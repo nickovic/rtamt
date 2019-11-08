@@ -1,0 +1,296 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Jul 23 21:38:29 2019
+
+@author: NickovicD
+"""
+import logging
+import operator
+
+from rtamt.parser.stl.StlParserVisitor import StlParserVisitor
+from rtamt.interval.interval import Interval
+
+from rtamt.node.stl.variable import Variable
+from rtamt.node.stl.predicate import Predicate
+from rtamt.node.stl.neg import Neg
+from rtamt.node.stl.conjunction import Conjunction
+from rtamt.node.stl.disjunction import Disjunction
+from rtamt.node.stl.implies import Implies
+from rtamt.node.stl.iff import Iff
+from rtamt.node.stl.xor import Xor
+from rtamt.node.stl.always import Always
+from rtamt.node.stl.eventually import Eventually
+from rtamt.node.stl.once import Once
+from rtamt.node.stl.historically import Historically
+from rtamt.node.stl.until import Until
+from rtamt.node.stl.since import Since
+
+from rtamt.lib.rtamt_stl_library_wrapper.stl_io_type import StlIOType
+from rtamt.lib.rtamt_stl_library_wrapper.stl_comp_op import StlComparisonOperator
+
+from rtamt.exception.stl.exception import STLParseException
+
+
+class STLNodeVisitor(StlParserVisitor):
+    
+    def __init__(self, spec):
+        self.ops = set()
+        self.spec = spec
+
+    @property
+    def spec(self):
+        return self.__spec
+
+    @spec.setter
+    def spec(self, spec):
+        self.__spec = spec
+
+    @property
+    def ops(self):
+        return self.__ops
+    
+    @ops.setter
+    def ops(self, ops):
+        self.__ops = ops
+
+
+        
+    def visitIdCompInt(self, ctx):
+        id = ctx.Identifier().getText();
+        id_tokens = id.split('.')
+        id_head = id_tokens[0]
+        id_tokens.pop(0)
+        id_tail = '.'.join(id_tokens)
+
+        try:
+            var = self.spec.var_object_dict[id_head]
+            if (not id_tail):
+                if (not isinstance(var, (int, long, float))):
+                    raise STLParseException('Variable {} is not of type int, long or float'.format(id))
+            else:
+                try:
+                    value = operator.attrgetter(id_tail)(var)
+                    if (not isinstance(value, (int, long, float))):
+                        raise STLParseException('The field {0} of the variable {1} is not of type int, long or float'.format(id, id_head))
+                except AttributeError as err:
+                    raise STLParseException(err)
+        except KeyError:
+            if id_tail:
+                raise STLParseException('{0} refers to undeclared variable {1} of unknown type'.format(id, id_head))
+            else:
+                var = float()
+                self.spec.var_object_dict[id] = var
+                self.spec.add_var(id)
+                logging.warning('The variable {} is not explicitely declared. It is implicitely declared as a '
+                                'variable of type float'.format(id))
+
+        threshold = float(ctx.literal().getText())
+        op_type = self.str_to_op_type(ctx.comparisonOp().getText())
+        node = Predicate(id_head, id_tail, StlIOType.OUT, op_type, threshold)
+        node.horizon = int(0)
+        return node
+
+    def visitExprId(self, ctx):
+        id = ctx.Identifier().getText();
+        id_tokens = id.split('.')
+        id_head = id_tokens[0]
+        id_tokens.pop(0)
+        id_tail = '.'.join(id_tokens)
+
+        try:
+            var = self.spec.var_object_dict[id_head]
+            if (not id_tail):
+                if (not isinstance(var, (int, long, float))):
+                    raise STLParseException('Variable {} is not of type int, long or float'.format(id))
+            else:
+                try:
+                    value = operator.attrgetter(id_tail)(var)
+                    if (not isinstance(value, (int, long, float))):
+                        raise STLParseException(
+                            'The field {0} of the variable {1} is not of type int, long or float'.format(id, id_head))
+                except AttributeError as err:
+                    raise STLParseException(err)
+        except KeyError:
+            if id_tail:
+                raise STLParseException('{0} refers to undeclared variable {1} of unknown type'.format(id, id_head))
+            else:
+                var = float()
+                self.spec.var_object_dict[id] = var
+                self.spec.add_var(id)
+                logging.warning('The variable {} is not explicitely declared. It is implicitely declared as a '
+                                'variable of type float'.format(id))
+
+        node = Variable(id_head, id_tail)
+        node.horizon = int(0)
+        return node
+
+    def visitExprNotExpr(self, ctx):
+        child = self.visit(ctx.expression())
+        node = Neg(child)
+        node.horizon = child.horizon
+        return node
+
+    def visitExprAndExpr(self, ctx):
+        child1 = self.visit(ctx.expression(0))
+        child2 = self.visit(ctx.expression(1))
+        node = Conjunction(child1, child2)
+        node.horizon = max(child1.horizon, child2.horizon)
+        return node
+
+    def visitExprOrExpr(self, ctx):
+        child1 = self.visit(ctx.expression(0))
+        child2 = self.visit(ctx.expression(1))
+        node = Disjunction(child1, child2)
+        node.horizon = max(child1.horizon, child2.horizon)
+        return node
+
+    def visitExprImpliesExpr(self, ctx):
+        child1 = self.visit(ctx.expression(0))
+        child2 = self.visit(ctx.expression(1))
+        node = Implies(child1, child2)
+        node.horizon = max(child1.horizon, child2.horizon)
+        return node
+
+    def visitExprIffExpr(self, ctx):
+        child1 = self.visit(ctx.expression(0))
+        child2 = self.visit(ctx.expression(1))
+        node = Iff(child1, child2)
+        node.horizon = max(child1.horizon, child2.horizon)
+        return node
+
+    def visitExprXorExpr(self, ctx):
+        child1 = self.visit(ctx.expression(0))
+        child2 = self.visit(ctx.expression(1))
+        node = Xor(child1, child2)
+        node.horizon = max(child1.horizon, child2.horizon)
+        return node
+
+    def visitExprAlwaysExpr(self, ctx):
+        child = self.visit(ctx.expression())
+        horizon = child.horizon
+        if ctx.interval() == None:
+            interval = None
+
+        else:
+            interval = self.visit(ctx.interval())
+            horizon = child.horizon + interval.end
+        node = Always(child, interval)
+        node.horizon = horizon
+        return node
+
+    def visitExprEvExpr(self, ctx):
+        child = self.visit(ctx.expression())
+        horizon = child.horizon
+        if ctx.interval() == None:
+            interval = None
+
+        else:
+            interval = self.visit(ctx.interval())
+            horizon = child.horizon + interval.end
+        node = Eventually(child, interval)
+        node.horizon = horizon
+        return node
+
+    def visitExprOnceExpr(self, ctx):
+        child = self.visit(ctx.expression())
+        if ctx.interval() == None:
+            interval = None
+
+        else:
+            interval = self.visit(ctx.interval())
+        node = Once(child, interval)
+        node.horizon = child.horizon
+        return node
+
+    def visitExprHistoricallyExpr(self, ctx):
+        child = self.visit(ctx.expression())
+        if ctx.interval() == None:
+            interval = None
+
+        else:
+            interval = self.visit(ctx.interval())
+        node = Historically(child, interval)
+        node.horizon = child.horizon
+        return node
+
+    def visitExprSinceExpr(self, ctx):
+        child1 = self.visit(ctx.expression(0))
+        child2 = self.visit(ctx.expression(1))
+        if ctx.interval() == None:
+            interval = None
+
+        else:
+            interval = self.visit(ctx.interval())
+        node = Since(child1, child2, interval)
+        node.horizon = max(child1.horizon, child2.horizon)
+        return node
+
+    def visitExprUntilExpr(self, ctx):
+        # Parse children
+        child1 = self.visit(ctx.expression(0))
+        child2 = self.visit(ctx.expression(1))
+        interval = self.visit(ctx.interval())
+
+        node = Until(child1, child2, interval)
+        node.horizon = max(child1.horizon, child2.horizon) + interval.end
+        return node
+
+    def visitExprParen(self, ctx):
+        return self.visit(ctx.expression())	
+	
+    def visitAssertion(self, ctx):
+        return self.visit(ctx.expression())
+
+    def visitStlfile(self, ctx):
+        return self.visit(ctx.stlSpecification())
+
+    def visitStlSpecification(self, ctx):
+        return self.visit(ctx.assertion())
+
+    def visitIntervalTimeLiteral(self, ctx):
+        out = int(ctx.IntegerLiteral().getText())
+
+        if ctx.unit() == None:
+            # default time unit is seconds - conversion of the bound to ps
+            out = out * 10e12
+        else:
+            unit = ctx.unit().getText()
+            if (unit == 's'):
+                out = out * 10e12
+            elif (unit == 'ms'):
+                out = out * 10e9
+            elif (unit == 'us'):
+                out == out * 10e6
+            elif (unit == 'ns'):
+                out == out * 10e3
+            else:
+                pass
+        remainder = out % self.spec.sampling_period
+        if remainder > 0:
+            raise STLParseException('The STL operator bound must be a multiple of the sampling period')
+
+        out = int(out / self.spec.sampling_period)
+
+        return out
+
+    def visitInterval(self, ctx):
+        begin = self.visit(ctx.intervalTime(0))
+        end = self.visit(ctx.intervalTime(1))
+        interval = Interval(begin, end)
+        return interval
+
+    def str_to_op_type(self, input):
+        if input == "<":
+            return StlComparisonOperator.LESS
+        elif input == '<=':
+            return StlComparisonOperator.LEQ
+        elif input == ">=":
+            return StlComparisonOperator.GEQ
+        elif input == ">":
+            return StlComparisonOperator.GREATER
+        elif input == "==":
+            return StlComparisonOperator.EQUAL
+        else:
+            return StlComparisonOperator.NEQ
+
+
