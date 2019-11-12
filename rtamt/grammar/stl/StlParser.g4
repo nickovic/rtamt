@@ -62,7 +62,14 @@ unit
 expression
 	: 
 	idComp                                                      #ExprIdComp
-	| Identifier                                                  #ExprId
+	| Identifier                                                #ExprId
+
+	| expression PLUS expression                                #ExprAddition
+	| expression MINUS expression                               #ExprSubtraction
+	| expression TIMES expression                               #ExprMultiplication
+	| expression DIVIDE expression                              #ExprDivision
+
+	| ABS LPAREN expression RPAREN                              #ExprAbs
 	
 	| LPAREN expression RPAREN                                  #ExprParen
 	| NotOperator expression                                    #ExprNot

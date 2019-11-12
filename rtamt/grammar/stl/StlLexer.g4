@@ -6,6 +6,18 @@ lexer grammar StlLexer ;
 
 // Separators
 
+MINUS
+    : '-' ;
+
+PLUS
+    : '+' ;
+
+TIMES
+    : '*' ;
+
+DIVIDE
+    : '/' ;
+
 LPAREN
 	: '(' ;
 
@@ -39,6 +51,8 @@ DOT
 AT
         : '@' ;
 
+ABS
+    : 'abs' ;
 
 SEC
     : 's' ;
