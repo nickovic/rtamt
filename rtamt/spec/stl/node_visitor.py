@@ -24,6 +24,11 @@ from rtamt.node.stl.once import Once
 from rtamt.node.stl.historically import Historically
 from rtamt.node.stl.until import Until
 from rtamt.node.stl.since import Since
+from rtamt.node.stl.abs import Abs
+from rtamt.node.stl.addition import Addition
+from rtamt.node.stl.subtraction import Subtraction
+from rtamt.node.stl.multiplication import Multiplication
+from rtamt.node.stl.division import Division
 
 from rtamt.lib.rtamt_stl_library_wrapper.stl_io_type import StlIOType
 from rtamt.lib.rtamt_stl_library_wrapper.stl_comp_op import StlComparisonOperator
@@ -122,6 +127,47 @@ class STLNodeVisitor(StlParserVisitor):
 
         node = Variable(id_head, id_tail)
         node.horizon = int(0)
+        return node
+
+    def visitExprAddition(self, ctx):
+        child1 = self.visit(ctx.expression(1))
+        child2 = self.visit(ctx.expression(2))
+        node = Addition(child1, child2)
+        node.horizon = child.horizon
+        return node
+
+    def visitExprAddition(self, ctx):
+        child1 = self.visit(ctx.expression(1))
+        child2 = self.visit(ctx.expression(2))
+        node = Addition(child1, child2)
+        node.horizon = max(child1.horizon, child2.horizon)
+        return node
+
+    def visitExprSubtraction(self, ctx):
+        child1 = self.visit(ctx.expression(1))
+        child2 = self.visit(ctx.expression(2))
+        node = Subtraction(child1, child2)
+        node.horizon = max(child1.horizon, child2.horizon)
+        return node
+
+    def visitExprMultiplication(self, ctx):
+        child1 = self.visit(ctx.expression(1))
+        child2 = self.visit(ctx.expression(2))
+        node = Multiplication(child1, child2)
+        node.horizon = max(child1.horizon, child2.horizon)
+        return node
+
+    def visitExprDivision(self, ctx):
+        child1 = self.visit(ctx.expression(1))
+        child2 = self.visit(ctx.expression(2))
+        node = Division(child1, child2)
+        node.horizon = max(child1.horizon, child2.horizon)
+        return node
+
+    def visitExprAbs(self, ctx):
+        child = self.visit(ctx.expression())
+        node = Abs(child)
+        node.horizon = child.horizon
         return node
 
     def visitExprNotExpr(self, ctx):
