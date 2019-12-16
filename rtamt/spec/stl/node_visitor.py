@@ -124,7 +124,7 @@ class STLNodeVisitor(StlParserVisitor):
         node.horizon = int(0)
         return node
 
-    def visitExprNotExpr(self, ctx):
+    def visitExprNot(self, ctx):
         child = self.visit(ctx.expression())
         node = Neg(child)
         node.horizon = child.horizon
