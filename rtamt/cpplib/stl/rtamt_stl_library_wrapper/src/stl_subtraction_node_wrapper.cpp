@@ -10,16 +10,16 @@
 #include <boost/python/wrapper.hpp>
 
 #include <rtamt_stl_library/stl_node.h>
-#include <rtamt_stl_library/stl_multiplication_node.h>
+#include <rtamt_stl_library/stl_subtraction_node.h>
 #include <rtamt_stl_library/stl_sample.h>
 
 using namespace boost::python;
 using namespace stl_library;
 
-BOOST_PYTHON_MODULE(stl_multiplication_node)
+BOOST_PYTHON_MODULE(stl_subtraction_node)
 {
-    class_<StlMultiplicationNode, bases<StlNode> >("StlMultiplicationNode")
-        .def("update", &StlMultiplicationNode::update)
-        .def("addNewInput", static_cast<void (StlMultiplicationNode::*)(Sample, Sample)>(&StlMultiplicationNode::addNewInput))
+    class_<StlSubtractionNode, bases<StlNode> >("StlSubtractionNode")
+        .def("update", &StlSubtractionNode::update)
+        .def("addNewInput", static_cast<void (StlSubtractionNode::*)(Sample, Sample)>(&StlSubtractionNode::addNewInput))
     ;
 }

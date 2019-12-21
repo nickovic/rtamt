@@ -7,7 +7,7 @@ Created on Sun Jul 21 22:24:09 2019
 
 from rtamt.node.stl.node import Node
 from rtamt.lib.rtamt_stl_library_wrapper.stl_node import StlNode
-from rtamt.lib.rtamt_stl_library_wrapper.stl_not_node import StlAbsNode
+from rtamt.lib.rtamt_stl_library_wrapper.stl_abs_node import StlAbsNode
 
 class Abs(Node):
     """A class for storing STL Neg nodes

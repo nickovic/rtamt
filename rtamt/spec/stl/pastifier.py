@@ -15,6 +15,11 @@ from rtamt.node.stl.once import Once
 from rtamt.node.stl.historically import Historically
 from rtamt.node.stl.precedes import Precedes
 from rtamt.node.stl.since import Since
+from rtamt.node.stl.addition import Addition
+from rtamt.node.stl.subtraction import Subtraction
+from rtamt.node.stl.multiplication import Multiplication
+from rtamt.node.stl.division import Division
+from rtamt.node.stl.abs import Abs
 
 class STLPastifier(STLVisitor):
 
@@ -39,6 +44,35 @@ class STLPastifier(STLVisitor):
             child = Variable(element.var, element.field)
             bound = Interval(horizon, horizon)
             node = Once(child, bound)
+        return node
+
+    def visitAddition(self, element, args):
+        child1_node = self.visit(element.children[0], args)
+        child2_node = self.visit(element.children[1], args)
+        node = Addition(child1_node, child2_node)
+        return node
+
+    def visitMultiplication(self, element, args):
+        child1_node = self.visit(element.children[0], args)
+        child2_node = self.visit(element.children[1], args)
+        node = Multiplication(child1_node, child2_node)
+        return node
+
+    def visitSubtraction(self, element, args):
+        child1_node = self.visit(element.children[0], args)
+        child2_node = self.visit(element.children[1], args)
+        node = Subtraction(child1_node, child2_node)
+        return node
+
+    def visitDivision(self, element, args):
+        child1_node = self.visit(element.children[0], args)
+        child2_node = self.visit(element.children[1], args)
+        node = Division(child1_node, child2_node)
+        return node
+
+    def visitAbs(self, element, args):
+        child_node = self.visit(element.children[0], args)
+        node = Abs(child_node)
         return node
 
     def visitNot(self, element, args):

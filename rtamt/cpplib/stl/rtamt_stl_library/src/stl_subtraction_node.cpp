@@ -5,6 +5,9 @@
 
 using namespace stl_library;
 
+StlSubtractionNode::StlSubtractionNode() {
+}
+
 void StlSubtractionNode::addNewInput(int i, Sample sample) {
     if (i > 1 or i < 0)
         return;
