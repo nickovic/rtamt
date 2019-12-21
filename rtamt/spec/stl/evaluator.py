@@ -49,6 +49,41 @@ class STLEvaluator(STLVisitor):
 
         return out_sample
 
+    def visitAbs(self, element, args):
+        in_sample = self.visit(element.children[0], args)
+        element.node.addNewInput(in_sample)
+        out_sample = element.node.update()
+        return out_sample
+
+    def visitAddition(self, element, args):
+        in_sample_1 = self.visit(element.children[0], args)
+        in_sample_2 = self.visit(element.children[1], args)
+        element.node.addNewInput(in_sample_1, in_sample_2)
+        out_sample = element.node.update()
+        return out_sample
+
+    def visitSubtraction(self, element, args):
+        in_sample_1 = self.visit(element.children[0], args)
+        in_sample_2 = self.visit(element.children[1], args)
+        element.node.addNewInput(in_sample_1, in_sample_2)
+        out_sample = element.node.update()
+        return out_sample
+
+    def visitMultiplication(self, element, args):
+        in_sample_1 = self.visit(element.children[0], args)
+        in_sample_2 = self.visit(element.children[1], args)
+        element.node.addNewInput(in_sample_1, in_sample_2)
+        out_sample = element.node.update()
+        return out_sample
+
+    def visitDivision(self, element, args):
+        in_sample_1 = self.visit(element.children[0], args)
+        in_sample_2 = self.visit(element.children[1], args)
+        element.node.addNewInput(in_sample_1, in_sample_2)
+        out_sample = element.node.update()
+        return out_sample
+
+
     def visitNot(self, element, args):
         in_sample = self.visit(element.children[0], args)
         element.node.addNewInput(in_sample)

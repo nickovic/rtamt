@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../cpplib/stl/rtamt_stl_library/include/rtamt_stl_library/stl_sample.h
+
+/home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library_wrapper/src/stl_time_wrapper.cpp
+boost/python.hpp
+-
+boost/python/def.hpp
+-
+boost/python/module.hpp
+-
+rtamt_stl_library/stl_sample.h
+-
+

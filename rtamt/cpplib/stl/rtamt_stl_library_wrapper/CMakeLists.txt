@@ -27,6 +27,12 @@ add_library(stl_once_bounded_node MODULE src/stl_once_bounded_node_wrapper.cpp)
 add_library(stl_historically_bounded_node MODULE src/stl_historically_bounded_node_wrapper.cpp)
 add_library(stl_since_bounded_node MODULE src/stl_since_bounded_node_wrapper.cpp)
 add_library(stl_precedes_bounded_node MODULE src/stl_precedes_bounded_node_wrapper.cpp)
+add_library(stl_addition_node MODULE src/stl_addition_node_wrapper.cpp)
+add_library(stl_subtraction_node MODULE src/stl_subtraction_node_wrapper.cpp)
+add_library(stl_multiplication_node MODULE src/stl_multiplication_node_wrapper.cpp)
+add_library(stl_division_node MODULE src/stl_division_node_wrapper.cpp)
+add_library(stl_abs_node MODULE src/stl_abs_node_wrapper.cpp)
+
 
 
 set(INCLUDE_DIRECTORIES_FOR_STL_WRAPPER ${PROJECT_SOURCE_DIR}/include ${Boost_INCLUDE_DIRS} ${PYTHON_INCLUDE_DIRS})
@@ -52,6 +58,13 @@ target_include_directories(stl_once_bounded_node PUBLIC ${INCLUDE_DIRECTORIES_FO
 target_include_directories(stl_historically_bounded_node PUBLIC ${INCLUDE_DIRECTORIES_FOR_STL_WRAPPER})
 target_include_directories(stl_since_bounded_node PUBLIC ${INCLUDE_DIRECTORIES_FOR_STL_WRAPPER})
 target_include_directories(stl_precedes_bounded_node PUBLIC ${INCLUDE_DIRECTORIES_FOR_STL_WRAPPER})
+target_include_directories(stl_addition_node PUBLIC ${INCLUDE_DIRECTORIES_FOR_STL_WRAPPER})
+target_include_directories(stl_subtraction_node PUBLIC ${INCLUDE_DIRECTORIES_FOR_STL_WRAPPER})
+target_include_directories(stl_multiplication_node PUBLIC ${INCLUDE_DIRECTORIES_FOR_STL_WRAPPER})
+target_include_directories(stl_division_node PUBLIC ${INCLUDE_DIRECTORIES_FOR_STL_WRAPPER})
+target_include_directories(stl_abs_node PUBLIC ${INCLUDE_DIRECTORIES_FOR_STL_WRAPPER})
+
+
 
 
 set(LINK_LIBS_FOR_STL_WRAPPER rtamt_stl_library ${Boost_LIBRARIES} ${PYTHON_LIBRARIES})
@@ -77,6 +90,12 @@ target_link_libraries(stl_once_bounded_node ${LINK_LIBS_FOR_STL_WRAPPER})
 target_link_libraries(stl_historically_bounded_node ${LINK_LIBS_FOR_STL_WRAPPER})
 target_link_libraries(stl_since_bounded_node ${LINK_LIBS_FOR_STL_WRAPPER})
 target_link_libraries(stl_precedes_bounded_node ${LINK_LIBS_FOR_STL_WRAPPER})
+target_link_libraries(stl_addition_node ${LINK_LIBS_FOR_STL_WRAPPER})
+target_link_libraries(stl_subtraction_node ${LINK_LIBS_FOR_STL_WRAPPER})
+target_link_libraries(stl_multiplication_node ${LINK_LIBS_FOR_STL_WRAPPER})
+target_link_libraries(stl_division_node ${LINK_LIBS_FOR_STL_WRAPPER})
+target_link_libraries(stl_abs_node ${LINK_LIBS_FOR_STL_WRAPPER})
+
 
 
 set(LIB_OUT_DIR_FOR_STL_WRAPPER ${RTAMAT_CPPLIB_DIR}/${PROJECT_NAME})
@@ -146,6 +165,22 @@ set_target_properties(stl_since_bounded_node PROPERTIES
 set_target_properties(stl_precedes_bounded_node PROPERTIES
 	PREFIX ""
 	LIBRARY_OUTPUT_DIRECTORY ${LIB_OUT_DIR_FOR_STL_WRAPPER})
+set_target_properties(stl_addition_node PROPERTIES
+	PREFIX ""
+	LIBRARY_OUTPUT_DIRECTORY ${LIB_OUT_DIR_FOR_STL_WRAPPER})
+set_target_properties(stl_subtraction_node PROPERTIES
+	PREFIX ""
+	LIBRARY_OUTPUT_DIRECTORY ${LIB_OUT_DIR_FOR_STL_WRAPPER})
+set_target_properties(stl_multiplication_node PROPERTIES
+	PREFIX ""
+	LIBRARY_OUTPUT_DIRECTORY ${LIB_OUT_DIR_FOR_STL_WRAPPER})
+set_target_properties(stl_division_node PROPERTIES
+	PREFIX ""
+	LIBRARY_OUTPUT_DIRECTORY ${LIB_OUT_DIR_FOR_STL_WRAPPER})
+set_target_properties(stl_abs_node PROPERTIES
+	PREFIX ""
+	LIBRARY_OUTPUT_DIRECTORY ${LIB_OUT_DIR_FOR_STL_WRAPPER})
+
 
 # copy __init__.py
 configure_file(${PROJECT_SOURCE_DIR}/__init__.py ${LIB_OUT_DIR_FOR_STL_WRAPPER}/__init__.py COPYONLY)

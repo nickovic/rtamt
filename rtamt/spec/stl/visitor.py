@@ -14,9 +14,11 @@ from rtamt.node.stl.once import Once
 from rtamt.node.stl.historically import Historically
 from rtamt.node.stl.since import Since
 from rtamt.node.stl.precedes import Precedes
-
-
-
+from rtamt.node.stl.abs import Abs
+from rtamt.node.stl.addition import Addition
+from rtamt.node.stl.subtraction import Subtraction
+from rtamt.node.stl.multiplication import Multiplication
+from rtamt.node.stl.division import Division
 
 NOT_IMPLEMENTED = "You should implement this."
 
@@ -57,6 +59,16 @@ class STLVisitor:
             out = self.visitSince(element, args)
         elif isinstance(element, Precedes):
             out = self.visitPrecedes(element, args)
+        elif isinstance(element, Abs):
+            out = self.visitAbs(element, args)
+        elif isinstance(element, Addition):
+            out = self.visitAddition(element, args)
+        elif isinstance(element, Subtraction):
+            out = self.visitSubtraction(element, args)
+        elif isinstance(element, Multiplication):
+            out = self.visitMultiplication(element, args)
+        elif isinstance(element, Division):
+            out = self.visitDivision(element, args)
         else:
             out = self.visitDefault(element, args)
         return out
@@ -68,6 +80,26 @@ class STLVisitor:
 
     @abstractmethod
     def visitVariable(self, element, args):
+        raise NotImplementedError(NOT_IMPLEMENTED)
+
+    @abstractmethod
+    def visitAbs(self, element, args):
+        raise NotImplementedError(NOT_IMPLEMENTED)
+
+    @abstractmethod
+    def visitAddition(self, element, args):
+        raise NotImplementedError(NOT_IMPLEMENTED)
+
+    @abstractmethod
+    def visitSubtraction(self, element, args):
+        raise NotImplementedError(NOT_IMPLEMENTED)
+
+    @abstractmethod
+    def visitMultiplication(self, element, args):
+        raise NotImplementedError(NOT_IMPLEMENTED)
+
+    @abstractmethod
+    def visitDivision(self, element, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod

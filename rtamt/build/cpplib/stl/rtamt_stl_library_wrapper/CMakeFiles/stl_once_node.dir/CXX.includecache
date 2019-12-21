@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../cpplib/stl/rtamt_stl_library/include/rtamt_stl_library/stl_node.h
+rtamt_stl_library/stl_sample.h
+-
+
+../cpplib/stl/rtamt_stl_library/include/rtamt_stl_library/stl_once_node.h
+rtamt_stl_library/stl_sample.h
+-
+rtamt_stl_library/stl_node.h
+-
+boost/circular_buffer.hpp
+-
+
+../cpplib/stl/rtamt_stl_library/include/rtamt_stl_library/stl_sample.h
+
+/home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library_wrapper/src/stl_once_node_wrapper.cpp
+boost/python.hpp
+-
+boost/python/def.hpp
+-
+boost/python/module.hpp
+-
+boost/python/wrapper.hpp
+-
+rtamt_stl_library/stl_node.h
+-
+rtamt_stl_library/stl_once_node.h
+-
+rtamt_stl_library/stl_sample.h
+-
+
