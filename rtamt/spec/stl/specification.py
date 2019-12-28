@@ -43,9 +43,9 @@ class STLSpecification(AbstractSpecification,StlParserVisitor):
 
         evaluator : AbstractEvaluator - pointer to the object that implements the monitoring algorithm
     """
-    def __init__(self):
+    def __init__(self, is_pure_python = False):
         """Constructor for STL Specification"""
-        super(STLSpecification, self).__init__()
+        super(STLSpecification, self).__init__(is_pure_python)
         self.name = 'STL Specification'
 
     # Parses the STL property
@@ -71,7 +71,7 @@ class STLSpecification(AbstractSpecification,StlParserVisitor):
         self.top = self.visitor.visitStlfile(ctx)
 
         # Translate bounded future STL to past STL
-        pastifier = STLPastifier()
+        pastifier = STLPastifier(self)
         self.top.accept(pastifier)
         past = pastifier.pastify(self.top)
         self.top = past

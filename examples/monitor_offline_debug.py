@@ -3,6 +3,7 @@ import sys
 import rtamt
 
 def monitor():
+
     # data
     dataSet = {
          'a': [(0, 100.0), (1, -1.0), (2, -2.0)],
@@ -10,12 +11,12 @@ def monitor():
     }
 
     # # stl
-    spec = rtamt.STLSpecification()
+    spec = rtamt.STLSpecification(True)
     spec.name = 'HandMadeMonitor'
     spec.declare_var('a', 'float')
     spec.declare_var('b', 'float')
     spec.declare_var('c', 'float')
-    spec.spec = 'c = abs(a / b)'
+    spec.spec = 'c = a + b'
     try:
         spec.parse()
         robustness = spec.offline(dataSet)

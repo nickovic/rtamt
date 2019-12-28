@@ -30,8 +30,8 @@ from rtamt.node.stl.subtraction import Subtraction
 from rtamt.node.stl.multiplication import Multiplication
 from rtamt.node.stl.division import Division
 
-from rtamt.lib.rtamt_stl_library_wrapper.stl_io_type import StlIOType
-from rtamt.lib.rtamt_stl_library_wrapper.stl_comp_op import StlComparisonOperator
+#from rtamt.lib.rtamt_stl_library_wrapper.stl_io_type import StlIOType
+#from rtamt.lib.rtamt_stl_library_wrapper.stl_comp_op import StlComparisonOperator
 
 from rtamt.exception.stl.exception import STLParseException
 
@@ -41,6 +41,15 @@ class STLNodeVisitor(StlParserVisitor):
     def __init__(self, spec):
         self.ops = set()
         self.spec = spec
+
+        io_type_name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_io_type'
+        comp_op_name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_comp_op'
+        if self.spec.is_pure_python:
+            io_type_name = 'rtamt.spec.stl.io_type'
+            comp_op_name = 'rtamt.spec.stl.comp_op'
+
+        self.io_type_mod = __import__(io_type_name, fromlist=[''])
+        self.comp_op_mod = __import__(comp_op_name, fromlist=[''])
 
     @property
     def spec(self):
@@ -58,8 +67,6 @@ class STLNodeVisitor(StlParserVisitor):
     def ops(self, ops):
         self.__ops = ops
 
-
-        
     def visitIdCompInt(self, ctx):
         id = ctx.Identifier().getText();
         id_tokens = id.split('.')
@@ -91,7 +98,7 @@ class STLNodeVisitor(StlParserVisitor):
 
         threshold = float(ctx.literal().getText())
         op_type = self.str_to_op_type(ctx.comparisonOp().getText())
-        node = Predicate(id_head, id_tail, StlIOType.OUT, op_type, threshold)
+        node = Predicate(id_head, id_tail, self.io_type_mod.StlIOType.OUT, op_type, threshold)
         node.horizon = int(0)
         return node
 
@@ -132,7 +139,7 @@ class STLNodeVisitor(StlParserVisitor):
     def visitExprAddition(self, ctx):
         child1 = self.visit(ctx.expression(0))
         child2 = self.visit(ctx.expression(1))
-        node = Addition(child1, child2)
+        node = Addition(child1, child2, self.spec.is_pure_python)
         node.horizon = max(child1.horizon, child2.horizon)
         return node
 
@@ -320,16 +327,16 @@ class STLNodeVisitor(StlParserVisitor):
 
     def str_to_op_type(self, input):
         if input == "<":
-            return StlComparisonOperator.LESS
+            return self.comp_op_mod.StlComparisonOperator.LESS
         elif input == '<=':
-            return StlComparisonOperator.LEQ
+            return self.comp_op_mod.StlComparisonOperator.LEQ
         elif input == ">=":
-            return StlComparisonOperator.GEQ
+            return self.comp_op_mod.StlComparisonOperator.GEQ
         elif input == ">":
-            return StlComparisonOperator.GREATER
+            return self.comp_op_mod.StlComparisonOperator.GREATER
         elif input == "==":
-            return StlComparisonOperator.EQUAL
+            return self.comp_op_mod.StlComparisonOperator.EQUAL
         else:
-            return StlComparisonOperator.NEQ
+            return self.comp_op_mod.StlComparisonOperator.NEQ
 
 

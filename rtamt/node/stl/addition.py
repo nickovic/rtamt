@@ -6,14 +6,14 @@ Created on Sun Jul 21 22:24:09 2019
 """
 
 from rtamt.node.stl.node import Node
-from rtamt.lib.rtamt_stl_library_wrapper.stl_node import StlNode
 from rtamt.lib.rtamt_stl_library_wrapper.stl_addition_node import StlAdditionNode
+from rtamt.operation.arithmetic.addition_operation import AdditionOperation
 
 class Addition(Node):
     """A class for storing STL Conjunction nodes
         Inherits TemporalNode
     """
-    def __init__(self, child1, child2):
+    def __init__(self, child1, child2, is_pure_python):
         """Constructor for Conjunction node
 
             Parameters:
@@ -25,5 +25,9 @@ class Addition(Node):
         self.addChild(child1)
         self.addChild(child2)
 
-        self.node = StlAdditionNode()
+        if is_pure_python:
+            self.node = AdditionOperation()
+        else:
+            self.node = StlAdditionNode()
+
 

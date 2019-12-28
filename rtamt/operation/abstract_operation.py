@@ -4,7 +4,9 @@ Created on Mon Sep 23 2019
 
 @author: Dejan Nickovic
 """
-from abc import ABCMeta
+from abc import ABCMeta, abstractmethod
+
+NOT_IMPLEMENTED = "You should implement this."
 
 class AbstractOperation:
     """
@@ -15,4 +17,8 @@ class AbstractOperation:
     def __init__(self):
         pass
 
+    @abstractmethod
     def update(self):
+        raise NotImplementedError(NOT_IMPLEMENTED)
+
+

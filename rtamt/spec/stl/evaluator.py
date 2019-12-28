@@ -1,13 +1,26 @@
 import operator
-
+import logging
 from rtamt.spec.stl.visitor import STLVisitor
-from rtamt.lib.rtamt_stl_library_wrapper.stl_sample import Sample
+
+#from rtamt.operation.sample import Sample
+#from rtamt.lib.rtamt_stl_library_wrapper.stl_sample import Sample
+
 
 class STLEvaluator(STLVisitor):
 
     def __init__(self, dict, spec):
         self.dict = dict
         self.spec = spec
+
+        name = None
+        if spec.is_pure_python:
+            name = 'rtamt.operation.sample'
+        else:
+            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_sample'
+
+        self.mod = __import__(name, fromlist=[''])
+
+
 
     def evaluate(self, element, args):
         sample = self.visit(element, args)
@@ -26,7 +39,7 @@ class STLEvaluator(STLVisitor):
         else:
             value = var
 
-        in_sample = Sample()
+        in_sample = self.mod.Sample()
         in_sample.seq = time_index
         in_sample.value = value
 
@@ -43,7 +56,7 @@ class STLEvaluator(STLVisitor):
         else:
             value = var
 
-        out_sample = Sample()
+        out_sample = self.mod.Sample()
         out_sample.seq = time_index
         out_sample.value = value
 
@@ -172,4 +185,3 @@ class STLEvaluator(STLVisitor):
 
     def visitDefault(self, element, args):
         return None
-

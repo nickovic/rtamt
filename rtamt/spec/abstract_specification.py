@@ -33,6 +33,8 @@ class AbstractSpecification:
 
         evaluator : AbstractEvaluator - pointer to the object that implements the monitoring algorithm
 
+        is_pure_python : Boolean - flag denoting whether to use pure Python or mixed Python/C++ implementation (default = False)
+
     Methods
         get_spec_from_file - create and populate specification object from the text file
         parse - parse the specification
@@ -40,7 +42,7 @@ class AbstractSpecification:
     """
     __metaclass__ = ABCMeta
 
-    def __init__(self):
+    def __init__(self, is_pure_python):
         self.name = 'Abstract Specification'
 
         self.vars = set()
@@ -59,7 +61,19 @@ class AbstractSpecification:
 
         self.evaluator = None
 
+        self.is_pure_python = is_pure_python
+
+
     # setters and getters
+    @property
+    def is_pure_python(self):
+        return self.__is_pure_python
+
+    @is_pure_python.setter
+    def is_pure_python(self, is_pure_python):
+        self.__is_pure_python = is_pure_python
+
+
     @property
     def name(self):
         return self.__name

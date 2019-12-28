@@ -23,6 +23,17 @@ from rtamt.node.stl.abs import Abs
 
 class STLPastifier(STLVisitor):
 
+    def __init__(self, spec):
+        self.spec = spec
+
+    @property
+    def spec(self):
+        return self.__spec
+
+    @spec.setter
+    def spec(self, spec):
+        self.__spec = spec
+
     def pastify(self, element):
         return self.visit(element, [element.horizon])
 
@@ -49,7 +60,7 @@ class STLPastifier(STLVisitor):
     def visitAddition(self, element, args):
         child1_node = self.visit(element.children[0], args)
         child2_node = self.visit(element.children[1], args)
-        node = Addition(child1_node, child2_node)
+        node = Addition(child1_node, child2_node, self.spec.is_pure_python)
         return node
 
     def visitMultiplication(self, element, args):
