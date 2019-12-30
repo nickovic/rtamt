@@ -146,27 +146,27 @@ class STLNodeVisitor(StlParserVisitor):
     def visitExprSubtraction(self, ctx):
         child1 = self.visit(ctx.expression(0))
         child2 = self.visit(ctx.expression(1))
-        node = Subtraction(child1, child2)
+        node = Subtraction(child1, child2, self.spec.is_pure_python)
         node.horizon = max(child1.horizon, child2.horizon)
         return node
 
     def visitExprMultiplication(self, ctx):
         child1 = self.visit(ctx.expression(0))
         child2 = self.visit(ctx.expression(1))
-        node = Multiplication(child1, child2)
+        node = Multiplication(child1, child2, self.spec.is_pure_python)
         node.horizon = max(child1.horizon, child2.horizon)
         return node
 
     def visitExprDivision(self, ctx):
         child1 = self.visit(ctx.expression(0))
         child2 = self.visit(ctx.expression(1))
-        node = Division(child1, child2)
+        node = Division(child1, child2, self.spec.is_pure_python)
         node.horizon = max(child1.horizon, child2.horizon)
         return node
 
     def visitExprAbs(self, ctx):
         child = self.visit(ctx.expression())
-        node = Abs(child)
+        node = Abs(child, self.spec.is_pure_python)
         node.horizon = child.horizon
         return node
 

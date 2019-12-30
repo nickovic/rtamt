@@ -66,24 +66,24 @@ class STLPastifier(STLVisitor):
     def visitMultiplication(self, element, args):
         child1_node = self.visit(element.children[0], args)
         child2_node = self.visit(element.children[1], args)
-        node = Multiplication(child1_node, child2_node)
+        node = Multiplication(child1_node, child2_node, self.spec.is_pure_python)
         return node
 
     def visitSubtraction(self, element, args):
         child1_node = self.visit(element.children[0], args)
         child2_node = self.visit(element.children[1], args)
-        node = Subtraction(child1_node, child2_node)
+        node = Subtraction(child1_node, child2_node, self.spec.is_pure_python)
         return node
 
     def visitDivision(self, element, args):
         child1_node = self.visit(element.children[0], args)
         child2_node = self.visit(element.children[1], args)
-        node = Division(child1_node, child2_node)
+        node = Division(child1_node, child2_node, self.spec.is_pure_python)
         return node
 
     def visitAbs(self, element, args):
         child_node = self.visit(element.children[0], args)
-        node = Abs(child_node)
+        node = Abs(child_node, self.spec.is_pure_python)
         return node
 
     def visitNot(self, element, args):
