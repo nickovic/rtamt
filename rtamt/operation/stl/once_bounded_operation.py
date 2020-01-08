@@ -15,6 +15,8 @@ class OnceBoundedOperation(AbstractOperation):
             self.buffer.append(s)
 
     def addNewInput(self, sample):
+        self.input = Sample()
+
         self.input.seq = sample.seq
         self.input.time.sec = sample.time.sec
         self.input.time.msec = sample.time.msec
@@ -22,15 +24,15 @@ class OnceBoundedOperation(AbstractOperation):
 
         self.buffer.append(self.input)
 
+
     def update(self):
         out = Sample()
-
         out.seq = self.input.seq
         out.time.msec = self.input.time.msec
         out.time.sec = self.input.time.sec
-        out.value = - float("inf")
 
-        for i in range(self.end-self.begin+1):
-            out.value = max(out.value, self.buffer[i])
+        out.value = -float("inf")
+        for i in [0, self.end-self.begin]:
+            out.value = max(out.value, self.buffer[i].value)
 
         return out

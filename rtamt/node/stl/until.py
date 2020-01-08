@@ -13,7 +13,7 @@ class Until(TemporalNode):
     A class for storing STL Since nodes
     Inherits TemporalNode
     """
-    def __init__(self, child1, child2, bound):
+    def __init__(self, child1, child2, bound, is_pure_python):
         """Constructor for Since node
 
             Parameters:

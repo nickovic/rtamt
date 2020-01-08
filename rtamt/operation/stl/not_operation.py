@@ -14,7 +14,7 @@ class NotOperation(AbstractOperation):
 
     def update(self):
         out = Sample()
-        val = abs(self.input.value)
+        val = - self.input.value
         out.time.sec = self.input.time.sec
         out.time.msec = self.input.time.msec
         out.seq = self.input.seq

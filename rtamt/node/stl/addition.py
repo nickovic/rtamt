@@ -6,6 +6,7 @@ Created on Sun Jul 21 22:24:09 2019
 """
 
 from rtamt.node.stl.node import Node
+from rtamt.lib.rtamt_stl_library_wrapper.stl_node import StlNode
 from rtamt.lib.rtamt_stl_library_wrapper.stl_addition_node import StlAdditionNode
 from rtamt.operation.arithmetic.addition_operation import AdditionOperation
 

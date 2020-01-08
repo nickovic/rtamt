@@ -1,6 +1,5 @@
 from rtamt.operation.abstract_operation import AbstractOperation
 from rtamt.operation.sample import Sample
-from rtamt.operation.sample import Time
 
 class HistoricallyOperation(AbstractOperation):
     def __init__(self):

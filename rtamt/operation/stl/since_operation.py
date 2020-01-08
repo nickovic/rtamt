@@ -11,7 +11,7 @@ class SinceOperation(AbstractOperation):
         self.input.append(sample)
         self.prev_out = Sample()
 
-        elf.prev_out.seq = 0
+        self.prev_out.seq = 0
         self.prev_out.time.sec = 0
         self.prev_out.time.msec = 0
         self.prev_out.value = -float("inf")
@@ -29,6 +29,7 @@ class SinceOperation(AbstractOperation):
 
     def update(self):
         out = Sample()
+
         out.value = min(self.input[0].value, self.prev_out.value)
         out.value = max(out.value, self.input[1].value)
 

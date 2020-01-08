@@ -6,6 +6,7 @@ Created on Sun Jul 21 22:30:09 2019
 """
 
 from rtamt.node.stl.node import Node
+from rtamt.lib.rtamt_stl_library_wrapper.stl_node import StlNode
 from rtamt.lib.rtamt_stl_library_wrapper.stl_predicate_node import StlPredicateNode
 from rtamt.operation.stl.predicate_operation import PredicateOperation
 

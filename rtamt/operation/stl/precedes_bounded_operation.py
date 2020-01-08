@@ -9,6 +9,7 @@ class PrecedesBoundedOperation(AbstractOperation):
         self.buffer = []
         self.buffer.append(collections.deque(maxlen=(end+1)))
         self.buffer.append(collections.deque(maxlen=(end+1)))
+        self.input = Sample()
 
         for i in range(end+1):
             s_left = Sample()
@@ -19,19 +20,19 @@ class PrecedesBoundedOperation(AbstractOperation):
             self.buffer[1].append(s_right)
 
     def addNewInput(self, left, right):
-        input = Sample()
-        input.seq = left.seq
-        input.time.sec = left.time.sec
-        input.time.msec = left.time.msec
-        input.value = left.value
-        self.buffer[0].append(input)
+        self.input = Sample()
+        self.input.seq = left.seq
+        self.input.time.sec = left.time.sec
+        self.input.time.msec = left.time.msec
+        self.input.value = left.value
+        self.buffer[0].append(self.input)
 
-        input = Sample()
-        input.seq = right.seq
-        input.time.sec = right.time.sec
-        input.time.msec = right.time.msec
-        input.value = right.value
-        self.buffer[1].append(input)
+        self.input = Sample()
+        self.input.seq = right.seq
+        self.input.time.sec = right.time.sec
+        self.input.time.msec = right.time.msec
+        self.input.value = right.value
+        self.buffer[1].append(self.input)
 
     def update(self):
         out = Sample()
@@ -41,7 +42,7 @@ class PrecedesBoundedOperation(AbstractOperation):
         out.time.sec = self.input.time.sec
         out.value = - float("inf")
 
-        for i in range(self.begin, self.end+1):
+        for i in [0, self.end-self.begin]:
             left = float("inf")
             right = self.buffer[1][i].value
             for j in range(i):

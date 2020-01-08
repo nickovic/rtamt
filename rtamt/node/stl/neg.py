@@ -6,6 +6,7 @@ Created on Sun Jul 21 22:24:09 2019
 """
 
 from rtamt.node.stl.node import Node
+from rtamt.lib.rtamt_stl_library_wrapper.stl_node import StlNode
 from rtamt.lib.rtamt_stl_library_wrapper.stl_not_node import StlNotNode
 from rtamt.operation.stl.not_operation import NotOperation
 
@@ -23,8 +24,9 @@ class Neg(Node):
         self.addChild(child)
 
         if is_pure_python:
-            self.node = StlNotNode()
-        else:
             self.node = NotOperation()
+        else:
+            self.node = StlNotNode()
+
 
 

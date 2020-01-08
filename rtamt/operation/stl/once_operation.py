@@ -26,7 +26,7 @@ class OnceOperation(AbstractOperation):
         out.time.sec = self.input.time.sec
         out.value = self.input.value
 
-        out.value = min(self.input.value, self.prev_out.value)
+        out.value = max(self.input.value, self.prev_out.value)
 
         self.prev_out.seq = out.seq
         self.prev_out.time.sec = out.time.sec

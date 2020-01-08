@@ -6,6 +6,7 @@ Created on Sun Jul 21 22:24:09 2019
 """
 
 from rtamt.node.stl.temporal_node import TemporalNode
+from rtamt.lib.rtamt_stl_library_wrapper.stl_node import StlNode
 from rtamt.lib.rtamt_stl_library_wrapper.stl_always_node import StlAlwaysNode
 from rtamt.operation.stl.always_operation import AlwaysOperation
 

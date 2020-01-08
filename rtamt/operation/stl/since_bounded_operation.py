@@ -6,32 +6,32 @@ class SinceBoundedOperation(AbstractOperation):
     def __init__(self, begin, end):
         self.begin = begin
         self.end = end
-        self.buffer = []
-        self.buffer.append(collections.deque(maxlen=(end+1)))
-        self.buffer.append(collections.deque(maxlen=(end+1)))
+        self.buffer_left = collections.deque(maxlen=(end+1))
+        self.buffer_right = collections.deque(maxlen=(end+1))
+        self.input = Sample()
 
         for i in range(end+1):
             s_left = Sample()
             s_right = Sample()
             s_left.value = float("inf")
-            s_left.value = - float("inf")
-            self.buffer[0].append(s_left)
-            self.buffer[1].append(s_right)
+            s_right.value = - float("inf")
+            self.buffer_left.append(s_left)
+            self.buffer_right.append(s_right)
 
     def addNewInput(self, left, right):
-        input = Sample()
-        input.seq = left.seq
-        input.time.sec = left.time.sec
-        input.time.msec = left.time.msec
-        input.value = left.value
-        self.buffer[0].append(input)
+        self.input = Sample()
+        self.input.seq = left.seq
+        self.input.time.sec = left.time.sec
+        self.input.time.msec = left.time.msec
+        self.input.value = left.value
+        self.buffer_left.append(self.input)
 
-        input = Sample()
-        input.seq = right.seq
-        input.time.sec = right.time.sec
-        input.time.msec = right.time.msec
-        input.value = right.value
-        self.buffer[1].append(input)
+        self.input = Sample()
+        self.input.seq = right.seq
+        self.input.time.sec = right.time.sec
+        self.input.time.msec = right.time.msec
+        self.input.value = right.value
+        self.buffer_right.append(self.input)
 
     def update(self):
         out = Sample()
@@ -41,11 +41,11 @@ class SinceBoundedOperation(AbstractOperation):
         out.time.sec = self.input.time.sec
         out.value = - float("inf")
 
-        for i in range(self.end-self.begin+1):
+        for i in [0, self.end-self.begin]:
             left = float("inf")
-            right = self.buffer[1][i].value
-            for j in range(self.end-self.begin+1,self.end+1):
-                left = min(left, self.buffer[0][j].value)
+            right = self.buffer_right[i].value
+            for j in range(i+1,self.end):
+                left = min(left, self.buffer_left[j].value)
             out.value = max(out.value, min(left,right))
 
         return out

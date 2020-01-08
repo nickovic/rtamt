@@ -40,11 +40,11 @@ class STLPastifier(STLVisitor):
     def visitPredicate(self, element, args):
         horizon = args[0]
         if horizon == 0:
-            node = Predicate(element.var, element.field, element.io_type, element.operator, element.threshold)
+            node = Predicate(element.var, element.field, element.io_type, element.operator, element.threshold, self.spec.is_pure_python)
         else:
-            child = Predicate(element.var, element.field, element.io_type, element.operator, element.threshold)
+            child = Predicate(element.var, element.field, element.io_type, element.operator, element.threshold, self.spec.is_pure_python)
             bound = Interval(horizon, horizon)
-            node = Once(child, bound)
+            node = Once(child, bound, self.spec.is_pure_python)
         return node
 
     def visitVariable(self, element, args):
@@ -54,7 +54,7 @@ class STLPastifier(STLVisitor):
         else:
             child = Variable(element.var, element.field)
             bound = Interval(horizon, horizon)
-            node = Once(child, bound)
+            node = Once(child, bound, self.spec.is_pure_python)
         return node
 
     def visitAddition(self, element, args):
@@ -88,37 +88,37 @@ class STLPastifier(STLVisitor):
 
     def visitNot(self, element, args):
         child_node = self.visit(element.children[0], args)
-        node = Neg(child_node)
+        node = Neg(child_node, self.spec.is_pure_python)
         return node
 
     def visitAnd(self, element, args):
         child1_node = self.visit(element.children[0], args)
         child2_node = self.visit(element.children[1], args)
-        node = Conjunction(child1_node, child2_node)
+        node = Conjunction(child1_node, child2_node, self.spec.is_pure_python)
         return node
 
     def visitOr(self, element, args):
         child1_node = self.visit(element.children[0], args)
         child2_node = self.visit(element.children[1], args)
-        node = Disjunction(child1_node, child2_node)
+        node = Disjunction(child1_node, child2_node, self.spec.is_pure_python)
         return node
 
     def visitImplies(self, element, args):
         child1_node = self.visit(element.children[0], args)
         child2_node = self.visit(element.children[1], args)
-        node = Implies(child1_node, child2_node)
+        node = Implies(child1_node, child2_node, self.spec.is_pure_python)
         return node
 
     def visitIff(self, element, args):
         child1_node = self.visit(element.children[0], args)
         child2_node = self.visit(element.children[1], args)
-        node = Iff(child1_node, child2_node)
+        node = Iff(child1_node, child2_node, self.spec.is_pure_python)
         return node
 
     def visitXor(self, element, args):
         child1_node = self.visit(element.children[0], args)
         child2_node = self.visit(element.children[1], args)
-        node = Xor(child1_node, child2_node)
+        node = Xor(child1_node, child2_node, self.spec.is_pure_python)
         return node
 
     def visitEventually(self, element, args):
@@ -129,18 +129,18 @@ class STLPastifier(STLVisitor):
         else:
             child_node = self.visit(element.children[0], [horizon - element.bound.end])
             bound = Interval(horizon - element.bound.end, horizon - element.bound.begin)
-            node = Once(child_node, bound)
+            node = Once(child_node, bound, self.spec.is_pure_python)
         return node
 
     def visitAlways(self, element, args):
         horizon = args[0]
         if element.bound == None:
             child_node = self.visit(element.children[0], [horizon])
-            node = Always(child_node, element.bound)
+            node = Always(child_node, element.bound, self.spec.is_pure_python)
         else:
             child_node = self.visit(element.children[0], [horizon - element.bound.end])
             bound = Interval(horizon - element.bound.end, horizon - element.bound.begin)
-            node = Historically(child_node, bound)
+            node = Historically(child_node, bound, self.spec.is_pure_python)
         return node
 
     def visitUntil(self, element, args):
@@ -153,44 +153,62 @@ class STLPastifier(STLVisitor):
         child1_node = self.visit(element.children[0], [horizon - end])
         child2_node = self.visit(element.children[1], [horizon - end])
         bound = Interval(horizon - begin, horizon - begin)
-        node = Precedes(child1_node, child2_node, bound)
+        node = Precedes(child1_node, child2_node, bound, self.spec.is_pure_python)
         return node
 
     def visitOnce(self, element, args):
         horizon = args[0]
-        end = 0
-        begin = 0
-        if element.bound != None:
-            end = element.bound.end
+        child_node = self.visit(element.children[0], [horizon])
+
+        if element.bound == None:
+            if horizon == 0:
+                node = Once(child_node, None, self.spec.is_pure_python)
+            else:
+                bound = Interval(horizon, float("inf"))
+                node = Once(child_node, bound, self.spec.is_pure_python)
+        else:
             begin = element.bound.begin
-        child_node = self.visit(element.children[0], [horizon - end])
-        bound = Interval(begin + horizon, begin + horizon)
-        node = Once(child_node, bound)
+            end = element.bound.end
+            bound = Interval(begin + horizon, end + horizon)
+            node = Once(child_node, bound, self.spec.is_pure_python)
+
         return node
 
     def visitHistorically(self, element, args):
         horizon = args[0]
-        end = 0
-        begin = 0
-        if element.bound != None:
-            end = element.bound.end
+        child_node = self.visit(element.children[0], [horizon])
+
+        if element.bound == None:
+            if horizon == 0:
+                node = Historically(child_node, None, self.spec.is_pure_python)
+            else:
+                bound = Interval(horizon, float("inf"))
+                node = Historically(child_node, bound, self.spec.is_pure_python)
+        else:
             begin = element.bound.begin
-        child_node = self.visit(element.children[0], [horizon - end])
-        bound = Interval(begin + horizon, begin + horizon)
-        node = Historically(child_node, bound)
+            end = element.bound.end
+            bound = Interval(begin + horizon, end + horizon)
+            node = Historically(child_node, bound, self.spec.is_pure_python)
+
         return node
 
     def visitSince(self, element, args):
         horizon = args[0]
-        end = 0
-        begin = 0
-        if element.bound != None:
-            end = element.bound.end
+        child_node_1 = self.visit(element.children[0], [horizon])
+        child_node_2 = self.visit(element.children[1], [horizon])
+
+        if element.bound == None:
+            if horizon == 0:
+                node = Since(child_node_1, child_node_2, None, self.spec.is_pure_python)
+            else:
+                bound = Interval(horizon, float("inf"))
+                node = Since(child_node_1, child_node_2, bound, self.spec.is_pure_python)
+        else:
             begin = element.bound.begin
-        child1_node = self.visit(element.children[0], [horizon - end])
-        child2_node = self.visit(element.children[1], [horizon - end])
-        bound = Interval(begin + horizon, begin + horizon)
-        node = Since(child1_node, child2_node, bound)
+            end = element.bound.end
+            bound = Interval(begin + horizon, end + horizon)
+            node = Since(child_node_1, child_node_2, bound, self.spec.is_pure_python)
+
         return node
 
     def visitPrecedes(self, element, args):
@@ -203,7 +221,7 @@ class STLPastifier(STLVisitor):
         child1_node = self.visit(element.children[0], [horizon - end])
         child2_node = self.visit(element.children[1], [horizon - end])
         bound = Interval(begin + horizon, begin + horizon)
-        node = Precedes(child1_node, child2_node, bound)
+        node = Precedes(child1_node, child2_node, bound, self.spec.is_pure_python)
         return node
 
 

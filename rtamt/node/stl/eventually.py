@@ -4,6 +4,7 @@ Created on Sun Jul 21 22:24:09 2019
 
 @author: NickovicD
 """
+
 from rtamt.node.stl.temporal_node import TemporalNode
 
 

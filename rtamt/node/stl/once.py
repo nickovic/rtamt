@@ -5,6 +5,7 @@ Created on Sun Jul 21 22:24:09 2019
 @author: NickovicD
 """
 from rtamt.node.stl.temporal_node import TemporalNode
+from rtamt.lib.rtamt_stl_library_wrapper.stl_node import StlNode
 from rtamt.lib.rtamt_stl_library_wrapper.stl_once_node import StlOnceNode
 from rtamt.lib.rtamt_stl_library_wrapper.stl_once_bounded_node import StlOnceBoundedNode
 from rtamt.operation.stl.once_operation import OnceOperation

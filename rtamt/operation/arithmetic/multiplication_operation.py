@@ -19,7 +19,6 @@ class MultiplicationOperation(AbstractOperation):
         self.input[1].seq = right.seq
         self.input[1].time.sec = right.time.sec
         self.input[1].time.msec = right.time.msec
-        self.input[1].value = right.value.msec
         self.input[1].value = right.value
 
     def update(self):

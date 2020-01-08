@@ -98,9 +98,6 @@ class STLEvaluator(STLVisitor):
 
     def visitNot(self, element, args):
         in_sample = self.visit(element.children[0], args)
-        print('HELLO')
-        print(in_sample)
-        print(element.node)
         element.node.addNewInput(in_sample)
         out_sample = element.node.update()
         return out_sample

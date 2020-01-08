@@ -98,7 +98,7 @@ class STLNodeVisitor(StlParserVisitor):
 
         threshold = float(ctx.literal().getText())
         op_type = self.str_to_op_type(ctx.comparisonOp().getText())
-        node = Predicate(id_head, id_tail, self.io_type_mod.StlIOType.OUT, op_type, threshold)
+        node = Predicate(id_head, id_tail, self.io_type_mod.StlIOType.OUT, op_type, threshold, self.spec.is_pure_python)
         node.horizon = int(0)
         return node
 
@@ -172,42 +172,42 @@ class STLNodeVisitor(StlParserVisitor):
 
     def visitExprNot(self, ctx):
         child = self.visit(ctx.expression())
-        node = Neg(child)
+        node = Neg(child, self.spec.is_pure_python)
         node.horizon = child.horizon
         return node
 
     def visitExprAndExpr(self, ctx):
         child1 = self.visit(ctx.expression(0))
         child2 = self.visit(ctx.expression(1))
-        node = Conjunction(child1, child2)
+        node = Conjunction(child1, child2, self.spec.is_pure_python)
         node.horizon = max(child1.horizon, child2.horizon)
         return node
 
     def visitExprOrExpr(self, ctx):
         child1 = self.visit(ctx.expression(0))
         child2 = self.visit(ctx.expression(1))
-        node = Disjunction(child1, child2)
+        node = Disjunction(child1, child2, self.spec.is_pure_python)
         node.horizon = max(child1.horizon, child2.horizon)
         return node
 
     def visitExprImpliesExpr(self, ctx):
         child1 = self.visit(ctx.expression(0))
         child2 = self.visit(ctx.expression(1))
-        node = Implies(child1, child2)
+        node = Implies(child1, child2, self.spec.is_pure_python)
         node.horizon = max(child1.horizon, child2.horizon)
         return node
 
     def visitExprIffExpr(self, ctx):
         child1 = self.visit(ctx.expression(0))
         child2 = self.visit(ctx.expression(1))
-        node = Iff(child1, child2)
+        node = Iff(child1, child2, self.spec.is_pure_python)
         node.horizon = max(child1.horizon, child2.horizon)
         return node
 
     def visitExprXorExpr(self, ctx):
         child1 = self.visit(ctx.expression(0))
         child2 = self.visit(ctx.expression(1))
-        node = Xor(child1, child2)
+        node = Xor(child1, child2, self.spec.is_pure_python)
         node.horizon = max(child1.horizon, child2.horizon)
         return node
 
@@ -220,7 +220,7 @@ class STLNodeVisitor(StlParserVisitor):
         else:
             interval = self.visit(ctx.interval())
             horizon = child.horizon + interval.end
-        node = Always(child, interval)
+        node = Always(child, interval, self.spec.is_pure_python)
         node.horizon = horizon
         return node
 
@@ -237,25 +237,25 @@ class STLNodeVisitor(StlParserVisitor):
         node.horizon = horizon
         return node
 
-    def visitExprOnceExpr(self, ctx):
+    def visitExpreOnceExpr(self, ctx):
         child = self.visit(ctx.expression())
         if ctx.interval() == None:
             interval = None
 
         else:
             interval = self.visit(ctx.interval())
-        node = Once(child, interval)
+        node = Once(child, interval, self.spec.is_pure_python)
         node.horizon = child.horizon
         return node
 
-    def visitExprHistoricallyExpr(self, ctx):
+    def visitExprHistExpr(self, ctx):
         child = self.visit(ctx.expression())
         if ctx.interval() == None:
             interval = None
 
         else:
             interval = self.visit(ctx.interval())
-        node = Historically(child, interval)
+        node = Historically(child, interval, self.spec.is_pure_python)
         node.horizon = child.horizon
         return node
 
@@ -267,7 +267,7 @@ class STLNodeVisitor(StlParserVisitor):
 
         else:
             interval = self.visit(ctx.interval())
-        node = Since(child1, child2, interval)
+        node = Since(child1, child2, interval, self.spec.is_pure_python)
         node.horizon = max(child1.horizon, child2.horizon)
         return node
 
@@ -277,7 +277,7 @@ class STLNodeVisitor(StlParserVisitor):
         child2 = self.visit(ctx.expression(1))
         interval = self.visit(ctx.interval())
 
-        node = Until(child1, child2, interval)
+        node = Until(child1, child2, interval, self.spec.is_pure_python)
         node.horizon = max(child1.horizon, child2.horizon) + interval.end
         return node
 
