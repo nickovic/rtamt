@@ -26,6 +26,6 @@ class Abs(Node):
             self.node = AbsOperation()
         else:
             self.node = StlAbsNode()
-        
+
 
 

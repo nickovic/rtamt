@@ -6,8 +6,8 @@ Created on Sun Jul 21 22:24:09 2019
 """
 
 from rtamt.node.stl.temporal_node import TemporalNode
-from rtamt.lib.rtamt_stl_library_wrapper.stl_node import StlNode
 from rtamt.lib.rtamt_stl_library_wrapper.stl_always_node import StlAlwaysNode
+from rtamt.operation.stl.always_operation import AlwaysOperation
 
 
 class Always(TemporalNode):
@@ -15,7 +15,7 @@ class Always(TemporalNode):
         Inherits TemporalNode
     """
 
-    def __init__(self, child, bound):
+    def __init__(self, child, bound, is_pure_python):
         """Constructor for Always
 
         Parameters:
@@ -24,7 +24,11 @@ class Always(TemporalNode):
         """
         super(Always, self).__init__(bound)
         self.addChild(child)
-        self.node = StlAlwaysNode()
+
+        if is_pure_python:
+            self.node = AlwaysOperation()
+        else:
+            self.node = StlAlwaysNode()
 
 
 

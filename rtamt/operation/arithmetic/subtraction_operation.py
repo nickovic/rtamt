@@ -5,15 +5,12 @@ from rtamt.operation.sample import Time
 class SubtractionOperation(AbstractOperation):
     def __init__(self):
         self.input = []
+        sample = Sample()
+        self.input.append(sample)
+        sample = Sample()
+        self.input.append(sample)
 
     def addNewInput(self, left, right):
-        sample = Sample()
-        self.input.append(sample)
-        self.input[0].time = Time()
-        sample = Sample()
-        self.input.append(sample)
-        self.input[1].time = Time()
-
         self.input[0].seq = left.seq
         self.input[0].time.sec = left.time.sec
         self.input[0].time.msec = left.time.msec

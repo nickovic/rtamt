@@ -6,8 +6,8 @@ Created on Sun Jul 21 22:30:09 2019
 """
 
 from rtamt.node.stl.node import Node
-from rtamt.lib.rtamt_stl_library_wrapper.stl_node import StlNode
 from rtamt.lib.rtamt_stl_library_wrapper.stl_predicate_node import StlPredicateNode
+from rtamt.operation.stl.predicate_operation import PredicateOperation
 
 class Predicate(Node):
     """A class for storing STL real-valued Variable nodes
@@ -20,7 +20,7 @@ class Predicate(Node):
         threshold : double
         operator : OperatorType (LEQ, GEQ, LESS, GREATER, EQ or NEQ)
     """
-    def __init__(self, var, field, io_type, operator, threshold):
+    def __init__(self, var, field, io_type, operator, threshold, is_pure_python):
         """Constructor for Predicate node
 
         Parameters:
@@ -37,7 +37,11 @@ class Predicate(Node):
         self.io_type = io_type
         self.operator = operator
         self.threshold = threshold
-        self.node = StlPredicateNode(operator, threshold, io_type)
+
+        if is_pure_python:
+            self.node = PredicateOperation(operator, threshold, io_type)
+        else:
+            self.node = StlPredicateNode(operator, threshold, io_type)
 
     @property
     def var(self):

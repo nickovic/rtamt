@@ -2,7 +2,7 @@ from rtamt.operation.abstract_operation import AbstractOperation
 from rtamt.operation.sample import Sample
 from rtamt.operation.sample import Time
 
-class AbsOperation(AbstractOperation):
+class NotOperation(AbstractOperation):
     def __init__(self):
         self.input = Sample()
 

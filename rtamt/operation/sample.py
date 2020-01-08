@@ -23,7 +23,7 @@ class Time:
 class Sample:
     def __init__(self):
         self.seq = 0;
-        self.time = Time
+        self.time = Time()
         self.value = 0.0
 
     @property

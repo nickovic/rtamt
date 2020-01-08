@@ -11,7 +11,7 @@ def monitor():
     }
 
     # # stl
-    spec = rtamt.STLSpecification(True)
+    spec = rtamt.STLSpecification()
     spec.name = 'HandMadeMonitor'
     spec.declare_var('a', 'float')
     spec.declare_var('b', 'float')

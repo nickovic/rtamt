@@ -5,8 +5,8 @@ Created on Sun Jul 21 22:24:09 2019
 @author: NickovicD
 """
 from rtamt.node.stl.temporal_node import TemporalNode
-from rtamt.lib.rtamt_stl_library_wrapper.stl_node import StlNode
 from rtamt.lib.rtamt_stl_library_wrapper.stl_precedes_bounded_node import StlPrecedesBoundedNode
+from rtamt.operation.stl.precedes_bounded_operation import PrecedesBoundedOperation
 
 
 
@@ -16,7 +16,7 @@ class Precedes(TemporalNode):
                 Inherits TemporalNode
     """
 
-    def __init__(self, child1, child2, bound):
+    def __init__(self, child1, child2, bound, is_pure_python):
         """Constructor for Precedes node
 
         Parameters:
@@ -27,4 +27,8 @@ class Precedes(TemporalNode):
         super(Precedes, self).__init__(bound)
         self.addChild(child1)
         self.addChild(child2)
-        self.node = StlPrecedesBoundedNode(bound.begin, bound.end)
+
+        if is_pure_python:
+            self.node = PrecedesBoundedOperation(bound.begin, bound.end)
+        else:
+            self.node = StlPrecedesBoundedNode(bound.begin, bound.end)

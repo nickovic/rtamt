@@ -8,6 +8,7 @@ from rtamt.node.stl.temporal_node import TemporalNode
 
 
 
+
 class Eventually(TemporalNode):
     """A class for storing STL Eventually nodes
             Inherits TemporalNode
