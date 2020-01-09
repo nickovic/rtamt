@@ -6,9 +6,7 @@ Created on Sun Jul 21 22:24:09 2019
 """
 
 from rtamt.node.stl.node import Node
-from rtamt.lib.rtamt_stl_library_wrapper.stl_node import StlNode
-from rtamt.lib.rtamt_stl_library_wrapper.stl_division_node import StlDivisionNode
-from rtamt.operation.arithmetic.division_operation import DivisionOperation
+
 
 class Division(Node):
     """A class for storing STL Division nodes
@@ -27,7 +25,14 @@ class Division(Node):
         self.addChild(child2)
 
         if is_pure_python:
-            self.node = DivisionOperation()
+            name = 'rtamt.operation.stl.division_operation'
+            mod = __import__(name, fromlist=[''])
+            self.node = mod.DivisionOperation()
         else:
-            self.node = StlDivisionNode()
+            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_node'
+            mod = __import__(name, fromlist=[''])
+
+            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_division_node'
+            mod = __import__(name, fromlist=[''])
+            self.node = mod.StlDivisionNode()
 

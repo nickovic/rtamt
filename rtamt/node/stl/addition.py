@@ -6,9 +6,7 @@ Created on Sun Jul 21 22:24:09 2019
 """
 
 from rtamt.node.stl.node import Node
-from rtamt.lib.rtamt_stl_library_wrapper.stl_node import StlNode
-from rtamt.lib.rtamt_stl_library_wrapper.stl_addition_node import StlAdditionNode
-from rtamt.operation.arithmetic.addition_operation import AdditionOperation
+
 
 class Addition(Node):
     """A class for storing STL Conjunction nodes
@@ -27,8 +25,15 @@ class Addition(Node):
         self.addChild(child2)
 
         if is_pure_python:
+            name = 'rtamt.operation.stl.addition_operation'
+            mod = __import__(name, fromlist=[''])
             self.node = AdditionOperation()
         else:
+            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_node'
+            mod = __import__(name, fromlist=[''])
+
+            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_addition_node'
+            mod = __import__(name, fromlist=[''])
             self.node = StlAdditionNode()
 
 

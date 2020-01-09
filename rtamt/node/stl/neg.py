@@ -6,9 +6,6 @@ Created on Sun Jul 21 22:24:09 2019
 """
 
 from rtamt.node.stl.node import Node
-from rtamt.lib.rtamt_stl_library_wrapper.stl_node import StlNode
-from rtamt.lib.rtamt_stl_library_wrapper.stl_not_node import StlNotNode
-from rtamt.operation.stl.not_operation import NotOperation
 
 class Neg(Node):
     """A class for storing STL Neg nodes
@@ -24,9 +21,16 @@ class Neg(Node):
         self.addChild(child)
 
         if is_pure_python:
-            self.node = NotOperation()
+            name = 'rtamt.operation.stl.not_operation'
+            mod = __import__(name, fromlist=[''])
+            self.node = mod.NotOperation()
         else:
-            self.node = StlNotNode()
+            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_node'
+            mod = __import__(name, fromlist=[''])
+
+            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_not_node'
+            mod = __import__(name, fromlist=[''])
+            self.node = mod.StlNotNode()
 
 
 

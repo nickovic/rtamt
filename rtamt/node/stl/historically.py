@@ -5,11 +5,6 @@ Created on Sun Jul 21 22:24:09 2019
 @author: NickovicD
 """
 from rtamt.node.stl.temporal_node import TemporalNode
-from rtamt.lib.rtamt_stl_library_wrapper.stl_node import StlNode
-from rtamt.lib.rtamt_stl_library_wrapper.stl_historically_node import StlHistoricallyNode
-from rtamt.lib.rtamt_stl_library_wrapper.stl_historically_bounded_node import StlHistoricallyBoundedNode
-from rtamt.operation.stl.historically_operation import HistoricallyOperation
-from rtamt.operation.stl.historically_bounded_operation import HistoricallyBoundedOperation
 
 class Historically(TemporalNode):
     """A class for storing STL Historically nodes
@@ -28,11 +23,22 @@ class Historically(TemporalNode):
 
         if is_pure_python:
             if self.bound == None:
-                self.node = HistoricallyOperation()
+                name = 'rtamt.operation.stl.historically_operation'
+                mod = __import__(name, fromlist=[''])
+                self.node = mod.HistoricallyOperation()
             else:
-                self.node = HistoricallyBoundedOperation(bound.begin, bound.end)
+                name = 'rtamt.operation.stl.historically_bounded_operation'
+                mod = __import__(name, fromlist=[''])
+                self.node = mod.HistoricallyBoundedOperation(bound.begin, bound.end)
         else:
+            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_node'
+            mod = __import__(name, fromlist=[''])
+
             if self.bound == None:
-                self.node = StlHistoricallyNode()
-            else :
-                self.node = StlHistoricallyBoundedNode(bound.begin, bound.end)
+                name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_historically_node'
+                mod = __import__(name, fromlist=[''])
+                self.node = mod.StlHistoricallyNode()
+            else:
+                name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_historically_bounded_node'
+                mod = __import__(name, fromlist=[''])
+                self.node = mod.StlHistoricallyBoundedNode(bound.begin, bound.end)

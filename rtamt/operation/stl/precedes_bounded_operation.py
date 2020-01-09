@@ -15,9 +15,10 @@ class PrecedesBoundedOperation(AbstractOperation):
             s_left = Sample()
             s_right = Sample()
             s_left.value = float("inf")
-            s_left.value = - float("inf")
+            s_right.value = - float("inf")
             self.buffer[0].append(s_left)
             self.buffer[1].append(s_right)
+
 
     def addNewInput(self, left, right):
         self.input = Sample()
@@ -42,11 +43,12 @@ class PrecedesBoundedOperation(AbstractOperation):
         out.time.sec = self.input.time.sec
         out.value = - float("inf")
 
-        for i in [0, self.end-self.begin]:
+        for i in range(self.begin, self.end):
             left = float("inf")
             right = self.buffer[1][i].value
             for j in range(i):
                 left = min(left, self.buffer[0][j].value)
+
             out.value = max(out.value, min(left,right))
 
         return out

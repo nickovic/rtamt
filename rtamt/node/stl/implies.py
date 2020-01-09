@@ -5,10 +5,7 @@ Created on Sun Jul 21 22:24:09 2019
 @author: NickovicD
 """
 from rtamt.node.stl.node import Node
-from rtamt.lib.rtamt_stl_library_wrapper.stl_node import StlNode
-from rtamt.lib.rtamt_stl_library_wrapper.stl_combinatorial_binary_node import StlCombinatorialBinaryNode
-from rtamt.lib.rtamt_stl_library_wrapper.stl_implies_node import StlImpliesNode
-from rtamt.operation.stl.implies_operation import ImpliesOperation
+
 
 class Implies(Node):
     """A class for storing STL Implies nodes
@@ -26,8 +23,18 @@ class Implies(Node):
         self.addChild(child2)
 
         if is_pure_python:
-            self.node = ImpliesOperation()
+            name = 'rtamt.operation.stl.implies_operation'
+            mod = __import__(name, fromlist=[''])
+            self.node = mod.ImpliesOperation()
         else:
-            self.node = StlImpliesNode()
+            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_node'
+            mod = __import__(name, fromlist=[''])
+
+            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_combinatorial_binary_node'
+            mod = __import__(name, fromlist=[''])
+
+            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_implies_node'
+            mod = __import__(name, fromlist=[''])
+            self.node = mod.StlImpliesNode()
 
 

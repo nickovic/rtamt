@@ -6,10 +6,6 @@ Created on Sun Jul 21 22:24:09 2019
 """
 
 from rtamt.node.stl.node import Node
-from rtamt.lib.rtamt_stl_library_wrapper.stl_node import StlNode
-from rtamt.lib.rtamt_stl_library_wrapper.stl_combinatorial_binary_node import StlCombinatorialBinaryNode
-from rtamt.lib.rtamt_stl_library_wrapper.stl_xor_node import StlXorNode
-from rtamt.operation.stl.xor_operation import XorOperation
 
 class Xor(Node):
     """A class for storing STL Xor nodes
@@ -27,6 +23,16 @@ class Xor(Node):
         self.addChild(child2)
 
         if is_pure_python:
-            self.node = XorOperation()
+            name = 'rtamt.operation.stl.xor_operation'
+            mod = __import__(name, fromlist=[''])
+            self.node = mod.XorOperation()
         else:
-            self.node = StlXorNode()
+            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_node'
+            mod = __import__(name, fromlist=[''])
+
+            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_combinatorial_binary_node'
+            mod = __import__(name, fromlist=[''])
+
+            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_xor_node'
+            mod = __import__(name, fromlist=[''])
+            self.node = mod.StlXorNode()

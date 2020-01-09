@@ -6,10 +6,7 @@ Created on Sun Jul 21 22:24:09 2019
 """
 
 from rtamt.node.stl.node import Node
-from rtamt.lib.rtamt_stl_library_wrapper.stl_node import StlNode
-from rtamt.lib.rtamt_stl_library_wrapper.stl_combinatorial_binary_node import StlCombinatorialBinaryNode
-from rtamt.lib.rtamt_stl_library_wrapper.stl_or_node import StlOrNode
-from rtamt.operation.stl.or_operation import OrOperation
+
 
 class Disjunction(Node):
     """A class for storing STL Or nodes
@@ -27,9 +24,19 @@ class Disjunction(Node):
         self.addChild(child2)
 
         if is_pure_python:
-            self.node = OrOperation()
+            name = 'rtamt.operation.stl.or_operation'
+            mod = __import__(name, fromlist=[''])
+            self.node = mod.OrOperation()
         else:
-            self.node = StlOrNode()
+            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_node'
+            mod = __import__(name, fromlist=[''])
+
+            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_combinatorial_binary_node'
+            mod = __import__(name, fromlist=[''])
+
+            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_or_node'
+            mod = __import__(name, fromlist=[''])
+            self.node = mod.StlOrNode()
 
 
 

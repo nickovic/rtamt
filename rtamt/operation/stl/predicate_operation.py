@@ -1,6 +1,6 @@
 from rtamt.operation.abstract_operation import AbstractOperation
 from rtamt.operation.sample import Sample
-from rtamt.spec.comp_oper import ComparisonOperator
+from rtamt.spec.comp_oper import StlComparisonOperator
 from rtamt.spec.stl.io_type import StlIOType
 
 class PredicateOperation(AbstractOperation):
@@ -19,13 +19,13 @@ class PredicateOperation(AbstractOperation):
     def update(self):
         out = Sample()
 
-        if (self.op == ComparisonOperator.EQ):
+        if (self.op.value == StlComparisonOperator.EQ.value):
             val = - abs(self.input.value - self.threshold)
-        elif (self.op == ComparisonOperator.NEQ):
+        elif (self.op.value == StlComparisonOperator.NEQ.value):
             val = abs(self.input.value - self.threshold)
-        elif (self.op == ComparisonOperator.LEQ or self.op == ComparisonOperator.LESS):
+        elif (self.op.value == StlComparisonOperator.LEQ.value or self.op.value == StlComparisonOperator.LESS.value):
             val = self.threshold - self.input.value
-        elif (self.op == ComparisonOperator.GEQ or self.op == ComparisonOperator.GREATER):
+        elif (self.op.value == StlComparisonOperator.GEQ.value or self.op.value == StlComparisonOperator.GREATER.value):
             val = self.input.value - self.threshold
         else:
             val = float('nan')

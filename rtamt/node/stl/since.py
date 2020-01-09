@@ -5,11 +5,6 @@ Created on Sun Jul 21 22:24:09 2019
 @author: NickovicD
 """
 from rtamt.node.stl.temporal_node import TemporalNode
-from rtamt.lib.rtamt_stl_library_wrapper.stl_node import StlNode
-from rtamt.lib.rtamt_stl_library_wrapper.stl_since_node import StlSinceNode
-from rtamt.lib.rtamt_stl_library_wrapper.stl_since_bounded_node import StlSinceBoundedNode
-from rtamt.operation.stl.since_operation import SinceOperation
-from rtamt.operation.stl.since_bounded_operation import SinceBoundedOperation
 
 class Since(TemporalNode):
     """A class for storing STL Since nodes
@@ -30,11 +25,22 @@ class Since(TemporalNode):
 
         if is_pure_python:
             if bound == None:
-                self.node = SinceOperation()
+                name = 'rtamt.operation.stl.since_operation'
+                mod = __import__(name, fromlist=[''])
+                self.node = mod.SinceOperation()
             else:
-                self.node = SinceBoundedOperation(bound.begin, bound.end)
+                name = 'rtamt.operation.stl.since_bounded_operation'
+                mod = __import__(name, fromlist=[''])
+                self.node = mod.SinceBoundedOperation(bound.begin, bound.end)
         else:
+            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_node'
+            mod = __import__(name, fromlist=[''])
+
             if bound == None:
-                self.node = StlSinceNode()
+                name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_since_node'
+                mod = __import__(name, fromlist=[''])
+                self.node = mod.StlSinceNode()
             else:
-                self.node = StlSinceBoundedNode(bound.begin, bound.end)
+                name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_since_bounded_node'
+                mod = __import__(name, fromlist=[''])
+                self.node = mod.StlSinceBoundedNode(bound.begin, bound.end)

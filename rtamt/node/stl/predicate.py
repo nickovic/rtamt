@@ -6,9 +6,6 @@ Created on Sun Jul 21 22:30:09 2019
 """
 
 from rtamt.node.stl.node import Node
-from rtamt.lib.rtamt_stl_library_wrapper.stl_node import StlNode
-from rtamt.lib.rtamt_stl_library_wrapper.stl_predicate_node import StlPredicateNode
-from rtamt.operation.stl.predicate_operation import PredicateOperation
 
 class Predicate(Node):
     """A class for storing STL real-valued Variable nodes
@@ -40,9 +37,16 @@ class Predicate(Node):
         self.threshold = threshold
 
         if is_pure_python:
-            self.node = PredicateOperation(operator, threshold, io_type)
+            name = 'rtamt.operation.stl.predicate_operation'
+            mod = __import__(name, fromlist=[''])
+            self.node = mod.PredicateOperation(operator, threshold, io_type)
         else:
-            self.node = StlPredicateNode(operator, threshold, io_type)
+            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_node'
+            mod = __import__(name, fromlist=[''])
+
+            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_predicate_node'
+            mod = __import__(name, fromlist=[''])
+            self.node = mod.StlPredicateNode(operator, threshold, io_type)
 
     @property
     def var(self):

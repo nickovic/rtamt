@@ -5,11 +5,6 @@ Created on Sun Jul 21 22:24:09 2019
 @author: NickovicD
 """
 from rtamt.node.stl.temporal_node import TemporalNode
-from rtamt.lib.rtamt_stl_library_wrapper.stl_node import StlNode
-from rtamt.lib.rtamt_stl_library_wrapper.stl_precedes_bounded_node import StlPrecedesBoundedNode
-from rtamt.operation.stl.precedes_bounded_operation import PrecedesBoundedOperation
-
-
 
 class Precedes(TemporalNode):
     """A class for storing STL Precedes nodes - an auxilliary operator need for translating
@@ -30,6 +25,13 @@ class Precedes(TemporalNode):
         self.addChild(child2)
 
         if is_pure_python:
-            self.node = PrecedesBoundedOperation(bound.begin, bound.end)
+            name = 'rtamt.operation.stl.precedes_bounded_operation'
+            mod = __import__(name, fromlist=[''])
+            self.node = mod.PrecedesBoundedOperation(bound.begin, bound.end)
         else:
-            self.node = StlPrecedesBoundedNode(bound.begin, bound.end)
+            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_node'
+            mod = __import__(name, fromlist=[''])
+
+            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_precedes_bounded_node'
+            mod = __import__(name, fromlist=[''])
+            self.node = mod.StlPrecedesBoundedNode(bound.begin, bound.end)

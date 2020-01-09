@@ -6,9 +6,6 @@ Created on Sun Jul 21 22:24:09 2019
 """
 
 from rtamt.node.stl.node import Node
-from rtamt.lib.rtamt_stl_library_wrapper.stl_node import StlNode
-from rtamt.lib.rtamt_stl_library_wrapper.stl_abs_node import StlAbsNode
-from rtamt.operation.arithmetic.abs_operation import AbsOperation
 
 class Abs(Node):
     """A class for storing STL Neg nodes
@@ -24,9 +21,16 @@ class Abs(Node):
         self.addChild(child)
 
         if is_pure_python:
-            self.node = AbsOperation()
+            name = 'rtamt.operation.stl.abs_operation'
+            mod = __import__(name, fromlist=[''])
+            self.node = mod.AbsOperation()
         else:
-            self.node = StlAbsNode()
+            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_node'
+            mod = __import__(name, fromlist=[''])
+
+            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_abs_node'
+            mod = __import__(name, fromlist=[''])
+            self.node = mod.StlAbsNode()
 
 
 

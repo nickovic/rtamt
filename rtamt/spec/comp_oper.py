@@ -6,7 +6,7 @@ Created on Sun Jul 21 22:39:19 2019
 """
 from enum import Enum
 
-class ComparisonOperator(Enum):
+class StlComparisonOperator(Enum):
     LESS = 0
     LEQ = 1
     EQ = 2

@@ -6,9 +6,6 @@ Created on Sun Jul 21 22:24:09 2019
 """
 
 from rtamt.node.stl.node import Node
-from rtamt.lib.rtamt_stl_library_wrapper.stl_node import StlNode
-from rtamt.lib.rtamt_stl_library_wrapper.stl_subtraction_node import StlSubtractionNode
-from rtamt.operation.arithmetic.subtraction_operation import SubtractionOperation
 
 class Subtraction(Node):
     """A class for storing STL Subtraction nodes
@@ -27,7 +24,14 @@ class Subtraction(Node):
         self.addChild(child2)
 
         if is_pure_python:
-            self.node = SubtractionOperation()
+            name = 'rtamt.operation.stl.subtraction_operation'
+            mod = __import__(name, fromlist=[''])
+            self.node = mod.SubtractionOperation()
         else:
-            self.node = StlSubtractionNode()
+            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_node'
+            mod = __import__(name, fromlist=[''])
+
+            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_subtraction_node'
+            mod = __import__(name, fromlist=[''])
+            self.node = mod.StlSubtractionNode()
 

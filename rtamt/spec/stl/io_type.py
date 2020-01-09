@@ -7,6 +7,6 @@ Created on Sun Jul 21 22:39:19 2019
 from enum import Enum
 
 class StlIOType(Enum):
-    INPUT = 0
-    OUTPUT = 1
+    IN = 0
+    OUT = 1
     UNDEFINED = 2
