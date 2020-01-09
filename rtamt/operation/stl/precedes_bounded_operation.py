@@ -43,7 +43,7 @@ class PrecedesBoundedOperation(AbstractOperation):
         out.time.sec = self.input.time.sec
         out.value = - float("inf")
 
-        for i in range(self.begin, self.end):
+        for i in range(self.begin, self.end+1):
             left = float("inf")
             right = self.buffer[1][i].value
             for j in range(i):
