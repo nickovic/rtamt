@@ -16,6 +16,7 @@ class AbstractSpecification:
 
     Attributes:
         name : String
+        spec : String - specification text
 
         vars : set(String) - set of variable names
         free_vars : set(String) - set of free variable names
@@ -44,6 +45,7 @@ class AbstractSpecification:
 
     def __init__(self, is_pure_python):
         self.name = 'Abstract Specification'
+        self.spec = None
 
         self.vars = set()
         self.free_vars = set()
@@ -73,6 +75,13 @@ class AbstractSpecification:
     def is_pure_python(self, is_pure_python):
         self.__is_pure_python = is_pure_python
 
+    @property
+    def spec(self):
+        return self.__spec
+
+    @spec.setter
+    def spec(self,spec):
+        self.__spec = spec
 
     @property
     def name(self):
