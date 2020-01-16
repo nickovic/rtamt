@@ -25,15 +25,15 @@ class Addition(Node):
         self.addChild(child2)
 
         if is_pure_python:
-            name = 'rtamt.operation.stl.addition_operation'
+            name = 'rtamt.operation.arithmetic.addition_operation'
             mod = __import__(name, fromlist=[''])
-            self.node = AdditionOperation()
+            self.node = mod.AdditionOperation()
         else:
             name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_node'
             mod = __import__(name, fromlist=[''])
 
             name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_addition_node'
             mod = __import__(name, fromlist=[''])
-            self.node = StlAdditionNode()
+            self.node = mod.StlAdditionNode()
 
 
