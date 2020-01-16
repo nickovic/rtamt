@@ -9,7 +9,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='real-time-analog-monitoring-tool',
-    version='0.0.5',
+    version='0.0.6',
     description='A tool for real time analog monitoring.',
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -19,7 +19,7 @@ setup(
     license='BSD',
     python_requires='>=2.7',
     install_requires=[
-        #'antlr4-python2-runtime==4.5',
+        'antlr4-python2-runtime==4.5',
     ],
     package_data={'': ['*.so']},
     packages=find_packages(),
