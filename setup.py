@@ -9,7 +9,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='real-time-analog-monitoring-tool',
-    version='0.0.6',
+    version='0.0.7',
     description='A tool for real time analog monitoring.',
     long_description=long_description,
     long_description_content_type="text/markdown",
