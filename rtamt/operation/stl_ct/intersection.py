@@ -7,14 +7,15 @@ def intersection(a, b, method):
 
     hi = None
 
-    while i < len(a) and j < len(b):
+    while len(a) > 1 and len(b) > 1:
         a_start = a[i - 1][0]
         a_end = a[i][0]
         b_start = b[j - 1][0]
         b_end = b[j][0]
 
         a_val = a[i - 1][1]
-        b_val = b[i - 1][1]
+        b_val = b[j - 1][1]
+
 
         lo = max(a_start, b_start)
         hi = min(a_end, b_end)
@@ -25,12 +26,9 @@ def intersection(a, b, method):
             ans.append((lo, val))
 
         if a_end < b_end:
-            i += 1
+            del(a[i-1])
         else:
-            j += 1
-
-    if hi is not None:
-        ans.append((hi, val))
+            del (b[j - 1])
 
     return ans
 
