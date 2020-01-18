@@ -1,6 +1,7 @@
 from rtamt.enumerations.bool_ops import BooleanOperator
 
-def intersection(a, b, op):
+
+def intersection(a, b, method):
     ans = []
     i = j = 1
 
@@ -12,25 +13,15 @@ def intersection(a, b, op):
         b_start = b[j - 1][0]
         b_end = b[j][0]
 
-        a_val = a[i-1][1]
-        b_val = b[i-1][1]
+        a_val = a[i - 1][1]
+        b_val = b[i - 1][1]
 
         lo = max(a_start, b_start)
         hi = min(a_end, b_end)
 
         val = float("nan")
         if lo <= hi:
-            if op == BooleanOperator.AND:
-                val = min(a_val, b_val)
-            elif op == BooleanOperator.OR:
-                val = max(a_val, b_val)
-            elif op == BooleanOperator.IMPLIES:
-                val = max(-a_val, b_val)
-            elif op == BooleanOperator.XOR:
-                val = abs(a_val - b_val)
-            elif op == BooleanOperator.IFF:
-                val = -abs(a_val - b_val)
-
+            val = method(a_val, b_val)
             ans.append((lo, val))
 
         if a_end < b_end:
@@ -42,3 +33,39 @@ def intersection(a, b, op):
         ans.append((hi, val))
 
     return ans
+
+
+def disjunction(a, b):
+    return max(a, b)
+
+
+def conjunction(a, b):
+    return min(a, b)
+
+
+def implication(a, b):
+    return max(-a, b)
+
+
+def xor(a, b):
+    return abs(a - b)
+
+
+def iff(a, b):
+    return -abs(a, b)
+
+
+def addition(a, b):
+    return a + b
+
+
+def subtraction(a, b):
+    return a - b
+
+
+def multiplication(a, b):
+    return a * b
+
+
+def division(a, b):
+    return a / b
