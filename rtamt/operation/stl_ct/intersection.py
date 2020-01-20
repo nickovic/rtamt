@@ -1,8 +1,55 @@
 from rtamt.enumerations.bool_ops import BooleanOperator
 
 
+def interval_union(a, b, method):
+    out = []
+
+    a_min = a[0]
+    a_max = a[1]
+    b_min = b[0]
+    b_max = b[1]
+
+    lo = max(a_min, b_min)
+    hi = min(a_max, b_max)
+
+    if lo <= hi:
+        val = method(a[2], b[2])
+        out.append((lo, hi, val))
+        out.append((hi, b_max, b[2]))
+    else:
+        out.append(b)
+
+    return b
+
+
+def union(a_list, b):
+    i = len(a_list)
+    out = []
+
+    if not a_list:
+        out = [b]
+
+    while i > 0:
+        a = a_list[i]
+        if b[0] >= a[0]:
+            current = interval_union(a, b)
+            out.append(current)
+            i = i - 1
+        else:
+            i = 0
+    return out;
+
+
+def intersects(x1, x2, y1, y2):
+    if x1 <= y2 and y1 <= x2:
+        return True
+    else:
+        return False
+
 def intersection(a, b, method):
     ans = []
+    a = list(a)
+    b = list(b)
     i = j = 1
 
     hi = None
@@ -16,7 +63,6 @@ def intersection(a, b, method):
         a_val = a[i - 1][1]
         b_val = b[j - 1][1]
 
-
         lo = max(a_start, b_start)
         hi = min(a_end, b_end)
 
@@ -26,7 +72,7 @@ def intersection(a, b, method):
             ans.append((lo, val))
 
         if a_end < b_end:
-            del(a[i-1])
+            del (a[i - 1])
         else:
             del (b[j - 1])
 
