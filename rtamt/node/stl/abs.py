@@ -21,7 +21,7 @@ class Abs(Node):
         self.addChild(child)
 
         if is_pure_python:
-            name = 'rtamt.operation.stl.abs_operation'
+            name = 'rtamt.operation.arithmetic.abs_operation'
             mod = __import__(name, fromlist=[''])
             self.node = mod.AbsOperation()
         else:

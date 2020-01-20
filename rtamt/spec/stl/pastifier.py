@@ -40,9 +40,9 @@ class STLPastifier(STLVisitor):
     def visitPredicate(self, element, args):
         horizon = args[0]
         if horizon == 0:
-            node = Predicate(element.var, element.field, element.io_type, element.operator, element.threshold, self.spec.is_pure_python)
+            node = Predicate(element.child, element.io_type, element.operator, element.threshold, self.spec.is_pure_python)
         else:
-            child = Predicate(element.var, element.field, element.io_type, element.operator, element.threshold, self.spec.is_pure_python)
+            child = Predicate(element.child, element.io_type, element.operator, element.threshold, self.spec.is_pure_python)
             bound = Interval(horizon, horizon)
             node = Once(child, bound, self.spec.is_pure_python)
         return node

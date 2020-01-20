@@ -32,20 +32,9 @@ class STLEvaluator(STLVisitor):
         return out_sample
 
     def visitPredicate(self, element, args):
-        time_index = args[0]
-        var = self.dict[element.var]
-        if element.field:
-            value = operator.attrgetter(element.field)(var)
-        else:
-            value = var
-
-        in_sample = self.mod.Sample()
-        in_sample.seq = time_index
-        in_sample.value = value
-
+        in_sample = self.visit(element.child, args)
         element.node.addNewInput(in_sample)
         out_sample = element.node.update()
-
         return out_sample
 
     def visitVariable(self, element, args):

@@ -397,11 +397,11 @@ class TestSTLBooleanAndTemporal(unittest.TestCase):
         oper.addNewInput(self.left5)
         out5 = oper.update()
 
-        self.assertEqual(out1.value, float("inf"), "input 1")
-        self.assertEqual(out2.value, 100, "input 2")
-        self.assertEqual(out3.value, -1, "input 3")
-        self.assertEqual(out4.value, -2, "input 4")
-        self.assertEqual(out5.value, -2, "input 5")
+        self.assertEqual(out1.value, -100, "input 1")
+        self.assertEqual(out2.value, 1, "input 2")
+        self.assertEqual(out3.value, 2, "input 3")
+        self.assertEqual(out4.value, -5, "input 4")
+        self.assertEqual(out5.value, 1, "input 5")
 
 
 if __name__ == '__main__':

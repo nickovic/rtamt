@@ -18,7 +18,7 @@ class Predicate(Node):
         threshold : double
         operator : OperatorType (LEQ, GEQ, LESS, GREATER, EQ or NEQ)
     """
-    def __init__(self, var, field, io_type, operator, threshold, is_pure_python):
+    def __init__(self, child, io_type, operator, threshold, is_pure_python):
         """Constructor for Predicate node
 
         Parameters:
@@ -30,8 +30,7 @@ class Predicate(Node):
         """
 
         super(Predicate, self).__init__()
-        self.var = var
-        self.field = field
+        self.child = child
         self.io_type = io_type
         self.operator = operator
         self.threshold = threshold
@@ -49,24 +48,14 @@ class Predicate(Node):
             self.node = mod.StlPredicateNode(operator, threshold, io_type)
 
     @property
-    def var(self):
-        """Getter for var"""
-        return self.__var
+    def child(self):
+        """Getter for child"""
+        return self.__child
     
-    @var.setter
-    def var(self, var):
-        """Setter for var"""
-        self.__var = var
-
-    @property
-    def field(self):
-        """Getter for field"""
-        return self.__field
-
-    @field.setter
-    def field(self, field):
-        """Setter for field"""
-        self.__field = field
+    @child.setter
+    def child(self, child):
+        """Setter for child"""
+        self.__child = child
         
     @property
     def io_type(self):
