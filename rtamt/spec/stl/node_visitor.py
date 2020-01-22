@@ -30,9 +30,6 @@ from rtamt.node.stl.subtraction import Subtraction
 from rtamt.node.stl.multiplication import Multiplication
 from rtamt.node.stl.division import Division
 
-#from rtamt.lib.rtamt_stl_library_wrapper.stl_io_type import StlIOType
-#from rtamt.lib.rtamt_stl_library_wrapper.stl_comp_op import StlComparisonOperator
-
 from rtamt.exception.stl.exception import STLParseException
 
 

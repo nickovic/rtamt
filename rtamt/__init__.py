@@ -1,5 +1,6 @@
 from rtamt.spec.stl.specification import STLSpecification
 from rtamt.spec.io_stl.specification import STLIOSpecification
+from rtamt.spec.stl_ct.specification import STLCTSpecification
 from rtamt.exception.stl.exception import STLException
 from rtamt.exception.stl.exception import STLParseException
 from rtamt.exception.stl.exception import STLOfflineException
