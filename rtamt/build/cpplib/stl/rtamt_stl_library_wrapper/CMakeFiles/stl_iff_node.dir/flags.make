@@ -6,5 +6,5 @@ CXX_FLAGS = -fPIC
 
 CXX_DEFINES = -Dstl_iff_node_EXPORTS
 
-CXX_INCLUDES = -I/home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library_wrapper/include -I/usr/include/python2.7 -I/home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/include 
+CXX_INCLUDES = -I/home/nickovic/work/cav/rtamt/rtamt/cpplib/stl/rtamt_stl_library_wrapper/include -I/usr/include/python2.7 -I/home/nickovic/work/cav/rtamt/rtamt/cpplib/stl/rtamt_stl_library/include 
 

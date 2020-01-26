@@ -16,6 +16,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/rtamt_stl_library.dir/src/stl_multiplication_node.cpp.o"
   "CMakeFiles/rtamt_stl_library.dir/src/stl_division_node.cpp.o"
   "CMakeFiles/rtamt_stl_library.dir/src/stl_abs_node.cpp.o"
+  "CMakeFiles/rtamt_stl_library.dir/src/stl_rise_node.cpp.o"
+  "CMakeFiles/rtamt_stl_library.dir/src/stl_fall_node.cpp.o"
   "librtamt_stl_library.pdb"
   "librtamt_stl_library.so"
 )

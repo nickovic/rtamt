@@ -81,6 +81,8 @@ expression
     | HistoricallyOperator ( interval )? expression             #ExprHistExpr
     | OnceOperator ( interval )? expression                     #ExpreOnceExpr
     | expression SinceOperator ( interval )? expression         #ExprSinceExpr
+    | RiseOperator LPAREN expression RPAREN                     #ExprRise
+    | FallOperator LPAREN expression RPAREN                     #ExprFall
 	;
 
 //idComp

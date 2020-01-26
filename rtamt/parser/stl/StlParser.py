@@ -7,7 +7,7 @@ from io import StringIO
 def serializedATN():
     with StringIO() as buf:
         buf.write(u"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3")
-        buf.write(u"H\u00e0\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t")
+        buf.write(u"H\u00ea\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t")
         buf.write(u"\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f\t\f\4\r\t\r")
         buf.write(u"\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22\4")
         buf.write(u"\23\t\23\4\24\t\24\4\25\t\25\3\2\3\2\3\2\3\3\5\3/\n\3")
@@ -20,88 +20,94 @@ def serializedATN():
         buf.write(u"\20\3\20\3\21\3\21\3\21\3\21\3\21\5\21~\n\21\3\21\3\21")
         buf.write(u"\3\21\5\21\u0083\n\21\3\21\3\21\3\21\5\21\u0088\n\21")
         buf.write(u"\3\21\3\21\3\21\5\21\u008d\n\21\3\21\3\21\3\21\3\21\3")
-        buf.write(u"\21\3\21\5\21\u0095\n\21\3\21\3\21\3\21\3\21\3\21\3\21")
-        buf.write(u"\3\21\3\21\3\21\3\21\3\21\3\21\3\21\3\21\3\21\3\21\3")
-        buf.write(u"\21\3\21\3\21\3\21\3\21\3\21\3\21\5\21\u00ae\n\21\3\21")
-        buf.write(u"\3\21\3\21\3\21\3\21\7\21\u00b5\n\21\f\21\16\21\u00b8")
-        buf.write(u"\13\21\3\22\3\22\3\22\3\22\3\22\3\22\3\22\5\22\u00c1")
-        buf.write(u"\n\22\3\22\3\22\3\22\3\22\3\22\3\22\3\22\3\22\3\22\3")
-        buf.write(u"\22\3\22\3\22\7\22\u00cf\n\22\f\22\16\22\u00d2\13\22")
-        buf.write(u"\3\23\3\23\3\23\3\23\3\23\3\23\5\23\u00da\n\23\3\24\3")
-        buf.write(u"\24\3\25\3\25\3\25\2\4 \"\26\2\4\6\b\n\f\16\20\22\24")
-        buf.write(u"\26\30\32\34\36 \"$&(\2\6\4\2\37\"DD\3\2\32\33\3\2\23")
-        buf.write(u"\27\3\2BC\u00f1\2*\3\2\2\2\4.\3\2\2\2\6?\3\2\2\2\bB\3")
-        buf.write(u"\2\2\2\nG\3\2\2\2\fK\3\2\2\2\16M\3\2\2\2\20P\3\2\2\2")
-        buf.write(u"\22X\3\2\2\2\24f\3\2\2\2\26h\3\2\2\2\30j\3\2\2\2\32l")
-        buf.write(u"\3\2\2\2\34r\3\2\2\2\36v\3\2\2\2 \u0094\3\2\2\2\"\u00c0")
-        buf.write(u"\3\2\2\2$\u00d9\3\2\2\2&\u00db\3\2\2\2(\u00dd\3\2\2\2")
-        buf.write(u"*+\5\4\3\2+,\7\2\2\3,\3\3\2\2\2-/\5\6\4\2.-\3\2\2\2.")
-        buf.write(u"/\3\2\2\2/\63\3\2\2\2\60\62\5\b\5\2\61\60\3\2\2\2\62")
-        buf.write(u"\65\3\2\2\2\63\61\3\2\2\2\63\64\3\2\2\2\64:\3\2\2\2\65")
-        buf.write(u"\63\3\2\2\2\669\5\f\7\2\679\5\16\b\28\66\3\2\2\28\67")
-        buf.write(u"\3\2\2\29<\3\2\2\2:8\3\2\2\2:;\3\2\2\2;=\3\2\2\2<:\3")
-        buf.write(u"\2\2\2=>\5\n\6\2>\5\3\2\2\2?@\7%\2\2@A\7D\2\2A\7\3\2")
-        buf.write(u"\2\2BC\7&\2\2CD\7D\2\2DE\7\31\2\2EF\7D\2\2F\t\3\2\2\2")
-        buf.write(u"GH\7D\2\2HI\7>\2\2IJ\5 \21\2J\13\3\2\2\2KL\5\22\n\2L")
-        buf.write(u"\r\3\2\2\2MN\7\21\2\2NO\5\20\t\2O\17\3\2\2\2PQ\7\30\2")
-        buf.write(u"\2QR\7\7\2\2RS\7D\2\2ST\7\17\2\2TU\7D\2\2UV\7\b\2\2V")
-        buf.write(u"\21\3\2\2\2WY\7\35\2\2XW\3\2\2\2XY\3\2\2\2Y[\3\2\2\2")
-        buf.write(u"Z\\\5\30\r\2[Z\3\2\2\2[\\\3\2\2\2\\]\3\2\2\2]^\5\26\f")
-        buf.write(u"\2^`\5(\25\2_a\5\24\13\2`_\3\2\2\2`a\3\2\2\2a\23\3\2")
-        buf.write(u"\2\2bc\7>\2\2cg\5&\24\2de\7>\2\2eg\5 \21\2fb\3\2\2\2")
-        buf.write(u"fd\3\2\2\2g\25\3\2\2\2hi\t\2\2\2i\27\3\2\2\2jk\t\3\2")
-        buf.write(u"\2k\31\3\2\2\2lm\7\13\2\2mn\5\34\17\2no\7\16\2\2op\5")
-        buf.write(u"\34\17\2pq\7\f\2\2q\33\3\2\2\2rt\7B\2\2su\5\36\20\2t")
-        buf.write(u"s\3\2\2\2tu\3\2\2\2u\35\3\2\2\2vw\t\4\2\2w\37\3\2\2\2")
-        buf.write(u"xy\b\21\1\2yz\7\'\2\2z\u0095\5 \21\16{}\7/\2\2|~\5\32")
-        buf.write(u"\16\2}|\3\2\2\2}~\3\2\2\2~\177\3\2\2\2\177\u0095\5 \21")
-        buf.write(u"\b\u0080\u0082\7\60\2\2\u0081\u0083\5\32\16\2\u0082\u0081")
+        buf.write(u"\21\3\21\3\21\3\21\3\21\3\21\3\21\3\21\3\21\3\21\3\21")
+        buf.write(u"\3\21\5\21\u009f\n\21\3\21\3\21\3\21\3\21\3\21\3\21\3")
+        buf.write(u"\21\3\21\3\21\3\21\3\21\3\21\3\21\3\21\3\21\3\21\3\21")
+        buf.write(u"\3\21\3\21\3\21\3\21\3\21\3\21\5\21\u00b8\n\21\3\21\3")
+        buf.write(u"\21\3\21\3\21\3\21\7\21\u00bf\n\21\f\21\16\21\u00c2\13")
+        buf.write(u"\21\3\22\3\22\3\22\3\22\3\22\3\22\3\22\5\22\u00cb\n\22")
+        buf.write(u"\3\22\3\22\3\22\3\22\3\22\3\22\3\22\3\22\3\22\3\22\3")
+        buf.write(u"\22\3\22\7\22\u00d9\n\22\f\22\16\22\u00dc\13\22\3\23")
+        buf.write(u"\3\23\3\23\3\23\3\23\3\23\5\23\u00e4\n\23\3\24\3\24\3")
+        buf.write(u"\25\3\25\3\25\2\4 \"\26\2\4\6\b\n\f\16\20\22\24\26\30")
+        buf.write(u"\32\34\36 \"$&(\2\6\4\2\37\"DD\3\2\32\33\3\2\23\27\3")
+        buf.write(u"\2BC\u00fd\2*\3\2\2\2\4.\3\2\2\2\6?\3\2\2\2\bB\3\2\2")
+        buf.write(u"\2\nG\3\2\2\2\fK\3\2\2\2\16M\3\2\2\2\20P\3\2\2\2\22X")
+        buf.write(u"\3\2\2\2\24f\3\2\2\2\26h\3\2\2\2\30j\3\2\2\2\32l\3\2")
+        buf.write(u"\2\2\34r\3\2\2\2\36v\3\2\2\2 \u009e\3\2\2\2\"\u00ca\3")
+        buf.write(u"\2\2\2$\u00e3\3\2\2\2&\u00e5\3\2\2\2(\u00e7\3\2\2\2*")
+        buf.write(u"+\5\4\3\2+,\7\2\2\3,\3\3\2\2\2-/\5\6\4\2.-\3\2\2\2./")
+        buf.write(u"\3\2\2\2/\63\3\2\2\2\60\62\5\b\5\2\61\60\3\2\2\2\62\65")
+        buf.write(u"\3\2\2\2\63\61\3\2\2\2\63\64\3\2\2\2\64:\3\2\2\2\65\63")
+        buf.write(u"\3\2\2\2\669\5\f\7\2\679\5\16\b\28\66\3\2\2\28\67\3\2")
+        buf.write(u"\2\29<\3\2\2\2:8\3\2\2\2:;\3\2\2\2;=\3\2\2\2<:\3\2\2")
+        buf.write(u"\2=>\5\n\6\2>\5\3\2\2\2?@\7%\2\2@A\7D\2\2A\7\3\2\2\2")
+        buf.write(u"BC\7&\2\2CD\7D\2\2DE\7\31\2\2EF\7D\2\2F\t\3\2\2\2GH\7")
+        buf.write(u"D\2\2HI\7>\2\2IJ\5 \21\2J\13\3\2\2\2KL\5\22\n\2L\r\3")
+        buf.write(u"\2\2\2MN\7\21\2\2NO\5\20\t\2O\17\3\2\2\2PQ\7\30\2\2Q")
+        buf.write(u"R\7\7\2\2RS\7D\2\2ST\7\17\2\2TU\7D\2\2UV\7\b\2\2V\21")
+        buf.write(u"\3\2\2\2WY\7\35\2\2XW\3\2\2\2XY\3\2\2\2Y[\3\2\2\2Z\\")
+        buf.write(u"\5\30\r\2[Z\3\2\2\2[\\\3\2\2\2\\]\3\2\2\2]^\5\26\f\2")
+        buf.write(u"^`\5(\25\2_a\5\24\13\2`_\3\2\2\2`a\3\2\2\2a\23\3\2\2")
+        buf.write(u"\2bc\7>\2\2cg\5&\24\2de\7>\2\2eg\5 \21\2fb\3\2\2\2fd")
+        buf.write(u"\3\2\2\2g\25\3\2\2\2hi\t\2\2\2i\27\3\2\2\2jk\t\3\2\2")
+        buf.write(u"k\31\3\2\2\2lm\7\13\2\2mn\5\34\17\2no\7\16\2\2op\5\34")
+        buf.write(u"\17\2pq\7\f\2\2q\33\3\2\2\2rt\7B\2\2su\5\36\20\2ts\3")
+        buf.write(u"\2\2\2tu\3\2\2\2u\35\3\2\2\2vw\t\4\2\2w\37\3\2\2\2xy")
+        buf.write(u"\b\21\1\2yz\7\'\2\2z\u009f\5 \21\20{}\7/\2\2|~\5\32\16")
+        buf.write(u"\2}|\3\2\2\2}~\3\2\2\2~\177\3\2\2\2\177\u009f\5 \21\n")
+        buf.write(u"\u0080\u0082\7\60\2\2\u0081\u0083\5\32\16\2\u0082\u0081")
         buf.write(u"\3\2\2\2\u0082\u0083\3\2\2\2\u0083\u0084\3\2\2\2\u0084")
-        buf.write(u"\u0095\5 \21\7\u0085\u0087\7\62\2\2\u0086\u0088\5\32")
+        buf.write(u"\u009f\5 \21\t\u0085\u0087\7\62\2\2\u0086\u0088\5\32")
         buf.write(u"\16\2\u0087\u0086\3\2\2\2\u0087\u0088\3\2\2\2\u0088\u0089")
-        buf.write(u"\3\2\2\2\u0089\u0095\5 \21\5\u008a\u008c\7\63\2\2\u008b")
+        buf.write(u"\3\2\2\2\u0089\u009f\5 \21\7\u008a\u008c\7\63\2\2\u008b")
         buf.write(u"\u008d\5\32\16\2\u008c\u008b\3\2\2\2\u008c\u008d\3\2")
-        buf.write(u"\2\2\u008d\u008e\3\2\2\2\u008e\u0095\5 \21\4\u008f\u0095")
+        buf.write(u"\2\2\u008d\u008e\3\2\2\2\u008e\u009f\5 \21\6\u008f\u009f")
         buf.write(u"\5\"\22\2\u0090\u0091\7\7\2\2\u0091\u0092\5 \21\2\u0092")
-        buf.write(u"\u0093\7\b\2\2\u0093\u0095\3\2\2\2\u0094x\3\2\2\2\u0094")
-        buf.write(u"{\3\2\2\2\u0094\u0080\3\2\2\2\u0094\u0085\3\2\2\2\u0094")
-        buf.write(u"\u008a\3\2\2\2\u0094\u008f\3\2\2\2\u0094\u0090\3\2\2")
-        buf.write(u"\2\u0095\u00b6\3\2\2\2\u0096\u0097\f\r\2\2\u0097\u0098")
-        buf.write(u"\7(\2\2\u0098\u00b5\5 \21\16\u0099\u009a\f\f\2\2\u009a")
-        buf.write(u"\u009b\7)\2\2\u009b\u00b5\5 \21\r\u009c\u009d\f\13\2")
-        buf.write(u"\2\u009d\u009e\7+\2\2\u009e\u00b5\5 \21\f\u009f\u00a0")
-        buf.write(u"\f\n\2\2\u00a0\u00a1\7*\2\2\u00a1\u00b5\5 \21\13\u00a2")
-        buf.write(u"\u00a3\f\t\2\2\u00a3\u00a4\7,\2\2\u00a4\u00b5\5 \21\n")
-        buf.write(u"\u00a5\u00a6\f\6\2\2\u00a6\u00a7\7\61\2\2\u00a7\u00a8")
-        buf.write(u"\5\32\16\2\u00a8\u00a9\5 \21\7\u00a9\u00b5\3\2\2\2\u00aa")
-        buf.write(u"\u00ab\f\3\2\2\u00ab\u00ad\7\64\2\2\u00ac\u00ae\5\32")
-        buf.write(u"\16\2\u00ad\u00ac\3\2\2\2\u00ad\u00ae\3\2\2\2\u00ae\u00af")
-        buf.write(u"\3\2\2\2\u00af\u00b5\5 \21\4\u00b0\u00b1\f\20\2\2\u00b1")
-        buf.write(u"\u00b2\5$\23\2\u00b2\u00b3\5&\24\2\u00b3\u00b5\3\2\2")
-        buf.write(u"\2\u00b4\u0096\3\2\2\2\u00b4\u0099\3\2\2\2\u00b4\u009c")
-        buf.write(u"\3\2\2\2\u00b4\u009f\3\2\2\2\u00b4\u00a2\3\2\2\2\u00b4")
-        buf.write(u"\u00a5\3\2\2\2\u00b4\u00aa\3\2\2\2\u00b4\u00b0\3\2\2")
-        buf.write(u"\2\u00b5\u00b8\3\2\2\2\u00b6\u00b4\3\2\2\2\u00b6\u00b7")
-        buf.write(u"\3\2\2\2\u00b7!\3\2\2\2\u00b8\u00b6\3\2\2\2\u00b9\u00ba")
-        buf.write(u"\b\22\1\2\u00ba\u00c1\7D\2\2\u00bb\u00bc\7\22\2\2\u00bc")
-        buf.write(u"\u00bd\7\7\2\2\u00bd\u00be\5\"\22\2\u00be\u00bf\7\b\2")
-        buf.write(u"\2\u00bf\u00c1\3\2\2\2\u00c0\u00b9\3\2\2\2\u00c0\u00bb")
-        buf.write(u"\3\2\2\2\u00c1\u00d0\3\2\2\2\u00c2\u00c3\f\7\2\2\u00c3")
-        buf.write(u"\u00c4\7\4\2\2\u00c4\u00cf\5\"\22\b\u00c5\u00c6\f\6\2")
-        buf.write(u"\2\u00c6\u00c7\7\3\2\2\u00c7\u00cf\5\"\22\7\u00c8\u00c9")
-        buf.write(u"\f\5\2\2\u00c9\u00ca\7\5\2\2\u00ca\u00cf\5\"\22\6\u00cb")
-        buf.write(u"\u00cc\f\4\2\2\u00cc\u00cd\7\6\2\2\u00cd\u00cf\5\"\22")
-        buf.write(u"\5\u00ce\u00c2\3\2\2\2\u00ce\u00c5\3\2\2\2\u00ce\u00c8")
-        buf.write(u"\3\2\2\2\u00ce\u00cb\3\2\2\2\u00cf\u00d2\3\2\2\2\u00d0")
-        buf.write(u"\u00ce\3\2\2\2\u00d0\u00d1\3\2\2\2\u00d1#\3\2\2\2\u00d2")
-        buf.write(u"\u00d0\3\2\2\2\u00d3\u00da\7;\2\2\u00d4\u00da\7:\2\2")
-        buf.write(u"\u00d5\u00da\7=\2\2\u00d6\u00da\7<\2\2\u00d7\u00da\7")
-        buf.write(u"8\2\2\u00d8\u00da\79\2\2\u00d9\u00d3\3\2\2\2\u00d9\u00d4")
-        buf.write(u"\3\2\2\2\u00d9\u00d5\3\2\2\2\u00d9\u00d6\3\2\2\2\u00d9")
-        buf.write(u"\u00d7\3\2\2\2\u00d9\u00d8\3\2\2\2\u00da%\3\2\2\2\u00db")
-        buf.write(u"\u00dc\t\5\2\2\u00dc\'\3\2\2\2\u00dd\u00de\7D\2\2\u00de")
-        buf.write(u")\3\2\2\2\27.\638:X[`ft}\u0082\u0087\u008c\u0094\u00ad")
-        buf.write(u"\u00b4\u00b6\u00c0\u00ce\u00d0\u00d9")
+        buf.write(u"\u0093\7\b\2\2\u0093\u009f\3\2\2\2\u0094\u0095\7-\2\2")
+        buf.write(u"\u0095\u0096\7\7\2\2\u0096\u0097\5 \21\2\u0097\u0098")
+        buf.write(u"\7\b\2\2\u0098\u009f\3\2\2\2\u0099\u009a\7.\2\2\u009a")
+        buf.write(u"\u009b\7\7\2\2\u009b\u009c\5 \21\2\u009c\u009d\7\b\2")
+        buf.write(u"\2\u009d\u009f\3\2\2\2\u009ex\3\2\2\2\u009e{\3\2\2\2")
+        buf.write(u"\u009e\u0080\3\2\2\2\u009e\u0085\3\2\2\2\u009e\u008a")
+        buf.write(u"\3\2\2\2\u009e\u008f\3\2\2\2\u009e\u0090\3\2\2\2\u009e")
+        buf.write(u"\u0094\3\2\2\2\u009e\u0099\3\2\2\2\u009f\u00c0\3\2\2")
+        buf.write(u"\2\u00a0\u00a1\f\17\2\2\u00a1\u00a2\7(\2\2\u00a2\u00bf")
+        buf.write(u"\5 \21\20\u00a3\u00a4\f\16\2\2\u00a4\u00a5\7)\2\2\u00a5")
+        buf.write(u"\u00bf\5 \21\17\u00a6\u00a7\f\r\2\2\u00a7\u00a8\7+\2")
+        buf.write(u"\2\u00a8\u00bf\5 \21\16\u00a9\u00aa\f\f\2\2\u00aa\u00ab")
+        buf.write(u"\7*\2\2\u00ab\u00bf\5 \21\r\u00ac\u00ad\f\13\2\2\u00ad")
+        buf.write(u"\u00ae\7,\2\2\u00ae\u00bf\5 \21\f\u00af\u00b0\f\b\2\2")
+        buf.write(u"\u00b0\u00b1\7\61\2\2\u00b1\u00b2\5\32\16\2\u00b2\u00b3")
+        buf.write(u"\5 \21\t\u00b3\u00bf\3\2\2\2\u00b4\u00b5\f\5\2\2\u00b5")
+        buf.write(u"\u00b7\7\64\2\2\u00b6\u00b8\5\32\16\2\u00b7\u00b6\3\2")
+        buf.write(u"\2\2\u00b7\u00b8\3\2\2\2\u00b8\u00b9\3\2\2\2\u00b9\u00bf")
+        buf.write(u"\5 \21\6\u00ba\u00bb\f\22\2\2\u00bb\u00bc\5$\23\2\u00bc")
+        buf.write(u"\u00bd\5&\24\2\u00bd\u00bf\3\2\2\2\u00be\u00a0\3\2\2")
+        buf.write(u"\2\u00be\u00a3\3\2\2\2\u00be\u00a6\3\2\2\2\u00be\u00a9")
+        buf.write(u"\3\2\2\2\u00be\u00ac\3\2\2\2\u00be\u00af\3\2\2\2\u00be")
+        buf.write(u"\u00b4\3\2\2\2\u00be\u00ba\3\2\2\2\u00bf\u00c2\3\2\2")
+        buf.write(u"\2\u00c0\u00be\3\2\2\2\u00c0\u00c1\3\2\2\2\u00c1!\3\2")
+        buf.write(u"\2\2\u00c2\u00c0\3\2\2\2\u00c3\u00c4\b\22\1\2\u00c4\u00cb")
+        buf.write(u"\7D\2\2\u00c5\u00c6\7\22\2\2\u00c6\u00c7\7\7\2\2\u00c7")
+        buf.write(u"\u00c8\5\"\22\2\u00c8\u00c9\7\b\2\2\u00c9\u00cb\3\2\2")
+        buf.write(u"\2\u00ca\u00c3\3\2\2\2\u00ca\u00c5\3\2\2\2\u00cb\u00da")
+        buf.write(u"\3\2\2\2\u00cc\u00cd\f\7\2\2\u00cd\u00ce\7\4\2\2\u00ce")
+        buf.write(u"\u00d9\5\"\22\b\u00cf\u00d0\f\6\2\2\u00d0\u00d1\7\3\2")
+        buf.write(u"\2\u00d1\u00d9\5\"\22\7\u00d2\u00d3\f\5\2\2\u00d3\u00d4")
+        buf.write(u"\7\5\2\2\u00d4\u00d9\5\"\22\6\u00d5\u00d6\f\4\2\2\u00d6")
+        buf.write(u"\u00d7\7\6\2\2\u00d7\u00d9\5\"\22\5\u00d8\u00cc\3\2\2")
+        buf.write(u"\2\u00d8\u00cf\3\2\2\2\u00d8\u00d2\3\2\2\2\u00d8\u00d5")
+        buf.write(u"\3\2\2\2\u00d9\u00dc\3\2\2\2\u00da\u00d8\3\2\2\2\u00da")
+        buf.write(u"\u00db\3\2\2\2\u00db#\3\2\2\2\u00dc\u00da\3\2\2\2\u00dd")
+        buf.write(u"\u00e4\7;\2\2\u00de\u00e4\7:\2\2\u00df\u00e4\7=\2\2\u00e0")
+        buf.write(u"\u00e4\7<\2\2\u00e1\u00e4\78\2\2\u00e2\u00e4\79\2\2\u00e3")
+        buf.write(u"\u00dd\3\2\2\2\u00e3\u00de\3\2\2\2\u00e3\u00df\3\2\2")
+        buf.write(u"\2\u00e3\u00e0\3\2\2\2\u00e3\u00e1\3\2\2\2\u00e3\u00e2")
+        buf.write(u"\3\2\2\2\u00e4%\3\2\2\2\u00e5\u00e6\t\5\2\2\u00e6\'\3")
+        buf.write(u"\2\2\2\u00e7\u00e8\7D\2\2\u00e8)\3\2\2\2\27.\638:X[`")
+        buf.write(u"ft}\u0082\u0087\u008c\u009e\u00b7\u00be\u00c0\u00ca\u00d8")
+        buf.write(u"\u00da\u00e3")
         return buf.getvalue()
 
 
@@ -1400,6 +1406,52 @@ class StlParser ( Parser ):
                 return visitor.visitChildren(self)
 
 
+    class ExprFallContext(ExpressionContext):
+
+        def __init__(self, parser, ctx): # actually a StlParser.ExpressionContext)
+            super(StlParser.ExprFallContext, self).__init__(parser)
+            self.copyFrom(ctx)
+
+        def FallOperator(self):
+            return self.getToken(StlParser.FallOperator, 0)
+        def LPAREN(self):
+            return self.getToken(StlParser.LPAREN, 0)
+        def expression(self):
+            return self.getTypedRuleContext(StlParser.ExpressionContext,0)
+
+        def RPAREN(self):
+            return self.getToken(StlParser.RPAREN, 0)
+
+        def accept(self, visitor):
+            if hasattr(visitor, "visitExprFall"):
+                return visitor.visitExprFall(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+    class ExprRiseContext(ExpressionContext):
+
+        def __init__(self, parser, ctx): # actually a StlParser.ExpressionContext)
+            super(StlParser.ExprRiseContext, self).__init__(parser)
+            self.copyFrom(ctx)
+
+        def RiseOperator(self):
+            return self.getToken(StlParser.RiseOperator, 0)
+        def LPAREN(self):
+            return self.getToken(StlParser.LPAREN, 0)
+        def expression(self):
+            return self.getTypedRuleContext(StlParser.ExpressionContext,0)
+
+        def RPAREN(self):
+            return self.getToken(StlParser.RPAREN, 0)
+
+        def accept(self, visitor):
+            if hasattr(visitor, "visitExprRise"):
+                return visitor.visitExprRise(self)
+            else:
+                return visitor.visitChildren(self)
+
+
     class ExprHistExprContext(ExpressionContext):
 
         def __init__(self, parser, ctx): # actually a StlParser.ExpressionContext)
@@ -1520,7 +1572,7 @@ class StlParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 146
+            self.state = 156
             token = self._input.LA(1)
             if token in [StlParser.NotOperator]:
                 localctx = StlParser.ExprNotContext(self, localctx)
@@ -1530,7 +1582,7 @@ class StlParser ( Parser ):
                 self.state = 119
                 self.match(StlParser.NotOperator)
                 self.state = 120
-                self.expression(12)
+                self.expression(14)
 
             elif token in [StlParser.AlwaysOperator]:
                 localctx = StlParser.ExprAlwaysExprContext(self, localctx)
@@ -1546,7 +1598,7 @@ class StlParser ( Parser ):
 
 
                 self.state = 125
-                self.expression(6)
+                self.expression(8)
 
             elif token in [StlParser.EventuallyOperator]:
                 localctx = StlParser.ExprEvExprContext(self, localctx)
@@ -1562,7 +1614,7 @@ class StlParser ( Parser ):
 
 
                 self.state = 130
-                self.expression(5)
+                self.expression(7)
 
             elif token in [StlParser.HistoricallyOperator]:
                 localctx = StlParser.ExprHistExprContext(self, localctx)
@@ -1578,7 +1630,7 @@ class StlParser ( Parser ):
 
 
                 self.state = 135
-                self.expression(3)
+                self.expression(5)
 
             elif token in [StlParser.OnceOperator]:
                 localctx = StlParser.ExpreOnceExprContext(self, localctx)
@@ -1594,7 +1646,7 @@ class StlParser ( Parser ):
 
 
                 self.state = 140
-                self.expression(2)
+                self.expression(4)
 
             elif token in [StlParser.ABS, StlParser.Identifier]:
                 localctx = StlParser.ExprRealContext(self, localctx)
@@ -1614,11 +1666,37 @@ class StlParser ( Parser ):
                 self.state = 144
                 self.match(StlParser.RPAREN)
 
+            elif token in [StlParser.RiseOperator]:
+                localctx = StlParser.ExprRiseContext(self, localctx)
+                self._ctx = localctx
+                _prevctx = localctx
+                self.state = 146
+                self.match(StlParser.RiseOperator)
+                self.state = 147
+                self.match(StlParser.LPAREN)
+                self.state = 148
+                self.expression(0)
+                self.state = 149
+                self.match(StlParser.RPAREN)
+
+            elif token in [StlParser.FallOperator]:
+                localctx = StlParser.ExprFallContext(self, localctx)
+                self._ctx = localctx
+                _prevctx = localctx
+                self.state = 151
+                self.match(StlParser.FallOperator)
+                self.state = 152
+                self.match(StlParser.LPAREN)
+                self.state = 153
+                self.expression(0)
+                self.state = 154
+                self.match(StlParser.RPAREN)
+
             else:
                 raise NoViableAltException(self)
 
             self._ctx.stop = self._input.LT(-1)
-            self.state = 180
+            self.state = 190
             self._errHandler.sync(self)
             _alt = self._interp.adaptivePredict(self._input,16,self._ctx)
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
@@ -1626,123 +1704,123 @@ class StlParser ( Parser ):
                     if self._parseListeners is not None:
                         self.triggerExitRuleEvent()
                     _prevctx = localctx
-                    self.state = 178
+                    self.state = 188
                     la_ = self._interp.adaptivePredict(self._input,15,self._ctx)
                     if la_ == 1:
                         localctx = StlParser.ExprOrExprContext(self, StlParser.ExpressionContext(self, _parentctx, _parentState))
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expression)
-                        self.state = 148
-                        if not self.precpred(self._ctx, 11):
+                        self.state = 158
+                        if not self.precpred(self._ctx, 13):
                             from antlr4.error.Errors import FailedPredicateException
-                            raise FailedPredicateException(self, "self.precpred(self._ctx, 11)")
-                        self.state = 149
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 13)")
+                        self.state = 159
                         self.match(StlParser.OrOperator)
-                        self.state = 150
-                        self.expression(12)
+                        self.state = 160
+                        self.expression(14)
                         pass
 
                     elif la_ == 2:
                         localctx = StlParser.ExprAndExprContext(self, StlParser.ExpressionContext(self, _parentctx, _parentState))
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expression)
-                        self.state = 151
-                        if not self.precpred(self._ctx, 10):
+                        self.state = 161
+                        if not self.precpred(self._ctx, 12):
                             from antlr4.error.Errors import FailedPredicateException
-                            raise FailedPredicateException(self, "self.precpred(self._ctx, 10)")
-                        self.state = 152
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 12)")
+                        self.state = 162
                         self.match(StlParser.AndOperator)
-                        self.state = 153
-                        self.expression(11)
+                        self.state = 163
+                        self.expression(13)
                         pass
 
                     elif la_ == 3:
                         localctx = StlParser.ExprImpliesExprContext(self, StlParser.ExpressionContext(self, _parentctx, _parentState))
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expression)
-                        self.state = 154
-                        if not self.precpred(self._ctx, 9):
+                        self.state = 164
+                        if not self.precpred(self._ctx, 11):
                             from antlr4.error.Errors import FailedPredicateException
-                            raise FailedPredicateException(self, "self.precpred(self._ctx, 9)")
-                        self.state = 155
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 11)")
+                        self.state = 165
                         self.match(StlParser.ImpliesOperator)
-                        self.state = 156
-                        self.expression(10)
+                        self.state = 166
+                        self.expression(12)
                         pass
 
                     elif la_ == 4:
                         localctx = StlParser.ExprIffExprContext(self, StlParser.ExpressionContext(self, _parentctx, _parentState))
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expression)
-                        self.state = 157
-                        if not self.precpred(self._ctx, 8):
+                        self.state = 167
+                        if not self.precpred(self._ctx, 10):
                             from antlr4.error.Errors import FailedPredicateException
-                            raise FailedPredicateException(self, "self.precpred(self._ctx, 8)")
-                        self.state = 158
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 10)")
+                        self.state = 168
                         self.match(StlParser.IffOperator)
-                        self.state = 159
-                        self.expression(9)
+                        self.state = 169
+                        self.expression(11)
                         pass
 
                     elif la_ == 5:
                         localctx = StlParser.ExprXorExprContext(self, StlParser.ExpressionContext(self, _parentctx, _parentState))
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expression)
-                        self.state = 160
-                        if not self.precpred(self._ctx, 7):
+                        self.state = 170
+                        if not self.precpred(self._ctx, 9):
                             from antlr4.error.Errors import FailedPredicateException
-                            raise FailedPredicateException(self, "self.precpred(self._ctx, 7)")
-                        self.state = 161
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 9)")
+                        self.state = 171
                         self.match(StlParser.XorOperator)
-                        self.state = 162
-                        self.expression(8)
+                        self.state = 172
+                        self.expression(10)
                         pass
 
                     elif la_ == 6:
                         localctx = StlParser.ExprUntilExprContext(self, StlParser.ExpressionContext(self, _parentctx, _parentState))
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expression)
-                        self.state = 163
-                        if not self.precpred(self._ctx, 4):
+                        self.state = 173
+                        if not self.precpred(self._ctx, 6):
                             from antlr4.error.Errors import FailedPredicateException
-                            raise FailedPredicateException(self, "self.precpred(self._ctx, 4)")
-                        self.state = 164
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 6)")
+                        self.state = 174
                         self.match(StlParser.UntilOperator)
-                        self.state = 165
+                        self.state = 175
                         self.interval()
-                        self.state = 166
-                        self.expression(5)
+                        self.state = 176
+                        self.expression(7)
                         pass
 
                     elif la_ == 7:
                         localctx = StlParser.ExprSinceExprContext(self, StlParser.ExpressionContext(self, _parentctx, _parentState))
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expression)
-                        self.state = 168
-                        if not self.precpred(self._ctx, 1):
+                        self.state = 178
+                        if not self.precpred(self._ctx, 3):
                             from antlr4.error.Errors import FailedPredicateException
-                            raise FailedPredicateException(self, "self.precpred(self._ctx, 1)")
-                        self.state = 169
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 3)")
+                        self.state = 179
                         self.match(StlParser.SinceOperator)
-                        self.state = 171
+                        self.state = 181
                         _la = self._input.LA(1)
                         if _la==StlParser.LBRACK:
-                            self.state = 170
+                            self.state = 180
                             self.interval()
 
 
-                        self.state = 173
-                        self.expression(2)
+                        self.state = 183
+                        self.expression(4)
                         pass
 
                     elif la_ == 8:
                         localctx = StlParser.IdCompIntContext(self, StlParser.ExpressionContext(self, _parentctx, _parentState))
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expression)
-                        self.state = 174
-                        if not self.precpred(self._ctx, 14):
+                        self.state = 184
+                        if not self.precpred(self._ctx, 16):
                             from antlr4.error.Errors import FailedPredicateException
-                            raise FailedPredicateException(self, "self.precpred(self._ctx, 14)")
-                        self.state = 175
+                            raise FailedPredicateException(self, "self.precpred(self._ctx, 16)")
+                        self.state = 185
                         self.comparisonOp()
-                        self.state = 176
+                        self.state = 186
                         self.literal()
                         pass
 
              
-                self.state = 182
+                self.state = 192
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,16,self._ctx)
 
@@ -1906,34 +1984,34 @@ class StlParser ( Parser ):
         self.enterRecursionRule(localctx, 32, self.RULE_real_expression, _p)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 190
+            self.state = 200
             token = self._input.LA(1)
             if token in [StlParser.Identifier]:
                 localctx = StlParser.ExprIdContext(self, localctx)
                 self._ctx = localctx
                 _prevctx = localctx
 
-                self.state = 184
+                self.state = 194
                 self.match(StlParser.Identifier)
 
             elif token in [StlParser.ABS]:
                 localctx = StlParser.ExprAbsContext(self, localctx)
                 self._ctx = localctx
                 _prevctx = localctx
-                self.state = 185
+                self.state = 195
                 self.match(StlParser.ABS)
-                self.state = 186
+                self.state = 196
                 self.match(StlParser.LPAREN)
-                self.state = 187
+                self.state = 197
                 self.real_expression(0)
-                self.state = 188
+                self.state = 198
                 self.match(StlParser.RPAREN)
 
             else:
                 raise NoViableAltException(self)
 
             self._ctx.stop = self._input.LT(-1)
-            self.state = 206
+            self.state = 216
             self._errHandler.sync(self)
             _alt = self._interp.adaptivePredict(self._input,19,self._ctx)
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
@@ -1941,62 +2019,62 @@ class StlParser ( Parser ):
                     if self._parseListeners is not None:
                         self.triggerExitRuleEvent()
                     _prevctx = localctx
-                    self.state = 204
+                    self.state = 214
                     la_ = self._interp.adaptivePredict(self._input,18,self._ctx)
                     if la_ == 1:
                         localctx = StlParser.ExprAdditionContext(self, StlParser.Real_expressionContext(self, _parentctx, _parentState))
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_real_expression)
-                        self.state = 192
+                        self.state = 202
                         if not self.precpred(self._ctx, 5):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 5)")
-                        self.state = 193
+                        self.state = 203
                         self.match(StlParser.PLUS)
-                        self.state = 194
+                        self.state = 204
                         self.real_expression(6)
                         pass
 
                     elif la_ == 2:
                         localctx = StlParser.ExprSubtractionContext(self, StlParser.Real_expressionContext(self, _parentctx, _parentState))
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_real_expression)
-                        self.state = 195
+                        self.state = 205
                         if not self.precpred(self._ctx, 4):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 4)")
-                        self.state = 196
+                        self.state = 206
                         self.match(StlParser.MINUS)
-                        self.state = 197
+                        self.state = 207
                         self.real_expression(5)
                         pass
 
                     elif la_ == 3:
                         localctx = StlParser.ExprMultiplicationContext(self, StlParser.Real_expressionContext(self, _parentctx, _parentState))
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_real_expression)
-                        self.state = 198
+                        self.state = 208
                         if not self.precpred(self._ctx, 3):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 3)")
-                        self.state = 199
+                        self.state = 209
                         self.match(StlParser.TIMES)
-                        self.state = 200
+                        self.state = 210
                         self.real_expression(4)
                         pass
 
                     elif la_ == 4:
                         localctx = StlParser.ExprDivisionContext(self, StlParser.Real_expressionContext(self, _parentctx, _parentState))
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_real_expression)
-                        self.state = 201
+                        self.state = 211
                         if not self.precpred(self._ctx, 2):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 2)")
-                        self.state = 202
+                        self.state = 212
                         self.match(StlParser.DIVIDE)
-                        self.state = 203
+                        self.state = 213
                         self.real_expression(3)
                         pass
 
              
-                self.state = 208
+                self.state = 218
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,19,self._ctx)
 
@@ -2126,42 +2204,42 @@ class StlParser ( Parser ):
         localctx = StlParser.ComparisonOpContext(self, self._ctx, self.state)
         self.enterRule(localctx, 34, self.RULE_comparisonOp)
         try:
-            self.state = 215
+            self.state = 225
             token = self._input.LA(1)
             if token in [StlParser.LesserOrEqualOperator]:
                 localctx = StlParser.CmpOpLsContext(self, localctx)
                 self.enterOuterAlt(localctx, 1)
-                self.state = 209
+                self.state = 219
                 self.match(StlParser.LesserOrEqualOperator)
 
             elif token in [StlParser.GreaterOrEqualOperator]:
                 localctx = StlParser.CmpOpGteContext(self, localctx)
                 self.enterOuterAlt(localctx, 2)
-                self.state = 210
+                self.state = 220
                 self.match(StlParser.GreaterOrEqualOperator)
 
             elif token in [StlParser.LesserOperator]:
                 localctx = StlParser.CmpOpLseContext(self, localctx)
                 self.enterOuterAlt(localctx, 3)
-                self.state = 211
+                self.state = 221
                 self.match(StlParser.LesserOperator)
 
             elif token in [StlParser.GreaterOperator]:
                 localctx = StlParser.CmpOpGtContext(self, localctx)
                 self.enterOuterAlt(localctx, 4)
-                self.state = 212
+                self.state = 222
                 self.match(StlParser.GreaterOperator)
 
             elif token in [StlParser.EqualOperator]:
                 localctx = StlParser.CmpOpEqContext(self, localctx)
                 self.enterOuterAlt(localctx, 5)
-                self.state = 213
+                self.state = 223
                 self.match(StlParser.EqualOperator)
 
             elif token in [StlParser.NotEqualOperator]:
                 localctx = StlParser.ComOpNeqContext(self, localctx)
                 self.enterOuterAlt(localctx, 6)
-                self.state = 214
+                self.state = 224
                 self.match(StlParser.NotEqualOperator)
 
             else:
@@ -2206,7 +2284,7 @@ class StlParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 217
+            self.state = 227
             _la = self._input.LA(1)
             if not(_la==StlParser.IntegerLiteral or _la==StlParser.RealLiteral):
                 self._errHandler.recoverInline(self)
@@ -2260,7 +2338,7 @@ class StlParser ( Parser ):
         try:
             localctx = StlParser.IdContext(self, localctx)
             self.enterOuterAlt(localctx, 1)
-            self.state = 219
+            self.state = 229
             self.match(StlParser.Identifier)
         except RecognitionException as re:
             localctx.exception = re
@@ -2285,35 +2363,35 @@ class StlParser ( Parser ):
 
     def expression_sempred(self, localctx, predIndex):
             if predIndex == 0:
-                return self.precpred(self._ctx, 11)
+                return self.precpred(self._ctx, 13)
          
 
             if predIndex == 1:
-                return self.precpred(self._ctx, 10)
+                return self.precpred(self._ctx, 12)
          
 
             if predIndex == 2:
-                return self.precpred(self._ctx, 9)
+                return self.precpred(self._ctx, 11)
          
 
             if predIndex == 3:
-                return self.precpred(self._ctx, 8)
+                return self.precpred(self._ctx, 10)
          
 
             if predIndex == 4:
-                return self.precpred(self._ctx, 7)
+                return self.precpred(self._ctx, 9)
          
 
             if predIndex == 5:
-                return self.precpred(self._ctx, 4)
+                return self.precpred(self._ctx, 6)
          
 
             if predIndex == 6:
-                return self.precpred(self._ctx, 1)
+                return self.precpred(self._ctx, 3)
          
 
             if predIndex == 7:
-                return self.precpred(self._ctx, 14)
+                return self.precpred(self._ctx, 16)
          
 
     def real_expression_sempred(self, localctx, predIndex):

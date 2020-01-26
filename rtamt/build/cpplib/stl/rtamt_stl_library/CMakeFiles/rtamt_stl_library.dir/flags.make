@@ -6,5 +6,5 @@ CXX_FLAGS = -fPIC
 
 CXX_DEFINES = -Drtamt_stl_library_EXPORTS
 
-CXX_INCLUDES = -I/home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/include 
+CXX_INCLUDES = -I/home/nickovic/work/cav/rtamt/rtamt/cpplib/stl/rtamt_stl_library/include 
 

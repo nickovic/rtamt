@@ -29,6 +29,8 @@ from rtamt.node.stl.addition import Addition
 from rtamt.node.stl.subtraction import Subtraction
 from rtamt.node.stl.multiplication import Multiplication
 from rtamt.node.stl.division import Division
+from rtamt.node.stl.fall import Fall
+from rtamt.node.stl.rise import Rise
 
 #from rtamt.lib.rtamt_stl_library_wrapper.stl_io_type import StlIOType
 #from rtamt.lib.rtamt_stl_library_wrapper.stl_comp_op import StlComparisonOperator
@@ -146,6 +148,18 @@ class STLNodeVisitor(StlParserVisitor):
     def visitExprNot(self, ctx):
         child = self.visit(ctx.expression())
         node = Neg(child, self.spec.is_pure_python)
+        node.horizon = child.horizon
+        return node
+
+    def visitExprRise(self, ctx):
+        child = self.visit(ctx.expression())
+        node = Rise(child, self.spec.is_pure_python)
+        node.horizon = child.horizon
+        return node
+
+    def visitExprFall(self, ctx):
+        child = self.visit(ctx.expression())
+        node = Fall(child, self.spec.is_pure_python)
         node.horizon = child.horizon
         return node
 

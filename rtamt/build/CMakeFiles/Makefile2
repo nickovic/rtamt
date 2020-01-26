@@ -54,10 +54,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/nickovic/work/debug/rtamt/rtamt
+CMAKE_SOURCE_DIR = /home/nickovic/work/cav/rtamt/rtamt
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/nickovic/work/debug/rtamt/rtamt/build
+CMAKE_BINARY_DIR = /home/nickovic/work/cav/rtamt/rtamt/build
 
 #=============================================================================
 # Directory level rules for directory cpplib/stl
@@ -105,7 +105,7 @@ cpplib/stl/rtamt_stl_library/preinstall:
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/all:
 	$(MAKE) -f cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/build.make cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/depend
 	$(MAKE) -f cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/build.make cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18 "Built target rtamt_stl_library"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20 "Built target rtamt_stl_library"
 .PHONY : cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/all
 
 # Include target in all.
@@ -115,9 +115,9 @@ all: cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/all
 
 # Build rule for subdir invocation for target.
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 18
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 20
 	$(MAKE) -f CMakeFiles/Makefile2 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 0
 .PHONY : cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/rule
 
 # Convenience name for target.
@@ -139,6 +139,7 @@ clean: cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/clean
 # Directory level rules for directory cpplib/stl/rtamt_stl_library_wrapper
 
 # Convenience name for "all" pass in the directory.
+cpplib/stl/rtamt_stl_library_wrapper/all: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_fall_node.dir/all
 cpplib/stl/rtamt_stl_library_wrapper/all: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_division_node.dir/all
 cpplib/stl/rtamt_stl_library_wrapper/all: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_subtraction_node.dir/all
 cpplib/stl/rtamt_stl_library_wrapper/all: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_multiplication_node.dir/all
@@ -165,11 +166,13 @@ cpplib/stl/rtamt_stl_library_wrapper/all: cpplib/stl/rtamt_stl_library_wrapper/C
 cpplib/stl/rtamt_stl_library_wrapper/all: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_historically_bounded_node.dir/all
 cpplib/stl/rtamt_stl_library_wrapper/all: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_operator_type.dir/all
 cpplib/stl/rtamt_stl_library_wrapper/all: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_since_bounded_node.dir/all
+cpplib/stl/rtamt_stl_library_wrapper/all: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_rise_node.dir/all
 cpplib/stl/rtamt_stl_library_wrapper/all: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_precedes_bounded_node.dir/all
 
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/all
 
 # Convenience name for "clean" pass in the directory.
+cpplib/stl/rtamt_stl_library_wrapper/clean: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_fall_node.dir/clean
 cpplib/stl/rtamt_stl_library_wrapper/clean: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_division_node.dir/clean
 cpplib/stl/rtamt_stl_library_wrapper/clean: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_subtraction_node.dir/clean
 cpplib/stl/rtamt_stl_library_wrapper/clean: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_multiplication_node.dir/clean
@@ -196,6 +199,7 @@ cpplib/stl/rtamt_stl_library_wrapper/clean: cpplib/stl/rtamt_stl_library_wrapper
 cpplib/stl/rtamt_stl_library_wrapper/clean: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_historically_bounded_node.dir/clean
 cpplib/stl/rtamt_stl_library_wrapper/clean: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_operator_type.dir/clean
 cpplib/stl/rtamt_stl_library_wrapper/clean: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_since_bounded_node.dir/clean
+cpplib/stl/rtamt_stl_library_wrapper/clean: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_rise_node.dir/clean
 cpplib/stl/rtamt_stl_library_wrapper/clean: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_precedes_bounded_node.dir/clean
 
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/clean
@@ -206,13 +210,50 @@ cpplib/stl/rtamt_stl_library_wrapper/preinstall:
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/preinstall
 
 #=============================================================================
+# Target rules for target cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_fall_node.dir
+
+# All Build rule for target.
+cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_fall_node.dir/all: cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/all
+	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_fall_node.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_fall_node.dir/depend
+	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_fall_node.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_fall_node.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles --progress-num=35,36 "Built target stl_fall_node"
+.PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_fall_node.dir/all
+
+# Include target in all.
+all: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_fall_node.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_fall_node.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 22
+	$(MAKE) -f CMakeFiles/Makefile2 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_fall_node.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 0
+.PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_fall_node.dir/rule
+
+# Convenience name for target.
+stl_fall_node: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_fall_node.dir/rule
+
+.PHONY : stl_fall_node
+
+# clean rule for target.
+cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_fall_node.dir/clean:
+	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_fall_node.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_fall_node.dir/clean
+.PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_fall_node.dir/clean
+
+# clean rule for target.
+clean: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_fall_node.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
 # Target rules for target cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_division_node.dir
 
 # All Build rule for target.
 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_division_node.dir/all: cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/all
 	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_division_node.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_division_node.dir/depend
 	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_division_node.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_division_node.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles --progress-num=31,32 "Built target stl_division_node"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles --progress-num=33,34 "Built target stl_division_node"
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_division_node.dir/all
 
 # Include target in all.
@@ -222,9 +263,9 @@ all: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_division_node.dir/all
 
 # Build rule for subdir invocation for target.
 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_division_node.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 20
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 22
 	$(MAKE) -f CMakeFiles/Makefile2 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_division_node.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 0
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_division_node.dir/rule
 
 # Convenience name for target.
@@ -249,7 +290,7 @@ clean: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_division_node.dir/cle
 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_subtraction_node.dir/all: cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/all
 	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_subtraction_node.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_subtraction_node.dir/depend
 	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_subtraction_node.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_subtraction_node.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles --progress-num=67,68 "Built target stl_subtraction_node"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles --progress-num=73,74 "Built target stl_subtraction_node"
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_subtraction_node.dir/all
 
 # Include target in all.
@@ -259,9 +300,9 @@ all: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_subtraction_node.dir/al
 
 # Build rule for subdir invocation for target.
 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_subtraction_node.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 20
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 22
 	$(MAKE) -f CMakeFiles/Makefile2 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_subtraction_node.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 0
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_subtraction_node.dir/rule
 
 # Convenience name for target.
@@ -286,7 +327,7 @@ clean: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_subtraction_node.dir/
 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_multiplication_node.dir/all: cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/all
 	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_multiplication_node.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_multiplication_node.dir/depend
 	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_multiplication_node.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_multiplication_node.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles --progress-num=43,44 "Built target stl_multiplication_node"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles --progress-num=47,48 "Built target stl_multiplication_node"
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_multiplication_node.dir/all
 
 # Include target in all.
@@ -296,9 +337,9 @@ all: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_multiplication_node.dir
 
 # Build rule for subdir invocation for target.
 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_multiplication_node.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 20
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 22
 	$(MAKE) -f CMakeFiles/Makefile2 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_multiplication_node.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 0
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_multiplication_node.dir/rule
 
 # Convenience name for target.
@@ -323,7 +364,7 @@ clean: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_multiplication_node.d
 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_addition_node.dir/all: cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/all
 	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_addition_node.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_addition_node.dir/depend
 	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_addition_node.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_addition_node.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles --progress-num=21,22 "Built target stl_addition_node"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles --progress-num=23,24 "Built target stl_addition_node"
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_addition_node.dir/all
 
 # Include target in all.
@@ -333,9 +374,9 @@ all: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_addition_node.dir/all
 
 # Build rule for subdir invocation for target.
 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_addition_node.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 20
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 22
 	$(MAKE) -f CMakeFiles/Makefile2 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_addition_node.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 0
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_addition_node.dir/rule
 
 # Convenience name for target.
@@ -360,7 +401,7 @@ clean: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_addition_node.dir/cle
 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_sample.dir/all: cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/all
 	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_sample.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_sample.dir/depend
 	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_sample.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_sample.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles --progress-num=61,62 "Built target stl_sample"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles --progress-num=67,68 "Built target stl_sample"
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_sample.dir/all
 
 # Include target in all.
@@ -370,9 +411,9 @@ all: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_sample.dir/all
 
 # Build rule for subdir invocation for target.
 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_sample.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 20
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 22
 	$(MAKE) -f CMakeFiles/Makefile2 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_sample.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 0
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_sample.dir/rule
 
 # Convenience name for target.
@@ -397,7 +438,7 @@ clean: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_sample.dir/clean
 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_predicate_node.dir/all: cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/all
 	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_predicate_node.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_predicate_node.dir/depend
 	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_predicate_node.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_predicate_node.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles --progress-num=59,60 "Built target stl_predicate_node"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles --progress-num=63,64 "Built target stl_predicate_node"
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_predicate_node.dir/all
 
 # Include target in all.
@@ -407,9 +448,9 @@ all: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_predicate_node.dir/all
 
 # Build rule for subdir invocation for target.
 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_predicate_node.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 20
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 22
 	$(MAKE) -f CMakeFiles/Makefile2 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_predicate_node.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 0
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_predicate_node.dir/rule
 
 # Convenience name for target.
@@ -434,7 +475,7 @@ clean: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_predicate_node.dir/cl
 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_io_type.dir/all: cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/all
 	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_io_type.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_io_type.dir/depend
 	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_io_type.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_io_type.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles --progress-num=41,42 "Built target stl_io_type"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles --progress-num=45,46 "Built target stl_io_type"
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_io_type.dir/all
 
 # Include target in all.
@@ -444,9 +485,9 @@ all: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_io_type.dir/all
 
 # Build rule for subdir invocation for target.
 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_io_type.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 20
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 22
 	$(MAKE) -f CMakeFiles/Makefile2 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_io_type.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 0
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_io_type.dir/rule
 
 # Convenience name for target.
@@ -471,7 +512,7 @@ clean: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_io_type.dir/clean
 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_implies_node.dir/all: cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/all
 	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_implies_node.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_implies_node.dir/depend
 	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_implies_node.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_implies_node.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles --progress-num=39,40 "Built target stl_implies_node"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles --progress-num=43,44 "Built target stl_implies_node"
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_implies_node.dir/all
 
 # Include target in all.
@@ -481,9 +522,9 @@ all: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_implies_node.dir/all
 
 # Build rule for subdir invocation for target.
 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_implies_node.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 20
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 22
 	$(MAKE) -f CMakeFiles/Makefile2 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_implies_node.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 0
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_implies_node.dir/rule
 
 # Convenience name for target.
@@ -508,7 +549,7 @@ clean: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_implies_node.dir/clea
 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_comp_op.dir/all: cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/all
 	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_comp_op.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_comp_op.dir/depend
 	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_comp_op.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_comp_op.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles --progress-num=29,30 "Built target stl_comp_op"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles --progress-num=31,32 "Built target stl_comp_op"
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_comp_op.dir/all
 
 # Include target in all.
@@ -518,9 +559,9 @@ all: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_comp_op.dir/all
 
 # Build rule for subdir invocation for target.
 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_comp_op.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 20
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 22
 	$(MAKE) -f CMakeFiles/Makefile2 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_comp_op.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 0
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_comp_op.dir/rule
 
 # Convenience name for target.
@@ -545,7 +586,7 @@ clean: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_comp_op.dir/clean
 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_once_bounded_node.dir/all: cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/all
 	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_once_bounded_node.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_once_bounded_node.dir/depend
 	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_once_bounded_node.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_once_bounded_node.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles --progress-num=49,50 "Built target stl_once_bounded_node"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles --progress-num=53,54 "Built target stl_once_bounded_node"
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_once_bounded_node.dir/all
 
 # Include target in all.
@@ -555,9 +596,9 @@ all: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_once_bounded_node.dir/a
 
 # Build rule for subdir invocation for target.
 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_once_bounded_node.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 20
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 22
 	$(MAKE) -f CMakeFiles/Makefile2 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_once_bounded_node.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 0
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_once_bounded_node.dir/rule
 
 # Convenience name for target.
@@ -582,7 +623,7 @@ clean: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_once_bounded_node.dir
 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_time.dir/all: cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/all
 	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_time.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_time.dir/depend
 	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_time.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_time.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles --progress-num=69,70 "Built target stl_time"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles --progress-num=75,76 "Built target stl_time"
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_time.dir/all
 
 # Include target in all.
@@ -592,9 +633,9 @@ all: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_time.dir/all
 
 # Build rule for subdir invocation for target.
 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_time.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 20
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 22
 	$(MAKE) -f CMakeFiles/Makefile2 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_time.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 0
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_time.dir/rule
 
 # Convenience name for target.
@@ -619,7 +660,7 @@ clean: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_time.dir/clean
 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_node.dir/all: cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/all
 	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_node.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_node.dir/depend
 	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_node.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_node.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles --progress-num=45,46 "Built target stl_node"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles --progress-num=49,50 "Built target stl_node"
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_node.dir/all
 
 # Include target in all.
@@ -629,9 +670,9 @@ all: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_node.dir/all
 
 # Build rule for subdir invocation for target.
 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_node.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 20
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 22
 	$(MAKE) -f CMakeFiles/Makefile2 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_node.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 0
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_node.dir/rule
 
 # Convenience name for target.
@@ -656,7 +697,7 @@ clean: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_node.dir/clean
 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_combinatorial_binary_node.dir/all: cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/all
 	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_combinatorial_binary_node.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_combinatorial_binary_node.dir/depend
 	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_combinatorial_binary_node.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_combinatorial_binary_node.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles --progress-num=27,28 "Built target stl_combinatorial_binary_node"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles --progress-num=29,30 "Built target stl_combinatorial_binary_node"
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_combinatorial_binary_node.dir/all
 
 # Include target in all.
@@ -666,9 +707,9 @@ all: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_combinatorial_binary_no
 
 # Build rule for subdir invocation for target.
 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_combinatorial_binary_node.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 20
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 22
 	$(MAKE) -f CMakeFiles/Makefile2 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_combinatorial_binary_node.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 0
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_combinatorial_binary_node.dir/rule
 
 # Convenience name for target.
@@ -693,7 +734,7 @@ clean: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_combinatorial_binary_
 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_or_node.dir/all: cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/all
 	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_or_node.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_or_node.dir/depend
 	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_or_node.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_or_node.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles --progress-num=55,56 "Built target stl_or_node"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles --progress-num=59,60 "Built target stl_or_node"
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_or_node.dir/all
 
 # Include target in all.
@@ -703,9 +744,9 @@ all: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_or_node.dir/all
 
 # Build rule for subdir invocation for target.
 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_or_node.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 20
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 22
 	$(MAKE) -f CMakeFiles/Makefile2 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_or_node.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 0
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_or_node.dir/rule
 
 # Convenience name for target.
@@ -730,7 +771,7 @@ clean: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_or_node.dir/clean
 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_xor_node.dir/all: cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/all
 	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_xor_node.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_xor_node.dir/depend
 	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_xor_node.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_xor_node.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles --progress-num=71,72 "Built target stl_xor_node"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles --progress-num=77,78 "Built target stl_xor_node"
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_xor_node.dir/all
 
 # Include target in all.
@@ -740,9 +781,9 @@ all: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_xor_node.dir/all
 
 # Build rule for subdir invocation for target.
 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_xor_node.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 20
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 22
 	$(MAKE) -f CMakeFiles/Makefile2 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_xor_node.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 0
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_xor_node.dir/rule
 
 # Convenience name for target.
@@ -767,7 +808,7 @@ clean: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_xor_node.dir/clean
 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_abs_node.dir/all: cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/all
 	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_abs_node.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_abs_node.dir/depend
 	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_abs_node.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_abs_node.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles --progress-num=19,20 "Built target stl_abs_node"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles --progress-num=21,22 "Built target stl_abs_node"
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_abs_node.dir/all
 
 # Include target in all.
@@ -777,9 +818,9 @@ all: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_abs_node.dir/all
 
 # Build rule for subdir invocation for target.
 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_abs_node.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 20
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 22
 	$(MAKE) -f CMakeFiles/Makefile2 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_abs_node.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 0
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_abs_node.dir/rule
 
 # Convenience name for target.
@@ -804,7 +845,7 @@ clean: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_abs_node.dir/clean
 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_not_node.dir/all: cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/all
 	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_not_node.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_not_node.dir/depend
 	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_not_node.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_not_node.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles --progress-num=47,48 "Built target stl_not_node"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles --progress-num=51,52 "Built target stl_not_node"
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_not_node.dir/all
 
 # Include target in all.
@@ -814,9 +855,9 @@ all: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_not_node.dir/all
 
 # Build rule for subdir invocation for target.
 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_not_node.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 20
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 22
 	$(MAKE) -f CMakeFiles/Makefile2 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_not_node.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 0
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_not_node.dir/rule
 
 # Convenience name for target.
@@ -841,7 +882,7 @@ clean: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_not_node.dir/clean
 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_always_node.dir/all: cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/all
 	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_always_node.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_always_node.dir/depend
 	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_always_node.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_always_node.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles --progress-num=23,24 "Built target stl_always_node"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles --progress-num=25,26 "Built target stl_always_node"
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_always_node.dir/all
 
 # Include target in all.
@@ -851,9 +892,9 @@ all: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_always_node.dir/all
 
 # Build rule for subdir invocation for target.
 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_always_node.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 20
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 22
 	$(MAKE) -f CMakeFiles/Makefile2 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_always_node.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 0
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_always_node.dir/rule
 
 # Convenience name for target.
@@ -878,7 +919,7 @@ clean: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_always_node.dir/clean
 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_since_node.dir/all: cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/all
 	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_since_node.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_since_node.dir/depend
 	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_since_node.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_since_node.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles --progress-num=65,66 "Built target stl_since_node"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles --progress-num=71,72 "Built target stl_since_node"
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_since_node.dir/all
 
 # Include target in all.
@@ -888,9 +929,9 @@ all: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_since_node.dir/all
 
 # Build rule for subdir invocation for target.
 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_since_node.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 20
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 22
 	$(MAKE) -f CMakeFiles/Makefile2 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_since_node.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 0
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_since_node.dir/rule
 
 # Convenience name for target.
@@ -915,7 +956,7 @@ clean: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_since_node.dir/clean
 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_and_node.dir/all: cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/all
 	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_and_node.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_and_node.dir/depend
 	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_and_node.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_and_node.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles --progress-num=25,26 "Built target stl_and_node"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles --progress-num=27,28 "Built target stl_and_node"
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_and_node.dir/all
 
 # Include target in all.
@@ -925,9 +966,9 @@ all: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_and_node.dir/all
 
 # Build rule for subdir invocation for target.
 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_and_node.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 20
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 22
 	$(MAKE) -f CMakeFiles/Makefile2 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_and_node.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 0
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_and_node.dir/rule
 
 # Convenience name for target.
@@ -952,7 +993,7 @@ clean: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_and_node.dir/clean
 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_historically_node.dir/all: cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/all
 	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_historically_node.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_historically_node.dir/depend
 	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_historically_node.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_historically_node.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles --progress-num=35,36 "Built target stl_historically_node"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles --progress-num=39,40 "Built target stl_historically_node"
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_historically_node.dir/all
 
 # Include target in all.
@@ -962,9 +1003,9 @@ all: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_historically_node.dir/a
 
 # Build rule for subdir invocation for target.
 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_historically_node.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 20
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 22
 	$(MAKE) -f CMakeFiles/Makefile2 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_historically_node.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 0
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_historically_node.dir/rule
 
 # Convenience name for target.
@@ -989,7 +1030,7 @@ clean: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_historically_node.dir
 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_once_node.dir/all: cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/all
 	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_once_node.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_once_node.dir/depend
 	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_once_node.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_once_node.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles --progress-num=51,52 "Built target stl_once_node"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles --progress-num=55,56 "Built target stl_once_node"
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_once_node.dir/all
 
 # Include target in all.
@@ -999,9 +1040,9 @@ all: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_once_node.dir/all
 
 # Build rule for subdir invocation for target.
 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_once_node.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 20
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 22
 	$(MAKE) -f CMakeFiles/Makefile2 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_once_node.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 0
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_once_node.dir/rule
 
 # Convenience name for target.
@@ -1026,7 +1067,7 @@ clean: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_once_node.dir/clean
 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_iff_node.dir/all: cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/all
 	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_iff_node.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_iff_node.dir/depend
 	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_iff_node.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_iff_node.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles --progress-num=37,38 "Built target stl_iff_node"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles --progress-num=41,42 "Built target stl_iff_node"
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_iff_node.dir/all
 
 # Include target in all.
@@ -1036,9 +1077,9 @@ all: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_iff_node.dir/all
 
 # Build rule for subdir invocation for target.
 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_iff_node.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 20
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 22
 	$(MAKE) -f CMakeFiles/Makefile2 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_iff_node.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 0
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_iff_node.dir/rule
 
 # Convenience name for target.
@@ -1063,7 +1104,7 @@ clean: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_iff_node.dir/clean
 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_historically_bounded_node.dir/all: cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/all
 	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_historically_bounded_node.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_historically_bounded_node.dir/depend
 	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_historically_bounded_node.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_historically_bounded_node.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles --progress-num=33,34 "Built target stl_historically_bounded_node"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles --progress-num=37,38 "Built target stl_historically_bounded_node"
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_historically_bounded_node.dir/all
 
 # Include target in all.
@@ -1073,9 +1114,9 @@ all: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_historically_bounded_no
 
 # Build rule for subdir invocation for target.
 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_historically_bounded_node.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 20
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 22
 	$(MAKE) -f CMakeFiles/Makefile2 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_historically_bounded_node.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 0
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_historically_bounded_node.dir/rule
 
 # Convenience name for target.
@@ -1100,7 +1141,7 @@ clean: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_historically_bounded_
 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_operator_type.dir/all: cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/all
 	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_operator_type.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_operator_type.dir/depend
 	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_operator_type.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_operator_type.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles --progress-num=53,54 "Built target stl_operator_type"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles --progress-num=57,58 "Built target stl_operator_type"
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_operator_type.dir/all
 
 # Include target in all.
@@ -1110,9 +1151,9 @@ all: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_operator_type.dir/all
 
 # Build rule for subdir invocation for target.
 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_operator_type.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 20
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 22
 	$(MAKE) -f CMakeFiles/Makefile2 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_operator_type.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 0
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_operator_type.dir/rule
 
 # Convenience name for target.
@@ -1137,7 +1178,7 @@ clean: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_operator_type.dir/cle
 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_since_bounded_node.dir/all: cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/all
 	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_since_bounded_node.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_since_bounded_node.dir/depend
 	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_since_bounded_node.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_since_bounded_node.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles --progress-num=63,64 "Built target stl_since_bounded_node"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles --progress-num=69,70 "Built target stl_since_bounded_node"
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_since_bounded_node.dir/all
 
 # Include target in all.
@@ -1147,9 +1188,9 @@ all: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_since_bounded_node.dir/
 
 # Build rule for subdir invocation for target.
 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_since_bounded_node.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 20
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 22
 	$(MAKE) -f CMakeFiles/Makefile2 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_since_bounded_node.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 0
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_since_bounded_node.dir/rule
 
 # Convenience name for target.
@@ -1168,13 +1209,50 @@ clean: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_since_bounded_node.di
 .PHONY : clean
 
 #=============================================================================
+# Target rules for target cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_rise_node.dir
+
+# All Build rule for target.
+cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_rise_node.dir/all: cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/all
+	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_rise_node.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_rise_node.dir/depend
+	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_rise_node.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_rise_node.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles --progress-num=65,66 "Built target stl_rise_node"
+.PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_rise_node.dir/all
+
+# Include target in all.
+all: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_rise_node.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_rise_node.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 22
+	$(MAKE) -f CMakeFiles/Makefile2 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_rise_node.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 0
+.PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_rise_node.dir/rule
+
+# Convenience name for target.
+stl_rise_node: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_rise_node.dir/rule
+
+.PHONY : stl_rise_node
+
+# clean rule for target.
+cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_rise_node.dir/clean:
+	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_rise_node.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_rise_node.dir/clean
+.PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_rise_node.dir/clean
+
+# clean rule for target.
+clean: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_rise_node.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
 # Target rules for target cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_precedes_bounded_node.dir
 
 # All Build rule for target.
 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_precedes_bounded_node.dir/all: cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/all
 	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_precedes_bounded_node.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_precedes_bounded_node.dir/depend
 	$(MAKE) -f cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_precedes_bounded_node.dir/build.make cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_precedes_bounded_node.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles --progress-num=57,58 "Built target stl_precedes_bounded_node"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles --progress-num=61,62 "Built target stl_precedes_bounded_node"
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_precedes_bounded_node.dir/all
 
 # Include target in all.
@@ -1184,9 +1262,9 @@ all: cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_precedes_bounded_node.d
 
 # Build rule for subdir invocation for target.
 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_precedes_bounded_node.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 20
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 22
 	$(MAKE) -f CMakeFiles/Makefile2 cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_precedes_bounded_node.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nickovic/work/cav/rtamt/rtamt/build/CMakeFiles 0
 .PHONY : cpplib/stl/rtamt_stl_library_wrapper/CMakeFiles/stl_precedes_bounded_node.dir/rule
 
 # Convenience name for target.

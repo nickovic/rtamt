@@ -135,6 +135,16 @@ class StlParserVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by StlParser#ExprFall.
+    def visitExprFall(self, ctx):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by StlParser#ExprRise.
+    def visitExprRise(self, ctx):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by StlParser#ExprHistExpr.
     def visitExprHistExpr(self, ctx):
         return self.visitChildren(ctx)
