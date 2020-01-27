@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/nickovic/work/debug/rtamt/rtamt
+CMAKE_SOURCE_DIR = /home/tester/debug/rtamt/rtamt
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/nickovic/work/debug/rtamt/rtamt/build
+CMAKE_BINARY_DIR = /home/tester/debug/rtamt/rtamt/build
 
 # Include any dependencies generated for this target.
 include cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/depend.make
@@ -59,16 +59,16 @@ include cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/flags.make
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_combinatorial_binary_node.cpp.o: cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/flags.make
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_combinatorial_binary_node.cpp.o: ../cpplib/stl/rtamt_stl_library/src/stl_combinatorial_binary_node.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_combinatorial_binary_node.cpp.o"
-	cd /home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rtamt_stl_library.dir/src/stl_combinatorial_binary_node.cpp.o -c /home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_combinatorial_binary_node.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/tester/debug/rtamt/rtamt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_combinatorial_binary_node.cpp.o"
+	cd /home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rtamt_stl_library.dir/src/stl_combinatorial_binary_node.cpp.o -c /home/tester/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_combinatorial_binary_node.cpp
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_combinatorial_binary_node.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/rtamt_stl_library.dir/src/stl_combinatorial_binary_node.cpp.i"
-	cd /home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_combinatorial_binary_node.cpp > CMakeFiles/rtamt_stl_library.dir/src/stl_combinatorial_binary_node.cpp.i
+	cd /home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/tester/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_combinatorial_binary_node.cpp > CMakeFiles/rtamt_stl_library.dir/src/stl_combinatorial_binary_node.cpp.i
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_combinatorial_binary_node.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/rtamt_stl_library.dir/src/stl_combinatorial_binary_node.cpp.s"
-	cd /home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_combinatorial_binary_node.cpp -o CMakeFiles/rtamt_stl_library.dir/src/stl_combinatorial_binary_node.cpp.s
+	cd /home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/tester/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_combinatorial_binary_node.cpp -o CMakeFiles/rtamt_stl_library.dir/src/stl_combinatorial_binary_node.cpp.s
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_combinatorial_binary_node.cpp.o.requires:
 
@@ -83,16 +83,16 @@ cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_combinator
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_not_node.cpp.o: cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/flags.make
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_not_node.cpp.o: ../cpplib/stl/rtamt_stl_library/src/stl_not_node.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_not_node.cpp.o"
-	cd /home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rtamt_stl_library.dir/src/stl_not_node.cpp.o -c /home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_not_node.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/tester/debug/rtamt/rtamt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_not_node.cpp.o"
+	cd /home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rtamt_stl_library.dir/src/stl_not_node.cpp.o -c /home/tester/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_not_node.cpp
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_not_node.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/rtamt_stl_library.dir/src/stl_not_node.cpp.i"
-	cd /home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_not_node.cpp > CMakeFiles/rtamt_stl_library.dir/src/stl_not_node.cpp.i
+	cd /home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/tester/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_not_node.cpp > CMakeFiles/rtamt_stl_library.dir/src/stl_not_node.cpp.i
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_not_node.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/rtamt_stl_library.dir/src/stl_not_node.cpp.s"
-	cd /home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_not_node.cpp -o CMakeFiles/rtamt_stl_library.dir/src/stl_not_node.cpp.s
+	cd /home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/tester/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_not_node.cpp -o CMakeFiles/rtamt_stl_library.dir/src/stl_not_node.cpp.s
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_not_node.cpp.o.requires:
 
@@ -107,16 +107,16 @@ cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_not_node.c
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_once_node.cpp.o: cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/flags.make
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_once_node.cpp.o: ../cpplib/stl/rtamt_stl_library/src/stl_once_node.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_once_node.cpp.o"
-	cd /home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rtamt_stl_library.dir/src/stl_once_node.cpp.o -c /home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_once_node.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/tester/debug/rtamt/rtamt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_once_node.cpp.o"
+	cd /home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rtamt_stl_library.dir/src/stl_once_node.cpp.o -c /home/tester/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_once_node.cpp
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_once_node.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/rtamt_stl_library.dir/src/stl_once_node.cpp.i"
-	cd /home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_once_node.cpp > CMakeFiles/rtamt_stl_library.dir/src/stl_once_node.cpp.i
+	cd /home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/tester/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_once_node.cpp > CMakeFiles/rtamt_stl_library.dir/src/stl_once_node.cpp.i
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_once_node.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/rtamt_stl_library.dir/src/stl_once_node.cpp.s"
-	cd /home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_once_node.cpp -o CMakeFiles/rtamt_stl_library.dir/src/stl_once_node.cpp.s
+	cd /home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/tester/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_once_node.cpp -o CMakeFiles/rtamt_stl_library.dir/src/stl_once_node.cpp.s
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_once_node.cpp.o.requires:
 
@@ -131,16 +131,16 @@ cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_once_node.
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_historically_node.cpp.o: cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/flags.make
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_historically_node.cpp.o: ../cpplib/stl/rtamt_stl_library/src/stl_historically_node.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_historically_node.cpp.o"
-	cd /home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rtamt_stl_library.dir/src/stl_historically_node.cpp.o -c /home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_historically_node.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/tester/debug/rtamt/rtamt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_historically_node.cpp.o"
+	cd /home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rtamt_stl_library.dir/src/stl_historically_node.cpp.o -c /home/tester/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_historically_node.cpp
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_historically_node.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/rtamt_stl_library.dir/src/stl_historically_node.cpp.i"
-	cd /home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_historically_node.cpp > CMakeFiles/rtamt_stl_library.dir/src/stl_historically_node.cpp.i
+	cd /home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/tester/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_historically_node.cpp > CMakeFiles/rtamt_stl_library.dir/src/stl_historically_node.cpp.i
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_historically_node.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/rtamt_stl_library.dir/src/stl_historically_node.cpp.s"
-	cd /home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_historically_node.cpp -o CMakeFiles/rtamt_stl_library.dir/src/stl_historically_node.cpp.s
+	cd /home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/tester/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_historically_node.cpp -o CMakeFiles/rtamt_stl_library.dir/src/stl_historically_node.cpp.s
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_historically_node.cpp.o.requires:
 
@@ -155,16 +155,16 @@ cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_historical
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_since_node.cpp.o: cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/flags.make
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_since_node.cpp.o: ../cpplib/stl/rtamt_stl_library/src/stl_since_node.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_since_node.cpp.o"
-	cd /home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rtamt_stl_library.dir/src/stl_since_node.cpp.o -c /home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_since_node.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/tester/debug/rtamt/rtamt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_since_node.cpp.o"
+	cd /home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rtamt_stl_library.dir/src/stl_since_node.cpp.o -c /home/tester/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_since_node.cpp
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_since_node.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/rtamt_stl_library.dir/src/stl_since_node.cpp.i"
-	cd /home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_since_node.cpp > CMakeFiles/rtamt_stl_library.dir/src/stl_since_node.cpp.i
+	cd /home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/tester/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_since_node.cpp > CMakeFiles/rtamt_stl_library.dir/src/stl_since_node.cpp.i
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_since_node.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/rtamt_stl_library.dir/src/stl_since_node.cpp.s"
-	cd /home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_since_node.cpp -o CMakeFiles/rtamt_stl_library.dir/src/stl_since_node.cpp.s
+	cd /home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/tester/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_since_node.cpp -o CMakeFiles/rtamt_stl_library.dir/src/stl_since_node.cpp.s
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_since_node.cpp.o.requires:
 
@@ -179,16 +179,16 @@ cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_since_node
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_once_bounded_node.cpp.o: cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/flags.make
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_once_bounded_node.cpp.o: ../cpplib/stl/rtamt_stl_library/src/stl_once_bounded_node.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_once_bounded_node.cpp.o"
-	cd /home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rtamt_stl_library.dir/src/stl_once_bounded_node.cpp.o -c /home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_once_bounded_node.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/tester/debug/rtamt/rtamt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_once_bounded_node.cpp.o"
+	cd /home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rtamt_stl_library.dir/src/stl_once_bounded_node.cpp.o -c /home/tester/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_once_bounded_node.cpp
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_once_bounded_node.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/rtamt_stl_library.dir/src/stl_once_bounded_node.cpp.i"
-	cd /home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_once_bounded_node.cpp > CMakeFiles/rtamt_stl_library.dir/src/stl_once_bounded_node.cpp.i
+	cd /home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/tester/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_once_bounded_node.cpp > CMakeFiles/rtamt_stl_library.dir/src/stl_once_bounded_node.cpp.i
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_once_bounded_node.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/rtamt_stl_library.dir/src/stl_once_bounded_node.cpp.s"
-	cd /home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_once_bounded_node.cpp -o CMakeFiles/rtamt_stl_library.dir/src/stl_once_bounded_node.cpp.s
+	cd /home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/tester/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_once_bounded_node.cpp -o CMakeFiles/rtamt_stl_library.dir/src/stl_once_bounded_node.cpp.s
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_once_bounded_node.cpp.o.requires:
 
@@ -203,16 +203,16 @@ cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_once_bound
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_historically_bounded_node.cpp.o: cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/flags.make
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_historically_bounded_node.cpp.o: ../cpplib/stl/rtamt_stl_library/src/stl_historically_bounded_node.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_historically_bounded_node.cpp.o"
-	cd /home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rtamt_stl_library.dir/src/stl_historically_bounded_node.cpp.o -c /home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_historically_bounded_node.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/tester/debug/rtamt/rtamt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_historically_bounded_node.cpp.o"
+	cd /home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rtamt_stl_library.dir/src/stl_historically_bounded_node.cpp.o -c /home/tester/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_historically_bounded_node.cpp
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_historically_bounded_node.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/rtamt_stl_library.dir/src/stl_historically_bounded_node.cpp.i"
-	cd /home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_historically_bounded_node.cpp > CMakeFiles/rtamt_stl_library.dir/src/stl_historically_bounded_node.cpp.i
+	cd /home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/tester/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_historically_bounded_node.cpp > CMakeFiles/rtamt_stl_library.dir/src/stl_historically_bounded_node.cpp.i
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_historically_bounded_node.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/rtamt_stl_library.dir/src/stl_historically_bounded_node.cpp.s"
-	cd /home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_historically_bounded_node.cpp -o CMakeFiles/rtamt_stl_library.dir/src/stl_historically_bounded_node.cpp.s
+	cd /home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/tester/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_historically_bounded_node.cpp -o CMakeFiles/rtamt_stl_library.dir/src/stl_historically_bounded_node.cpp.s
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_historically_bounded_node.cpp.o.requires:
 
@@ -227,16 +227,16 @@ cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_historical
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_since_bounded_node.cpp.o: cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/flags.make
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_since_bounded_node.cpp.o: ../cpplib/stl/rtamt_stl_library/src/stl_since_bounded_node.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_since_bounded_node.cpp.o"
-	cd /home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rtamt_stl_library.dir/src/stl_since_bounded_node.cpp.o -c /home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_since_bounded_node.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/tester/debug/rtamt/rtamt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_since_bounded_node.cpp.o"
+	cd /home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rtamt_stl_library.dir/src/stl_since_bounded_node.cpp.o -c /home/tester/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_since_bounded_node.cpp
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_since_bounded_node.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/rtamt_stl_library.dir/src/stl_since_bounded_node.cpp.i"
-	cd /home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_since_bounded_node.cpp > CMakeFiles/rtamt_stl_library.dir/src/stl_since_bounded_node.cpp.i
+	cd /home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/tester/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_since_bounded_node.cpp > CMakeFiles/rtamt_stl_library.dir/src/stl_since_bounded_node.cpp.i
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_since_bounded_node.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/rtamt_stl_library.dir/src/stl_since_bounded_node.cpp.s"
-	cd /home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_since_bounded_node.cpp -o CMakeFiles/rtamt_stl_library.dir/src/stl_since_bounded_node.cpp.s
+	cd /home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/tester/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_since_bounded_node.cpp -o CMakeFiles/rtamt_stl_library.dir/src/stl_since_bounded_node.cpp.s
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_since_bounded_node.cpp.o.requires:
 
@@ -251,16 +251,16 @@ cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_since_boun
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_precedes_bounded_node.cpp.o: cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/flags.make
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_precedes_bounded_node.cpp.o: ../cpplib/stl/rtamt_stl_library/src/stl_precedes_bounded_node.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_precedes_bounded_node.cpp.o"
-	cd /home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rtamt_stl_library.dir/src/stl_precedes_bounded_node.cpp.o -c /home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_precedes_bounded_node.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/tester/debug/rtamt/rtamt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_precedes_bounded_node.cpp.o"
+	cd /home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rtamt_stl_library.dir/src/stl_precedes_bounded_node.cpp.o -c /home/tester/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_precedes_bounded_node.cpp
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_precedes_bounded_node.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/rtamt_stl_library.dir/src/stl_precedes_bounded_node.cpp.i"
-	cd /home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_precedes_bounded_node.cpp > CMakeFiles/rtamt_stl_library.dir/src/stl_precedes_bounded_node.cpp.i
+	cd /home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/tester/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_precedes_bounded_node.cpp > CMakeFiles/rtamt_stl_library.dir/src/stl_precedes_bounded_node.cpp.i
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_precedes_bounded_node.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/rtamt_stl_library.dir/src/stl_precedes_bounded_node.cpp.s"
-	cd /home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_precedes_bounded_node.cpp -o CMakeFiles/rtamt_stl_library.dir/src/stl_precedes_bounded_node.cpp.s
+	cd /home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/tester/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_precedes_bounded_node.cpp -o CMakeFiles/rtamt_stl_library.dir/src/stl_precedes_bounded_node.cpp.s
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_precedes_bounded_node.cpp.o.requires:
 
@@ -275,16 +275,16 @@ cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_precedes_b
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_always_node.cpp.o: cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/flags.make
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_always_node.cpp.o: ../cpplib/stl/rtamt_stl_library/src/stl_always_node.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_always_node.cpp.o"
-	cd /home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rtamt_stl_library.dir/src/stl_always_node.cpp.o -c /home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_always_node.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/tester/debug/rtamt/rtamt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_always_node.cpp.o"
+	cd /home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rtamt_stl_library.dir/src/stl_always_node.cpp.o -c /home/tester/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_always_node.cpp
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_always_node.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/rtamt_stl_library.dir/src/stl_always_node.cpp.i"
-	cd /home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_always_node.cpp > CMakeFiles/rtamt_stl_library.dir/src/stl_always_node.cpp.i
+	cd /home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/tester/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_always_node.cpp > CMakeFiles/rtamt_stl_library.dir/src/stl_always_node.cpp.i
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_always_node.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/rtamt_stl_library.dir/src/stl_always_node.cpp.s"
-	cd /home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_always_node.cpp -o CMakeFiles/rtamt_stl_library.dir/src/stl_always_node.cpp.s
+	cd /home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/tester/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_always_node.cpp -o CMakeFiles/rtamt_stl_library.dir/src/stl_always_node.cpp.s
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_always_node.cpp.o.requires:
 
@@ -299,16 +299,16 @@ cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_always_nod
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_eventually_node.cpp.o: cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/flags.make
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_eventually_node.cpp.o: ../cpplib/stl/rtamt_stl_library/src/stl_eventually_node.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_eventually_node.cpp.o"
-	cd /home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rtamt_stl_library.dir/src/stl_eventually_node.cpp.o -c /home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_eventually_node.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/tester/debug/rtamt/rtamt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_eventually_node.cpp.o"
+	cd /home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rtamt_stl_library.dir/src/stl_eventually_node.cpp.o -c /home/tester/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_eventually_node.cpp
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_eventually_node.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/rtamt_stl_library.dir/src/stl_eventually_node.cpp.i"
-	cd /home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_eventually_node.cpp > CMakeFiles/rtamt_stl_library.dir/src/stl_eventually_node.cpp.i
+	cd /home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/tester/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_eventually_node.cpp > CMakeFiles/rtamt_stl_library.dir/src/stl_eventually_node.cpp.i
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_eventually_node.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/rtamt_stl_library.dir/src/stl_eventually_node.cpp.s"
-	cd /home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_eventually_node.cpp -o CMakeFiles/rtamt_stl_library.dir/src/stl_eventually_node.cpp.s
+	cd /home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/tester/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_eventually_node.cpp -o CMakeFiles/rtamt_stl_library.dir/src/stl_eventually_node.cpp.s
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_eventually_node.cpp.o.requires:
 
@@ -323,16 +323,16 @@ cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_eventually
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_predicate_node.cpp.o: cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/flags.make
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_predicate_node.cpp.o: ../cpplib/stl/rtamt_stl_library/src/stl_predicate_node.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_predicate_node.cpp.o"
-	cd /home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rtamt_stl_library.dir/src/stl_predicate_node.cpp.o -c /home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_predicate_node.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/tester/debug/rtamt/rtamt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_predicate_node.cpp.o"
+	cd /home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rtamt_stl_library.dir/src/stl_predicate_node.cpp.o -c /home/tester/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_predicate_node.cpp
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_predicate_node.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/rtamt_stl_library.dir/src/stl_predicate_node.cpp.i"
-	cd /home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_predicate_node.cpp > CMakeFiles/rtamt_stl_library.dir/src/stl_predicate_node.cpp.i
+	cd /home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/tester/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_predicate_node.cpp > CMakeFiles/rtamt_stl_library.dir/src/stl_predicate_node.cpp.i
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_predicate_node.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/rtamt_stl_library.dir/src/stl_predicate_node.cpp.s"
-	cd /home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_predicate_node.cpp -o CMakeFiles/rtamt_stl_library.dir/src/stl_predicate_node.cpp.s
+	cd /home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/tester/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_predicate_node.cpp -o CMakeFiles/rtamt_stl_library.dir/src/stl_predicate_node.cpp.s
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_predicate_node.cpp.o.requires:
 
@@ -347,16 +347,16 @@ cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_predicate_
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_addition_node.cpp.o: cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/flags.make
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_addition_node.cpp.o: ../cpplib/stl/rtamt_stl_library/src/stl_addition_node.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_addition_node.cpp.o"
-	cd /home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rtamt_stl_library.dir/src/stl_addition_node.cpp.o -c /home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_addition_node.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/tester/debug/rtamt/rtamt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_addition_node.cpp.o"
+	cd /home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rtamt_stl_library.dir/src/stl_addition_node.cpp.o -c /home/tester/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_addition_node.cpp
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_addition_node.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/rtamt_stl_library.dir/src/stl_addition_node.cpp.i"
-	cd /home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_addition_node.cpp > CMakeFiles/rtamt_stl_library.dir/src/stl_addition_node.cpp.i
+	cd /home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/tester/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_addition_node.cpp > CMakeFiles/rtamt_stl_library.dir/src/stl_addition_node.cpp.i
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_addition_node.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/rtamt_stl_library.dir/src/stl_addition_node.cpp.s"
-	cd /home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_addition_node.cpp -o CMakeFiles/rtamt_stl_library.dir/src/stl_addition_node.cpp.s
+	cd /home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/tester/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_addition_node.cpp -o CMakeFiles/rtamt_stl_library.dir/src/stl_addition_node.cpp.s
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_addition_node.cpp.o.requires:
 
@@ -371,16 +371,16 @@ cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_addition_n
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_subtraction_node.cpp.o: cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/flags.make
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_subtraction_node.cpp.o: ../cpplib/stl/rtamt_stl_library/src/stl_subtraction_node.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_subtraction_node.cpp.o"
-	cd /home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rtamt_stl_library.dir/src/stl_subtraction_node.cpp.o -c /home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_subtraction_node.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/tester/debug/rtamt/rtamt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_subtraction_node.cpp.o"
+	cd /home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rtamt_stl_library.dir/src/stl_subtraction_node.cpp.o -c /home/tester/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_subtraction_node.cpp
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_subtraction_node.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/rtamt_stl_library.dir/src/stl_subtraction_node.cpp.i"
-	cd /home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_subtraction_node.cpp > CMakeFiles/rtamt_stl_library.dir/src/stl_subtraction_node.cpp.i
+	cd /home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/tester/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_subtraction_node.cpp > CMakeFiles/rtamt_stl_library.dir/src/stl_subtraction_node.cpp.i
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_subtraction_node.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/rtamt_stl_library.dir/src/stl_subtraction_node.cpp.s"
-	cd /home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_subtraction_node.cpp -o CMakeFiles/rtamt_stl_library.dir/src/stl_subtraction_node.cpp.s
+	cd /home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/tester/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_subtraction_node.cpp -o CMakeFiles/rtamt_stl_library.dir/src/stl_subtraction_node.cpp.s
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_subtraction_node.cpp.o.requires:
 
@@ -395,16 +395,16 @@ cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_subtractio
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_multiplication_node.cpp.o: cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/flags.make
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_multiplication_node.cpp.o: ../cpplib/stl/rtamt_stl_library/src/stl_multiplication_node.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_multiplication_node.cpp.o"
-	cd /home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rtamt_stl_library.dir/src/stl_multiplication_node.cpp.o -c /home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_multiplication_node.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/tester/debug/rtamt/rtamt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_multiplication_node.cpp.o"
+	cd /home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rtamt_stl_library.dir/src/stl_multiplication_node.cpp.o -c /home/tester/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_multiplication_node.cpp
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_multiplication_node.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/rtamt_stl_library.dir/src/stl_multiplication_node.cpp.i"
-	cd /home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_multiplication_node.cpp > CMakeFiles/rtamt_stl_library.dir/src/stl_multiplication_node.cpp.i
+	cd /home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/tester/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_multiplication_node.cpp > CMakeFiles/rtamt_stl_library.dir/src/stl_multiplication_node.cpp.i
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_multiplication_node.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/rtamt_stl_library.dir/src/stl_multiplication_node.cpp.s"
-	cd /home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_multiplication_node.cpp -o CMakeFiles/rtamt_stl_library.dir/src/stl_multiplication_node.cpp.s
+	cd /home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/tester/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_multiplication_node.cpp -o CMakeFiles/rtamt_stl_library.dir/src/stl_multiplication_node.cpp.s
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_multiplication_node.cpp.o.requires:
 
@@ -419,16 +419,16 @@ cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_multiplica
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_division_node.cpp.o: cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/flags.make
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_division_node.cpp.o: ../cpplib/stl/rtamt_stl_library/src/stl_division_node.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_division_node.cpp.o"
-	cd /home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rtamt_stl_library.dir/src/stl_division_node.cpp.o -c /home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_division_node.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/tester/debug/rtamt/rtamt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_division_node.cpp.o"
+	cd /home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rtamt_stl_library.dir/src/stl_division_node.cpp.o -c /home/tester/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_division_node.cpp
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_division_node.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/rtamt_stl_library.dir/src/stl_division_node.cpp.i"
-	cd /home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_division_node.cpp > CMakeFiles/rtamt_stl_library.dir/src/stl_division_node.cpp.i
+	cd /home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/tester/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_division_node.cpp > CMakeFiles/rtamt_stl_library.dir/src/stl_division_node.cpp.i
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_division_node.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/rtamt_stl_library.dir/src/stl_division_node.cpp.s"
-	cd /home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_division_node.cpp -o CMakeFiles/rtamt_stl_library.dir/src/stl_division_node.cpp.s
+	cd /home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/tester/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_division_node.cpp -o CMakeFiles/rtamt_stl_library.dir/src/stl_division_node.cpp.s
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_division_node.cpp.o.requires:
 
@@ -443,16 +443,16 @@ cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_division_n
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_abs_node.cpp.o: cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/flags.make
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_abs_node.cpp.o: ../cpplib/stl/rtamt_stl_library/src/stl_abs_node.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_abs_node.cpp.o"
-	cd /home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rtamt_stl_library.dir/src/stl_abs_node.cpp.o -c /home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_abs_node.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/tester/debug/rtamt/rtamt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_abs_node.cpp.o"
+	cd /home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rtamt_stl_library.dir/src/stl_abs_node.cpp.o -c /home/tester/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_abs_node.cpp
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_abs_node.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/rtamt_stl_library.dir/src/stl_abs_node.cpp.i"
-	cd /home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_abs_node.cpp > CMakeFiles/rtamt_stl_library.dir/src/stl_abs_node.cpp.i
+	cd /home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/tester/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_abs_node.cpp > CMakeFiles/rtamt_stl_library.dir/src/stl_abs_node.cpp.i
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_abs_node.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/rtamt_stl_library.dir/src/stl_abs_node.cpp.s"
-	cd /home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_abs_node.cpp -o CMakeFiles/rtamt_stl_library.dir/src/stl_abs_node.cpp.s
+	cd /home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/tester/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library/src/stl_abs_node.cpp -o CMakeFiles/rtamt_stl_library.dir/src/stl_abs_node.cpp.s
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_abs_node.cpp.o.requires:
 
@@ -507,8 +507,8 @@ cpplib/stl/rtamt_stl_library/librtamt_stl_library.so: cpplib/stl/rtamt_stl_libra
 cpplib/stl/rtamt_stl_library/librtamt_stl_library.so: cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/src/stl_abs_node.cpp.o
 cpplib/stl/rtamt_stl_library/librtamt_stl_library.so: cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/build.make
 cpplib/stl/rtamt_stl_library/librtamt_stl_library.so: cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/nickovic/work/debug/rtamt/rtamt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Linking CXX shared library librtamt_stl_library.so"
-	cd /home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/rtamt_stl_library.dir/link.txt --verbose=$(VERBOSE)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/tester/debug/rtamt/rtamt/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Linking CXX shared library librtamt_stl_library.so"
+	cd /home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/rtamt_stl_library.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/build: cpplib/stl/rtamt_stl_library/librtamt_stl_library.so
@@ -536,10 +536,10 @@ cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/requires: cpplib/s
 .PHONY : cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/requires
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/clean:
-	cd /home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && $(CMAKE_COMMAND) -P CMakeFiles/rtamt_stl_library.dir/cmake_clean.cmake
+	cd /home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library && $(CMAKE_COMMAND) -P CMakeFiles/rtamt_stl_library.dir/cmake_clean.cmake
 .PHONY : cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/clean
 
 cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/depend:
-	cd /home/nickovic/work/debug/rtamt/rtamt/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/nickovic/work/debug/rtamt/rtamt /home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library /home/nickovic/work/debug/rtamt/rtamt/build /home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library /home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/tester/debug/rtamt/rtamt/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/tester/debug/rtamt/rtamt /home/tester/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library /home/tester/debug/rtamt/rtamt/build /home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library /home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : cpplib/stl/rtamt_stl_library/CMakeFiles/rtamt_stl_library.dir/depend
 

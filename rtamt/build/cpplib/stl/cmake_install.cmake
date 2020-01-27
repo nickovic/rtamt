@@ -1,4 +1,4 @@
-# Install script for directory: /home/nickovic/work/debug/rtamt/rtamt/cpplib/stl
+# Install script for directory: /home/tester/debug/rtamt/rtamt/cpplib/stl
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -34,8 +34,8 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library/cmake_install.cmake")
-  include("/home/nickovic/work/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library_wrapper/cmake_install.cmake")
+  include("/home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library/cmake_install.cmake")
+  include("/home/tester/debug/rtamt/rtamt/build/cpplib/stl/rtamt_stl_library_wrapper/cmake_install.cmake")
 
 endif()
 

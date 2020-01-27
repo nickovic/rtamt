@@ -18,7 +18,7 @@ rtamt_stl_library/stl_sample.h
 
 ../cpplib/stl/rtamt_stl_library/include/rtamt_stl_library/stl_sample.h
 
-/home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library_wrapper/src/stl_always_node_wrapper.cpp
+/home/tester/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library_wrapper/src/stl_always_node_wrapper.cpp
 boost/python.hpp
 -
 boost/python/def.hpp

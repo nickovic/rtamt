@@ -1,4 +1,4 @@
-# Install script for directory: /home/nickovic/work/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library_wrapper
+# Install script for directory: /home/tester/debug/rtamt/rtamt/cpplib/stl/rtamt_stl_library_wrapper
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
