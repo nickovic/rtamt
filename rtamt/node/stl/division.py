@@ -25,7 +25,7 @@ class Division(Node):
         self.addChild(child2)
 
         if is_pure_python:
-            name = 'rtamt.operation.stl.division_operation'
+            name = 'rtamt.operation.arithmetic.division_operation'
             mod = __import__(name, fromlist=[''])
             self.node = mod.DivisionOperation()
         else:

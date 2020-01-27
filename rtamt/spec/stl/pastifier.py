@@ -20,6 +20,8 @@ from rtamt.node.stl.subtraction import Subtraction
 from rtamt.node.stl.multiplication import Multiplication
 from rtamt.node.stl.division import Division
 from rtamt.node.stl.abs import Abs
+from rtamt.node.stl.fall import Fall
+from rtamt.node.stl.rise import Rise
 
 class STLPastifier(STLVisitor):
 
@@ -40,9 +42,9 @@ class STLPastifier(STLVisitor):
     def visitPredicate(self, element, args):
         horizon = args[0]
         if horizon == 0:
-            node = Predicate(element.var, element.field, element.io_type, element.operator, element.threshold, self.spec.is_pure_python)
+            node = Predicate(element.child, element.io_type, element.operator, element.threshold, self.spec.is_pure_python)
         else:
-            child = Predicate(element.var, element.field, element.io_type, element.operator, element.threshold, self.spec.is_pure_python)
+            child = Predicate(element.child, element.io_type, element.operator, element.threshold, self.spec.is_pure_python)
             bound = Interval(horizon, horizon)
             node = Once(child, bound, self.spec.is_pure_python)
         return node
@@ -84,6 +86,16 @@ class STLPastifier(STLVisitor):
     def visitAbs(self, element, args):
         child_node = self.visit(element.children[0], args)
         node = Abs(child_node, self.spec.is_pure_python)
+        return node
+
+    def visitRise(self, element, args):
+        child_node = self.visit(element.children[0], args)
+        node = Rise(child_node, self.spec.is_pure_python)
+        return node
+
+    def visitFall(self, element, args):
+        child_node = self.visit(element.children[0], args)
+        node = Fall(child_node, self.spec.is_pure_python)
         return node
 
     def visitNot(self, element, args):

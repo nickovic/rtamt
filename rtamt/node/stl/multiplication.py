@@ -25,7 +25,7 @@ class Multiplication(Node):
         self.addChild(child2)
 
         if is_pure_python:
-            name = 'rtamt.operation.stl.multiplication_operation'
+            name = 'rtamt.operation.arithmetic.multiplication_operation'
             mod = __import__(name, fromlist=[''])
             self.node = mod.MultiplicationOperation()
         else:

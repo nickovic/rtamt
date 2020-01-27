@@ -24,7 +24,7 @@ class Subtraction(Node):
         self.addChild(child2)
 
         if is_pure_python:
-            name = 'rtamt.operation.stl.subtraction_operation'
+            name = 'rtamt.operation.arithmetic.subtraction_operation'
             mod = __import__(name, fromlist=[''])
             self.node = mod.SubtractionOperation()
         else:

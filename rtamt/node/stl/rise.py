@@ -7,7 +7,7 @@ Created on Sun Jul 21 22:24:09 2019
 
 from rtamt.node.stl.node import Node
 
-class Abs(Node):
+class Rise(Node):
     """A class for storing STL Neg nodes
         Inherits Node
     """
@@ -17,20 +17,20 @@ class Abs(Node):
             Parameters:
                 child : stl.Node
         """
-        super(Abs, self).__init__()
+        super(Rise, self).__init__()
         self.addChild(child)
 
         if is_pure_python:
-            name = 'rtamt.operation.arithmetic.abs_operation'
+            name = 'rtamt.operation.stl.rise_operation'
             mod = __import__(name, fromlist=[''])
-            self.node = mod.AbsOperation()
+            self.node = mod.RiseOperation()
         else:
             name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_node'
             mod = __import__(name, fromlist=[''])
 
-            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_abs_node'
+            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_rise_node'
             mod = __import__(name, fromlist=[''])
-            self.node = mod.StlAbsNode()
+            self.node = mod.StlRiseNode()
 
 
 

@@ -61,15 +61,10 @@ unit
 
 expression
 	: 
-	idComp                                                      #ExprIdComp
-	| Identifier                                                #ExprId
 
-	| expression PLUS expression                                #ExprAddition
-	| expression MINUS expression                               #ExprSubtraction
-	| expression TIMES expression                               #ExprMultiplication
-	| expression DIVIDE expression                              #ExprDivision
-
-	| ABS LPAREN expression RPAREN                              #ExprAbs
+    real_expression                                             #ExprReal
+    | expression comparisonOp literal                             #IdCompInt
+//    | idComp                                                    #ExprIdComp
 	
 	| LPAREN expression RPAREN                                  #ExprParen
 	| NotOperator expression                                    #ExprNot
@@ -86,11 +81,24 @@ expression
     | HistoricallyOperator ( interval )? expression             #ExprHistExpr
     | OnceOperator ( interval )? expression                     #ExpreOnceExpr
     | expression SinceOperator ( interval )? expression         #ExprSinceExpr
+    | RiseOperator LPAREN expression RPAREN                     #ExprRise
+    | FallOperator LPAREN expression RPAREN                     #ExprFall
 	;
-	
-idComp
-	: Identifier comparisonOp literal    #IdCompInt
+
+//idComp
+//	: real_expression comparisonOp literal    #IdCompInt
+//	;
+
+real_expression:
+    Identifier                                                  #ExprId
+    | real_expression PLUS real_expression                      #ExprAddition
+	| real_expression MINUS real_expression                     #ExprSubtraction
+	| real_expression TIMES real_expression                     #ExprMultiplication
+	| real_expression DIVIDE real_expression                    #ExprDivision
+
+	| ABS LPAREN real_expression RPAREN                         #ExprAbs
 	;
+
 
 comparisonOp
 	: LesserOrEqualOperator                                     #CmpOpLs

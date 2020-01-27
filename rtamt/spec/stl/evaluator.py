@@ -31,6 +31,7 @@ class STLEvaluator(STLVisitor):
         return out_sample
 
     def visitPredicate(self, element, args):
+<<<<<<< HEAD
         time_index = args[0]
         var = self.spec.var_object_dict[element.var]
         if element.field:
@@ -42,9 +43,11 @@ class STLEvaluator(STLVisitor):
         in_sample.seq = time_index
         in_sample.value = value
 
+=======
+        in_sample = self.visit(element.child, args)
+>>>>>>> master
         element.node.addNewInput(in_sample)
         out_sample = element.node.update()
-
         return out_sample
 
     def visitVariable(self, element, args):
@@ -96,6 +99,18 @@ class STLEvaluator(STLVisitor):
         return out_sample
 
     def visitNot(self, element, args):
+        in_sample = self.visit(element.children[0], args)
+        element.node.addNewInput(in_sample)
+        out_sample = element.node.update()
+        return out_sample
+
+    def visitRise(self, element, args):
+        in_sample = self.visit(element.children[0], args)
+        element.node.addNewInput(in_sample)
+        out_sample = element.node.update()
+        return out_sample
+
+    def visitFall(self, element, args):
         in_sample = self.visit(element.children[0], args)
         element.node.addNewInput(in_sample)
         out_sample = element.node.update()

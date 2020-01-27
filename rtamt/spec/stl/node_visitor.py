@@ -29,6 +29,8 @@ from rtamt.node.stl.addition import Addition
 from rtamt.node.stl.subtraction import Subtraction
 from rtamt.node.stl.multiplication import Multiplication
 from rtamt.node.stl.division import Division
+from rtamt.node.stl.fall import Fall
+from rtamt.node.stl.rise import Rise
 
 from rtamt.exception.stl.exception import STLParseException
 
@@ -65,37 +67,10 @@ class STLNodeVisitor(StlParserVisitor):
         self.__ops = ops
 
     def visitIdCompInt(self, ctx):
-        id = ctx.Identifier().getText();
-        id_tokens = id.split('.')
-        id_head = id_tokens[0]
-        id_tokens.pop(0)
-        id_tail = '.'.join(id_tokens)
-
-        try:
-            var = self.spec.var_object_dict[id_head]
-            if (not id_tail):
-                if (not isinstance(var, (int, long, float))):
-                    raise STLParseException('Variable {} is not of type int, long or float'.format(id))
-            else:
-                try:
-                    value = operator.attrgetter(id_tail)(var)
-                    if (not isinstance(value, (int, long, float))):
-                        raise STLParseException('The field {0} of the variable {1} is not of type int, long or float'.format(id, id_head))
-                except AttributeError as err:
-                    raise STLParseException(err)
-        except KeyError:
-            if id_tail:
-                raise STLParseException('{0} refers to undeclared variable {1} of unknown type'.format(id, id_head))
-            else:
-                var = float()
-                self.spec.var_object_dict[id] = var
-                self.spec.add_var(id)
-                logging.warning('The variable {} is not explicitely declared. It is implicitely declared as a '
-                                'variable of type float'.format(id))
-
+        child = self.visit(ctx.expression())
         threshold = float(ctx.literal().getText())
         op_type = self.str_to_op_type(ctx.comparisonOp().getText())
-        node = Predicate(id_head, id_tail, self.io_type_mod.StlIOType.OUT, op_type, threshold, self.spec.is_pure_python)
+        node = Predicate(child, self.io_type_mod.StlIOType.OUT, op_type, threshold, self.spec.is_pure_python)
         node.horizon = int(0)
         return node
 
@@ -134,35 +109,35 @@ class STLNodeVisitor(StlParserVisitor):
         return node
 
     def visitExprAddition(self, ctx):
-        child1 = self.visit(ctx.expression(0))
-        child2 = self.visit(ctx.expression(1))
+        child1 = self.visit(ctx.real_expression(0))
+        child2 = self.visit(ctx.real_expression(1))
         node = Addition(child1, child2, self.spec.is_pure_python)
         node.horizon = max(child1.horizon, child2.horizon)
         return node
 
     def visitExprSubtraction(self, ctx):
-        child1 = self.visit(ctx.expression(0))
-        child2 = self.visit(ctx.expression(1))
+        child1 = self.visit(ctx.real_expression(0))
+        child2 = self.visit(ctx.real_expression(1))
         node = Subtraction(child1, child2, self.spec.is_pure_python)
         node.horizon = max(child1.horizon, child2.horizon)
         return node
 
     def visitExprMultiplication(self, ctx):
-        child1 = self.visit(ctx.expression(0))
-        child2 = self.visit(ctx.expression(1))
+        child1 = self.visit(ctx.real_expression(0))
+        child2 = self.visit(ctx.real_expression(1))
         node = Multiplication(child1, child2, self.spec.is_pure_python)
         node.horizon = max(child1.horizon, child2.horizon)
         return node
 
     def visitExprDivision(self, ctx):
-        child1 = self.visit(ctx.expression(0))
-        child2 = self.visit(ctx.expression(1))
+        child1 = self.visit(ctx.real_expression(0))
+        child2 = self.visit(ctx.real_expression(1))
         node = Division(child1, child2, self.spec.is_pure_python)
         node.horizon = max(child1.horizon, child2.horizon)
         return node
 
     def visitExprAbs(self, ctx):
-        child = self.visit(ctx.expression())
+        child = self.visit(ctx.real_expression())
         node = Abs(child, self.spec.is_pure_python)
         node.horizon = child.horizon
         return node
@@ -170,6 +145,18 @@ class STLNodeVisitor(StlParserVisitor):
     def visitExprNot(self, ctx):
         child = self.visit(ctx.expression())
         node = Neg(child, self.spec.is_pure_python)
+        node.horizon = child.horizon
+        return node
+
+    def visitExprRise(self, ctx):
+        child = self.visit(ctx.expression())
+        node = Rise(child, self.spec.is_pure_python)
+        node.horizon = child.horizon
+        return node
+
+    def visitExprFall(self, ctx):
+        child = self.visit(ctx.expression())
+        node = Fall(child, self.spec.is_pure_python)
         node.horizon = child.horizon
         return node
 

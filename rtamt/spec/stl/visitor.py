@@ -19,6 +19,8 @@ from rtamt.node.stl.addition import Addition
 from rtamt.node.stl.subtraction import Subtraction
 from rtamt.node.stl.multiplication import Multiplication
 from rtamt.node.stl.division import Division
+from rtamt.node.stl.rise import Rise
+from rtamt.node.stl.fall import Fall
 
 NOT_IMPLEMENTED = "You should implement this."
 
@@ -69,6 +71,10 @@ class STLVisitor:
             out = self.visitMultiplication(element, args)
         elif isinstance(element, Division):
             out = self.visitDivision(element, args)
+        elif isinstance(element, Rise):
+            out = self.visitRise(element, args)
+        elif isinstance(element, Fall):
+            out = self.visitFall(element, args)
         else:
             out = self.visitDefault(element, args)
         return out
@@ -148,6 +154,14 @@ class STLVisitor:
 
     @abstractmethod
     def visitSince(self, element, args):
+        raise NotImplementedError(NOT_IMPLEMENTED)
+
+    @abstractmethod
+    def visitRise(self, element, args):
+        raise NotImplementedError(NOT_IMPLEMENTED)
+
+    @abstractmethod
+    def visitFall(self, element, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
