@@ -19,14 +19,8 @@ class STLCTEvaluator(STLVisitor):
         return out_sample
 
     def visitPredicate(self, element, args):
-        var = self.spec.var_object_dict[element.var]
-        if element.field:
-            value = operator.attrgetter(element.field)(var)
-        else:
-            value = var
-
-        out_sample = element.node.update(value)
-
+        in_sample = self.visit(element.children[0], args)
+        out_sample = element.node.update(in_sample)
         return out_sample
 
     def visitVariable(self, element, args):
@@ -138,6 +132,16 @@ class STLCTEvaluator(STLVisitor):
         in_sample_1 = self.visit(element.children[0], args)
         in_sample_2 = self.visit(element.children[1], args)
         out_sample = element.node.update(in_sample_1, in_sample_2)
+        return out_sample
+
+    def visitRise(self, element, args):
+        in_sample = self.visit(element.children[0], args)
+        out_sample = element.node.update(in_sample)
+        return out_sample
+
+    def visitFall(self, element, args):
+        in_sample = self.visit(element.children[0], args)
+        out_sample = element.node.update(in_sample)
         return out_sample
 
     def visitDefault(self, element, args):

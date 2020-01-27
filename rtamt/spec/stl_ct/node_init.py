@@ -90,6 +90,14 @@ class STLCTNodeInit(STLVisitor):
         self.visit(element.children[0], args)
         element.node = OnceOperation()
 
+    def visitRise(self, element, args):
+        self.visit(element.children[0], args)
+        element.node = RiseOperation()
+
+    def visitFall(self, element, args):
+        self.visit(element.children[0], args)
+        element.node = FallOperation()
+
     def visitHistorically(self, element, args):
         self.visit(element.children[0], args)
         element.node = HistoricallyOperation()
