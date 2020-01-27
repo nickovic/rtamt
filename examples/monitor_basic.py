@@ -10,12 +10,12 @@ def monitor():
     }
 
     # # stl
-    spec = rtamt.STLSpecification()
+    spec = rtamt.STLSpecification(1)
     spec.name = 'HandMadeMonitor'
     spec.declare_var('a', 'float')
     spec.declare_var('b', 'float')
     spec.declare_var('c', 'float')
-    spec.spec = 'c = always(a<=2 and b>=1)'
+    spec.spec = 'c = a + b'
     try:
         spec.parse()
     except rtamt.STLParseException as err:

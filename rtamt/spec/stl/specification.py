@@ -77,14 +77,17 @@ class STLSpecification(AbstractSpecification,StlParserVisitor):
         self.top = past
 
         # Initialize the evaluator
-        self.evaluator = STLEvaluator(self.var_object_dict, self)
+        self.evaluator = STLEvaluator(self)
         self.top.accept(self.evaluator)
 
-    def update(self, time_index, args):
-        for arg in args:
+    def update(self, *args, **kargs):
+        time_index = args[0]
+        signals = args[1]
+        for arg in signals:
             var_name = arg[0]
             var_object = arg[1]
             self.var_object_dict[var_name] = var_object
+
         return self.evaluator.evaluate(self.top, [time_index])
 
     # This is the visitor part. We will populate

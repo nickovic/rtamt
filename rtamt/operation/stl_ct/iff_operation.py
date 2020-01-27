@@ -6,8 +6,10 @@ class IffOperation(AbstractOperation):
         self.left = []
         self.right = []
 
-    def update(self, left_list, right_list):
+    def update(self, *args, **kargs):
         out = []
+        left_list = args[0]
+        right_list = args[1]
         self.left = self.left + left_list
         self.right = self.right + right_list
 

@@ -10,15 +10,15 @@ def monitor():
     }
 
     # # stl
-    spec = rtamt.STLIOSpecification()
+    spec = rtamt.STLIOSpecification(1)
     spec.name = 'HandMadeMonitor'
     spec.declare_var('a', 'float')
     spec.declare_var('b', 'float')
     spec.declare_var('c', 'float')
-    spec.set_var_io_type('a', rtamt.IOType.INPUT)
-    spec.set_var_io_type('b', rtamt.IOType.INPUT)
-    spec.set_var_io_type('c', rtamt.IOType.OUTPUT)
-    spec.spec = 'c = always(a<=2 and b>=1)'
+    spec.set_var_io_type('a', rtamt.StlIOType.IN)
+    spec.set_var_io_type('b', rtamt.StlIOType.IN)
+    spec.set_var_io_type('c', rtamt.StlIOType.OUT)
+    spec.spec = 'c = always(not a<=2 implies b>=1)'
     spec.iosem = 'input-robustness'
     try:
         spec.parse()

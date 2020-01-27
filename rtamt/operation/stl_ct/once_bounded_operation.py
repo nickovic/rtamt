@@ -9,8 +9,9 @@ class OnceBoundedOperation(AbstractOperation):
         self.begin = begin
         self.end = end
 
-    def update(self, input_list):
+    def update(self, *args, **kargs):
         out = []
+        input_list = args[0]
         ans = []
 
         i = 1

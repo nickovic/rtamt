@@ -6,12 +6,12 @@ Created on Sun Jul 21 20:32:57 2019
 """
 
 import logging
-from rtamt.spec.stl.specification import STLSpecification
+from rtamt.spec.stl_ct.specification import STLCTSpecification
 from rtamt.spec.stl.io_type import StlIOType
-from rtamt.spec.io_stl.evaluator import STLIOEvaluator
+from rtamt.spec.io_stl_ct.evaluator import STLIOCTEvaluator
 
 
-class STLIOSpecification(STLSpecification):
+class STLIOCTSpecification(STLCTSpecification):
     """A class used as a container for IO-Aware STL specifications
        Inherits STLSpecification
 
@@ -23,16 +23,16 @@ class STLIOSpecification(STLSpecification):
     """
     def __init__(self,is_pure_python=False):
         """Constructor for STL Specification"""
-        super(STLIOSpecification, self).__init__(is_pure_python)
+        super(STLIOCTSpecification, self).__init__(is_pure_python)
         self.iosem = 'standard'
         self.in_vars = set()
         self.out_vars = set()
 
 
     def parse(self):
-        super(STLIOSpecification, self).parse()
+        super(STLIOCTSpecification, self).parse()
         # Initialize the evaluator
-        self.evaluator = STLIOEvaluator(self.var_object_dict, self)
+        self.evaluator = STLIOCTEvaluator(self)
         self.top.accept(self.evaluator)
 
     @property

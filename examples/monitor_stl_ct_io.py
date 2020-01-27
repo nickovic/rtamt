@@ -13,12 +13,16 @@ def monitor():
     b3 = [(15, 0)]
 
     # # stl
-    spec = rtamt.STLCTSpecification(1)
+    spec = rtamt.STLIOCTSpecification(1)
     spec.name = 'HandMadeMonitor'
     spec.declare_var('a', 'float')
     spec.declare_var('b', 'float')
     spec.declare_var('c', 'float')
-    spec.spec = 'c=a+b'
+    spec.set_var_io_type('a', rtamt.StlIOType.IN)
+    spec.set_var_io_type('b', rtamt.StlIOType.IN)
+    spec.set_var_io_type('c', rtamt.StlIOType.OUT)
+    spec.spec = 'c= a>=2'
+    spec.iosem = 'input-robustness'
     try:
         spec.parse()
     except rtamt.STLParseException as err:

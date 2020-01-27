@@ -21,78 +21,78 @@ class STLCTNodeInit(STLVisitor):
         pass
 
     def visitPredicate(self, element, args):
-        element.node.node = PredicateOperation(element.node.op, element.node.threshold, element.node.io_type)
+        element.node = PredicateOperation(element.node.op, element.node.threshold, element.node.io_type)
 
     def visitAbs(self, element, args):
         self.visit(element.children[0], args)
-        element.node.node = AbsOperation()
+        element.node = AbsOperation()
 
     def visitAddition(self, element, args):
         self.visit(element.children[0], args)
         self.visit(element.children[1], args)
-        element.node.node = AdditionOperation()
+        element.node = AdditionOperation()
 
     def visitSubtraction(self, element, args):
         self.visit(element.children[0], args)
         self.visit(element.children[1], args)
-        element.node.node = SubtractionOperation()
+        element.node = SubtractionOperation()
 
     def visitMultiplication(self, element, args):
         self.visit(element.children[0], args)
         self.visit(element.children[1], args)
-        element.node.node = MultiplicationOperation()
+        element.node = MultiplicationOperation()
 
     def visitDivision(self, element, args):
         self.visit(element.children[0], args)
         self.visit(element.children[1], args)
-        element.node.node = DivisionOperation()
+        element.node = DivisionOperation()
 
     def visitNot(self, element, args):
         self.visit(element.children[0], args)
-        element.node.node = NotOperation()
+        element.node = NotOperation()
 
     def visitAnd(self, element, args):
         self.visit(element.children[0], args)
         self.visit(element.children[1], args)
-        element.node.node = AndOperation()
+        element.node = AndOperation()
 
     def visitOr(self, element, args):
         self.visit(element.children[0], args)
         self.visit(element.children[1], args)
-        element.node.node = OrOperation()
+        element.node = OrOperation()
 
     def visitImplies(self, element, args):
         self.visit(element.children[0], args)
         self.visit(element.children[1], args)
-        element.node.node = ImpliesOperation()
+        element.node = ImpliesOperation()
 
     def visitIff(self, element, args):
         self.visit(element.children[0], args)
         self.visit(element.children[1], args)
-        element.node.node = IffOperation()
+        element.node = IffOperation()
 
     def visitXor(self, element, args):
         self.visit(element.children[0], args)
         self.visit(element.children[1], args)
-        element.node.node = XorOperation()
+        element.node = XorOperation()
 
     def visitEventually(self, element, args):
         pass
 
     def visitAlways(self, element, args):
         self.visit(element.children[0], args)
-        element.node.node = HistoricallyOperation()
+        element.node = HistoricallyOperation()
 
     def visitUntil(self, element, args):
         pass
 
     def visitOnce(self, element, args):
         self.visit(element.children[0], args)
-        element.node.node = OnceOperation()
+        element.node = OnceOperation()
 
     def visitHistorically(self, element, args):
         self.visit(element.children[0], args)
-        element.node.node = HistoricallyOperation()
+        element.node = HistoricallyOperation()
 
     def visitSince(self, element, args):
         pass

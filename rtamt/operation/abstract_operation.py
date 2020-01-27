@@ -18,7 +18,7 @@ class AbstractOperation:
         pass
 
     @abstractmethod
-    def update(self):
+    def update(self, *args, **kargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
 

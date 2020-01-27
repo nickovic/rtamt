@@ -4,8 +4,9 @@ class NotOperation(AbstractOperation):
     def __init__(self):
         self.input = []
 
-    def update(self, input_list):
+    def update(self, *args, **kargs):
         out = []
+        input_list = args[0]
 
         for in_sample in input_list:
             self.input.append(in_sample)
