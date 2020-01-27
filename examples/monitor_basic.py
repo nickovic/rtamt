@@ -15,11 +15,8 @@ def monitor():
     spec.declare_var('a1', 'float')
     spec.declare_var('b2', 'float')
     spec.declare_var('c', 'float')
-<<<<<<< HEAD
     spec.spec = 'c = a + b'
-=======
-    spec.spec = 'c = always(a1<=2 and b2>=1)'
->>>>>>> master
+
     try:
         spec.parse()
     except rtamt.STLParseException as err:

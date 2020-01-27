@@ -14,7 +14,7 @@ setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url='https://github.com/nickovic/rtamt',
-    author='Niokovic Dejan, Tomoya Yamaguchi',
+    author='Nikovic Dejan, Tomoya Yamaguchi',
     author_email='dejan.nickovic@ait.ac.at, tomoya.yamaguchi@toyota.com',
     license='BSD',
     python_requires='>=2.7',
