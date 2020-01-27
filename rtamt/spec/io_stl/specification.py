@@ -32,7 +32,7 @@ class STLIOSpecification(STLSpecification):
     def parse(self):
         super(STLIOSpecification, self).parse()
         # Initialize the evaluator
-        self.evaluator = STLIOEvaluator(self.var_object_dict, self)
+        self.evaluator = STLIOEvaluator(self)
         self.top.accept(self.evaluator)
 
     @property
@@ -79,12 +79,15 @@ class STLIOSpecification(STLSpecification):
             if var_iotype == StlIOType.IN:
                 self.add_input_var(var_name)
                 self.remove_output_var(var_name)
+                self.var_type_dict[var_name] = 'input'
             elif var_iotype == StlIOType.OUT:
                 self.add_output_var(var_name)
                 self.remove_input_var(var_name)
+                self.var_type_dict[var_name] = 'output'
             else:
                 self.remove_input_var(var_name)
                 self.remove_output_var(var_name)
+                self.var_type_dict[var_name] = 'undefined'
 
     def add_input_var(self, input_var):
         self.in_vars.add(input_var)

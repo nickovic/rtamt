@@ -19,6 +19,8 @@ class Neg(Node):
         """
         super(Neg, self).__init__()
         self.addChild(child)
+        self.in_vars = child.in_vars
+        self.out_vars = child.out_vars
 
         if is_pure_python:
             name = 'rtamt.operation.stl.not_operation'

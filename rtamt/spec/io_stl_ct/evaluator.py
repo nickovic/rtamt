@@ -10,13 +10,25 @@ class STLIOCTEvaluator(STLCTEvaluator):
     def visitPredicate(self, element, args):
         out_sample = super(STLIOCTEvaluator, self).visitPredicate(element, args)
 
-        if (self.spec.iosem == IOInterpretation.OUTPUT_ROBUSTNESS and not element.var in self.spec.out_vars):
-            out_sample.value = out_sample.value*float('inf')
-        elif(self.spec.iosem == IOInterpretation.INPUT_VACUITY and not element.var in self.spec.in_vars):
-            out_sample.value = 0
-        elif(self.spec.iosem == IOInterpretation.INPUT_ROBUSTNESS and not element.var in self.spec.in_vars):
-            out_sample.value = out_sample.value*float('inf')
-        elif(self.spec.iosem == IOInterpretation.OUTPUT_VACUITY and not element.var in self.spec.out_vars):
-            out_sample.value = 0
-        return out_sample
+        out = []
+        if (self.spec.iosem == 'output-robustness' and not element.out_vars):
+            for tuple in out_sample:
+                ntuple = (tuple[0], tuple[1]*float('inf'))
+                out.append(ntuple)
+        elif(self.spec.iosem == 'input-vacuity' and not element.out_vars):
+            for tuple in out_sample:
+                ntuple = (tuple[0], 0)
+                out.append(ntuple)
+        elif(self.spec.iosem == 'input-robustness' and not element.in_vars):
+            for tuple in out_sample:
+                ntuple = (tuple[0], tuple[1]*float('inf'))
+                out.append(ntuple)
+        elif(self.spec.iosem == 'output-vacuity' and not element.in_vars):
+            for tuple in out_sample:
+                ntuple = (tuple[0], 0)
+                out.append(ntuple)
+        else:
+            out = out_sample
+
+        return out
 

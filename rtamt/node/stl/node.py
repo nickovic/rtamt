@@ -26,6 +26,8 @@ class Node(AbstractNode):
         """Constructor for Node"""
         super(Node, self).__init__()
         self.horizon = 0;
+        self.in_vars = []
+        self.out_vars = []
 
     @property
     def horizon(self):
@@ -36,3 +38,23 @@ class Node(AbstractNode):
     def horizon(self, horizon):
         """Setter for the horizon"""
         self.__horizon = horizon
+
+    @property
+    def in_vars(self):
+        """Getter for the in_vars"""
+        return self.__in_vars
+
+    @in_vars.setter
+    def in_vars(self, in_vars):
+        """Setter for the in_vars"""
+        self.__in_vars = in_vars
+
+    @property
+    def out_vars(self):
+        """Getter for the out_vars"""
+        return self.__out_vars
+
+    @out_vars.setter
+    def out_vars(self, out_vars):
+        """Setter for the out_vars"""
+        self.__out_vars = out_vars

@@ -22,6 +22,10 @@ class Until(TemporalNode):
                 bound : Interval
         """
         super(Until, self).__init__(bound)
+
         self.addChild(child1)
         self.addChild(child2)
+
+        self.in_vars = child1.in_vars + child2.in_vars
+        self.out_vars = child1.out_vars + child2.out_vars
 

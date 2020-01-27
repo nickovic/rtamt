@@ -22,6 +22,9 @@ class Implies(Node):
         self.addChild(child1)
         self.addChild(child2)
 
+        self.in_vars = child1.in_vars + child2.in_vars
+        self.out_vars = child1.out_vars + child2.out_vars
+
         if is_pure_python:
             name = 'rtamt.operation.stl.implies_operation'
             mod = __import__(name, fromlist=[''])

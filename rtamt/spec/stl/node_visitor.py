@@ -71,6 +71,7 @@ class STLNodeVisitor(StlParserVisitor):
         threshold = float(ctx.literal().getText())
         op_type = self.str_to_op_type(ctx.comparisonOp().getText())
         node = Predicate(child, self.io_type_mod.StlIOType.OUT, op_type, threshold, self.spec.is_pure_python)
+
         node.horizon = int(0)
         return node
 
@@ -104,8 +105,10 @@ class STLNodeVisitor(StlParserVisitor):
                 logging.warning('The variable {} is not explicitely declared. It is implicitely declared as a '
                                 'variable of type float'.format(id))
 
-        node = Variable(id_head, id_tail)
+        var_type = self.spec.var_type_dict[id_head]
+        node = Variable(id_head, id_tail, var_type)
         node.horizon = int(0)
+
         return node
 
     def visitExprAddition(self, ctx):

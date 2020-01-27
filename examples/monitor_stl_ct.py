@@ -18,7 +18,7 @@ def monitor():
     spec.declare_var('a', 'float')
     spec.declare_var('b', 'float')
     spec.declare_var('c', 'float')
-    spec.spec = 'c=a+b'
+    spec.spec = 'c=a>=2'
     try:
         spec.parse()
     except rtamt.STLParseException as err:

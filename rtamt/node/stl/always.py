@@ -24,6 +24,9 @@ class Always(TemporalNode):
         super(Always, self).__init__(bound)
         self.addChild(child)
 
+        self.in_vars = child.in_vars
+        self.out_vars = child.out_vars
+
         if is_pure_python:
             name = 'rtamt.operation.stl.always_operation'
             mod = __import__(name, fromlist=[''])

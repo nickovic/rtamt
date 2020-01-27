@@ -15,11 +15,11 @@ def monitor():
     spec.declare_var('a', 'float')
     spec.declare_var('b', 'float')
     spec.declare_var('c', 'float')
-    spec.set_var_io_type('a', rtamt.StlIOType.IN)
-    spec.set_var_io_type('b', rtamt.StlIOType.IN)
+    spec.set_var_io_type('a', rtamt.StlIOType.OUT)
+    spec.set_var_io_type('b', rtamt.StlIOType.OUT)
     spec.set_var_io_type('c', rtamt.StlIOType.OUT)
-    spec.spec = 'c = always(not a<=2 implies b>=1)'
-    spec.iosem = 'input-robustness'
+    spec.spec = 'c = (a-b >= 2)'
+    spec.iosem = 'output-vacuity'
     try:
         spec.parse()
     except rtamt.STLParseException as err:

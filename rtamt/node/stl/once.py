@@ -21,6 +21,8 @@ class Once(TemporalNode):
 
         super(Once, self).__init__(bound)
         self.addChild(child)
+        self.in_vars = child.in_vars
+        self.out_vars = child.out_vars
 
         if is_pure_python:
             if bound == None:

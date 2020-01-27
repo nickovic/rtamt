@@ -51,10 +51,11 @@ class STLPastifier(STLVisitor):
 
     def visitVariable(self, element, args):
         horizon = args[0]
+        var_type = self.spec.var_type_dict[element.var]
         if horizon == 0:
-            node = Variable(element.var, element.field)
+            node = Variable(element.var, element.field, var_type)
         else:
-            child = Variable(element.var, element.field)
+            child = Variable(element.var, element.field, var_type)
             bound = Interval(horizon, horizon)
             node = Once(child, bound, self.spec.is_pure_python)
         return node

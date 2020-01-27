@@ -11,7 +11,7 @@ class Variable(Node):
     """A class for storing STL real-valued Variable nodes
             Inherits Node
         """
-    def __init__(self, var, field):
+    def __init__(self, var, field, iotype):
         """Constructor for Variable node
 
         Parameters:
@@ -23,6 +23,11 @@ class Variable(Node):
         self.var = var
         self.field = field
         self.node = None
+
+        if (iotype == 'input'):
+            self.in_vars = [var]
+        else:
+            self.out_vars = [var]
 
     @property
     def var(self):

@@ -19,8 +19,6 @@ class STLEvaluator(STLVisitor):
 
         self.mod = __import__(name, fromlist=[''])
 
-
-
     def evaluate(self, element, args):
         sample = self.visit(element, args)
         out_sample = self.spec.var_object_dict[self.spec.out_var]
