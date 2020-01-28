@@ -28,6 +28,7 @@ class AbstractSpecification:
         var_object_dict : dict(String,AbstractNode) - dictionary that maps variable names to their Node instances
         modules : dict(String,String) - dictionary that maps module paths to module names
         var_type_dict : dict(String, String) - dictionary that maps var names to var types
+        var_io_dict : dict(String, String) - dictionary that maps var names to var io signature
         var_topic_dict : dict(String,String) - dictionaty that mapts var names to ROS topic names
 
         top : AbstractNode - pointer to the specification parse tree
@@ -57,6 +58,7 @@ class AbstractSpecification:
         self.var_object_dict = dict()
         self.modules = dict()
         self.var_type_dict = dict()
+        self.var_io_dict = dict()
         self.var_topic_dict = dict()
 
         self.top = None

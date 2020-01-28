@@ -67,27 +67,27 @@ class STLIOSpecification(STLSpecification):
         # If 'var' is output, add to the set of output vars
         if (not ctx.ioType() is None):
             if (not ctx.ioType().Input() is None):
-                var_iotype = StlIOType.IN
+                var_iotype = 'input'
             elif (not ctx.ioType().Output() is None):
-                var_iotype = StlIOType.OUT
+                var_iotype = 'output'
         self.set_var_io_type(var_name, var_iotype)
 
     def set_var_io_type(self, var_name, var_iotype):
         if not var_name in self.vars:
             logging.warning('The variable {} does not exist'.format(var_name))
         else:
-            if var_iotype == StlIOType.IN:
+            if var_iotype == 'input':
                 self.add_input_var(var_name)
                 self.remove_output_var(var_name)
-                self.var_type_dict[var_name] = 'input'
-            elif var_iotype == StlIOType.OUT:
+                self.var_io_dict[var_name] = 'input'
+            elif var_iotype == 'output':
                 self.add_output_var(var_name)
                 self.remove_input_var(var_name)
-                self.var_type_dict[var_name] = 'output'
+                self.var_io_dict[var_name] = 'output'
             else:
                 self.remove_input_var(var_name)
                 self.remove_output_var(var_name)
-                self.var_type_dict[var_name] = 'undefined'
+                self.var_io_dict[var_name] = 'undefined'
 
     def add_input_var(self, input_var):
         self.in_vars.add(input_var)

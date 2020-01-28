@@ -15,7 +15,7 @@ class STLIOCTEvaluator(STLCTEvaluator):
             for tuple in out_sample:
                 ntuple = (tuple[0], tuple[1]*float('inf'))
                 out.append(ntuple)
-        elif(self.spec.iosem == 'input-vacuity' and not element.out_vars):
+        elif(self.spec.iosem == 'input-vacuity' and not element.in_vars):
             for tuple in out_sample:
                 ntuple = (tuple[0], 0)
                 out.append(ntuple)

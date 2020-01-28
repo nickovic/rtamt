@@ -105,8 +105,8 @@ class STLNodeVisitor(StlParserVisitor):
                 logging.warning('The variable {} is not explicitely declared. It is implicitely declared as a '
                                 'variable of type float'.format(id))
 
-        var_type = self.spec.var_type_dict[id_head]
-        node = Variable(id_head, id_tail, var_type)
+        var_io = self.spec.var_io_dict[id_head]
+        node = Variable(id_head, id_tail, var_io)
         node.horizon = int(0)
 
         return node

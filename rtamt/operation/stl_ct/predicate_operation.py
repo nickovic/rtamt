@@ -12,8 +12,8 @@ class PredicateOperation(AbstractOperation):
         out = []
         input_list = args[0]
 
+
         for in_sample in input_list:
-            out_time = in_sample[0]
             if self.op.value == StlComparisonOperator.EQ.value:
                 out_val = - abs(in_sample[1] - self.threshold)
             elif self.op.value == StlComparisonOperator.NEQ.value:
@@ -24,6 +24,6 @@ class PredicateOperation(AbstractOperation):
                 out_val = in_sample[1] - self.threshold
             else:
                 out_val = float('nan')
-            out.append((out_time, out_val))
+            out.append((in_sample[0], out_val))
 
         return out
