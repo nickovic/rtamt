@@ -41,7 +41,7 @@ class SinceBoundedOperation(AbstractOperation):
         out.time.sec = self.input.time.sec
         out.value = - float("inf")
 
-        for i in [0, self.end-self.begin]:
+        for i in range(self.end-self.begin+1):
             left = float("inf")
             right = self.buffer_right[i].value
             for j in range(i+1,self.end):

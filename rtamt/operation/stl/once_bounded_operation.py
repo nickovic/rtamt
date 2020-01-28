@@ -32,7 +32,7 @@ class OnceBoundedOperation(AbstractOperation):
         out.time.sec = self.input.time.sec
 
         out.value = -float("inf")
-        for i in [0, self.end-self.begin]:
+        for i in range(self.end-self.begin+1):
             out.value = max(out.value, self.buffer[i].value)
 
         return out
