@@ -62,7 +62,6 @@ class STLIOSpecification(STLSpecification):
     def visitVariableDeclaration(self, ctx):
         super(STLIOSpecification, self).visitVariableDeclaration(ctx)
         var_name = ctx.identifier().getText()
-        var_iotype = StlIOType.UNDEFINED
         # If 'var' is input, add to the set of input vars
         # If 'var' is output, add to the set of output vars
         if (not ctx.ioType() is None):

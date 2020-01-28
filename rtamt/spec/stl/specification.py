@@ -143,6 +143,7 @@ class STLSpecification(AbstractSpecification,StlParserVisitor):
         var_type = ctx.domainType().getText()
 
         self.declare_var(var_name, var_type)
+        self.var_io_dict[var_name] = 'output'
 
         self.visitChildren(ctx)
 
@@ -198,6 +199,8 @@ class STLSpecification(AbstractSpecification,StlParserVisitor):
 
         # Add the default variable topic to var
         self.var_topic_dict[var_name] = 'rtamt/{}'.format(var_name)
+
+        self.var_io_dict[var_name] = 'output'
 
     def set_var_topic(self, var_name, var_topic):
         if not var_name in self.vars:
