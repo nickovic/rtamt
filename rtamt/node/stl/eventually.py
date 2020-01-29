@@ -25,3 +25,4 @@ class Eventually(TemporalNode):
         self.addChild(child)
         self.in_vars = child.in_vars
         self.out_vars = child.out_vars
+        self.bound = bound

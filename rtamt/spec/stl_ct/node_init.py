@@ -13,6 +13,8 @@ from rtamt.operation.stl_ct.xor_operation import XorOperation
 from rtamt.operation.stl_ct.iff_operation import IffOperation
 from rtamt.operation.stl_ct.historically_operation import HistoricallyOperation
 from rtamt.operation.stl_ct.once_operation import OnceOperation
+from rtamt.operation.stl_ct.once_bounded_operation import OnceBoundedOperation
+from rtamt.operation.stl_ct.historically_bounded_operation import HistoricallyBoundedOperation
 
 class STLCTNodeInit(STLVisitor):
 
@@ -88,19 +90,26 @@ class STLCTNodeInit(STLVisitor):
 
     def visitOnce(self, element, args):
         self.visit(element.children[0], args)
-        element.node = OnceOperation()
+        if element.bound is None:
+            element.node = OnceOperation()
+        else:
+            element.node = OnceBoundedOperation(int(element.bound.begin), int(element.bound.end))
+
 
     def visitRise(self, element, args):
         self.visit(element.children[0], args)
-        element.node = RiseOperation()
+        #element.node = RiseOperation()
 
     def visitFall(self, element, args):
         self.visit(element.children[0], args)
-        element.node = FallOperation()
+        #element.node = FallOperation()
 
     def visitHistorically(self, element, args):
         self.visit(element.children[0], args)
-        element.node = HistoricallyOperation()
+        if element.bound is None:
+            element.node = HistoricallyOperation()
+        else:
+            element.node = HistoricallyBoundedOperation(int(element.bound.begin), int(element.bound.end))
 
     def visitSince(self, element, args):
         pass
