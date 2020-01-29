@@ -111,7 +111,8 @@ comparisonOp
 	
 literal
 	: IntegerLiteral		
-	| RealLiteral			
+	| RealLiteral
+	| MINUS literal
 	;
 
 identifier
