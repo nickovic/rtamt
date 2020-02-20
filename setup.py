@@ -9,12 +9,12 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='real-time-analog-monitoring-tool',
-    version='0.0.8',
+    version='0.0.9',
     description='A tool for real time analog monitoring.',
     long_description=long_description,
     long_description_content_type="text/markdown",
     url='https://github.com/nickovic/rtamt',
-    author='Nikovic Dejan, Tomoya Yamaguchi',
+    author='Nickovic Dejan, Tomoya Yamaguchi',
     author_email='dejan.nickovic@ait.ac.at, tomoya.yamaguchi@toyota.com',
     license='BSD',
     python_requires='>=2.7',
