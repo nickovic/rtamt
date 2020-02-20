@@ -43,7 +43,7 @@ class STLSpecification(AbstractSpecification,StlParserVisitor):
 
         evaluator : AbstractEvaluator - pointer to the object that implements the monitoring algorithm
     """
-    def __init__(self, is_pure_python = False):
+    def __init__(self, is_pure_python = True):
         """Constructor for STL Specification"""
         super(STLSpecification, self).__init__(is_pure_python)
         self.name = 'STL Specification'

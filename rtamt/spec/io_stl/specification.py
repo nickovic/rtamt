@@ -21,7 +21,7 @@ class STLIOSpecification(STLSpecification):
         in_vars : set(String) - set of input variable names
         out_vars : set(String) - set of out variable names
     """
-    def __init__(self,is_pure_python=False):
+    def __init__(self, is_pure_python=True):
         """Constructor for STL Specification"""
         super(STLIOSpecification, self).__init__(is_pure_python)
         self.iosem = 'standard'

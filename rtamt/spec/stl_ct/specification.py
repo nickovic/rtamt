@@ -17,7 +17,7 @@ class STLCTSpecification(STLSpecification):
     Attributes:
 
     """
-    def __init__(self,is_pure_python=False):
+    def __init__(self,is_pure_python=True):
         """Constructor for STL Specification"""
         super(STLCTSpecification, self).__init__(is_pure_python)
 
