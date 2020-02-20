@@ -1,0 +1,12 @@
+simulink_model sf_aircraft
+in Pilot_command
+out elevator_position_left
+out elevator_position_right
+out LO_mode_value
+out RO_mode_value
+out RI_mode_value
+out LI_mode_value  
+dependent LO_mode_value
+dependent RO_mode_value
+dependent RI_mode_value
+dependent LI_mode_value
