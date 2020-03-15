@@ -2,6 +2,8 @@ from rtamt.operation.abstract_operation import AbstractOperation
 import rtamt.operation.stl_ct.intersection as intersect
 
 
+
+
 class OnceBoundedOperation(AbstractOperation):
     def __init__(self, begin, end):
         self.input = []
@@ -38,7 +40,10 @@ class OnceBoundedOperation(AbstractOperation):
                         out.append((b[0], b[1], b[2]))
             i = i + 1
 
+        prev = float("nan")
         for b in out:
-            ans.append((b[0], b[2]))
+            if b[2] != prev:
+                ans.append([b[0], b[2]])
+            prev = b[2]
 
         return ans
