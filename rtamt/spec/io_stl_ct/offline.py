@@ -1,14 +1,14 @@
 import operator
 
-from rtamt.spec.stl_ct.evaluator import STLCTEvaluator
+from rtamt.spec.stl_ct.offline import STLCTOffline
 from rtamt.spec.io_stl.io_interpretation import IOInterpretation
 
-class STLIOCTEvaluator(STLCTEvaluator):
+class STLIOCTOffline(STLCTOffline):
     def __init__(self, spec):
-        super(STLIOCTEvaluator, self).__init__(spec)
+        super(STLIOCTOffline, self).__init__(spec)
 
     def visitPredicate(self, element, args):
-        out_sample = super(STLIOCTEvaluator, self).visitPredicate(element, args)
+        out_sample = super(STLIOCTOffline, self).visitPredicate(element, args)
 
         out = []
         if (self.spec.iosem == 'output-robustness' and not element.out_vars):
@@ -30,5 +30,14 @@ class STLIOCTEvaluator(STLCTEvaluator):
         else:
             out = out_sample
 
+        return out
+
+    def offline(self, *args, **kargs):
+        for arg in args:
+            var_name = arg[0]
+            var_object = arg[1]
+            self.var_object_dict[var_name] = var_object
+        out = self.offline.offline(self.top, None)
+        self.var_object_dict = self.var_object_dict.fromkeys(self.var_object_dict, [])
         return out
 

@@ -9,6 +9,7 @@ import logging
 from rtamt.spec.stl.specification import STLSpecification
 from rtamt.spec.stl_ct.node_init import STLCTNodeInit
 from rtamt.spec.stl_ct.evaluator import STLCTEvaluator
+from rtamt.spec.stl_ct.offline import STLCTOffline
 
 class STLCTSpecification(STLSpecification):
     """A class used as a container for STL continuous time specifications
@@ -27,6 +28,7 @@ class STLCTSpecification(STLSpecification):
         nodeInit = STLCTNodeInit()
         nodeInit.visit(self.top, None)
         self.evaluator = STLCTEvaluator(self)
+        self.offline = STLCTOffline(self)
         self.top.accept(self.evaluator)
 
     def update(self, *args, **kargs):
@@ -35,6 +37,15 @@ class STLCTSpecification(STLSpecification):
             var_object = arg[1]
             self.var_object_dict[var_name] = var_object
         out = self.evaluator.evaluate(self.top, None)
+        self.var_object_dict = self.var_object_dict.fromkeys(self.var_object_dict, [])
+        return out
+
+    def offline(self, *args, **kargs):
+        for arg in args:
+            var_name = arg[0]
+            var_object = arg[1]
+            self.var_object_dict[var_name] = var_object
+        out = self.offline.offline(self.top, None)
         self.var_object_dict = self.var_object_dict.fromkeys(self.var_object_dict, [])
         return out
 

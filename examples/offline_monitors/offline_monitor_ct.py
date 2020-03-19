@@ -31,9 +31,10 @@ def monitor():
         sys.exit()
 
 
-    rob = spec.update(['req', data1[' req']], ['gnt', data1[' gnt']])
+    rob = spec.offline(['req', data1[' req']], ['gnt', data1[' gnt']])
 
-    print('Example (a) - standard robustness: {}'.format(rob[len(rob)-1][1]))
+    # print('Example (a) - standard robustness: {}'.format(rob[len(rob)-1][1]))
+    print('Example (a) - standard robustness: {}'.format(rob))
 
     # # #
     #
@@ -48,16 +49,16 @@ def monitor():
     spec.set_var_io_type('req', 'input')
     spec.set_var_io_type('gnt', 'output')
     spec.spec = 'out = always((req>=3) implies (eventually[0:5](gnt>=3)))'
-    spec.iosem = 'standard'
+    spec.iosem = 'output-robustness'
     try:
         spec.parse()
     except rtamt.STLParseException as err:
         print('STL Parse Exception: {}'.format(err))
         sys.exit()
 
-    rob = spec.update(['req', data1[' req']], ['gnt', data1[' gnt']])
+    rob = spec.offline(['req', data1[' req']], ['gnt', data1[' gnt']])
 
-    print('Example (a) - output robustness: {}'.format(rob[len(rob)-1][1]))
+    print('Example (a) - output robustness: {}'.format(rob))
 
     # # #
     #
@@ -79,10 +80,10 @@ def monitor():
         print('STL Parse Exception: {}'.format(err))
         sys.exit()
 
-    rob = spec.update(['req', data1[' req']], ['gnt', data1[' gnt']])
+    rob = spec.offline(['req', data1[' req']], ['gnt', data1[' gnt']])
 
-    print('Example (a) - input vacuity: {}'.format(rob[len(rob)-1][1]))
-
+    # print('Example (a) - input vacuity: {}'.format(rob[len(rob)-1][1]))
+    print('Example (a) - input vacuity: {}'.format(rob))
     # # #
     #
     # Example (b) - standard robustness
@@ -103,9 +104,9 @@ def monitor():
         print('STL Parse Exception: {}'.format(err))
         sys.exit()
 
-    rob = spec.update(['req', data2[' req']], ['gnt', data2[' gnt']])
+    rob = spec.offline(['req', data2[' req']], ['gnt', data2[' gnt']])
 
-    print('Example (b) - standard robustness: {}'.format(rob[len(rob)-1][1]))
+    print('Example (b) - standard robustness: {}'.format(rob))
 
     # # #
     #
@@ -127,9 +128,9 @@ def monitor():
         print('STL Parse Exception: {}'.format(err))
         sys.exit()
 
-    rob = spec.update(['req', data2[' req']], ['gnt', data2[' gnt']])
+    rob = spec.offline(['req', data2[' req']], ['gnt', data2[' gnt']])
 
-    print('Example (b) - output robustness: {}'.format(rob[len(rob)-1][1]))
+    print('Example (b) - output robustness: {}'.format(rob))
 
     # # #
     #
@@ -151,9 +152,9 @@ def monitor():
         print('STL Parse Exception: {}'.format(err))
         sys.exit()
 
-    rob = spec.update(['req', data2[' req']], ['gnt', data2[' gnt']])
+    rob = spec.offline(['req', data2[' req']], ['gnt', data2[' gnt']])
 
-    print('Example (b) - input vacuity: {}'.format(rob[len(rob)-1][1]))
+    print('Example (b) - input vacuity: {}'.format(rob))
 
     # # #
     #
@@ -175,11 +176,11 @@ def monitor():
         print('STL Parse Exception: {}'.format(err))
         sys.exit()
 
-    rob = spec.update(['req', data3[' req']], ['gnt', data3[' gnt']])
+    rob = spec.offline(['req', data3[' req']], ['gnt', data3[' gnt']])
 
 
 
-    print('Example (c) - standard robustness: {}'.format(rob[len(rob)-1][1]))
+    print('Example (c) - standard robustness: {}'.format(rob))
 
 
     # # #
@@ -202,9 +203,9 @@ def monitor():
         print('STL Parse Exception: {}'.format(err))
         sys.exit()
 
-    rob = spec.update(['req', data3[' req']], ['gnt', data3[' gnt']])
+    rob = spec.offline(['req', data3[' req']], ['gnt', data3[' gnt']])
 
-    print('Example (c) - output robustness: {}'.format(rob[len(rob)-1][1]))
+    print('Example (c) - output robustness: {}'.format(rob))
 
     # # #
     #
@@ -226,9 +227,9 @@ def monitor():
         print('STL Parse Exception: {}'.format(err))
         sys.exit()
 
-    rob = spec.update(['req', data3[' req']], ['gnt', data3[' gnt']])
+    rob = spec.offline(['req', data3[' req']], ['gnt', data3[' gnt']])
 
-    print('Example (c) - input vacuity: {}'.format(rob[len(rob)-1][1]))
+    print('Example (c) - input vacuity: {}'.format(rob))
 
     # # # #
     # #
@@ -250,9 +251,9 @@ def monitor():
         print('STL Parse Exception: {}'.format(err))
         sys.exit()
 
-    rob = spec.update(['req', data4[' req']], ['gnt', data4[' gnt']])
+    rob = spec.offline(['req', data4[' req']], ['gnt', data4[' gnt']])
 
-    print('Example (d) - standard robustness: {}'.format(rob[len(rob)-1][1]))
+    print('Example (d) - standard robustness: {}'.format(rob))
     # # # #
     # #
     # # Example (d) - output robustness
@@ -273,9 +274,9 @@ def monitor():
         print('STL Parse Exception: {}'.format(err))
         sys.exit()
 
-    rob = spec.update(['req', data4[' req']], ['gnt', data4[' gnt']])
+    rob = spec.offline(['req', data4[' req']], ['gnt', data4[' gnt']])
 
-    print('Example (d) - output robustness: {}'.format(rob[len(rob)-1][1]))
+    print('Example (d) - output robustness: {}'.format(rob))
 
     #
     # # # #
@@ -298,9 +299,9 @@ def monitor():
         print('STL Parse Exception: {}'.format(err))
         sys.exit()
 
-    rob = spec.update(['req', data4[' req']], ['gnt', data4[' gnt']])
+    rob = spec.offline(['req', data4[' req']], ['gnt', data4[' gnt']])
 
-    print('Example (d) - input vacuity: {}'.format(rob[len(rob)-1][1]))
+    print('Example (d) - input vacuity: {}'.format(rob))
 
 def read_csv(filename):
     f = open(filename, 'rb')
@@ -313,7 +314,7 @@ def read_csv(filename):
 
     for row in reader:
         for h, v in zip(headers, row):
-            column[h].append((float(row[0]), float(v)))
+            column[h].append([float(row[0]), float(v)])
 
     return column
 

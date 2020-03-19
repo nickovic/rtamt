@@ -13,6 +13,19 @@ class AndOperation(AbstractOperation):
         self.left = self.left + left_list
         self.right = self.right + right_list
 
-        out = intersect.intersection(self.left, self.right, intersect.conjunction)
+        out, last = intersect.intersection(self.left, self.right, intersect.conjunction)
+
+        return out
+
+    def offline(self, *args, **kargs):
+        out = []
+        left_list = args[0]
+        right_list = args[1]
+        self.left = self.left + left_list
+        self.right = self.right + right_list
+
+        out, last = intersect.intersection(self.left, self.right, intersect.conjunction)
+        if last:
+            out.append(last)
 
         return out

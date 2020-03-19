@@ -64,6 +64,7 @@ class AbstractSpecification:
         self.top = None
 
         self.evaluator = None
+        self.offline = None
 
         self.is_pure_python = is_pure_python
 
@@ -214,6 +215,10 @@ class AbstractSpecification:
 
     @abstractmethod
     def update(self, args):
+        pass
+
+    @abstractmethod
+    def offline(self, args):
         pass
 
 

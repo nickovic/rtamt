@@ -9,6 +9,7 @@ import logging
 from rtamt.spec.stl_ct.specification import STLCTSpecification
 from rtamt.spec.stl.io_type import StlIOType
 from rtamt.spec.io_stl_ct.evaluator import STLIOCTEvaluator
+from rtamt.spec.io_stl_ct.offline import STLIOCTOffline
 
 
 class STLIOCTSpecification(STLCTSpecification):
@@ -33,6 +34,7 @@ class STLIOCTSpecification(STLCTSpecification):
         super(STLIOCTSpecification, self).parse()
         # Initialize the evaluator
         self.evaluator = STLIOCTEvaluator(self)
+        self.offline = STLIOCTOffline(self)
         self.top.accept(self.evaluator)
 
     @property

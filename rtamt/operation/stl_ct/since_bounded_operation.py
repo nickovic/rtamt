@@ -29,3 +29,22 @@ class SinceBoundedOperation(AbstractOperation):
         out = andop.update(out1, out3)
 
         return out
+
+    def offline(self, *args, **kargs):
+        out = []
+        left_list = args[0]
+        right_list = args[1]
+        self.left = self.left + left_list
+        self.right = self.right + right_list
+
+        since = SinceOperation()
+        hist = HistoricallyBoundedOperation(0, self.begin)
+        once = OnceBoundedOperation(self.begin, self.end)
+        andop = AndOperation()
+
+        out1 = once.offline(right_list)
+        out2 = since.offline(left_list, right_list)
+        out3 = hist.offline(out2)
+        out = andop.offline(out1, out3)
+
+        return out
