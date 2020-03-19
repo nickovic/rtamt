@@ -28,7 +28,7 @@ class STLCTSpecification(STLSpecification):
         nodeInit = STLCTNodeInit()
         nodeInit.visit(self.top, None)
         self.evaluator = STLCTEvaluator(self)
-        self.offline = STLCTOffline(self)
+        self.offline_evaluator = STLCTOffline(self)
         self.top.accept(self.evaluator)
 
     def update(self, *args, **kargs):
@@ -45,7 +45,7 @@ class STLCTSpecification(STLSpecification):
             var_name = arg[0]
             var_object = arg[1]
             self.var_object_dict[var_name] = var_object
-        out = self.offline.offline(self.top, None)
+        out = self.offline_evaluator.offline(self.top, None)
         self.var_object_dict = self.var_object_dict.fromkeys(self.var_object_dict, [])
         return out
 

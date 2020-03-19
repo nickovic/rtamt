@@ -32,12 +32,3 @@ class STLIOCTOffline(STLCTOffline):
 
         return out
 
-    def offline(self, *args, **kargs):
-        for arg in args:
-            var_name = arg[0]
-            var_object = arg[1]
-            self.var_object_dict[var_name] = var_object
-        out = self.offline.offline(self.top, None)
-        self.var_object_dict = self.var_object_dict.fromkeys(self.var_object_dict, [])
-        return out
-

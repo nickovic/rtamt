@@ -80,8 +80,8 @@ class HistoricallyBoundedOperation(AbstractOperation):
             i = i + 1
 
         prev = float("nan")
-        for b in out:
-            if b[2] != prev:
+        for i, b in enumerate(out):
+            if b[2] != prev or i == len(out) - 1:
                 ans.append([b[0], b[2]])
             prev = b[2]
 

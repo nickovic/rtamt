@@ -34,7 +34,7 @@ class STLIOCTSpecification(STLCTSpecification):
         super(STLIOCTSpecification, self).parse()
         # Initialize the evaluator
         self.evaluator = STLIOCTEvaluator(self)
-        self.offline = STLIOCTOffline(self)
+        self.offline_evaluator = STLIOCTOffline(self)
         self.top.accept(self.evaluator)
 
     @property

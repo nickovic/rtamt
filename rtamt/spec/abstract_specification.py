@@ -34,8 +34,9 @@ class AbstractSpecification:
         top : AbstractNode - pointer to the specification parse tree
 
         evaluator : AbstractEvaluator - pointer to the object that implements the monitoring algorithm
+        offline_evaluator : OfflineEvaluator - pointer to the object that implements the monitoring algorithm
 
-        is_pure_python : Boolean - flag denoting whether to use pure Python or mixed Python/C++ implementation (default = False)
+        is_pure_python : Boolean - flag denoting whether to use pure Python or mixed Python/C++ implementation (default = True)
 
     Methods
         get_spec_from_file - create and populate specification object from the text file
@@ -64,7 +65,7 @@ class AbstractSpecification:
         self.top = None
 
         self.evaluator = None
-        self.offline = None
+        self.offline_evaluator = None
 
         self.is_pure_python = is_pure_python
 
