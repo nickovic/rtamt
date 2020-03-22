@@ -5,26 +5,30 @@ class AndOperation(AbstractOperation):
     def __init__(self):
         self.left = []
         self.right = []
+        self.last = []
 
     def update(self, *args, **kargs):
         out = []
-        left_list = args[0]
-        right_list = args[1]
-        self.left = self.left + left_list
-        self.right = self.right + right_list
+        left_list = self.left + args[0]
+        right_list = self.right + args[1]
 
-        out, last = intersect.intersection(self.left, self.right, intersect.conjunction)
+        out, last, left, right = intersect.intersection(left_list, right_list, intersect.conjunction)
+
+        self.left = left
+        self.right = right
+        self.last = last
 
         return out
+
+    def update_final(self):
+        return [self.last]
 
     def offline(self, *args, **kargs):
         out = []
         left_list = args[0]
         right_list = args[1]
-        self.left = self.left + left_list
-        self.right = self.right + right_list
 
-        out, last = intersect.intersection(self.left, self.right, intersect.conjunction)
+        out, last, a, b = intersect.intersection(left_list, right_list, intersect.conjunction)
         if last:
             out.append(last)
 

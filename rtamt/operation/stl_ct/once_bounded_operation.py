@@ -6,7 +6,7 @@ import rtamt.operation.stl_ct.intersection as intersect
 
 class OnceBoundedOperation(AbstractOperation):
     def __init__(self, begin, end):
-        self.input = []
+        self.last = []
         self.max = - float("inf")
         self.begin = begin
         self.end = end
@@ -22,6 +22,7 @@ class OnceBoundedOperation(AbstractOperation):
 
         while i < len(input_list):
             b = (input_list[i - 1][0] + begin, input_list[i][0] + end, input_list[i - 1][1])
+            last = (input_list[i][0] + end, input_list[i][0] + end, input_list[i][1])
             if not out:
                 out.append(b)
             else:
@@ -38,11 +39,15 @@ class OnceBoundedOperation(AbstractOperation):
                         del (out[len(out) - 1])
                         out.append((a[0], b[0], a[2]))
                         out.append((b[0], b[1], b[2]))
+            if i == len(input_list) - 1:
+                out.append(last)
+
             i = i + 1
 
         prev = float("nan")
-        for b in out:
-            if b[2] != prev:
+
+        for i, b in enumerate(out):
+            if b[2] != prev or i == len(out) - 1:
                 ans.append([b[0], b[2]])
             prev = b[2]
 
@@ -87,6 +92,5 @@ class OnceBoundedOperation(AbstractOperation):
             if b[2] != prev or i == len(out) - 1:
                 ans.append([b[0], b[2]])
             prev = b[2]
-
 
         return ans

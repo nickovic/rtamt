@@ -88,7 +88,7 @@ def intersection(a, b, method):
             prev = val
             last = [hi, last_val]
 
-    return ans, last
+    return ans, last, a, b
 
 
 def disjunction(a, b):
