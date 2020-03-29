@@ -5,16 +5,16 @@ class SinceOperation(AbstractOperation):
         self.left = []
         self.right = []
         self.prev = -float("inf")
+        self.last = []
 
     def update(self, *args, **kargs):
         out = []
-        a = args[0]
-        b = args[1]
+        a = self.left + args[0]
+        b = self.right + args[1]
 
-        ans = []
         i = j = 1
 
-        hi = None
+        last = self.last
 
         while len(a) > 1 and len(b) > 1:
             a_start = a[i - 1][0]
@@ -45,15 +45,19 @@ class SinceOperation(AbstractOperation):
             val = float("nan")
             if lo < hi:
                 val = max(min(a_val, b_val), min(a_val, self.prev))
-                if val != self.prev:
-                    out.append([lo, val])
+                #if not (self.last == [lo, val]):
+                out.append([lo, val])
                 self.prev = val
                 last = [hi, last_val]
 
-        if out:
-            out.append(last)
+        self.left = a
+        self.right = b
+        self.last = last
 
         return out
+
+    def update_final(self, *args, **kargs):
+        return self.update(args[0], args[1]) + [self.last]
 
     def offline(self, *args, **kargs):
         out = []

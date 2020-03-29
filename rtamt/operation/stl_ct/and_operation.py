@@ -16,12 +16,13 @@ class AndOperation(AbstractOperation):
 
         self.left = left
         self.right = right
-        self.last = last
+        if out:
+            self.last = last
 
         return out
 
-    def update_final(self):
-        return [self.last]
+    def update_final(self, *args, **kargs):
+        return self.update(args[0], args[1]) + [self.last]
 
     def offline(self, *args, **kargs):
         out = []

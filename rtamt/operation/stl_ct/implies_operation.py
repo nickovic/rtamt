@@ -5,17 +5,24 @@ class ImpliesOperation(AbstractOperation):
     def __init__(self):
         self.left = []
         self.right = []
+        self.last = []
 
     def update(self, *args, **kargs):
         out = []
-        left_list = args[0]
-        right_list = args[1]
-        self.left = self.left + left_list
-        self.right = self.right + right_list
+        left_list = self.left + args[0]
+        right_list = self.right + args[1]
 
-        out, last = intersect.intersection(self.left, self.right, intersect.implication)
+        out, last, left, right = intersect.intersection(left_list, right_list, intersect.implication)
+
+        self.left = left
+        self.right = right
+        if out:
+            self.last = last
 
         return out
+
+    def update_final(self, *args, **kargs):
+        return self.update(args[0], args[1]) + [self.last]
 
     def offline(self, *args, **kargs):
         out = []
@@ -24,7 +31,7 @@ class ImpliesOperation(AbstractOperation):
         self.left = self.left + left_list
         self.right = self.right + right_list
 
-        out, last = intersect.intersection(self.left, self.right, intersect.implication)
+        out, last, left, right = intersect.intersection(self.left, self.right, intersect.implication)
 
         if last:
             out.append(last)

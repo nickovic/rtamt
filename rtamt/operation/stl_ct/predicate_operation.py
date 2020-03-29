@@ -31,6 +31,9 @@ class PredicateOperation(AbstractOperation):
 
         return out
 
+    def update_final(self, *args, **kargs):
+        return self.upate(args[0])
+
     def offline(self, *args, **kargs):
         out = []
         input_list = args[0]

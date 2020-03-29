@@ -11,6 +11,11 @@ class SinceBoundedOperation(AbstractOperation):
         self.begin = begin
         self.end = end
 
+        self.since = SinceOperation()
+        self.hist = HistoricallyBoundedOperation(0, self.begin)
+        self.once = OnceBoundedOperation(self.begin, self.end)
+        self.andop = AndOperation()
+
     def update(self, *args, **kargs):
         out = []
         left_list = args[0]
@@ -18,15 +23,24 @@ class SinceBoundedOperation(AbstractOperation):
         self.left = self.left + left_list
         self.right = self.right + right_list
 
-        since = SinceOperation()
-        hist = HistoricallyBoundedOperation(0, self.begin)
-        once = OnceBoundedOperation(self.begin, self.end)
-        andop = AndOperation()
+        out1 = self.once.update(right_list)
+        out2 = self.since.update(left_list, right_list)
+        out3 = self.hist.update(out2)
+        out = self.andop.update(out1, out3)
 
-        out1 = once.update(right_list)
-        out2 = since.update(left_list, right_list)
-        out3 = hist.update(out2)
-        out = andop.update(out1, out3)
+        return out
+
+    def update_final(self, *args, **kargs):
+        out = []
+        left_list = args[0]
+        right_list = args[1]
+        self.left = self.left + left_list
+        self.right = self.right + right_list
+
+        out1 = self.once.update_final(right_list)
+        out2 = self.since.update_final(left_list, right_list)
+        out3 = self.hist.update_final(out2)
+        out = self.andop.update_final(out1, out3)
 
         return out
 

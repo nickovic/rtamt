@@ -14,6 +14,9 @@ class AbsOperation(AbstractOperation):
 
         return out
 
+    def update_final(self, *args, **kargs):
+        return self.update(args[0])
+
     def offline(self, input_list):
         out = []
 

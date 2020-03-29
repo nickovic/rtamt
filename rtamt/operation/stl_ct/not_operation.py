@@ -16,13 +16,8 @@ class NotOperation(AbstractOperation):
 
         return out
 
-    def update_final(self):
-        out = []
-        for in_sample in self.input:
-            out_time = in_sample[0]
-            out_value = -in_sample[1]
-            out.append([out_time, out_value])
-        return out
+    def update_final(self, *args, **kargs):
+        return self.update(args[0])
 
     def offline(self, *args, **kargs):
         out = []
