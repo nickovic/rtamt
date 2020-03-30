@@ -32,7 +32,7 @@ class PredicateOperation(AbstractOperation):
         return out
 
     def update_final(self, *args, **kargs):
-        return self.upate(args[0])
+        return self.update(args[0])
 
     def offline(self, *args, **kargs):
         out = []
