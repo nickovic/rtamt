@@ -113,14 +113,14 @@ class STLSpecification(AbstractSpecification,StlParserVisitor):
         try:
             var = self.var_object_dict[id_head]
             if (not id_tail):
-                if (not isinstance(var, (int, long, float))):
-                    raise STLParseException('Variable {} is not of type int, long or float'.format(id))
+                if (not isinstance(var, (int, float))):
+                    raise STLParseException('Variable {} is not of type int or float'.format(id))
             else:
                 try:
                     value = operator.attrgetter(id_tail)(var)
-                    if (not isinstance(value, (int, long, float))):
+                    if (not isinstance(value, (int, float))):
                         raise STLParseException(
-                            'The field {0} of the variable {1} is not of type int, long or float'.format(id, id_head))
+                            'The field {0} of the variable {1} is not of type int or float'.format(id, id_head))
                 except AttributeError as err:
                     raise STLParseException(err)
         except KeyError:
@@ -164,8 +164,6 @@ class STLSpecification(AbstractSpecification,StlParserVisitor):
             var = float()
         elif var_type.encode('utf-8') == 'int'.encode('utf-8'):
             var = int()
-        elif var_type.encode('utf-8') == 'long'.encode('utf-8'):
-            var = long()
         elif var_type.encode('utf-8') == 'complex'.encode('utf-8'):
             var = complex()
         else:

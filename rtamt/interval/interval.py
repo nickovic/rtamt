@@ -1,6 +1,6 @@
 import logging
 
-class Interval:
+class Interval(object):
     """A class for storing integer intervals
 
         Attributes
@@ -34,9 +34,7 @@ class Interval:
 
     @begin.setter
     def begin(self, begin):
-        """Setter for begin (silent, issues warning message and does nothing)"""
-        logging.warning('The Interval object is immutable')
-        pass
+        self.__begin = begin
 
     @property
     def end(self):
@@ -45,6 +43,4 @@ class Interval:
 
     @end.setter
     def end(self, end):
-        """Setter for end (silent, issues warning message and does nothing)"""
-        logging.warning('The Interval object is immutable')
-        pass
+        self.__end = end
