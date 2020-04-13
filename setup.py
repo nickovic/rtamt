@@ -19,7 +19,7 @@ setup(
     license='BSD',
     python_requires='>=2.7',
     install_requires=[
-        'antlr4-python3-runtime==4.5',
+        'antlr4-python3-runtime==4.8',
         'antlr4-python2-runtime==4.5',
         'enum34'
     ],
