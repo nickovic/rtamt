@@ -17,7 +17,7 @@ setup(
     author='Nickovic Dejan, Tomoya Yamaguchi',
     author_email='dejan.nickovic@ait.ac.at, tomoya.yamaguchi@toyota.com',
     license='BSD',
-    python_requires='==3.6',
+    python_requires='>=3.6, <3.7',
     install_requires=[
         'antlr4-python3-runtime==4.5',
         'enum34'
