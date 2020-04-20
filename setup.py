@@ -17,10 +17,9 @@ setup(
     author='Nickovic Dejan, Tomoya Yamaguchi',
     author_email='dejan.nickovic@ait.ac.at, tomoya.yamaguchi@toyota.com',
     license='BSD',
-    python_requires='>=2.7',
+    python_requires='==3.6',
     install_requires=[
         'antlr4-python3-runtime==4.5',
-        'antlr4-python2-runtime==4.5',
         'enum34'
     ],
     package_data={'': ['*.so']},
@@ -28,7 +27,7 @@ setup(
 
     classifiers=[
         'License :: OSI Approved :: BSD License',
-        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3.6',
         'Programming Language :: C++',
     ],
 )
