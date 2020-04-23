@@ -1,0 +1,85 @@
+#--------------------------- Tool Specifications -------------------------
+#
+# Modify the following macros to reflect the tools you wish to use for
+# compiling and linking your code.
+#
+CC = /usr/local/MATLAB/R2019b/bin/mex -R2018a
+LD = $(CC)
+ 
+MODEL     = sf_aircraft_fault
+TARGET      = sfun
+MODULE_SRCS   = c3_sf_aircraft_fault.c
+MODEL_SRC  = sf_aircraft_fault_sfun.c
+MODEL_REG = sf_aircraft_fault_sfun_registry.c
+MAKEFILE    = sf_aircraft_fault_sfun.mku
+MATLAB_ROOT  = /usr/local/MATLAB/R2019b/toolbox/stateflow/stateflow/../../..
+BUILDARGS   = 
+#------------------------------ Include/Lib Path ------------------------------
+ 
+USER_INCLUDES = -I"/home/tester/cav20-ae/02_simulink_sensitivity_analysis" -I"/home/tester/cav20-ae/02_simulink_sensitivity_analysis/model" 
+AUX_INCLUDES = 
+MLSLSF_INCLUDES  = \
+    -I"/usr/local/MATLAB/R2019b/extern/include" \
+    -I"/usr/local/MATLAB/R2019b/simulink/include" \
+    -I"/usr/local/MATLAB/R2019b/simulink/include/sf_runtime" \
+    -I"/usr/local/MATLAB/R2019b/stateflow/c/mex/include" \
+    -I"/usr/local/MATLAB/R2019b/rtw/c/src" \
+    -I"/home/tester/cav20-ae/02_simulink_sensitivity_analysis/slprj/_sfprj/sf_aircraft_fault/_self/sfun/src" 
+
+THIRD_PARTY_INCLUDES = 
+
+INCLUDE_PATH = $(USER_INCLUDES) $(AUX_INCLUDES) $(MLSLSF_INCLUDES) $(COMPILER_INCLUDES) $(THIRD_PARTY_INCLUDES)
+ 
+#----------------- Compiler and Linker Options --------------------------------
+ 
+# Optimization Options
+ 
+CC_OPTS =  
+CPP_REQ_DEFINES = -DMATLAB_MEX_FILE
+ 
+# Uncomment this line to move warning level to W4
+# cflags = $(cflags:W3=W4)
+CFLAGS = $(CPP_REQ_DEFINES) $(INCLUDE_PATH) CFLAGS="\$$CFLAGS $(CC_OPTS)"
+ 
+LDFLAGS =  
+ 
+AUXLDFLAGS = 
+#----------------------------- Source Files -----------------------------------
+ 
+REQ_SRCS  = $(MODEL_SRC) $(MODEL_REG) $(MODULE_SRCS)
+
+USER_OBJS =
+
+AUX_ABS_OBJS =
+THIRD_PARTY_OBJS =
+
+REQ_OBJS = $(REQ_SRCS:.cpp=.o)
+REQ_OBJS2 = $(REQ_OBJS:.c=.o)
+OBJS = $(REQ_OBJS2) $(USER_OBJS) $(AUX_ABS_OBJS) $(THIRD_PARTY_OBJS)
+OBJLIST_FILE = sf_aircraft_fault_sfun.mol
+SFCLIB = 
+AUX_LNK_OBJS = 
+USER_LIBS = 
+PARLIB = 
+  MAPCSF = /usr/local/MATLAB/R2019b/tools/glnxa64/mapcsf
+   # RUN_MAPCSF_ON_UNIX is defined only if MAPCSF exists on this platform.
+   ifneq ($(wildcard $(MAPCSF)),) # run MAPCSF if it exists on this platform
+      RUN_MAPCSF_ON_UNIX =  /usr/local/MATLAB/R2019b/tools/glnxa64/mapcsf $@
+   endif
+ 
+#--------------------------------- Rules --------------------------------------
+ 
+MEX_FILE_NAME = $(MODEL)_$(TARGET).mexa64
+ 
+ $(MEX_FILE_NAME): $(MAKEFILE) $(OBJS) $(SFCLIB) $(AUX_LNK_OBJS) $(USER_LIBS)
+	@echo ### Linking ...
+	$(CC) -silent LDFLAGS="\$$LDFLAGS $(LDFLAGS) $(AUXLDFLAGS)" -output $(MEX_FILE_NAME) @$(OBJLIST_FILE) $(AUX_LNK_OBJS) $(USER_LIBS) $(SFCLIB) $(PARLIB) $(IPPLIB) $(THIRD_PARTY_LIBS)
+	$(RUN_MAPCSF_ON_UNIX)
+
+%.o :    %.c
+	$(CC) -c $(CFLAGS) $<
+
+%.o :    %.cpp
+	$(CC) -c $(CFLAGS) $<
+
+
