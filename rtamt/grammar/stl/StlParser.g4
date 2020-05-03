@@ -17,7 +17,7 @@ modimport :
         From Identifier Import Identifier #modImport ;
 
 assertion 
-	: Identifier EQUAL expression ;
+	: Identifier EQUAL topExpression ;
 
 declaration 
 	: variableDeclaration                                         #declVariable ;
@@ -50,7 +50,8 @@ interval
 	: LBRACK intervalTime COLON intervalTime RBRACK ;
 
 intervalTime
-	: IntegerLiteral ( unit )?      #intervalTimeLiteral ;
+	: RealLiteral ( unit )?      #intervalTimeLiteral
+	;
 
 unit
     : SEC | MSEC | USEC | NSEC | PSEC ;
@@ -59,13 +60,19 @@ unit
 
 // -- O -- O -- O -- O -- O -- O -- O -- O -- O -- O -- O -- O -- O  expression
 
-expression
-	: 
+topExpression
+	:
+    AlwaysOperator expression                                   #ExprUntimedAlwaysExpr
+    | EventuallyOperator expression                             #ExprUntimedEvExpr
+    | expression                                                #Expr
+    ;
 
+
+expression
+	:
     real_expression                                             #ExprReal
-    | expression comparisonOp literal                             #IdCompInt
-//    | idComp                                                    #ExprIdComp
-	
+    | expression comparisonOp literal                           #IdCompInt
+
 	| LPAREN expression RPAREN                                  #ExprParen
 	| NotOperator expression                                    #ExprNot
 
@@ -75,8 +82,8 @@ expression
     | expression IffOperator expression                         #ExprIffExpr
     | expression XorOperator expression                         #ExprXorExpr
 
-	| AlwaysOperator ( interval )? expression                   #ExprAlwaysExpr
-    | EventuallyOperator ( interval )? expression               #ExprEvExpr
+	| AlwaysOperator interval expression                        #ExprAlwaysExpr
+    | EventuallyOperator interval expression                    #ExprEvExpr
     | expression UntilOperator interval expression              #ExprUntilExpr
     | HistoricallyOperator ( interval )? expression             #ExprHistExpr
     | OnceOperator ( interval )? expression                     #ExpreOnceExpr
@@ -84,10 +91,6 @@ expression
     | RiseOperator LPAREN expression RPAREN                     #ExprRise
     | FallOperator LPAREN expression RPAREN                     #ExprFall
 	;
-
-//idComp
-//	: real_expression comparisonOp literal    #IdCompInt
-//	;
 
 real_expression:
     Identifier                                                  #ExprId

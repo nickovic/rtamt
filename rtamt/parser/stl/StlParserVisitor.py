@@ -1,4 +1,4 @@
-# Generated from StlParser.g4 by ANTLR 4.5.1
+# Generated from StlParser.g4 by ANTLR 4.8
 from antlr4 import *
 
 # This class defines a complete generic visitor for a parse tree produced by StlParser.
@@ -82,6 +82,21 @@ class StlParserVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by StlParser#unit.
     def visitUnit(self, ctx):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by StlParser#ExprUntimedAlwaysExpr.
+    def visitExprUntimedAlwaysExpr(self, ctx):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by StlParser#ExprUntimedEvExpr.
+    def visitExprUntimedEvExpr(self, ctx):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by StlParser#Expr.
+    def visitExpr(self, ctx):
         return self.visitChildren(ctx)
 
 
