@@ -50,7 +50,7 @@ interval
 	: LBRACK intervalTime COLON intervalTime RBRACK ;
 
 intervalTime
-	: RealLiteral ( unit )?      #intervalTimeLiteral
+	: IntegerLiteral ( unit )?      #intervalTimeLiteral
 	;
 
 unit

@@ -7,9 +7,6 @@ Created on Tue Jul 23 21:38:29 2019
 import logging
 import operator
 
-from fractions import Fraction
-from decimal import Decimal
-
 from rtamt.parser.stl.StlParserVisitor import StlParserVisitor
 from rtamt.interval.interval import Interval
 
@@ -294,8 +291,8 @@ class STLNodeVisitor(StlParserVisitor):
         return self.visit(ctx.assertion())
 
     def visitIntervalTimeLiteral(self, ctx):
-        realLiteralString = ctx.RealLiteral().getText()
-        out = Fraction(Decimal(realLiteralString))
+
+        out = int(ctx.IntegerLiteral().getText())
 
         if ctx.unit() == None:
             # default time unit is seconds - conversion of the bound to ps

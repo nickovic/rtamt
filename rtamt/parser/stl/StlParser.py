@@ -1,14 +1,12 @@
-# Generated from StlParser.g4 by ANTLR 4.8
+# Generated from StlParser.g4 by ANTLR 4.5.1
 # encoding: utf-8
 from __future__ import print_function
 from antlr4 import *
 from io import StringIO
-import sys
-
 
 def serializedATN():
     with StringIO() as buf:
-        buf.write(u"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3")
+        buf.write(u"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3")
         buf.write(u"H\u00f5\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t")
         buf.write(u"\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f\t\f\4\r\t\r")
         buf.write(u"\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22\4")
@@ -21,8 +19,8 @@ def serializedATN():
         buf.write(u"\f\3\f\3\r\3\r\3\16\3\16\3\16\3\16\3\16\3\16\3\17\3\17")
         buf.write(u"\5\17w\n\17\3\20\3\20\3\21\3\21\3\21\3\21\3\21\5\21\u0080")
         buf.write(u"\n\21\3\22\3\22\3\22\3\22\3\22\3\22\3\22\3\22\3\22\3")
-        buf.write(u"\22\3\22\3\22\3\22\3\22\3\22\3\22\3\22\3\22\5\22\u0094")
-        buf.write(u"\n\22\3\22\3\22\3\22\5\22\u0099\n\22\3\22\3\22\3\22\3")
+        buf.write(u"\22\3\22\3\22\3\22\5\22\u008f\n\22\3\22\3\22\3\22\5\22")
+        buf.write(u"\u0094\n\22\3\22\3\22\3\22\3\22\3\22\3\22\3\22\3\22\3")
         buf.write(u"\22\3\22\3\22\3\22\3\22\3\22\3\22\3\22\5\22\u00a6\n\22")
         buf.write(u"\3\22\3\22\3\22\3\22\3\22\3\22\3\22\3\22\3\22\3\22\3")
         buf.write(u"\22\3\22\3\22\3\22\3\22\3\22\3\22\3\22\3\22\3\22\3\22")
@@ -34,9 +32,9 @@ def serializedATN():
         buf.write(u"\3\24\5\24\u00eb\n\24\3\25\3\25\3\25\3\25\5\25\u00f1")
         buf.write(u"\n\25\3\26\3\26\3\26\2\4\"$\27\2\4\6\b\n\f\16\20\22\24")
         buf.write(u"\26\30\32\34\36 \"$&(*\2\5\4\2\37\"DD\3\2\32\33\3\2\23")
-        buf.write(u"\27\2\u0109\2,\3\2\2\2\4\60\3\2\2\2\6A\3\2\2\2\bD\3\2")
-        buf.write(u"\2\2\nI\3\2\2\2\fM\3\2\2\2\16O\3\2\2\2\20R\3\2\2\2\22")
-        buf.write(u"Z\3\2\2\2\24h\3\2\2\2\26j\3\2\2\2\30l\3\2\2\2\32n\3\2")
+        buf.write(u"\27\u0109\2,\3\2\2\2\4\60\3\2\2\2\6A\3\2\2\2\bD\3\2\2")
+        buf.write(u"\2\nI\3\2\2\2\fM\3\2\2\2\16O\3\2\2\2\20R\3\2\2\2\22Z")
+        buf.write(u"\3\2\2\2\24h\3\2\2\2\26j\3\2\2\2\30l\3\2\2\2\32n\3\2")
         buf.write(u"\2\2\34t\3\2\2\2\36x\3\2\2\2 \177\3\2\2\2\"\u00a5\3\2")
         buf.write(u"\2\2$\u00d1\3\2\2\2&\u00ea\3\2\2\2(\u00f0\3\2\2\2*\u00f2")
         buf.write(u"\3\2\2\2,-\5\4\3\2-.\7\2\2\3.\3\3\2\2\2/\61\5\6\4\2\60")
@@ -55,67 +53,67 @@ def serializedATN():
         buf.write(u"\2\2\2de\7>\2\2ei\5(\25\2fg\7>\2\2gi\5\"\22\2hd\3\2\2")
         buf.write(u"\2hf\3\2\2\2i\25\3\2\2\2jk\t\2\2\2k\27\3\2\2\2lm\t\3")
         buf.write(u"\2\2m\31\3\2\2\2no\7\13\2\2op\5\34\17\2pq\7\16\2\2qr")
-        buf.write(u"\5\34\17\2rs\7\f\2\2s\33\3\2\2\2tv\7C\2\2uw\5\36\20\2")
+        buf.write(u"\5\34\17\2rs\7\f\2\2s\33\3\2\2\2tv\7B\2\2uw\5\36\20\2")
         buf.write(u"vu\3\2\2\2vw\3\2\2\2w\35\3\2\2\2xy\t\4\2\2y\37\3\2\2")
         buf.write(u"\2z{\7/\2\2{\u0080\5\"\22\2|}\7\60\2\2}\u0080\5\"\22")
         buf.write(u"\2~\u0080\5\"\22\2\177z\3\2\2\2\177|\3\2\2\2\177~\3\2")
-        buf.write(u"\2\2\u0080!\3\2\2\2\u0081\u0082\b\22\1\2\u0082\u00a6")
-        buf.write(u"\5$\23\2\u0083\u0084\7\7\2\2\u0084\u0085\5\"\22\2\u0085")
-        buf.write(u"\u0086\7\b\2\2\u0086\u00a6\3\2\2\2\u0087\u0088\7\'\2")
-        buf.write(u"\2\u0088\u00a6\5\"\22\20\u0089\u008a\7/\2\2\u008a\u008b")
-        buf.write(u"\5\32\16\2\u008b\u008c\5\"\22\n\u008c\u00a6\3\2\2\2\u008d")
-        buf.write(u"\u008e\7\60\2\2\u008e\u008f\5\32\16\2\u008f\u0090\5\"")
-        buf.write(u"\22\t\u0090\u00a6\3\2\2\2\u0091\u0093\7\62\2\2\u0092")
-        buf.write(u"\u0094\5\32\16\2\u0093\u0092\3\2\2\2\u0093\u0094\3\2")
-        buf.write(u"\2\2\u0094\u0095\3\2\2\2\u0095\u00a6\5\"\22\7\u0096\u0098")
-        buf.write(u"\7\63\2\2\u0097\u0099\5\32\16\2\u0098\u0097\3\2\2\2\u0098")
-        buf.write(u"\u0099\3\2\2\2\u0099\u009a\3\2\2\2\u009a\u00a6\5\"\22")
-        buf.write(u"\6\u009b\u009c\7-\2\2\u009c\u009d\7\7\2\2\u009d\u009e")
-        buf.write(u"\5\"\22\2\u009e\u009f\7\b\2\2\u009f\u00a6\3\2\2\2\u00a0")
-        buf.write(u"\u00a1\7.\2\2\u00a1\u00a2\7\7\2\2\u00a2\u00a3\5\"\22")
-        buf.write(u"\2\u00a3\u00a4\7\b\2\2\u00a4\u00a6\3\2\2\2\u00a5\u0081")
-        buf.write(u"\3\2\2\2\u00a5\u0083\3\2\2\2\u00a5\u0087\3\2\2\2\u00a5")
-        buf.write(u"\u0089\3\2\2\2\u00a5\u008d\3\2\2\2\u00a5\u0091\3\2\2")
-        buf.write(u"\2\u00a5\u0096\3\2\2\2\u00a5\u009b\3\2\2\2\u00a5\u00a0")
-        buf.write(u"\3\2\2\2\u00a6\u00c7\3\2\2\2\u00a7\u00a8\f\17\2\2\u00a8")
-        buf.write(u"\u00a9\7(\2\2\u00a9\u00c6\5\"\22\20\u00aa\u00ab\f\16")
-        buf.write(u"\2\2\u00ab\u00ac\7)\2\2\u00ac\u00c6\5\"\22\17\u00ad\u00ae")
-        buf.write(u"\f\r\2\2\u00ae\u00af\7+\2\2\u00af\u00c6\5\"\22\16\u00b0")
-        buf.write(u"\u00b1\f\f\2\2\u00b1\u00b2\7*\2\2\u00b2\u00c6\5\"\22")
-        buf.write(u"\r\u00b3\u00b4\f\13\2\2\u00b4\u00b5\7,\2\2\u00b5\u00c6")
-        buf.write(u"\5\"\22\f\u00b6\u00b7\f\b\2\2\u00b7\u00b8\7\61\2\2\u00b8")
-        buf.write(u"\u00b9\5\32\16\2\u00b9\u00ba\5\"\22\t\u00ba\u00c6\3\2")
-        buf.write(u"\2\2\u00bb\u00bc\f\5\2\2\u00bc\u00be\7\64\2\2\u00bd\u00bf")
-        buf.write(u"\5\32\16\2\u00be\u00bd\3\2\2\2\u00be\u00bf\3\2\2\2\u00bf")
-        buf.write(u"\u00c0\3\2\2\2\u00c0\u00c6\5\"\22\6\u00c1\u00c2\f\22")
-        buf.write(u"\2\2\u00c2\u00c3\5&\24\2\u00c3\u00c4\5(\25\2\u00c4\u00c6")
-        buf.write(u"\3\2\2\2\u00c5\u00a7\3\2\2\2\u00c5\u00aa\3\2\2\2\u00c5")
-        buf.write(u"\u00ad\3\2\2\2\u00c5\u00b0\3\2\2\2\u00c5\u00b3\3\2\2")
-        buf.write(u"\2\u00c5\u00b6\3\2\2\2\u00c5\u00bb\3\2\2\2\u00c5\u00c1")
-        buf.write(u"\3\2\2\2\u00c6\u00c9\3\2\2\2\u00c7\u00c5\3\2\2\2\u00c7")
-        buf.write(u"\u00c8\3\2\2\2\u00c8#\3\2\2\2\u00c9\u00c7\3\2\2\2\u00ca")
-        buf.write(u"\u00cb\b\23\1\2\u00cb\u00d2\7D\2\2\u00cc\u00cd\7\22\2")
-        buf.write(u"\2\u00cd\u00ce\7\7\2\2\u00ce\u00cf\5$\23\2\u00cf\u00d0")
-        buf.write(u"\7\b\2\2\u00d0\u00d2\3\2\2\2\u00d1\u00ca\3\2\2\2\u00d1")
-        buf.write(u"\u00cc\3\2\2\2\u00d2\u00e1\3\2\2\2\u00d3\u00d4\f\7\2")
-        buf.write(u"\2\u00d4\u00d5\7\4\2\2\u00d5\u00e0\5$\23\b\u00d6\u00d7")
-        buf.write(u"\f\6\2\2\u00d7\u00d8\7\3\2\2\u00d8\u00e0\5$\23\7\u00d9")
-        buf.write(u"\u00da\f\5\2\2\u00da\u00db\7\5\2\2\u00db\u00e0\5$\23")
-        buf.write(u"\6\u00dc\u00dd\f\4\2\2\u00dd\u00de\7\6\2\2\u00de\u00e0")
-        buf.write(u"\5$\23\5\u00df\u00d3\3\2\2\2\u00df\u00d6\3\2\2\2\u00df")
-        buf.write(u"\u00d9\3\2\2\2\u00df\u00dc\3\2\2\2\u00e0\u00e3\3\2\2")
-        buf.write(u"\2\u00e1\u00df\3\2\2\2\u00e1\u00e2\3\2\2\2\u00e2%\3\2")
-        buf.write(u"\2\2\u00e3\u00e1\3\2\2\2\u00e4\u00eb\7;\2\2\u00e5\u00eb")
-        buf.write(u"\7:\2\2\u00e6\u00eb\7=\2\2\u00e7\u00eb\7<\2\2\u00e8\u00eb")
-        buf.write(u"\78\2\2\u00e9\u00eb\79\2\2\u00ea\u00e4\3\2\2\2\u00ea")
-        buf.write(u"\u00e5\3\2\2\2\u00ea\u00e6\3\2\2\2\u00ea\u00e7\3\2\2")
-        buf.write(u"\2\u00ea\u00e8\3\2\2\2\u00ea\u00e9\3\2\2\2\u00eb\'\3")
-        buf.write(u"\2\2\2\u00ec\u00f1\7B\2\2\u00ed\u00f1\7C\2\2\u00ee\u00ef")
-        buf.write(u"\7\3\2\2\u00ef\u00f1\5(\25\2\u00f0\u00ec\3\2\2\2\u00f0")
-        buf.write(u"\u00ed\3\2\2\2\u00f0\u00ee\3\2\2\2\u00f1)\3\2\2\2\u00f2")
-        buf.write(u"\u00f3\7D\2\2\u00f3+\3\2\2\2\27\60\65:<Z]bhv\177\u0093")
-        buf.write(u"\u0098\u00a5\u00be\u00c5\u00c7\u00d1\u00df\u00e1\u00ea")
-        buf.write(u"\u00f0")
+        buf.write(u"\2\2\u0080!\3\2\2\2\u0081\u0082\b\22\1\2\u0082\u0083")
+        buf.write(u"\7\'\2\2\u0083\u00a6\5\"\22\20\u0084\u0085\7/\2\2\u0085")
+        buf.write(u"\u0086\5\32\16\2\u0086\u0087\5\"\22\n\u0087\u00a6\3\2")
+        buf.write(u"\2\2\u0088\u0089\7\60\2\2\u0089\u008a\5\32\16\2\u008a")
+        buf.write(u"\u008b\5\"\22\t\u008b\u00a6\3\2\2\2\u008c\u008e\7\62")
+        buf.write(u"\2\2\u008d\u008f\5\32\16\2\u008e\u008d\3\2\2\2\u008e")
+        buf.write(u"\u008f\3\2\2\2\u008f\u0090\3\2\2\2\u0090\u00a6\5\"\22")
+        buf.write(u"\7\u0091\u0093\7\63\2\2\u0092\u0094\5\32\16\2\u0093\u0092")
+        buf.write(u"\3\2\2\2\u0093\u0094\3\2\2\2\u0094\u0095\3\2\2\2\u0095")
+        buf.write(u"\u00a6\5\"\22\6\u0096\u00a6\5$\23\2\u0097\u0098\7\7\2")
+        buf.write(u"\2\u0098\u0099\5\"\22\2\u0099\u009a\7\b\2\2\u009a\u00a6")
+        buf.write(u"\3\2\2\2\u009b\u009c\7-\2\2\u009c\u009d\7\7\2\2\u009d")
+        buf.write(u"\u009e\5\"\22\2\u009e\u009f\7\b\2\2\u009f\u00a6\3\2\2")
+        buf.write(u"\2\u00a0\u00a1\7.\2\2\u00a1\u00a2\7\7\2\2\u00a2\u00a3")
+        buf.write(u"\5\"\22\2\u00a3\u00a4\7\b\2\2\u00a4\u00a6\3\2\2\2\u00a5")
+        buf.write(u"\u0081\3\2\2\2\u00a5\u0084\3\2\2\2\u00a5\u0088\3\2\2")
+        buf.write(u"\2\u00a5\u008c\3\2\2\2\u00a5\u0091\3\2\2\2\u00a5\u0096")
+        buf.write(u"\3\2\2\2\u00a5\u0097\3\2\2\2\u00a5\u009b\3\2\2\2\u00a5")
+        buf.write(u"\u00a0\3\2\2\2\u00a6\u00c7\3\2\2\2\u00a7\u00a8\f\17\2")
+        buf.write(u"\2\u00a8\u00a9\7(\2\2\u00a9\u00c6\5\"\22\20\u00aa\u00ab")
+        buf.write(u"\f\16\2\2\u00ab\u00ac\7)\2\2\u00ac\u00c6\5\"\22\17\u00ad")
+        buf.write(u"\u00ae\f\r\2\2\u00ae\u00af\7+\2\2\u00af\u00c6\5\"\22")
+        buf.write(u"\16\u00b0\u00b1\f\f\2\2\u00b1\u00b2\7*\2\2\u00b2\u00c6")
+        buf.write(u"\5\"\22\r\u00b3\u00b4\f\13\2\2\u00b4\u00b5\7,\2\2\u00b5")
+        buf.write(u"\u00c6\5\"\22\f\u00b6\u00b7\f\b\2\2\u00b7\u00b8\7\61")
+        buf.write(u"\2\2\u00b8\u00b9\5\32\16\2\u00b9\u00ba\5\"\22\t\u00ba")
+        buf.write(u"\u00c6\3\2\2\2\u00bb\u00bc\f\5\2\2\u00bc\u00be\7\64\2")
+        buf.write(u"\2\u00bd\u00bf\5\32\16\2\u00be\u00bd\3\2\2\2\u00be\u00bf")
+        buf.write(u"\3\2\2\2\u00bf\u00c0\3\2\2\2\u00c0\u00c6\5\"\22\6\u00c1")
+        buf.write(u"\u00c2\f\22\2\2\u00c2\u00c3\5&\24\2\u00c3\u00c4\5(\25")
+        buf.write(u"\2\u00c4\u00c6\3\2\2\2\u00c5\u00a7\3\2\2\2\u00c5\u00aa")
+        buf.write(u"\3\2\2\2\u00c5\u00ad\3\2\2\2\u00c5\u00b0\3\2\2\2\u00c5")
+        buf.write(u"\u00b3\3\2\2\2\u00c5\u00b6\3\2\2\2\u00c5\u00bb\3\2\2")
+        buf.write(u"\2\u00c5\u00c1\3\2\2\2\u00c6\u00c9\3\2\2\2\u00c7\u00c5")
+        buf.write(u"\3\2\2\2\u00c7\u00c8\3\2\2\2\u00c8#\3\2\2\2\u00c9\u00c7")
+        buf.write(u"\3\2\2\2\u00ca\u00cb\b\23\1\2\u00cb\u00d2\7D\2\2\u00cc")
+        buf.write(u"\u00cd\7\22\2\2\u00cd\u00ce\7\7\2\2\u00ce\u00cf\5$\23")
+        buf.write(u"\2\u00cf\u00d0\7\b\2\2\u00d0\u00d2\3\2\2\2\u00d1\u00ca")
+        buf.write(u"\3\2\2\2\u00d1\u00cc\3\2\2\2\u00d2\u00e1\3\2\2\2\u00d3")
+        buf.write(u"\u00d4\f\7\2\2\u00d4\u00d5\7\4\2\2\u00d5\u00e0\5$\23")
+        buf.write(u"\b\u00d6\u00d7\f\6\2\2\u00d7\u00d8\7\3\2\2\u00d8\u00e0")
+        buf.write(u"\5$\23\7\u00d9\u00da\f\5\2\2\u00da\u00db\7\5\2\2\u00db")
+        buf.write(u"\u00e0\5$\23\6\u00dc\u00dd\f\4\2\2\u00dd\u00de\7\6\2")
+        buf.write(u"\2\u00de\u00e0\5$\23\5\u00df\u00d3\3\2\2\2\u00df\u00d6")
+        buf.write(u"\3\2\2\2\u00df\u00d9\3\2\2\2\u00df\u00dc\3\2\2\2\u00e0")
+        buf.write(u"\u00e3\3\2\2\2\u00e1\u00df\3\2\2\2\u00e1\u00e2\3\2\2")
+        buf.write(u"\2\u00e2%\3\2\2\2\u00e3\u00e1\3\2\2\2\u00e4\u00eb\7;")
+        buf.write(u"\2\2\u00e5\u00eb\7:\2\2\u00e6\u00eb\7=\2\2\u00e7\u00eb")
+        buf.write(u"\7<\2\2\u00e8\u00eb\78\2\2\u00e9\u00eb\79\2\2\u00ea\u00e4")
+        buf.write(u"\3\2\2\2\u00ea\u00e5\3\2\2\2\u00ea\u00e6\3\2\2\2\u00ea")
+        buf.write(u"\u00e7\3\2\2\2\u00ea\u00e8\3\2\2\2\u00ea\u00e9\3\2\2")
+        buf.write(u"\2\u00eb\'\3\2\2\2\u00ec\u00f1\7B\2\2\u00ed\u00f1\7C")
+        buf.write(u"\2\2\u00ee\u00ef\7\3\2\2\u00ef\u00f1\5(\25\2\u00f0\u00ec")
+        buf.write(u"\3\2\2\2\u00f0\u00ed\3\2\2\2\u00f0\u00ee\3\2\2\2\u00f1")
+        buf.write(u")\3\2\2\2\u00f2\u00f3\7D\2\2\u00f3+\3\2\2\2\27\60\65")
+        buf.write(u":<Z]bhv\177\u008e\u0093\u00a5\u00be\u00c5\u00c7\u00d1")
+        buf.write(u"\u00df\u00e1\u00ea\u00f0")
         return buf.getvalue()
 
 
@@ -263,12 +261,11 @@ class StlParser ( Parser ):
     COMMENT=69
     LINE_COMMENT=70
 
-    def __init__(self, input, output=sys.stdout):
-        super(StlParser, self).__init__(input, output=output)
-        self.checkVersion("4.8")
+    def __init__(self, input):
+        super(StlParser, self).__init__(input)
+        self.checkVersion("4.5.1")
         self._interp = ParserATNSimulator(self, self.atn, self.decisionsToDFA, self.sharedContextCache)
         self._predicates = None
-
 
 
 
@@ -314,7 +311,6 @@ class StlParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class StlSpecificationContext(ParserRuleContext):
 
@@ -371,7 +367,6 @@ class StlParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 46
-            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==StlParser.Specification:
                 self.state = 45
@@ -394,16 +389,15 @@ class StlParser ( Parser ):
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                 if _alt==1:
                     self.state = 56
-                    self._errHandler.sync(self)
                     token = self._input.LA(1)
                     if token in [StlParser.Input, StlParser.Output, StlParser.Constant, StlParser.DomainTypeFloat, StlParser.DomainTypeLong, StlParser.DomainTypeComplex, StlParser.DomainTypeInt, StlParser.Identifier]:
                         self.state = 54
                         self.declaration()
-                        pass
+
                     elif token in [StlParser.AT]:
                         self.state = 55
                         self.annotation()
-                        pass
+
                     else:
                         raise NoViableAltException(self)
              
@@ -420,7 +414,6 @@ class StlParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class SpecContext(ParserRuleContext):
 
@@ -475,7 +468,6 @@ class StlParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class ModimportContext(ParserRuleContext):
 
@@ -540,7 +532,6 @@ class StlParser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class AssertionContext(ParserRuleContext):
 
         def __init__(self, parser, parent=None, invokingState=-1):
@@ -588,7 +579,6 @@ class StlParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class DeclarationContext(ParserRuleContext):
 
@@ -641,15 +631,11 @@ class StlParser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class AnnotationContext(ParserRuleContext):
 
         def __init__(self, parser, parent=None, invokingState=-1):
             super(StlParser.AnnotationContext, self).__init__(parent, invokingState)
             self.parser = parser
-
-        def AT(self):
-            return self.getToken(StlParser.AT, 0)
 
         def annotation_type(self):
             return self.getTypedRuleContext(StlParser.Annotation_typeContext,0)
@@ -684,7 +670,6 @@ class StlParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class Annotation_typeContext(ParserRuleContext):
 
@@ -757,7 +742,6 @@ class StlParser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class VariableDeclarationContext(ParserRuleContext):
 
         def __init__(self, parser, parent=None, invokingState=-1):
@@ -803,7 +787,6 @@ class StlParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 88
-            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==StlParser.Constant:
                 self.state = 87
@@ -811,7 +794,6 @@ class StlParser ( Parser ):
 
 
             self.state = 91
-            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==StlParser.Input or _la==StlParser.Output:
                 self.state = 90
@@ -823,7 +805,6 @@ class StlParser ( Parser ):
             self.state = 94
             self.identifier()
             self.state = 96
-            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==StlParser.EQUAL:
                 self.state = 95
@@ -837,7 +818,6 @@ class StlParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class AssignmentContext(ParserRuleContext):
 
@@ -900,7 +880,6 @@ class StlParser ( Parser ):
         self.enterRule(localctx, 18, self.RULE_assignment)
         try:
             self.state = 102
-            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,7,self._ctx)
             if la_ == 1:
                 localctx = StlParser.AsgnLiteralContext(self, localctx)
@@ -928,7 +907,6 @@ class StlParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class DomainTypeContext(ParserRuleContext):
 
@@ -975,7 +953,6 @@ class StlParser ( Parser ):
             if not(((((_la - 29)) & ~0x3f) == 0 and ((1 << (_la - 29)) & ((1 << (StlParser.DomainTypeFloat - 29)) | (1 << (StlParser.DomainTypeLong - 29)) | (1 << (StlParser.DomainTypeComplex - 29)) | (1 << (StlParser.DomainTypeInt - 29)) | (1 << (StlParser.Identifier - 29)))) != 0)):
                 self._errHandler.recoverInline(self)
             else:
-                self._errHandler.reportMatch(self)
                 self.consume()
         except RecognitionException as re:
             localctx.exception = re
@@ -984,7 +961,6 @@ class StlParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class IoTypeContext(ParserRuleContext):
 
@@ -1022,7 +998,6 @@ class StlParser ( Parser ):
             if not(_la==StlParser.Input or _la==StlParser.Output):
                 self._errHandler.recoverInline(self)
             else:
-                self._errHandler.reportMatch(self)
                 self.consume()
         except RecognitionException as re:
             localctx.exception = re
@@ -1031,7 +1006,6 @@ class StlParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class IntervalContext(ParserRuleContext):
 
@@ -1091,7 +1065,6 @@ class StlParser ( Parser ):
             self.exitRule()
         return localctx
 
-
     class IntervalTimeContext(ParserRuleContext):
 
         def __init__(self, parser, parent=None, invokingState=-1):
@@ -1114,8 +1087,8 @@ class StlParser ( Parser ):
             super(StlParser.IntervalTimeLiteralContext, self).__init__(parser)
             self.copyFrom(ctx)
 
-        def RealLiteral(self):
-            return self.getToken(StlParser.RealLiteral, 0)
+        def IntegerLiteral(self):
+            return self.getToken(StlParser.IntegerLiteral, 0)
         def unit(self):
             return self.getTypedRuleContext(StlParser.UnitContext,0)
 
@@ -1137,9 +1110,8 @@ class StlParser ( Parser ):
             localctx = StlParser.IntervalTimeLiteralContext(self, localctx)
             self.enterOuterAlt(localctx, 1)
             self.state = 114
-            self.match(StlParser.RealLiteral)
+            self.match(StlParser.IntegerLiteral)
             self.state = 116
-            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << StlParser.SEC) | (1 << StlParser.MSEC) | (1 << StlParser.USEC) | (1 << StlParser.NSEC) | (1 << StlParser.PSEC))) != 0):
                 self.state = 115
@@ -1153,7 +1125,6 @@ class StlParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class UnitContext(ParserRuleContext):
 
@@ -1200,7 +1171,6 @@ class StlParser ( Parser ):
             if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << StlParser.SEC) | (1 << StlParser.MSEC) | (1 << StlParser.USEC) | (1 << StlParser.NSEC) | (1 << StlParser.PSEC))) != 0)):
                 self._errHandler.recoverInline(self)
             else:
-                self._errHandler.reportMatch(self)
                 self.consume()
         except RecognitionException as re:
             localctx.exception = re
@@ -1209,7 +1179,6 @@ class StlParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class TopExpressionContext(ParserRuleContext):
 
@@ -1289,7 +1258,6 @@ class StlParser ( Parser ):
         self.enterRule(localctx, 30, self.RULE_topExpression)
         try:
             self.state = 125
-            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,9,self._ctx)
             if la_ == 1:
                 localctx = StlParser.ExprUntimedAlwaysExprContext(self, localctx)
@@ -1324,7 +1292,6 @@ class StlParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class ExpressionContext(ParserRuleContext):
 
@@ -1727,66 +1694,62 @@ class StlParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 163
-            self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [StlParser.ABS, StlParser.Identifier]:
-                localctx = StlParser.ExprRealContext(self, localctx)
+            if token in [StlParser.NotOperator]:
+                localctx = StlParser.ExprNotContext(self, localctx)
                 self._ctx = localctx
                 _prevctx = localctx
 
                 self.state = 128
-                self.real_expression(0)
-                pass
-            elif token in [StlParser.LPAREN]:
-                localctx = StlParser.ExprParenContext(self, localctx)
-                self._ctx = localctx
-                _prevctx = localctx
-                self.state = 129
-                self.match(StlParser.LPAREN)
-                self.state = 130
-                self.expression(0)
-                self.state = 131
-                self.match(StlParser.RPAREN)
-                pass
-            elif token in [StlParser.NotOperator]:
-                localctx = StlParser.ExprNotContext(self, localctx)
-                self._ctx = localctx
-                _prevctx = localctx
-                self.state = 133
                 self.match(StlParser.NotOperator)
-                self.state = 134
+                self.state = 129
                 self.expression(14)
-                pass
+
             elif token in [StlParser.AlwaysOperator]:
                 localctx = StlParser.ExprAlwaysExprContext(self, localctx)
                 self._ctx = localctx
                 _prevctx = localctx
-                self.state = 135
+                self.state = 130
                 self.match(StlParser.AlwaysOperator)
-                self.state = 136
+                self.state = 131
                 self.interval()
-                self.state = 137
+                self.state = 132
                 self.expression(8)
-                pass
+
             elif token in [StlParser.EventuallyOperator]:
                 localctx = StlParser.ExprEvExprContext(self, localctx)
                 self._ctx = localctx
                 _prevctx = localctx
-                self.state = 139
+                self.state = 134
                 self.match(StlParser.EventuallyOperator)
-                self.state = 140
+                self.state = 135
                 self.interval()
-                self.state = 141
+                self.state = 136
                 self.expression(7)
-                pass
+
             elif token in [StlParser.HistoricallyOperator]:
                 localctx = StlParser.ExprHistExprContext(self, localctx)
                 self._ctx = localctx
                 _prevctx = localctx
-                self.state = 143
+                self.state = 138
                 self.match(StlParser.HistoricallyOperator)
+                self.state = 140
+                _la = self._input.LA(1)
+                if _la==StlParser.LBRACK:
+                    self.state = 139
+                    self.interval()
+
+
+                self.state = 142
+                self.expression(5)
+
+            elif token in [StlParser.OnceOperator]:
+                localctx = StlParser.ExpreOnceExprContext(self, localctx)
+                self._ctx = localctx
+                _prevctx = localctx
+                self.state = 143
+                self.match(StlParser.OnceOperator)
                 self.state = 145
-                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==StlParser.LBRACK:
                     self.state = 144
@@ -1794,25 +1757,26 @@ class StlParser ( Parser ):
 
 
                 self.state = 147
-                self.expression(5)
-                pass
-            elif token in [StlParser.OnceOperator]:
-                localctx = StlParser.ExpreOnceExprContext(self, localctx)
+                self.expression(4)
+
+            elif token in [StlParser.ABS, StlParser.Identifier]:
+                localctx = StlParser.ExprRealContext(self, localctx)
                 self._ctx = localctx
                 _prevctx = localctx
                 self.state = 148
-                self.match(StlParser.OnceOperator)
+                self.real_expression(0)
+
+            elif token in [StlParser.LPAREN]:
+                localctx = StlParser.ExprParenContext(self, localctx)
+                self._ctx = localctx
+                _prevctx = localctx
+                self.state = 149
+                self.match(StlParser.LPAREN)
                 self.state = 150
-                self._errHandler.sync(self)
-                _la = self._input.LA(1)
-                if _la==StlParser.LBRACK:
-                    self.state = 149
-                    self.interval()
+                self.expression(0)
+                self.state = 151
+                self.match(StlParser.RPAREN)
 
-
-                self.state = 152
-                self.expression(4)
-                pass
             elif token in [StlParser.RiseOperator]:
                 localctx = StlParser.ExprRiseContext(self, localctx)
                 self._ctx = localctx
@@ -1825,7 +1789,7 @@ class StlParser ( Parser ):
                 self.expression(0)
                 self.state = 156
                 self.match(StlParser.RPAREN)
-                pass
+
             elif token in [StlParser.FallOperator]:
                 localctx = StlParser.ExprFallContext(self, localctx)
                 self._ctx = localctx
@@ -1838,7 +1802,7 @@ class StlParser ( Parser ):
                 self.expression(0)
                 self.state = 161
                 self.match(StlParser.RPAREN)
-                pass
+
             else:
                 raise NoViableAltException(self)
 
@@ -1852,7 +1816,6 @@ class StlParser ( Parser ):
                         self.triggerExitRuleEvent()
                     _prevctx = localctx
                     self.state = 195
-                    self._errHandler.sync(self)
                     la_ = self._interp.adaptivePredict(self._input,14,self._ctx)
                     if la_ == 1:
                         localctx = StlParser.ExprOrExprContext(self, StlParser.ExpressionContext(self, _parentctx, _parentState))
@@ -1944,7 +1907,6 @@ class StlParser ( Parser ):
                         self.state = 186
                         self.match(StlParser.SinceOperator)
                         self.state = 188
-                        self._errHandler.sync(self)
                         _la = self._input.LA(1)
                         if _la==StlParser.LBRACK:
                             self.state = 187
@@ -1980,7 +1942,6 @@ class StlParser ( Parser ):
         finally:
             self.unrollRecursionContexts(_parentctx)
         return localctx
-
 
     class Real_expressionContext(ParserRuleContext):
 
@@ -2135,7 +2096,6 @@ class StlParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 207
-            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [StlParser.Identifier]:
                 localctx = StlParser.ExprIdContext(self, localctx)
@@ -2144,7 +2104,7 @@ class StlParser ( Parser ):
 
                 self.state = 201
                 self.match(StlParser.Identifier)
-                pass
+
             elif token in [StlParser.ABS]:
                 localctx = StlParser.ExprAbsContext(self, localctx)
                 self._ctx = localctx
@@ -2157,7 +2117,7 @@ class StlParser ( Parser ):
                 self.real_expression(0)
                 self.state = 205
                 self.match(StlParser.RPAREN)
-                pass
+
             else:
                 raise NoViableAltException(self)
 
@@ -2171,7 +2131,6 @@ class StlParser ( Parser ):
                         self.triggerExitRuleEvent()
                     _prevctx = localctx
                     self.state = 221
-                    self._errHandler.sync(self)
                     la_ = self._interp.adaptivePredict(self._input,17,self._ctx)
                     if la_ == 1:
                         localctx = StlParser.ExprAdditionContext(self, StlParser.Real_expressionContext(self, _parentctx, _parentState))
@@ -2237,7 +2196,6 @@ class StlParser ( Parser ):
         finally:
             self.unrollRecursionContexts(_parentctx)
         return localctx
-
 
     class ComparisonOpContext(ParserRuleContext):
 
@@ -2358,44 +2316,43 @@ class StlParser ( Parser ):
         self.enterRule(localctx, 36, self.RULE_comparisonOp)
         try:
             self.state = 232
-            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [StlParser.LesserOrEqualOperator]:
                 localctx = StlParser.CmpOpLsContext(self, localctx)
                 self.enterOuterAlt(localctx, 1)
                 self.state = 226
                 self.match(StlParser.LesserOrEqualOperator)
-                pass
+
             elif token in [StlParser.GreaterOrEqualOperator]:
                 localctx = StlParser.CmpOpGteContext(self, localctx)
                 self.enterOuterAlt(localctx, 2)
                 self.state = 227
                 self.match(StlParser.GreaterOrEqualOperator)
-                pass
+
             elif token in [StlParser.LesserOperator]:
                 localctx = StlParser.CmpOpLseContext(self, localctx)
                 self.enterOuterAlt(localctx, 3)
                 self.state = 228
                 self.match(StlParser.LesserOperator)
-                pass
+
             elif token in [StlParser.GreaterOperator]:
                 localctx = StlParser.CmpOpGtContext(self, localctx)
                 self.enterOuterAlt(localctx, 4)
                 self.state = 229
                 self.match(StlParser.GreaterOperator)
-                pass
+
             elif token in [StlParser.EqualOperator]:
                 localctx = StlParser.CmpOpEqContext(self, localctx)
                 self.enterOuterAlt(localctx, 5)
                 self.state = 230
                 self.match(StlParser.EqualOperator)
-                pass
+
             elif token in [StlParser.NotEqualOperator]:
                 localctx = StlParser.ComOpNeqContext(self, localctx)
                 self.enterOuterAlt(localctx, 6)
                 self.state = 231
                 self.match(StlParser.NotEqualOperator)
-                pass
+
             else:
                 raise NoViableAltException(self)
 
@@ -2406,7 +2363,6 @@ class StlParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class LiteralContext(ParserRuleContext):
 
@@ -2445,25 +2401,24 @@ class StlParser ( Parser ):
         self.enterRule(localctx, 38, self.RULE_literal)
         try:
             self.state = 238
-            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [StlParser.IntegerLiteral]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 234
                 self.match(StlParser.IntegerLiteral)
-                pass
+
             elif token in [StlParser.RealLiteral]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 235
                 self.match(StlParser.RealLiteral)
-                pass
+
             elif token in [StlParser.MINUS]:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 236
                 self.match(StlParser.MINUS)
                 self.state = 237
                 self.literal()
-                pass
+
             else:
                 raise NoViableAltException(self)
 
@@ -2474,7 +2429,6 @@ class StlParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
 
     class IdentifierContext(ParserRuleContext):
 
