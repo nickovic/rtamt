@@ -10,6 +10,7 @@ from rtamt.spec.stl.specification import STLSpecification
 from rtamt.spec.stl_ct.node_init import STLCTNodeInit
 from rtamt.spec.stl_ct.evaluator import STLCTEvaluator
 from rtamt.spec.stl_ct.offline import STLCTOffline
+from rtamt.spec.stl_ct.node_visitor import STLCTNodeVisitor
 
 class STLCTSpecification(STLSpecification):
     """A class used as a container for STL continuous time specifications
@@ -21,6 +22,7 @@ class STLCTSpecification(STLSpecification):
     def __init__(self,is_pure_python=True):
         """Constructor for STL Specification"""
         super(STLCTSpecification, self).__init__(is_pure_python)
+        self.visitor = STLCTNodeVisitor(self)
 
 
     def parse(self):

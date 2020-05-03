@@ -32,7 +32,7 @@ class Historically(TemporalNode):
             else:
                 name = 'rtamt.operation.stl.historically_bounded_operation'
                 mod = __import__(name, fromlist=[''])
-                self.node = mod.HistoricallyBoundedOperation(bound.begin, bound.end)
+                self.node = mod.HistoricallyBoundedOperation(int(bound.begin), int(bound.end))
         else:
             name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_node'
             mod = __import__(name, fromlist=[''])
@@ -44,4 +44,4 @@ class Historically(TemporalNode):
             else:
                 name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_historically_bounded_node'
                 mod = __import__(name, fromlist=[''])
-                self.node = mod.StlHistoricallyBoundedNode(bound.begin, bound.end)
+                self.node = mod.StlHistoricallyBoundedNode(int(bound.begin), int(bound.end))

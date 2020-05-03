@@ -35,7 +35,7 @@ class Since(TemporalNode):
             else:
                 name = 'rtamt.operation.stl.since_bounded_operation'
                 mod = __import__(name, fromlist=[''])
-                self.node = mod.SinceBoundedOperation(bound.begin, bound.end)
+                self.node = mod.SinceBoundedOperation(int(bound.begin), int(bound.end))
         else:
             name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_node'
             mod = __import__(name, fromlist=[''])
@@ -47,4 +47,4 @@ class Since(TemporalNode):
             else:
                 name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_since_bounded_node'
                 mod = __import__(name, fromlist=[''])
-                self.node = mod.StlSinceBoundedNode(bound.begin, bound.end)
+                self.node = mod.StlSinceBoundedNode(int(bound.begin), int(bound.end))

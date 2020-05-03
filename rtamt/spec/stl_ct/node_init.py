@@ -93,7 +93,7 @@ class STLCTNodeInit(STLVisitor):
         if element.bound is None:
             element.node = OnceOperation()
         else:
-            element.node = OnceBoundedOperation(int(element.bound.begin), int(element.bound.end))
+            element.node = OnceBoundedOperation(element.bound.begin, element.bound.end)
 
 
     def visitRise(self, element, args):
@@ -109,7 +109,7 @@ class STLCTNodeInit(STLVisitor):
         if element.bound is None:
             element.node = HistoricallyOperation()
         else:
-            element.node = HistoricallyBoundedOperation(int(element.bound.begin), int(element.bound.end))
+            element.node = HistoricallyBoundedOperation(element.bound.begin, element.bound.end)
 
     def visitSince(self, element, args):
         pass

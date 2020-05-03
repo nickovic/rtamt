@@ -50,7 +50,7 @@ interval
 	: LBRACK intervalTime COLON intervalTime RBRACK ;
 
 intervalTime
-	: IntegerLiteral ( unit )?      #intervalTimeLiteral ;
+	: literal ( unit )?      #intervalTimeLiteral ;
 
 unit
     : SEC | MSEC | USEC | NSEC | PSEC ;

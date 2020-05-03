@@ -31,11 +31,11 @@ class Precedes(TemporalNode):
         if is_pure_python:
             name = 'rtamt.operation.stl.precedes_bounded_operation'
             mod = __import__(name, fromlist=[''])
-            self.node = mod.PrecedesBoundedOperation(bound.begin, bound.end)
+            self.node = mod.PrecedesBoundedOperation(int(bound.begin), int(bound.end))
         else:
             name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_node'
             mod = __import__(name, fromlist=[''])
 
             name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_precedes_bounded_node'
             mod = __import__(name, fromlist=[''])
-            self.node = mod.StlPrecedesBoundedNode(bound.begin, bound.end)
+            self.node = mod.StlPrecedesBoundedNode(int(bound.begin), int(bound.end))
