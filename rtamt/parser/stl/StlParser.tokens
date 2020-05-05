@@ -110,15 +110,7 @@ LINE_COMMENT=70
 'xor'=42
 'rise'=43
 'fall'=44
-'always'=45
-'eventually'=46
-'until'=47
-'historically'=48
-'once'=49
-'since'=50
-'next'=51
 'oracle'=52
-'prev'=53
 '=='=54
 '!=='=55
 '>='=56
