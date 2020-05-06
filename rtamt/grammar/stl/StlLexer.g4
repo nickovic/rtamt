@@ -117,13 +117,13 @@ From
 
 // Boolean operators
 NotOperator
-	: 'not' ;
+	: 'not' | '!';
 
 OrOperator
-	: 'or' ;
+	: 'or' | '|';
 
 AndOperator
-	: 'and' ;
+	: 'and' | '&' ;
 
 IffOperator
 	: 'iff'

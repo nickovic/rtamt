@@ -15,7 +15,7 @@ def monitor():
     spec.declare_var('a', 'float')
     spec.declare_var('b', 'float')
     spec.declare_var('c', 'float')
-    spec.spec = 'c = always (F[1:2] a)'
+    spec.spec = 'c = a + b >= - 2'
 
     try:
         spec.parse()

@@ -130,11 +130,12 @@ class StlParser ( Parser ):
                      u"'input'", u"'output'", u"'internal'", u"'const'", 
                      u"'real'", u"'float'", u"'long'", u"'complex'", u"'int'", 
                      u"'bool'", u"'assertion'", u"'specification'", u"'from'", 
-                     u"'not'", u"'or'", u"'and'", u"<INVALID>", u"<INVALID>", 
-                     u"'xor'", u"'rise'", u"'fall'", u"<INVALID>", u"<INVALID>", 
                      u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>", 
-                     u"<INVALID>", u"'oracle'", u"<INVALID>", u"'=='", u"'!=='", 
-                     u"'>='", u"'<='", u"'>'", u"'<'", u"'='" ]
+                     u"<INVALID>", u"'xor'", u"'rise'", u"'fall'", u"<INVALID>", 
+                     u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>", 
+                     u"<INVALID>", u"<INVALID>", u"'oracle'", u"<INVALID>", 
+                     u"'=='", u"'!=='", u"'>='", u"'<='", u"'>'", u"'<'", 
+                     u"'='" ]
 
     symbolicNames = [ u"<INVALID>", u"MINUS", u"PLUS", u"TIMES", u"DIVIDE", 
                       u"LPAREN", u"RPAREN", u"LBRACE", u"RBRACE", u"LBRACK", 
