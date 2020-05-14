@@ -63,7 +63,7 @@ expression
 	: 
 
     real_expression                                             #ExprReal
-    | expression comparisonOp literal                             #IdCompInt
+    | expression comparisonOp expression                        #IdCompInt
 //    | idComp                                                    #ExprIdComp
 	
 	| LPAREN expression RPAREN                                  #ExprParen

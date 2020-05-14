@@ -67,8 +67,10 @@ class STLNodeVisitor(StlParserVisitor):
         self.__ops = ops
 
     def visitIdCompInt(self, ctx):
-        child = self.visit(ctx.expression())
-        threshold = float(ctx.literal().getText())
+        child1 = self.visit(ctx.expression(0))
+        child2 = self.visit(ctx.expression(1))
+        child = Subtraction(child1, child2)
+        threshold = float(0)
         op_type = self.str_to_op_type(ctx.comparisonOp().getText())
         node = Predicate(child, self.io_type_mod.StlIOType.OUT, op_type, threshold, self.spec.is_pure_python)
 
