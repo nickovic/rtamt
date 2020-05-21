@@ -53,7 +53,7 @@ def monitor():
 
 
 def read_csv(filename):
-    f = open(filename, 'rb')
+    f = open(filename, 'r')
     reader = csv.reader(f)
     headers = next(reader, None)
 
