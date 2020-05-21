@@ -52,7 +52,7 @@ def serializedATN():
         buf.write(u"a\3\2\2\2a\23\3\2\2\2bc\7>\2\2cg\5&\24\2de\7>\2\2eg\5")
         buf.write(u" \21\2fb\3\2\2\2fd\3\2\2\2g\25\3\2\2\2hi\t\2\2\2i\27")
         buf.write(u"\3\2\2\2jk\t\3\2\2k\31\3\2\2\2lm\7\13\2\2mn\5\34\17\2")
-        buf.write(u"no\7\16\2\2op\5\34\17\2pq\7\f\2\2q\33\3\2\2\2rt\7B\2")
+        buf.write(u"no\7\16\2\2op\5\34\17\2pq\7\f\2\2q\33\3\2\2\2rt\5&\24")
         buf.write(u"\2su\5\36\20\2ts\3\2\2\2tu\3\2\2\2u\35\3\2\2\2vw\t\4")
         buf.write(u"\2\2w\37\3\2\2\2xy\b\21\1\2yz\7\'\2\2z\u009f\5 \21\20")
         buf.write(u"{}\7/\2\2|~\5\32\16\2}|\3\2\2\2}~\3\2\2\2~\177\3\2\2")
@@ -1081,8 +1081,9 @@ class StlParser ( Parser ):
             super(StlParser.IntervalTimeLiteralContext, self).__init__(parser)
             self.copyFrom(ctx)
 
-        def IntegerLiteral(self):
-            return self.getToken(StlParser.IntegerLiteral, 0)
+        def literal(self):
+            return self.getTypedRuleContext(StlParser.LiteralContext,0)
+
         def unit(self):
             return self.getTypedRuleContext(StlParser.UnitContext,0)
 
@@ -1104,7 +1105,7 @@ class StlParser ( Parser ):
             localctx = StlParser.IntervalTimeLiteralContext(self, localctx)
             self.enterOuterAlt(localctx, 1)
             self.state = 112
-            self.match(StlParser.IntegerLiteral)
+            self.literal()
             self.state = 114
             _la = self._input.LA(1)
             if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << StlParser.SEC) | (1 << StlParser.MSEC) | (1 << StlParser.USEC) | (1 << StlParser.NSEC) | (1 << StlParser.PSEC))) != 0):
