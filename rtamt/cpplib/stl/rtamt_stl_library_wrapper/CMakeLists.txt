@@ -1,8 +1,26 @@
-cmake_minimum_required(VERSION 2.8.3)
+cmake_minimum_required(VERSION 3.12)
 project(rtamt_stl_library_wrapper)
 
-find_package(Boost REQUIRED COMPONENTS system python)
-find_package(PythonLibs 2.7 REQUIRED)
+option(PythonVersion "PythonVersion" 2)
+
+if(PythonVersion EQUAL 2)
+    find_package(Python2 COMPONENTS Interpreter Development REQUIRED)
+    find_package(Boost REQUIRED COMPONENTS system python-py27)
+    set(PYTHON_LIBRARIES ${Python2_LIBRARIES})
+    set(PYTHON_INCLUDE_DIRS ${Python2_INCLUDE_DIRS})
+else()
+    #find_package(PythonInterp 3.5 REQUIRED)
+    #find_package(PythonLibs 3.5 REQUIRED)
+    #find_package(Boost REQUIRED COMPONENTS system python-py35)
+    find_package(Python3 COMPONENTS Interpreter Development REQUIRED)
+    find_package(Boost REQUIRED COMPONENTS system python-py35)
+    set(PYTHON_LIBRARIES ${Python3_LIBRARIES})
+    set(PYTHON_INCLUDE_DIRS ${Python3_INCLUDE_DIRS})
+endif()
+
+
+message( "Python library: ${PYTHON_LIBRARIES}" )
+message( "Python include dir: ${PYTHON_INCLUDE_DIRS}" )
 
 ## Declare a C++ library
 add_library(stl_io_type MODULE src/stl_io_type_wrapper.cpp)

@@ -4,7 +4,7 @@ Specification-based real-time monitoring library
 
 ## Install
 
-### Install back-ends
+### Install prerequisites for RTAMT installation
 
 ```bash
 sudo apt install libboost-all-dev
@@ -12,7 +12,7 @@ sudo apt install python-dev
 sudo apt install python-pip
 ```
 
-If your work for TL development, following package is needed in addition.
+If your want to extend the specification language, you may need the ANTLR4 parser generator.
 
 ```bash
 sudo apt install antlr4
@@ -26,7 +26,9 @@ sudo apt install antlr4
 git clone https://github.com/nickovic/rtamt
 ```
 
-#### build cpp libs (required only if you want to use CPP backend)
+#### build CPP libraries 
+#### (This step is needed only if you want to use the CPP backend)
+#### (This step can be skipped if you want to use pure Python monitors)
 
 ```bash
 cd rtamt/rtamt
@@ -36,11 +38,30 @@ cmake ../
 make
 ```
 
-#### install rtamt tool
+#### install RTAMT for Python 2
 
 ```bash
 cd rtamt/
-sudo pip install .
+sudo pip2 install .
+```
+
+#### install RTAMT for Python 3
+
+```bash
+cd rtamt/
+sudo pip3 install .
+```
+
+#### uninstall RTAMT (Python 2)
+
+```bash
+sudo pip2 uninstall rtamt
+```
+
+#### uninstall RTAMT (Python 3)
+
+```bash
+sudo pip3 uninstall rtamt
 ```
 
 ## Run examples

@@ -304,7 +304,7 @@ def monitor():
     print('Example (d) - input vacuity: {}'.format(rob))
 
 def read_csv(filename):
-    f = open(filename, 'rb')
+    f = open(filename, 'r')
     reader = csv.reader(f)
     headers = next(reader, None)
 
