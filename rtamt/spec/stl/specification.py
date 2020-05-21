@@ -47,6 +47,8 @@ class STLSpecification(AbstractSpecification,StlParserVisitor):
         """Constructor for STL Specification"""
         super(STLSpecification, self).__init__(is_pure_python)
         self.name = 'STL Specification'
+        self.visitor = STLNodeVisitor(self)
+
 
     # Parses the STL property
     # string can be either file path containint the STL property
@@ -67,7 +69,6 @@ class STLSpecification(AbstractSpecification,StlParserVisitor):
         self.visitStlfile(ctx)
 
         # Create the visitor for the actual spec nodes
-        self.visitor = STLNodeVisitor(self)
         self.top = self.visitor.visitStlfile(ctx)
 
         # Translate bounded future STL to past STL

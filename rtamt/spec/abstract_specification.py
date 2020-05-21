@@ -9,6 +9,8 @@ import os
 import logging
 import sys
 from abc import ABCMeta, abstractmethod
+from decimal import Decimal
+from fractions import Fraction
 
 
 class AbstractSpecification:
@@ -23,7 +25,7 @@ class AbstractSpecification:
         publish_var : String - variable name to be published
         publish_var_field : String - variable field to be published
 
-        sampling_period : int - size of the sampling period in ps (default = 10^12 ps = 1s)
+        sampling_period : int - size of the sampling period in ps (default = 10^12 ps = 1s
 
         var_object_dict : dict(String,AbstractNode) - dictionary that maps variable names to their Node instances
         modules : dict(String,String) - dictionary that maps module paths to module names
@@ -54,7 +56,7 @@ class AbstractSpecification:
         self.publish_var = ''
         self.publish_var_field = ''
 
-        self.sampling_period = int(10e12)
+        self.sampling_period = Fraction(1e12)
 
         self.var_object_dict = dict()
         self.modules = dict()
@@ -113,24 +115,26 @@ class AbstractSpecification:
 
     def set_sampling_period(self, sampling_period, unit):
 
+
+
         if (unit == 's'):
-            self.sampling_period = sampling_period * 10e12
+            self.sampling_period = Fraction(Decimal(sampling_period)) * 1e12
         elif (unit == 'ms'):
-            self.sampling_period = sampling_period * 10e9
+            self.sampling_period = Fraction(Decimal(sampling_period)) * 1e9
         elif (unit == 'us'):
-            self.sampling_period = sampling_period * 10e6
+            self.sampling_period = Fraction(Decimal(sampling_period)) * 1e6
         elif (unit == 'ns'):
-            self.sampling_period = sampling_period * 10e3
+            self.sampling_period = Fraction(Decimal(sampling_period)) * 1e3
         elif (unit == 'ps'):
-            self.sampling_period = sampling_period
+            self.sampling_period = Fraction(Decimal(sampling_period))
         else:
             logging.error('set_sampling_period: unit {} is not valid. The unit is set to default (s) value'.format(unit))
-            self.sampling_period = sampling_period * 10e12
+            self.sampling_period = Fraction(Decimal(sampling_period)) * 1e12
 
 
 
     def get_sampling_frequency(self):
-        return 10e12 * 1/self.sampling_period
+        return 1e12 * 1/self.sampling_period
 
     @property
     def publish_var(self):
