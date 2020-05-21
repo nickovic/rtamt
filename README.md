@@ -18,6 +18,12 @@ If your want to extend the specification language, you may need the ANTLR4 parse
 sudo apt install antlr4
 ```
 
+You will also need CMake version 3.12 or higher if you need to build the CPP backend.
+
+```bash
+sudo apt install cmake
+```
+
 ### Build the tool
 
 #### clone the repository
@@ -26,7 +32,7 @@ sudo apt install antlr4
 git clone https://github.com/nickovic/rtamt
 ```
 
-#### build CPP libraries 
+#### build CPP libraries for Python 2 
 #### (This step is needed only if you want to use the CPP backend)
 #### (This step can be skipped if you want to use pure Python monitors)
 
@@ -34,7 +40,7 @@ git clone https://github.com/nickovic/rtamt
 cd rtamt/rtamt
 mkdir build
 cd build
-cmake ../
+cmake -DPythonVersion=2 ../
 make
 ```
 
@@ -43,6 +49,18 @@ make
 ```bash
 cd rtamt/
 sudo pip2 install .
+```
+
+#### build CPP libraries for Python 3 
+#### (This step is needed only if you want to use the CPP backend)
+#### (This step can be skipped if you want to use pure Python monitors)
+
+```bash
+cd rtamt/rtamt
+mkdir build
+cd build
+cmake -DPythonVersion=3 ../
+make
 ```
 
 #### install RTAMT for Python 3
