@@ -117,13 +117,13 @@ From
 
 // Boolean operators
 NotOperator
-	: 'not' ;
+	: 'not' | '!';
 
 OrOperator
-	: 'or' ;
+	: 'or' | '|';
 
 AndOperator
-	: 'and' ;
+	: 'and' | '&' ;
 
 IffOperator
 	: 'iff'
@@ -145,28 +145,28 @@ FallOperator
 
 // Future temporal operators
 AlwaysOperator
-	: 'always' ;
+	: 'always' | 'G' ;
 
 EventuallyOperator
-	: 'eventually' ;
+	: 'eventually' | 'F' ;
 
 UntilOperator
-	: 'until' ;
+	: 'until' | 'U' ;
 
 // Past temporal operators
 HistoricallyOperator
-	: 'historically' ;
+	: 'historically' | 'H' ;
 
 OnceOperator
-	: 'once' ;
+	: 'once' | 'O' ;
 
 SinceOperator
-	: 'since' ;
+	: 'since' | 'S' ;
 
 //----------------
 //added
 NextOperator
-	: 'next' ;
+	: 'next' | 'X' ;
 
 //added
 OracleOperator
@@ -174,7 +174,7 @@ OracleOperator
 //----------------
 
 PreviousOperator
-	: 'prev' ;
+	: 'prev' | 'Y' ;
 
 EqualOperator
 	: '==' ;
