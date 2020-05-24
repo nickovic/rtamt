@@ -203,26 +203,33 @@ class STLNodeVisitor(StlParserVisitor):
 
     def visitExprAlwaysExpr(self, ctx):
         child = self.visit(ctx.expression())
-        horizon = child.horizon
-        if ctx.interval() == None:
-            interval = None
+        interval = self.visit(ctx.interval())
+        horizon = child.horizon + interval.end
+        node = Always(child, interval, self.spec.is_pure_python)
+        node.horizon = horizon
+        return node
 
-        else:
-            interval = self.visit(ctx.interval())
-            horizon = child.horizon + interval.end
+
+    def visitExprUntimedAlwaysExpr(self, ctx):
+        child = self.visit(ctx.expression())
+        horizon = child.horizon
+        interval = None
         node = Always(child, interval, self.spec.is_pure_python)
         node.horizon = horizon
         return node
 
     def visitExprEvExpr(self, ctx):
         child = self.visit(ctx.expression())
-        horizon = child.horizon
-        if ctx.interval() == None:
-            interval = None
+        interval = self.visit(ctx.interval())
+        horizon = child.horizon + interval.end
+        node = Eventually(child, interval)
+        node.horizon = horizon
+        return node
 
-        else:
-            interval = self.visit(ctx.interval())
-            horizon = child.horizon + interval.end
+    def visitExprUntimedEvExpr(self, ctx):
+        child = self.visit(ctx.expression())
+        horizon = child.horizon
+        interval = None
         node = Eventually(child, interval)
         node.horizon = horizon
         return node
@@ -272,10 +279,13 @@ class STLNodeVisitor(StlParserVisitor):
         return node
 
     def visitExprParen(self, ctx):
-        return self.visit(ctx.expression())	
+        return self.visit(ctx.expression())
+
+    def visitExpr(self, ctx):
+        return self.visit(ctx.expression())
 	
     def visitAssertion(self, ctx):
-        return self.visit(ctx.expression())
+        return self.visit(ctx.topExpression())
 
     def visitStlfile(self, ctx):
         return self.visit(ctx.stlSpecification())
@@ -286,6 +296,7 @@ class STLNodeVisitor(StlParserVisitor):
     def visitIntervalTimeLiteral(self, ctx):
         text = ctx.literal().getText()
         out = Fraction(Decimal(text))
+
 
         if ctx.unit() == None:
             # default time unit is seconds - conversion of the bound to ps
@@ -300,6 +311,32 @@ class STLNodeVisitor(StlParserVisitor):
                 out == out * 1e6
             elif (unit == 'ns'):
                 out == out * 1e3
+            else:
+                pass
+        remainder = out % self.spec.sampling_period
+        if remainder > 0:
+            raise STLParseException('The STL operator bound must be a multiple of the sampling period')
+
+        out = int(out / self.spec.sampling_period)
+
+        return out
+
+    def visitIntervalFloatTimeLiteral(self, ctx):
+        out = float(ctx.RealLiteral().getText())
+
+        if ctx.unit() == None:
+            # default time unit is seconds - conversion of the bound to ps
+            out = out * 10e12
+        else:
+            unit = ctx.unit().getText()
+            if (unit == 's'):
+                out = out * 10e12
+            elif (unit == 'ms'):
+                out = out * 10e9
+            elif (unit == 'us'):
+                out == out * 10e6
+            elif (unit == 'ns'):
+                out == out * 10e3
             else:
                 pass
         remainder = out % self.spec.sampling_period
