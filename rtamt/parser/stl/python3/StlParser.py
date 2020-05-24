@@ -130,11 +130,11 @@ class StlParser ( Parser ):
                      "'topic'", "'import'", "'input'", "'output'", "'internal'", 
                      "'const'", "'real'", "'float'", "'long'", "'complex'", 
                      "'int'", "'bool'", "'assertion'", "'specification'", 
-                     "'from'", "'not'", "'or'", "'and'", "<INVALID>", "<INVALID>", 
-                     "'xor'", "'rise'", "'fall'", "'always'", "'eventually'", 
-                     "'until'", "'historically'", "'once'", "'since'", "'next'", 
-                     "'oracle'", "'prev'", "'=='", "'!=='", "'>='", "'<='", 
-                     "'>'", "'<'", "'='" ]
+                     "'from'", "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
+                     "<INVALID>", "'xor'", "'rise'", "'fall'", "<INVALID>", 
+                     "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
+                     "<INVALID>", "<INVALID>", "'oracle'", "<INVALID>", 
+                     "'=='", "'!=='", "'>='", "'<='", "'>'", "'<'", "'='" ]
 
     symbolicNames = [ "<INVALID>", "MINUS", "PLUS", "TIMES", "DIVIDE", "LPAREN", 
                       "RPAREN", "LBRACE", "RBRACE", "LBRACK", "RBRACK", 
