@@ -22,6 +22,7 @@ from rtamt.node.stl.division import Division
 from rtamt.node.stl.abs import Abs
 from rtamt.node.stl.fall import Fall
 from rtamt.node.stl.rise import Rise
+from rtamt.node.stl.constant import Constant
 
 class STLPastifier(STLVisitor):
 
@@ -39,12 +40,17 @@ class STLPastifier(STLVisitor):
     def pastify(self, element):
         return self.visit(element, [element.horizon])
 
+    def visitConstant(self, element, args):
+        horizon = args[0]
+        node = Constant(element.val, self.spec.is_pure_python)
+        return node
+
     def visitPredicate(self, element, args):
         horizon = args[0]
         if horizon == 0:
-            node = Predicate(element.child, element.io_type, element.operator, element.threshold, self.spec.is_pure_python)
+            node = Predicate(element.children[0], element.children[1], element.io_type, element.operator, self.spec.is_pure_python)
         else:
-            child = Predicate(element.child, element.io_type, element.operator, element.threshold, self.spec.is_pure_python)
+            child = Predicate(element.children[0], element.children[1], element.io_type, element.operator, self.spec.is_pure_python)
             bound = Interval(horizon, horizon)
             node = Once(child, bound, self.spec.is_pure_python)
         return node

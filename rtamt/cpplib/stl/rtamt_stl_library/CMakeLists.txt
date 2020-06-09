@@ -16,13 +16,14 @@ add_library(${PROJECT_NAME}
 		src/stl_always_node.cpp
 		src/stl_eventually_node.cpp
 		src/stl_predicate_node.cpp
-                src/stl_addition_node.cpp
-                src/stl_subtraction_node.cpp
-                src/stl_multiplication_node.cpp
-                src/stl_division_node.cpp
-                src/stl_abs_node.cpp
-                src/stl_rise_node.cpp
-                src/stl_fall_node.cpp
+        src/stl_addition_node.cpp
+        src/stl_subtraction_node.cpp
+        src/stl_multiplication_node.cpp
+        src/stl_division_node.cpp
+        src/stl_abs_node.cpp
+        src/stl_rise_node.cpp
+        src/stl_fall_node.cpp
+        src/stl_constant_node.cpp
 )
 
 target_include_directories(${PROJECT_NAME}

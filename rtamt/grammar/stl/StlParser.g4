@@ -91,6 +91,7 @@ expression
 
 real_expression:
     Identifier                                                  #ExprId
+    | literal                                                   #ExprLiteral
     | real_expression PLUS real_expression                      #ExprAddition
 	| real_expression MINUS real_expression                     #ExprSubtraction
 	| real_expression TIMES real_expression                     #ExprMultiplication

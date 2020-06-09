@@ -24,19 +24,18 @@ namespace stl_library {
 class StlPredicateNode : public StlNode {
     private:
         StlComparisonOperator op;
-        double threshold;
         StlIOType io_type;
         
-        Sample in;
-        
+        Sample in[2];
+
         void addNewInput(int i, Sample msg);
         
         
         
     public:
-        StlPredicateNode(StlComparisonOperator op, double threshold, StlIOType io_type);
+        StlPredicateNode(StlComparisonOperator op, StlIOType io_type);
         Sample update();
-        void addNewInput(Sample msg);
+        void addNewInput(Sample left, Sample right);
 };
 
 } // namespace stl_library

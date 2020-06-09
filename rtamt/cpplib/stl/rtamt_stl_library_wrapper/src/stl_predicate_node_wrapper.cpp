@@ -14,9 +14,9 @@ using namespace stl_library;
 
 BOOST_PYTHON_MODULE(stl_predicate_node)
 {
-    class_<StlPredicateNode, bases<StlNode> >("StlPredicateNode",  init<StlComparisonOperator, double, StlIOType>())
+    class_<StlPredicateNode, bases<StlNode> >("StlPredicateNode",  init<StlComparisonOperator, StlIOType>())
         .def("update", &StlPredicateNode::update)
-        .def("addNewInput", static_cast<void (StlPredicateNode::*)(stl_library::Sample)>(&StlPredicateNode::addNewInput))
+        .def("addNewInput", static_cast<void (StlPredicateNode::*)(Sample, Sample)>(&StlPredicateNode::addNewInput))
     ;
 }
 
