@@ -1,8 +1,6 @@
 import operator
 from rtamt.spec.stl.visitor import STLVisitor
 
-
-
 class STLCTOffline(STLVisitor):
 
     def __init__(self, spec):
@@ -19,8 +17,10 @@ class STLCTOffline(STLVisitor):
         return out_sample
 
     def visitPredicate(self, element, args):
-        in_sample = self.visit(element.children[0], args)
-        out_sample = element.node.offline(in_sample)
+        in_sample_1 = self.visit(element.children[0], args)
+        in_sample_2 = self.visit(element.children[1], args)
+
+        out_sample = element.node.offline(in_sample_1, in_sample_2)
         return out_sample
 
     def visitVariable(self, element, args):
@@ -31,6 +31,10 @@ class STLCTOffline(STLVisitor):
             value = var
 
         return value
+
+    def visitConstant(self, element, args):
+        out_sample = element.node.offline()
+        return out_sample
 
     def visitAbs(self, element, args):
         in_sample = self.visit(element.children[0], args)

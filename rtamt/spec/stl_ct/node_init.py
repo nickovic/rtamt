@@ -15,6 +15,7 @@ from rtamt.operation.stl_ct.historically_operation import HistoricallyOperation
 from rtamt.operation.stl_ct.once_operation import OnceOperation
 from rtamt.operation.stl_ct.once_bounded_operation import OnceBoundedOperation
 from rtamt.operation.stl_ct.historically_bounded_operation import HistoricallyBoundedOperation
+from rtamt.operation.stl_ct.constant_operation import ConstantOperation
 
 class STLCTNodeInit(STLVisitor):
 
@@ -22,8 +23,13 @@ class STLCTNodeInit(STLVisitor):
     def visitVariable(self, element, args):
         pass
 
+    def visitConstant(self, element, args):
+        element.node = ConstantOperation(element.node.val)
+
     def visitPredicate(self, element, args):
-        element.node = PredicateOperation(element.node.op, element.node.threshold, element.node.io_type)
+        self.visit(element.children[0], args)
+        self.visit(element.children[1], args)
+        element.node = PredicateOperation(element.node.op, element.node.io_type)
 
     def visitAbs(self, element, args):
         self.visit(element.children[0], args)

@@ -20,11 +20,12 @@ class STLCTEvaluator(STLVisitor):
 
     def visitPredicate(self, element, args):
         flag = args[0]
-        in_sample = self.visit(element.children[0], args)
+        in_sample_1 = self.visit(element.children[0], args)
+        in_sample_2 = self.visit(element.children[1], args)
         if flag == 'update':
-            out_sample = element.node.update(in_sample)
+            out_sample = element.node.update(in_sample_1, in_sample_2)
         else:
-            out_sample = element.node.update_final(in_sample)
+            out_sample = element.node.update_final(in_sample_1, in_sample_2)
         return out_sample
 
     def visitVariable(self, element, args):
@@ -43,6 +44,14 @@ class STLCTEvaluator(STLVisitor):
             out_sample = element.node.update(in_sample)
         else:
             out_sample = element.node.update_final(in_sample)
+        return out_sample
+
+    def visitConstant(self, element, args):
+        flag = args[0]
+        if flag == 'update':
+            out_sample = element.node.update()
+        else:
+            out_sample = element.node.update_final()
         return out_sample
 
     def visitAddition(self, element, args):
