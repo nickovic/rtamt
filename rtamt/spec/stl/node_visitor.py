@@ -34,6 +34,7 @@ from rtamt.node.stl.multiplication import Multiplication
 from rtamt.node.stl.division import Division
 from rtamt.node.stl.fall import Fall
 from rtamt.node.stl.rise import Rise
+from rtamt.node.stl.constant import Constant
 
 from rtamt.exception.stl.exception import STLParseException
 
@@ -70,10 +71,10 @@ class STLNodeVisitor(StlParserVisitor):
         self.__ops = ops
 
     def visitIdCompInt(self, ctx):
-        child = self.visit(ctx.expression())
-        threshold = float(ctx.literal().getText())
+        child1 = self.visit(ctx.expression(0))
+        child2 = self.visit(ctx.expression(1))
         op_type = self.str_to_op_type(ctx.comparisonOp().getText())
-        node = Predicate(child, self.io_type_mod.StlIOType.OUT, op_type, threshold, self.spec.is_pure_python)
+        node = Predicate(child1, child2, self.io_type_mod.StlIOType.OUT, op_type, self.spec.is_pure_python)
 
         node.horizon = int(0)
         return node
@@ -158,6 +159,12 @@ class STLNodeVisitor(StlParserVisitor):
         child = self.visit(ctx.expression())
         node = Rise(child, self.spec.is_pure_python)
         node.horizon = child.horizon
+        return node
+
+    def visitExprLiteral(self, ctx):
+        val = float(ctx.literal().getText())
+        node = Constant(val, self.spec.is_pure_python)
+        node.horizon = 0
         return node
 
     def visitExprFall(self, ctx):

@@ -9,9 +9,8 @@
 
 using namespace stl_library;
 
-StlPredicateNode::StlPredicateNode(StlComparisonOperator op, double threshold, StlIOType io_type) {
+StlPredicateNode::StlPredicateNode(StlComparisonOperator op, StlIOType io_type) {
     this->op = op;
-    this->threshold = threshold;
     this->io_type = io_type;
 }
 
@@ -20,37 +19,36 @@ void StlPredicateNode::addNewInput(int i, Sample msg) {
         return;
     }
     
-    in.seq = msg.seq;
-    in.time.msec = msg.time.msec;
-    in.time.sec = msg.time.sec;
-    in.value = msg.value;
+    in[i].seq = msg.seq;
+    in[i].time.msec = msg.time.msec;
+    in[i].time.sec = msg.time.sec;
+    in[i].value = msg.value;
 }
 
-void StlPredicateNode::addNewInput(Sample msg) {
-    addNewInput(0, msg);
+void StlPredicateNode::addNewInput(Sample left, Sample right) {
+    addNewInput(0, left);
+    addNewInput(1, right);
 }
 
 Sample StlPredicateNode::update() {
     Sample out;
     
-    out.seq = in.seq;
-    out.time.msec = out.time.msec;
-    out.time.sec = out.time.sec;
-    
+    out.seq = in[0].seq;
+
     switch(op) {
         case EQUAL:
-            out.value = -std::abs(in.value - threshold);
+            out.value = -std::abs(in[0].value - in[1].value);
             break;
         case NEQ:
-            out.value = std::abs(in.value - threshold);
+            out.value = std::abs(in[0].value - in[1].value);
             break;
         case LEQ:
         case LESS:
-            out.value = threshold - in.value;
+            out.value = in[1].value - in[0].value;
             break;
         case GEQ:
         case GREATER:
-            out.value = in.value - threshold;
+            out.value = in[0].value - in[1].value;
             break;
     }
     

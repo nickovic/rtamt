@@ -52,6 +52,8 @@ add_library(stl_division_node MODULE src/stl_division_node_wrapper.cpp)
 add_library(stl_abs_node MODULE src/stl_abs_node_wrapper.cpp)
 add_library(stl_rise_node MODULE src/stl_rise_node_wrapper.cpp)
 add_library(stl_fall_node MODULE src/stl_fall_node_wrapper.cpp)
+add_library(stl_constant_node MODULE src/stl_constant_node_wrapper.cpp)
+
 
 
 
@@ -85,10 +87,7 @@ target_include_directories(stl_division_node PUBLIC ${INCLUDE_DIRECTORIES_FOR_ST
 target_include_directories(stl_abs_node PUBLIC ${INCLUDE_DIRECTORIES_FOR_STL_WRAPPER})
 target_include_directories(stl_rise_node PUBLIC ${INCLUDE_DIRECTORIES_FOR_STL_WRAPPER})
 target_include_directories(stl_fall_node PUBLIC ${INCLUDE_DIRECTORIES_FOR_STL_WRAPPER})
-
-
-
-
+target_include_directories(stl_constant_node PUBLIC ${INCLUDE_DIRECTORIES_FOR_STL_WRAPPER})
 
 set(LINK_LIBS_FOR_STL_WRAPPER rtamt_stl_library ${Boost_LIBRARIES} ${PYTHON_LIBRARIES})
 target_link_libraries(stl_io_type ${LINK_LIBS_FOR_STL_WRAPPER})
@@ -120,7 +119,7 @@ target_link_libraries(stl_division_node ${LINK_LIBS_FOR_STL_WRAPPER})
 target_link_libraries(stl_abs_node ${LINK_LIBS_FOR_STL_WRAPPER})
 target_link_libraries(stl_rise_node ${LINK_LIBS_FOR_STL_WRAPPER})
 target_link_libraries(stl_fall_node ${LINK_LIBS_FOR_STL_WRAPPER})
-
+target_link_libraries(stl_constant_node ${LINK_LIBS_FOR_STL_WRAPPER})
 
 set(LIB_OUT_DIR_FOR_STL_WRAPPER ${RTAMAT_CPPLIB_DIR}/${PROJECT_NAME})
 set_target_properties(stl_io_type PROPERTIES
@@ -208,6 +207,9 @@ set_target_properties(stl_rise_node PROPERTIES
 	PREFIX ""
 	LIBRARY_OUTPUT_DIRECTORY ${LIB_OUT_DIR_FOR_STL_WRAPPER})
 set_target_properties(stl_fall_node PROPERTIES
+	PREFIX ""
+	LIBRARY_OUTPUT_DIRECTORY ${LIB_OUT_DIR_FOR_STL_WRAPPER})
+set_target_properties(stl_constant_node PROPERTIES
 	PREFIX ""
 	LIBRARY_OUTPUT_DIRECTORY ${LIB_OUT_DIR_FOR_STL_WRAPPER})
 

@@ -1,16 +1,19 @@
 from rtamt.operation.abstract_operation import AbstractOperation
 from rtamt.spec.comp_oper import StlComparisonOperator
+from rtamt.operation.arithmetic_ct.subtraction_operation import SubtractionOperation
 
 
 class PredicateOperation(AbstractOperation):
-    def __init__(self, op, threshold, io_type):
+    def __init__(self, op, io_type):
         self.op = op
-        self.threshold = threshold
         self.io_type = io_type
+        self.sub = SubtractionOperation()
 
     def update(self, *args, **kargs):
         out = []
-        input_list = args[0]
+        input_list_1 = args[0]
+        input_list_2 = args[1]
+        input_list = self.sub.update(input_list_1, input_list_2)
 
         prev = float("nan")
         for in_sample in input_list:
@@ -32,22 +35,47 @@ class PredicateOperation(AbstractOperation):
         return out
 
     def update_final(self, *args, **kargs):
-        return self.update(args[0])
+        out = []
+        input_list_1 = args[0]
+        input_list_2 = args[1]
+        input_list = self.sub.update_final(input_list_1, input_list_2)
+
+        prev = float("nan")
+        for in_sample in input_list:
+            if self.op.value == StlComparisonOperator.EQ.value:
+                out_val = - abs(in_sample[1])
+            elif self.op.value == StlComparisonOperator.NEQ.value:
+                out_val = abs(in_sample[1])
+            elif self.op.value == StlComparisonOperator.LEQ.value or self.op.value == StlComparisonOperator.LESS.value:
+                out_val = - in_sample[1]
+            elif self.op.value == StlComparisonOperator.GEQ.value or self.op.value == StlComparisonOperator.GREATER.value:
+                out_val = in_sample[1]
+            else:
+                out_val = float('nan')
+
+            if out_val != prev:
+                out.append([in_sample[0], out_val])
+            prev = out_val
+
+        return out
 
     def offline(self, *args, **kargs):
         out = []
-        input_list = args[0]
+        input_list_1 = args[0]
+        input_list_2 = args[1]
+        input_list = self.sub.update(input_list_1, input_list_2)
+
 
         prev = float("nan")
         for i, in_sample in enumerate(input_list):
             if self.op.value == StlComparisonOperator.EQ.value:
-                out_val = - abs(in_sample[1] - self.threshold)
+                out_val = - abs(in_sample[1])
             elif self.op.value == StlComparisonOperator.NEQ.value:
-                out_val = abs(in_sample[1] - self.threshold)
+                out_val = abs(in_sample[1])
             elif self.op.value == StlComparisonOperator.LEQ.value or self.op.value == StlComparisonOperator.LESS.value:
-                out_val = self.threshold - in_sample[1]
+                out_val = - in_sample[1]
             elif self.op.value == StlComparisonOperator.GEQ.value or self.op.value == StlComparisonOperator.GREATER.value:
-                out_val = in_sample[1] - self.threshold
+                out_val = in_sample[1]
             else:
                 out_val = float('nan')
 

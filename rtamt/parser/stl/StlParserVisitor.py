@@ -200,6 +200,11 @@ class StlParserVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by StlParser#ExprLiteral.
+    def visitExprLiteral(self, ctx):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by StlParser#ExprId.
     def visitExprId(self, ctx):
         return self.visitChildren(ctx)

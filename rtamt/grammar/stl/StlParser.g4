@@ -70,8 +70,7 @@ topExpression
 expression
 	:
     real_expression                                             #ExprReal
-    | expression comparisonOp literal                           #IdCompInt
-
+    | expression comparisonOp expression                        #IdCompInt
 	| LPAREN expression RPAREN                                  #ExprParen
 	| NotOperator expression                                    #ExprNot
 
@@ -93,6 +92,7 @@ expression
 
 real_expression:
     Identifier                                                  #ExprId
+    | literal                                                   #ExprLiteral
     | real_expression PLUS real_expression                      #ExprAddition
 	| real_expression MINUS real_expression                     #ExprSubtraction
 	| real_expression TIMES real_expression                     #ExprMultiplication
