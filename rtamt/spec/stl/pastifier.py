@@ -144,7 +144,7 @@ class STLPastifier(STLVisitor):
         horizon = args[0]
         if element.bound == None:
             child_node = self.visit(element.children[0], [horizon])
-            node = Eventually(child_node, element.bound)
+            node = Eventually(child_node, element.bound, self.spec.is_pure_python)
         else:
             child_node = self.visit(element.children[0], [horizon - element.bound.end])
             bound = Interval(horizon - element.bound.end, horizon - element.bound.begin)

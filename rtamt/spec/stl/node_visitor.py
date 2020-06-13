@@ -229,7 +229,7 @@ class STLNodeVisitor(StlParserVisitor):
         child = self.visit(ctx.expression())
         interval = self.visit(ctx.interval())
         horizon = child.horizon + interval.end
-        node = Eventually(child, interval)
+        node = Eventually(child, interval, self.spec.is_pure_python)
         node.horizon = horizon
         return node
 
@@ -237,7 +237,7 @@ class STLNodeVisitor(StlParserVisitor):
         child = self.visit(ctx.expression())
         horizon = child.horizon
         interval = None
-        node = Eventually(child, interval)
+        node = Eventually(child, interval, self.spec.is_pure_python)
         node.horizon = horizon
         return node
 
