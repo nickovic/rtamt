@@ -24,6 +24,12 @@ You will also need CMake version 3.12 or higher if you need to build the CPP bac
 sudo apt install cmake
 ```
 
+You can check installed cmake version.
+```bash
+cmake --version
+```
+If you need to install manually, please see [Installing CMake](https://cmake.org/install/).
+
 ### Build the tool
 
 #### clone the repository
