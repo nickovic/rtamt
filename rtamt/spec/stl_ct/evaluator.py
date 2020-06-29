@@ -10,12 +10,20 @@ class STLCTEvaluator(STLVisitor):
 
 
     def evaluate(self, element, args):
-        sample = self.visit(element, args)
-        out_sample = self.spec.var_object_dict[self.spec.out_var]
+        samples = self.visit(element, args)
+        #out_sample = self.spec.var_object_dict[self.spec.out_var]
+
+        #instance = self.create_var_from_name(var_name)
+
+        out_sample = []
         if self.spec.out_var_field:
-            setattr(out_sample, self.spec.out_var_field, sample)
+            for sample in samples:
+                out_var = self.spec.create_var_from_name(self.spec.out_var)
+                setattr(out_var, self.spec.out_var_field, sample[1])
+                out_sample.append([sample[0], out_var])
         else:
             out_sample = sample
+
         return out_sample
 
     def visitPredicate(self, element, args):
@@ -31,7 +39,9 @@ class STLCTEvaluator(STLVisitor):
     def visitVariable(self, element, args):
         var = self.spec.var_object_dict[element.var]
         if element.field:
-            value = operator.attrgetter(element.field)(var)
+            value = []
+            for var_item in var:
+                value.append([var_item[0], operator.attrgetter(element.field)(var_item[1])])
         else:
             value = var
 

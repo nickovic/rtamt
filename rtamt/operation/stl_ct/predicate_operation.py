@@ -8,6 +8,7 @@ class PredicateOperation(AbstractOperation):
         self.op = op
         self.io_type = io_type
         self.sub = SubtractionOperation()
+        self.threshold = 0.0
 
     def update(self, *args, **kargs):
         out = []
