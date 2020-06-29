@@ -22,7 +22,7 @@ class STLCTEvaluator(STLVisitor):
                 setattr(out_var, self.spec.out_var_field, sample[1])
                 out_sample.append([sample[0], out_var])
         else:
-            out_sample = sample
+            out_sample = out_sample
 
         return out_sample
 
