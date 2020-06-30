@@ -32,9 +32,10 @@ sudo apt install cmake
 git clone https://github.com/nickovic/rtamt
 ```
 
-#### build CPP libraries for Python 2 
-#### (This step is needed only if you want to use the CPP backend)
-#### (This step can be skipped if you want to use pure Python monitors)
+#### build CPP libraries for Python 2
+
+**(This step is needed only if you want to use the CPP backend)**  
+**(This step can be skipped if you want to use pure Python monitors)**
 
 ```bash
 cd rtamt/rtamt
@@ -51,9 +52,10 @@ cd rtamt/
 sudo pip2 install .
 ```
 
-#### build CPP libraries for Python 3 
-#### (This step is needed only if you want to use the CPP backend)
-#### (This step can be skipped if you want to use pure Python monitors)
+#### build CPP libraries for Python 3
+
+**(This step is needed only if you want to use the CPP backend)**  
+**(This step can be skipped if you want to use pure Python monitors)**
 
 ```bash
 cd rtamt/rtamt
