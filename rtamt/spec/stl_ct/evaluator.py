@@ -11,9 +11,6 @@ class STLCTEvaluator(STLVisitor):
 
     def evaluate(self, element, args):
         samples = self.visit(element, args)
-        #out_sample = self.spec.var_object_dict[self.spec.out_var]
-
-        #instance = self.create_var_from_name(var_name)
 
         out_sample = []
         if self.spec.out_var_field:
@@ -30,6 +27,7 @@ class STLCTEvaluator(STLVisitor):
         flag = args[0]
         in_sample_1 = self.visit(element.children[0], args)
         in_sample_2 = self.visit(element.children[1], args)
+
         if flag == 'update':
             out_sample = element.node.update(in_sample_1, in_sample_2)
         else:
@@ -38,6 +36,7 @@ class STLCTEvaluator(STLVisitor):
 
     def visitVariable(self, element, args):
         var = self.spec.var_object_dict[element.var]
+
         if element.field:
             value = []
             for var_item in var:
