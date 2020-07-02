@@ -33,6 +33,7 @@ class STLCTSpecification(STLSpecification):
         self.offline_evaluator = STLCTOffline(self)
         self.top.accept(self.evaluator)
 
+
     def update(self, *args, **kargs):
         for arg in args:
             var_name = arg[0]
@@ -59,6 +60,8 @@ class STLCTSpecification(STLSpecification):
         out = self.offline_evaluator.offline(self.top, None)
         self.var_object_dict = self.var_object_dict.fromkeys(self.var_object_dict, [])
         return out
+
+
 
 
 

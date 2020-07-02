@@ -36,11 +36,11 @@ class STLCTEvaluator(STLVisitor):
 
     def visitVariable(self, element, args):
         var = self.spec.var_object_dict[element.var]
-
         if element.field:
             value = []
-            for var_item in var:
-                value.append([var_item[0], operator.attrgetter(element.field)(var_item[1])])
+            if isinstance(var, list):
+                for var_item in var:
+                    value.append([var_item[0], operator.attrgetter(element.field)(var_item[1])])
         else:
             value = var
 
