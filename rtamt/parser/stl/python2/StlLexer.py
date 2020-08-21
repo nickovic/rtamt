@@ -1,4 +1,4 @@
-# Generated from StlBoundedFutureLexer.g4 by ANTLR 4.5.1
+# Generated from StlLexer.g4 by ANTLR 4.5.1
 # encoding: utf-8
 from __future__ import print_function
 from antlr4 import *
@@ -329,7 +329,7 @@ def serializedATN():
         return buf.getvalue()
 
 
-class StlBoundedFutureLexer(Lexer):
+class StlLexer(Lexer):
 
     atn = ATNDeserializer().deserialize(serializedATN())
 
@@ -462,10 +462,10 @@ class StlBoundedFutureLexer(Lexer):
                   u"LetterOrUnderscore", u"Letter", u"LINE_TERMINATOR", 
                   u"WHITESPACE", u"COMMENT", u"LINE_COMMENT" ]
 
-    grammarFileName = u"StlBoundedFutureLexer.g4"
+    grammarFileName = u"StlLexer.g4"
 
     def __init__(self, input=None):
-        super(StlBoundedFutureLexer, self).__init__(input)
+        super(StlLexer, self).__init__(input)
         self.checkVersion("4.5.1")
         self._interp = LexerATNSimulator(self, self.atn, self.decisionsToDFA, PredictionContextCache())
         self._actions = None
