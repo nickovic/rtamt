@@ -4,13 +4,18 @@ Created on Tue Jul 23 21:38:29 2019
 
 @author: NickovicD
 """
+import sys
 import logging
 import operator
 
 from decimal import Decimal
 from fractions import Fraction
 
-from rtamt.parser.stl.StlParserVisitor import StlParserVisitor
+if sys.version_info >= (3, 0):
+    from rtamt.parser.stl.python3.StlBoundedFutureParserVisitor import StlBoundedFutureParserVisitor
+else:
+    from rtamt.parser.stl.python2.StlBoundedFutureParserVisitor import StlBoundedFutureParserVisitor
+
 from rtamt.interval.interval import Interval
 
 from rtamt.node.stl.variable import Variable
@@ -39,7 +44,7 @@ from rtamt.node.stl.constant import Constant
 from rtamt.exception.stl.exception import STLParseException
 
 
-class STLNodeVisitor(StlParserVisitor):
+class STLNodeVisitor(StlBoundedFutureParserVisitor):
     
     def __init__(self, spec):
         self.ops = set()
