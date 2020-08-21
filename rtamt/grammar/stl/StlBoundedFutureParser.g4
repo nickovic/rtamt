@@ -1,7 +1,7 @@
 parser grammar StlBoundedFutureParser ;
 
 options {
-	tokenVocab = StlBoundedFutureLexer ;
+	tokenVocab = StlLexer ;
 }
 
 stlfile

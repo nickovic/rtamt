@@ -11,11 +11,11 @@ import importlib
 import operator
 
 if sys.version_info >= (3, 0):
-    from rtamt.parser.stl.python3.StlBoundedFutureLexer import StlBoundedFutureLexer
+    from rtamt.parser.stl.python3.StlLexer import StlLexer
     from rtamt.parser.stl.python3.StlBoundedFutureParser import StlBoundedFutureParser
     from rtamt.parser.stl.python3.StlBoundedFutureParserVisitor import StlBoundedFutureParserVisitor
 else:
-    from rtamt.parser.stl.python2.StlBoundedFutureLexer import StlBoundedFutureLexer
+    from rtamt.parser.stl.python2.StlLexer import StlLexer
     from rtamt.parser.stl.python2.StlBoundedFutureParser import StlBoundedFutureParser
     from rtamt.parser.stl.python2.StlBoundedFutureParserVisitor import StlBoundedFutureParserVisitor
 
@@ -67,7 +67,7 @@ class STLSpecification(AbstractSpecification,StlBoundedFutureParserVisitor):
 
         # Parse the STL spec - ANTLR4 magic
         input_stream = InputStream(self.spec)
-        lexer = StlBoundedFutureLexer(input_stream)
+        lexer = StlLexer(input_stream)
         stream = CommonTokenStream(lexer)
         parser = StlBoundedFutureParser(stream)
         parser._listeners = [STLParserErrorListener()]

@@ -1,4 +1,4 @@
-lexer grammar StlBoundedFutureLexer ;
+lexer grammar StlLexer ;
 
 
 // Rules prefixed with fragment can be called only from other lexer rules;
