@@ -5,18 +5,24 @@ Created on Sun Jul 21 20:32:57 2019
 @author: NickovicD
 """
 
+import sys
 import logging
 import importlib
 import operator
+
+if sys.version_info >= (3, 0):
+    from rtamt.parser.stl.python3.StlBoundedFutureLexer import StlBoundedFutureLexer
+    from rtamt.parser.stl.python3.StlBoundedFutureParser import StlBoundedFutureParser
+    from rtamt.parser.stl.python3.StlBoundedFutureParserVisitor import StlBoundedFutureParserVisitor
+else:
+    from rtamt.parser.stl.python2.StlBoundedFutureLexer import StlBoundedFutureLexer
+    from rtamt.parser.stl.python2.StlBoundedFutureParser import StlBoundedFutureParser
+    from rtamt.parser.stl.python2.StlBoundedFutureParserVisitor import StlBoundedFutureParserVisitor
 
 from antlr4 import *
 from antlr4.InputStream import InputStream
 
 from rtamt.spec.abstract_specification import AbstractSpecification
-
-from rtamt.parser.stl.StlLexer import StlLexer
-from rtamt.parser.stl.StlParser import StlParser
-from rtamt.parser.stl.StlParserVisitor import StlParserVisitor
 
 from rtamt.parser.stl.error.parser_error_listener import STLParserErrorListener
 from rtamt.exception.stl.exception import STLParseException
@@ -28,7 +34,7 @@ from rtamt.spec.stl.evaluator import STLEvaluator
 from rtamt.spec.stl.reset import STLReset
 
 
-class STLSpecification(AbstractSpecification,StlParserVisitor):
+class STLSpecification(AbstractSpecification,StlBoundedFutureParserVisitor):
     """A class used as a container for STL specifications
 
     Attributes:
@@ -61,9 +67,9 @@ class STLSpecification(AbstractSpecification,StlParserVisitor):
 
         # Parse the STL spec - ANTLR4 magic
         input_stream = InputStream(self.spec)
-        lexer = StlLexer(input_stream)
+        lexer = StlBoundedFutureLexer(input_stream)
         stream = CommonTokenStream(lexer)
-        parser = StlParser(stream)
+        parser = StlBoundedFutureParser(stream)
         parser._listeners = [STLParserErrorListener()]
         ctx = parser.stlfile()
 
