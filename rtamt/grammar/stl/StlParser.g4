@@ -80,9 +80,9 @@ expression
     | expression IffOperator expression                         #ExprIffExpr
     | expression XorOperator expression                         #ExprXorExpr
 
-	| AlwaysOperator (interval)! expression                        #ExprAlwaysExpr
-    | EventuallyOperator (interval)! expression                    #ExprEvExpr
-    | expression UntilOperator (interval)! expression              #ExprUntilExpr
+	| AlwaysOperator interval expression                        #ExprAlwaysExpr
+    | EventuallyOperator interval expression                    #ExprEvExpr
+    | expression UntilOperator interval expression              #ExprUntilExpr
     | HistoricallyOperator ( interval )? expression             #ExprHistExpr
     | OnceOperator ( interval )? expression                     #ExpreOnceExpr
     | expression SinceOperator ( interval )? expression         #ExprSinceExpr
