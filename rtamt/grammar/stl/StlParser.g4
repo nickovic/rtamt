@@ -17,7 +17,7 @@ modimport :
         From Identifier Import Identifier #modImport ;
 
 assertion 
-	: Identifier EQUAL topExpression ;
+	: Identifier EQUAL expression ;
 
 declaration 
 	: variableDeclaration                                         #declVariable ;
@@ -59,14 +59,6 @@ unit
 
 // -- O -- O -- O -- O -- O -- O -- O -- O -- O -- O -- O -- O -- O  expression
 
-topExpression
-	:
-    AlwaysOperator expression                                   #ExprUntimedAlwaysExpr
-    | EventuallyOperator expression                             #ExprUntimedEvExpr
-    | expression                                                #Expr
-    ;
-
-
 expression
 	:
     real_expression                                             #ExprReal
@@ -80,9 +72,9 @@ expression
     | expression IffOperator expression                         #ExprIffExpr
     | expression XorOperator expression                         #ExprXorExpr
 
-	| AlwaysOperator interval expression                        #ExprAlwaysExpr
-    | EventuallyOperator interval expression                    #ExprEvExpr
-    | expression UntilOperator interval expression              #ExprUntilExpr
+	| AlwaysOperator ( interval )? expression                        #ExprAlwaysExpr
+    | EventuallyOperator ( interval )? expression                    #ExprEvExpr
+    | expression UntilOperator ( interval )? expression              #ExprUntilExpr
     | HistoricallyOperator ( interval )? expression             #ExprHistExpr
     | OnceOperator ( interval )? expression                     #ExpreOnceExpr
     | expression SinceOperator ( interval )? expression         #ExprSinceExpr
