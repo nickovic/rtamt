@@ -3,7 +3,14 @@ from rtamt.operation.abstract_operation import AbstractOperation
 class NotOperation(AbstractOperation):
     def __init__(self):
         self.input = []
-
+    #  function update
+    #  takes as input a list of [timestamp, value] pairs
+    #  returns as output a list of [timestamp, value] pairs
+    #
+    # Example:
+    # out = update(in)
+    # in - [[4.2, 2.13], [5.7, -3.12], [6.88, 4.55]]
+    # out - [[4.2, -2.13], [5.7, 3.12], [6.88, -4.55]]
     def update(self, *args, **kargs):
         out = []
         input_list = args[0]
