@@ -1,6 +1,7 @@
 import unittest
 from rtamt.operation.stl_ct_offline.not_operation import NotOperation
-from rtamt.operation.stl_ct_offline.abs_operation import AbstractOperation
+from rtamt.operation.stl_ct_offline.abs_operation import AbsOperation
+from rtamt.operation.stl_ct_offline.rise_operation import RiseOperation
 
 class TestSTLoffline(unittest.TestCase):
 
@@ -21,6 +22,16 @@ class TestSTLoffline(unittest.TestCase):
         oper = AbsOperation()
         in_data = [[5, 3], [5.3, -1], [5.75, 2], [6.5, -5], [6.75, 6], [9, 5], [9.25, 4], [10, 2]]
         out_expected = [[5, 3], [5.3, 1], [5.75, 2], [6.5, 5], [6.75, 6], [9, 5], [9.25, 4], [10, 2]]
+        out_computed = oper.offline(in_data)
+
+        self.assertListEqual(out_expected, out_computed,
+                             "Problem with 1st example:\nExpected output: %s\nComputed output: %s" % (
+                                 out_expected, out_computed))
+
+    def test_rise(self):
+        oper = RiseOperation()
+        in_data = [[5, 3], [5.3, -1], [5.75, 2], [6.5, -5], [6.75, 6], [9, 5], [9.25, 4], [10, 2]]
+        out_expected = [[5, 0], [5.3, -4], [5.75, 3], [6.5, -7], [6.75, 11], [9, -1], [9.25, -1], [10, -2]]
         out_computed = oper.offline(in_data)
 
         self.assertListEqual(out_expected, out_computed,
