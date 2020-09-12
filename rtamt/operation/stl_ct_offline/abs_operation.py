@@ -4,7 +4,10 @@ class AbsOperation(AbstractOperation):
     def __init__(self):
         pass
 
-    def offline(self):
+    def update(self, *args, **kargs):
+        pass
+
+    def offline(self, *args, **kargs):
         out = []
         input_list = args[0]
 

@@ -12,6 +12,10 @@ class NotOperation(AbstractOperation):
     # out = update(in)
     # in - [[4.2, 2.13], [5.7, -3.12], [6.88, 4.55]]
     # out - [[4.2, -2.13], [5.7, 3.12], [6.88, -4.55]]
+
+    def update(self, *args, **kargs):
+        pass
+
     def offline(self, *args, **kargs):
         out = []
         input_list = args[0]
