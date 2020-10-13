@@ -81,15 +81,36 @@ class STLSpecification(AbstractSpecification,StlParserVisitor):
         self.evaluator = STLEvaluator(self)
         self.top.accept(self.evaluator)
 
-    def update(self, *args, **kargs):
-        time_index = args[0]
-        signals = args[1]
-        for arg in signals:
-            var_name = arg[0]
-            var_object = arg[1]
-            self.var_object_dict[var_name] = var_object
+        self.normalize = float(self.U[self.unit]) / float(self.U[self.sampling_period_unit])
 
-        return self.evaluator.evaluate(self.top, [time_index])
+    def update(self, *args, **kargs):
+        # args[0] : timestamp - float
+        # args[1] : inputs - list of [var name, var value] pairs
+        # Example:
+        # update(3.48, [['a', 2.2], ['b', 3.3]])
+        timestamp = args[0]
+        inputs = args[1]
+
+        # Check if the difference between two consecutive timestamps is between
+        # the accepted tolerance - if not, increase the violation counter
+        if self.update_counter > 0:
+            duration = (timestamp - self.previous_time) * self.normalize
+            tolerance = self.sampling_period * self.sampling_tolerance
+            if not duration in [self.sampling_period-tolerance, self.sampling_period+tolerance]:
+                self.sampling_violation_counter = self.sampling_violation_counter + 1
+
+        for inp in inputs:
+            var_name = inp[0]
+            var_value = inp[1]
+            self.var_object_dict[var_name] = var_value
+
+        # The evaluation done wrt the discrete counter (logical time)
+        out = self.evaluator.evaluate(self.top, [self.update_counter])
+
+        self.previous_time = timestamp
+        self.update_counter = self.update_counter + 1
+
+        return out
 
     # This is the visitor part. We will populate
     def visitStlSpecification(self, ctx):
