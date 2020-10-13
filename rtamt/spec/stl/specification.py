@@ -96,7 +96,7 @@ class STLSpecification(AbstractSpecification,StlParserVisitor):
         if self.update_counter > 0:
             duration = (timestamp - self.previous_time) * self.normalize
             tolerance = self.sampling_period * self.sampling_tolerance
-            if not duration in [self.sampling_period-tolerance, self.sampling_period+tolerance]:
+            if duration < self.sampling_period-tolerance or duration > self.sampling_period+tolerance:
                 self.sampling_violation_counter = self.sampling_violation_counter + 1
 
         for inp in inputs:

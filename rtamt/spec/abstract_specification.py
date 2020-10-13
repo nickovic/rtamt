@@ -180,7 +180,7 @@ class AbstractSpecification:
         self.sampling_period = sampling_period
         self.sampling_period_unit = unit
 
-        if tolerance not in [0.0,1.0]:
+        if tolerance < 0.0 or tolerance > 1.0:
             raise STLSpecificationException
 
         self.sampling_tolerance = tolerance
