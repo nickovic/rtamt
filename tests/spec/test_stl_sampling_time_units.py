@@ -6,30 +6,6 @@ from rtamt.operation.sample import Sample
 class TestSTLSamplingTimeUnits(unittest.TestCase):
     def __init__(self, *args, **kwargs):
         super(TestSTLSamplingTimeUnits, self).__init__(*args, **kwargs)
-        self.left1 = Sample()
-        self.right1 = Sample()
-        self.left1.value = 100
-        self.right1.value = 20
-
-        self.left2 = Sample()
-        self.right2 = Sample()
-        self.left2.value = -1
-        self.right2.value = 2
-
-        self.left3 = Sample()
-        self.right3 = Sample()
-        self.left3.value = -2
-        self.right3.value = -10
-
-        self.left4 = Sample()
-        self.right4 = Sample()
-        self.left4.value = 5
-        self.right4.value = 4
-
-        self.left5 = Sample()
-        self.right5 = Sample()
-        self.left5.value = -1
-        self.right5.value = -1
 
     def test_example(self):
         spec = rtamt.STLSpecification()
