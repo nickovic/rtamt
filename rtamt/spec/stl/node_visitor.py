@@ -216,7 +216,6 @@ class STLNodeVisitor(StlParserVisitor):
         node.horizon = horizon
         return node
 
-
     def visitExprUntimedAlwaysExpr(self, ctx):
         child = self.visit(ctx.expression())
         horizon = child.horizon
@@ -304,50 +303,43 @@ class STLNodeVisitor(StlParserVisitor):
         text = ctx.literal().getText()
         out = Fraction(Decimal(text))
 
-
         if ctx.unit() == None:
             # default time unit is seconds - conversion of the bound to ps
-            out = out * 1e12
+            unit = self.spec.unit
         else:
             unit = ctx.unit().getText()
-            if (unit == 's'):
-                out = out * 1e12
-            elif (unit == 'ms'):
-                out = out * 1e9
-            elif (unit == 'us'):
-                out == out * 1e6
-            elif (unit == 'ns'):
-                out == out * 1e3
-            else:
-                pass
-        remainder = out % self.spec.sampling_period
-        if remainder > 0:
+
+        out = out * self.spec.U[unit]
+
+        sp = Fraction(self.spec.get_sampling_period())
+
+        out = out / sp
+
+        if out.numerator % out.denominator > 0:
             raise STLParseException('The STL operator bound must be a multiple of the sampling period')
 
         out = int(out / self.spec.sampling_period)
 
         return out
 
+
     def visitIntervalFloatTimeLiteral(self, ctx):
-        out = float(ctx.RealLiteral().getText())
+        text = ctx.literal().getText()
+        out = Fraction(Decimal(text))
 
         if ctx.unit() == None:
             # default time unit is seconds - conversion of the bound to ps
-            out = out * 10e12
+            unit = self.spec.unit
         else:
             unit = ctx.unit().getText()
-            if (unit == 's'):
-                out = out * 10e12
-            elif (unit == 'ms'):
-                out = out * 10e9
-            elif (unit == 'us'):
-                out == out * 10e6
-            elif (unit == 'ns'):
-                out == out * 10e3
-            else:
-                pass
-        remainder = out % self.spec.sampling_period
-        if remainder > 0:
+
+        out = out * self.spec.U[unit]
+
+        sp = Fraction(self.spec.get_sampling_period())
+
+        out = out / sp
+
+        if out.numerator % out.denominator > 0:
             raise STLParseException('The STL operator bound must be a multiple of the sampling period')
 
         out = int(out / self.spec.sampling_period)

@@ -28,6 +28,7 @@ class STLPastifier(STLVisitor):
 
     def __init__(self, spec):
         self.spec = spec
+        self.horizon = spec.top.horizon
 
     @property
     def spec(self):
@@ -38,31 +39,20 @@ class STLPastifier(STLVisitor):
         self.__spec = spec
 
     def pastify(self, element):
-        return self.visit(element, [element.horizon])
+        return self.visit(element, [])
 
     def visitConstant(self, element, args):
-        horizon = args[0]
         node = Constant(element.val, self.spec.is_pure_python)
         return node
 
     def visitPredicate(self, element, args):
-        horizon = args[0]
-        if horizon == 0:
-            node = Predicate(element.children[0], element.children[1], element.io_type, element.operator, self.spec.is_pure_python)
-        else:
-            child = Predicate(element.children[0], element.children[1], element.io_type, element.operator, self.spec.is_pure_python)
-            bound = Interval(horizon, horizon)
-            node = Once(child, bound, self.spec.is_pure_python)
+        node = Predicate(element.children[0], element.children[1], element.io_type, element.operator, self.spec.is_pure_python)
         return node
 
     def visitVariable(self, element, args):
-        horizon = args[0]
-        var_type = self.spec.var_type_dict[element.var]
-        if horizon == 0:
-            node = Variable(element.var, element.field, var_type)
-        else:
-            child = Variable(element.var, element.field, var_type)
-            bound = Interval(horizon, horizon)
+        node = Variable(element.var, element.field, var_type)
+        if self.horizon > 0:
+            bound = Interval(self.horizon, self.horizon)
             node = Once(child, bound, self.spec.is_pure_python)
         return node
 
@@ -141,109 +131,70 @@ class STLPastifier(STLVisitor):
         return node
 
     def visitEventually(self, element, args):
-        horizon = args[0]
         if element.bound == None:
-            child_node = self.visit(element.children[0], [horizon])
+            child_node = self.visit(element.children[0], args)
             node = Eventually(child_node, element.bound, self.spec.is_pure_python)
         else:
-            child_node = self.visit(element.children[0], [horizon - element.bound.end])
-            bound = Interval(horizon - element.bound.end, horizon - element.bound.begin)
-            node = Once(child_node, bound, self.spec.is_pure_python)
+            node = self.visit(element.children[0], args)
+            begin = 0
+            end = element.bound.end - element.bound.begin
+            if end > 0:
+                bound = Interval(begin, end)
+                node = Once(node, bound, self.spec.is_pure_python)
         return node
 
     def visitAlways(self, element, args):
-        horizon = args[0]
         if element.bound == None:
-            child_node = self.visit(element.children[0], [horizon])
+            child_node = self.visit(element.children[0], [])
             node = Always(child_node, element.bound, self.spec.is_pure_python)
         else:
-            child_node = self.visit(element.children[0], [horizon - element.bound.end])
-            bound = Interval(horizon - element.bound.end, horizon - element.bound.begin)
-            node = Historically(child_node, bound, self.spec.is_pure_python)
+            node = self.visit(element.children[0], [])
+            begin = 0
+            end = element.bound.end - element.bound.begin
+            if end > 0:
+                bound = Interval(begin, end)
+                node = Once(node, bound, self.spec.is_pure_python)
         return node
 
     def visitUntil(self, element, args):
-        horizon = args[0]
-        end = 0
-        begin = 0
-        if element.bound != None:
-            end = element.bound.end
-            begin = element.bound.begin
-        child1_node = self.visit(element.children[0], [horizon - end])
-        child2_node = self.visit(element.children[1], [horizon - end])
-        bound = Interval(horizon - begin, horizon - begin)
+        begin = element.bound.begin
+        end = element.bound.end
+        child1_node = self.visit(element.children[0], [])
+        child2_node = self.visit(element.children[1], [])
+        bound = Interval(begin, end)
         node = Precedes(child1_node, child2_node, bound, self.spec.is_pure_python)
         return node
 
     def visitOnce(self, element, args):
-        horizon = args[0]
-        child_node = self.visit(element.children[0], [horizon])
+        child_node = self.visit(element.children[0], [])
 
-        if element.bound == None:
-            if horizon == 0:
-                node = Once(child_node, None, self.spec.is_pure_python)
-            else:
-                bound = Interval(horizon, float("inf"))
-                node = Once(child_node, bound, self.spec.is_pure_python)
-        else:
-            begin = element.bound.begin
-            end = element.bound.end
-            bound = Interval(begin + horizon, end + horizon)
-            node = Once(child_node, bound, self.spec.is_pure_python)
+        node = Once(child_node, element.bound, self.spec.is_pure_python)
 
         return node
 
     def visitHistorically(self, element, args):
-        horizon = args[0]
-        child_node = self.visit(element.children[0], [horizon])
+        child_node = self.visit(element.children[0], [])
 
-        if element.bound == None:
-            if horizon == 0:
-                node = Historically(child_node, None, self.spec.is_pure_python)
-            else:
-                bound = Interval(horizon, float("inf"))
-                node = Historically(child_node, bound, self.spec.is_pure_python)
-        else:
-            begin = element.bound.begin
-            end = element.bound.end
-            bound = Interval(begin + horizon, end + horizon)
-            node = Historically(child_node, bound, self.spec.is_pure_python)
+        node = Historically(child_node, element.bound, self.spec.is_pure_python)
 
         return node
 
     def visitSince(self, element, args):
-        horizon = args[0]
-        child_node_1 = self.visit(element.children[0], [horizon])
-        child_node_2 = self.visit(element.children[1], [horizon])
+        child_node_1 = self.visit(element.children[0], [])
+        child_node_2 = self.visit(element.children[1], [])
 
-        if element.bound == None:
-            if horizon == 0:
-                node = Since(child_node_1, child_node_2, None, self.spec.is_pure_python)
-            else:
-                bound = Interval(horizon, float("inf"))
-                node = Since(child_node_1, child_node_2, bound, self.spec.is_pure_python)
-        else:
-            begin = element.bound.begin
-            end = element.bound.end
-            bound = Interval(begin + horizon, end + horizon)
-            node = Since(child_node_1, child_node_2, bound, self.spec.is_pure_python)
+        node = Since(child_node_1, child_node_2, element.bound, self.spec.is_pure_python)
 
         return node
 
     def visitPrecedes(self, element, args):
-        horizon = args[0]
-        end = 0
-        begin = 0
-        if element.bound != None:
-            end = element.bound.end
-            begin = element.bound.begin
-        child1_node = self.visit(element.children[0], [horizon - end])
-        child2_node = self.visit(element.children[1], [horizon - end])
-        bound = Interval(begin + horizon, begin + horizon)
+        end = element.bound.end
+        begin = element.bound.begin
+        child1_node = self.visit(element.children[0], [])
+        child2_node = self.visit(element.children[1], [])
+        bound = Interval(begin, begin)
         node = Precedes(child1_node, child2_node, bound, self.spec.is_pure_python)
         return node
-
-
 
     def visitDefault(self, element):
         return None

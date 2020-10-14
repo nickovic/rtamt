@@ -59,7 +59,7 @@ def monitor():
     # sampling period = 10ms
     # ok
     spec.spec = 'c = always[0:100ms](a>=0)'
-    spec.set_sampling_period('10', 'ms')
+    spec.set_sampling_period(10,'ms')
     try:
         spec.parse()
         robustness = spec.offline(dataSet)
@@ -79,7 +79,7 @@ def monitor():
     # sampling period = 10ms
     # ok
     spec.spec = 'c = always[0:0.02s](a>=0)'
-    spec.set_sampling_period('10', 'ms')
+    spec.set_sampling_period(10, 'ms')
     try:
         spec.parse()
         robustness = spec.offline(dataSet)

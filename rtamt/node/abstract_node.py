@@ -16,6 +16,7 @@ class AbstractNode:
     def __init__(self):
         self.children = list()
         self.evaluator = None
+        self.horizon = 0
 
     def addChild(self, child):
         self.children.append(child)
@@ -37,6 +38,16 @@ class AbstractNode:
     def evaluator(self, evaluator):
         """Setter for the evaluator"""
         self.__evaluator = evaluator
+
+    @property
+    def horizon(self):
+        """Getter for the horizon"""
+        return self.__horizon
+
+    @horizon.setter
+    def horizon(self, horizon):
+        """Setter for the horizon"""
+        self.__horizon = horizon
 
     def __repr__(self):
         '''Returns representation of the object'''
