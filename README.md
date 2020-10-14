@@ -191,6 +191,192 @@ There are several important points to note about the above syntax and semantics:
 We can see from the semantics of bounded-future STL that the direct evaluation of a formula `phi` at time `t` may depend on inputs at `t'>t` that have not arrived yet.
 The library monitors bounded-future STL formulas with a fixed _delay_. In order to compute `rho(phi,w,t)`, the monitor waits for all inputs required to evaluate `phi` to become available before computing the robustness degree. This delay is fixed and depends on the specification. For instance, the specification `always((req >= 3) -> eventually[0:2]always[0:3](gnt >= 3)`is evaluated with delay `5` - the time needed to capture all inputs required for evaluating bounded `eventually` and `always` operators. We refer the reader to [2] for algorithmic details regarding monitoring with delay.
 
+# Usage
+
+## Working with time units and timing assumptions
+
+The default unit in RTAMT is seconds, and the default expected period between 
+two consecutive input samples is `1s` with `10%` tolerance. 
+The following program uses these default values to implicitely set up the monitor. 
+The specification intuitively states that whenever the `req` is above `3`, 
+eventually within `5s` `gnt` also goes above `3`. 
+The user feeds the monitor with values timestamped _exactly_ `1s` apart 
+from each other. It follows that the periodic sampling assumption holds.
+
+RTAMT counts how many times the periodic sampling assumption has been violated 
+up to the moment of being invoked via the `sampling_violation_counter` member. 
+In this example, this violation obviously occurs `0` times.
+
+```
+import sys
+import rtamt
+
+def monitor():
+    spec = rtamt.STLSpecification()
+    spec.name = 'Bounded-response Request-Grant'
+
+    spec.declare_var('req', 'float')
+    spec.declare_var('gnt', 'float')
+    spec.declare_var('out', 'float')
+
+    spec.spec = 'out = always((req>=3) implies (eventually[0:5](gnt>=3)))'
+
+    try:
+        spec.parse()
+        spec.update(0, [('req', 0.1), ('gnt', 0.3)])
+        spec.update(1, [('req', 0.45), ('gnt', 0.12)])
+        spec.update(2, [('req', 0.78), ('gnt', 0.18)])
+        nb_violations = spec.sampling_violation_counter // nb_violations = 0
+    except rtamt.STLParseException as err:
+        print('STL Parse Exception: {}'.format(err))
+        sys.exit()
+
+if __name__ == '__main__':
+    # Process arguments
+    monitor()
+}
+```
+The same program, but with slightly different timestamps still reports `0` number of periodic sampling assumption violations. This is because the difference between all consecuting sampling timestamps remains within the (implicitely) specified `10%` tolerance.
+
+
+```
+    ...
+    out = spec.update(0, {In("req", 0.0), In("gnt", 0.0)}); // out = inf
+    out = spec.update(1.01, {In("req", 0.0), In("gnt", 0.0)}); // out = inf
+    out = spec.update(1.98, {In("req", 0.0), In("gnt", 0.0)}); // out = inf
+    out = spec.update(3.03, {In("req", 6.0), In("gnt", 0.0)}); // out = inf
+    out = spec.update(4.01, {In("req", 6.0), In("gnt", 0.0)}); // out = inf
+    out = spec.update(4.99, {In("req", 0.0), In("gnt", 0.0)}); // out = 3
+    out = spec.update(6.01, {In("req", 0.0), In("gnt", 0.0)}); // out = 3
+    
+    double nb_violations = spec.sampling_violation_counter(); // nb_violations = 0
+```
+On the other hand, the following sequence of inputs results in `1` reported violation of periodic sampling assumption. This is because the second input is `1.11s` away from the first sample, which is `11%` above the assumed `1s` period. 
+
+```
+    ...
+    out = spec.update(0, {In("req", 0.0), In("gnt", 0.0)}); // out = inf
+    out = spec.update(1.11, {In("req", 0.0), In("gnt", 0.0)}); // out = inf
+    out = spec.update(2.08, {In("req", 0.0), In("gnt", 0.0)}); // out = inf
+    out = spec.update(3.03, {In("req", 6.0), In("gnt", 0.0)}); // out = inf
+    out = spec.update(4.01, {In("req", 6.0), In("gnt", 0.0)}); // out = inf
+    out = spec.update(4.99, {In("req", 0.0), In("gnt", 0.0)}); // out = 3
+    out = spec.update(6.01, {In("req", 0.0), In("gnt", 0.0)}); // out = 3
+    
+    double nb_violations = spec.sampling_violation_counter(); // nb_violations = 1
+```
+This same sequence of inputs results in `0` reported violation of periodic sampling assumption if we explicitely set the sampling period tolerance value to `20%`. 
+
+```
+    ...
+    spec.sampling_period(1, Unit::S, 0.2);
+    ...
+    out = spec.update(0, {In("req", 0.0), In("gnt", 0.0)}); // out = inf
+    out = spec.update(1.11, {In("req", 0.0), In("gnt", 0.0)}); // out = inf
+    out = spec.update(2.08, {In("req", 0.0), In("gnt", 0.0)}); // out = inf
+    out = spec.update(3.03, {In("req", 6.0), In("gnt", 0.0)}); // out = inf
+    out = spec.update(4.01, {In("req", 6.0), In("gnt", 0.0)}); // out = inf
+    out = spec.update(4.99, {In("req", 0.0), In("gnt", 0.0)}); // out = 3
+    out = spec.update(6.01, {In("req", 0.0), In("gnt", 0.0)}); // out = 3
+    
+    double nb_violations = spec.sampling_violation_counter(); // nb_violations = 1
+```
+
+The user can also explicitely set the default unit, as well as the expected period and tolerance. In that case, the user must ensure that the timing bounds declared in the specification are divisible by the sampling period. The following specification is correct, since the sampling period is set to `500ms`, the default unit is set to seconds, and the specification implicitely defines the bound from `0.5s = 500ms` and `1.5s = 1500ms`, i.e. between `1` amd `3` sampling periods. 
+
+```
+#include <rtamt/stl_specification.hpp>
+#include <rtamt/stl_exception.hpp>
+
+using namespace std;
+using namespace rtamt;
+using In = Input;
+
+int main(int argc, char **argv) {
+    StlSpecification spec;
+
+    spec.name("Bounded-response Request-Grant");
+    
+    spec.declare_var("req", Type::FLOAT);
+    spec.declare_var("gnt", Type::FLOAT);
+    spec.declare_var("out", Type::FLOAT);
+    
+    spec.var_io_type("req", StlIOType::IN);
+    spec.var_io_type("gnt", StlIOType::OUT);
+    
+    spec.default_unit(Unit::S);
+    spec.sampling_period(500, Unit::MS, 0.1);
+    
+    spec.semantics(StlSemantics::STANDARD);
+    
+    spec.spec("out = (req >= 3) -> (eventually[0.5:1.5](gnt >= 3))");
+    
+    spec.parse();
+    
+    double out;
+    
+    out = spec.update(0, {In("req", 0.0), In("gnt", 0.0)}); // out = inf
+    out = spec.update(0.5, {In("req", 0.0), In("gnt", 0.0)}); // out = inf
+    out = spec.update(1, {In("req", 0.0), In("gnt", 0.0)}); // out = inf
+    out = spec.update(1.5, {In("req", 6.0), In("gnt", 0.0)}); // out = inf
+    out = spec.update(2, {In("req", 6.0), In("gnt", 0.0)}); // out = inf
+    out = spec.update(2.5, {In("req", 0.0), In("gnt", 0.0)}); // out = 3
+    out = spec.update(3, {In("req", 0.0), In("gnt", 0.0)}); // out = 3
+
+    double nb_violations = spec.sampling_violation_counter(); // nb_violations = 0
+}
+```
+The following defines the same program, but now with `ms` as the default unit. 
+
+```
+    ...
+    spec.default_unit(Unit::MS);
+    spec.sampling_period(500, Unit::MS, 0.1);
+    ...
+    spec.spec("out = (req >= 3) -> (eventually[500:1500](gnt >= 3))");
+    
+    spec.parse();
+    
+    double out;
+    
+    out = spec.update(0, {In("req", 0.0), In("gnt", 0.0)}); // out = inf
+    out = spec.update(500, {In("req", 0.0), In("gnt", 0.0)}); // out = inf
+
+    double nb_violations = spec.sampling_violation_counter(); // nb_violations = 0
+}
+```
+
+The following program throws an exception - the temporal bound is defined between `500ms` and `1500ms`, while the sampling period equals to `1s = 1000ms`. 
+
+```
+    ...
+    spec.default_unit(Unit::MS);
+    spec.sampling_period(1, Unit::S, 0.1);
+    ...
+    spec.spec("out = (req >= 3) -> (eventually[500:1500](gnt >= 3))");
+    ...
+    spec.parse();
+    ...
+    
+}
+```
+
+Finally, the following program is correct, because the temporal bound is explicitely defined between `500s` and `1500s`, while the sampling period equals to `1s`. 
+
+```
+    ...
+    spec.default_unit(Unit::MS);
+    spec.sampling_period(1, Unit::S, 0.1);
+    ...
+    spec.spec("out = (req >= 3) -> (eventually[500s:1500s](gnt >= 3))");
+    ...
+    spec.parse();
+    ...
+    
+}
+```
+
+
 
 ## Run examples
 
