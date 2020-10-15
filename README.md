@@ -208,6 +208,7 @@ up to the moment of being invoked via the `sampling_violation_counter` member.
 In this example, this violation obviously occurs `0` times.
 
 ```
+# examples/documentation/time_units_1.py
 import sys
 import rtamt
 
@@ -240,122 +241,81 @@ The same program, but with slightly different timestamps still reports `0` numbe
 
 
 ```
+# examples/documentation/time_units_2.py
     ...
-    out = spec.update(0, {In("req", 0.0), In("gnt", 0.0)}); // out = inf
-    out = spec.update(1.01, {In("req", 0.0), In("gnt", 0.0)}); // out = inf
-    out = spec.update(1.98, {In("req", 0.0), In("gnt", 0.0)}); // out = inf
-    out = spec.update(3.03, {In("req", 6.0), In("gnt", 0.0)}); // out = inf
-    out = spec.update(4.01, {In("req", 6.0), In("gnt", 0.0)}); // out = inf
-    out = spec.update(4.99, {In("req", 0.0), In("gnt", 0.0)}); // out = 3
-    out = spec.update(6.01, {In("req", 0.0), In("gnt", 0.0)}); // out = 3
-    
-    double nb_violations = spec.sampling_violation_counter(); // nb_violations = 0
+    spec.update(0, [('req', 0.1), ('gnt', 0.3)])
+    spec.update(1.02, [('req', 0.45), ('gnt', 0.12)])
+    spec.update(1.98, [('req', 0.78), ('gnt', 0.18)])
+    nb_violations = spec.sampling_violation_counter // nb_violations = 0
+    ....
 ```
 On the other hand, the following sequence of inputs results in `1` reported violation of periodic sampling assumption. This is because the second input is `1.11s` away from the first sample, which is `11%` above the assumed `1s` period. 
 
 ```
+# examples/documentation/time_units_3.py
     ...
-    out = spec.update(0, {In("req", 0.0), In("gnt", 0.0)}); // out = inf
-    out = spec.update(1.11, {In("req", 0.0), In("gnt", 0.0)}); // out = inf
-    out = spec.update(2.08, {In("req", 0.0), In("gnt", 0.0)}); // out = inf
-    out = spec.update(3.03, {In("req", 6.0), In("gnt", 0.0)}); // out = inf
-    out = spec.update(4.01, {In("req", 6.0), In("gnt", 0.0)}); // out = inf
-    out = spec.update(4.99, {In("req", 0.0), In("gnt", 0.0)}); // out = 3
-    out = spec.update(6.01, {In("req", 0.0), In("gnt", 0.0)}); // out = 3
-    
-    double nb_violations = spec.sampling_violation_counter(); // nb_violations = 1
+    spec.update(0, [('req', 0.1), ('gnt', 0.3)])
+    spec.update(1.02, [('req', 0.45), ('gnt', 0.12)])
+    spec.update(2.14, [('req', 0.78), ('gnt', 0.18)])
+    nb_violations = spec.sampling_violation_counter // nb_violations = 1
 ```
 This same sequence of inputs results in `0` reported violation of periodic sampling assumption if we explicitely set the sampling period tolerance value to `20%`. 
 
 ```
+# examples/documentation/time_units_4.py
     ...
-    spec.sampling_period(1, Unit::S, 0.2);
+    spec.set_sampling_period(1, 's', 0.2)
     ...
-    out = spec.update(0, {In("req", 0.0), In("gnt", 0.0)}); // out = inf
-    out = spec.update(1.11, {In("req", 0.0), In("gnt", 0.0)}); // out = inf
-    out = spec.update(2.08, {In("req", 0.0), In("gnt", 0.0)}); // out = inf
-    out = spec.update(3.03, {In("req", 6.0), In("gnt", 0.0)}); // out = inf
-    out = spec.update(4.01, {In("req", 6.0), In("gnt", 0.0)}); // out = inf
-    out = spec.update(4.99, {In("req", 0.0), In("gnt", 0.0)}); // out = 3
-    out = spec.update(6.01, {In("req", 0.0), In("gnt", 0.0)}); // out = 3
-    
-    double nb_violations = spec.sampling_violation_counter(); // nb_violations = 1
+    spec.update(0, [('req', 0.1), ('gnt', 0.3)])
+    spec.update(1.02, [('req', 0.45), ('gnt', 0.12)])
+    spec.update(2.14, [('req', 0.78), ('gnt', 0.18)])
+    nb_violations = spec.sampling_violation_counter // nb_violations = 0
 ```
 
 The user can also explicitely set the default unit, as well as the expected period and tolerance. In that case, the user must ensure that the timing bounds declared in the specification are divisible by the sampling period. The following specification is correct, since the sampling period is set to `500ms`, the default unit is set to seconds, and the specification implicitely defines the bound from `0.5s = 500ms` and `1.5s = 1500ms`, i.e. between `1` amd `3` sampling periods. 
 
 ```
-#include <rtamt/stl_specification.hpp>
-#include <rtamt/stl_exception.hpp>
-
-using namespace std;
-using namespace rtamt;
-using In = Input;
-
-int main(int argc, char **argv) {
-    StlSpecification spec;
-
-    spec.name("Bounded-response Request-Grant");
-    
-    spec.declare_var("req", Type::FLOAT);
-    spec.declare_var("gnt", Type::FLOAT);
-    spec.declare_var("out", Type::FLOAT);
-    
-    spec.var_io_type("req", StlIOType::IN);
-    spec.var_io_type("gnt", StlIOType::OUT);
-    
-    spec.default_unit(Unit::S);
-    spec.sampling_period(500, Unit::MS, 0.1);
-    
-    spec.semantics(StlSemantics::STANDARD);
-    
-    spec.spec("out = (req >= 3) -> (eventually[0.5:1.5](gnt >= 3))");
-    
-    spec.parse();
-    
-    double out;
-    
-    out = spec.update(0, {In("req", 0.0), In("gnt", 0.0)}); // out = inf
-    out = spec.update(0.5, {In("req", 0.0), In("gnt", 0.0)}); // out = inf
-    out = spec.update(1, {In("req", 0.0), In("gnt", 0.0)}); // out = inf
-    out = spec.update(1.5, {In("req", 6.0), In("gnt", 0.0)}); // out = inf
-    out = spec.update(2, {In("req", 6.0), In("gnt", 0.0)}); // out = inf
-    out = spec.update(2.5, {In("req", 0.0), In("gnt", 0.0)}); // out = 3
-    out = spec.update(3, {In("req", 0.0), In("gnt", 0.0)}); // out = 3
-
-    double nb_violations = spec.sampling_violation_counter(); // nb_violations = 0
+# examples/documentation/time_units_5.py
+    ...
+    spec.unit = 's'
+    spec.set_sampling_period(500, 'ms', 0.1)
+    ...
+    spec.spec = 'out = always((req>=3) implies (eventually[0.5:1.5](gnt>=3)))'
+    ...
+    spec.update(0, [('req', 0.1), ('gnt', 0.3)])
+    spec.update(0.5, [('req', 0.45), ('gnt', 0.12)])
+    spec.update(1, [('req', 0.78), ('gnt', 0.18)])
+    nb_violations = spec.sampling_violation_counter // nb_violations = 0
 }
 ```
 The following defines the same program, but now with `ms` as the default unit. 
 
 ```
+ # examples/documentation/time_units_6.py
     ...
-    spec.default_unit(Unit::MS);
-    spec.sampling_period(500, Unit::MS, 0.1);
+    spec.unit = 'ms'
+    spec.set_sampling_period(500, 'ms', 0.1)
     ...
-    spec.spec("out = (req >= 3) -> (eventually[500:1500](gnt >= 3))");
-    
-    spec.parse();
-    
-    double out;
-    
-    out = spec.update(0, {In("req", 0.0), In("gnt", 0.0)}); // out = inf
-    out = spec.update(500, {In("req", 0.0), In("gnt", 0.0)}); // out = inf
-
-    double nb_violations = spec.sampling_violation_counter(); // nb_violations = 0
+    spec.spec = 'out = always((req>=3) implies (eventually[500:1500](gnt>=3)))'
+    ...
+    spec.update(0, [('req', 0.1), ('gnt', 0.3)])
+    spec.update(500, [('req', 0.45), ('gnt', 0.12)])
+    spec.update(1000, [('req', 0.78), ('gnt', 0.18)])
+    nb_violations = spec.sampling_violation_counter // nb_violations = 0
 }
 ```
 
 The following program throws an exception - the temporal bound is defined between `500ms` and `1500ms`, while the sampling period equals to `1s = 1000ms`. 
 
 ```
+# examples/documentation/time_units_7.py
     ...
-    spec.default_unit(Unit::MS);
-    spec.sampling_period(1, Unit::S, 0.1);
+    spec.unit = 'ms'
+    spec.set_sampling_period(1, 's', 0.1)
     ...
-    spec.spec("out = (req >= 3) -> (eventually[500:1500](gnt >= 3))");
+    spec.spec = 'out = always((req>=3) implies (eventually[500:1500](gnt>=3)))'
     ...
-    spec.parse();
+    spec.parse()
     ...
     
 }
@@ -364,57 +324,15 @@ The following program throws an exception - the temporal bound is defined betwee
 Finally, the following program is correct, because the temporal bound is explicitely defined between `500s` and `1500s`, while the sampling period equals to `1s`. 
 
 ```
+# examples/documentation/time_units_8.py
     ...
-    spec.default_unit(Unit::MS);
-    spec.sampling_period(1, Unit::S, 0.1);
+    spec.unit = 'ms'
+    spec.set_sampling_period(1, 's', 0.1)
     ...
-    spec.spec("out = (req >= 3) -> (eventually[500s:1500s](gnt >= 3))");
+    spec.spec = 'out = always((req>=3) implies (eventually[500s:1500s](gnt>=3)))'
     ...
-    spec.parse();
+    spec.parse()
     ...
-    
-}
-```
-
-
-
-## Run examples
-
-### online-STL example
-
-```bash
-cd rtamt/examples/basic
-$ python monitor_basic.py
-time=0 rob=122.0
-time=1 rob=3.0
-time=2 rob=-10.0
-```
-
-### offline-STL example
-
-```bash
-cd rtamt/examples/basic
-$ python monitor_offline.py
-Robustness: -98.0
-```
-
-### Io-STL example
-
-```bash
-cd rtamt/examples/offline_monitors
-$ python offline_monitor_dt.py
-Example (a) - standard robustness: 3.0
-Example (a) - output robustness: 3.0
-Example (a) - input vacuity: 0
-Example (b) - standard robustness: 1.0
-Example (b) - output robustness: inf
-Example (b) - input vacuity: 1.0
-Example (c) - standard robustness: -2.0
-Example (c) - output robustness: -2.0
-Example (c) - input vacuity: 0
-Example (d) - standard robustness: -1.0
-Example (d) - output robustness: -2.0
-Example (d) - input vacuity: 0
 ```
 
 # References
