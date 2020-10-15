@@ -47,13 +47,13 @@ ioType
 	| Output ;
 
 interval
-	: LBRACK intervalTime COLON intervalTime RBRACK ;
+	: LBRACK intervalTime ( COLON | COMMA ) intervalTime RBRACK ;
 
 intervalTime
 	: literal ( unit )?      #intervalTimeLiteral ;
 
 unit
-    : SEC | MSEC | USEC | NSEC | PSEC ;
+    : SEC | MSEC | USEC | NSEC ;
 
  
 
