@@ -59,7 +59,7 @@ class TestSTLoffline(unittest.TestCase):
     def test_always(self):
         oper = AlwaysOperation()
         in_data = [[5, 3], [5.3, 1], [5.75, 2], [6.5, 5], [6.75, 6], [9, 5], [9.25, 4], [10, 2]]
-        out_expected = [[5, 1], [5.3, 1], [5.75, 2], [10.0, 2]]
+        out_expected = [[5, 1], [5.75, 2], [10.0, 2]]
         out_computed = oper.offline(in_data)
 
         self.assertListEqual(out_expected, out_computed,

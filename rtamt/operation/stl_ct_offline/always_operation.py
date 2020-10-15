@@ -19,11 +19,12 @@ class AlwaysOperation(AbstractOperation):
             min_indexs = [i for i, x in enumerate(temp_nums) if x == temp_min]
             out.append([input_list[i][0], temp_min])
 
-            if i == len(input_list)-1:
-                break
-            elif min_indexs[-1] == 0:
+            if min_indexs[-1] == 0:
                 i = i + 1
+            elif i+min_indexs[-1] == len(input_list)-1:
+                out.append([input_list[-1][0], temp_min])
+                break
             else:
-                i = i+min_indexs[-1]
+                i = i+min_indexs[-1]+1
 
         return out
