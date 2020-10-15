@@ -237,7 +237,10 @@ if __name__ == '__main__':
     monitor()
 }
 ```
-The same program, but with slightly different timestamps still reports `0` number of periodic sampling assumption violations. This is because the difference between all consecuting sampling timestamps remains within the (implicitely) specified `10%` tolerance.
+The same program, but with slightly different timestamps still reports `0` 
+number of periodic sampling assumption violations. This is because the 
+difference between all consecutive sampling timestamps remains within 
+the (implicitely) specified `10%` tolerance.
 
 
 ```
@@ -249,7 +252,10 @@ The same program, but with slightly different timestamps still reports `0` numbe
     nb_violations = spec.sampling_violation_counter // nb_violations = 0
     ....
 ```
-On the other hand, the following sequence of inputs results in `1` reported violation of periodic sampling assumption. This is because the second input is `1.11s` away from the first sample, which is `11%` above the assumed `1s` period. 
+On the other hand, the following sequence of inputs results in `1` reported 
+violation of periodic sampling assumption. This is because the third 
+input is `1.12s` away from the second sample, which is `12%` above the 
+assumed `1s` period. 
 
 ```
 # examples/documentation/time_units_3.py
@@ -259,7 +265,8 @@ On the other hand, the following sequence of inputs results in `1` reported viol
     spec.update(2.14, [('req', 0.78), ('gnt', 0.18)])
     nb_violations = spec.sampling_violation_counter // nb_violations = 1
 ```
-This same sequence of inputs results in `0` reported violation of periodic sampling assumption if we explicitely set the sampling period tolerance value to `20%`. 
+This same sequence of inputs results in `0` reported violation of periodic 
+sampling assumption if we explicitely set the sampling period tolerance value to `20%`. 
 
 ```
 # examples/documentation/time_units_4.py
@@ -272,7 +279,13 @@ This same sequence of inputs results in `0` reported violation of periodic sampl
     nb_violations = spec.sampling_violation_counter // nb_violations = 0
 ```
 
-The user can also explicitely set the default unit, as well as the expected period and tolerance. In that case, the user must ensure that the timing bounds declared in the specification are divisible by the sampling period. The following specification is correct, since the sampling period is set to `500ms`, the default unit is set to seconds, and the specification implicitely defines the bound from `0.5s = 500ms` and `1.5s = 1500ms`, i.e. between `1` amd `3` sampling periods. 
+The user can also explicitely set the default unit, as well as the 
+expected period and tolerance. In that case, the user must ensure that 
+the timing bounds declared in the specification are divisible by the 
+sampling period. The following specification is correct, since the 
+sampling period is set to `500ms`, the default unit is set to seconds, 
+and the specification implicitely defines the bound from `0.5s = 500ms` 
+and `1.5s = 1500ms`, i.e. between `1` amd `3` sampling periods. 
 
 ```
 # examples/documentation/time_units_5.py
