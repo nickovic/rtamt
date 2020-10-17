@@ -1,7 +1,7 @@
 from rtamt.operation.abstract_operation import AbstractOperation
 import numpy
 
-class HistoricallyOperation(AbstractOperation):
+class EventuallyOperation(AbstractOperation):
     def __init__(self):
         pass
 
