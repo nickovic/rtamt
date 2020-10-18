@@ -29,6 +29,8 @@ class Variable(Node):
         else:
             self.out_vars = [var]
 
+        self.name = var
+
     @property
     def var(self):
         """Getter for var"""

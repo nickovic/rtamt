@@ -27,6 +27,12 @@ class Since(TemporalNode):
         self.out_vars = child1.out_vars + child2.out_vars
         self.bound = bound
 
+        if bound == None:
+            self.name = '(' + child1.name + ')since(' + child2.name + ')'
+        else:
+            self.name = '(' + child1.name + ')precedes[' + str(bound.begin) + ',' + str(
+                bound.end) + '](' + child2.name + ')'
+
         if is_pure_python:
             if bound == None:
                 name = 'rtamt.operation.stl.since_operation'

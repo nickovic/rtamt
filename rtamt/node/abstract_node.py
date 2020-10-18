@@ -17,6 +17,7 @@ class AbstractNode:
         self.children = list()
         self.evaluator = None
         self.horizon = 0
+        self.name = ''
 
     def addChild(self, child):
         self.children.append(child)
@@ -38,6 +39,16 @@ class AbstractNode:
     def evaluator(self, evaluator):
         """Setter for the evaluator"""
         self.__evaluator = evaluator
+
+    @property
+    def name(self):
+        """Getter for the name"""
+        return self.__name
+
+    @name.setter
+    def name(self, name):
+        """Setter for the name"""
+        self.__name = name
 
     @property
     def horizon(self):

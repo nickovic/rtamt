@@ -28,6 +28,11 @@ class Always(TemporalNode):
         self.out_vars = child.out_vars
         self.bound = bound
 
+        if bound == None:
+            self.name = 'always(' + child.name + ')'
+        else:
+            self.name = 'always[' + str(bound.begin) + ',' + str(bound.end) + '](' + child.name + ')'
+
         if is_pure_python:
             name = 'rtamt.operation.stl.always_operation'
             mod = __import__(name, fromlist=[''])

@@ -27,6 +27,11 @@ class Eventually(TemporalNode):
         self.out_vars = child.out_vars
         self.bound = bound
 
+        if bound == None:
+            self.name = 'eventually(' + child.name + ')'
+        else:
+            self.name = 'eventually[' + str(bound.begin) + ',' + str(bound.end) + '](' + child.name + ')'
+
         if is_pure_python:
             name = 'rtamt.operation.stl.eventually_operation'
             mod = __import__(name, fromlist=[''])

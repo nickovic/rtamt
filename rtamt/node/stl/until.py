@@ -27,6 +27,9 @@ class Until(TemporalNode):
         self.addChild(child2)
         self.bound = bound
 
+        self.name = '(' + child1.name + ')until[' + str(bound.begin) + ',' + str(
+            bound.end) + '](' + child2.name + ')'
+
         self.in_vars = child1.in_vars + child2.in_vars
         self.out_vars = child1.out_vars + child2.out_vars
 

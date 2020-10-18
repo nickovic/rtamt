@@ -22,6 +22,8 @@ class Rise(Node):
         self.in_vars = child.in_vars
         self.out_vars = child.out_vars
 
+        self.name = 'rise(' + child.name + ')'
+
         if is_pure_python:
             name = 'rtamt.operation.stl.rise_operation'
             mod = __import__(name, fromlist=[''])

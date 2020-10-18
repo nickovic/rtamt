@@ -28,6 +28,8 @@ class Precedes(TemporalNode):
         self.out_vars = child1.out_vars + child2.out_vars
         self.bound = bound
 
+        self.name = '(' + child1.name + ')precedes[' + str(bound.begin) + ',' + str(bound.end) + '](' + child2.name + ')'
+
         if is_pure_python:
             name = 'rtamt.operation.stl.precedes_bounded_operation'
             mod = __import__(name, fromlist=[''])

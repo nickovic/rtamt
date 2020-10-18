@@ -23,6 +23,11 @@ class Historically(TemporalNode):
         self.out_vars = child.out_vars
         self.bound = bound
 
+        if bound == None:
+            self.name = 'historically(' + child.name + ')'
+        else:
+            self.name = 'historically[' + str(bound.begin) + ',' + str(bound.end) + '](' + child.name + ')'
+
 
         if is_pure_python:
             if self.bound == None:

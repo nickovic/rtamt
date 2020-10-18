@@ -25,6 +25,11 @@ class Once(TemporalNode):
         self.out_vars = child.out_vars
         self.bound = bound
 
+        if bound == None:
+            self.name = 'once(' + child.name + ')'
+        else:
+            self.name = 'once[' + str(bound.begin) + ',' + str(bound.end) + '](' + child.name + ')'
+
         if is_pure_python:
             if bound == None:
                 name = 'rtamt.operation.stl.once_operation'

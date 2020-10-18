@@ -23,6 +23,8 @@ class Abs(Node):
         self.in_vars = child.in_vars
         self.out_vars = child.out_vars
 
+        self.name = 'abs(' + child.name + ')'
+
         if is_pure_python:
             name = 'rtamt.operation.arithmetic.abs_operation'
             mod = __import__(name, fromlist=[''])

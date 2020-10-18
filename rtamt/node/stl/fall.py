@@ -22,6 +22,8 @@ class Fall(Node):
         self.in_vars = child.in_vars
         self.out_vars = child.out_vars
 
+        self.name = 'fall(' + child.name + ')'
+
         if is_pure_python:
             name = 'rtamt.operation.stl.fall_operation'
             mod = __import__(name, fromlist=[''])

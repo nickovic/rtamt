@@ -24,6 +24,8 @@ class Constant(Node):
         super(Constant, self).__init__()
         self.val = val
 
+        self.name = str(val)
+
         if is_pure_python:
             name = 'rtamt.operation.stl.constant_operation'
             mod = __import__(name, fromlist=[''])

@@ -26,6 +26,8 @@ class Iff(Node):
         self.in_vars = child1.in_vars + child2.in_vars
         self.out_vars = child1.out_vars + child2.out_vars
 
+        self.name = '(' + child1.name + ')<->(' + child2.name + ')'
+
         if is_pure_python:
             name = 'rtamt.operation.stl.iff_operation'
             mod = __import__(name, fromlist=[''])
