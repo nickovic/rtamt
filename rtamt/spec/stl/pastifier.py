@@ -26,134 +26,133 @@ from rtamt.node.stl.constant import Constant
 
 class STLPastifier(STLVisitor):
 
-    def __init__(self, spec):
-        self.spec = spec
-        self.horizon = spec.top.horizon
-
+    def __init__(self, is_pure_python=True):
+        self.is_pure_python = is_pure_python
+        
     @property
-    def spec(self):
-        return self.__spec
+    def is_pure_python(self):
+        return self.__is_pure_python
 
-    @spec.setter
-    def spec(self, spec):
-        self.__spec = spec
+    @is_pure_python.setter
+    def is_pure_python(self, is_pure_python):
+        self.__is_pure_python = is_pure_python
 
     def pastify(self, element):
         return self.visit(element, [])
 
     def visitConstant(self, element, args):
-        node = Constant(element.val, self.spec.is_pure_python)
+        node = Constant(element.val, self.is_pure_python)
         return node
 
     def visitPredicate(self, element, args):
-        node = Predicate(element.children[0], element.children[1], element.io_type, element.operator, self.spec.is_pure_python)
+        node = Predicate(element.children[0], element.children[1], element.io_type, element.operator, self.is_pure_python)
         return node
 
     def visitVariable(self, element, args):
-        node = Variable(element.var, element.field, var_type)
-        if self.horizon > 0:
-            bound = Interval(self.horizon, self.horizon)
-            node = Once(child, bound, self.spec.is_pure_python)
+        node = Variable(element.var, element.field, element.io_type)
+        if node.horizon > 0:
+            bound = Interval(node.horizon, node.horizon)
+            node = Once(node, bound, self.is_pure_python)
         return node
 
     def visitAddition(self, element, args):
         child1_node = self.visit(element.children[0], args)
         child2_node = self.visit(element.children[1], args)
-        node = Addition(child1_node, child2_node, self.spec.is_pure_python)
+        node = Addition(child1_node, child2_node, self.is_pure_python)
         return node
 
     def visitMultiplication(self, element, args):
         child1_node = self.visit(element.children[0], args)
         child2_node = self.visit(element.children[1], args)
-        node = Multiplication(child1_node, child2_node, self.spec.is_pure_python)
+        node = Multiplication(child1_node, child2_node, self.is_pure_python)
         return node
 
     def visitSubtraction(self, element, args):
         child1_node = self.visit(element.children[0], args)
         child2_node = self.visit(element.children[1], args)
-        node = Subtraction(child1_node, child2_node, self.spec.is_pure_python)
+        node = Subtraction(child1_node, child2_node, self.is_pure_python)
         return node
 
     def visitDivision(self, element, args):
         child1_node = self.visit(element.children[0], args)
         child2_node = self.visit(element.children[1], args)
-        node = Division(child1_node, child2_node, self.spec.is_pure_python)
+        node = Division(child1_node, child2_node, self.is_pure_python)
         return node
 
     def visitAbs(self, element, args):
         child_node = self.visit(element.children[0], args)
-        node = Abs(child_node, self.spec.is_pure_python)
+        node = Abs(child_node, self.is_pure_python)
         return node
 
     def visitRise(self, element, args):
         child_node = self.visit(element.children[0], args)
-        node = Rise(child_node, self.spec.is_pure_python)
+        node = Rise(child_node, self.is_pure_python)
         return node
 
     def visitFall(self, element, args):
         child_node = self.visit(element.children[0], args)
-        node = Fall(child_node, self.spec.is_pure_python)
+        node = Fall(child_node, self.is_pure_python)
         return node
 
     def visitNot(self, element, args):
         child_node = self.visit(element.children[0], args)
-        node = Neg(child_node, self.spec.is_pure_python)
+        node = Neg(child_node, self.is_pure_python)
         return node
 
     def visitAnd(self, element, args):
         child1_node = self.visit(element.children[0], args)
         child2_node = self.visit(element.children[1], args)
-        node = Conjunction(child1_node, child2_node, self.spec.is_pure_python)
+        node = Conjunction(child1_node, child2_node, self.is_pure_python)
         return node
 
     def visitOr(self, element, args):
         child1_node = self.visit(element.children[0], args)
         child2_node = self.visit(element.children[1], args)
-        node = Disjunction(child1_node, child2_node, self.spec.is_pure_python)
+        node = Disjunction(child1_node, child2_node, self.is_pure_python)
         return node
 
     def visitImplies(self, element, args):
         child1_node = self.visit(element.children[0], args)
         child2_node = self.visit(element.children[1], args)
-        node = Implies(child1_node, child2_node, self.spec.is_pure_python)
+        node = Implies(child1_node, child2_node, self.is_pure_python)
         return node
 
     def visitIff(self, element, args):
         child1_node = self.visit(element.children[0], args)
         child2_node = self.visit(element.children[1], args)
-        node = Iff(child1_node, child2_node, self.spec.is_pure_python)
+        node = Iff(child1_node, child2_node, self.is_pure_python)
         return node
 
     def visitXor(self, element, args):
         child1_node = self.visit(element.children[0], args)
         child2_node = self.visit(element.children[1], args)
-        node = Xor(child1_node, child2_node, self.spec.is_pure_python)
+        node = Xor(child1_node, child2_node, self.is_pure_python)
         return node
 
     def visitEventually(self, element, args):
         if element.bound == None:
             child_node = self.visit(element.children[0], args)
-            node = Eventually(child_node, element.bound, self.spec.is_pure_python)
+            node = Eventually(child_node, element.bound, self.is_pure_python)
         else:
             node = self.visit(element.children[0], args)
             begin = 0
             end = element.bound.end - element.bound.begin
             if end > 0:
                 bound = Interval(begin, end)
-                node = Once(node, bound, self.spec.is_pure_python)
+                node = Once(node, bound, self.is_pure_python)
         return node
 
     def visitAlways(self, element, args):
         if element.bound == None:
             child_node = self.visit(element.children[0], [])
-            node = Always(child_node, element.bound, self.spec.is_pure_python)
+            node = Always(child_node, element.bound, self.is_pure_python)
         else:
             node = self.visit(element.children[0], [])
             begin = 0
             end = element.bound.end - element.bound.begin
             if end > 0:
                 bound = Interval(begin, end)
-                node = Once(node, bound, self.spec.is_pure_python)
+                node = Once(node, bound, self.is_pure_python)
         return node
 
     def visitUntil(self, element, args):
@@ -162,20 +161,20 @@ class STLPastifier(STLVisitor):
         child1_node = self.visit(element.children[0], [])
         child2_node = self.visit(element.children[1], [])
         bound = Interval(begin, end)
-        node = Precedes(child1_node, child2_node, bound, self.spec.is_pure_python)
+        node = Precedes(child1_node, child2_node, bound, self.is_pure_python)
         return node
 
     def visitOnce(self, element, args):
         child_node = self.visit(element.children[0], [])
 
-        node = Once(child_node, element.bound, self.spec.is_pure_python)
+        node = Once(child_node, element.bound, self.is_pure_python)
 
         return node
 
     def visitHistorically(self, element, args):
         child_node = self.visit(element.children[0], [])
 
-        node = Historically(child_node, element.bound, self.spec.is_pure_python)
+        node = Historically(child_node, element.bound, self.is_pure_python)
 
         return node
 
@@ -183,7 +182,7 @@ class STLPastifier(STLVisitor):
         child_node_1 = self.visit(element.children[0], [])
         child_node_2 = self.visit(element.children[1], [])
 
-        node = Since(child_node_1, child_node_2, element.bound, self.spec.is_pure_python)
+        node = Since(child_node_1, child_node_2, element.bound, self.is_pure_python)
 
         return node
 
@@ -193,7 +192,7 @@ class STLPastifier(STLVisitor):
         child1_node = self.visit(element.children[0], [])
         child2_node = self.visit(element.children[1], [])
         bound = Interval(begin, begin)
-        node = Precedes(child1_node, child2_node, bound, self.spec.is_pure_python)
+        node = Precedes(child1_node, child2_node, bound, self.is_pure_python)
         return node
 
     def visitDefault(self, element):

@@ -14,7 +14,7 @@ class Constant(Node):
     Attributes:
         val : double
     """
-    def __init__(self, val, is_pure_python):
+    def __init__(self, val, is_pure_python=True):
         """Constructor for Const node
 
         Parameters:

@@ -1,96 +1,37 @@
 import unittest
-import rtamt
-from rtamt.operation.sample import Sample
+from rtamt.spec.stl.pastifier import STLPastifier
+from rtamt.node.stl.constant import Constant
+from rtamt.node.stl.variable import Variable
 
 
 class TestSTLPastification(unittest.TestCase):
     def __init__(self, *args, **kwargs):
         super(TestSTLPastification, self).__init__(*args, **kwargs)
 
-    TEST_F(StlPastificationTest, constant)
-    {
-        double
-    val = 5;
-    StlConstantNode * node = new
-    StlConstantNode(val);
-
-    node->horizon(0);
-    StlNode * out = pastification.pastify(node);
-    std::string
-    computed = out->getName();
-    const
-    std::string
-    expected = std::to_string(val);
-
-    EXPECT_EQ(expected, computed);
-
-    delete
-    out;
-
-    node->horizon(5);
-    out = pastification.pastify(node);
-    computed = out->getName();
-
-    EXPECT_EQ(expected, computed);
-
-
     def test_constant(self):
-        spec = rtamt.STLSpecification()
-        spec.name = 'STL Example specification'
+        old_node = Constant(2)
+        pastifier = STLPastifier()
+        old_node.accept(pastifier)
+        new_node = pastifier.pastify(old_node)
 
-        self.assertEqual(spec.name, 'STL Example specification', 'Spec name assertion')
+        self.assertEqual(str(2), new_node.name, 'Constant pastification assertion')
 
-        spec.declare_var('req', 'float')
-        spec.declare_var('gnt', 'float')
-        spec.declare_var('out', 'float')
+    def test_variable_1(self):
+        old_node = Variable('req', '', 'output')
+        pastifier = STLPastifier()
+        old_node.accept(pastifier)
+        new_node = pastifier.pastify(old_node)
 
-        spec.spec = 'out = req<=2 and gnt>=3'
+        self.assertEqual('req', new_node.name, 'Constant pastification assertion')
 
-        self.assertEqual(spec.spec, 'out = req<=2 and gnt>=3', 'Spec assertion')
-        self.assertEqual(spec.sampling_tolerance, 0.1, 'Spec sampling tolerance assertion')
+    def test_variable_2(self):
+        old_node = Variable('req', '', 'output')
+        old_node.horizon = int(5)
+        pastifier = STLPastifier()
+        old_node.accept(pastifier)
+        new_node = pastifier.pastify(old_node)
 
-        try:
-            spec.parse();
-            computed = spec.update(0, [['req', 2.2], ['gnt', 1]])
-            self.assertEqual(-2.0, computed, 'First computation')
-
-            computed = spec.update(1.2, [['req', 4.2], ['gnt', -3.7]])
-            self.assertEqual(-6.7, computed, 'First computation')
-            self.assertEqual(1, spec.sampling_violation_counter, 'Violation counter')
-        except rtamt.STLParseException as err:
-            print('STL Parse Exception: {}'.format(err))
-
-    def test_wrong_tolerance(self):
-        spec = rtamt.STLSpecification()
-        with self.assertRaises(rtamt.STLSpecificationException):
-            spec.set_sampling_period(1, 's', 1.5)
-
-    def test_default_unit_default_sampling_unit_greater_tolerance_ok_samples(self):
-        spec = rtamt.STLSpecification()
-        spec.name = 'STL Example specification'
-
-        self.assertEqual(spec.name, 'STL Example specification', 'Spec name assertion')
-
-        spec.declare_var('req', 'float')
-        spec.declare_var('gnt', 'float')
-        spec.declare_var('out', 'float')
-
-        spec.set_sampling_period(1, 's', 0.5)
-
-        spec.spec = 'out = rise(req)'
-
-        try:
-            spec.parse();
-            spec.update(0, [['req', 2.2], ['gnt', 1]])
-            spec.update(1.11, [['req', 2.2], ['gnt', 1]])
-            spec.update(1.99, [['req', 2.2], ['gnt', 1]])
-            spec.update(3.38, [['req', 2.2], ['gnt', 1]])
-            spec.update(4.39, [['req', 2.2], ['gnt', 1]])
-
-            self.assertEqual(0, spec.sampling_violation_counter, 'Violation counter')
-        except rtamt.STLParseException as err:
-            print('STL Parse Exception: {}'.format(err))
-
+        self.assertEqual('once[5,5](req)', new_node.name, 'Constant pastification assertion')
 
 if __name__ == '__main__':
     unittest.main()

@@ -22,6 +22,7 @@ class Variable(Node):
         super(Variable, self).__init__()
         self.var = var
         self.field = field
+        self.io_type = iotype
         self.node = None
 
         if (iotype == 'input'):
@@ -50,3 +51,13 @@ class Variable(Node):
     def field(self, field):
         """Setter for field"""
         self.__field = field
+
+    @property
+    def io_type(self):
+        """Getter for io_type"""
+        return self.__io_type
+
+    @io_type.setter
+    def io_type(self, io_type):
+        """Setter for io_type"""
+        self.__io_type = io_type
