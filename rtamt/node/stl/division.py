@@ -12,7 +12,7 @@ class Division(Node):
     """A class for storing STL Division nodes
         Inherits Node
     """
-    def __init__(self, child1, child2, is_pure_python):
+    def __init__(self, child1, child2, is_pure_python=True):
         """Constructor for Division node
 
             Parameters:

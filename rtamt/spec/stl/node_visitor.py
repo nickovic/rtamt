@@ -74,7 +74,7 @@ class STLNodeVisitor(StlParserVisitor):
         child1 = self.visit(ctx.expression(0))
         child2 = self.visit(ctx.expression(1))
         op_type = self.str_to_op_type(ctx.comparisonOp().getText())
-        node = Predicate(child1, child2, self.io_type_mod.StlIOType.OUT, op_type, self.spec.is_pure_python)
+        node = Predicate(child1, child2, op_type, self.spec.is_pure_python)
 
         node.horizon = int(0)
         return node

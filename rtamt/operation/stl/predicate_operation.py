@@ -4,11 +4,10 @@ from rtamt.spec.comp_oper import StlComparisonOperator
 from rtamt.spec.stl.io_type import StlIOType
 
 class PredicateOperation(AbstractOperation):
-    def __init__(self, op, io_type):
+    def __init__(self, op):
         self.left = Sample()
         self.right = Sample()
         self.op = op
-        self.io_type = io_type
 
     def addNewInput(self, left, right):
         self.left.seq = left.seq

@@ -11,7 +11,7 @@ class Xor(Node):
     """A class for storing STL Xor nodes
         Inherits TemporalNode
     """
-    def __init__(self, child1, child2, is_pure_python):
+    def __init__(self, child1, child2, is_pure_python=True):
         """Constructor for Xor node
 
         Parameters:

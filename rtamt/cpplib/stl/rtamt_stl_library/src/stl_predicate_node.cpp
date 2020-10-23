@@ -9,9 +9,8 @@
 
 using namespace stl_library;
 
-StlPredicateNode::StlPredicateNode(StlComparisonOperator op, StlIOType io_type) {
+StlPredicateNode::StlPredicateNode(StlComparisonOperator op) {
     this->op = op;
-    this->io_type = io_type;
 }
 
 void StlPredicateNode::addNewInput(int i, Sample msg) {

@@ -17,15 +17,13 @@
 #include <rtamt_stl_library/stl_sample.h>
 #include <rtamt_stl_library/stl_node.h>
 #include <rtamt_stl_library/stl_comp_op.h>
-#include <rtamt_stl_library/stl_io_type.h>
 
 namespace stl_library {
 
 class StlPredicateNode : public StlNode {
     private:
         StlComparisonOperator op;
-        StlIOType io_type;
-        
+
         Sample in[2];
 
         void addNewInput(int i, Sample msg);

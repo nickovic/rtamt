@@ -38,6 +38,7 @@ class STLPastifier(STLVisitor):
         self.__is_pure_python = is_pure_python
 
     def pastify(self, element):
+        self.horizon = element.horizon
         return self.visit(element, [])
 
     def visitConstant(self, element, args):
@@ -45,13 +46,15 @@ class STLPastifier(STLVisitor):
         return node
 
     def visitPredicate(self, element, args):
-        node = Predicate(element.children[0], element.children[1], element.io_type, element.operator, self.is_pure_python)
+        child1_node = self.visit(element.children[0], args)
+        child2_node = self.visit(element.children[1], args)
+        node = Predicate(child1_node, child2_node, element.operator, self.is_pure_python)
         return node
 
     def visitVariable(self, element, args):
         node = Variable(element.var, element.field, element.io_type)
-        if node.horizon > 0:
-            bound = Interval(node.horizon, node.horizon)
+        if self.horizon > 0:
+            bound = Interval(self.horizon, self.horizon)
             node = Once(node, bound, self.is_pure_python)
         return node
 
@@ -134,6 +137,7 @@ class STLPastifier(STLVisitor):
             child_node = self.visit(element.children[0], args)
             node = Eventually(child_node, element.bound, self.is_pure_python)
         else:
+            self.horizon = self.horizon - element.bound.end
             node = self.visit(element.children[0], args)
             begin = 0
             end = element.bound.end - element.bound.begin
@@ -147,6 +151,7 @@ class STLPastifier(STLVisitor):
             child_node = self.visit(element.children[0], [])
             node = Always(child_node, element.bound, self.is_pure_python)
         else:
+            self.horizon = self.horizon - element.bound.end
             node = self.visit(element.children[0], [])
             begin = 0
             end = element.bound.end - element.bound.begin
@@ -156,6 +161,7 @@ class STLPastifier(STLVisitor):
         return node
 
     def visitUntil(self, element, args):
+        self.horizon = self.horizon - element.bound.end
         begin = element.bound.begin
         end = element.bound.end
         child1_node = self.visit(element.children[0], [])

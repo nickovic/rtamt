@@ -11,7 +11,7 @@ class Implies(Node):
     """A class for storing STL Implies nodes
         Inherits TemporalNode
     """
-    def __init__(self, child1, child2, is_pure_python):
+    def __init__(self, child1, child2, is_pure_python=True):
         """Constructor for Implies node
 
         Parameters:
