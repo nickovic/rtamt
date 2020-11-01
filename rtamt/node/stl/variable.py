@@ -30,7 +30,10 @@ class Variable(Node):
         else:
             self.out_vars = [var]
 
-        self.name = var
+        if not self.field:
+            self.name = self.var
+        else:
+            self.name = self.var + '.' + self.field
 
     @property
     def var(self):

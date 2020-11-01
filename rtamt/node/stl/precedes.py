@@ -12,7 +12,7 @@ class Precedes(TemporalNode):
                 Inherits TemporalNode
     """
 
-    def __init__(self, child1, child2, bound, is_pure_python):
+    def __init__(self, child1, child2, bound=None, is_pure_python=True):
         """Constructor for Precedes node
 
         Parameters:

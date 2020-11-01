@@ -157,7 +157,7 @@ class STLPastifier(STLVisitor):
             end = element.bound.end - element.bound.begin
             if end > 0:
                 bound = Interval(begin, end)
-                node = Once(node, bound, self.is_pure_python)
+                node = Historically(node, bound, self.is_pure_python)
         return node
 
     def visitUntil(self, element, args):
@@ -197,7 +197,7 @@ class STLPastifier(STLVisitor):
         begin = element.bound.begin
         child1_node = self.visit(element.children[0], [])
         child2_node = self.visit(element.children[1], [])
-        bound = Interval(begin, begin)
+        bound = Interval(begin, end)
         node = Precedes(child1_node, child2_node, bound, self.is_pure_python)
         return node
 

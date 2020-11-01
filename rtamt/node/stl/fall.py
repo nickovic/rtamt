@@ -11,7 +11,7 @@ class Fall(Node):
     """A class for storing STL Neg nodes
         Inherits Node
     """
-    def __init__(self, child, is_pure_python):
+    def __init__(self, child, is_pure_python=True):
         """Constructor for Neg node
 
             Parameters:

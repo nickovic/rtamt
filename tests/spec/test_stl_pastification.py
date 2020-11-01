@@ -14,6 +14,16 @@ from rtamt.node.stl.disjunction import Disjunction
 from rtamt.node.stl.implies import Implies
 from rtamt.node.stl.iff import Iff
 from rtamt.node.stl.xor import Xor
+from rtamt.node.stl.rise import Rise
+from rtamt.node.stl.fall import Fall
+from rtamt.node.stl.once import Once
+from rtamt.node.stl.historically import Historically
+from rtamt.node.stl.eventually import Eventually
+from rtamt.node.stl.always import Always
+from rtamt.node.stl.since import Since
+from rtamt.node.stl.until import Until
+from rtamt.node.stl.precedes import Precedes
+from rtamt.interval.interval import Interval
 from rtamt.spec.stl.comp_op import StlComparisonOperator
 
 
@@ -35,7 +45,14 @@ class TestSTLPastification(unittest.TestCase):
         old_node.accept(pastifier)
         new_node = pastifier.pastify(old_node)
 
-        self.assertEqual('req', new_node.name, 'Constant pastification assertion')
+        self.assertEqual('req', new_node.name, 'Variable pastification assertion')
+
+        old_node = Variable('myvar.req', 'val', 'output')
+        pastifier = STLPastifier()
+        old_node.accept(pastifier)
+        new_node = pastifier.pastify(old_node)
+
+        self.assertEqual('myvar.req.val', new_node.name, 'Variable pastification assertion')
 
     def test_variable_2(self):
         old_node = Variable('req', '', 'output')
@@ -44,7 +61,7 @@ class TestSTLPastification(unittest.TestCase):
         old_node.accept(pastifier)
         new_node = pastifier.pastify(old_node)
 
-        self.assertEqual('once[5,5](req)', new_node.name, 'Constant pastification assertion')
+        self.assertEqual('once[5,5](req)', new_node.name, 'Variable pastification assertion')
 
     def test_abs_1(self):
         var_node = Variable('req', '', 'output')
@@ -256,6 +273,240 @@ class TestSTLPastification(unittest.TestCase):
         new_node = pastifier.pastify(add_node)
 
         self.assertEqual('(req)xor(gnt)', new_node.name, 'Xor pastification assertion')
+
+    def test_rise(self):
+        var_node = Variable('req', '', 'output')
+        node = Rise(var_node)
+
+        pastifier = STLPastifier()
+        node.accept(pastifier)
+        new_node = pastifier.pastify(node)
+
+        self.assertEqual('rise(req)', new_node.name, 'Rise pastification assertion')
+
+    def test_fall(self):
+        var_node = Variable('req', '', 'output')
+        node = Fall(var_node)
+
+        pastifier = STLPastifier()
+        node.accept(pastifier)
+        new_node = pastifier.pastify(node)
+
+        self.assertEqual('fall(req)', new_node.name, 'Fall pastification assertion')
+
+    def test_once(self):
+        var_node = Variable('req', '', 'output')
+        node = Once(var_node)
+
+        pastifier = STLPastifier()
+        node.accept(pastifier)
+        new_node = pastifier.pastify(node)
+
+        self.assertEqual('once(req)', new_node.name, 'Once pastification assertion')
+
+        node.horizon = 5
+
+        pastifier = STLPastifier()
+        node.accept(pastifier)
+        new_node = pastifier.pastify(node)
+
+        self.assertEqual('once(once[5,5](req))', new_node.name, 'Once pastification assertion')
+
+
+    def test_historically(self):
+        var_node = Variable('req', '', 'output')
+        node = Historically(var_node)
+
+        pastifier = STLPastifier()
+        node.accept(pastifier)
+        new_node = pastifier.pastify(node)
+
+        self.assertEqual('historically(req)', new_node.name, 'Historically pastification assertion')
+
+    def test_eventually(self):
+        var_node = Variable('req', '', 'output')
+        node = Eventually(var_node)
+
+        pastifier = STLPastifier()
+        node.accept(pastifier)
+        new_node = pastifier.pastify(node)
+
+        self.assertEqual('eventually(req)', new_node.name, 'Eventually pastification assertion')
+
+        node.horizon = 5
+
+        pastifier = STLPastifier()
+        node.accept(pastifier)
+        new_node = pastifier.pastify(node)
+
+        self.assertEqual('eventually(once[5,5](req))', new_node.name, 'Eventually pastification assertion')
+
+    def test_always(self):
+        var_node = Variable('req', '', 'output')
+        node = Always(var_node)
+
+        pastifier = STLPastifier()
+        node.accept(pastifier)
+        new_node = pastifier.pastify(node)
+
+        self.assertEqual('always(req)', new_node.name, 'Always pastification assertion')
+
+        node.horizon = 5
+
+        pastifier = STLPastifier()
+        node.accept(pastifier)
+        new_node = pastifier.pastify(node)
+
+        self.assertEqual('always(once[5,5](req))', new_node.name, 'Always pastification assertion')
+
+    def test_since(self):
+        var_node_1 = Variable('req', '', 'output')
+        var_node_2 = Variable('gnt', '', 'output')
+        add_node = Since(var_node_1, var_node_2)
+
+        pastifier = STLPastifier()
+        add_node.accept(pastifier)
+        new_node = pastifier.pastify(add_node)
+
+        self.assertEqual('(req)since(gnt)', new_node.name, 'Since pastification assertion')
+
+        add_node.horizon = 5
+        pastifier = STLPastifier()
+        add_node.accept(pastifier)
+        new_node = pastifier.pastify(add_node)
+
+        self.assertEqual('(once[5,5](req))since(once[5,5](gnt))', new_node.name, 'Since pastification assertion')
+
+
+    def test_once_0_1(self):
+        var_node = Variable('req', '', 'output')
+        node = Once(var_node, Interval(0, 1))
+
+        pastifier = STLPastifier()
+        node.accept(pastifier)
+        new_node = pastifier.pastify(node)
+
+        self.assertEqual('once[0,1](req)', new_node.name, 'Once pastification assertion')
+
+        node.horizon = 5
+
+        pastifier = STLPastifier()
+        node.accept(pastifier)
+        new_node = pastifier.pastify(node)
+
+        self.assertEqual('once[0,1](once[5,5](req))', new_node.name, 'Once pastification assertion')
+
+    def test_historically_0_1(self):
+        var_node = Variable('req', '', 'output')
+        node = Historically(var_node, Interval(0, 1))
+
+        pastifier = STLPastifier()
+        node.accept(pastifier)
+        new_node = pastifier.pastify(node)
+
+        self.assertEqual('historically[0,1](req)', new_node.name, 'Historically pastification assertion')
+
+        node.horizon = 5
+
+        pastifier = STLPastifier()
+        node.accept(pastifier)
+        new_node = pastifier.pastify(node)
+
+        self.assertEqual('historically[0,1](once[5,5](req))', new_node.name, 'Historically pastification assertion')
+
+    def test_eventually_0_1(self):
+        var_node = Variable('req', '', 'output')
+        node = Eventually(var_node, Interval(0, 1))
+
+        pastifier = STLPastifier()
+        node.accept(pastifier)
+        new_node = pastifier.pastify(node)
+
+        self.assertEqual('once[0,1](req)', new_node.name, 'Eventually pastification assertion')
+
+        node.horizon = 5
+
+        pastifier = STLPastifier()
+        node.accept(pastifier)
+        new_node = pastifier.pastify(node)
+
+        self.assertEqual('once[0,1](once[4,4](req))', new_node.name, 'Eventually pastification assertion')
+
+    def test_always_0_1(self):
+        var_node = Variable('req', '', 'output')
+        node = Always(var_node, Interval(0, 1))
+
+        pastifier = STLPastifier()
+        node.accept(pastifier)
+        new_node = pastifier.pastify(node)
+
+        self.assertEqual('historically[0,1](req)', new_node.name, 'Always pastification assertion')
+
+        node.horizon = 5
+
+        pastifier = STLPastifier()
+        node.accept(pastifier)
+        new_node = pastifier.pastify(node)
+
+        self.assertEqual('historically[0,1](once[4,4](req))', new_node.name, 'Always pastification assertion')
+
+    def test_until_0_1(self):
+        var_node_1 = Variable('req', '', 'output')
+        var_node_2 = Variable('gnt', '', 'output')
+        add_node = Until(var_node_1, var_node_2, Interval(0,1))
+
+        pastifier = STLPastifier()
+        add_node.accept(pastifier)
+        new_node = pastifier.pastify(add_node)
+
+        self.assertEqual('(req)precedes[0,1](gnt)', new_node.name, 'Until pastification assertion')
+
+        add_node.horizon = 5
+        pastifier = STLPastifier()
+        add_node.accept(pastifier)
+        new_node = pastifier.pastify(add_node)
+
+        self.assertEqual('(once[4,4](req))precedes[0,1](once[4,4](gnt))', new_node.name, 'Until pastification assertion')
+
+    def test_since_0_1(self):
+        var_node_1 = Variable('req', '', 'output')
+        var_node_2 = Variable('gnt', '', 'output')
+        add_node = Since(var_node_1, var_node_2, Interval(0,1))
+
+        pastifier = STLPastifier()
+        add_node.accept(pastifier)
+        new_node = pastifier.pastify(add_node)
+
+        self.assertEqual('(req)since[0,1](gnt)', new_node.name, 'Since pastification assertion')
+
+        add_node.horizon = 5
+        pastifier = STLPastifier()
+        add_node.accept(pastifier)
+        new_node = pastifier.pastify(add_node)
+
+        self.assertEqual('(once[5,5](req))since[0,1](once[5,5](gnt))', new_node.name, 'Since pastification assertion')
+
+    def test_precedes_0_1(self):
+        var_node_1 = Variable('req', '', 'output')
+        var_node_2 = Variable('gnt', '', 'output')
+        add_node = Precedes(var_node_1, var_node_2, Interval(0,1))
+
+        pastifier = STLPastifier()
+        add_node.accept(pastifier)
+        new_node = pastifier.pastify(add_node)
+
+        self.assertEqual('(req)precedes[0,1](gnt)', new_node.name, 'Precedes pastification assertion')
+
+        add_node.horizon = 5
+        pastifier = STLPastifier()
+        add_node.accept(pastifier)
+        new_node = pastifier.pastify(add_node)
+
+        self.assertEqual('(once[5,5](req))precedes[0,1](once[5,5](gnt))', new_node.name, 'Precedes pastification assertion')
+
+
+
+
 
 if __name__ == '__main__':
     unittest.main()
