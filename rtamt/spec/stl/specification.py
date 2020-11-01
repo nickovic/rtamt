@@ -25,6 +25,7 @@ from rtamt.exception.stl.exception import STLOfflineException
 from rtamt.spec.stl.node_visitor import STLNodeVisitor
 from rtamt.spec.stl.pastifier import STLPastifier
 from rtamt.spec.stl.evaluator import STLEvaluator
+from rtamt.spec.stl.reset import STLReset
 
 
 class STLSpecification(AbstractSpecification,StlParserVisitor):
@@ -48,6 +49,7 @@ class STLSpecification(AbstractSpecification,StlParserVisitor):
         super(STLSpecification, self).__init__(is_pure_python)
         self.name = 'STL Specification'
         self.visitor = STLNodeVisitor(self)
+        self.reseter = STLReset(self)
 
 
     # Parses the STL property
@@ -111,6 +113,13 @@ class STLSpecification(AbstractSpecification,StlParserVisitor):
         self.update_counter = self.update_counter + 1
 
         return out
+
+    def reset(self):
+        self.top.accept(self.reseter)
+        self.reseter.reset(self.top)
+        self.update_counter = 0;
+        self.previous_time = 0.0;
+        self.sampling_violation_counter = 0;
 
     # This is the visitor part. We will populate
     def visitStlSpecification(self, ctx):

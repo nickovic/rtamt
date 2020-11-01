@@ -7,6 +7,9 @@ class ConstantOperation(AbstractOperation):
         self.val = val
         self.time = 0
 
+    def reset(self):
+        self.time = 0
+
     def update(self):
         out = Sample()
         out.seq = self.time

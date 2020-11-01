@@ -6,6 +6,9 @@ class HistoricallyBoundedOperation(AbstractOperation):
     def __init__(self, begin, end):
         self.begin = begin
         self.end = end
+        self.reset()
+
+    def reset(self):
         self.input = Sample()
         self.buffer = collections.deque(maxlen=(end+1))
 

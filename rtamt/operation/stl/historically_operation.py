@@ -3,6 +3,9 @@ from rtamt.operation.sample import Sample
 
 class HistoricallyOperation(AbstractOperation):
     def __init__(self):
+        self.reset()
+
+    def reset(self):
         self.prev_out = Sample()
         self.input = Sample()
 

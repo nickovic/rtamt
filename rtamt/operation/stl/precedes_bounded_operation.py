@@ -6,6 +6,10 @@ class PrecedesBoundedOperation(AbstractOperation):
     def __init__(self, begin, end):
         self.begin = begin
         self.end = end
+
+        self.reset()
+
+    def reset(self):
         self.buffer = []
         self.buffer.append(collections.deque(maxlen=(end+1)))
         self.buffer.append(collections.deque(maxlen=(end+1)))
@@ -18,7 +22,6 @@ class PrecedesBoundedOperation(AbstractOperation):
             s_right.value = - float("inf")
             self.buffer[0].append(s_left)
             self.buffer[1].append(s_right)
-
 
     def addNewInput(self, left, right):
         self.input = Sample()

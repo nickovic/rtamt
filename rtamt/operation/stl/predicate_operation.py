@@ -5,9 +5,13 @@ from rtamt.spec.stl.io_type import StlIOType
 
 class PredicateOperation(AbstractOperation):
     def __init__(self, op):
+        self.op = op
+        self.reset()
+
+    def reset(self):
         self.left = Sample()
         self.right = Sample()
-        self.op = op
+
 
     def addNewInput(self, left, right):
         self.left.seq = left.seq

@@ -18,6 +18,10 @@ class AbstractNode:
         self.evaluator = None
         self.horizon = 0
         self.name = ''
+        self.node = None
+
+    def reset(self):
+        self.node.reset()
 
     def addChild(self, child):
         self.children.append(child)
@@ -59,6 +63,16 @@ class AbstractNode:
     def horizon(self, horizon):
         """Setter for the horizon"""
         self.__horizon = horizon
+
+    @property
+    def node(self):
+        """Getter for the node"""
+        return self.__node
+
+    @node.setter
+    def node(self, node):
+        """Setter for the horizon"""
+        self.__node = node
 
     def __repr__(self):
         '''Returns representation of the object'''

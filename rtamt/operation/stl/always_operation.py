@@ -4,6 +4,9 @@ from rtamt.operation.sample import Time
 
 class AlwaysOperation(AbstractOperation):
     def __init__(self):
+        self.reset()
+
+    def reset(self):
         self.prev_out = Sample()
         self.input = Sample()
 
@@ -11,6 +14,7 @@ class AlwaysOperation(AbstractOperation):
         self.prev_out.time.sec = 0
         self.prev_out.time.msec = 0
         self.prev_out.value = float("inf")
+
 
     def addNewInput(self, sample):
         self.input.seq = sample.seq

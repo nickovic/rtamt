@@ -4,6 +4,9 @@ from rtamt.operation.sample import Time
 
 class FallOperation(AbstractOperation):
     def __init__(self):
+        self.reset()
+
+    def reset(self):
         self.input = Sample()
         self.prev = Sample()
         self.prev.value = float("inf")

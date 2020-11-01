@@ -1,6 +1,5 @@
 import unittest
 import rtamt
-from rtamt.operation.sample import Sample
 
 
 class TestSTLIntervalStyle(unittest.TestCase):

@@ -6,6 +6,9 @@ class SinceBoundedOperation(AbstractOperation):
     def __init__(self, begin, end):
         self.begin = begin
         self.end = end
+        self.reset()
+
+    def reset(self):
         self.buffer_left = collections.deque(maxlen=(end+1))
         self.buffer_right = collections.deque(maxlen=(end+1))
         self.input = Sample()
