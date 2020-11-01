@@ -504,9 +504,105 @@ class TestSTLPastification(unittest.TestCase):
 
         self.assertEqual('(once[5,5](req))precedes[0,1](once[5,5](gnt))', new_node.name, 'Precedes pastification assertion')
 
+    def test_complex_past_1(self):
+        var_node_1 = Variable('req', '', 'output')
+        var_node_2 = Variable('gnt', '', 'output')
+        rise_node = Rise(var_node_1)
+        hist_node = Historically(var_node_2)
+        once_node = Once(hist_node, Interval(1,2))
+        add_node = Since(rise_node, once_node, Interval(2, 6))
+        add_node.horizon = 0
+
+        pastifier = STLPastifier()
+        add_node.accept(pastifier)
+        new_node = pastifier.pastify(add_node)
+
+        self.assertEqual('(rise(req))since[2,6](once[1,2](historically(gnt)))', new_node.name, 'Complex pastification assertion')
+
+    def test_complex_past_2(self):
+        var_node_1 = Variable('req', '', 'output')
+        var_node_2 = Variable('gnt', '', 'output')
+        rise_node = Rise(var_node_1)
+        hist_node = Historically(var_node_2)
+        once_node = Once(hist_node, Interval(1,2))
+        since_node = Since(rise_node, once_node, Interval(2, 6))
+        add_node = Always(since_node)
+        add_node.horizon = 0
+
+        pastifier = STLPastifier()
+        add_node.accept(pastifier)
+        new_node = pastifier.pastify(add_node)
+
+        self.assertEqual('always((rise(req))since[2,6](once[1,2](historically(gnt))))', new_node.name, 'Complex pastification assertion')
+
+    def test_complex_bounded_future_1(self):
+        var_node_1 = Variable('req', '', 'output')
+        var_node_2 = Variable('gnt', '', 'output')
+        cnt_node_1 = Constant(3)
+        cnt_node_2 = Constant(3)
+        pd_node_1 = Predicate(var_node_1, cnt_node_1, StlComparisonOperator.GEQ)
+        pd_node_2 = Predicate(var_node_2, cnt_node_2, StlComparisonOperator.GEQ)
+        rise_node = Rise(pd_node_1)
+        hist_node = Always(pd_node_2, Interval(3, 4))
+        once_node = Eventually(hist_node, Interval(1,2))
+        implies_node = Implies(rise_node, once_node)
+        add_node = Always(implies_node)
+        add_node.horizon = 6
+
+        pastifier = STLPastifier()
+        add_node.accept(pastifier)
+        new_node = pastifier.pastify(add_node)
+
+        self.assertEqual('always((rise((once[6,6](req))>=(3)))->(once[0,1](historically[0,1]((gnt)>=(3)))))', new_node.name, 'Complex pastification assertion')
+
+    def test_complex_bounded_future_2(self):
+        var_node_1 = Variable('req', '', 'output')
+        var_node_2 = Variable('gnt', '', 'output')
+        var_node_3 = Variable('ack', '', 'output')
+
+        until_node = Until(var_node_1, var_node_2, Interval(1, 2))
+        ev_node = Eventually(var_node_3, Interval(0, 6))
+        add_node = Implies(until_node, ev_node)
+        add_node.horizon = 6
+
+        pastifier = STLPastifier()
+        add_node.accept(pastifier)
+        new_node = pastifier.pastify(add_node)
+
+        self.assertEqual('((once[4,4](req))precedes[1,2](once[4,4](gnt)))->(once[0,6](ack))', new_node.name, 'Complex pastification assertion')
+
+    def test_complex_mixed_1(self):
+        var_node_1 = Variable('req', '', 'output')
+        var_node_2 = Variable('gnt', '', 'output')
+
+        ev_node = Eventually(var_node_1, Interval(5, 6))
+        once_node = Once(var_node_2, Interval(1, 2))
+        ev_once_node = Eventually(once_node, Interval(3, 3))
+        add_node = Implies(ev_node, ev_once_node)
+        add_node.horizon = 6
+
+        pastifier = STLPastifier()
+        add_node.accept(pastifier)
+        new_node = pastifier.pastify(add_node)
+
+        self.assertEqual('(once[0,1](req))->(once[1,2](once[3,3](gnt)))', new_node.name, 'Complex pastification assertion')
+
+    def test_complex_mixed_2(self):
+        var_node_1 = Variable('req', '', 'output')
+        var_node_2 = Variable('gnt', '', 'output')
+
+        ev_node = Eventually(var_node_1, Interval(5, 6))
+        once_node = Once(var_node_2, Interval(1, 2))
+        alw_node = Always(once_node, Interval(3, 3))
+        add_node = Implies(ev_node, alw_node)
+        add_node.horizon = 6
+
+        pastifier = STLPastifier()
+        add_node.accept(pastifier)
+        new_node = pastifier.pastify(add_node)
+
+        self.assertEqual('(once[0,1](req))->(once[1,2](once[3,3](gnt)))', new_node.name, 'Complex pastification assertion')
 
 
-
-
-if __name__ == '__main__':
-    unittest.main()
+    if __name__ == '__main__':
+        unittest.main()

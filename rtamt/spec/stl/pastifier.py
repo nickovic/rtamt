@@ -38,8 +38,7 @@ class STLPastifier(STLVisitor):
         self.__is_pure_python = is_pure_python
 
     def pastify(self, element):
-        self.horizon = element.horizon
-        return self.visit(element, [])
+        return self.visit(element, [element.horizon])
 
     def visitConstant(self, element, args):
         node = Constant(element.val, self.is_pure_python)
@@ -52,9 +51,10 @@ class STLPastifier(STLVisitor):
         return node
 
     def visitVariable(self, element, args):
+        horizon = args[0]
         node = Variable(element.var, element.field, element.io_type)
-        if self.horizon > 0:
-            bound = Interval(self.horizon, self.horizon)
+        if horizon > 0:
+            bound = Interval(horizon, horizon)
             node = Once(node, bound, self.is_pure_python)
         return node
 
@@ -137,8 +137,8 @@ class STLPastifier(STLVisitor):
             child_node = self.visit(element.children[0], args)
             node = Eventually(child_node, element.bound, self.is_pure_python)
         else:
-            self.horizon = self.horizon - element.bound.end
-            node = self.visit(element.children[0], args)
+            horizon = args[0] - element.bound.end
+            node = self.visit(element.children[0], [horizon])
             begin = 0
             end = element.bound.end - element.bound.begin
             if end > 0:
@@ -148,11 +148,11 @@ class STLPastifier(STLVisitor):
 
     def visitAlways(self, element, args):
         if element.bound == None:
-            child_node = self.visit(element.children[0], [])
+            child_node = self.visit(element.children[0], args)
             node = Always(child_node, element.bound, self.is_pure_python)
         else:
-            self.horizon = self.horizon - element.bound.end
-            node = self.visit(element.children[0], [])
+            horizon = args[0] - element.bound.end
+            node = self.visit(element.children[0], [horizon])
             begin = 0
             end = element.bound.end - element.bound.begin
             if end > 0:
@@ -161,32 +161,32 @@ class STLPastifier(STLVisitor):
         return node
 
     def visitUntil(self, element, args):
-        self.horizon = self.horizon - element.bound.end
+        horizon = args[0] - element.bound.end
         begin = element.bound.begin
         end = element.bound.end
-        child1_node = self.visit(element.children[0], [])
-        child2_node = self.visit(element.children[1], [])
+        child1_node = self.visit(element.children[0], [horizon])
+        child2_node = self.visit(element.children[1], [horizon])
         bound = Interval(begin, end)
         node = Precedes(child1_node, child2_node, bound, self.is_pure_python)
         return node
 
     def visitOnce(self, element, args):
-        child_node = self.visit(element.children[0], [])
+        child_node = self.visit(element.children[0], args)
 
         node = Once(child_node, element.bound, self.is_pure_python)
 
         return node
 
     def visitHistorically(self, element, args):
-        child_node = self.visit(element.children[0], [])
+        child_node = self.visit(element.children[0], args)
 
         node = Historically(child_node, element.bound, self.is_pure_python)
 
         return node
 
     def visitSince(self, element, args):
-        child_node_1 = self.visit(element.children[0], [])
-        child_node_2 = self.visit(element.children[1], [])
+        child_node_1 = self.visit(element.children[0], args)
+        child_node_2 = self.visit(element.children[1], args)
 
         node = Since(child_node_1, child_node_2, element.bound, self.is_pure_python)
 
@@ -195,8 +195,8 @@ class STLPastifier(STLVisitor):
     def visitPrecedes(self, element, args):
         end = element.bound.end
         begin = element.bound.begin
-        child1_node = self.visit(element.children[0], [])
-        child2_node = self.visit(element.children[1], [])
+        child1_node = self.visit(element.children[0], args)
+        child2_node = self.visit(element.children[1], args)
         bound = Interval(begin, end)
         node = Precedes(child1_node, child2_node, bound, self.is_pure_python)
         return node
