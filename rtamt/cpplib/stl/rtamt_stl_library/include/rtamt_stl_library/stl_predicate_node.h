@@ -31,9 +31,10 @@ class StlPredicateNode : public StlNode {
         
         
     public:
-        StlPredicateNode(StlComparisonOperator op, StlIOType io_type);
+        StlPredicateNode(StlComparisonOperator op);
         Sample update();
         void addNewInput(Sample left, Sample right);
+        void reset();
 };
 
 } // namespace stl_library

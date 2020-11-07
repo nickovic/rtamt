@@ -13,6 +13,7 @@ using namespace stl_library;
 BOOST_PYTHON_MODULE(stl_constant_node)
 {
     class_<StlConstantNode, bases<StlNode> >("StlConstantNode", init<double>())
-        .def("update", &StlConstantNode::update)    ;
+        .def("update", &StlConstantNode::update)
+        .def("reset", &StlConstantNode::reset);
 }
 

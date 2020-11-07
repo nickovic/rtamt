@@ -32,6 +32,7 @@ class StlOnceNode : public StlNode {
         StlOnceNode();
         Sample update();
         void addNewInput(Sample msg);
+        void reset();
        
 };
 

@@ -18,6 +18,13 @@ StlRiseNode::StlRiseNode() {
     prev_in.value = - std::numeric_limits<double>::infinity();
 }
 
+void StlRiseNode::reset() {
+    prev_in.seq = 0;
+    prev_in.time.sec = 0;
+    prev_in.time.msec = 0;
+    prev_in.value = - std::numeric_limits<double>::infinity();
+}
+
 void StlRiseNode::addNewInput(int i, Sample sample) {
     if (i != 0)
         return;

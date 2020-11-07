@@ -8,6 +8,9 @@ using namespace stl_library;
 StlDivisionNode::StlDivisionNode() {
 }
 
+void StlDivisionNode::reset() {
+}
+
 void StlDivisionNode::addNewInput(int i, Sample sample) {
     if (i > 1 or i < 0)
         return;

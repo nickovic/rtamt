@@ -15,6 +15,9 @@ using namespace stl_library;
 StlAbsNode::StlAbsNode() {
 }
 
+void StlAbsNode::reset() {
+}
+
 void StlAbsNode::addNewInput(int i, Sample sample) {
     if (i != 0)
         return;

@@ -28,7 +28,8 @@ class StlSubtractionNode : public StlNode {
     public:
         StlSubtractionNode();
         Sample update();
-        void addNewInput(Sample left, Sample right);      
+        void addNewInput(Sample left, Sample right);
+        void reset();
 };
 
 } // namespace stl_library

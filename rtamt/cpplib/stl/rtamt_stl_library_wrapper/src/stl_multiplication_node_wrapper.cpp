@@ -20,6 +20,7 @@ BOOST_PYTHON_MODULE(stl_multiplication_node)
 {
     class_<StlMultiplicationNode, bases<StlNode> >("StlMultiplicationNode")
         .def("update", &StlMultiplicationNode::update)
+        .def("reset", &StlMultiplicationNode::reset)
         .def("addNewInput", static_cast<void (StlMultiplicationNode::*)(Sample, Sample)>(&StlMultiplicationNode::addNewInput))
     ;
 }

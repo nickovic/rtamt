@@ -13,6 +13,9 @@ StlPredicateNode::StlPredicateNode(StlComparisonOperator op) {
     this->op = op;
 }
 
+void StlPredicateNode::reset() {
+}
+
 void StlPredicateNode::addNewInput(int i, Sample msg) {
     if (i!=0) {
         return;

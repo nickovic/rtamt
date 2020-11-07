@@ -29,6 +29,7 @@ class StlAbsNode : public StlNode {
         StlAbsNode();
         Sample update();
         void addNewInput(Sample msg);
+        void reset();
        
 };
 

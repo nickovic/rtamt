@@ -21,6 +21,7 @@ BOOST_PYTHON_MODULE(stl_implies_node)
 {
     class_<StlImpliesNode, bases<StlCombinatorialBinaryNode, StlNode> >("StlImpliesNode")
         .def("update", &StlImpliesNode::update)
+        .def("reset", &StlImpliesNode::reset)
         .def("addNewInput", static_cast<void (StlImpliesNode::*)(Sample, Sample)>(&StlImpliesNode::addNewInput))
     ;
 }

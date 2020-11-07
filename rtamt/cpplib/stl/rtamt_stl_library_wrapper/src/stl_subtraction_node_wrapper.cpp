@@ -20,6 +20,7 @@ BOOST_PYTHON_MODULE(stl_subtraction_node)
 {
     class_<StlSubtractionNode, bases<StlNode> >("StlSubtractionNode")
         .def("update", &StlSubtractionNode::update)
+        .def("reset", &StlSubtractionNode::reset)
         .def("addNewInput", static_cast<void (StlSubtractionNode::*)(Sample, Sample)>(&StlSubtractionNode::addNewInput))
     ;
 }

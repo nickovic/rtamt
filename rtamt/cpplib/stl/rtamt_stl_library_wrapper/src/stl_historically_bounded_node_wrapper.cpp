@@ -20,6 +20,7 @@ BOOST_PYTHON_MODULE(stl_historically_bounded_node)
 {
     class_<StlHistoricallyBoundedNode, bases<StlNode> >("StlHistoricallyBoundedNode", init<int,int>())
         .def("update", &StlHistoricallyBoundedNode::update)
+        .def("reset", &StlHistoricallyBoundedNode::reset)
         .def("addNewInput", static_cast<void (StlHistoricallyBoundedNode::*)(Sample)>(&StlHistoricallyBoundedNode::addNewInput))
     ;
 }

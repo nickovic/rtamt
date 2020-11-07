@@ -18,6 +18,13 @@ StlFallNode::StlFallNode() {
     prev_in.value = std::numeric_limits<double>::infinity();
 }
 
+void StlFallNode::reset() {
+    prev_in.seq = 0;
+    prev_in.time.sec = 0;
+    prev_in.time.msec = 0;
+    prev_in.value = std::numeric_limits<double>::infinity();
+}
+
 void StlFallNode::addNewInput(int i, Sample sample) {
     if (i != 0)
         return;

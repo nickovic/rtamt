@@ -28,7 +28,8 @@ class StlAdditionNode : public StlNode {
     public:
         StlAdditionNode();
         Sample update();
-        void addNewInput(Sample left, Sample right);      
+        void addNewInput(Sample left, Sample right);
+        void reset();
 };
 
 } // namespace stl_library

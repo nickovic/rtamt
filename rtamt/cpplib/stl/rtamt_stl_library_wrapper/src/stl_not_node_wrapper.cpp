@@ -14,6 +14,7 @@ BOOST_PYTHON_MODULE(stl_not_node)
 {
     class_<StlNotNode, bases<StlNode> >("StlNotNode")
         .def("update", &StlNotNode::update)
+        .def("reset", &StlNotNode::reset)
         .def("addNewInput", static_cast<void (StlNotNode::*)(Sample)>(&StlNotNode::addNewInput))
     ;
 }

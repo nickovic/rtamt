@@ -46,9 +46,9 @@ class PrecedesBoundedOperation(AbstractOperation):
         for i in range(self.begin, self.end+1):
             left = float("inf")
             right = self.buffer[1][i].value
-            for j in range(i):
+            for j in range(0, i):
                 left = min(left, self.buffer[0][j].value)
 
-            out.value = max(out.value, min(left,right))
+            out.value = max(out.value, min(left, right))
 
         return out

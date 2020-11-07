@@ -16,6 +16,10 @@ StlConstantNode::StlConstantNode(double val) {
     this->time = 0;
 }
 
+void StlConstantNode::reset() {
+    this->time = 0;
+}
+
 void StlConstantNode::addNewInput(int i, Sample sample) {
         return;
 }

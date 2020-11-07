@@ -20,6 +20,7 @@ BOOST_PYTHON_MODULE(stl_since_bounded_node)
 {
     class_<StlSinceBoundedNode, bases<StlNode> >("StlSinceBoundedNode", init<int,int>())
         .def("update", &StlSinceBoundedNode::update)
+        .def("reset", &StlSinceBoundedNode::reset)
         .def("addNewInput", static_cast<void (StlSinceBoundedNode::*)(Sample, Sample)>(&StlSinceBoundedNode::addNewInput))
     ;
 }

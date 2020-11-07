@@ -72,7 +72,7 @@ class STLSpecification(AbstractSpecification,StlParserVisitor):
         self.top = self.visitor.visitStlfile(ctx)
 
         # Translate bounded future STL to past STL
-        pastifier = STLPastifier()
+        pastifier = STLPastifier(self.is_pure_python)
         self.top.accept(pastifier)
         past = pastifier.pastify(self.top)
         self.top = past
