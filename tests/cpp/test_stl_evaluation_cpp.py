@@ -1,5 +1,34 @@
 import unittest
+from rtamt.lib.rtamt_stl_library_wrapper.stl_node import StlNode
+from rtamt.lib.rtamt_stl_library_wrapper.stl_constant_node import StlConstantNode
+from rtamt.lib.rtamt_stl_library_wrapper.stl_sample import Sample
+from rtamt.lib.rtamt_stl_library_wrapper.stl_comp_op import StlComparisonOperator
+from rtamt.lib.rtamt_stl_library_wrapper.stl_time import Time
 from rtamt.operation.stl.constant_operation import ConstantOperation
+from rtamt.lib.rtamt_stl_library_wrapper.stl_addition_node import StlAdditionNode
+#from rtamt.lib.rtamt_stl_library_wrapper.stl_and_node import StlAndNode
+from rtamt.lib.rtamt_stl_library_wrapper.stl_rise_node import StlRiseNode
+from rtamt.lib.rtamt_stl_library_wrapper.stl_fall_node import StlFallNode
+from rtamt.lib.rtamt_stl_library_wrapper.stl_predicate_node import StlPredicateNode
+from rtamt.lib.rtamt_stl_library_wrapper.stl_not_node import StlNotNode
+#from rtamt.lib.rtamt_stl_library_wrapper.stl_or_node import StlOrNode
+#from rtamt.lib.rtamt_stl_library_wrapper.stl_implies_node import StlImpliesNode
+#from rtamt.lib.rtamt_stl_library_wrapper.stl_iff_node import StlIffNode
+#from rtamt.lib.rtamt_stl_library_wrapper.stl_Xor_node import StlXorNode
+from rtamt.lib.rtamt_stl_library_wrapper.stl_always_node import StlAlwaysNode
+from rtamt.lib.rtamt_stl_library_wrapper.stl_historically_node import StlHistoricallyNode
+from rtamt.lib.rtamt_stl_library_wrapper.stl_once_node import StlOnceNode
+from rtamt.lib.rtamt_stl_library_wrapper.stl_since_node import StlSinceNode
+from rtamt.lib.rtamt_stl_library_wrapper.stl_once_bounded_node import StlOnceBoundedNode
+from rtamt.lib.rtamt_stl_library_wrapper.stl_historically_bounded_node import StlHistoricallyBoundedNode
+from rtamt.lib.rtamt_stl_library_wrapper.stl_since_bounded_node import StlSinceBoundedNode
+from rtamt.lib.rtamt_stl_library_wrapper.stl_precedes_bounded_node import StlPrecedesBoundedNode
+from rtamt.lib.rtamt_stl_library_wrapper.stl_subtraction_node import StlSubtractionNode
+from rtamt.lib.rtamt_stl_library_wrapper.stl_multiplication_node import StlMultiplicationNode
+from rtamt.lib.rtamt_stl_library_wrapper.stl_division_node import StlDivisionNode
+from rtamt.lib.rtamt_stl_library_wrapper.stl_abs_node import StlAbsNode
+
+
 from rtamt.operation.stl.and_operation import AndOperation
 from rtamt.operation.stl.rise_operation import RiseOperation
 from rtamt.operation.stl.fall_operation import FallOperation
@@ -23,13 +52,11 @@ from rtamt.operation.arithmetic.addition_operation import AdditionOperation
 from rtamt.operation.arithmetic.multiplication_operation import MultiplicationOperation
 from rtamt.operation.arithmetic.division_operation import DivisionOperation
 from rtamt.operation.arithmetic.abs_operation import AbsOperation
-from rtamt.spec.stl.comp_op import StlComparisonOperator
-from rtamt.operation.sample import Sample
 
-class TestSTLBooleanAndTemporal(unittest.TestCase):
+class TestSTLEvaluationCPP(unittest.TestCase):
 
     def __init__(self, *args, **kwargs):
-        super(TestSTLBooleanAndTemporal, self).__init__(*args, **kwargs)
+        super(TestSTLEvaluationCPP, self).__init__(*args, **kwargs)
         self.left1 = Sample()
         self.right1 = Sample()
         self.left1.value = 100
@@ -56,7 +83,7 @@ class TestSTLBooleanAndTemporal(unittest.TestCase):
         self.right5.value = -1
 
     def test_constant(self):
-        oper = ConstantOperation(5)
+        oper = StlConstantNode(5)
 
         out1 = oper.update()
         out2 = oper.update()
@@ -66,7 +93,7 @@ class TestSTLBooleanAndTemporal(unittest.TestCase):
 
 
     def test_addition(self):
-        oper = AdditionOperation()
+        oper = StlAdditionNode()
 
         oper.addNewInput(self.left1, self.right1)
         out1 = oper.update()
@@ -90,7 +117,7 @@ class TestSTLBooleanAndTemporal(unittest.TestCase):
         self.assertEqual(out5.value, -2, "input 5")
 
     def test_subtraction(self):
-        oper = SubtractionOperation()
+        oper = StlSubtractionNode()
 
         oper.addNewInput(self.left1, self.right1)
         out1 = oper.update()
@@ -114,7 +141,7 @@ class TestSTLBooleanAndTemporal(unittest.TestCase):
         self.assertEqual(out5.value, 0, "input 5")
 
     def test_multiplication(self):
-        oper = MultiplicationOperation()
+        oper = StlMultiplicationNode()
 
         oper.addNewInput(self.left1, self.right1)
         out1 = oper.update()
@@ -138,7 +165,7 @@ class TestSTLBooleanAndTemporal(unittest.TestCase):
         self.assertEqual(out5.value, 1, "input 5")
 
     def test_division(self):
-        oper = DivisionOperation()
+        oper = StlDivisionNode()
 
         oper.addNewInput(self.left1, self.right1)
         out1 = oper.update()
@@ -162,7 +189,7 @@ class TestSTLBooleanAndTemporal(unittest.TestCase):
         self.assertEqual(out5.value, -1 / -1, "input 5")
 
     def test_abs(self):
-        oper = AbsOperation()
+        oper = StlAbsNode()
 
         oper.addNewInput(self.left1)
         out1 = oper.update()
@@ -307,7 +334,7 @@ class TestSTLBooleanAndTemporal(unittest.TestCase):
         self.assertEqual(out5.value, 1, "input 5")
 
     def test_always(self):
-        oper = AlwaysOperation()
+        oper = StlAlwaysNode()
 
         oper.addNewInput(self.left1)
         out1 = oper.update()
@@ -331,7 +358,7 @@ class TestSTLBooleanAndTemporal(unittest.TestCase):
         self.assertEqual(out5.value, -2, "input 5")
 
     def test_historically(self):
-        oper = HistoricallyOperation()
+        oper = StlHistoricallyNode()
 
         oper.addNewInput(self.left1)
         out1 = oper.update()
@@ -355,7 +382,7 @@ class TestSTLBooleanAndTemporal(unittest.TestCase):
         self.assertEqual(out5.value, -2, "input 5")
 
     def test_once(self):
-        oper = OnceOperation()
+        oper = StlOnceNode()
 
         oper.addNewInput(self.left1)
         out1 = oper.update()
@@ -379,7 +406,7 @@ class TestSTLBooleanAndTemporal(unittest.TestCase):
         self.assertEqual(out5.value, 100, "input 5")
 
     def test_eventually(self):
-        oper = EventuallyOperation()
+        oper = StlOnceNode()
 
         oper.addNewInput(self.left1)
         out1 = oper.update()
@@ -403,7 +430,7 @@ class TestSTLBooleanAndTemporal(unittest.TestCase):
         self.assertEqual(out5.value, 100, "input 5")
 
     def test_since(self):
-        oper = SinceOperation()
+        oper = StlSinceNode()
 
         oper.addNewInput(self.left1, self.right1)
         out1 = oper.update()
@@ -427,7 +454,7 @@ class TestSTLBooleanAndTemporal(unittest.TestCase):
         self.assertEqual(out5.value, -1, "input 5")
 
     def test_once_0_1(self):
-        oper = OnceBoundedOperation(0,1)
+        oper = StlOnceBoundedNode(0,1)
 
         oper.addNewInput(self.left1)
         out1 = oper.update()
@@ -451,7 +478,7 @@ class TestSTLBooleanAndTemporal(unittest.TestCase):
         self.assertEqual(out5.value, 5, "input 5")
 
     def test_once_1_2(self):
-        oper = OnceBoundedOperation(1,2)
+        oper = StlOnceBoundedNode(1,2)
 
         oper.addNewInput(self.left1)
         out1 = oper.update()
@@ -475,7 +502,7 @@ class TestSTLBooleanAndTemporal(unittest.TestCase):
         self.assertEqual(out5.value, 5, "input 5")
 
     def test_historically_0_1(self):
-        oper = HistoricallyBoundedOperation(0,1)
+        oper = StlHistoricallyBoundedNode(0,1)
 
         oper.addNewInput(self.left1)
         out1 = oper.update()
@@ -499,7 +526,7 @@ class TestSTLBooleanAndTemporal(unittest.TestCase):
         self.assertEqual(out5.value, -1, "input 5")
 
     def test_historically_1_2(self):
-        oper = HistoricallyBoundedOperation(1,2)
+        oper = StlHistoricallyBoundedNode(1,2)
 
         oper.addNewInput(self.left1)
         out1 = oper.update()
@@ -523,7 +550,7 @@ class TestSTLBooleanAndTemporal(unittest.TestCase):
         self.assertEqual(out5.value, -2, "input 5")
 
     def test_since_0_1(self):
-        oper = SinceBoundedOperation(0,1)
+        oper = StlSinceBoundedNode(0,1)
 
         oper.addNewInput(self.left1, self.right1)
         out1 = oper.update()
@@ -547,7 +574,7 @@ class TestSTLBooleanAndTemporal(unittest.TestCase):
         self.assertEqual(out5.value, -1, "input 5")
 
     def test_precedes_1_2(self):
-        oper = PrecedesBoundedOperation(1, 2)
+        oper = StlPrecedesBoundedNode(1, 2)
 
         oper.addNewInput(self.left1, self.right1)
         out1 = oper.update()
@@ -571,7 +598,7 @@ class TestSTLBooleanAndTemporal(unittest.TestCase):
         self.assertEqual(out5.value, -2, "input 5")
 
     def test_not(self):
-        oper = NotOperation()
+        oper = StlNotNode()
 
         oper.addNewInput(self.left1)
         out1 = oper.update()
@@ -595,7 +622,7 @@ class TestSTLBooleanAndTemporal(unittest.TestCase):
         self.assertEqual(out5.value, 1, "input 5")
 
     def test_rise(self):
-        oper = RiseOperation()
+        oper = StlRiseNode()
 
         oper.addNewInput(self.left1)
         out1 = oper.update()
@@ -619,7 +646,7 @@ class TestSTLBooleanAndTemporal(unittest.TestCase):
         self.assertEqual(out5.value, -5, "input 5")
 
     def test_fall(self):
-        oper = FallOperation()
+        oper = StlFallNode()
 
         oper.addNewInput(self.left1)
         out1 = oper.update()
@@ -644,7 +671,7 @@ class TestSTLBooleanAndTemporal(unittest.TestCase):
 
 
     def test_predicate_leq(self):
-        oper = PredicateOperation(StlComparisonOperator.LEQ)
+        oper = StlPredicateNode(StlComparisonOperator.LEQ)
 
         oper.addNewInput(self.left1, self.right1)
         out1 = oper.update()
@@ -668,7 +695,7 @@ class TestSTLBooleanAndTemporal(unittest.TestCase):
         self.assertEqual(out5.value, 0, "input 5")
 
     def test_predicate_less(self):
-        oper = PredicateOperation(StlComparisonOperator.LESS)
+        oper = StlPredicateNode(StlComparisonOperator.LESS)
 
         oper.addNewInput(self.left1, self.right1)
         out1 = oper.update()
@@ -692,7 +719,7 @@ class TestSTLBooleanAndTemporal(unittest.TestCase):
         self.assertEqual(out5.value, 0, "input 5")
 
     def test_predicate_geq(self):
-        oper = PredicateOperation(StlComparisonOperator.GEQ)
+        oper = StlPredicateNode(StlComparisonOperator.GEQ)
 
         oper.addNewInput(self.left1, self.right1)
         out1 = oper.update()
@@ -716,7 +743,7 @@ class TestSTLBooleanAndTemporal(unittest.TestCase):
         self.assertEqual(out5.value, 0, "input 5")
 
     def test_predicate_greater(self):
-        oper = PredicateOperation(StlComparisonOperator.GREATER)
+        oper = StlPredicateNode(StlComparisonOperator.GREATER)
 
         oper.addNewInput(self.left1, self.right1)
         out1 = oper.update()
@@ -740,7 +767,7 @@ class TestSTLBooleanAndTemporal(unittest.TestCase):
         self.assertEqual(out5.value, 0, "input 5")
 
     def test_predicate_eq(self):
-        oper = PredicateOperation(StlComparisonOperator.EQUAL)
+        oper = StlPredicateNode(StlComparisonOperator.EQUAL)
 
         oper.addNewInput(self.left1, self.right1)
         out1 = oper.update()
@@ -762,9 +789,9 @@ class TestSTLBooleanAndTemporal(unittest.TestCase):
         self.assertEqual(out3.value, -12, "input 3")
         self.assertEqual(out4.value, -1, "input 4")
         self.assertEqual(out5.value, 0, "input 5")
-
+        
     def test_predicate_neq(self):
-        oper = PredicateOperation(StlComparisonOperator.NEQ)
+        oper = StlPredicateNode(StlComparisonOperator.NEQ)
 
         oper.addNewInput(self.left1, self.right1)
         out1 = oper.update()

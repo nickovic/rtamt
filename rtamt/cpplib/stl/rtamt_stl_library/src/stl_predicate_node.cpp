@@ -17,10 +17,6 @@ void StlPredicateNode::reset() {
 }
 
 void StlPredicateNode::addNewInput(int i, Sample msg) {
-    if (i!=0) {
-        return;
-    }
-    
     in[i].seq = msg.seq;
     in[i].time.msec = msg.time.msec;
     in[i].time.sec = msg.time.sec;

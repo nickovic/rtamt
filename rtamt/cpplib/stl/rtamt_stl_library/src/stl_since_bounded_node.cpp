@@ -68,7 +68,7 @@ Sample StlSinceBoundedNode::update() {
         right.value = buffer[1][i].value;
         left.value = std::numeric_limits<double>::infinity();
         int j;
-        for(j=end - begin + 1; j <= end; j++) {
+        for(j=i + 1; j <= end; j++) {
             left.value = std::min(left.value, buffer[0][j].value);
         }
         out.value = std::max(out.value, std::min(left.value, right.value));
