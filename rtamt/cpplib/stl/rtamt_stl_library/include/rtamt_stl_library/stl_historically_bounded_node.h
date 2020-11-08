@@ -34,6 +34,7 @@ class StlHistoricallyBoundedNode : public StlNode {
         StlHistoricallyBoundedNode(int begin, int end);
         Sample update();
         void addNewInput(Sample msg);
+        void reset();
        
 };
 

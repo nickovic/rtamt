@@ -14,6 +14,9 @@ using namespace stl_library;
 StlNotNode::StlNotNode() {
 }
 
+void StlNotNode::reset() {
+}
+
 void StlNotNode::addNewInput(int i, Sample sample) {
     if (i != 0)
         return;

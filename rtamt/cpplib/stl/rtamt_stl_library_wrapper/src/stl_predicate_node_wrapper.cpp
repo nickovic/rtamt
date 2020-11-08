@@ -15,6 +15,7 @@ BOOST_PYTHON_MODULE(stl_predicate_node)
 {
     class_<StlPredicateNode, bases<StlNode> >("StlPredicateNode",  init<StlComparisonOperator>())
         .def("update", &StlPredicateNode::update)
+        .def("reset", &StlPredicateNode::reset)
         .def("addNewInput", static_cast<void (StlPredicateNode::*)(Sample, Sample)>(&StlPredicateNode::addNewInput))
     ;
 }

@@ -34,6 +34,7 @@ class StlSinceBoundedNode : public StlNode {
         StlSinceBoundedNode(int begin, int end);
         Sample update();
         void addNewInput(Sample left, Sample right);
+        void reset();
        
 };
 

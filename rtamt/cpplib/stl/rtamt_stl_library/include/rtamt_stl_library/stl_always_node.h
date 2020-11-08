@@ -30,6 +30,7 @@ class StlAlwaysNode : public StlNode {
         StlAlwaysNode();
         Sample update();
         void addNewInput(Sample msg);
+        void reset();
        
 };
 

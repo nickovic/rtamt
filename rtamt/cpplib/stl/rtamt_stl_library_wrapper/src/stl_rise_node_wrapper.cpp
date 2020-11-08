@@ -14,6 +14,7 @@ BOOST_PYTHON_MODULE(stl_rise_node)
 {
     class_<StlRiseNode, bases<StlNode> >("StlRiseNode")
         .def("update", &StlRiseNode::update)
+        .def("reset", &StlRiseNode::reset)
         .def("addNewInput", static_cast<void (StlRiseNode::*)(Sample)>(&StlRiseNode::addNewInput))
     ;
 }

@@ -28,6 +28,18 @@ StlSinceBoundedNode::StlSinceBoundedNode(int begin, int end) {
     }
 }
 
+void StlSinceBoundedNode::reset() {
+    int i;
+    for(i=0; i <= end; i++) {
+        Sample s_left;
+        Sample s_right;
+        s_left.value = std::numeric_limits<double>::infinity();
+        s_right.value = - std::numeric_limits<double>::infinity();
+        this->buffer[0].push_back(s_left);
+        this->buffer[1].push_back(s_right);
+    }
+}
+
 void StlSinceBoundedNode::addNewInput(int i, Sample sample) {
     if (i < 0 || i > 1)
         return;
@@ -56,7 +68,7 @@ Sample StlSinceBoundedNode::update() {
         right.value = buffer[1][i].value;
         left.value = std::numeric_limits<double>::infinity();
         int j;
-        for(j=end - begin + 1; j <= end; j++) {
+        for(j=i + 1; j <= end; j++) {
             left.value = std::min(left.value, buffer[0][j].value);
         }
         out.value = std::max(out.value, std::min(left.value, right.value));

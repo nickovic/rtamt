@@ -20,6 +20,7 @@ BOOST_PYTHON_MODULE(stl_once_node)
 {
     class_<StlOnceNode, bases<StlNode> >("StlOnceNode")
         .def("update", &StlOnceNode::update)
+        .def("reset", &StlOnceNode::reset)
         .def("addNewInput", static_cast<void (StlOnceNode::*)(Sample)>(&StlOnceNode::addNewInput))
     ;
 }

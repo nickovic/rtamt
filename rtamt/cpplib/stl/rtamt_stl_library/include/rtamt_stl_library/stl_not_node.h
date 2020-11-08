@@ -29,6 +29,7 @@ class StlNotNode : public StlNode {
         StlNotNode();
         Sample update();
         void addNewInput(Sample msg);
+        void reset();
        
 };
 

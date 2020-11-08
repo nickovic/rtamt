@@ -18,6 +18,13 @@ StlOnceNode::StlOnceNode() {
     prev_out.value = - std::numeric_limits<double>::infinity();
 }
 
+void StlOnceNode::reset() {
+    prev_out.seq = 0;
+    prev_out.time.sec = 0;
+    prev_out.time.msec = 0;
+    prev_out.value = - std::numeric_limits<double>::infinity();
+}
+
 void StlOnceNode::addNewInput(int i, Sample sample) {
     if (i != 0)
         return;

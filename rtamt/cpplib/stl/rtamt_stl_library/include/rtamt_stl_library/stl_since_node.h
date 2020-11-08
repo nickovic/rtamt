@@ -32,6 +32,7 @@ class StlSinceNode : public StlNode {
         StlSinceNode();
         Sample update();
         void addNewInput(Sample left, Sample right);
+        void reset();
        
 };
 

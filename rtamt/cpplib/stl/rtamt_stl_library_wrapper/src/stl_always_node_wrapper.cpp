@@ -14,6 +14,7 @@ BOOST_PYTHON_MODULE(stl_always_node)
 {
     class_<StlAlwaysNode, bases<StlNode> >("StlAlwaysNode", init<>())
         .def("update", &StlAlwaysNode::update)
+        .def("reset", &StlAlwaysNode::reset)
         .def("addNewInput", static_cast<void (StlAlwaysNode::*)(Sample)>(&StlAlwaysNode::addNewInput))
     ;
 }

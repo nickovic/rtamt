@@ -28,6 +28,18 @@ StlPrecedesBoundedNode::StlPrecedesBoundedNode(int begin, int end) {
     }
 }
 
+void StlPrecedesBoundedNode::reset() {
+    int i;
+    for(i=0; i <= end; i++) {
+        Sample s_left;
+        Sample s_right;
+        s_left.value = std::numeric_limits<double>::infinity();
+        s_right.value = - std::numeric_limits<double>::infinity();
+        this->buffer[0].push_back(s_left);
+        this->buffer[1].push_back(s_right);
+    }
+}
+
 void StlPrecedesBoundedNode::addNewInput(int i, Sample sample) {
     if (i < 0 || i > 1)
         return;

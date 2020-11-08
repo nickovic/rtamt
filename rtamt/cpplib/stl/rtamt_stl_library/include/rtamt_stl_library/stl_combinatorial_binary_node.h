@@ -30,7 +30,8 @@ class StlCombinatorialBinaryNode : public StlNode {
     public:
         StlCombinatorialBinaryNode(StlOperatorType type);
         Sample update();
-        void addNewInput(Sample left, Sample right);      
+        void addNewInput(Sample left, Sample right);
+        void reset();
 };
 
 } // namespace stl_library

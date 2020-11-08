@@ -34,6 +34,7 @@ class StlPrecedesBoundedNode : public StlNode {
         StlPrecedesBoundedNode(int begin, int end);
         Sample update();
         void addNewInput(Sample left, Sample right);
+        void reset();
        
 };
 

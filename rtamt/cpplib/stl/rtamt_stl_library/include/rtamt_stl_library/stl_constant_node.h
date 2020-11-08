@@ -29,6 +29,7 @@ class StlConstantNode : public StlNode {
     public:
         StlConstantNode(double val);
         Sample update();
+        void reset();
 };
 
 } // namespace stl_library

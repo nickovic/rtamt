@@ -8,6 +8,9 @@ using namespace stl_library;
 StlAdditionNode::StlAdditionNode() {
 }
 
+void StlAdditionNode::reset() {
+}
+
 void StlAdditionNode::addNewInput(int i, Sample sample) {
     if (i > 1 or i < 0)
         return;

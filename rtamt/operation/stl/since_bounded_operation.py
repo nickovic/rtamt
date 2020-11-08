@@ -47,7 +47,7 @@ class SinceBoundedOperation(AbstractOperation):
         for i in range(self.end-self.begin+1):
             left = float("inf")
             right = self.buffer_right[i].value
-            for j in range(i+1,self.end):
+            for j in range(i+1,self.end+1):
                 left = min(left, self.buffer_left[j].value)
             out.value = max(out.value, min(left,right))
 

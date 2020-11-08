@@ -34,6 +34,7 @@ class StlOnceBoundedNode : public StlNode {
         StlOnceBoundedNode(int begin, int end);
         Sample update();
         void addNewInput(Sample msg);
+        void reset();
        
 };
 

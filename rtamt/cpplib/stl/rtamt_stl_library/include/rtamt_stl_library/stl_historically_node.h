@@ -32,6 +32,7 @@ class StlHistoricallyNode : public StlNode {
         StlHistoricallyNode();
         Sample update();
         void addNewInput(Sample msg);
+        void reset();
        
 };
 
