@@ -4,17 +4,17 @@ from rtamt.lib.rtamt_stl_library_wrapper.stl_constant_node import StlConstantNod
 from rtamt.lib.rtamt_stl_library_wrapper.stl_sample import Sample
 from rtamt.lib.rtamt_stl_library_wrapper.stl_comp_op import StlComparisonOperator
 from rtamt.lib.rtamt_stl_library_wrapper.stl_time import Time
-from rtamt.operation.stl.constant_operation import ConstantOperation
 from rtamt.lib.rtamt_stl_library_wrapper.stl_addition_node import StlAdditionNode
-#from rtamt.lib.rtamt_stl_library_wrapper.stl_and_node import StlAndNode
+from rtamt.lib.rtamt_stl_library_wrapper.stl_combinatorial_binary_node import StlCombinatorialBinaryNode
+from rtamt.lib.rtamt_stl_library_wrapper.stl_and_node import StlAndNode
 from rtamt.lib.rtamt_stl_library_wrapper.stl_rise_node import StlRiseNode
 from rtamt.lib.rtamt_stl_library_wrapper.stl_fall_node import StlFallNode
 from rtamt.lib.rtamt_stl_library_wrapper.stl_predicate_node import StlPredicateNode
 from rtamt.lib.rtamt_stl_library_wrapper.stl_not_node import StlNotNode
-#from rtamt.lib.rtamt_stl_library_wrapper.stl_or_node import StlOrNode
-#from rtamt.lib.rtamt_stl_library_wrapper.stl_implies_node import StlImpliesNode
-#from rtamt.lib.rtamt_stl_library_wrapper.stl_iff_node import StlIffNode
-#from rtamt.lib.rtamt_stl_library_wrapper.stl_Xor_node import StlXorNode
+from rtamt.lib.rtamt_stl_library_wrapper.stl_or_node import StlOrNode
+from rtamt.lib.rtamt_stl_library_wrapper.stl_implies_node import StlImpliesNode
+from rtamt.lib.rtamt_stl_library_wrapper.stl_iff_node import StlIffNode
+from rtamt.lib.rtamt_stl_library_wrapper.stl_xor_node import StlXorNode
 from rtamt.lib.rtamt_stl_library_wrapper.stl_always_node import StlAlwaysNode
 from rtamt.lib.rtamt_stl_library_wrapper.stl_historically_node import StlHistoricallyNode
 from rtamt.lib.rtamt_stl_library_wrapper.stl_once_node import StlOnceNode
@@ -27,31 +27,6 @@ from rtamt.lib.rtamt_stl_library_wrapper.stl_subtraction_node import StlSubtract
 from rtamt.lib.rtamt_stl_library_wrapper.stl_multiplication_node import StlMultiplicationNode
 from rtamt.lib.rtamt_stl_library_wrapper.stl_division_node import StlDivisionNode
 from rtamt.lib.rtamt_stl_library_wrapper.stl_abs_node import StlAbsNode
-
-
-from rtamt.operation.stl.and_operation import AndOperation
-from rtamt.operation.stl.rise_operation import RiseOperation
-from rtamt.operation.stl.fall_operation import FallOperation
-from rtamt.operation.stl.predicate_operation import PredicateOperation
-from rtamt.operation.stl.not_operation import NotOperation
-from rtamt.operation.stl.or_operation import OrOperation
-from rtamt.operation.stl.implies_operation import ImpliesOperation
-from rtamt.operation.stl.iff_operation import IffOperation
-from rtamt.operation.stl.xor_operation import XorOperation
-from rtamt.operation.stl.always_operation import AlwaysOperation
-from rtamt.operation.stl.eventually_operation import EventuallyOperation
-from rtamt.operation.stl.historically_operation import HistoricallyOperation
-from rtamt.operation.stl.once_operation import OnceOperation
-from rtamt.operation.stl.since_operation import SinceOperation
-from rtamt.operation.stl.once_bounded_operation import OnceBoundedOperation
-from rtamt.operation.stl.historically_bounded_operation import HistoricallyBoundedOperation
-from rtamt.operation.stl.since_bounded_operation import SinceBoundedOperation
-from rtamt.operation.stl.precedes_bounded_operation import PrecedesBoundedOperation
-from rtamt.operation.arithmetic.subtraction_operation import SubtractionOperation
-from rtamt.operation.arithmetic.addition_operation import AdditionOperation
-from rtamt.operation.arithmetic.multiplication_operation import MultiplicationOperation
-from rtamt.operation.arithmetic.division_operation import DivisionOperation
-from rtamt.operation.arithmetic.abs_operation import AbsOperation
 
 class TestSTLEvaluationCPP(unittest.TestCase):
 
@@ -214,7 +189,7 @@ class TestSTLEvaluationCPP(unittest.TestCase):
 
 
     def test_and(self):
-        oper = AndOperation()
+        oper = StlAndNode()
 
         oper.addNewInput(self.left1, self.right1)
         out1 = oper.update()
@@ -238,7 +213,7 @@ class TestSTLEvaluationCPP(unittest.TestCase):
         self.assertEqual(out5.value, -1, "input 5")
 
     def test_or(self):
-        oper = OrOperation()
+        oper = StlOrNode()
 
         oper.addNewInput(self.left1, self.right1)
         out1 = oper.update()
@@ -262,7 +237,7 @@ class TestSTLEvaluationCPP(unittest.TestCase):
         self.assertEqual(out5.value, -1, "input 5")
 
     def test_iff(self):
-        oper = IffOperation()
+        oper = StlIffNode()
 
         oper.addNewInput(self.left1, self.right1)
         out1 = oper.update()
@@ -286,7 +261,7 @@ class TestSTLEvaluationCPP(unittest.TestCase):
         self.assertEqual(out5.value, 0, "input 5")
 
     def test_xor(self):
-        oper = XorOperation()
+        oper = StlXorNode()
 
         oper.addNewInput(self.left1, self.right1)
         out1 = oper.update()
@@ -310,7 +285,7 @@ class TestSTLEvaluationCPP(unittest.TestCase):
         self.assertEqual(out5.value, 0, "input 5")
 
     def test_implies(self):
-        oper = ImpliesOperation()
+        oper = StlImpliesNode()
 
         oper.addNewInput(self.left1, self.right1)
         out1 = oper.update()
