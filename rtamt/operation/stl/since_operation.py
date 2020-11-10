@@ -4,16 +4,15 @@ from rtamt.operation.sample import Time
 
 class SinceOperation(AbstractOperation):
     def __init__(self):
-        self.reset()
-
-    def reset(self):
         self.input = []
         sample = Sample()
         self.input.append(sample)
         sample = Sample()
         self.input.append(sample)
         self.prev_out = Sample()
+        self.reset()
 
+    def reset(self):
         self.prev_out.seq = 0
         self.prev_out.time.sec = 0
         self.prev_out.time.msec = 0

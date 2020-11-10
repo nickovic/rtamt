@@ -26,10 +26,10 @@ from rtamt.operation.arithmetic.abs_operation import AbsOperation
 from rtamt.spec.stl.comp_op import StlComparisonOperator
 from rtamt.operation.sample import Sample
 
-class TestSTLBooleanAndTemporal(unittest.TestCase):
+class TestSTLEvaluation(unittest.TestCase):
 
     def __init__(self, *args, **kwargs):
-        super(TestSTLBooleanAndTemporal, self).__init__(*args, **kwargs)
+        super(TestSTLEvaluation, self).__init__(*args, **kwargs)
         self.left1 = Sample()
         self.right1 = Sample()
         self.left1.value = 100

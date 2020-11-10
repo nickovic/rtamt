@@ -35,6 +35,9 @@ class Variable(Node):
         else:
             self.name = self.var + '.' + self.field
 
+    def reset(self):
+        pass
+
     @property
     def var(self):
         """Getter for var"""

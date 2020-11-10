@@ -7,8 +7,9 @@
 #include <rtamt_stl_library/stl_abs_node.h>
 #include <algorithm>
 #include <limits>
-#include <cstdlib>
+#include <cmath>
 
+using namespace std;
 using namespace stl_library;
 
 // Initialize previous and current value
@@ -39,7 +40,7 @@ Sample StlAbsNode::update() {
     out.time.msec = in.time.msec;
     out.time.sec = in.time.sec;
     out.value = abs(in.value);
-    
+
     return out;
 }
 

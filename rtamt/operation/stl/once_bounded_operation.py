@@ -10,9 +10,9 @@ class OnceBoundedOperation(AbstractOperation):
 
     def reset(self):
         self.input = Sample()
-        self.buffer = collections.deque(maxlen=(end+1))
+        self.buffer = collections.deque(maxlen=(self.end+1))
 
-        for i in range(end+1):
+        for i in range(self.end+1):
             s = Sample()
             s.value = - float("inf")
             self.buffer.append(s)

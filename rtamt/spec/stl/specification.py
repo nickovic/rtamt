@@ -49,7 +49,7 @@ class STLSpecification(AbstractSpecification,StlParserVisitor):
         super(STLSpecification, self).__init__(is_pure_python)
         self.name = 'STL Specification'
         self.visitor = STLNodeVisitor(self)
-        self.reseter = STLReset(self)
+        self.reseter = STLReset()
 
 
     # Parses the STL property

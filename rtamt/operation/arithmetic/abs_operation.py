@@ -6,6 +6,9 @@ class AbsOperation(AbstractOperation):
     def __init__(self):
         self.input = Sample()
 
+    def reset(self):
+        pass
+
     def addNewInput(self, sample):
         self.input.seq = sample.seq
         self.input.time.sec = sample.time.sec

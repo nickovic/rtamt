@@ -9,11 +9,11 @@ class SinceBoundedOperation(AbstractOperation):
         self.reset()
 
     def reset(self):
-        self.buffer_left = collections.deque(maxlen=(end+1))
-        self.buffer_right = collections.deque(maxlen=(end+1))
+        self.buffer_left = collections.deque(maxlen=(self.end+1))
+        self.buffer_right = collections.deque(maxlen=(self.end+1))
         self.input = Sample()
 
-        for i in range(end+1):
+        for i in range(self.end+1):
             s_left = Sample()
             s_right = Sample()
             s_left.value = float("inf")
