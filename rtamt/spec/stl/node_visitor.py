@@ -315,9 +315,9 @@ class STLNodeVisitor(StlParserVisitor):
             elif (unit == 'ms'):
                 out = out * 1e9
             elif (unit == 'us'):
-                out == out * 1e6
+                out = out * 1e6
             elif (unit == 'ns'):
-                out == out * 1e3
+                out = out * 1e3
             else:
                 pass
         remainder = out % self.spec.sampling_period
@@ -341,9 +341,9 @@ class STLNodeVisitor(StlParserVisitor):
             elif (unit == 'ms'):
                 out = out * 10e9
             elif (unit == 'us'):
-                out == out * 10e6
+                out = out * 10e6
             elif (unit == 'ns'):
-                out == out * 10e3
+                out = out * 10e3
             else:
                 pass
         remainder = out % self.spec.sampling_period
