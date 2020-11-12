@@ -115,7 +115,6 @@ Specification
 From
 	: 'from' ;
 
-// Boolean operators
 NotOperator
 	: 'not' | '!';
 
@@ -136,14 +135,12 @@ ImpliesOperator
 XorOperator
 	: 'xor' ;
 
-// Event operators
 RiseOperator
 	: 'rise' ;
 
 FallOperator
 	: 'fall' ;
 
-// Future temporal operators
 AlwaysOperator
 	: 'always' | 'G' ;
 
@@ -153,7 +150,9 @@ EventuallyOperator
 UntilOperator
 	: 'until' | 'U' ;
 
-// Past temporal operators
+UnlessOperator
+	: 'unless' | 'W' ;
+
 HistoricallyOperator
 	: 'historically' | 'H' ;
 
@@ -163,15 +162,8 @@ OnceOperator
 SinceOperator
 	: 'since' | 'S' ;
 
-//----------------
-//added
 NextOperator
 	: 'next' | 'X' ;
-
-//added
-OracleOperator
-	: 'oracle' ;
-//----------------
 
 PreviousOperator
 	: 'prev' | 'Y' ;
@@ -206,8 +198,6 @@ TRUE
 
 FALSE
 	: ('false' | 'FALSE');
-
-// Integer Literals
 
 IntegerLiteral
 	: DecimalNumeral
@@ -266,13 +256,10 @@ fragment BinaryDigit
 fragment BinaryDigitsAndUnderscores
 	: BinaryDigitOrUnderscore+ ;
 
-// long bytes = 0b11010010_01101001_10010100_10010010;
 
 fragment BinaryDigitOrUnderscore
 	: BinaryDigit
 	| '_' ;
-
-// Floating-Point Literals
 
 RealLiteral
 	: DecimalRealLiteral ;
@@ -281,7 +268,6 @@ fragment DecimalRealLiteral
 	: Digits '.' Digits? ExponentPart?
 	| '.' Digits ExponentPart?
 	| Digits ExponentPart
-//	|	Digits FloatTypeSuffix
 	;
 
 fragment ExponentPart
@@ -296,7 +282,6 @@ fragment SignedInteger
 fragment Sign
 	: [+-] ;
 
-// Identifier (must appear after all keywords in the grammar)
 
 Identifier
 	: ((IdentifierStart)(IdentifierPart)*) ;

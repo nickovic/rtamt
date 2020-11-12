@@ -23,6 +23,7 @@ from rtamt.node.stl.abs import Abs
 from rtamt.node.stl.fall import Fall
 from rtamt.node.stl.rise import Rise
 from rtamt.node.stl.constant import Constant
+from rtamt.node.stl.previous import Previous
 
 class STLPastifier(STLVisitor):
 
@@ -176,6 +177,18 @@ class STLPastifier(STLVisitor):
         node = Once(child_node, element.bound, self.is_pure_python)
 
         return node
+
+    def visitPrevious(self, element, args):
+        child_node = self.visit(element.children[0], args)
+        node = Previous(child_node, self.is_pure_python)
+        return node
+
+    def visitNext(self, element, args):
+        horizon = args[0] - 1
+        child_node = self.visit(element.children[0], [horizon])
+
+
+        return child_node
 
     def visitHistorically(self, element, args):
         child_node = self.visit(element.children[0], args)

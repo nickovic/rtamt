@@ -15,6 +15,8 @@ from rtamt.interval.interval import Interval
 
 from rtamt.node.stl.variable import Variable
 from rtamt.node.stl.predicate import Predicate
+from rtamt.node.stl.previous import Previous
+from rtamt.node.stl.next import Next
 from rtamt.node.stl.neg import Neg
 from rtamt.node.stl.conjunction import Conjunction
 from rtamt.node.stl.disjunction import Disjunction
@@ -240,6 +242,18 @@ class STLNodeVisitor(StlParserVisitor):
         node.horizon = horizon
         return node
 
+    def visitExprPrevious(self, ctx):
+        child = self.visit(ctx.expression())
+        node = Previous(child, self.spec.is_pure_python)
+        node.horizon = child.horizon
+        return node
+
+    def visitExprNext(self, ctx):
+        child = self.visit(ctx.expression())
+        node = Next(child, self.spec.is_pure_python)
+        node.horizon = child.horizon + 1
+        return node
+
     def visitExpreOnceExpr(self, ctx):
         child = self.visit(ctx.expression())
         if ctx.interval() == None:
@@ -281,6 +295,20 @@ class STLNodeVisitor(StlParserVisitor):
         interval = self.visit(ctx.interval())
 
         node = Until(child1, child2, interval, self.spec.is_pure_python)
+        node.horizon = max(child1.horizon, child2.horizon) + interval.end
+        return node
+
+    def visitExprUnless(self, ctx):
+        child1 = self.visit(ctx.expression(0))
+        child2 = self.visit(ctx.expression(1))
+        interval = self.visit(ctx.interval())
+
+        left_interval = Interval(0, interval.end)
+
+        left = Always(child1, left_interval, self.spec.is_pure_python)
+        right = Until(child1, child2, interval, self.spec.is_pure_python)
+        node = Disjunction(left, right)
+
         node.horizon = max(child1.horizon, child2.horizon) + interval.end
         return node
 

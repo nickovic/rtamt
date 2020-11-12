@@ -23,6 +23,7 @@ from rtamt.operation.arithmetic.addition_operation import AdditionOperation
 from rtamt.operation.arithmetic.multiplication_operation import MultiplicationOperation
 from rtamt.operation.arithmetic.division_operation import DivisionOperation
 from rtamt.operation.arithmetic.abs_operation import AbsOperation
+from rtamt.operation.stl.previous_operation import PreviousOperation
 from rtamt.spec.stl.comp_op import StlComparisonOperator
 from rtamt.operation.sample import Sample
 
@@ -185,6 +186,29 @@ class TestSTLEvaluation(unittest.TestCase):
         self.assertEqual(out4.value, 5, "input 4")
         self.assertEqual(out5.value, 1, "input 5")
 
+    def test_previous(self):
+        oper = PreviousOperation()
+
+        oper.addNewInput(self.left1)
+        out1 = oper.update()
+
+        oper.addNewInput(self.left2)
+        out2 = oper.update()
+
+        oper.addNewInput(self.left3)
+        out3 = oper.update()
+
+        oper.addNewInput(self.left4)
+        out4 = oper.update()
+
+        oper.addNewInput(self.left5)
+        out5 = oper.update()
+
+        self.assertEqual(out1.value, float("inf"), "input 1")
+        self.assertEqual(out2.value, 100, "input 2")
+        self.assertEqual(out3.value, -1, "input 3")
+        self.assertEqual(out4.value, -2, "input 4")
+        self.assertEqual(out5.value, 5, "input 5")
 
     def test_and(self):
         oper = AndOperation()

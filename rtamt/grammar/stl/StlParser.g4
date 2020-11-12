@@ -7,8 +7,11 @@ options {
 stlfile
 	: stlSpecification EOF ;
 
+//stlSpecification
+//    : ( spec )? ( modimport )* ( declaration | annotation )* assertion ;
+
 stlSpecification
-    : ( spec )? ( modimport )* ( declaration | annotation )* assertion ;
+    : assertion ;
 	
 spec
 	: Specification Identifier #Specification ;
@@ -83,11 +86,14 @@ expression
 	| AlwaysOperator interval expression                        #ExprAlwaysExpr
     | EventuallyOperator interval expression                    #ExprEvExpr
     | expression UntilOperator interval expression              #ExprUntilExpr
+    | expression UnlessOperator interval expression             #ExprUnless
     | HistoricallyOperator ( interval )? expression             #ExprHistExpr
     | OnceOperator ( interval )? expression                     #ExpreOnceExpr
     | expression SinceOperator ( interval )? expression         #ExprSinceExpr
     | RiseOperator LPAREN expression RPAREN                     #ExprRise
     | FallOperator LPAREN expression RPAREN                     #ExprFall
+    | PreviousOperator expression                               #ExprPrevious
+    | NextOperator expression                                   #ExprNext
 	;
 
 real_expression:

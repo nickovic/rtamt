@@ -1,7 +1,6 @@
 import unittest
 import rtamt
 
-
 class TestSTLIntervalStyle(unittest.TestCase):
     def __init__(self, *args, **kwargs):
         super(TestSTLIntervalStyle, self).__init__(*args, **kwargs)

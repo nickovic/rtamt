@@ -135,6 +135,24 @@ class TestSTLReset(unittest.TestCase):
         out = spec.update(0, [['req', 3.3], ['gnt', 4.3]])
         self.assertEqual(3.3 / 4.3, out, 'Division reset assertion')
 
+    def test_prev(self):
+        spec = STLSpecification(0)
+        spec.declare_var('req', 'float')
+        spec.declare_var('out', 'float')
+        spec.spec = 'out = prev(req)'
+        spec.parse()
+
+        out = spec.update(0, [['req', 1.1]])
+        self.assertEqual(float("inf"), out, 'Fall reset assertion')
+
+        out = spec.update(1, [['req', 2]])
+        self.assertEqual(1.1, out, 'Fall reset assertion')
+
+        spec.reset()
+
+        out = spec.update(0, [['req', -3]])
+        self.assertEqual(float("inf"), out, 'Rise reset assertion')
+
     def test_predicate_leq(self):
         spec = STLSpecification(0)
         spec.declare_var('req', 'float')

@@ -23,6 +23,8 @@ from rtamt.node.stl.always import Always
 from rtamt.node.stl.since import Since
 from rtamt.node.stl.until import Until
 from rtamt.node.stl.precedes import Precedes
+from rtamt.node.stl.previous import Previous
+from rtamt.node.stl.next import Next
 from rtamt.interval.interval import Interval
 from rtamt.spec.stl.comp_op import StlComparisonOperator
 
@@ -62,6 +64,59 @@ class TestSTLPastification(unittest.TestCase):
         new_node = pastifier.pastify(old_node)
 
         self.assertEqual('once[5,5](req)', new_node.name, 'Variable pastification assertion')
+
+    def test_previous_1(self):
+        var_node = Variable('req', '', 'output')
+        abs_node = Previous(var_node)
+
+        pastifier = STLPastifier()
+        abs_node.accept(pastifier)
+        new_node = pastifier.pastify(abs_node)
+
+        self.assertEqual('previous(req)', new_node.name, 'Previous pastification assertion')
+
+    def test_previous_2(self):
+        var_node = Variable('req', '', 'output')
+        abs_node = Previous(var_node)
+        abs_node.horizon = 5
+
+        pastifier = STLPastifier()
+        abs_node.accept(pastifier)
+        new_node = pastifier.pastify(abs_node)
+
+        self.assertEqual('previous(once[5,5](req))', new_node.name, 'Previous pastification assertion')
+
+    def test_previous_1(self):
+        var_node = Variable('req', '', 'output')
+        abs_node = Previous(var_node)
+
+        pastifier = STLPastifier()
+        abs_node.accept(pastifier)
+        new_node = pastifier.pastify(abs_node)
+
+        self.assertEqual('previous(req)', new_node.name, 'Previous pastification assertion')
+
+    def test_next_1(self):
+        var_node = Variable('req', '', 'output')
+        abs_node = Next(var_node)
+        abs_node.horizon = 1
+
+        pastifier = STLPastifier()
+        abs_node.accept(pastifier)
+        new_node = pastifier.pastify(abs_node)
+
+        self.assertEqual('req', new_node.name, 'Next pastification assertion')
+
+    def test_next_2(self):
+        var_node = Variable('req', '', 'output')
+        abs_node = Next(var_node)
+        abs_node.horizon = 5
+
+        pastifier = STLPastifier()
+        abs_node.accept(pastifier)
+        new_node = pastifier.pastify(abs_node)
+
+        self.assertEqual('once[4,4](req)', new_node.name, 'Next pastification assertion')
 
     def test_abs_1(self):
         var_node = Variable('req', '', 'output')

@@ -22,6 +22,8 @@ from rtamt.node.stl.division import Division
 from rtamt.node.stl.rise import Rise
 from rtamt.node.stl.fall import Fall
 from rtamt.node.stl.constant import Constant
+from rtamt.node.stl.next import Next
+from rtamt.node.stl.previous import Previous
 
 NOT_IMPLEMENTED = "You should implement this."
 
@@ -78,6 +80,10 @@ class STLVisitor:
             out = self.visitFall(element, args)
         elif isinstance(element, Constant):
             out = self.visitConstant(element, args)
+        elif isinstance(element, Previous):
+            out = self.visitPrevious(element, args)
+        elif isinstance(element, Next):
+            out = self.visitNext(element, args)
         else:
             out = self.visitDefault(element, args)
         return out
@@ -169,6 +175,14 @@ class STLVisitor:
 
     @abstractmethod
     def visitConstant(self, element, args):
+        raise NotImplementedError(NOT_IMPLEMENTED)
+
+    @abstractmethod
+    def visitPrevious(self, element, args):
+        raise NotImplementedError(NOT_IMPLEMENTED)
+
+    @abstractmethod
+    def visitNext(self, element, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod

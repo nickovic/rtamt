@@ -118,6 +118,14 @@ class STLReset(STLVisitor):
         self.visit(element.children[0], args)
         element.reset()
 
+    def visitPrevious(self, element, args):
+        self.visit(element.children[0], args)
+        element.reset()
+
+    def visitNext(self, element, args):
+        self.visit(element.children[0], args)
+        element.reset()
+
     def visitHistorically(self, element, args):
         self.visit(element.children[0], args)
         element.reset()
