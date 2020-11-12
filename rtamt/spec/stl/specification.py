@@ -83,6 +83,9 @@ class STLSpecification(AbstractSpecification,StlParserVisitor):
         self.evaluator = STLEvaluator(self)
         self.top.accept(self.evaluator)
 
+        print('Unit ' + self.unit)
+        print('Sampling period unit ' + self.sampling_period_unit)
+
         self.normalize = float(self.U[self.unit]) / float(self.U[self.sampling_period_unit])
 
     def update(self, *args, **kargs):

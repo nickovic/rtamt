@@ -154,6 +154,8 @@ rho(fall(phi),w,t) = -rho(phi,w,t)                    if t=0
                      min(rho(phi,w,t-1),-rho(phi,w,t) otherwise
 
 % Past untimed temporal operators
+rho(prev phi,w,t) = inf            if t<=0
+                    rho(phi,w,t-1) otherwise
 rho(once phi,w,t) = max_{t' in [0,t]} rho(phi,w,t')
 rho(historically phi,w,t) = min_{t' in [0,t]} rho(phi,w,t')
 rho(phi since psi,w,t) = max_{t' in [0,t]}(min(rho(psi,w,t'), min_{t'' in (t',t]}rho(psi,w,t') rho(phi,w,t'')))
@@ -168,6 +170,7 @@ rho(phi since[a,b] psi,w,t) = -inf                                              
                               min_{t'' in (t',t]}rho(psi,w,t') rho(phi,w,t'')))          otherwise
 
 % Future untimed temporal operators
+rho(next phi,w,t) = rho(phi,w,t+1)
 rho(eventually phi,w,t) = max_{t' in [0,t]} rho(phi,w,t')
 rho(always phi,w,t) = min_{t' in [0,t]} rho(phi,w,t')
 
@@ -187,6 +190,8 @@ There are several important points to note about the above syntax and semantics:
 - The library allows only bounded-future STL specifications, meaning that _unbounded_ future operators `always` and `eventually` can appear only at the top level of the specification. For example, `always(x<=2)` is a bounded-future STL specification, while `always(eventually(x<=2))` is not.
 - The library does not allow _unbounded_ `until` operator.
 - The library uses _non-standard_ semantics for unbounded `always` and `eventually` operators. For instance, standard TL semantics says that `always phi` holds at time `t` iff `phi` holds at all future times `t'>=t`. This interpretation cannot be monitored in online fashion. We define semantics that says that `always phi` holds at time `t` iff `phi` has been continuously holding so far. Note that this interpretation of `always` is equivalent to the `historically`operator. The situation is symmetric for the non-standard semantics of  `eventually` and `once`.
+- The `prev` and `next` operators are valid only under the discrete-time interpretation of STL
+- The `unless` operator is added as syntactic sugar - `phi unless[a,b] psi = always[0,b] phi or phi until[a,b] psi
 
 We can see from the semantics of bounded-future STL that the direct evaluation of a formula `phi` at time `t` may depend on inputs at `t'>t` that have not arrived yet.
 The library monitors bounded-future STL formulas with a fixed _delay_. In order to compute `rho(phi,w,t)`, the monitor waits for all inputs required to evaluate `phi` to become available before computing the robustness degree. This delay is fixed and depends on the specification. For instance, the specification `always((req >= 3) -> eventually[0:2]always[0:3](gnt >= 3)`is evaluated with delay `5` - the time needed to capture all inputs required for evaluating bounded `eventually` and `always` operators. We refer the reader to [2] for algorithmic details regarding monitoring with delay.
