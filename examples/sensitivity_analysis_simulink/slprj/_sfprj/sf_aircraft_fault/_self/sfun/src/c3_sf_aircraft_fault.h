@@ -26,14 +26,44 @@ typedef struct PositionBus_tag c3_PositionBus;
 
 #endif                                 /*typedef_c3_PositionBus*/
 
-#include "sf_aircraft_ModeType.h"
 #ifndef typedef_SFc3_sf_aircraft_faultInstanceStruct
 #define typedef_SFc3_sf_aircraft_faultInstanceStruct
 
 typedef struct {
   SimStruct *S;
   ChartInfoStruct chartInfo;
+  uint32_T chartNumber;
+  uint32_T instanceNumber;
   int32_T c3_sfEvent;
+  uint8_T c3_tp_Actuators;
+  uint8_T c3_tp_LO;
+  uint8_T c3_tp_L1;
+  uint8_T c3_tp_Passive;
+  uint8_T c3_tp_Active;
+  uint8_T c3_tp_Standby;
+  uint8_T c3_tp_Off;
+  uint8_T c3_tp_Isolated;
+  uint8_T c3_tp_RO;
+  uint8_T c3_b_tp_L1;
+  uint8_T c3_b_tp_Passive;
+  uint8_T c3_b_tp_Active;
+  uint8_T c3_b_tp_Standby;
+  uint8_T c3_b_tp_Off;
+  uint8_T c3_b_tp_Isolated;
+  uint8_T c3_tp_LI;
+  uint8_T c3_c_tp_L1;
+  uint8_T c3_c_tp_Passive;
+  uint8_T c3_c_tp_Active;
+  uint8_T c3_c_tp_Standby;
+  uint8_T c3_c_tp_Off;
+  uint8_T c3_c_tp_Isolated;
+  uint8_T c3_tp_RI;
+  uint8_T c3_d_tp_L1;
+  uint8_T c3_d_tp_Passive;
+  uint8_T c3_d_tp_Active;
+  uint8_T c3_d_tp_Standby;
+  uint8_T c3_d_tp_Off;
+  uint8_T c3_d_tp_Isolated;
   uint8_T c3_is_active_c3_sf_aircraft_fault;
   uint8_T c3_is_c3_sf_aircraft_fault;
   uint8_T c3_is_LO;
@@ -44,24 +74,12 @@ typedef struct {
   uint8_T c3_is_active_LI;
   uint8_T c3_is_RI;
   uint8_T c3_is_active_RI;
-  uint8_T c3_JITStateAnimation[29];
   int32_T c3_fails;
   int32_T c3_b_fails;
   int32_T c3_c_fails;
   int32_T c3_d_fails;
-  uint8_T c3_JITTransitionAnimation[104];
-  void *c3_RuntimeVar;
   uint8_T c3_doSetSimStateSideEffects;
   const mxArray *c3_setSimStateSideEffectsInfo;
-  uint32_T c3_mlFcnLineNumber;
-  void *c3_fcnDataPtrs[4];
-  char_T *c3_dataNames[4];
-  uint32_T c3_numFcnVars;
-  uint32_T c3_ssIds[4];
-  uint32_T c3_statuses[4];
-  void *c3_outMexFcns[4];
-  void *c3_inMexFcns[4];
-  CovrtStateflowInstance *c3_covrtInstance;
   void *c3_fEmlrtCtx;
   sf_aircraft_ModeType *c3_LO_mode;
   sf_aircraft_ModeType *c3_RO_mode;
@@ -75,6 +93,7 @@ typedef struct {
 /* Named Constants */
 
 /* Variable Declarations */
+extern struct SfDebugInstanceStruct *sfGlobalDebugInstanceStruct;
 
 /* Variable Definitions */
 

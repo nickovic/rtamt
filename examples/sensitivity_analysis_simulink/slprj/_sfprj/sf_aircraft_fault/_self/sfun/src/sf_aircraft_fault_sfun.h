@@ -9,22 +9,21 @@
 #include "sf_runtime/DebuggerRuntimeInterface.h"
 #include "sf_runtime/sfc_mex.h"
 #include "sf_runtime/sf_runtime_errors.h"
-#include "sf_runtime/sf_partitioning_execution_bridge.h"
 #include "rtwtypes.h"
 #include "simtarget/slSimTgtClientServerAPIBridge.h"
 #include "sf_runtime/sfc_sdi.h"
 #include "sf_runtime/sf_test_language.h"
-#include "simlogCIntrf.h"
 #include "multiword_types.h"
 #include "sf_runtime/sfc_messages.h"
+#include "sf_runtime/sfcdebug.h"
 #define rtInf                          (mxGetInf())
 #define rtMinusInf                     (-(mxGetInf()))
 #define rtNaN                          (mxGetNaN())
-#define rtInfF                         ((real32_T)mxGetInf())
-#define rtMinusInfF                    (-(real32_T)mxGetInf())
-#define rtNaNF                         ((real32_T)mxGetNaN())
 #define rtIsNaN(X)                     ((int)mxIsNaN(X))
 #define rtIsInf(X)                     ((int)mxIsInf(X))
+
+struct SfDebugInstanceStruct;
+extern struct SfDebugInstanceStruct* sfGlobalDebugInstanceStruct;
 
 /* Custom Code from Simulation Target dialog*/
 #include "sf_aircraft_ModeType.h"
@@ -34,6 +33,7 @@
 /* Named Constants */
 
 /* Variable Declarations */
+extern uint32_T _sf_aircraft_faultMachineNumber_;
 
 /* Variable Definitions */
 
