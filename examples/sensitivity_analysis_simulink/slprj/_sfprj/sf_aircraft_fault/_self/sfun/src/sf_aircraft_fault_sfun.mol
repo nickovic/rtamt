@@ -1,20 +1,22 @@
-sf_aircraft_fault_sfun.o
-c3_sf_aircraft_fault.o
-sf_aircraft_fault_sfun_registry.o
+sf_aircraft_fault_sfun.obj
+c3_sf_aircraft_fault.obj
+sf_aircraft_fault_sfun_registry.obj
 
-"-L/usr/local/MATLAB/R2019b/bin/glnxa64" "-lmwsf_runtime"
-"-L/usr/local/MATLAB/R2019b/bin/glnxa64" "-lfixedpoint"
-"-L/usr/local/MATLAB/R2019b/bin/glnxa64" "-lut"
-"-L/usr/local/MATLAB/R2019b/bin/glnxa64" "-lemlrt"
-"-L/usr/local/MATLAB/R2019b/bin/glnxa64" "-lmwstringutil"
-"-L/usr/local/MATLAB/R2019b/bin/glnxa64" "-lmwmathutil"
-"-L/usr/local/MATLAB/R2019b/bin/glnxa64" "-lmwblas"
-"-L/usr/local/MATLAB/R2019b/bin/glnxa64" "-lmwsl_log_load_blocks"
-"-L/usr/local/MATLAB/R2019b/bin/glnxa64" "-lmwsimulink"
-"-L/usr/local/MATLAB/R2019b/bin/glnxa64" "-lmwsl_sfcn_cov_bridge"
-"-L/usr/local/MATLAB/R2019b/bin/glnxa64" "-lcovrt"
-"-L/usr/local/MATLAB/R2019b/bin/glnxa64" "-lmwlapack"
-"-L/usr/local/MATLAB/R2019b/bin/glnxa64" "-lmwsl_simtarget_core"
-"-L/usr/local/MATLAB/R2019b/bin/glnxa64" "-lmwsl_simtarget_instrumentation"
-"-L/usr/local/MATLAB/R2019b/bin/glnxa64" "-lmwslexec_simlog"
-"-L/usr/local/MATLAB/R2019b/bin/glnxa64" "-lmwipp"
+
+
+"C:\Program Files\MATLAB\R2018a\extern\lib\win64\mingw64\sf_runtime.lib" 
+"C:\Program Files\MATLAB\R2018a\extern\lib\win64\mingw64\libmx.lib" 
+"C:\Program Files\MATLAB\R2018a\extern\lib\win64\mingw64\libmex.lib" 
+"C:\Program Files\MATLAB\R2018a\extern\lib\win64\mingw64\libmat.lib" 
+"C:\Program Files\MATLAB\R2018a\extern\lib\win64\mingw64\libfixedpoint.lib" 
+"C:\Program Files\MATLAB\R2018a\extern\lib\win64\mingw64\libut.lib" 
+"C:\Program Files\MATLAB\R2018a\extern\lib\win64\mingw64\libmwmathutil.lib" 
+"C:\Program Files\MATLAB\R2018a\extern\lib\win64\mingw64\libemlrt.lib" 
+"C:\Program Files\MATLAB\R2018a\extern\lib\win64\mingw64\libmwsl_log_load_blocks.lib" 
+"C:\Program Files\MATLAB\R2018a\extern\lib\win64\mingw64\libmwsimulink.lib" 
+"C:\Program Files\MATLAB\R2018a\extern\lib\win64\mingw64\libmwsl_sfcn_cov_bridge.lib" 
+"C:\Program Files\MATLAB\R2018a\extern\lib\win64\mingw64\libcovrt.lib" 
+"C:\Program Files\MATLAB\R2018a\extern\lib\win64\mingw64\libmwsl_simtarget_core.lib" 
+"C:\Program Files\MATLAB\R2018a\extern\lib\win64\mingw64\libmwsl_simtarget_instrumentation.lib" 
+"-LC:\Program Files\MATLAB\R2018a\bin\win64" "-llibmwipp"
+
