@@ -14,8 +14,11 @@ class AlwaysBoundedOperation(AbstractOperation):
         pass
 
     def offline(self, *args, **kargs):
+        # ideally func_in={input_time_series_list} class member={operator_interval}
+        # In here only eval_func should be decided.
+
         operator_interval = [self.begin, self.end]
 
-        out = offline_binary_timed_operator_wrapper(operator_interval, numpy.amin, *args, **kargs, )
+        out = offline_binary_timed_operator_wrapper(operator_interval, numpy.amin, *args, **kargs)
 
         return out
