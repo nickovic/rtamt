@@ -15,22 +15,20 @@ class AlwaysBoundedOperation(AbstractOperation):
 
     def offline(self, *args, **kargs):
         out = []
-        input_list = args[0]
+        input_time_series_list = args[0]
         
-        if not input_list:
+        if not input_time_series_list:
             return out
 
         # data conversion
-        input_array = numpy.array(input_list)
-        t = input_array[:,0]
-        x = input_array[:,1]
+        input_time_series = numpy.array(input_time_series_list)
         operator_interval = [self.begin, self.end]
 
         # eval
-        robs = eval_timed_operator_bound(t, x, operator_interval, numpy.amin, extrapolation='end', kind='previous')
+        robustness = eval_timed_operator_bound(input_time_series, operator_interval, numpy.amin, extrapolation='end', kind='previous')
 
         # remove duplication
-        robs = remove_duplication(robs)
+        robustness = remove_duplication(robustness)
 
-        out = robs.tolist()
+        out = robustness.tolist()
         return out

@@ -1,16 +1,16 @@
 import numpy
 from scipy import signal, interpolate
 
-def interpolation_func_gen(times, values, extrapolation, kind='previous'):
+def interpolation_func_gen(time_series, extrapolation, kind='previous'):
     # make interpolation_func
     if extrapolation == 'begin' or extrapolation == 'both':
-        times  = numpy.append(numpy.ninf, times)
-        values = numpy.append(values[0], values)
+        time_series = numpy.vstack(([numpy.ninf, time_series[0,1]],
+                                    time_series))
     if extrapolation == 'end' or extrapolation == 'both':
-        times  = numpy.append(times, numpy.Inf)
-        values = numpy.append(values, values[-1])
+        time_series = numpy.vstack((time_series,
+                                    [numpy.inf, time_series[0,-1]],))
     
-    interpolation_func = interpolate.interp1d(times, values, kind)
+    interpolation_func = interpolate.interp1d(time_series[:,0], time_series[:,1], kind)
 
     return interpolation_func
 
@@ -63,13 +63,14 @@ def inlection_time_window_eval(inflection_time, interpolation_func, eval_func):
 
     return rob_data_point
 
-def eval_timed_operator_bound(times, values, operator_interval, eval_func, extrapolation, kind):
+def eval_timed_operator_bound(time_series, operator_interval, eval_func, extrapolation, kind):
     # eval timed operator
 
     # make interplation function
-    interpolation_func = interpolation_func_gen(times, values, extrapolation, kind)
+    interpolation_func = interpolation_func_gen(time_series, extrapolation, kind)
 
     # inflection time set
+    times = time_series[:,0]
     inflection_times = inflection_time(times, operator_interval)
     ## cutting out of range
     inflection_times = inlection_time_filter(inflection_times, interpolation_func)
