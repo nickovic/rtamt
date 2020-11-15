@@ -80,6 +80,27 @@ def eval_timed_operator_bound(time_series, operator_interval, eval_func, extrapo
 
     return robustness
 
+def offline_binary_timed_operator_wrapper(operator_interval, eval_func, *args, **kargs):
+    #TODO: move it into TL abstract class
+
+    input_time_series_list = args[0]
+    out = []
+    
+    if not input_time_series_list:
+        return out
+
+    # data conversion
+    input_time_series = numpy.array(input_time_series_list)
+
+    # eval
+    robustness = eval_timed_operator_bound(input_time_series, operator_interval, eval_func, extrapolation='end', kind='previous')
+
+    # remove duplication
+    robustness = remove_duplication(robustness)
+
+    out = robustness.tolist()
+    return out
+
 def remove_duplication(time_series):
     # remove duplicated points
     diff = numpy.diff(time_series[:,1])

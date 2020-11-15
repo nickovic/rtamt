@@ -14,21 +14,8 @@ class AlwaysBoundedOperation(AbstractOperation):
         pass
 
     def offline(self, *args, **kargs):
-        out = []
-        input_time_series_list = args[0]
-        
-        if not input_time_series_list:
-            return out
-
-        # data conversion
-        input_time_series = numpy.array(input_time_series_list)
         operator_interval = [self.begin, self.end]
 
-        # eval
-        robustness = eval_timed_operator_bound(input_time_series, operator_interval, numpy.amin, extrapolation='end', kind='previous')
+        out = offline_binary_timed_operator_wrapper(operator_interval, numpy.amin, *args, **kargs, )
 
-        # remove duplication
-        robustness = remove_duplication(robustness)
-
-        out = robustness.tolist()
         return out
