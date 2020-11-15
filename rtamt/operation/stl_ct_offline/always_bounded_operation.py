@@ -19,6 +19,6 @@ class AlwaysBoundedOperation(AbstractOperation):
 
         operator_interval = [self.begin, self.end]
 
-        out = offline_binary_timed_operator_wrapper(operator_interval, numpy.amin, *args, **kargs)
+        out = offline_unary_timed_operator_wrapper(operator_interval, numpy.amin, *args, **kargs)
 
         return out
