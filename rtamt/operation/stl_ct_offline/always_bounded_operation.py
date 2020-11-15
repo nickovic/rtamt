@@ -3,6 +3,8 @@ from scipy import signal, interpolate
 
 import numpy
 
+from .tllibs import *
+
 class AlwaysBoundedOperation(AbstractOperation):
     def __init__(self, begin, end):
         self.begin = begin
@@ -19,43 +21,16 @@ class AlwaysBoundedOperation(AbstractOperation):
             return out
 
         # data conversion
-        t = numpy.array([ i[0] for i in input_list ])
-        p = numpy.array([ i[1] for i in input_list ])
-        t = numpy.append(t, numpy.Inf)  # if you don't need to extrapolation of end of traj. you can remove here. 
-        p = numpy.append(p, p[-1])
-        interpolate_traj = interpolate.interp1d(t, p, kind='previous') # interporlation is piecewise constant.
+        input_array = numpy.array(input_list)
+        t = input_array[:,0]
+        x = input_array[:,1]
+        operator_interval = [self.begin, self.end]
 
-        # inflection time set
-        ## (inflection time, interval start, interval end)
-        intsi = numpy.array([t[0], t[0]+self.begin, t[0]+self.end])
-        tT = numpy.array([t]).T
-        its1 = numpy.hstack((tT-self.end, tT-(self.end-self.begin), tT))
-        its2 = numpy.hstack((tT-self.begin, tT, tT+(self.end-self.begin)))
-        its = numpy.vstack((intsi, its1,its2))
-        its = numpy.unique(its, axis=0)
-        
-        ## cutting out of range
-        index = (t[0] <= its) & (its <= t[-1])
-        index = numpy.amin(index, axis=1)
-        its = its[index]
-
-        # calc rob for each its
-        robs = numpy.empty([its.shape[0],2])
-        for i in range(its.shape[0]):
-            it = its[i]
-            time = it[0]
-            begin = it[1]
-            end = it[2]
-            tt = t[(begin<t)&(t<end)] 
-            eval_times = numpy.hstack((begin, tt, end))
-            rob = min(interpolate_traj(eval_times))
-            robs[i] = numpy.array([time,rob])
+        # eval
+        robs = eval_timed_operator_bound(t, x, operator_interval, numpy.amin, extrapolation='end', kind='previous')
 
         # remove duplication
-        diff = numpy.diff(robs[:,1])
-        index = (diff !=0)
-        index = numpy.hstack((True, index))
-        robs = robs[index]
+        robs = remove_duplication(robs)
 
         out = robs.tolist()
         return out
