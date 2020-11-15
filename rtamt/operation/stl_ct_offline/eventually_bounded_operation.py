@@ -36,7 +36,7 @@ class EventuallyBoundedOperation(AbstractOperation):
         
         ## cutting out of range
         index = (t[0] <= its) & (its <= t[-1])
-        index = [numpy.amin(index, axis=1)]
+        index = numpy.amin(index, axis=1)
         its = its[index]
 
         # calc rob for each its
