@@ -13,6 +13,7 @@ from rtamt.operation.stl_ct_offline.eventually_operation import EventuallyOperat
 from rtamt.operation.stl_ct_offline.always_bounded_operation import AlwaysBoundedOperation
 from rtamt.operation.stl_ct_offline.eventually_bounded_operation import EventuallyBoundedOperation
 from rtamt.operation.stl_ct_offline.and_operation import AndOperation
+from rtamt.operation.stl_ct_offline.or_operation import OrOperation
 
 class TestSTLoffline(unittest.TestCase):
 
@@ -486,6 +487,16 @@ class TestSTLoffline(unittest.TestCase):
                              "Problem with 7th example:\nExpected output: %s\nComputed output: %s" % (
                                  out_expected, out_computed))
 
+    def test_or(self):
+        oper = OrOperation()
+        in_data_1 = [[1, 2], [4.1, 1], [5, 2], [6.1, 1], [6.7, 4], [9.9, 5]]
+        in_data_2 = [[1.2, 1], [3.7, 3], [7.5, 2], [8.1, 6]]
+        out_expected = [[1.2, 2], [3.7, 3], [6.7, 4], [8.1, 6]]
+        out_computed = oper.offline(in_data_1, in_data_2)
+
+        self.assertListEqual(out_expected, out_computed,
+                             "Problem with 1st example:\nExpected output: %s\nComputed output: %s" % (
+                                 out_expected, out_computed))
 
 if __name__ == '__main__':
     unittest.main()
