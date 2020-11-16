@@ -40,15 +40,15 @@ def inflection_time_filter(inflection_times, interpolation_func):
 
     return inflection_times
 
-def inflection_time_eval(inflection_times, interpolation_func, eval_func):
+def inflection_time_eval(inflection_times, interpolation_func, semantics_func):
     # calc rob of inlection_time
     robustness = numpy.empty([inflection_times.shape[0],2])
     for i in range(inflection_times.shape[0]):   #TODO: use here multiprocessing
-        robustness[i] = inlection_time_window_eval(inflection_times[i], interpolation_func, eval_func)
+        robustness[i] = inflection_time_window_eval(inflection_times[i], interpolation_func, semantics_func)
     
     return robustness
 
-def inlection_time_window_eval(inflection_time, interpolation_func, eval_func):
+def inflection_time_window_eval(inflection_time, interpolation_func, semantics_func):
     # calc rob for each inlection_time
     time  = inflection_time[0]
     begin = inflection_time[1]
@@ -58,12 +58,12 @@ def inlection_time_window_eval(inflection_time, interpolation_func, eval_func):
     sampling_times_in_range = sampling_times[(begin<sampling_times)&(sampling_times<end)]
     eval_times = numpy.hstack((begin, sampling_times_in_range, end))
     values = interpolation_func(eval_times)
-    rob_values = eval_func(values)
-    rob_data_point = numpy.array([time, rob_values])
+    bounded_time_seriese = numpy.hstack( (numpy.array([eval_times]).T, numpy.array([values]).T) )
+    rob_data_point = semantics_func(time, bounded_time_seriese)
 
     return rob_data_point
 
-def eval_unary_timed_operator_bound(time_series, operator_interval, eval_func, extrapolation, kind):
+def eval_unary_timed_operator_bound(time_series, operator_interval, semantics_func, extrapolation, kind):
     # eval timed operator
 
     # make interplation function
@@ -76,11 +76,11 @@ def eval_unary_timed_operator_bound(time_series, operator_interval, eval_func, e
     inflection_times = inflection_time_filter(inflection_times, interpolation_func)
     
     # calc rob for each inflection time
-    robustness = inflection_time_eval(inflection_times, interpolation_func, eval_func)
+    robustness = inflection_time_eval(inflection_times, interpolation_func, semantics_func)
 
     return robustness
 
-def offline_unary_timed_operator_wrapper(operator_interval, eval_func, *args, **kargs):
+def offline_unary_timed_operator_wrapper(operator_interval, semantics_func, *args, **kargs):
     #TODO: move it into TL abstract class
 
     input_time_series_list = args[0]
@@ -93,7 +93,7 @@ def offline_unary_timed_operator_wrapper(operator_interval, eval_func, *args, **
     input_time_series = numpy.array(input_time_series_list)
 
     # eval
-    robustness = eval_unary_timed_operator_bound(input_time_series, operator_interval, eval_func, extrapolation='end', kind='previous')
+    robustness = eval_unary_timed_operator_bound(input_time_series, operator_interval, semantics_func, extrapolation='end', kind='previous')
 
     # remove duplication
     robustness = remove_duplication(robustness)
