@@ -7,12 +7,9 @@ options {
 stlfile
 	: stlSpecification EOF ;
 
-//stlSpecification
-//    : ( spec )? ( modimport )* ( declaration | annotation )* assertion ;
-
 stlSpecification
-    : assertion ;
-	
+    : ( spec )? ( modimport )* ( declaration | annotation )* assertion ;
+
 spec
 	: Specification Identifier #Specification ;
 
@@ -20,7 +17,7 @@ modimport :
         From Identifier Import Identifier #modImport ;
 
 assertion 
-	: Identifier EQUAL topExpression ;
+	: (Identifier EQUAL)? topExpression ;
 
 declaration 
 	: variableDeclaration                                         #declVariable ;

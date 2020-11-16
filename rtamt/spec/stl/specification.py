@@ -138,11 +138,19 @@ class STLSpecification(AbstractSpecification,StlParserVisitor):
 
     def visitAssertion(self, ctx):
         self.visitChildren(ctx)
-        id = ctx.Identifier().getText();
-        id_tokens = id.split('.')
-        id_head = id_tokens[0]
-        id_tokens.pop(0)
-        id_tail = '.'.join(id_tokens)
+
+        implicit = False
+        if not ctx.Identifier():
+            id = 'out'
+            id_head = 'out'
+            id_tail = ''
+            implicit = True
+        else:
+            id = ctx.Identifier().getText();
+            id_tokens = id.split('.')
+            id_head = id_tokens[0]
+            id_tokens.pop(0)
+            id_tail = '.'.join(id_tokens)
 
         try:
             var = self.var_object_dict[id_head]
@@ -164,7 +172,8 @@ class STLSpecification(AbstractSpecification,StlParserVisitor):
                 var = float()
                 self.var_object_dict[id] = var
                 self.add_var(id)
-                logging.warning('The variable {} is not explicitely declared. It is implicitely declared as a '
+                if not implicit:
+                    logging.warning('The variable {} is not explicitely declared. It is implicitely declared as a '
                                 'variable of type float'.format(id))
 
         self.out_var = id_head;
