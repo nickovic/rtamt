@@ -32,7 +32,7 @@ def inflection_time(times, interval):
     
     return inflection_times
 
-def inlection_time_filter(inflection_times, interpolation_func):
+def inflection_time_filter(inflection_times, interpolation_func):
     # cutting out of range
     index = (interpolation_func.x[0] <= inflection_times) & (inflection_times <= interpolation_func.x[-1])
     index = numpy.all(index, axis=1)
@@ -40,7 +40,7 @@ def inlection_time_filter(inflection_times, interpolation_func):
 
     return inflection_times
 
-def inlection_time_eval(inflection_times, interpolation_func, eval_func):
+def inflection_time_eval(inflection_times, interpolation_func, eval_func):
     # calc rob of inlection_time
     robustness = numpy.empty([inflection_times.shape[0],2])
     for i in range(inflection_times.shape[0]):   #TODO: use here multiprocessing
@@ -63,7 +63,7 @@ def inlection_time_window_eval(inflection_time, interpolation_func, eval_func):
 
     return rob_data_point
 
-def eval_timed_operator_bound(time_series, operator_interval, eval_func, extrapolation, kind):
+def eval_unary_timed_operator_bound(time_series, operator_interval, eval_func, extrapolation, kind):
     # eval timed operator
 
     # make interplation function
@@ -73,10 +73,10 @@ def eval_timed_operator_bound(time_series, operator_interval, eval_func, extrapo
     times = time_series[:,0]
     inflection_times = inflection_time(times, operator_interval)
     ## cutting out of range
-    inflection_times = inlection_time_filter(inflection_times, interpolation_func)
+    inflection_times = inflection_time_filter(inflection_times, interpolation_func)
     
     # calc rob for each inflection time
-    robustness = inlection_time_eval(inflection_times, interpolation_func, eval_func)
+    robustness = inflection_time_eval(inflection_times, interpolation_func, eval_func)
 
     return robustness
 
@@ -93,7 +93,7 @@ def offline_unary_timed_operator_wrapper(operator_interval, eval_func, *args, **
     input_time_series = numpy.array(input_time_series_list)
 
     # eval
-    robustness = eval_timed_operator_bound(input_time_series, operator_interval, eval_func, extrapolation='end', kind='previous')
+    robustness = eval_unary_timed_operator_bound(input_time_series, operator_interval, eval_func, extrapolation='end', kind='previous')
 
     # remove duplication
     robustness = remove_duplication(robustness)
@@ -101,6 +101,51 @@ def offline_unary_timed_operator_wrapper(operator_interval, eval_func, *args, **
     out = robustness.tolist()
     return out
 
+def eval_binary_logic_operator(left_time_series, right_time_series, semantics_func, extrapolation, kind):
+    # eval timed operator
+
+    # make interplation function
+    left_interpolation_func = interpolation_func_gen(left_time_series, extrapolation, kind)
+    right_interpolation_func = interpolation_func_gen(right_time_series, extrapolation, kind)
+
+    # sample time set
+    sample_times = numpy.hstack((left_time_series[:,0], right_time_series[:,0]))
+    sample_times = numpy.unique(sample_times, axis=0)
+    ## cutting out of range
+    index = ((left_interpolation_func.x[0] <= sample_times) & (sample_times <= left_interpolation_func.x[-1])) & ((right_interpolation_func.x[0] <= sample_times) & (sample_times <= right_interpolation_func.x[-1]))
+    sample_times = sample_times[index]
+    
+    # calc rob for each sample time
+    left_values  = left_interpolation_func(sample_times)
+    normalize_left_time_series = numpy.hstack( (numpy.array([sample_times]).T, numpy.array([left_values]).T,) )
+    right_values = right_interpolation_func(sample_times)
+    normalize_right_time_series = numpy.hstack( (numpy.array([sample_times]).T, numpy.array([right_values]).T,) )
+    robustness = semantics_func(normalize_left_time_series, normalize_right_time_series)
+
+    return robustness
+
+def offline_binary_logic_operator_wrapper(semantics_func, *args, **kargs):
+    #TODO: move it into TL abstract class
+
+    out = []
+    left_time_series_list = args[0]
+    right_time_series_list = args[1]
+
+    if (not left_time_series_list) or (not right_time_series_list):
+        return out
+
+    # data conversion
+    left_time_series = numpy.array(left_time_series_list)
+    right_time_series = numpy.array(right_time_series_list)
+
+    # eval
+    robustness = eval_binary_logic_operator(left_time_series, right_time_series, semantics_func, extrapolation='end', kind='previous')
+
+    # remove duplication
+    robustness = remove_duplication(robustness)
+
+    out = robustness.tolist()
+    return out
 
 def remove_duplication(time_series):
     # remove duplicated points
