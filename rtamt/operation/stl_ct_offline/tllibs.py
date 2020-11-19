@@ -124,6 +124,28 @@ def eval_binary_logic_operator(left_time_series, right_time_series, semantics_fu
 
     return robustness
 
+
+def eval_binary_logic_operator_dense_time(left_interpolation_func, right_interpolation_func, semantics_func):
+
+    # sample time set
+    left_sample_times  = left_interpolation_func.x[  (left_interpolation_func.x!= -numpy.inf)  & (left_interpolation_func.x!=numpy.inf) ]
+    right_sample_times = right_interpolation_func.x[ (right_interpolation_func.x!= -numpy.inf) & (right_interpolation_func.x!=numpy.inf) ]
+    sample_times = numpy.hstack((left_sample_times, right_sample_times))
+    sample_times = numpy.unique(sample_times, axis=0)
+    ## cutting out of range
+    index = ((left_interpolation_func.x[0] <= sample_times) & (sample_times <= left_interpolation_func.x[-1])) & ((right_interpolation_func.x[0] <= sample_times) & (sample_times <= right_interpolation_func.x[-1]))
+    sample_times = sample_times[index]
+    
+    # calc rob for each sample time
+    left_values  = left_interpolation_func(sample_times)
+    normalize_left_time_series = numpy.hstack( (numpy.array([sample_times]).T, numpy.array([left_values]).T,) )
+    right_values = right_interpolation_func(sample_times)
+    normalize_right_time_series = numpy.hstack( (numpy.array([sample_times]).T, numpy.array([right_values]).T,) )
+    robustness = semantics_func(normalize_left_time_series, normalize_right_time_series)
+
+    return robustness
+
+
 def offline_binary_logic_operator_wrapper(semantics_func, *args, **kargs):
     #TODO: move it into TL abstract class
 
