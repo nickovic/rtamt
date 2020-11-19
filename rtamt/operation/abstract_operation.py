@@ -192,8 +192,8 @@ class offlineDensetimeBinaryOperation(offlineDensetime, BinaryOperation):
     @abstractmethod
     def eval(self, left_interpolation_func, right_interpolation_func):
         # [input]
-        # left_interpolation_func: left interpolation function
-        # right_interpolation_func: right interpolation function
+        # left_interpolation_func: left data with interpolation function
+        # right_interpolation_func: right data with interpolation function
 
         # [output]
         # robustness: 2D numpy array [[time,value], ...]
@@ -221,8 +221,42 @@ class offlineDensetimeUnaryOperation(offlineDensetime, UniaryOperation):
     @abstractmethod
     def eval(self, interpolation_func):
         # [input]
-        # interpolation_func: interpolation function
+        # interpolation_func: input data with interpolation function
 
         # [output]
         # robustness: 2D numpy array [[time,value], ...]
         raise NotImplementedError(NOT_IMPLEMENTED)
+
+class offlineDensetimeUnaryBoundedtimeOperation(offlineDensetimeUnaryOperation):
+    interval = []
+
+    def __init__(self, *args, **kargs):
+        super().__init__()
+        begin = args[0]
+        end = args[1]
+        self.interval = [begin, end]
+        return
+
+    def eval_wrapper(self, *args, **kargs):
+        robustness_list = []
+
+        time_series = self.getter_wrapper(*args,**kargs)
+        if (time_series.size == 0):
+            return robustness_list 
+
+        interpolation_func = self.time_handle(time_series)
+
+        robustness = self.eval(interpolation_func, self.interval)
+        robustness_list = robustness.tolist()
+        return robustness_list
+
+    @abstractmethod
+    def eval(self, interpolation_func, interval):
+        # [input]
+        # interpolation_func: input data with interpolation function
+        # interval: time interval for bouned time operation
+
+        # [output]
+        # robustness: 2D numpy array [[time,value], ...]
+        raise NotImplementedError(NOT_IMPLEMENTED)
+
