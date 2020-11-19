@@ -490,7 +490,7 @@ class TestSTLoffline(unittest.TestCase):
         in_data_1 = [[1, 2], [4.1, 1], [5, 2], [6.1, 1], [6.7, 4], [9.9, 5]]
         in_data_2 = [[1.2, 1], [3.7, 3], [7.5, 2], [8.1, 6]]
         out_expected = [[1.2, 2], [3.7, 3], [6.7, 4], [8.1, 6]]
-        out_computed = oper.offline(in_data_1, in_data_2)
+        out_computed = oper.eval_wrapper(in_data_1, in_data_2)
 
         self.assertListEqual(out_expected, out_computed,
                              "Problem with 1st example:\nExpected output: %s\nComputed output: %s" % (
