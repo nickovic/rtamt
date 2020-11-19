@@ -80,6 +80,20 @@ def eval_unary_timed_operator_bound(time_series, operator_interval, semantics_fu
 
     return robustness
 
+def eval_unary_timed_operator_bound_dense_time(input_interpolation_func, operator_interval, semantics_func):
+    # eval timed operator
+
+    # inflection time set
+    times = input_interpolation_func.x[ (input_interpolation_func.x!= -numpy.inf)  & (input_interpolation_func.x!=numpy.inf) ]
+    inflection_times = inflection_time(times, operator_interval)
+    ## cutting out of range
+    inflection_times = inflection_time_filter(inflection_times, input_interpolation_func)
+    
+    # calc rob for each inflection time
+    robustness = inflection_time_eval(inflection_times, input_interpolation_func, semantics_func)
+
+    return robustness
+
 def offline_unary_timed_operator_wrapper(operator_interval, semantics_func, *args, **kargs):
     #TODO: move it into TL abstract class
 
