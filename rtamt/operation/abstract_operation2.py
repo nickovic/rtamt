@@ -61,7 +61,8 @@ class ShapeOperation:
 
 class BinaryOperation(ShapeOperation):
     def __init__(self):
-        pass
+        super().__init__()
+        return
 
     def getter(self, *args, **kargs):
         left_time_series_list = args[0]
@@ -75,12 +76,16 @@ class BinaryOperation(ShapeOperation):
 
 class UniaryOperation(ShapeOperation):
     def __init__(self):
-        pass
+        super().__init__()
+        return
 
-    @abstractmethod
-    def getter(time_seriese):
-        raise NotImplementedError(NOT_IMPLEMENTED)
+    def getter(self, *args, **kargs):
+        time_series_list = args[0]
+        
+        # data conversion
+        time_series = numpy.array(time_series_list)
 
+        return time_series
 
 class operation:
     __metaclass__ = ABCMeta
@@ -165,7 +170,7 @@ class offlineDensetime(offline, denseTime):
         return interpolation_func
 
 # evaluation x ShapeOperation 
-class offlineBinaryOperation(offlineDensetime, BinaryOperation):
+class offlineDensetimeBinaryOperation(offlineDensetime, BinaryOperation):
     def __init__(self):
         offlineDensetime.__init__(self)
         return
@@ -189,6 +194,34 @@ class offlineBinaryOperation(offlineDensetime, BinaryOperation):
         # [input]
         # left_interpolation_func: left interpolation function
         # right_interpolation_func: right interpolation function
+
+        # [output]
+        # robustness: 2D numpy array [[time,value], ...]
+        raise NotImplementedError(NOT_IMPLEMENTED)
+
+class offlineDensetimeUnaryOperation(offlineDensetime, UniaryOperation):
+    def __init__(self):
+        offlineDensetime.__init__(self)
+        UniaryOperation.__init__(self)
+        return
+
+    def eval_wrapper(self, *args, **kargs):
+        robustness_list = []
+
+        time_series = self.getter_wrapper(*args,**kargs)
+        if (time_series.size == 0):
+            return robustness_list 
+
+        interpolation_func = self.time_handle(time_series)
+
+        robustness = self.eval(interpolation_func)
+        robustness_list = robustness.tolist()
+        return robustness_list
+
+    @abstractmethod
+    def eval(self, interpolation_func):
+        # [input]
+        # interpolation_func: interpolation function
 
         # [output]
         # robustness: 2D numpy array [[time,value], ...]

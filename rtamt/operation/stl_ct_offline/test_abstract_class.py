@@ -1,16 +1,13 @@
-from rtamt.operation.abstract_operation2 import offlineBinaryOperation
+from rtamt.operation.abstract_operation2 import offlineDensetimeBinaryOperation
 from scipy import signal, interpolate
 
 import numpy
 
 from .tllibs import *
 
-class AndOperation(offlineBinaryOperation):
+class AndOperation(offlineDensetimeBinaryOperation):
     def __init__(self):
         super().__init__()
-
-    def update(self, *args, **kargs):
-        pass
 
     def semantics_func(self, normalize_left_time_series, normalize_right_time_series):
         values = numpy.amin(numpy.vstack((normalize_left_time_series[:,1],normalize_right_time_series[:,1])), axis=0)
