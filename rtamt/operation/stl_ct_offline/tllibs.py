@@ -14,6 +14,17 @@ def interpolation_func_gen(time_series, extrapolation, kind='previous'):
 
     return interpolation_func
 
+def times_values2time_series(times, values):
+    time_series = numpy.hstack( (numpy.array([times]).T, numpy.array([values]).T) )
+    return time_series
+
+def interpolation_func2time_series(interpolation_func):
+    index = (interpolation_func.x!= -numpy.inf) & (interpolation_func.x!=numpy.inf)
+    times  = interpolation_func.x[index]
+    values = interpolation_func.y[index]
+    time_series = times_values2time_series(times, values)
+    return time_series
+
 def inflection_time(times, interval):
     # inflection time set
     # find time points which are needed to calculat robustness
@@ -58,8 +69,8 @@ def inflection_time_window_eval(inflection_time, interpolation_func, semantics_f
     sampling_times_in_range = sampling_times[(begin<sampling_times)&(sampling_times<end)]
     eval_times = numpy.hstack((begin, sampling_times_in_range, end))
     values = interpolation_func(eval_times)
-    bounded_time_seriese = numpy.hstack( (numpy.array([eval_times]).T, numpy.array([values]).T) )
-    rob_data_point = semantics_func(time, bounded_time_seriese)
+    bounded_time_series = times_values2time_series(eval_times, values)
+    rob_data_point = semantics_func(time, bounded_time_series)
 
     return rob_data_point
 
@@ -84,7 +95,8 @@ def eval_unary_timed_operator_bound_dense_time(input_interpolation_func, operato
     # eval timed operator
 
     # inflection time set
-    times = input_interpolation_func.x[ (input_interpolation_func.x!= -numpy.inf)  & (input_interpolation_func.x!=numpy.inf) ]
+    input_time_series = interpolation_func2time_series(input_interpolation_func)
+    times = input_time_series[:,0]
     inflection_times = inflection_time(times, operator_interval)
     ## cutting out of range
     inflection_times = inflection_time_filter(inflection_times, input_interpolation_func)
@@ -131,9 +143,9 @@ def eval_binary_logic_operator(left_time_series, right_time_series, semantics_fu
     
     # calc rob for each sample time
     left_values  = left_interpolation_func(sample_times)
-    normalize_left_time_series = numpy.hstack( (numpy.array([sample_times]).T, numpy.array([left_values]).T,) )
+    normalize_left_time_series = times_values2time_series(sample_times, left_values)
     right_values = right_interpolation_func(sample_times)
-    normalize_right_time_series = numpy.hstack( (numpy.array([sample_times]).T, numpy.array([right_values]).T,) )
+    normalize_right_time_series = times_values2time_series(sample_times, right_values)
     robustness = semantics_func(normalize_left_time_series, normalize_right_time_series)
 
     return robustness
@@ -142,8 +154,10 @@ def eval_binary_logic_operator(left_time_series, right_time_series, semantics_fu
 def eval_binary_logic_operator_dense_time(left_interpolation_func, right_interpolation_func, semantics_func):
 
     # sample time set
-    left_sample_times  = left_interpolation_func.x[  (left_interpolation_func.x!= -numpy.inf)  & (left_interpolation_func.x!=numpy.inf) ]
-    right_sample_times = right_interpolation_func.x[ (right_interpolation_func.x!= -numpy.inf) & (right_interpolation_func.x!=numpy.inf) ]
+    left_time_series = interpolation_func2time_series(left_interpolation_func)
+    left_sample_times  = left_time_series[:,0]
+    right_sample_times = interpolation_func2time_series(right_interpolation_func)
+    right_sample_times  = right_sample_times[:,0]
     sample_times = numpy.hstack((left_sample_times, right_sample_times))
     sample_times = numpy.unique(sample_times, axis=0)
     ## cutting out of range
@@ -152,9 +166,9 @@ def eval_binary_logic_operator_dense_time(left_interpolation_func, right_interpo
     
     # calc rob for each sample time
     left_values  = left_interpolation_func(sample_times)
-    normalize_left_time_series = numpy.hstack( (numpy.array([sample_times]).T, numpy.array([left_values]).T,) )
+    normalize_left_time_series = times_values2time_series(sample_times, left_values)
     right_values = right_interpolation_func(sample_times)
-    normalize_right_time_series = numpy.hstack( (numpy.array([sample_times]).T, numpy.array([right_values]).T,) )
+    normalize_right_time_series = times_values2time_series(sample_times, right_values)
     robustness = semantics_func(normalize_left_time_series, normalize_right_time_series)
 
     return robustness
