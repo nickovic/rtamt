@@ -32,7 +32,7 @@ class TestSTLoffline(unittest.TestCase):
         oper = AbsOperation()
         in_data = [[5, 3], [5.3, -1], [5.75, 2], [6.5, -5], [6.75, 6], [9, 5], [9.25, 4], [10, 2]]
         out_expected = [[5, 3], [5.3, 1], [5.75, 2], [6.5, 5], [6.75, 6], [9, 5], [9.25, 4], [10, 2]]
-        out_computed = oper.offline(in_data)
+        out_computed = oper.eval_wrapper(in_data)
 
         self.assertListEqual(out_expected, out_computed,
                              "Problem with 1st example:\nExpected output: %s\nComputed output: %s" % (

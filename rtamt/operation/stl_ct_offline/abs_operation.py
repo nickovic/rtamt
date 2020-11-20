@@ -1,20 +1,21 @@
-from rtamt.operation.abstract_operation import AbstractOperation
+import numpy
 
-class AbsOperation(AbstractOperation):
-    def __init__(self):
-        pass
+from rtamt.operation.abstract_operation import offlineDensetimeUnaryOperation
 
-    def update(self, *args, **kargs):
-        pass
+from .tllibs import *
 
-    def offline(self, *args, **kargs):
-        out = []
-        input_list = args[0]
+class AbsOperation(offlineDensetimeUnaryOperation):
+    def __init__(self, *args, **kargs):
+        super().__init__(*args, **kargs)
+        return
 
-        for in_sample in input_list:
-            out_time = in_sample[0]
-            out_value = abs(in_sample[1])
+    def eval(self, input_interpolation_func):
+        time_series = interpolation_func2time_series(input_interpolation_func)
+        times = time_series[:,0]
+        values = time_series[:,1]
 
-            out.append([out_time, out_value])
+        abss = numpy.absolute(values)
+        robustness = numpy.hstack( (numpy.array([times]).T, numpy.array([abss]).T) )
+        robustness = remove_duplication(robustness) # perhaps I need to put it into wrapper.
 
-        return out
+        return robustness
