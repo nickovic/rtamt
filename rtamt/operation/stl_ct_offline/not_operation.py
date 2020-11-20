@@ -1,29 +1,20 @@
-from rtamt.operation.abstract_operation import AbstractOperation
+import numpy
 
-class NotOperation(AbstractOperation):
-    def __init__(self):
-        pass
-    
-    #  function update
-    #  takes as input a list of [timestamp, value] pairs
-    #  returns as output a list of [timestamp, value] pairs
-    #
-    # Example:
-    # out = update(in)
-    # in - [[4.2, 2.13], [5.7, -3.12], [6.88, 4.55]]
-    # out - [[4.2, -2.13], [5.7, 3.12], [6.88, -4.55]]
+from rtamt.operation.abstract_operation import offlineDensetimeUnaryOperation
 
-    def update(self, *args, **kargs):
-        pass
+from .tllibs import *
 
-    def offline(self, *args, **kargs):
-        out = []
-        input_list = args[0]
+class NotOperation(offlineDensetimeUnaryOperation):
+    def __init__(self, *args, **kargs):
+        super().__init__(*args, **kargs)
+        return
 
-        for in_sample in input_list:
-            out_time = in_sample[0]
-            out_value = - in_sample[1]
+    def eval(self, input_interpolation_func):
+        time_series = interpolation_func2time_series(input_interpolation_func)
+        times = time_series[:,0]
+        values = time_series[:,1]
 
-            out.append([out_time, out_value])
+        robustness = times_values2time_series(times, -values)
+        robustness = remove_duplication(robustness) # perhaps I need to put it into wrapper.
 
-        return out
+        return robustness
