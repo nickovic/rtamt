@@ -1,7 +1,6 @@
-from rtamt.operation.abstract_operation import offlineDensetimeBinaryOperation
-from scipy import signal, interpolate
-
 import numpy
+
+from rtamt.operation.abstract_operation import offlineDensetimeBinaryOperation
 
 from .tllibs import *
 

@@ -200,7 +200,7 @@ class offlineDensetimeBinaryOperation(offlineDensetime, BinaryOperation):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
 class offlineDensetimeUnaryOperation(offlineDensetime, UniaryOperation):
-    def __init__(self):
+    def __init__(self, *args, **kargs):
         offlineDensetime.__init__(self)
         UniaryOperation.__init__(self)
         return
@@ -219,7 +219,7 @@ class offlineDensetimeUnaryOperation(offlineDensetime, UniaryOperation):
         return robustness_list
 
     @abstractmethod
-    def eval(self, interpolation_func):
+    def eval(self, input_interpolation_func):
         # [input]
         # interpolation_func: input data with interpolation function
 
@@ -251,7 +251,7 @@ class offlineDensetimeUnaryBoundedtimeOperation(offlineDensetimeUnaryOperation):
         return robustness_list
 
     @abstractmethod
-    def eval(self, interpolation_func, interval):
+    def eval(self, input_interpolation_func, interval):
         # [input]
         # interpolation_func: input data with interpolation function
         # interval: time interval for bouned time operation
@@ -259,4 +259,3 @@ class offlineDensetimeUnaryBoundedtimeOperation(offlineDensetimeUnaryOperation):
         # [output]
         # robustness: 2D numpy array [[time,value], ...]
         raise NotImplementedError(NOT_IMPLEMENTED)
-
