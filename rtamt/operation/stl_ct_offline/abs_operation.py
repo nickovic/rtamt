@@ -15,7 +15,7 @@ class AbsOperation(offlineDensetimeUnaryOperation):
         values = time_series[:,1]
 
         abss = numpy.absolute(values)
-        robustness = numpy.hstack( (numpy.array([times]).T, numpy.array([abss]).T) )
+        robustness = times_values2time_series(times, abss)
         robustness = remove_duplication(robustness) # perhaps I need to put it into wrapper.
 
         return robustness
