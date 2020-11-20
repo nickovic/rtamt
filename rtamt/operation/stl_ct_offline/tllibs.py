@@ -74,6 +74,22 @@ def inflection_time_window_eval(inflection_time, interpolation_func, semantics_f
 
     return rob_data_point
 
+def eval_unary_timed_operator_dense_time(input_interpolation_func, semantics_func):
+    input_time_series = interpolation_func2time_series(input_interpolation_func)
+
+    robustness = numpy.empty(([input_time_series.shape[0],2]))
+
+    time_series_set = []
+    temp_input_time_series = input_time_series
+    for i in range(input_time_series.shape[0]):
+        time_series_set.append(temp_input_time_series)
+        temp_input_time_series = numpy.delete( temp_input_time_series, 0, 0 )
+
+    for i in range(input_time_series.shape[0]):   #TODO: use here multiprocessing
+        robustness[i] = semantics_func(time_series_set[i])
+
+    return robustness
+
 def eval_unary_timed_operator_bound(time_series, operator_interval, semantics_func, extrapolation, kind):
     # eval timed operator
 
