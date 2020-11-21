@@ -128,14 +128,14 @@ def offline_unary_timed_operator_wrapper(operator_interval, semantics_func, *arg
     input_time_series_list = args[0]
     out = []
     
-    if not input_time_series_list:
+    if len(input_time_series_list) <= 1:
         return out
 
     # data conversion
     input_time_series = numpy.array(input_time_series_list)
 
     # eval
-    robustness = eval_unary_timed_operator_bound(input_time_series, operator_interval, semantics_func, extrapolation='end', kind='previous')
+    robustness = eval_unary_timed_operator_bound(input_time_series, operator_interval, semantics_func, extrapolation='none', kind='previous')
 
     # remove duplication
     robustness = remove_duplication(robustness)
@@ -205,7 +205,7 @@ def offline_binary_logic_operator_wrapper(semantics_func, *args, **kargs):
     right_time_series = numpy.array(right_time_series_list)
 
     # eval
-    robustness = eval_binary_logic_operator(left_time_series, right_time_series, semantics_func, extrapolation='end', kind='previous')
+    robustness = eval_binary_logic_operator(left_time_series, right_time_series, semantics_func, extrapolation='none', kind='previous')
 
     # remove duplication
     robustness = remove_duplication(robustness)
@@ -215,9 +215,13 @@ def offline_binary_logic_operator_wrapper(semantics_func, *args, **kargs):
 
 def remove_duplication(time_series):
     # remove duplicated points
+    if time_series.shape() == [1,2]:
+        return time_series
+
     diff = numpy.diff(time_series[:,1])
     index = (diff !=0)
     index = numpy.append(True, index)
+    index[-1] = True # to keep end time point, keep last data any
     time_series = time_series[index]
 
     return time_series
