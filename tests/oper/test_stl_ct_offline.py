@@ -141,13 +141,8 @@ class TestSTLoffline(unittest.TestCase):
                                  out_expected, out_computed))
 
         in_data = [[0, 1], [0.5, 2], [1, 3], [1.5, 4], [2, 5]]
-<<<<<<< HEAD
         out_expected = [[0, 1], [0.5, 2], [1, 3]]
-        out_computed = oper.offline(in_data)
-=======
-        out_expected = [[0, 1], [0.5, 2], [1, 3], [1.5, 4], [2, 5]]
         out_computed = oper.eval_wrapper(in_data)
->>>>>>> revising always bound operation
 
         self.assertListEqual(out_expected, out_computed,
                              "Problem with 2nd example:\nExpected output: %s\nComputed output: %s" % (
@@ -170,26 +165,16 @@ class TestSTLoffline(unittest.TestCase):
                                  out_expected, out_computed))
 
         in_data = [[6, 2], [8, 1], [8.1, 2], [10, 3]]
-<<<<<<< HEAD
         out_expected = [[6, 2], [7, 1], [8.1, 2], [9, 2]]
-        out_computed = oper.offline(in_data)
-=======
-        out_expected = [[6, 2], [7, 1], [8.1, 2], [10, 3]]
         out_computed = oper.eval_wrapper(in_data)
->>>>>>> revising always bound operation
 
         self.assertListEqual(out_expected, out_computed,
                              "Problem with 5th example:\nExpected output: %s\nComputed output: %s" % (
                                  out_expected, out_computed))
 
         in_data = [[6, 2], [8, 3], [8.1, 2], [10, 3]]
-<<<<<<< HEAD
         out_expected = [[6, 2], [9, 2]]
-        out_computed = oper.offline(in_data)
-=======
-        out_expected = [[6, 2], [10, 3]]
         out_computed = oper.eval_wrapper(in_data)
->>>>>>> revising always bound operation
 
         self.assertListEqual(out_expected, out_computed,
                              "Problem with 6th example:\nExpected output: %s\nComputed output: %s" % (
@@ -204,13 +189,8 @@ class TestSTLoffline(unittest.TestCase):
                                  out_expected, out_computed))
 
         in_data = [[2, 5]]
-<<<<<<< HEAD
         out_expected = []
-        out_computed = oper.offline(in_data)
-=======
-        out_expected = [[2, 5]]
         out_computed = oper.eval_wrapper(in_data)
->>>>>>> revising always bound operation
 
         self.assertListEqual(out_expected, out_computed,
                              "Problem with 8th example:\nExpected output: %s\nComputed output: %s" % (
@@ -227,13 +207,8 @@ class TestSTLoffline(unittest.TestCase):
                              out_expected, out_computed))
 
         in_data = [[0, 1], [0.5, 2], [1, 3], [1.5, 4], [2, 5]]
-<<<<<<< HEAD
         out_expected = [[0, 3]]
-        out_computed = oper.offline(in_data)
-=======
-        out_expected = [[0, 3], [0.5, 4], [1, 5]]
         out_computed = oper.eval_wrapper(in_data)
->>>>>>> revising always bound operation
 
         self.assertListEqual(out_expected, out_computed,
                              "Problem with 2nd example:\nExpected output: %s\nComputed output: %s" % (
@@ -256,26 +231,16 @@ class TestSTLoffline(unittest.TestCase):
                                   out_expected, out_computed))
 
         in_data = [[6, 2], [8, 1], [8.1, 2], [10, 3]]
-<<<<<<< HEAD
         out_expected = [[6, 1], [7.1, 2], [8, 2]]
-        out_computed = oper.offline(in_data)
-=======
-        out_expected = [[6, 1], [7.1, 2], [9, 3]]
         out_computed = oper.eval_wrapper(in_data)
->>>>>>> revising always bound operation
 
         self.assertListEqual(out_expected, out_computed,
                              "Problem with 5th example:\nExpected output: %s\nComputed output: %s" % (
                                  out_expected, out_computed))
 
         in_data = [[6, 2], [8, 3], [8.1, 2], [10, 3]]
-<<<<<<< HEAD
         out_expected = [[6, 2], [8, 2]]
-        out_computed = oper.offline(in_data)
-=======
-        out_expected = [[6, 2], [9, 3]]
         out_computed = oper.eval_wrapper(in_data)
->>>>>>> revising always bound operation
 
         self.assertListEqual(out_expected, out_computed,
                              "Problem with 6th example:\nExpected output: %s\nComputed output: %s" % (
@@ -290,13 +255,8 @@ class TestSTLoffline(unittest.TestCase):
                                  out_expected, out_computed))
 
         in_data = [[2, 5]]
-<<<<<<< HEAD
         out_expected = []
-        out_computed = oper.offline(in_data)
-=======
-        out_expected = [[2, 5]]
         out_computed = oper.eval_wrapper(in_data)
->>>>>>> revising always bound operation
 
         self.assertListEqual(out_expected, out_computed,
                              "Problem with 8th example:\nExpected output: %s\nComputed output: %s" % (
@@ -305,13 +265,8 @@ class TestSTLoffline(unittest.TestCase):
     def test_eventually_0_1(self):
         oper = EventuallyBoundedOperation(0, 1)
         in_data = [[5, 3], [5.3, 1], [5.75, 2], [6.5, 5], [6.75, 6], [9, 5], [9.25, 4], [10, 2]]
-<<<<<<< HEAD
         out_expected = [[5, 3], [5.3, 2], [5.5, 5], [5.75, 6], [9, 5]]
-        out_computed = oper.offline(in_data)
-=======
-        out_expected = [[5, 3], [5.3, 2], [5.5, 5], [5.75, 6], [9, 5], [9.25, 4], [10, 2]]
         out_computed = oper.eval_wrapper(in_data)
->>>>>>> revising eventually bound operation
 
         self.assertListEqual(out_expected, out_computed,
                              "Problem with 1st example:\nExpected output: %s\nComputed output: %s" % (
@@ -326,26 +281,16 @@ class TestSTLoffline(unittest.TestCase):
                              out_expected, out_computed))
 
         in_data = [[0, 5], [0.5, 4], [1, 3], [1.5, 2], [2, 1]]
-<<<<<<< HEAD
         out_expected = [[0, 5], [0.5, 4], [1, 3]]
-        out_computed = oper.offline(in_data)
-=======
-        out_expected = [[0, 5], [0.5, 4], [1.0, 3], [1.5, 2], [2, 1]]
         out_computed = oper.eval_wrapper(in_data)
->>>>>>> revising eventually bound operation
 
         self.assertListEqual(out_expected, out_computed,
                              "Problem with 3rd example:\nExpected output: %s\nComputed output: %s" % (
                              out_expected, out_computed))
 
         in_data = [[5, 3], [5.3, 1], [5.75, 2], [6.5, 5], [6.75, 1], [9, 5], [9.25, 4], [10, 2]]
-<<<<<<< HEAD
         out_expected = [[5, 3], [5.3, 2], [5.5, 5], [6.75, 1], [8, 5], [9, 5]]
-        out_computed = oper.offline(in_data)
-=======
-        out_expected = [[5, 3], [5.3, 2], [5.5, 5], [6.75, 1], [8, 5], [9.25, 4], [10, 2]]
         out_computed = oper.eval_wrapper(in_data)
->>>>>>> revising eventually bound operation
 
         self.assertListEqual(out_expected, out_computed,
                              "Problem with 4th example:\nExpected output: %s\nComputed output: %s" % (
@@ -376,13 +321,8 @@ class TestSTLoffline(unittest.TestCase):
                                  out_expected, out_computed))
 
         in_data = [[2, 5]]
-<<<<<<< HEAD
         out_expected = []
-        out_computed = oper.offline(in_data)
-=======
-        out_expected = [[2, 5]]
         out_computed = oper.eval_wrapper(in_data)
->>>>>>> revising eventually bound operation
 
         self.assertListEqual(out_expected, out_computed,
                              "Problem with 8th example:\nExpected output: %s\nComputed output: %s" % (
@@ -391,13 +331,8 @@ class TestSTLoffline(unittest.TestCase):
     def test_eventually_1_2(self):
         oper = EventuallyBoundedOperation(1,2)
         in_data = [[5, 3], [5.3, 1], [5.75, 2], [6.5, 5], [6.75, 6], [9, 5], [9.25, 4], [10, 2]]
-<<<<<<< HEAD
         out_expected = [[5.0, 6.0], [8.0, 5.0]]
-        out_computed = oper.offline(in_data)
-=======
-        out_expected = [[5.0, 6.0], [8.0, 5.0], [8.25, 4.0], [9.0, 2.0]]
         out_computed = oper.eval_wrapper(in_data)
->>>>>>> revising eventually bound operation
 
         self.assertListEqual(out_expected, out_computed,
                              "Problem with 1st example:\nExpected output: %s\nComputed output: %s" % (
@@ -412,26 +347,16 @@ class TestSTLoffline(unittest.TestCase):
                                  out_expected, out_computed))
 
         in_data = [[0, 5], [0.5, 4], [1, 3], [1.5, 2], [2, 1]]
-<<<<<<< HEAD
         out_expected = [[0, 3]]
-        out_computed = oper.offline(in_data)
-=======
-        out_expected = [[0, 3], [0.5, 2], [1, 1]]
         out_computed = oper.eval_wrapper(in_data)
->>>>>>> revising eventually bound operation
 
         self.assertListEqual(out_expected, out_computed,
                              "Problem with 3rd example:\nExpected output: %s\nComputed output: %s" % (
                                  out_expected, out_computed))
 
         in_data = [[5, 3], [5.3, 1], [5.75, 2], [6.5, 5], [6.75, 1], [9, 5], [9.25, 4], [10, 2]]
-<<<<<<< HEAD
         out_expected = [[5.0, 5], [5.75, 1], [7, 5], [8, 5]]
-        out_computed = oper.offline(in_data)
-=======
-        out_expected = [[5.0, 5], [5.75, 1], [7, 5], [8.25, 4], [9, 2]]
         out_computed = oper.eval_wrapper(in_data)
->>>>>>> revising eventually bound operation
 
         self.assertListEqual(out_expected, out_computed,
                              "Problem with 4th example:\nExpected output: %s\nComputed output: %s" % (
@@ -462,13 +387,8 @@ class TestSTLoffline(unittest.TestCase):
                                  out_expected, out_computed))
 
         in_data = [[2, 5]]
-<<<<<<< HEAD
         out_expected = []
-        out_computed = oper.offline(in_data)
-=======
-        out_expected = [[2, 5]]
         out_computed = oper.eval_wrapper(in_data)
->>>>>>> revising eventually bound operation
 
         self.assertListEqual(out_expected, out_computed,
                              "Problem with 8th example:\nExpected output: %s\nComputed output: %s" % (
@@ -478,13 +398,8 @@ class TestSTLoffline(unittest.TestCase):
         oper = AndOperation()
         in_data_1 = [[2, 2], [3.3, 3], [5.7, 4]]
         in_data_2 = [[2.5, 5], [4.7, 6]]
-<<<<<<< HEAD
         out_expected = [[2.5, 2], [3.3, 3], [4.7, 3]]
-        out_computed = oper.offline(in_data_1, in_data_2)
-=======
-        out_expected = [[2.5, 2], [3.3, 3], [5.7, 4]]
         out_computed = oper.eval_wrapper(in_data_1, in_data_2)
->>>>>>> filestructure change
 
         self.assertListEqual(out_expected, out_computed,
                              "Problem with 1st example:\nExpected output: %s\nComputed output: %s" % (
@@ -513,13 +428,8 @@ class TestSTLoffline(unittest.TestCase):
         oper = AndOperation()
         in_data_1 = [[2, 2], [3.3, 3]]
         in_data_2 = [[4.7, 3], [5, 5]]
-<<<<<<< HEAD
         out_expected = []
-        out_computed = oper.offline(in_data_1, in_data_2)
-=======
-        out_expected = [[4.7, 3]]
         out_computed = oper.eval_wrapper(in_data_1, in_data_2)
->>>>>>> filestructure change
 
         self.assertListEqual(out_expected, out_computed,
                              "Problem with 4th example:\nExpected output: %s\nComputed output: %s" % (
@@ -538,13 +448,8 @@ class TestSTLoffline(unittest.TestCase):
         oper = AndOperation()
         in_data_1 = [[1, 2], [4.1, 1], [5, 2], [6.1, 1], [6.7, 4], [9.9, 5]]
         in_data_2 = [[1.2, 1], [3.7, 3], [7.5, 2], [8.1, 6]]
-<<<<<<< HEAD
         out_expected = [[1.2, 1], [3.7, 2], [4.1, 1], [5, 2], [6.1, 1], [6.7, 3], [7.5, 2], [8.1, 4]]
-        out_computed = oper.offline(in_data_1, in_data_2)
-=======
-        out_expected = [[1.2, 1], [3.7, 2], [4.1, 1], [5, 2], [6.1, 1], [6.7, 3], [7.5, 2], [8.1, 4], [9.9, 5]]
         out_computed = oper.eval_wrapper(in_data_1, in_data_2)
->>>>>>> filestructure change
 
         self.assertListEqual(out_expected, out_computed,
                              "Problem with 6th example:\nExpected output: %s\nComputed output: %s" % (
@@ -553,13 +458,8 @@ class TestSTLoffline(unittest.TestCase):
         oper = AndOperation()
         in_data_1 = [[1, 1], [2, 2], [3, 3]]
         in_data_2 = [[3, 1], [4, 3], [7.5, 2]]
-<<<<<<< HEAD
         out_expected = [[3, 1]]
-        out_computed = oper.offline(in_data_1, in_data_2)
-=======
-        out_expected = [[3, 1], [4, 3], [7.5, 2]]
         out_computed = oper.eval_wrapper(in_data_1, in_data_2)
->>>>>>> filestructure change
 
         self.assertListEqual(out_expected, out_computed,
                              "Problem with 7th example:\nExpected output: %s\nComputed output: %s" % (
