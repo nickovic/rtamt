@@ -117,7 +117,7 @@ class evaluation:
 class offline(evaluation):
     
     def __init__(self):
-        self. extrapolation_kind = 'end'
+        self. extrapolation_kind = 'none'
         return
 
     def eval_wrapper(self, *args, **kargs):
@@ -179,7 +179,7 @@ class offlineDensetimeBinaryOperation(offlineDensetime, BinaryOperation):
         robustness_list = []
 
         left_time_series, right_time_series = self.getter_wrapper(*args,**kargs)
-        if (left_time_series.size == 0) or (right_time_series.size == 0):
+        if (left_time_series.size <= 1) or (right_time_series.size <= 1):
             return robustness_list 
 
         left_interpolation_func = self.time_handle(left_time_series)
@@ -209,12 +209,14 @@ class offlineDensetimeUnaryOperation(offlineDensetime, UniaryOperation):
         robustness_list = []
 
         time_series = self.getter_wrapper(*args,**kargs)
-        if (time_series.size == 0):
-            return robustness_list 
+        if time_series.size == 0:   #TODO: this code is problematic. it works for unbound time get [x,x] only
+            return robustness_list
+        elif time_series.shape == (1,2):
+            robustness = time_series
+        else:
+            interpolation_func = self.time_handle(time_series)
+            robustness = self.eval(interpolation_func)
 
-        interpolation_func = self.time_handle(time_series)
-
-        robustness = self.eval(interpolation_func)
         robustness_list = robustness.tolist()
         return robustness_list
 
@@ -241,7 +243,7 @@ class offlineDensetimeUnaryBoundedtimeOperation(offlineDensetimeUnaryOperation):
         robustness_list = []
 
         time_series = self.getter_wrapper(*args,**kargs)
-        if (time_series.size == 0):
+        if (time_series.size == 0 or time_series.shape == (1,2)):
             return robustness_list 
 
         interpolation_func = self.time_handle(time_series)

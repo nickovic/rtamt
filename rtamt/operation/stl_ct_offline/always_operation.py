@@ -17,4 +17,4 @@ class AlwaysOperation(offlineDensetimeUnaryOperation):
     def eval(self, interpolation_func):
         robustness = eval_unary_timed_operator_dense_time(interpolation_func, self.semantics_func)
         robustness = remove_duplication(robustness) # perhaps I need to put it into wrapper.
-        return robustness
+        return robustness   
