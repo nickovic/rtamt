@@ -215,7 +215,7 @@ def offline_binary_logic_operator_wrapper(semantics_func, *args, **kargs):
 
 def remove_duplication(time_series):
     # remove duplicated points
-    if time_series.shape() == [1,2]:
+    if (time_series.size == 0 or time_series.shape == (1,2)):
         return time_series
 
     diff = numpy.diff(time_series[:,1])
