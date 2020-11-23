@@ -12,7 +12,7 @@ class Disjunction(Node):
     """A class for storing STL Or nodes
         Inherits TemporalNode
     """
-    def __init__(self, child1, child2, is_pure_python):
+    def __init__(self, child1, child2, is_pure_python=True):
         """Constructor for Or node
 
         Parameters:
@@ -25,6 +25,8 @@ class Disjunction(Node):
 
         self.in_vars = child1.in_vars + child2.in_vars
         self.out_vars = child1.out_vars + child2.out_vars
+
+        self.name = '(' + child1.name + ')or(' + child2.name + ')'
 
         if is_pure_python:
             name = 'rtamt.operation.stl.or_operation'

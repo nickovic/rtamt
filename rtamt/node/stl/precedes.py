@@ -12,7 +12,7 @@ class Precedes(TemporalNode):
                 Inherits TemporalNode
     """
 
-    def __init__(self, child1, child2, bound, is_pure_python):
+    def __init__(self, child1, child2, bound=None, is_pure_python=True):
         """Constructor for Precedes node
 
         Parameters:
@@ -27,6 +27,8 @@ class Precedes(TemporalNode):
         self.in_vars = child1.in_vars + child2.in_vars
         self.out_vars = child1.out_vars + child2.out_vars
         self.bound = bound
+
+        self.name = '(' + child1.name + ')precedes[' + str(bound.begin) + ',' + str(bound.end) + '](' + child2.name + ')'
 
         if is_pure_python:
             name = 'rtamt.operation.stl.precedes_bounded_operation'

@@ -29,6 +29,8 @@ class Node(AbstractNode):
         self.in_vars = []
         self.out_vars = []
 
+
+
     @property
     def horizon(self):
         """Getter for the horizon"""

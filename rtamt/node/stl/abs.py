@@ -11,7 +11,7 @@ class Abs(Node):
     """A class for storing STL Neg nodes
         Inherits Node
     """
-    def __init__(self, child, is_pure_python):
+    def __init__(self, child, is_pure_python=True):
         """Constructor for Neg node
 
             Parameters:
@@ -22,6 +22,8 @@ class Abs(Node):
 
         self.in_vars = child.in_vars
         self.out_vars = child.out_vars
+
+        self.name = 'abs(' + child.name + ')'
 
         if is_pure_python:
             name = 'rtamt.operation.arithmetic.abs_operation'

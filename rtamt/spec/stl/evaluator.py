@@ -93,6 +93,18 @@ class STLEvaluator(STLVisitor):
         out_sample = element.node.update()
         return out_sample
 
+    def visitPrevious(self, element, args):
+        in_sample = self.visit(element.children[0], args)
+        element.node.addNewInput(in_sample)
+        out_sample = element.node.update()
+        return out_sample
+
+    def visitNext(self, element, args):
+        in_sample = self.visit(element.children[0], args)
+        element.node.addNewInput(in_sample)
+        out_sample = element.node.update()
+        return out_sample
+
     def visitRise(self, element, args):
         in_sample = self.visit(element.children[0], args)
         element.node.addNewInput(in_sample)

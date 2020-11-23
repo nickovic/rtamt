@@ -29,7 +29,7 @@ class STLCTNodeInit(STLVisitor):
     def visitPredicate(self, element, args):
         self.visit(element.children[0], args)
         self.visit(element.children[1], args)
-        element.node = PredicateOperation(element.node.op, element.node.io_type)
+        element.node = PredicateOperation(element.node.op)
 
     def visitAbs(self, element, args):
         self.visit(element.children[0], args)

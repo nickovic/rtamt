@@ -18,6 +18,13 @@ StlSinceNode::StlSinceNode() {
     prev_out.value = - std::numeric_limits<double>::infinity();
 }
 
+void StlSinceNode::reset() {
+    prev_out.seq = 0;
+    prev_out.time.sec = 0;
+    prev_out.time.msec = 0;
+    prev_out.value = - std::numeric_limits<double>::infinity();
+}
+
 void StlSinceNode::addNewInput(int i, Sample sample) {
     if (i < 0 || i > 1)
         return;

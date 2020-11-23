@@ -30,6 +30,7 @@ class StlRiseNode : public StlNode {
         StlRiseNode();
         Sample update();
         void addNewInput(Sample msg);
+        void reset();
        
 };
 

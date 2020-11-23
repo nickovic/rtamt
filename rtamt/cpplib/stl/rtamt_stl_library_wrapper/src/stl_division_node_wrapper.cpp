@@ -20,6 +20,7 @@ BOOST_PYTHON_MODULE(stl_division_node)
 {
     class_<StlDivisionNode, bases<StlNode> >("StlDivisionNode")
         .def("update", &StlDivisionNode::update)
+        .def("reset", &StlDivisionNode::reset)
         .def("addNewInput", static_cast<void (StlDivisionNode::*)(Sample, Sample)>(&StlDivisionNode::addNewInput))
     ;
 }

@@ -21,6 +21,7 @@ BOOST_PYTHON_MODULE(stl_or_node)
 {
     class_<StlOrNode, bases<StlCombinatorialBinaryNode, StlNode> >("StlOrNode")
         .def("update", &StlOrNode::update)
+        .def("reset", &StlOrNode::reset)
         .def("addNewInput", static_cast<void (StlOrNode::*)(Sample, Sample)>(&StlOrNode::addNewInput))
     ;
 }

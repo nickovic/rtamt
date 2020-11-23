@@ -21,6 +21,7 @@ BOOST_PYTHON_MODULE(stl_iff_node)
 {
     class_<StlIffNode, bases<StlCombinatorialBinaryNode, StlNode> >("StlIffNode")
         .def("update", &StlIffNode::update)
+        .def("reset", &StlIffNode::reset)
         .def("addNewInput", static_cast<void (StlIffNode::*)(Sample, Sample)>(&StlIffNode::addNewInput))
     ;
 }

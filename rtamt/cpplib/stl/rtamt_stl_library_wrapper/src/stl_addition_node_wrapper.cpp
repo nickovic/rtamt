@@ -20,6 +20,7 @@ BOOST_PYTHON_MODULE(stl_addition_node)
 {
     class_<StlAdditionNode, bases<StlNode> >("StlAdditionNode")
         .def("update", &StlAdditionNode::update)
+        .def("reset", &StlAdditionNode::reset)
         .def("addNewInput", static_cast<void (StlAdditionNode::*)(Sample, Sample)>(&StlAdditionNode::addNewInput))
     ;
 }

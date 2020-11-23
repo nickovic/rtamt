@@ -12,13 +12,11 @@ class Predicate(Node):
                 Inherits Node
 
     Attributes:
-        var : String
-        field : String
-        io_type : IOType enumeration (INPUT, OUTPUT or UNKNOWN)
-        threshold : double
+        child1 : Node
+        child2 : Node
         operator : OperatorType (LEQ, GEQ, LESS, GREATER, EQ or NEQ)
     """
-    def __init__(self, child1, child2, io_type, operator, is_pure_python):
+    def __init__(self, child1, child2, operator, is_pure_python=True):
         """Constructor for Predicate node
 
         Parameters:
@@ -31,35 +29,24 @@ class Predicate(Node):
         super(Predicate, self).__init__()
         self.addChild(child1)
         self.addChild(child2)
-        self.io_type = io_type
         self.operator = operator
         self.in_vars = child1.in_vars + child2.in_vars
         self.out_vars = child1.out_vars + child2.out_vars
 
+        self.name = '(' + child1.name + ')' + str(self.operator) + '(' + child2.name + ')'
 
         if is_pure_python:
             name = 'rtamt.operation.stl.predicate_operation'
             mod = __import__(name, fromlist=[''])
-            self.node = mod.PredicateOperation(operator, io_type)
+            self.node = mod.PredicateOperation(operator)
         else:
             name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_node'
             mod = __import__(name, fromlist=[''])
 
             name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_predicate_node'
             mod = __import__(name, fromlist=[''])
-            self.node = mod.StlPredicateNode(operator, io_type)
+            self.node = mod.StlPredicateNode(operator)
 
-
-        
-    @property
-    def io_type(self):
-        """Getter for io_type"""
-        return self.__io_type
-    
-    @io_type.setter
-    def io_type(self, io_type):
-        """Setter for io_type"""
-        self.__io_type = io_type
         
     @property
     def operator(self):
@@ -70,13 +57,3 @@ class Predicate(Node):
     def operator(self, operator):
         """Setter for operator"""
         self.__operator = operator
-        
-    @property
-    def threshold(self):
-        """Getter for threshold"""
-        return self.__threshold
-    
-    @threshold.setter
-    def threshold(self, threshold):
-        """Setter for threshold"""
-        self.__threshold = threshold

@@ -4,6 +4,9 @@ from rtamt.operation.sample import Time
 
 class NotOperation(AbstractOperation):
     def __init__(self):
+        self.reset()
+
+    def reset(self):
         self.input = Sample()
 
     def addNewInput(self, sample):

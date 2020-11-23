@@ -13,3 +13,17 @@ class StlComparisonOperator(Enum):
     NEQ = 3
     GREATER = 4
     GEQ = 5
+
+    def __str__(self):
+        if self.value == 0:
+            return '<'
+        elif self.value == 1:
+            return '<='
+        elif self.value == 2:
+            return '=='
+        elif self.value == 3:
+            return '!='
+        elif self.value == 4:
+            return '>'
+        else:
+            return '>='

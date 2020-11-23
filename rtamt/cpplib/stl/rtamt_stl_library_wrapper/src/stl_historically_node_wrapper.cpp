@@ -20,6 +20,7 @@ BOOST_PYTHON_MODULE(stl_historically_node)
 {
     class_<StlHistoricallyNode, bases<StlNode> >("StlHistoricallyNode")
         .def("update", &StlHistoricallyNode::update)
+        .def("reset", &StlHistoricallyNode::reset)
         .def("addNewInput", static_cast<void (StlHistoricallyNode::*)(Sample)>(&StlHistoricallyNode::addNewInput))
     ;
 }

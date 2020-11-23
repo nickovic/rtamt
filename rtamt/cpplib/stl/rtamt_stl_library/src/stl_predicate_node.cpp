@@ -9,16 +9,14 @@
 
 using namespace stl_library;
 
-StlPredicateNode::StlPredicateNode(StlComparisonOperator op, StlIOType io_type) {
+StlPredicateNode::StlPredicateNode(StlComparisonOperator op) {
     this->op = op;
-    this->io_type = io_type;
+}
+
+void StlPredicateNode::reset() {
 }
 
 void StlPredicateNode::addNewInput(int i, Sample msg) {
-    if (i!=0) {
-        return;
-    }
-    
     in[i].seq = msg.seq;
     in[i].time.msec = msg.time.msec;
     in[i].time.sec = msg.time.sec;

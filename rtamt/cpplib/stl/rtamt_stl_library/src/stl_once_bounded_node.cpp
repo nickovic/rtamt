@@ -24,6 +24,15 @@ StlOnceBoundedNode::StlOnceBoundedNode(int begin, int end) {
     }
 }
 
+void StlOnceBoundedNode::reset() {
+    int i;
+    for(i=0; i <= end; i++) {
+        Sample s;
+        s.value = - std::numeric_limits<double>::infinity();
+        this->buffer.push_back(s);
+    }
+}
+
 void StlOnceBoundedNode::addNewInput(int i, Sample sample) {
     if (i != 0)
         return;

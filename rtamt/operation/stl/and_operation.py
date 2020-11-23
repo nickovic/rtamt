@@ -4,6 +4,9 @@ from rtamt.operation.sample import Time
 
 class AndOperation(AbstractOperation):
     def __init__(self):
+        self.reset()
+
+    def reset(self):
         self.input = []
         sample = Sample()
         self.input.append(sample)

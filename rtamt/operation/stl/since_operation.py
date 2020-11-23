@@ -10,7 +10,9 @@ class SinceOperation(AbstractOperation):
         sample = Sample()
         self.input.append(sample)
         self.prev_out = Sample()
+        self.reset()
 
+    def reset(self):
         self.prev_out.seq = 0
         self.prev_out.time.sec = 0
         self.prev_out.time.msec = 0

@@ -145,6 +145,21 @@ class StlParserVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by StlParser#ExprNext.
+    def visitExprNext(self, ctx):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by StlParser#ExprUnless.
+    def visitExprUnless(self, ctx):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by StlParser#ExprPrevious.
+    def visitExprPrevious(self, ctx):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by StlParser#ExprIffExpr.
     def visitExprIffExpr(self, ctx):
         return self.visitChildren(ctx)

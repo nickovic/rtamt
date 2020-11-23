@@ -15,6 +15,8 @@ from rtamt.interval.interval import Interval
 
 from rtamt.node.stl.variable import Variable
 from rtamt.node.stl.predicate import Predicate
+from rtamt.node.stl.previous import Previous
+from rtamt.node.stl.next import Next
 from rtamt.node.stl.neg import Neg
 from rtamt.node.stl.conjunction import Conjunction
 from rtamt.node.stl.disjunction import Disjunction
@@ -74,7 +76,7 @@ class STLNodeVisitor(StlParserVisitor):
         child1 = self.visit(ctx.expression(0))
         child2 = self.visit(ctx.expression(1))
         op_type = self.str_to_op_type(ctx.comparisonOp().getText())
-        node = Predicate(child1, child2, self.io_type_mod.StlIOType.OUT, op_type, self.spec.is_pure_python)
+        node = Predicate(child1, child2, op_type, self.spec.is_pure_python)
 
         node.horizon = int(0)
         return node
@@ -216,7 +218,6 @@ class STLNodeVisitor(StlParserVisitor):
         node.horizon = horizon
         return node
 
-
     def visitExprUntimedAlwaysExpr(self, ctx):
         child = self.visit(ctx.expression())
         horizon = child.horizon
@@ -239,6 +240,18 @@ class STLNodeVisitor(StlParserVisitor):
         interval = None
         node = Eventually(child, interval, self.spec.is_pure_python)
         node.horizon = horizon
+        return node
+
+    def visitExprPrevious(self, ctx):
+        child = self.visit(ctx.expression())
+        node = Previous(child, self.spec.is_pure_python)
+        node.horizon = child.horizon
+        return node
+
+    def visitExprNext(self, ctx):
+        child = self.visit(ctx.expression())
+        node = Next(child, self.spec.is_pure_python)
+        node.horizon = child.horizon + 1
         return node
 
     def visitExpreOnceExpr(self, ctx):
@@ -285,6 +298,20 @@ class STLNodeVisitor(StlParserVisitor):
         node.horizon = max(child1.horizon, child2.horizon) + interval.end
         return node
 
+    def visitExprUnless(self, ctx):
+        child1 = self.visit(ctx.expression(0))
+        child2 = self.visit(ctx.expression(1))
+        interval = self.visit(ctx.interval())
+
+        left_interval = Interval(0, interval.end)
+
+        left = Always(child1, left_interval, self.spec.is_pure_python)
+        right = Until(child1, child2, interval, self.spec.is_pure_python)
+        node = Disjunction(left, right)
+
+        node.horizon = max(child1.horizon, child2.horizon) + interval.end
+        return node
+
     def visitExprParen(self, ctx):
         return self.visit(ctx.expression())
 
@@ -304,50 +331,43 @@ class STLNodeVisitor(StlParserVisitor):
         text = ctx.literal().getText()
         out = Fraction(Decimal(text))
 
-
         if ctx.unit() == None:
             # default time unit is seconds - conversion of the bound to ps
-            out = out * 1e12
+            unit = self.spec.unit
         else:
             unit = ctx.unit().getText()
-            if (unit == 's'):
-                out = out * 1e12
-            elif (unit == 'ms'):
-                out = out * 1e9
-            elif (unit == 'us'):
-                out == out * 1e6
-            elif (unit == 'ns'):
-                out == out * 1e3
-            else:
-                pass
-        remainder = out % self.spec.sampling_period
-        if remainder > 0:
+
+        out = out * self.spec.U[unit]
+
+        sp = Fraction(self.spec.get_sampling_period())
+
+        out = out / sp
+
+        if out.numerator % out.denominator > 0:
             raise STLParseException('The STL operator bound must be a multiple of the sampling period')
 
         out = int(out / self.spec.sampling_period)
 
         return out
 
+
     def visitIntervalFloatTimeLiteral(self, ctx):
-        out = float(ctx.RealLiteral().getText())
+        text = ctx.literal().getText()
+        out = Fraction(Decimal(text))
 
         if ctx.unit() == None:
             # default time unit is seconds - conversion of the bound to ps
-            out = out * 10e12
+            unit = self.spec.unit
         else:
             unit = ctx.unit().getText()
-            if (unit == 's'):
-                out = out * 10e12
-            elif (unit == 'ms'):
-                out = out * 10e9
-            elif (unit == 'us'):
-                out == out * 10e6
-            elif (unit == 'ns'):
-                out == out * 10e3
-            else:
-                pass
-        remainder = out % self.spec.sampling_period
-        if remainder > 0:
+
+        out = out * self.spec.U[unit]
+
+        sp = Fraction(self.spec.get_sampling_period())
+
+        out = out / sp
+
+        if out.numerator % out.denominator > 0:
             raise STLParseException('The STL operator bound must be a multiple of the sampling period')
 
         out = int(out / self.spec.sampling_period)

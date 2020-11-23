@@ -4,9 +4,8 @@ from rtamt.operation.arithmetic_ct.subtraction_operation import SubtractionOpera
 
 
 class PredicateOperation(AbstractOperation):
-    def __init__(self, op, io_type):
+    def __init__(self, op):
         self.op = op
-        self.io_type = io_type
         self.sub = SubtractionOperation()
 
     def update(self, *args, **kargs):

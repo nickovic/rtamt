@@ -21,6 +21,7 @@ BOOST_PYTHON_MODULE(stl_xor_node)
 {
     class_<StlXorNode, bases<StlCombinatorialBinaryNode, StlNode> >("StlXorNode")
         .def("update", &StlXorNode::update)
+        .def("reset", &StlXorNode::reset)
         .def("addNewInput", static_cast<void (StlXorNode::*)(Sample, Sample)>(&StlXorNode::addNewInput))
     ;
 }

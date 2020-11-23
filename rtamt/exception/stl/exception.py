@@ -1,8 +1,11 @@
 class STLException(Exception):
     pass
 
-class STLParseException(Exception):
+class STLParseException(STLException):
     pass
 
-class STLOfflineException(Exception):
+class STLOfflineException(STLException):
+    pass
+
+class STLSpecificationException(STLException):
     pass

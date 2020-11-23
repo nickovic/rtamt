@@ -33,7 +33,7 @@ set_param(system, 'Solver', 'ode4', 'StopTime', '10', ...
 
 % Set up the input (pilot command) parameters:
 % Amplitude and frequency of the input
-input_name = strcat(model_name_wo_ext, '/Pilot Command');
+input_name = strcat(model_name_wo_ext, '/pc');
 freq = '0.2';
 amp = '1';
 

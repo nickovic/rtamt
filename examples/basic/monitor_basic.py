@@ -14,8 +14,7 @@ def monitor():
     spec.name = 'HandMadeMonitor'
     spec.declare_var('a', 'float')
     spec.declare_var('b', 'float')
-    spec.declare_var('c', 'float')
-    spec.spec = 'c = a + b >= - 2'
+    spec.spec = 'a + b >= - 2'
 
     try:
         spec.parse()

@@ -30,6 +30,7 @@ class StlEventuallyNode : public StlNode {
         StlEventuallyNode();
         Sample update();
         void addNewInput(Sample msg);
+        void reset();
        
 };
 

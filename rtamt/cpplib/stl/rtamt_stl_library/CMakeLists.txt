@@ -24,6 +24,7 @@ add_library(${PROJECT_NAME}
         src/stl_rise_node.cpp
         src/stl_fall_node.cpp
         src/stl_constant_node.cpp
+        src/stl_previous_node.cpp
 )
 
 target_include_directories(${PROJECT_NAME}

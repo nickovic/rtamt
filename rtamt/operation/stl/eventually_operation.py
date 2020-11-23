@@ -4,6 +4,9 @@ from rtamt.operation.sample import Time
 
 class EventuallyOperation(AbstractOperation):
     def __init__(self):
+        self.reset()
+
+    def reset(self):
         self.prev_out = Sample()
         self.input = Sample()
 

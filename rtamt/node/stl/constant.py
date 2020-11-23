@@ -14,7 +14,7 @@ class Constant(Node):
     Attributes:
         val : double
     """
-    def __init__(self, val, is_pure_python):
+    def __init__(self, val, is_pure_python=True):
         """Constructor for Const node
 
         Parameters:
@@ -23,6 +23,8 @@ class Constant(Node):
 
         super(Constant, self).__init__()
         self.val = val
+
+        self.name = str(val)
 
         if is_pure_python:
             name = 'rtamt.operation.stl.constant_operation'

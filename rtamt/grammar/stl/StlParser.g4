@@ -9,7 +9,7 @@ stlfile
 
 stlSpecification
     : ( spec )? ( modimport )* ( declaration | annotation )* assertion ;
-	
+
 spec
 	: Specification Identifier #Specification ;
 
@@ -17,7 +17,7 @@ modimport :
         From Identifier Import Identifier #modImport ;
 
 assertion 
-	: Identifier EQUAL topExpression ;
+	: (Identifier EQUAL)? topExpression ;
 
 declaration 
 	: variableDeclaration                                         #declVariable ;
@@ -47,13 +47,13 @@ ioType
 	| Output ;
 
 interval
-	: LBRACK intervalTime COLON intervalTime RBRACK ;
+	: LBRACK intervalTime ( COLON | COMMA ) intervalTime RBRACK ;
 
 intervalTime
 	: literal ( unit )?      #intervalTimeLiteral ;
 
 unit
-    : SEC | MSEC | USEC | NSEC | PSEC ;
+    : SEC | MSEC | USEC | NSEC ;
 
  
 
@@ -83,11 +83,14 @@ expression
 	| AlwaysOperator interval expression                        #ExprAlwaysExpr
     | EventuallyOperator interval expression                    #ExprEvExpr
     | expression UntilOperator interval expression              #ExprUntilExpr
+    | expression UnlessOperator interval expression             #ExprUnless
     | HistoricallyOperator ( interval )? expression             #ExprHistExpr
     | OnceOperator ( interval )? expression                     #ExpreOnceExpr
     | expression SinceOperator ( interval )? expression         #ExprSinceExpr
     | RiseOperator LPAREN expression RPAREN                     #ExprRise
     | FallOperator LPAREN expression RPAREN                     #ExprFall
+    | PreviousOperator expression                               #ExprPrevious
+    | NextOperator expression                                   #ExprNext
 	;
 
 real_expression:

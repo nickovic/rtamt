@@ -26,6 +26,7 @@ class StlNode {
     private:
         // We add the new ith input msg
         virtual void addNewInput(int i, Sample msg)=0;
+
 };
 
 } // namespace stl_library

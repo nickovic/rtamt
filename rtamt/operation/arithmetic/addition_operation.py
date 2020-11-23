@@ -10,6 +10,9 @@ class AdditionOperation(AbstractOperation):
         sample = Sample()
         self.input.append(sample)
 
+    def reset(self):
+        pass
+
     def addNewInput(self, left, right):
         self.input[0].seq = left.seq
         self.input[0].time.sec = left.time.sec

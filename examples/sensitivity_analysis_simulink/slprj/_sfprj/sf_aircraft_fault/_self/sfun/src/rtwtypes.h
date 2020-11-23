@@ -23,14 +23,14 @@ typedef void * pointer_T;
 #ifndef INT64_T
 #define INT64_T
 
-typedef long int64_T;
+typedef long long int64_T;
 
 #endif
 
 #ifndef UINT64_T
 #define UINT64_T
 
-typedef unsigned long uint64_T;
+typedef unsigned long long uint64_T;
 
 #endif
 

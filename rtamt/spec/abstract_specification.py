@@ -9,6 +9,7 @@ import os
 import logging
 import sys
 from abc import ABCMeta, abstractmethod
+from rtamt.exception.stl.exception import STLSpecificationException
 from decimal import Decimal
 from fractions import Fraction
 
@@ -40,6 +41,11 @@ class AbstractSpecification:
 
         is_pure_python : Boolean - flag denoting whether to use pure Python or mixed Python/C++ implementation (default = True)
 
+        update_counter : int
+        previous_time : float
+        sampling_violation_counter : int
+
+
     Methods
         get_spec_from_file - create and populate specification object from the text file
         parse - parse the specification
@@ -48,6 +54,20 @@ class AbstractSpecification:
     __metaclass__ = ABCMeta
 
     def __init__(self, is_pure_python):
+        self.S_UNIT = int(1000000000)
+        self.MS_UNIT = int(1000000)
+        self.US_UNIT = int(1000)
+        self.NS_UNIT = int(1)
+
+        self.DEFAULT_TOLERANCE = float(0.1)
+
+        self.U = {
+            's': self.S_UNIT,
+            'ms': self.MS_UNIT,
+            'us': self.US_UNIT,
+            'ns': self.NS_UNIT
+        }
+
         self.name = 'Abstract Specification'
         self.spec = None
 
@@ -56,7 +76,15 @@ class AbstractSpecification:
         self.publish_var = ''
         self.publish_var_field = ''
 
-        self.sampling_period = Fraction(1e12)
+        # Default sampling period - 1s
+        self.sampling_period = int(1)
+        self.sampling_period_unit = 's'
+
+        # Default sampling tolerance
+        self.sampling_tolerance = float(0.1)
+
+        # Default unit
+        self.unit = 's'
 
         self.var_object_dict = dict()
         self.modules = dict()
@@ -71,6 +99,17 @@ class AbstractSpecification:
 
         self.is_pure_python = is_pure_python
 
+        self.update_counter = int(0)
+        self.previous_time = float(0.0)
+        self.sampling_violation_counter = int(0)
+
+        self.normalize = float(1.0)
+
+    def reset(self):
+        # TODO: add the reset visitor
+        self.update_counter = int(0)
+        self.previous_time = float(0.0)
+        self.sampling_violation_counter = int(0)
 
     # setters and getters
     @property
@@ -113,25 +152,41 @@ class AbstractSpecification:
     def sampling_period(self, sampling_period):
         self.__sampling_period = sampling_period
 
-    def set_sampling_period(self, sampling_period, unit):
+    @property
+    def sampling_period_unit(self):
+        return self.__sampling_period_unit
 
+    @sampling_period_unit.setter
+    def sampling_period_unit(self, sampling_period_unit):
+        self.__sampling_period_unit = sampling_period_unit
 
+    @property
+    def sampling_violation_counter(self):
+        return self.__sampling_violation_counter
 
-        if (unit == 's'):
-            self.sampling_period = Fraction(Decimal(sampling_period)) * 1e12
-        elif (unit == 'ms'):
-            self.sampling_period = Fraction(Decimal(sampling_period)) * 1e9
-        elif (unit == 'us'):
-            self.sampling_period = Fraction(Decimal(sampling_period)) * 1e6
-        elif (unit == 'ns'):
-            self.sampling_period = Fraction(Decimal(sampling_period)) * 1e3
-        elif (unit == 'ps'):
-            self.sampling_period = Fraction(Decimal(sampling_period))
-        else:
-            logging.error('set_sampling_period: unit {} is not valid. The unit is set to default (s) value'.format(unit))
-            self.sampling_period = Fraction(Decimal(sampling_period)) * 1e12
+    @sampling_violation_counter.setter
+    def sampling_violation_counter(self, sampling_violation_counter):
+        self.__sampling_violation_counter = sampling_violation_counter
 
+    @property
+    def unit(self):
+        return self.__unit
 
+    @unit.setter
+    def unit(self, unit):
+        self.__unit = unit
+
+    def set_sampling_period(self, sampling_period=int(1), unit='s', tolerance=float(0.1)):
+        self.sampling_period = sampling_period
+        self.sampling_period_unit = unit
+
+        if tolerance < 0.0 or tolerance > 1.0:
+            raise STLSpecificationException
+
+        self.sampling_tolerance = tolerance
+
+    def get_sampling_period(self):
+        return self.sampling_period * self.U[self.sampling_period_unit]
 
     def get_sampling_frequency(self):
         return 1e12 * 1/self.sampling_period
@@ -175,6 +230,14 @@ class AbstractSpecification:
     @modules.setter
     def modules(self, modules):
         self.__modules = modules
+
+    @property
+    def update_counter(self):
+        return self.__update_counter
+
+    @update_counter.setter
+    def update_counter(self, update_counter):
+        self.__update_counter = update_counter
 
     def add_input_var(self, input_var):
         self.in_vars.add(input_var)

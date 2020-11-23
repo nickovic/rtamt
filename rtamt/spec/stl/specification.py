@@ -25,6 +25,7 @@ from rtamt.exception.stl.exception import STLOfflineException
 from rtamt.spec.stl.node_visitor import STLNodeVisitor
 from rtamt.spec.stl.pastifier import STLPastifier
 from rtamt.spec.stl.evaluator import STLEvaluator
+from rtamt.spec.stl.reset import STLReset
 
 
 class STLSpecification(AbstractSpecification,StlParserVisitor):
@@ -48,6 +49,7 @@ class STLSpecification(AbstractSpecification,StlParserVisitor):
         super(STLSpecification, self).__init__(is_pure_python)
         self.name = 'STL Specification'
         self.visitor = STLNodeVisitor(self)
+        self.reseter = STLReset()
 
 
     # Parses the STL property
@@ -72,7 +74,7 @@ class STLSpecification(AbstractSpecification,StlParserVisitor):
         self.top = self.visitor.visitStlfile(ctx)
 
         # Translate bounded future STL to past STL
-        pastifier = STLPastifier(self)
+        pastifier = STLPastifier(self.is_pure_python)
         self.top.accept(pastifier)
         past = pastifier.pastify(self.top)
         self.top = past
@@ -81,15 +83,46 @@ class STLSpecification(AbstractSpecification,StlParserVisitor):
         self.evaluator = STLEvaluator(self)
         self.top.accept(self.evaluator)
 
-    def update(self, *args, **kargs):
-        time_index = args[0]
-        signals = args[1]
-        for arg in signals:
-            var_name = arg[0]
-            var_object = arg[1]
-            self.var_object_dict[var_name] = var_object
+        print('Unit ' + self.unit)
+        print('Sampling period unit ' + self.sampling_period_unit)
 
-        return self.evaluator.evaluate(self.top, [time_index])
+        self.normalize = float(self.U[self.unit]) / float(self.U[self.sampling_period_unit])
+
+    def update(self, *args, **kargs):
+        # args[0] : timestamp - float
+        # args[1] : inputs - list of [var name, var value] pairs
+        # Example:
+        # update(3.48, [['a', 2.2], ['b', 3.3]])
+        timestamp = args[0]
+        inputs = args[1]
+
+        # Check if the difference between two consecutive timestamps is between
+        # the accepted tolerance - if not, increase the violation counter
+        if self.update_counter > 0:
+            duration = (timestamp - self.previous_time) * self.normalize
+            tolerance = self.sampling_period * self.sampling_tolerance
+            if duration < self.sampling_period-tolerance or duration > self.sampling_period+tolerance:
+                self.sampling_violation_counter = self.sampling_violation_counter + 1
+
+        for inp in inputs:
+            var_name = inp[0]
+            var_value = inp[1]
+            self.var_object_dict[var_name] = var_value
+
+        # The evaluation done wrt the discrete counter (logical time)
+        out = self.evaluator.evaluate(self.top, [self.update_counter])
+
+        self.previous_time = timestamp
+        self.update_counter = self.update_counter + 1
+
+        return out
+
+    def reset(self):
+        self.top.accept(self.reseter)
+        self.reseter.reset(self.top)
+        self.update_counter = 0;
+        self.previous_time = 0.0;
+        self.sampling_violation_counter = 0;
 
     # This is the visitor part. We will populate
     def visitStlSpecification(self, ctx):
@@ -105,11 +138,19 @@ class STLSpecification(AbstractSpecification,StlParserVisitor):
 
     def visitAssertion(self, ctx):
         self.visitChildren(ctx)
-        id = ctx.Identifier().getText();
-        id_tokens = id.split('.')
-        id_head = id_tokens[0]
-        id_tokens.pop(0)
-        id_tail = '.'.join(id_tokens)
+
+        implicit = False
+        if not ctx.Identifier():
+            id = 'out'
+            id_head = 'out'
+            id_tail = ''
+            implicit = True
+        else:
+            id = ctx.Identifier().getText();
+            id_tokens = id.split('.')
+            id_head = id_tokens[0]
+            id_tokens.pop(0)
+            id_tail = '.'.join(id_tokens)
 
         try:
             var = self.var_object_dict[id_head]
@@ -131,7 +172,8 @@ class STLSpecification(AbstractSpecification,StlParserVisitor):
                 var = float()
                 self.var_object_dict[id] = var
                 self.add_var(id)
-                logging.warning('The variable {} is not explicitely declared. It is implicitely declared as a '
+                if not implicit:
+                    logging.warning('The variable {} is not explicitely declared. It is implicitely declared as a '
                                 'variable of type float'.format(id))
 
         self.out_var = id_head;

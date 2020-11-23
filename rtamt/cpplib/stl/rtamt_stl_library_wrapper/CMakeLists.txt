@@ -27,6 +27,7 @@ add_library(stl_io_type MODULE src/stl_io_type_wrapper.cpp)
 add_library(stl_comp_op MODULE src/stl_comp_op_wrapper.cpp)
 add_library(stl_node MODULE src/stl_node_wrapper.cpp)
 add_library(stl_always_node MODULE src/stl_always_node_wrapper.cpp)
+add_library(stl_previous_node MODULE src/stl_previous_node_wrapper.cpp)
 add_library(stl_predicate_node MODULE src/stl_predicate_node_wrapper.cpp)
 add_library(stl_time MODULE src/stl_time_wrapper.cpp)
 add_library(stl_sample MODULE src/stl_sample_wrapper.cpp)
@@ -39,6 +40,7 @@ add_library(stl_implies_node MODULE src/stl_implies_node_wrapper.cpp)
 add_library(stl_iff_node MODULE src/stl_iff_node_wrapper.cpp)
 add_library(stl_xor_node MODULE src/stl_xor_node_wrapper.cpp)
 add_library(stl_once_node MODULE src/stl_once_node_wrapper.cpp)
+add_library(stl_eventually_node MODULE src/stl_eventually_node_wrapper.cpp)
 add_library(stl_historically_node MODULE src/stl_historically_node_wrapper.cpp)
 add_library(stl_since_node MODULE src/stl_since_node_wrapper.cpp)
 add_library(stl_once_bounded_node MODULE src/stl_once_bounded_node_wrapper.cpp)
@@ -62,6 +64,8 @@ target_include_directories(stl_io_type PUBLIC ${INCLUDE_DIRECTORIES_FOR_STL_WRAP
 target_include_directories(stl_comp_op PUBLIC ${INCLUDE_DIRECTORIES_FOR_STL_WRAPPER})
 target_include_directories(stl_node PUBLIC ${INCLUDE_DIRECTORIES_FOR_STL_WRAPPER})
 target_include_directories(stl_always_node PUBLIC ${INCLUDE_DIRECTORIES_FOR_STL_WRAPPER})
+target_include_directories(stl_previous_node PUBLIC ${INCLUDE_DIRECTORIES_FOR_STL_WRAPPER})
+target_include_directories(stl_eventually_node PUBLIC ${INCLUDE_DIRECTORIES_FOR_STL_WRAPPER})
 target_include_directories(stl_predicate_node PUBLIC ${INCLUDE_DIRECTORIES_FOR_STL_WRAPPER})
 target_include_directories(stl_time PUBLIC ${INCLUDE_DIRECTORIES_FOR_STL_WRAPPER})
 target_include_directories(stl_sample PUBLIC ${INCLUDE_DIRECTORIES_FOR_STL_WRAPPER})
@@ -94,6 +98,8 @@ target_link_libraries(stl_io_type ${LINK_LIBS_FOR_STL_WRAPPER})
 target_link_libraries(stl_comp_op ${LINK_LIBS_FOR_STL_WRAPPER})
 target_link_libraries(stl_node ${LINK_LIBS_FOR_STL_WRAPPER})
 target_link_libraries(stl_always_node ${LINK_LIBS_FOR_STL_WRAPPER})
+target_link_libraries(stl_previous_node ${LINK_LIBS_FOR_STL_WRAPPER})
+target_link_libraries(stl_eventually_node ${LINK_LIBS_FOR_STL_WRAPPER})
 target_link_libraries(stl_predicate_node ${LINK_LIBS_FOR_STL_WRAPPER})
 target_link_libraries(stl_time ${LINK_LIBS_FOR_STL_WRAPPER})
 target_link_libraries(stl_sample ${LINK_LIBS_FOR_STL_WRAPPER})
@@ -132,6 +138,12 @@ set_target_properties(stl_node PROPERTIES
 	PREFIX ""
 	LIBRARY_OUTPUT_DIRECTORY ${LIB_OUT_DIR_FOR_STL_WRAPPER})
 set_target_properties(stl_always_node PROPERTIES
+	PREFIX ""
+	LIBRARY_OUTPUT_DIRECTORY ${LIB_OUT_DIR_FOR_STL_WRAPPER})
+set_target_properties(stl_previous_node PROPERTIES
+	PREFIX ""
+	LIBRARY_OUTPUT_DIRECTORY ${LIB_OUT_DIR_FOR_STL_WRAPPER})
+set_target_properties(stl_eventually_node PROPERTIES
 	PREFIX ""
 	LIBRARY_OUTPUT_DIRECTORY ${LIB_OUT_DIR_FOR_STL_WRAPPER})
 set_target_properties(stl_predicate_node PROPERTIES

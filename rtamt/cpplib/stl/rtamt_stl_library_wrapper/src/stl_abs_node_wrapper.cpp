@@ -15,6 +15,7 @@ BOOST_PYTHON_MODULE(stl_abs_node)
     class_<StlAbsNode, bases<StlNode> >("StlAbsNode")
         .def("update", &StlAbsNode::update)
         .def("addNewInput", static_cast<void (StlAbsNode::*)(Sample)>(&StlAbsNode::addNewInput))
+        .def("reset", &StlAbsNode::reset)
     ;
 }
 

@@ -6,19 +6,22 @@ class PrecedesBoundedOperation(AbstractOperation):
     def __init__(self, begin, end):
         self.begin = begin
         self.end = end
+
+        self.reset()
+
+    def reset(self):
         self.buffer = []
-        self.buffer.append(collections.deque(maxlen=(end+1)))
-        self.buffer.append(collections.deque(maxlen=(end+1)))
+        self.buffer.append(collections.deque(maxlen=(self.end+1)))
+        self.buffer.append(collections.deque(maxlen=(self.end+1)))
         self.input = Sample()
 
-        for i in range(end+1):
+        for i in range(self.end+1):
             s_left = Sample()
             s_right = Sample()
             s_left.value = float("inf")
             s_right.value = - float("inf")
             self.buffer[0].append(s_left)
             self.buffer[1].append(s_right)
-
 
     def addNewInput(self, left, right):
         self.input = Sample()
@@ -46,9 +49,9 @@ class PrecedesBoundedOperation(AbstractOperation):
         for i in range(self.begin, self.end+1):
             left = float("inf")
             right = self.buffer[1][i].value
-            for j in range(i):
+            for j in range(0, i):
                 left = min(left, self.buffer[0][j].value)
 
-            out.value = max(out.value, min(left,right))
+            out.value = max(out.value, min(left, right))
 
         return out
