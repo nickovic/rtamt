@@ -20,7 +20,8 @@ assertion
 	: (Identifier EQUAL)? topExpression ;
 
 declaration 
-	: variableDeclaration                                         #declVariable ;
+	: variableDeclaration                                         #declVariable
+	| constantDeclaration                                         #declConstant;
 
 annotation
         : '@' annotation_type ;
@@ -29,7 +30,10 @@ annotation_type
         : ROS_Topic LPAREN Identifier COMMA Identifier RPAREN #rosTopic;
 
 variableDeclaration
-	: Constant? ioType? domainType identifier assignment?  ;
+	: ioType? domainType Identifier assignment?  ;
+
+constantDeclaration
+	: Constant domainType Identifier EQUAL literal  ;
 
 assignment
 	: EQUAL literal 				#AsgnLiteral
@@ -50,7 +54,8 @@ interval
 	: LBRACK intervalTime ( COLON | COMMA ) intervalTime RBRACK ;
 
 intervalTime
-	: literal ( unit )?      #intervalTimeLiteral ;
+	: literal ( unit )?      #intervalTimeLiteral
+	| Identifier ( unit )?   #constantTimeLiteral ;
 
 unit
     : SEC | MSEC | USEC | NSEC ;
