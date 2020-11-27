@@ -83,38 +83,43 @@ class STLNodeVisitor(StlParserVisitor):
 
     def visitExprId(self, ctx):
         id = ctx.Identifier().getText();
-        id_tokens = id.split('.')
-        id_head = id_tokens[0]
-        id_tokens.pop(0)
-        id_tail = '.'.join(id_tokens)
 
-        try:
-            var = self.spec.var_object_dict[id_head]
-            if (not id_tail):
-                if (not isinstance(var, (int, float))):
-                    raise STLParseException('Variable {} is not of type int or float'.format(id))
-            else:
-                try:
-                    value = operator.attrgetter(id_tail)(var)
-                    if (not isinstance(value, (int, float))):
-                        raise STLParseException(
-                            'The field {0} of the variable {1} is not of type int or float'.format(id, id_head))
-                except AttributeError as err:
-                    raise STLParseException(err)
-        except KeyError:
-            if id_tail:
-                raise STLParseException('{0} refers to undeclared variable {1} of unknown type'.format(id, id_head))
-            else:
-                var = float()
-                self.spec.var_object_dict[id] = var
-                self.spec.add_var(id)
-                logging.warning('The variable {} is not explicitely declared. It is implicitely declared as a '
+        if id in self.spec.const_val_dict:
+            val = self.spec.const_val_dict[id]
+            node = Constant(float(val))
+        else:
+            id_tokens = id.split('.')
+            id_head = id_tokens[0]
+            id_tokens.pop(0)
+            id_tail = '.'.join(id_tokens)
+
+            try:
+                var = self.spec.var_object_dict[id_head]
+                if (not id_tail):
+                    if (not isinstance(var, (int, float))):
+                        raise STLParseException('Variable {} is not of type int or float'.format(id))
+                else:
+                    try:
+                        value = operator.attrgetter(id_tail)(var)
+                        if (not isinstance(value, (int, float))):
+                            raise STLParseException(
+                                'The field {0} of the variable {1} is not of type int or float'.format(id, id_head))
+                    except AttributeError as err:
+                        raise STLParseException(err)
+            except KeyError:
+                if id_tail:
+                    raise STLParseException('{0} refers to undeclared variable {1} of unknown type'.format(id, id_head))
+                else:
+                    var = float()
+                    self.spec.var_object_dict[id] = var
+                    self.spec.add_var(id)
+                    logging.warning('The variable {} is not explicitely declared. It is implicitely declared as a '
                                 'variable of type float'.format(id))
 
-        var_io = self.spec.var_io_dict[id_head]
-        node = Variable(id_head, id_tail, var_io)
-        node.horizon = int(0)
+            var_io = self.spec.var_io_dict[id_head]
+            node = Variable(id_head, id_tail, var_io)
 
+        node.horizon = int(0)
         return node
 
     def visitExprAddition(self, ctx):
@@ -350,6 +355,34 @@ class STLNodeVisitor(StlParserVisitor):
 
         return out
 
+    def visitConstantTimeLiteral(self, ctx):
+        const_name = ctx.Identifier().getText()
+
+        if const_name not in self.spec.const_val_dict:
+            raise STLParseException('Bound {} not declared'.format(const_name))
+
+        val = self.spec.const_val_dict[const_name]
+
+        out = Fraction(Decimal(val))
+
+        if ctx.unit() == None:
+            # default time unit is seconds - conversion of the bound to ps
+            unit = self.spec.unit
+        else:
+            unit = ctx.unit().getText()
+
+        out = out * self.spec.U[unit]
+
+        sp = Fraction(self.spec.get_sampling_period())
+
+        out = out / sp
+
+        if out.numerator % out.denominator > 0:
+            raise STLParseException('The STL operator bound must be a multiple of the sampling period')
+
+        out = int(out / self.spec.sampling_period)
+
+        return out
 
     def visitIntervalFloatTimeLiteral(self, ctx):
         text = ctx.literal().getText()

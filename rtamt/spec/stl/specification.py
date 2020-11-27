@@ -53,7 +53,7 @@ class STLSpecification(AbstractSpecification,StlParserVisitor):
 
 
     # Parses the STL property
-    # string can be either file path containint the STL property
+    # string can be either file path containing the STL property
     # or the textual property itself
     def parse(self):
         if self.spec is None:
@@ -82,9 +82,6 @@ class STLSpecification(AbstractSpecification,StlParserVisitor):
         # Initialize the evaluator
         self.evaluator = STLEvaluator(self)
         self.top.accept(self.evaluator)
-
-        print('Unit ' + self.unit)
-        print('Sampling period unit ' + self.sampling_period_unit)
 
         self.normalize = float(self.U[self.unit]) / float(self.U[self.sampling_period_unit])
 
@@ -190,6 +187,16 @@ class STLSpecification(AbstractSpecification,StlParserVisitor):
 
         self.visitChildren(ctx)
 
+    def visitConstantDeclaration(self, ctx):
+        # fetch the variable name, type and io signature
+        const_name = ctx.identifier().getText()
+        const_type = ctx.domainType().getText()
+        const_value = ctx.literal().getText()
+
+        self.declare_const(const_name, const_type, const_value)
+
+        self.visitChildren(ctx)
+
     def visitRosTopic(self, ctx):
         var_name = ctx.Identifier(0).getText()
         topic_name = ctx.Identifier(1).getText()
@@ -224,6 +231,14 @@ class STLSpecification(AbstractSpecification,StlParserVisitor):
             self.modules[module_name] = module
         except ImportError:
             raise STLParseException ('The module {} cannot be loaded'.format(from_name))
+
+    def declare_const(self, const_name, const_type, const_val):
+        if const_name in self.vars:
+            raise STLParseException ('Constant {} already declared'.format(const_name))
+
+        self.const_type_dict[const_name] = const_type
+        self.const_val_dict[const_name] = const_val
+        self.vars.add(const_name)
 
     def declare_var(self, var_name, var_type):
         if var_name in self.vars:

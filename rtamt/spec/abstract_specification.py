@@ -33,6 +33,8 @@ class AbstractSpecification:
         var_type_dict : dict(String, String) - dictionary that maps var names to var types
         var_io_dict : dict(String, String) - dictionary that maps var names to var io signature
         var_topic_dict : dict(String,String) - dictionaty that mapts var names to ROS topic names
+        const_type_dict : dict(String, String) - dictionary mapping const var names to var types
+        const_val_dict : dict(String, String) - dictionary mapping const var names to var vals encoded as strings
 
         top : AbstractNode - pointer to the specification parse tree
 
@@ -91,6 +93,8 @@ class AbstractSpecification:
         self.var_type_dict = dict()
         self.var_io_dict = dict()
         self.var_topic_dict = dict()
+        self.const_type_dict = dict()
+        self.const_val_dict = dict()
 
         self.top = None
 
