@@ -35,6 +35,11 @@ class StlParserVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by StlParser#declConstant.
+    def visitDeclConstant(self, ctx):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by StlParser#annotation.
     def visitAnnotation(self, ctx):
         return self.visitChildren(ctx)
@@ -47,6 +52,11 @@ class StlParserVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by StlParser#variableDeclaration.
     def visitVariableDeclaration(self, ctx):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by StlParser#constantDeclaration.
+    def visitConstantDeclaration(self, ctx):
         return self.visitChildren(ctx)
 
 
@@ -77,6 +87,11 @@ class StlParserVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by StlParser#intervalTimeLiteral.
     def visitIntervalTimeLiteral(self, ctx):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by StlParser#constantTimeLiteral.
+    def visitConstantTimeLiteral(self, ctx):
         return self.visitChildren(ctx)
 
 
