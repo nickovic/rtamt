@@ -8,7 +8,7 @@ stlfile
 	: stlSpecification EOF ;
 
 stlSpecification
-    : ( spec )? ( modimport )* ( declaration | annotation )* assertion ;
+    : ( spec )? ( modimport )* ( declaration | annotation )* ( assertion )+ ;
 
 spec
 	: Specification Identifier #Specification ;

@@ -330,7 +330,7 @@ class STLNodeVisitor(StlParserVisitor):
         return self.visit(ctx.stlSpecification())
 
     def visitStlSpecification(self, ctx):
-        return self.visit(ctx.assertion())
+        return self.visitChildren(ctx)
 
     def visitIntervalTimeLiteral(self, ctx):
         text = ctx.literal().getText()
