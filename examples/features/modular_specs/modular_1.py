@@ -14,7 +14,9 @@ def monitor():
     spec.name = 'HandMadeMonitor'
     spec.declare_var('a', 'float')
     spec.declare_var('b', 'float')
-    spec.spec = 'a + b >= - 2'
+    spec.declare_var('c', 'float')
+    spec.add_sub_spec('c = a + b')
+    spec.spec = 'c >= - 2'
 
     try:
         spec.parse()
@@ -29,7 +31,7 @@ def monitor():
         aData = aTraj[i]
         bData = bTraj[i]
         rob = spec.update(aData[0], [('a', aData[1]), ('b', bData[1])])
-        print('time='+str(aData[0])+' rob='+str(rob))
+        print('time='+str(aData[0])+' rob='+str(rob) + ' c=' + str(spec.get_value('c')))
 
 if __name__ == '__main__':
     # Process arguments

@@ -60,7 +60,9 @@ class STLSpecification(AbstractSpecification,StlParserVisitor):
             raise STLParseException ('STL specification if empty')
 
         # Parse the STL spec - ANTLR4 magic
-        input_stream = InputStream(self.spec)
+
+        entire_spec = self.modular_spec + self.spec
+        input_stream = InputStream(entire_spec)
         lexer = StlLexer(input_stream)
         stream = CommonTokenStream(lexer)
         parser = StlParser(stream)
@@ -105,6 +107,12 @@ class STLSpecification(AbstractSpecification,StlParserVisitor):
             var_name = inp[0]
             var_value = inp[1]
             self.var_object_dict[var_name] = var_value
+
+
+        for key in self.var_subspec_dict:
+            node = self.var_subspec_dict[key]
+            out = self.evaluator.evaluate(node, [self.update_counter])
+            self.var_object_dict[key] = out
 
         # The evaluation done wrt the discrete counter (logical time)
         out = self.evaluator.evaluate(self.top, [self.update_counter])

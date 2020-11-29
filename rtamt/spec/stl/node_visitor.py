@@ -84,9 +84,14 @@ class STLNodeVisitor(StlParserVisitor):
     def visitExprId(self, ctx):
         id = ctx.Identifier().getText();
 
+        # Identifier is a constant
         if id in self.spec.const_val_dict:
             val = self.spec.const_val_dict[id]
             node = Constant(float(val))
+        # Identifier is either an input variable or a sub-formula
+        elif id in self.spec.var_subspec_dict:
+                node = self.spec.var_subspec_dict[id]
+                return node
         else:
             id_tokens = id.split('.')
             id_head = id_tokens[0]
@@ -322,9 +327,14 @@ class STLNodeVisitor(StlParserVisitor):
 
     def visitExpr(self, ctx):
         return self.visit(ctx.expression())
-	
+
     def visitAssertion(self, ctx):
-        return self.visit(ctx.topExpression())
+        node = self.visit(ctx.topExpression())
+
+        if ctx.Identifier() != None:
+            var_name = ctx.Identifier().getText()
+            self.spec.var_subspec_dict[var_name] = node
+        return node
 
     def visitStlfile(self, ctx):
         return self.visit(ctx.stlSpecification())
