@@ -74,6 +74,7 @@ class STLSpecification(AbstractSpecification,StlParserVisitor):
 
         # Create the visitor for the actual spec nodes
         self.top = self.visitor.visitStlfile(ctx)
+        self.horizon = self.top.horizon
 
         # Translate bounded future STL to past STL
         pastifier = STLPastifier(self.is_pure_python)
@@ -103,19 +104,24 @@ class STLSpecification(AbstractSpecification,StlParserVisitor):
             if duration < self.sampling_period-tolerance or duration > self.sampling_period+tolerance:
                 self.sampling_violation_counter = self.sampling_violation_counter + 1
 
-        for inp in inputs:
-            var_name = inp[0]
-            var_value = inp[1]
-            self.var_object_dict[var_name] = var_value
 
+        if self.update_counter <= self.horizon:
+            for key in self.var_subspec_dict:
+                self.var_object_dict[key] = float('nan')
+            out = float('nan')
+        else:
+            for inp in inputs:
+                var_name = inp[0]
+                var_value = inp[1]
+                self.var_object_dict[var_name] = var_value
 
-        for key in self.var_subspec_dict:
-            node = self.var_subspec_dict[key]
-            out = self.evaluator.evaluate(node, [self.update_counter])
-            self.var_object_dict[key] = out
+            for key in self.var_subspec_dict:
+                node = self.var_subspec_dict[key]
+                out = self.evaluator.evaluate(node, [self.update_counter])
+                self.var_object_dict[key] = out
 
-        # The evaluation done wrt the discrete counter (logical time)
-        out = self.evaluator.evaluate(self.top, [self.update_counter])
+            # The evaluation done wrt the discrete counter (logical time)
+            out = self.evaluator.evaluate(self.top, [self.update_counter])
 
         self.previous_time = timestamp
         self.update_counter = self.update_counter + 1
