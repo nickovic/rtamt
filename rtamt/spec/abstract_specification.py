@@ -28,7 +28,8 @@ class AbstractSpecification:
 
         sampling_period : int - size of the sampling period in ps (default = 10^12 ps = 1s
 
-        var_object_dict : dict(String,AbstractNode) - dictionary that maps variable names to their Node instances
+        var_value_dict : dict(String, double) - dictionary that maps variable names to their value
+        var_subspec_dict : dict(String, AbstractNode) - dicrtionary that maps variables to the formulas they represent
         modules : dict(String,String) - dictionary that maps module paths to module names
         var_type_dict : dict(String, String) - dictionary that maps var names to var types
         var_io_dict : dict(String, String) - dictionary that maps var names to var io signature
@@ -86,7 +87,8 @@ class AbstractSpecification:
         # Default unit
         self.unit = 's'
 
-        self.var_object_dict = dict()
+        self.var_value_dict = dict()
+        self.var_subspec_dict = dict()
         self.modules = dict()
         self.var_type_dict = dict()
         self.var_io_dict = dict()
@@ -106,10 +108,7 @@ class AbstractSpecification:
         self.normalize = float(1.0)
 
     def reset(self):
-        # TODO: add the reset visitor
-        self.update_counter = int(0)
-        self.previous_time = float(0.0)
-        self.sampling_violation_counter = int(0)
+        pass
 
     # setters and getters
     @property
@@ -258,7 +257,7 @@ class AbstractSpecification:
         self.ops.add(op)
 
     def get_var_object(self, name):
-        return self.var_object_dict[name]
+        return self.var_value_dict[name]
 
     def get_spec_from_file(self, path):
         """Opens a text file and returns its content as a string

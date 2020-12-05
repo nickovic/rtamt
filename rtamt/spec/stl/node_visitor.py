@@ -89,7 +89,7 @@ class STLNodeVisitor(StlParserVisitor):
         id_tail = '.'.join(id_tokens)
 
         try:
-            var = self.spec.var_object_dict[id_head]
+            var = self.spec.var_value_dict[id_head]
             if (not id_tail):
                 if (not isinstance(var, (int, float))):
                     raise STLParseException('Variable {} is not of type int or float'.format(id))
@@ -106,7 +106,7 @@ class STLNodeVisitor(StlParserVisitor):
                 raise STLParseException('{0} refers to undeclared variable {1} of unknown type'.format(id, id_head))
             else:
                 var = float()
-                self.spec.var_object_dict[id] = var
+                self.spec.var_value_dict[id] = var
                 self.spec.add_var(id)
                 logging.warning('The variable {} is not explicitely declared. It is implicitely declared as a '
                                 'variable of type float'.format(id))

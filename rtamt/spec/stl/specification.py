@@ -37,7 +37,7 @@ class STLSpecification(AbstractSpecification,StlParserVisitor):
         vars : set(String) - set of variable names
         free_vars : set(String) - set of free variable names
 
-        var_object_dict : dict(String,AbstractNode) - dictionary that maps variable names to their Node instances
+        var_value_dict : dict(String,AbstractNode) - dictionary that maps variable names to their Node instances
         modules : dict(String,String) - dictionary that maps module paths to module names
 
         top : AbstractNode - pointer to the specification parse tree
@@ -104,7 +104,7 @@ class STLSpecification(AbstractSpecification,StlParserVisitor):
         for inp in inputs:
             var_name = inp[0]
             var_value = inp[1]
-            self.var_object_dict[var_name] = var_value
+            self.var_value_dict[var_name] = var_value
 
         # The evaluation done wrt the discrete counter (logical time)
         out = self.evaluator.evaluate(self.top, [self.update_counter])
@@ -150,7 +150,7 @@ class STLSpecification(AbstractSpecification,StlParserVisitor):
             id_tail = '.'.join(id_tokens)
 
         try:
-            var = self.var_object_dict[id_head]
+            var = self.var_value_dict[id_head]
             if (not id_tail):
                 if (not isinstance(var, (int, float))):
                     raise STLParseException('Variable {} is not of type int or float'.format(id))
@@ -167,7 +167,7 @@ class STLSpecification(AbstractSpecification,StlParserVisitor):
                 raise STLParseException('{0} refers to undeclared variable {1} of unknown type'.format(id, id_head))
             else:
                 var = float()
-                self.var_object_dict[id] = var
+                self.var_value_dict[id] = var
                 self.add_var(id)
                 if not implicit:
                     logging.warning('The variable {} is not explicitely declared. It is implicitely declared as a '
@@ -233,7 +233,7 @@ class STLSpecification(AbstractSpecification,StlParserVisitor):
         self.add_var(var_name)
         self.free_vars.add(var_name)
         instance = self.create_var_from_name(var_name)
-        self.var_object_dict[var_name] = instance
+        self.var_value_dict[var_name] = instance
 
         # Add the default variable topic to var
         self.var_topic_dict[var_name] = 'rtamt/{}'.format(var_name)

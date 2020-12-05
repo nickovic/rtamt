@@ -21,7 +21,7 @@ class STLEvaluator(STLVisitor):
 
     def evaluate(self, element, args):
         sample = self.visit(element, args)
-        out_sample = self.spec.var_object_dict[self.spec.out_var]
+        out_sample = self.spec.var_value_dict[self.spec.out_var]
         if self.spec.out_var_field:
             setattr(out_sample, self.spec.out_var_field, sample.value)
         else:
@@ -37,7 +37,7 @@ class STLEvaluator(STLVisitor):
 
     def visitVariable(self, element, args):
         time_index = args[0]
-        var = self.spec.var_object_dict[element.var]
+        var = self.spec.var_value_dict[element.var]
         if element.field:
             value = operator.attrgetter(element.field)(var)
         else:
