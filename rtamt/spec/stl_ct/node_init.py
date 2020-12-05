@@ -94,6 +94,12 @@ class STLCTNodeInit(STLVisitor):
     def visitUntil(self, element, args):
         pass
 
+    def visitPrev(self, element, args):
+        pass
+
+    def visitNext(self, element, args):
+        pass
+
     def visitOnce(self, element, args):
         self.visit(element.children[0], args)
         if element.bound is None:

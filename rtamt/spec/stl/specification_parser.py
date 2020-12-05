@@ -41,7 +41,7 @@ from rtamt.node.stl.constant import Constant
 from rtamt.exception.stl.exception import STLParseException
 
 
-class STLNodeVisitor(StlParserVisitor):
+class STLSpecificationParser(StlParserVisitor):
     
     def __init__(self, spec):
         self.ops = set()
@@ -121,6 +121,36 @@ class STLNodeVisitor(StlParserVisitor):
 
         node.horizon = int(0)
         return node
+
+    def visitVariableDeclaration(self, ctx):
+        # fetch the variable name, type and io signature
+        var_name = ctx.identifier().getText()
+        var_type = ctx.domainType().getText()
+
+        self.spec.declare_var(var_name, var_type)
+        self.spec.var_io_dict[var_name] = 'output'
+
+        self.visitChildren(ctx)
+
+    def visitConstantDeclaration(self, ctx):
+        # fetch the variable name, type and io signature
+        const_name = ctx.identifier().getText()
+        const_type = ctx.domainType().getText()
+        const_value = ctx.literal().getText()
+
+        self.spec.declare_const(const_name, const_type, const_value)
+
+        self.spec.visitChildren(ctx)
+
+    def visitRosTopic(self, ctx):
+        var_name = ctx.Identifier(0).getText()
+        topic_name = ctx.Identifier(1).getText()
+        self.spec.set_var_topic(var_name, topic_name)
+
+    def visitModImport(self, ctx):
+        module_name = ctx.Identifier(0).getText()
+        var_type = ctx.Identifier(1).getText()
+        self.spec.import_module(module_name, var_type)
 
     def visitExprAddition(self, ctx):
         child1 = self.visit(ctx.real_expression(0))
@@ -322,15 +352,65 @@ class STLNodeVisitor(StlParserVisitor):
 
     def visitExpr(self, ctx):
         return self.visit(ctx.expression())
-	
+
     def visitAssertion(self, ctx):
-        return self.visit(ctx.topExpression())
+        out = self.visit(ctx.topExpression())
+
+        implicit = False
+        if not ctx.Identifier():
+            id = 'out'
+            id_head = 'out'
+            id_tail = ''
+            implicit = True
+        else:
+            id = ctx.Identifier().getText();
+            id_tokens = id.split('.')
+            id_head = id_tokens[0]
+            id_tokens.pop(0)
+            id_tail = '.'.join(id_tokens)
+
+        try:
+            var = self.spec.var_object_dict[id_head]
+            if (not id_tail):
+                if (not isinstance(var, (int, float))):
+                    raise STLParseException('Variable {} is not of type int or float'.format(id))
+            else:
+                try:
+                    value = operator.attrgetter(id_tail)(var)
+                    if (not isinstance(value, (int, float))):
+                        raise STLParseException(
+                            'The field {0} of the variable {1} is not of type int or float'.format(id, id_head))
+                except AttributeError as err:
+                    raise STLParseException(err)
+        except KeyError:
+            if id_tail:
+                raise STLParseException('{0} refers to undeclared variable {1} of unknown type'.format(id, id_head))
+            else:
+                var = float()
+                self.spec.var_object_dict[id] = var
+                self.spec.add_var(id)
+                if not implicit:
+                    logging.warning('The variable {} is not explicitely declared. It is implicitely declared as a '
+                                    'variable of type float'.format(id))
+
+        self.spec.out_var = id_head;
+        self.spec.out_var_field = id_tail;
+        self.spec.free_vars.discard(id_head)
+        return out
 
     def visitStlfile(self, ctx):
         return self.visit(ctx.stlSpecification())
 
     def visitStlSpecification(self, ctx):
+        self.visitChildren(ctx)
         return self.visit(ctx.assertion())
+
+    def visitSpecification(self, ctx):
+        self.visitChildren(ctx)
+        # The specification name is updated only if it is given
+        # by the user
+        if not ctx.Identifier() is None:
+            self.spec.name = ctx.Identifier().getText()
 
     def visitIntervalTimeLiteral(self, ctx):
         text = ctx.literal().getText()
@@ -426,5 +506,23 @@ class STLNodeVisitor(StlParserVisitor):
             return self.comp_op_mod.StlComparisonOperator.EQUAL
         else:
             return self.comp_op_mod.StlComparisonOperator.NEQ
+
+    def create_var_from_name(self, var_name):
+        var = None
+        var_type = self.spec.var_type_dict[var_name]
+        if var_type.encode('utf-8') == 'float'.encode('utf-8'):
+            var = float()
+        elif var_type.encode('utf-8') == 'int'.encode('utf-8'):
+            var = int()
+        elif var_type.encode('utf-8') == 'complex'.encode('utf-8'):
+            var = complex()
+        else:
+            try:
+                var_module = self.spec.modules[var_type]
+                class_ = getattr(var_module, var_type)
+                var = class_()
+            except KeyError:
+                raise STLParseException ('The type {} does not seem to be imported.'.format(var_type))
+        return var
 
 

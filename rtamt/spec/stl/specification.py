@@ -22,7 +22,7 @@ from rtamt.parser.stl.error.parser_error_listener import STLParserErrorListener
 from rtamt.exception.stl.exception import STLParseException
 from rtamt.exception.stl.exception import STLOfflineException
 
-from rtamt.spec.stl.node_visitor import STLNodeVisitor
+from rtamt.spec.stl.specification_parser import STLSpecificationParser
 from rtamt.spec.stl.pastifier import STLPastifier
 from rtamt.spec.stl.evaluator import STLEvaluator
 from rtamt.spec.stl.reset import STLReset
@@ -48,7 +48,6 @@ class STLSpecification(AbstractSpecification,StlParserVisitor):
         """Constructor for STL Specification"""
         super(STLSpecification, self).__init__(is_pure_python)
         self.name = 'STL Specification'
-        self.visitor = STLNodeVisitor(self)
         self.reseter = STLReset()
 
 
@@ -68,10 +67,11 @@ class STLSpecification(AbstractSpecification,StlParserVisitor):
         ctx = parser.stlfile()
 
         # Visit the parse tree and populate spec fields
-        self.visitStlfile(ctx)
+        # self.visitStlfile(ctx)
 
         # Create the visitor for the actual spec nodes
-        self.top = self.visitor.visitStlfile(ctx)
+        visitor = STLSpecificationParser(self)
+        self.top = visitor.visitStlfile(ctx)
 
         # Translate bounded future STL to past STL
         pastifier = STLPastifier(self.is_pure_python)
@@ -120,152 +120,6 @@ class STLSpecification(AbstractSpecification,StlParserVisitor):
         self.update_counter = 0;
         self.previous_time = 0.0;
         self.sampling_violation_counter = 0;
-
-    # This is the visitor part. We will populate
-    def visitStlSpecification(self, ctx):
-        self.visitChildren(ctx)
-        # self.top = self.visitor.visitAssertion(ctx.assertion())
-
-    def visitSpecification(self, ctx):
-        self.visitChildren(ctx)
-        # The specification name is updated only if it is given
-        # by the user
-        if not ctx.Identifier() is None:
-            self.name = ctx.Identifier().getText()
-
-    def visitAssertion(self, ctx):
-        self.visitChildren(ctx)
-
-        implicit = False
-        if not ctx.Identifier():
-            id = 'out'
-            id_head = 'out'
-            id_tail = ''
-            implicit = True
-        else:
-            id = ctx.Identifier().getText();
-            id_tokens = id.split('.')
-            id_head = id_tokens[0]
-            id_tokens.pop(0)
-            id_tail = '.'.join(id_tokens)
-
-        try:
-            var = self.var_object_dict[id_head]
-            if (not id_tail):
-                if (not isinstance(var, (int, float))):
-                    raise STLParseException('Variable {} is not of type int or float'.format(id))
-            else:
-                try:
-                    value = operator.attrgetter(id_tail)(var)
-                    if (not isinstance(value, (int, float))):
-                        raise STLParseException(
-                            'The field {0} of the variable {1} is not of type int or float'.format(id, id_head))
-                except AttributeError as err:
-                    raise STLParseException(err)
-        except KeyError:
-            if id_tail:
-                raise STLParseException('{0} refers to undeclared variable {1} of unknown type'.format(id, id_head))
-            else:
-                var = float()
-                self.var_object_dict[id] = var
-                self.add_var(id)
-                if not implicit:
-                    logging.warning('The variable {} is not explicitely declared. It is implicitely declared as a '
-                                'variable of type float'.format(id))
-
-        self.out_var = id_head;
-        self.out_var_field = id_tail;
-        self.free_vars.discard(id_head)
-
-    def visitVariableDeclaration(self, ctx):
-        # fetch the variable name, type and io signature
-        var_name = ctx.identifier().getText()
-        var_type = ctx.domainType().getText()
-
-        self.declare_var(var_name, var_type)
-        self.var_io_dict[var_name] = 'output'
-
-        self.visitChildren(ctx)
-
-    def visitConstantDeclaration(self, ctx):
-        # fetch the variable name, type and io signature
-        const_name = ctx.identifier().getText()
-        const_type = ctx.domainType().getText()
-        const_value = ctx.literal().getText()
-
-        self.declare_const(const_name, const_type, const_value)
-
-        self.visitChildren(ctx)
-
-    def visitRosTopic(self, ctx):
-        var_name = ctx.Identifier(0).getText()
-        topic_name = ctx.Identifier(1).getText()
-        self.set_var_topic(var_name, topic_name)
-
-    def visitModImport(self, ctx):
-        module_name = ctx.Identifier(0).getText()
-        var_type = ctx.Identifier(1).getText()
-        self.import_module(module_name, var_type)
-
-    def create_var_from_name(self, var_name):
-        var = None
-        var_type = self.var_type_dict[var_name]
-        if var_type.encode('utf-8') == 'float'.encode('utf-8'):
-            var = float()
-        elif var_type.encode('utf-8') == 'int'.encode('utf-8'):
-            var = int()
-        elif var_type.encode('utf-8') == 'complex'.encode('utf-8'):
-            var = complex()
-        else:
-            try:
-                var_module = self.modules[var_type]
-                class_ = getattr(var_module, var_type)
-                var = class_()
-            except KeyError:
-                raise STLParseException ('The type {} does not seem to be imported.'.format(var_type))
-        return var
-
-    def import_module(self, from_name, module_name):
-        try:
-            module = importlib.import_module(from_name)
-            self.modules[module_name] = module
-        except ImportError:
-            raise STLParseException ('The module {} cannot be loaded'.format(from_name))
-
-    def declare_const(self, const_name, const_type, const_val):
-        if const_name in self.vars:
-            raise STLParseException ('Constant {} already declared'.format(const_name))
-
-        self.const_type_dict[const_name] = const_type
-        self.const_val_dict[const_name] = const_val
-        self.vars.add(const_name)
-
-    def declare_var(self, var_name, var_type):
-        if var_name in self.vars:
-            logging.warning('Variable {} was already declared. It is now overriden with the new declaration.'.format(var_name))
-
-        # Associate to variable name 'var' its type 'type'
-        self.var_type_dict[var_name] = var_type
-
-        # Add variable name 'var' to the set of variables
-        self.add_var(var_name)
-        self.free_vars.add(var_name)
-        instance = self.create_var_from_name(var_name)
-        self.var_object_dict[var_name] = instance
-
-        # Add the default variable topic to var
-        self.var_topic_dict[var_name] = 'rtamt/{}'.format(var_name)
-
-        self.var_io_dict[var_name] = 'output'
-
-    def set_var_topic(self, var_name, var_topic):
-        if not var_name in self.vars:
-            logging.warning(
-                'The variable {0} is not declared. Setting its topic name to {1} is ignored.'.format(var_name,
-                                                                                                     var_topic))
-        else:
-            topic = self.var_topic_dict[var_name]
-            self.var_topic_dict[var_name] = var_topic
 
     def offline(self, dataset):
         counter = 0

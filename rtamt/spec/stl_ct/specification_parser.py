@@ -5,12 +5,12 @@ Created on Tue Jul 23 21:38:29 2019
 @author: NickovicD
 """
 
-from rtamt.spec.stl.node_visitor import STLNodeVisitor
+from rtamt.spec.stl.specification_parser import STLSpecificationParser
 
-class STLCTNodeVisitor(STLNodeVisitor):
+class STLCTSpecificationParser(STLSpecificationParser):
     
     def __init__(self, spec):
-        super(STLCTNodeVisitor, self).__init__(spec)
+        super(STLCTSpecificationParser, self).__init__(spec)
 
     def visitIntervalTimeLiteral(self, ctx):
         text = ctx.literal().getText()
