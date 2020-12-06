@@ -130,6 +130,15 @@ class STLSpecificationParser(StlParserVisitor):
         self.spec.declare_var(var_name, var_type)
         self.spec.var_io_dict[var_name] = 'output'
 
+        # If 'var' is input, add to the set of input vars
+        # If 'var' is output, add to the set of output vars
+        if (not ctx.ioType() is None):
+            if (not ctx.ioType().Input() is None):
+                var_iotype = 'input'
+            elif (not ctx.ioType().Output() is None):
+                var_iotype = 'output'
+        self.spec.set_var_io_type(var_name, var_iotype)
+
         self.visitChildren(ctx)
 
     def visitConstantDeclaration(self, ctx):
@@ -507,22 +516,6 @@ class STLSpecificationParser(StlParserVisitor):
         else:
             return self.comp_op_mod.StlComparisonOperator.NEQ
 
-    def create_var_from_name(self, var_name):
-        var = None
-        var_type = self.spec.var_type_dict[var_name]
-        if var_type.encode('utf-8') == 'float'.encode('utf-8'):
-            var = float()
-        elif var_type.encode('utf-8') == 'int'.encode('utf-8'):
-            var = int()
-        elif var_type.encode('utf-8') == 'complex'.encode('utf-8'):
-            var = complex()
-        else:
-            try:
-                var_module = self.spec.modules[var_type]
-                class_ = getattr(var_module, var_type)
-                var = class_()
-            except KeyError:
-                raise STLParseException ('The type {} does not seem to be imported.'.format(var_type))
-        return var
+
 
 

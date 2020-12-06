@@ -10,8 +10,6 @@ import logging
 import sys
 from abc import ABCMeta, abstractmethod
 from rtamt.exception.stl.exception import STLSpecificationException
-from decimal import Decimal
-from fractions import Fraction
 
 
 class AbstractSpecification:

@@ -1,10 +1,7 @@
 import operator
-import logging
+
+import rtamt.spec.stl.specification
 from rtamt.spec.stl.visitor import STLVisitor
-
-#from rtamt.operation.sample import Sample
-#from rtamt.lib.rtamt_stl_library_wrapper.stl_sample import Sample
-
 
 class STLEvaluator(STLVisitor):
 
@@ -33,6 +30,16 @@ class STLEvaluator(STLVisitor):
         in_sample_2 = self.visit(element.children[1], args)
         element.node.addNewInput(in_sample_1, in_sample_2)
         out_sample = element.node.update()
+
+        if (self.spec.semantics == rtamt.spec.stl.specification.Semantics.OUTPUT_ROBUSTNESS and not element.out_vars):
+            out_sample.value = out_sample.value*float('inf')
+        elif(self.spec.semantics == rtamt.spec.stl.specification.Semantics.INPUT_VACUITY and not element.in_vars):
+            out_sample.value = 0
+        elif(self.spec.semantics == rtamt.spec.stl.specification.Semantics.INPUT_ROBUSTNESS and not element.in_vars):
+            out_sample.value = out_sample.value*float('inf')
+        elif(self.spec.semantics == rtamt.spec.stl.specification.Semantics.OUTPUT_VACUITY and not element.out_vars):
+            out_sample.value = 0
+
         return out_sample
 
     def visitVariable(self, element, args):
