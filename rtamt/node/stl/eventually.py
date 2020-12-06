@@ -1,16 +1,6 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Jul 21 22:24:09 2019
+from rtamt.node.stl.unary_node import UnaryNode
 
-@author: NickovicD
-"""
-
-from rtamt.node.stl.temporal_node import TemporalNode
-
-
-
-
-class Eventually(TemporalNode):
+class Eventually(UnaryNode):
     """A class for storing STL Eventually nodes
             Inherits TemporalNode
     """
@@ -21,8 +11,7 @@ class Eventually(TemporalNode):
             child : stl.Node
             bound : Interval
         """
-        super(Eventually, self).__init__(bound)
-        self.addChild(child)
+        super(Eventually, self).__init__(child, bound)
         self.in_vars = child.in_vars
         self.out_vars = child.out_vars
         self.bound = bound

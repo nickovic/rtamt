@@ -1,12 +1,6 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Jul 21 22:24:09 2019
+from rtamt.node.stl.binary_node import BinaryNode
 
-@author: NickovicD
-"""
-from rtamt.node.stl.temporal_node import TemporalNode
-
-class Precedes(TemporalNode):
+class Precedes(BinaryNode):
     """A class for storing STL Precedes nodes - an auxilliary operator need for translating
        bounded future STL formulas to pure past formulas
                 Inherits TemporalNode
@@ -20,9 +14,7 @@ class Precedes(TemporalNode):
             child2 : stl.Node
             bound : Interval
         """
-        super(Precedes, self).__init__(bound)
-        self.addChild(child1)
-        self.addChild(child2)
+        super(Precedes, self).__init__(child1, child2, bound)
 
         self.in_vars = child1.in_vars + child2.in_vars
         self.out_vars = child1.out_vars + child2.out_vars

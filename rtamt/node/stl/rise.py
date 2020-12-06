@@ -1,13 +1,6 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Jul 21 22:24:09 2019
+from rtamt.node.stl.unary_node import UnaryNode
 
-@author: NickovicD
-"""
-
-from rtamt.node.stl.node import Node
-
-class Rise(Node):
+class Rise(UnaryNode):
     """A class for storing STL Neg nodes
         Inherits Node
     """
@@ -17,8 +10,7 @@ class Rise(Node):
             Parameters:
                 child : stl.Node
         """
-        super(Rise, self).__init__()
-        self.addChild(child)
+        super(Rise, self).__init__(child)
         self.in_vars = child.in_vars
         self.out_vars = child.out_vars
 

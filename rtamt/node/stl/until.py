@@ -1,14 +1,6 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Jul 21 22:24:09 2019
+from rtamt.node.stl.binary_node import BinaryNode
 
-@author: NickovicD
-"""
-from rtamt.node.stl.temporal_node import TemporalNode
-
-
-
-class Until(TemporalNode):
+class Until(BinaryNode):
     """
     A class for storing STL Since nodes
     Inherits TemporalNode
@@ -21,10 +13,7 @@ class Until(TemporalNode):
                 child2 : stl.Node
                 bound : Interval
         """
-        super(Until, self).__init__(bound)
-
-        self.addChild(child1)
-        self.addChild(child2)
+        super(Until, self).__init__(child1, child2, bound)
         self.bound = bound
 
         self.name = '(' + child1.name + ')until[' + str(bound.begin) + ',' + str(

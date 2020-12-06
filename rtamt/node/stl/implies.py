@@ -1,13 +1,6 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Jul 21 22:24:09 2019
+from rtamt.node.stl.binary_node import BinaryNode
 
-@author: NickovicD
-"""
-from rtamt.node.stl.node import Node
-
-
-class Implies(Node):
+class Implies(BinaryNode):
     """A class for storing STL Implies nodes
         Inherits TemporalNode
     """
@@ -18,9 +11,7 @@ class Implies(Node):
             child1 : stl.Node
             child2 : stl.Node
         """
-        super(Implies, self).__init__()
-        self.addChild(child1)
-        self.addChild(child2)
+        super(Implies, self).__init__(child1, child2)
 
         self.in_vars = child1.in_vars + child2.in_vars
         self.out_vars = child1.out_vars + child2.out_vars

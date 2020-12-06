@@ -5,10 +5,10 @@ Created on Sun Jul 21 22:24:09 2019
 @author: NickovicD
 """
 
-from rtamt.node.stl.node import Node
+from rtamt.node.stl.binary_node import BinaryNode
 
 
-class Addition(Node):
+class Addition(BinaryNode):
     """A class for storing STL Conjunction nodes
         Inherits TemporalNode
     """
@@ -19,7 +19,7 @@ class Addition(Node):
                 child1 : stl.Node
                 child2 : stl.Node
         """
-        super(Addition, self).__init__()
+        super(Addition, self).__init__(child1, child2)
 
         self.addChild(child1)
         self.addChild(child2)

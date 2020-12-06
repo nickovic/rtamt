@@ -7,9 +7,7 @@ Created on Sun Jul 21 22:24:09 2019
 
 from rtamt.node.stl.temporal_node import TemporalNode
 
-
-
-class Always(TemporalNode):
+class Always(UnaryNode):
     """A class for storing STL Always nodes
         Inherits TemporalNode
     """
@@ -21,8 +19,7 @@ class Always(TemporalNode):
             child : stl.Node
             bound : Interval
         """
-        super(Always, self).__init__(bound)
-        self.addChild(child)
+        super(Always, self).__init__(child, bound)
 
         self.in_vars = child.in_vars
         self.out_vars = child.out_vars

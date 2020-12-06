@@ -1,12 +1,6 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Jul 21 22:24:09 2019
+from rtamt.node.stl.binary_node import BinaryNode
 
-@author: NickovicD
-"""
-from rtamt.node.stl.temporal_node import TemporalNode
-
-class Since(TemporalNode):
+class Since(BinaryNode):
     """A class for storing STL Since nodes
                 Inherits TemporalNode
     """
@@ -19,9 +13,7 @@ class Since(TemporalNode):
                 bound : Interval
         """
 
-        super(Since, self).__init__(bound)
-        self.addChild(child1)
-        self.addChild(child2)
+        super(Since, self).__init__(child1, child2, bound)
 
         self.in_vars = child1.in_vars + child2.in_vars
         self.out_vars = child1.out_vars + child2.out_vars

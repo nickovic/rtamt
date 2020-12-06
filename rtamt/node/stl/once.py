@@ -1,13 +1,6 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Jul 21 22:24:09 2019
+from rtamt.node.stl.unary_node import UnaryNode
 
-@author: NickovicD
-"""
-from rtamt.node.stl.temporal_node import TemporalNode
-
-
-class Once(TemporalNode):
+class Once(UnaryNode):
     """A class for storing STL Once nodes
                 Inherits TemporalNode
     """
@@ -19,8 +12,7 @@ class Once(TemporalNode):
             bound : Interval
         """
 
-        super(Once, self).__init__(bound)
-        self.addChild(child)
+        super(Once, self).__init__(child, bound)
         self.in_vars = child.in_vars
         self.out_vars = child.out_vars
         self.bound = bound

@@ -1,12 +1,6 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Jul 21 22:24:09 2019
+from rtamt.node.stl.unary_node import UnaryNode
 
-@author: NickovicD
-"""
-from rtamt.node.stl.temporal_node import TemporalNode
-
-class Historically(TemporalNode):
+class Historically(UnaryNode):
     """A class for storing STL Historically nodes
          Inherits TemporalNode
     """
@@ -17,8 +11,7 @@ class Historically(TemporalNode):
                 child : stl.Node
                 bound : Interval
         """
-        super(Historically, self).__init__(bound)
-        self.addChild(child)
+        super(Historically, self).__init__(child, bound)
         self.in_vars = child.in_vars
         self.out_vars = child.out_vars
         self.bound = bound

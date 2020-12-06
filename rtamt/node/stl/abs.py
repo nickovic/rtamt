@@ -5,9 +5,9 @@ Created on Sun Jul 21 22:24:09 2019
 @author: NickovicD
 """
 
-from rtamt.node.stl.node import Node
+from rtamt.node.stl.unary_node import UnaryNode
 
-class Abs(Node):
+class Abs(UnaryNode):
     """A class for storing STL Neg nodes
         Inherits Node
     """
@@ -17,8 +17,7 @@ class Abs(Node):
             Parameters:
                 child : stl.Node
         """
-        super(Abs, self).__init__()
-        self.addChild(child)
+        super(Abs, self).__init__(child)
 
         self.in_vars = child.in_vars
         self.out_vars = child.out_vars

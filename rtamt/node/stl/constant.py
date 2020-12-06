@@ -5,9 +5,9 @@ Created on Sun Jul 21 22:30:09 2019
 @author: NickovicD
 """
 
-from rtamt.node.stl.node import Node
+from rtamt.node.stl.leaf_node import LeafNode
 
-class Constant(Node):
+class Constant(LeafNode):
     """A class for storing STL real-valued Constant nodes
                 Inherits Node
 

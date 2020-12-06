@@ -1,13 +1,6 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Jul 21 22:30:09 2019
+from rtamt.node.stl.leaf_node import LeafNode
 
-@author: NickovicD
-"""
-
-from rtamt.node.stl.node import Node
-
-class Variable(Node):
+class Variable(LeafNode):
     """A class for storing STL real-valued Variable nodes
             Inherits Node
         """

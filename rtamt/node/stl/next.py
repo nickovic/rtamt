@@ -1,6 +1,6 @@
-from rtamt.node.stl.node import Node
+from rtamt.node.stl.node import UnaryNode
 
-class Next(Node):
+class Next(UnaryNode):
     """A class for storing STL Next nodes
         Inherits Node
     """
@@ -10,8 +10,7 @@ class Next(Node):
             Parameters:
                 child : stl.Node
         """
-        super(Next, self).__init__()
-        self.addChild(child)
+        super(Next, self).__init__(child)
         self.in_vars = child.in_vars
         self.out_vars = child.out_vars
 

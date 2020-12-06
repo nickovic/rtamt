@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Sep 23 2019
-
-@author: Dejan Nickovic
-"""
-
 from rtamt.node.stl.node import Node
 
 class TemporalNode(Node):
