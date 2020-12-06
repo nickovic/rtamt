@@ -84,9 +84,14 @@ class STLSpecificationParser(StlParserVisitor):
     def visitExprId(self, ctx):
         id = ctx.Identifier().getText();
 
+        # Identifier is a constant
         if id in self.spec.const_val_dict:
             val = self.spec.const_val_dict[id]
             node = Constant(float(val))
+        # Identifier is either an input variable or a sub-formula
+        elif id in self.spec.var_subspec_dict:
+                node = self.spec.var_subspec_dict[id]
+                return node
         else:
             id_tokens = id.split('.')
             id_head = id_tokens[0]

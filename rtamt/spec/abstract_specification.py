@@ -17,6 +17,8 @@ class AbstractSpecification:
 
     Attributes:
         name : String
+
+        modular_spec : String - specification text
         spec : String - specification text
 
         vars : set(String) - set of variable names
@@ -26,7 +28,8 @@ class AbstractSpecification:
 
         sampling_period : int - size of the sampling period in ps (default = 10^12 ps = 1s
 
-        var_object_dict : dict(String,AbstractNode) - dictionary that maps variable names to their Node instances
+        var_subspec_dict : dict(String, AbstractNode) - dictionary that maps variable names to the AST
+        var_object_dict : dict(String, double) - dictionary that maps variable names to their value
         modules : dict(String,String) - dictionary that maps module paths to module names
         var_type_dict : dict(String, String) - dictionary that maps var names to var types
         var_io_dict : dict(String, String) - dictionary that maps var names to var io signature
@@ -68,8 +71,11 @@ class AbstractSpecification:
             'ns': self.NS_UNIT
         }
 
+        self.horizon = 0
+
         self.name = 'Abstract Specification'
         self.spec = None
+        self.modular_spec = ''
 
         self.vars = set()
         self.free_vars = set()
@@ -86,6 +92,7 @@ class AbstractSpecification:
         # Default unit
         self.unit = 's'
 
+        self.var_subspec_dict = dict()
         self.var_object_dict = dict()
         self.modules = dict()
         self.var_type_dict = dict()
@@ -137,6 +144,14 @@ class AbstractSpecification:
     @name.setter
     def name(self, name):
         self.__name = name
+
+    @property
+    def horizon(self):
+        return self.__horizon
+
+    @horizon.setter
+    def horizon(self, horizon):
+        self.__horizon = horizon
         
     @property
     def top(self):
@@ -258,6 +273,12 @@ class AbstractSpecification:
         
     def add_op(self, op):
         self.ops.add(op)
+
+    def get_value(self, var_name):
+        return self.var_object_dict[var_name]
+
+    def add_sub_spec(self, sub_spec):
+        self.modular_spec = self.modular_spec + sub_spec + '\n'
 
     def get_var_object(self, name):
         return self.var_object_dict[name]
