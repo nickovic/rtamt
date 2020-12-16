@@ -1,4 +1,4 @@
-from rtamt.node.stl.node import UnaryNode
+from rtamt.node.stl.unary_node import UnaryNode
 
 class Next(UnaryNode):
     """A class for storing STL Next nodes

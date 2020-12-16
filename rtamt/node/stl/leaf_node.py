@@ -1,8 +1,8 @@
-from rtamt.node.node import Node
+from rtamt.node.stl.node import Node
 
 class LeafNode(Node):
 
-    def __init__(self, child):
-        super(Node, self).__init__()
+    def __init__(self):
+        super(LeafNode, self).__init__()
 
 

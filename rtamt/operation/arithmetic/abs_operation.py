@@ -1,26 +1,17 @@
 from rtamt.operation.abstract_operation import AbstractOperation
-from rtamt.operation.sample import Sample
-from rtamt.operation.sample import Time
+
 
 class AbsOperation(AbstractOperation):
     def __init__(self):
-        self.input = Sample()
+        self.input = float("nan")
 
     def reset(self):
-        pass
+        self.input = float("nan")
 
     def addNewInput(self, sample):
-        self.input.seq = sample.seq
-        self.input.time.sec = sample.time.sec
-        self.input.time.msec = sample.time.msec
-        self.input.value = sample.value
+        self.input = sample
 
     def update(self):
-        out = Sample()
-        val = abs(self.input.value)
-        out.time.sec = self.input.time.sec
-        out.time.msec = self.input.time.msec
-        out.seq = self.input.seq
-        out.value = val
+        out = abs(self.input)
 
         return out

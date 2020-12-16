@@ -87,14 +87,23 @@ class STLCTNodeInit(STLVisitor):
     def visitEventually(self, element, args):
         pass
 
+    def visitTimedEventually(self, element, args):
+        pass
+
     def visitAlways(self, element, args):
         self.visit(element.children[0], args)
         element.node = HistoricallyOperation()
 
+    def visitTimedAlways(self, element, args):
+        pass
+
     def visitUntil(self, element, args):
         pass
 
-    def visitPrev(self, element, args):
+    def visitTimedUntil(self, element, args):
+        pass
+
+    def visitPrevious(self, element, args):
         pass
 
     def visitNext(self, element, args):
@@ -102,11 +111,11 @@ class STLCTNodeInit(STLVisitor):
 
     def visitOnce(self, element, args):
         self.visit(element.children[0], args)
-        if element.bound is None:
-            element.node = OnceOperation()
-        else:
-            element.node = OnceBoundedOperation(element.bound.begin, element.bound.end)
+        element.node = OnceOperation()
 
+    def visitTimedOnce(self, element, args):
+        self.visit(element.children[0], args)
+        element.node = OnceBoundedOperation(element.begin, element.end)
 
     def visitRise(self, element, args):
         self.visit(element.children[0], args)
@@ -118,15 +127,19 @@ class STLCTNodeInit(STLVisitor):
 
     def visitHistorically(self, element, args):
         self.visit(element.children[0], args)
-        if element.bound is None:
-            element.node = HistoricallyOperation()
-        else:
-            element.node = HistoricallyBoundedOperation(element.bound.begin, element.bound.end)
+        element.node = HistoricallyOperation()
+
+    def visitTimedHistorically(self, element, args):
+        self.visit(element.children[0], args)
+        element.node = HistoricallyBoundedOperation(element.begin, element.end)
 
     def visitSince(self, element, args):
         pass
 
-    def visitPrecedes(self, element, args):
+    def visitTimedSince(self, element, args):
+        pass
+
+    def visitTimedPrecedes(self, element, args):
         pass
 
     def visitDefault(self, element, args):

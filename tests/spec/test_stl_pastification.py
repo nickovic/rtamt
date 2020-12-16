@@ -22,11 +22,17 @@ from rtamt.node.stl.eventually import Eventually
 from rtamt.node.stl.always import Always
 from rtamt.node.stl.since import Since
 from rtamt.node.stl.until import Until
-from rtamt.node.stl.precedes import Precedes
+from rtamt.node.stl.timed_precedes import TimedPrecedes
 from rtamt.node.stl.previous import Previous
 from rtamt.node.stl.next import Next
 from rtamt.interval.interval import Interval
 from rtamt.spec.stl.comp_op import StlComparisonOperator
+from rtamt.node.stl.timed_always import TimedAlways
+from rtamt.node.stl.timed_eventually import TimedEventually
+from rtamt.node.stl.timed_historically import TimedHistorically
+from rtamt.node.stl.timed_once import TimedOnce
+from rtamt.node.stl.timed_since import TimedSince
+from rtamt.node.stl.timed_until import TimedUntil
 
 
 class TestSTLPastification(unittest.TestCase):
@@ -435,7 +441,7 @@ class TestSTLPastification(unittest.TestCase):
 
     def test_once_0_1(self):
         var_node = Variable('req', '', 'output')
-        node = Once(var_node, Interval(0, 1))
+        node = TimedOnce(var_node, 0, 1)
 
         pastifier = STLPastifier()
         node.accept(pastifier)
@@ -453,7 +459,7 @@ class TestSTLPastification(unittest.TestCase):
 
     def test_historically_0_1(self):
         var_node = Variable('req', '', 'output')
-        node = Historically(var_node, Interval(0, 1))
+        node = TimedHistorically(var_node, 0, 1)
 
         pastifier = STLPastifier()
         node.accept(pastifier)
@@ -471,7 +477,7 @@ class TestSTLPastification(unittest.TestCase):
 
     def test_eventually_0_1(self):
         var_node = Variable('req', '', 'output')
-        node = Eventually(var_node, Interval(0, 1))
+        node = TimedEventually(var_node, 0, 1)
 
         pastifier = STLPastifier()
         node.accept(pastifier)
@@ -489,7 +495,7 @@ class TestSTLPastification(unittest.TestCase):
 
     def test_always_0_1(self):
         var_node = Variable('req', '', 'output')
-        node = Always(var_node, Interval(0, 1))
+        node = TimedAlways(var_node, 0, 1)
 
         pastifier = STLPastifier()
         node.accept(pastifier)
@@ -508,7 +514,7 @@ class TestSTLPastification(unittest.TestCase):
     def test_until_0_1(self):
         var_node_1 = Variable('req', '', 'output')
         var_node_2 = Variable('gnt', '', 'output')
-        add_node = Until(var_node_1, var_node_2, Interval(0,1))
+        add_node = TimedUntil(var_node_1, var_node_2, 0, 1)
 
         pastifier = STLPastifier()
         add_node.accept(pastifier)
@@ -526,7 +532,7 @@ class TestSTLPastification(unittest.TestCase):
     def test_since_0_1(self):
         var_node_1 = Variable('req', '', 'output')
         var_node_2 = Variable('gnt', '', 'output')
-        add_node = Since(var_node_1, var_node_2, Interval(0,1))
+        add_node = TimedSince(var_node_1, var_node_2, 0, 1)
 
         pastifier = STLPastifier()
         add_node.accept(pastifier)
@@ -544,7 +550,7 @@ class TestSTLPastification(unittest.TestCase):
     def test_precedes_0_1(self):
         var_node_1 = Variable('req', '', 'output')
         var_node_2 = Variable('gnt', '', 'output')
-        add_node = Precedes(var_node_1, var_node_2, Interval(0,1))
+        add_node = TimedPrecedes(var_node_1, var_node_2, 0, 1)
 
         pastifier = STLPastifier()
         add_node.accept(pastifier)
@@ -564,8 +570,8 @@ class TestSTLPastification(unittest.TestCase):
         var_node_2 = Variable('gnt', '', 'output')
         rise_node = Rise(var_node_1)
         hist_node = Historically(var_node_2)
-        once_node = Once(hist_node, Interval(1,2))
-        add_node = Since(rise_node, once_node, Interval(2, 6))
+        once_node = TimedOnce(hist_node, 1, 2)
+        add_node = TimedSince(rise_node, once_node, 2, 6)
         add_node.horizon = 0
 
         pastifier = STLPastifier()
@@ -579,8 +585,8 @@ class TestSTLPastification(unittest.TestCase):
         var_node_2 = Variable('gnt', '', 'output')
         rise_node = Rise(var_node_1)
         hist_node = Historically(var_node_2)
-        once_node = Once(hist_node, Interval(1,2))
-        since_node = Since(rise_node, once_node, Interval(2, 6))
+        once_node = TimedOnce(hist_node, 1, 2)
+        since_node = TimedSince(rise_node, once_node, 2, 6)
         add_node = Always(since_node)
         add_node.horizon = 0
 
@@ -598,8 +604,8 @@ class TestSTLPastification(unittest.TestCase):
         pd_node_1 = Predicate(var_node_1, cnt_node_1, StlComparisonOperator.GEQ)
         pd_node_2 = Predicate(var_node_2, cnt_node_2, StlComparisonOperator.GEQ)
         rise_node = Rise(pd_node_1)
-        hist_node = Always(pd_node_2, Interval(3, 4))
-        once_node = Eventually(hist_node, Interval(1,2))
+        hist_node = TimedAlways(pd_node_2, 3, 4)
+        once_node = TimedEventually(hist_node, 1, 2)
         implies_node = Implies(rise_node, once_node)
         add_node = Always(implies_node)
         add_node.horizon = 6
@@ -615,8 +621,8 @@ class TestSTLPastification(unittest.TestCase):
         var_node_2 = Variable('gnt', '', 'output')
         var_node_3 = Variable('ack', '', 'output')
 
-        until_node = Until(var_node_1, var_node_2, Interval(1, 2))
-        ev_node = Eventually(var_node_3, Interval(0, 6))
+        until_node = TimedUntil(var_node_1, var_node_2, 1, 2)
+        ev_node = TimedEventually(var_node_3, 0, 6)
         add_node = Implies(until_node, ev_node)
         add_node.horizon = 6
 
@@ -630,9 +636,9 @@ class TestSTLPastification(unittest.TestCase):
         var_node_1 = Variable('req', '', 'output')
         var_node_2 = Variable('gnt', '', 'output')
 
-        ev_node = Eventually(var_node_1, Interval(5, 6))
-        once_node = Once(var_node_2, Interval(1, 2))
-        ev_once_node = Eventually(once_node, Interval(3, 3))
+        ev_node = TimedEventually(var_node_1, 5, 6)
+        once_node = TimedOnce(var_node_2, 1, 2)
+        ev_once_node = TimedEventually(once_node, 3, 3)
         add_node = Implies(ev_node, ev_once_node)
         add_node.horizon = 6
 
@@ -646,9 +652,9 @@ class TestSTLPastification(unittest.TestCase):
         var_node_1 = Variable('req', '', 'output')
         var_node_2 = Variable('gnt', '', 'output')
 
-        ev_node = Eventually(var_node_1, Interval(5, 6))
-        once_node = Once(var_node_2, Interval(1, 2))
-        alw_node = Always(once_node, Interval(3, 3))
+        ev_node = TimedEventually(var_node_1, 5, 6)
+        once_node = TimedOnce(var_node_2, 1, 2)
+        alw_node = TimedAlways(once_node, 3, 3)
         add_node = Implies(ev_node, alw_node)
         add_node.horizon = 6
 

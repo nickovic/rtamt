@@ -1,42 +1,33 @@
 import collections
 from rtamt.operation.abstract_operation import AbstractOperation
-from rtamt.operation.sample import Sample
 
 class HistoricallyBoundedOperation(AbstractOperation):
     def __init__(self, begin, end):
         self.begin = begin
         self.end = end
-        self.reset()
-
-    def reset(self):
-        self.input = Sample()
-        self.buffer = collections.deque(maxlen=(self.end+1))
+        self.buffer = collections.deque(maxlen=(self.end + 1))
+        self.input = float("nan")
 
         for i in range(self.end+1):
-            s = Sample()
-            s.value = float("inf")
-            self.buffer.append(s)
+            val = float("inf")
+            self.buffer.append(val)
+
+    def reset(self):
+        self.buffer = collections.deque(maxlen=(self.end + 1))
+        self.input = float("nan")
+
+        for i in range(self.end + 1):
+            val = float("inf")
+            self.buffer.append(val)
 
     def addNewInput(self, sample):
-        self.input = Sample()
-
-        self.input.seq = sample.seq
-        self.input.time.sec = sample.time.sec
-        self.input.time.msec = sample.time.msec
-        self.input.value = sample.value
+        self.input = sample
 
         self.buffer.append(self.input)
 
     def update(self):
-        out = Sample()
-
-        out.seq = self.input.seq
-        out.time.msec = self.input.time.msec
-        out.time.sec = self.input.time.sec
-
-        out.value = float("inf")
+        out = float("inf")
         for i in range(self.end-self.begin+1):
-            out.value = min(out.value, self.buffer[i].value)
-
+            out = min(out, self.buffer[i])
 
         return out

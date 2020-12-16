@@ -16,6 +16,20 @@ class STLCTOffline(STLVisitor):
             out_sample = sample
         return out_sample
 
+    def visitPrevious(self, element, args):
+        in_sample_1 = self.visit(element.children[0], args)
+        in_sample_2 = self.visit(element.children[1], args)
+
+        out_sample = element.node.offline(in_sample_1, in_sample_2)
+        return out_sample
+
+    def visitNext(self, element, args):
+        in_sample_1 = self.visit(element.children[0], args)
+        in_sample_2 = self.visit(element.children[1], args)
+
+        out_sample = element.node.offline(in_sample_1, in_sample_2)
+        return out_sample
+
     def visitPredicate(self, element, args):
         in_sample_1 = self.visit(element.children[0], args)
         in_sample_2 = self.visit(element.children[1], args)
@@ -105,7 +119,17 @@ class STLCTOffline(STLVisitor):
         out_sample = element.node.offline(in_sample)
         return out_sample
 
+    def visitTimedEventually(self, element, args):
+        in_sample = self.visit(element.children[0], args)
+        out_sample = element.node.offline(in_sample)
+        return out_sample
+
     def visitAlways(self, element, args):
+        in_sample = self.visit(element.children[0], args)
+        out_sample = element.node.offline(in_sample)
+        return out_sample
+
+    def visitTimedAlways(self, element, args):
         in_sample = self.visit(element.children[0], args)
         out_sample = element.node.offline(in_sample)
         return out_sample
@@ -116,12 +140,28 @@ class STLCTOffline(STLVisitor):
         out_sample = element.node.offline(in_sample_1, in_sample_2)
         return out_sample
 
+    def visitTimedUntil(self, element, args):
+        in_sample_1 = self.visit(element.children[0], args)
+        in_sample_2 = self.visit(element.children[1], args)
+        out_sample = element.node.offline(in_sample_1, in_sample_2)
+        return out_sample
+
     def visitOnce(self, element, args):
         in_sample = self.visit(element.children[0], args)
         out_sample = element.node.offline(in_sample)
         return out_sample
 
+    def visitTimedOnce(self, element, args):
+        in_sample = self.visit(element.children[0], args)
+        out_sample = element.node.offline(in_sample)
+        return out_sample
+
     def visitHistorically(self, element, args):
+        in_sample = self.visit(element.children[0], args)
+        out_sample = element.node.offline(in_sample)
+        return out_sample
+
+    def visitTimedHistorically(self, element, args):
         in_sample = self.visit(element.children[0], args)
         out_sample = element.node.offline(in_sample)
         return out_sample
@@ -132,7 +172,13 @@ class STLCTOffline(STLVisitor):
         out_sample = element.node.offline(in_sample_1, in_sample_2)
         return out_sample
 
-    def visitPrecedes(self, element, args):
+    def visitTimedSince(self, element, args):
+        in_sample_1 = self.visit(element.children[0], args)
+        in_sample_2 = self.visit(element.children[1], args)
+        out_sample = element.node.offline(in_sample_1, in_sample_2)
+        return out_sample
+
+    def visitTimedPrecedes(self, element, args):
         in_sample_1 = self.visit(element.children[0], args)
         in_sample_2 = self.visit(element.children[1], args)
         out_sample = element.node.offline(in_sample_1, in_sample_2)

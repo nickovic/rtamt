@@ -11,8 +11,6 @@ import importlib
 from antlr4 import *
 from antlr4.InputStream import InputStream
 
-from enum import Enum
-
 from rtamt.spec.abstract_specification import AbstractSpecification
 
 from rtamt.parser.stl.StlLexer import StlLexer
@@ -24,19 +22,12 @@ from rtamt.exception.stl.exception import STLParseException
 from rtamt.exception.stl.exception import STLOfflineException
 
 from rtamt.spec.stl.pastifier import STLPastifier
-from rtamt.spec.stl.evaluator import STLEvaluator
+from rtamt.evaluator.stl.evaluator import STLEvaluator
 from rtamt.spec.stl.reset import STLReset
+from rtamt.enumerations.options import *
 
 
-class Semantics(Enum):
-    STANDARD = "standard"
-    OUTPUT_ROBUSTNESS = "output-robustness"
-    INPUT_VACUITY = "input-vacuity"
-    INPUT_ROBUSTNESS = "input-robustness"
-    OUTPUT_VACUITY = "output-vacuity"
 
-    def __str__(self):
-        return self.value
 
 
 class STLSpecification(AbstractSpecification):
@@ -62,6 +53,8 @@ class STLSpecification(AbstractSpecification):
         self.name = 'STL Specification'
         self.reseter = STLReset()
         self.semantics = Semantics.STANDARD
+        self.time_interpretation = TimeInterpretation.DISCRETE_TIME
+        self.deployment_type = DeploymentType.ONLINE
         self.in_vars = set()
         self.out_vars = set()
 
@@ -196,9 +189,6 @@ class STLSpecification(AbstractSpecification):
         parser._listeners = [STLParserErrorListener()]
         ctx = parser.stlfile()
 
-        # Visit the parse tree and populate spec fields
-        # self.visitStlfile(ctx)
-
         # Create the visitor for the actual spec nodes
         visitor = STLSpecificationParser(self)
         self.top = visitor.visitStlfile(ctx)
@@ -232,23 +222,18 @@ class STLSpecification(AbstractSpecification):
                 self.sampling_violation_counter = self.sampling_violation_counter + 1
 
 
-        if self.update_counter <= self.horizon:
-            for key in self.var_subspec_dict:
-                self.var_object_dict[key] = float('nan')
-            out = float('nan')
-        else:
-            for inp in inputs:
-                var_name = inp[0]
-                var_value = inp[1]
-                self.var_object_dict[var_name] = var_value
+        for inp in inputs:
+            var_name = inp[0]
+            var_value = inp[1]
+            self.var_object_dict[var_name] = var_value
 
-            for key in self.var_subspec_dict:
-                node = self.var_subspec_dict[key]
-                out = self.evaluator.evaluate(node, [self.update_counter])
-                self.var_object_dict[key] = out
+        for key in self.var_subspec_dict:
+            node = self.var_subspec_dict[key]
+            out = self.evaluator.evaluate(node, [self.update_counter])
+            self.var_object_dict[key] = out
 
-            # The evaluation done wrt the discrete counter (logical time)
-            out = self.evaluator.evaluate(self.top, [self.update_counter])
+        # The evaluation done wrt the discrete counter (logical time)
+        out = self.evaluator.evaluate(self.top, [self.update_counter])
 
         self.previous_time = timestamp
         self.update_counter = self.update_counter + 1

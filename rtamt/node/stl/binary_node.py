@@ -1,4 +1,4 @@
-from rtamt.node.node import Node
+from rtamt.node.stl.node import Node
 
 class BinaryNode(Node):
 

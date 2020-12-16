@@ -1,12 +1,13 @@
 from rtamt.node.stl.binary_node import BinaryNode
+from rtamt.node.stl.time_bound import TimeBound
 
-class Precedes(BinaryNode):
+class TimedPrecedes(BinaryNode, TimeBound):
     """A class for storing STL Precedes nodes - an auxilliary operator need for translating
        bounded future STL formulas to pure past formulas
                 Inherits TemporalNode
     """
 
-    def __init__(self, child1, child2, bound=None, is_pure_python=True):
+    def __init__(self, child1, child2, begin, end, is_pure_python=True):
         """Constructor for Precedes node
 
         Parameters:
@@ -14,22 +15,22 @@ class Precedes(BinaryNode):
             child2 : stl.Node
             bound : Interval
         """
-        super(Precedes, self).__init__(child1, child2, bound)
+        BinaryNode.__init__(self, child1, child2)
+        TimeBound.__init__(self, begin, end)
 
         self.in_vars = child1.in_vars + child2.in_vars
         self.out_vars = child1.out_vars + child2.out_vars
-        self.bound = bound
 
-        self.name = '(' + child1.name + ')precedes[' + str(bound.begin) + ',' + str(bound.end) + '](' + child2.name + ')'
+        self.name = '(' + child1.name + ')precedes[' + str(self.begin) + ',' + str(self.end) + '](' + child2.name + ')'
 
         if is_pure_python:
             name = 'rtamt.operation.stl.precedes_bounded_operation'
             mod = __import__(name, fromlist=[''])
-            self.node = mod.PrecedesBoundedOperation(int(bound.begin), int(bound.end))
+            self.node = mod.PrecedesBoundedOperation(int(self.begin), int(self.end))
         else:
             name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_node'
             mod = __import__(name, fromlist=[''])
 
             name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_precedes_bounded_node'
             mod = __import__(name, fromlist=[''])
-            self.node = mod.StlPrecedesBoundedNode(int(bound.begin), int(bound.end))
+            self.node = mod.StlPrecedesBoundedNode(int(self.begin), int(self.end))

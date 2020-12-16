@@ -1,29 +1,5 @@
 from rtamt.spec.stl.visitor import STLVisitor
 
-from rtamt.interval.interval import Interval
-from rtamt.node.stl.predicate import Predicate
-from rtamt.node.stl.variable import Variable
-from rtamt.node.stl.neg import Neg
-from rtamt.node.stl.conjunction import Conjunction
-from rtamt.node.stl.disjunction import Disjunction
-from rtamt.node.stl.implies import Implies
-from rtamt.node.stl.iff import Iff
-from rtamt.node.stl.xor import Xor
-from rtamt.node.stl.eventually import Eventually
-from rtamt.node.stl.always import Always
-from rtamt.node.stl.once import Once
-from rtamt.node.stl.historically import Historically
-from rtamt.node.stl.precedes import Precedes
-from rtamt.node.stl.since import Since
-from rtamt.node.stl.addition import Addition
-from rtamt.node.stl.subtraction import Subtraction
-from rtamt.node.stl.multiplication import Multiplication
-from rtamt.node.stl.division import Division
-from rtamt.node.stl.abs import Abs
-from rtamt.node.stl.fall import Fall
-from rtamt.node.stl.rise import Rise
-from rtamt.node.stl.constant import Constant
-
 class STLReset(STLVisitor):
 
     def reset(self, element):
@@ -135,9 +111,35 @@ class STLReset(STLVisitor):
         self.visit(element.children[1], args)
         element.reset()
 
-    def visitPrecedes(self, element, args):
+    def visitTimedPrecedes(self, element, args):
         self.visit(element.children[0], args)
         self.visit(element.children[1], args)
+        element.reset()
+
+    def visitTimedUntil(self, element, args):
+        self.visit(element.children[0], args)
+        self.visit(element.children[1], args)
+        element.reset()
+
+    def visitTimedAlways(self, element, args):
+        self.visit(element.children[0], args)
+        element.reset()
+
+    def visitTimedEventually(self, element, args):
+        self.visit(element.children[0], args)
+        element.reset()
+
+    def visitTimedSince(self, element, args):
+        self.visit(element.children[0], args)
+        self.visit(element.children[1], args)
+        element.reset()
+
+    def visitTimedHistorically(self, element, args):
+        self.visit(element.children[0], args)
+        element.reset()
+
+    def visitTimedOnce(self, element, args):
+        self.visit(element.children[0], args)
         element.reset()
 
     def visitDefault(self, element):

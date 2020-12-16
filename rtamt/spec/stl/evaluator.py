@@ -197,10 +197,48 @@ class STLEvaluator(STLVisitor):
         out_sample = element.node.update()
         return out_sample
 
-    def visitPrecedes(self, element, args):
+    def visitTimedPrecedes(self, element, args):
         in_sample_1 = self.visit(element.children[0], args)
         in_sample_2 = self.visit(element.children[1], args)
         element.node.addNewInput(in_sample_1, in_sample_2)
+        out_sample = element.node.update()
+        return out_sample
+
+    def visitTimedUntil(self, element, args):
+        in_sample_1 = self.visit(element.children[0], args)
+        in_sample_2 = self.visit(element.children[1], args)
+        element.node.addNewInput(in_sample_1, in_sample_2)
+        out_sample = element.node.update()
+        return out_sample
+
+    def visitTimedAlways(self, element, args):
+        in_sample = self.visit(element.children[0], args)
+        element.node.addNewInput(in_sample)
+        out_sample = element.node.update()
+        return out_sample
+
+    def visitTimedEventually(self, element, args):
+        in_sample = self.visit(element.children[0], args)
+        element.node.addNewInput(in_sample)
+        out_sample = element.node.update()
+        return out_sample
+
+    def visitTimedSince(self, element, args):
+        in_sample_1 = self.visit(element.children[0], args)
+        in_sample_2 = self.visit(element.children[1], args)
+        element.node.addNewInput(in_sample_1, in_sample_2)
+        out_sample = element.node.update()
+        return out_sample
+
+    def visitTimedOnce(self, element, args):
+        in_sample = self.visit(element.children[0], args)
+        element.node.addNewInput(in_sample)
+        out_sample = element.node.update()
+        return out_sample
+
+    def visitTimedHistorically(self, element, args):
+        in_sample = self.visit(element.children[0], args)
+        element.node.addNewInput(in_sample)
         out_sample = element.node.update()
         return out_sample
 

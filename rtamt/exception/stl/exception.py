@@ -9,3 +9,6 @@ class STLOfflineException(STLException):
 
 class STLSpecificationException(STLException):
     pass
+
+class STLNotImplementedException(STLException):
+    pass

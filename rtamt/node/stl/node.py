@@ -1,11 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Sep 23 2019
-
-@author: Dejan Nickovic
-"""
 from rtamt.node.abstract_node import AbstractNode
-
 
 class Node(AbstractNode):
     """A class for storing STL nodes
@@ -28,8 +21,6 @@ class Node(AbstractNode):
         self.horizon = 0;
         self.in_vars = []
         self.out_vars = []
-
-
 
     @property
     def horizon(self):

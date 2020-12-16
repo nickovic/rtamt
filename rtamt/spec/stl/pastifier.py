@@ -13,7 +13,7 @@ from rtamt.node.stl.eventually import Eventually
 from rtamt.node.stl.always import Always
 from rtamt.node.stl.once import Once
 from rtamt.node.stl.historically import Historically
-from rtamt.node.stl.precedes import Precedes
+from rtamt.node.stl.timed_precedes import TimedPrecedes
 from rtamt.node.stl.since import Since
 from rtamt.node.stl.addition import Addition
 from rtamt.node.stl.subtraction import Subtraction
@@ -24,6 +24,12 @@ from rtamt.node.stl.fall import Fall
 from rtamt.node.stl.rise import Rise
 from rtamt.node.stl.constant import Constant
 from rtamt.node.stl.previous import Previous
+from rtamt.node.stl.timed_always import TimedAlways
+from rtamt.node.stl.timed_eventually import TimedEventually
+from rtamt.node.stl.timed_historically import TimedHistorically
+from rtamt.node.stl.timed_once import TimedOnce
+from rtamt.node.stl.timed_since import TimedSince
+from rtamt.node.stl.timed_until import TimedUntil
 
 class STLPastifier(STLVisitor):
 
@@ -55,8 +61,7 @@ class STLPastifier(STLVisitor):
         horizon = args[0]
         node = Variable(element.var, element.field, element.io_type)
         if horizon > 0:
-            bound = Interval(horizon, horizon)
-            node = Once(node, bound, self.is_pure_python)
+            node = TimedOnce(node, horizon, horizon, self.is_pure_python)
         return node
 
     def visitAddition(self, element, args):
@@ -134,48 +139,53 @@ class STLPastifier(STLVisitor):
         return node
 
     def visitEventually(self, element, args):
-        if element.bound == None:
-            child_node = self.visit(element.children[0], args)
-            node = Eventually(child_node, element.bound, self.is_pure_python)
-        else:
-            horizon = args[0] - element.bound.end
-            node = self.visit(element.children[0], [horizon])
-            begin = 0
-            end = element.bound.end - element.bound.begin
-            if end > 0:
-                bound = Interval(begin, end)
-                node = Once(node, bound, self.is_pure_python)
+        child_node = self.visit(element.children[0], args)
+        node = Eventually(child_node, self.is_pure_python)
+        return node
+
+    def visitTimedEventually(self, element, args):
+        horizon = args[0] - element.end
+        node = self.visit(element.children[0], [horizon])
+        begin = 0
+        end = element.end - element.begin
+        if end > 0:
+            node = TimedOnce(node, begin, end, self.is_pure_python)
         return node
 
     def visitAlways(self, element, args):
-        if element.bound == None:
-            child_node = self.visit(element.children[0], args)
-            node = Always(child_node, element.bound, self.is_pure_python)
-        else:
-            horizon = args[0] - element.bound.end
-            node = self.visit(element.children[0], [horizon])
-            begin = 0
-            end = element.bound.end - element.bound.begin
-            if end > 0:
-                bound = Interval(begin, end)
-                node = Historically(node, bound, self.is_pure_python)
+        child_node = self.visit(element.children[0], args)
+        node = Always(child_node, self.is_pure_python)
+        return node
+
+    def visitTimedAlways(self, element, args):
+        horizon = args[0] - element.end
+        node = self.visit(element.children[0], [horizon])
+        begin = 0
+        end = element.end - element.begin
+        if end > 0:
+            node = TimedHistorically(node, begin, end, self.is_pure_python)
+        return node
+
+    def visitTimedUntil(self, element, args):
+        horizon = args[0] - element.end
+        begin = element.begin
+        end = element.end
+        child1_node = self.visit(element.children[0], [horizon])
+        child2_node = self.visit(element.children[1], [horizon])
+        node = TimedPrecedes(child1_node, child2_node, begin, end, self.is_pure_python)
         return node
 
     def visitUntil(self, element, args):
-        horizon = args[0] - element.bound.end
-        begin = element.bound.begin
-        end = element.bound.end
-        child1_node = self.visit(element.children[0], [horizon])
-        child2_node = self.visit(element.children[1], [horizon])
-        bound = Interval(begin, end)
-        node = Precedes(child1_node, child2_node, bound, self.is_pure_python)
-        return node
+        return None
 
     def visitOnce(self, element, args):
         child_node = self.visit(element.children[0], args)
+        node = Once(child_node, self.is_pure_python)
+        return node
 
-        node = Once(child_node, element.bound, self.is_pure_python)
-
+    def visitTimedOnce(self, element, args):
+        child_node = self.visit(element.children[0], args)
+        node = TimedOnce(child_node, element.begin, element.end, self.is_pure_python)
         return node
 
     def visitPrevious(self, element, args):
@@ -192,26 +202,32 @@ class STLPastifier(STLVisitor):
 
     def visitHistorically(self, element, args):
         child_node = self.visit(element.children[0], args)
+        node = Historically(child_node, self.is_pure_python)
+        return node
 
-        node = Historically(child_node, element.bound, self.is_pure_python)
-
+    def visitTimedHistorically(self, element, args):
+        child_node = self.visit(element.children[0], args)
+        node = TimedHistorically(child_node, element.begin, element.end, self.is_pure_python)
         return node
 
     def visitSince(self, element, args):
         child_node_1 = self.visit(element.children[0], args)
         child_node_2 = self.visit(element.children[1], args)
-
-        node = Since(child_node_1, child_node_2, element.bound, self.is_pure_python)
-
+        node = Since(child_node_1, child_node_2, self.is_pure_python)
         return node
 
-    def visitPrecedes(self, element, args):
-        end = element.bound.end
-        begin = element.bound.begin
+    def visitTimedSince(self, element, args):
+        child_node_1 = self.visit(element.children[0], args)
+        child_node_2 = self.visit(element.children[1], args)
+        node = TimedSince(child_node_1, child_node_2, element.begin, element.end, self.is_pure_python)
+        return node
+
+    def visitTimedPrecedes(self, element, args):
+        end = element.end
+        begin = element.begin
         child1_node = self.visit(element.children[0], args)
         child2_node = self.visit(element.children[1], args)
-        bound = Interval(begin, end)
-        node = Precedes(child1_node, child2_node, bound, self.is_pure_python)
+        node = TimedPrecedes(child1_node, child2_node, begin, end, self.is_pure_python)
         return node
 
     def visitDefault(self, element):

@@ -23,6 +23,12 @@ from rtamt.node.stl.disjunction import Disjunction
 from rtamt.node.stl.implies import Implies
 from rtamt.node.stl.iff import Iff
 from rtamt.node.stl.xor import Xor
+from rtamt.node.stl.timed_always import TimedAlways
+from rtamt.node.stl.timed_eventually import TimedEventually
+from rtamt.node.stl.timed_historically import TimedHistorically
+from rtamt.node.stl.timed_once import TimedOnce
+from rtamt.node.stl.timed_since import TimedSince
+from rtamt.node.stl.timed_until import TimedUntil
 from rtamt.node.stl.always import Always
 from rtamt.node.stl.eventually import Eventually
 from rtamt.node.stl.once import Once
@@ -126,6 +132,7 @@ class STLSpecificationParser(StlParserVisitor):
 
         node.horizon = int(0)
         return node
+
 
     def visitVariableDeclaration(self, ctx):
         # fetch the variable name, type and io signature
@@ -263,15 +270,14 @@ class STLSpecificationParser(StlParserVisitor):
         child = self.visit(ctx.expression())
         interval = self.visit(ctx.interval())
         horizon = child.horizon + interval.end
-        node = Always(child, interval, self.spec.is_pure_python)
+        node = TimedAlways(child, interval.begin, interval.end, self.spec.is_pure_python)
         node.horizon = horizon
         return node
 
     def visitExprUntimedAlwaysExpr(self, ctx):
         child = self.visit(ctx.expression())
         horizon = child.horizon
-        interval = None
-        node = Always(child, interval, self.spec.is_pure_python)
+        node = Always(child, self.spec.is_pure_python)
         node.horizon = horizon
         return node
 
@@ -279,15 +285,14 @@ class STLSpecificationParser(StlParserVisitor):
         child = self.visit(ctx.expression())
         interval = self.visit(ctx.interval())
         horizon = child.horizon + interval.end
-        node = Eventually(child, interval, self.spec.is_pure_python)
+        node = TimedEventually(child, interval.begin, interval.end, self.spec.is_pure_python)
         node.horizon = horizon
         return node
 
     def visitExprUntimedEvExpr(self, ctx):
         child = self.visit(ctx.expression())
         horizon = child.horizon
-        interval = None
-        node = Eventually(child, interval, self.spec.is_pure_python)
+        node = Eventually(child, self.spec.is_pure_python)
         node.horizon = horizon
         return node
 
@@ -306,22 +311,20 @@ class STLSpecificationParser(StlParserVisitor):
     def visitExpreOnceExpr(self, ctx):
         child = self.visit(ctx.expression())
         if ctx.interval() == None:
-            interval = None
-
+            node = Once(child, self.spec.is_pure_python)
         else:
             interval = self.visit(ctx.interval())
-        node = Once(child, interval, self.spec.is_pure_python)
+            node = TimedOnce(child, interval.begin, interval.end, self.spec.is_pure_python)
         node.horizon = child.horizon
         return node
 
     def visitExprHistExpr(self, ctx):
         child = self.visit(ctx.expression())
         if ctx.interval() == None:
-            interval = None
-
+            node = Historically(child, self.spec.is_pure_python)
         else:
             interval = self.visit(ctx.interval())
-        node = Historically(child, interval, self.spec.is_pure_python)
+            node = TimedHistorically(child, interval.begin, interval.end, self.spec.is_pure_python)
         node.horizon = child.horizon
         return node
 
@@ -329,11 +332,10 @@ class STLSpecificationParser(StlParserVisitor):
         child1 = self.visit(ctx.expression(0))
         child2 = self.visit(ctx.expression(1))
         if ctx.interval() == None:
-            interval = None
-
+            node = Since(child1, child2, self.spec.is_pure_python)
         else:
             interval = self.visit(ctx.interval())
-        node = Since(child1, child2, interval, self.spec.is_pure_python)
+            node = TimedSince(child1, child2, interval.begin, interval.end, self.spec.is_pure_python)
         node.horizon = max(child1.horizon, child2.horizon)
         return node
 
@@ -343,7 +345,7 @@ class STLSpecificationParser(StlParserVisitor):
         child2 = self.visit(ctx.expression(1))
         interval = self.visit(ctx.interval())
 
-        node = Until(child1, child2, interval, self.spec.is_pure_python)
+        node = TimedUntil(child1, child2, interval.begin, interval.end, self.spec.is_pure_python)
         node.horizon = max(child1.horizon, child2.horizon) + interval.end
         return node
 
@@ -352,10 +354,8 @@ class STLSpecificationParser(StlParserVisitor):
         child2 = self.visit(ctx.expression(1))
         interval = self.visit(ctx.interval())
 
-        left_interval = Interval(0, interval.end)
-
-        left = Always(child1, left_interval, self.spec.is_pure_python)
-        right = Until(child1, child2, interval, self.spec.is_pure_python)
+        left = TimedAlways(child1, 0, interval.end, self.spec.is_pure_python)
+        right = TimedUntil(child1, child2, interval.begin, interval.end, self.spec.is_pure_python)
         node = Disjunction(left, right)
 
         node.horizon = max(child1.horizon, child2.horizon) + interval.end
@@ -416,8 +416,8 @@ class STLSpecificationParser(StlParserVisitor):
         return self.visit(ctx.stlSpecification())
 
     def visitStlSpecification(self, ctx):
-        self.visitChildren(ctx)
-        return self.visit(ctx.assertion())
+        return self.visitChildren(ctx)
+        # return self.visit(ctx.assertion())
 
     def visitSpecification(self, ctx):
         self.visitChildren(ctx)
