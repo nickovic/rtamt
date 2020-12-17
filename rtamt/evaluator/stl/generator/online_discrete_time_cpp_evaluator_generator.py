@@ -1,45 +1,49 @@
 from rtamt.spec.stl.visitor import STLVisitor
 from rtamt.exception.stl.exception import STLNotImplementedException
-from rtamt.operation.stl.predicate_operation import PredicateOperation
-from rtamt.operation.arithmetic.addition_operation import AdditionOperation
-from rtamt.operation.arithmetic.multiplication_operation import MultiplicationOperation
-from rtamt.operation.arithmetic.subtraction_operation import SubtractionOperation
-from rtamt.operation.arithmetic.division_operation import DivisionOperation
-from rtamt.operation.stl.and_operation import AndOperation
-from rtamt.operation.stl.or_operation import OrOperation
-from rtamt.operation.stl.implies_operation import ImpliesOperation
-from rtamt.operation.stl.iff_operation import IffOperation
-from rtamt.operation.stl.xor_operation import XorOperation
-from rtamt.operation.stl.since_operation import SinceOperation
-from rtamt.operation.arithmetic.abs_operation import AbsOperation
-from rtamt.operation.stl.not_operation import NotOperation
-from rtamt.operation.stl.rise_operation import RiseOperation
-from rtamt.operation.stl.fall_operation import FallOperation
-from rtamt.operation.stl.once_operation import OnceOperation
-from rtamt.operation.stl.historically_operation import HistoricallyOperation
-from rtamt.operation.stl.always_operation import AlwaysOperation
-from rtamt.operation.stl.eventually_operation import EventuallyOperation
-from rtamt.operation.stl.previous_operation import PreviousOperation
-from rtamt.operation.stl.constant_operation import ConstantOperation
-from rtamt.operation.stl.once_bounded_operation import OnceBoundedOperation
-from rtamt.operation.stl.historically_bounded_operation import HistoricallyBoundedOperation
-from rtamt.operation.stl.since_bounded_operation import SinceBoundedOperation
-from rtamt.operation.stl.precedes_bounded_operation import PrecedesBoundedOperation
+from rtamt.spec.stl.comp_op import StlComparisonOperator as CompOp
+from rtamt.lib.rtamt_stl_library_wrapper.stl_comp_op import StlComparisonOperator
+from rtamt.lib.rtamt_stl_library_wrapper.stl_node import Operation
+from rtamt.lib.rtamt_stl_library_wrapper.stl_combinatorial_binary_node import CombinatorialBinaryOperation
+from rtamt.lib.rtamt_stl_library_wrapper.stl_predicate_node import PredicateOperation
+from rtamt.lib.rtamt_stl_library_wrapper.stl_addition_node import AdditionOperation
+from rtamt.lib.rtamt_stl_library_wrapper.stl_multiplication_node import MultiplicationOperation
+from rtamt.lib.rtamt_stl_library_wrapper.stl_subtraction_node import SubtractionOperation
+from rtamt.lib.rtamt_stl_library_wrapper.stl_division_node import DivisionOperation
+from rtamt.lib.rtamt_stl_library_wrapper.stl_and_node import AndOperation
+from rtamt.lib.rtamt_stl_library_wrapper.stl_or_node import OrOperation
+from rtamt.lib.rtamt_stl_library_wrapper.stl_implies_node import ImpliesOperation
+from rtamt.lib.rtamt_stl_library_wrapper.stl_iff_node import IffOperation
+from rtamt.lib.rtamt_stl_library_wrapper.stl_xor_node import XorOperation
+from rtamt.lib.rtamt_stl_library_wrapper.stl_since_node import SinceOperation
+from rtamt.lib.rtamt_stl_library_wrapper.stl_abs_node import AbsOperation
+from rtamt.lib.rtamt_stl_library_wrapper.stl_not_node import NotOperation
+from rtamt.lib.rtamt_stl_library_wrapper.stl_rise_node import RiseOperation
+from rtamt.lib.rtamt_stl_library_wrapper.stl_fall_node import FallOperation
+from rtamt.lib.rtamt_stl_library_wrapper.stl_once_node import OnceOperation
+from rtamt.lib.rtamt_stl_library_wrapper.stl_historically_node import HistoricallyOperation
+from rtamt.lib.rtamt_stl_library_wrapper.stl_always_node import AlwaysOperation
+from rtamt.lib.rtamt_stl_library_wrapper.stl_eventually_node import EventuallyOperation
+from rtamt.lib.rtamt_stl_library_wrapper.stl_previous_node import PreviousOperation
+from rtamt.lib.rtamt_stl_library_wrapper.stl_constant_node import ConstantOperation
+from rtamt.lib.rtamt_stl_library_wrapper.stl_once_bounded_node import OnceBoundedOperation
+from rtamt.lib.rtamt_stl_library_wrapper.stl_historically_bounded_node import HistoricallyBoundedOperation
+from rtamt.lib.rtamt_stl_library_wrapper.stl_since_bounded_node import SinceBoundedOperation
+from rtamt.lib.rtamt_stl_library_wrapper.stl_precedes_bounded_node import PrecedesBoundedOperation
 
 class STLOnlineDiscreteTimeCPPMonitor(STLVisitor):
     def __init__(self):
         self.node_monitor_dict = dict()
         
     def generate(self, node):
-        self.visit(node)
+        self.visit(node, [])
         return self.node_monitor_dict
 
     def visitPredicate(self, node, args):
-        monitor = PredicateOperation(node.operator)
+        monitor = PredicateOperation(self.op_cpp(node.operator))
         self.node_monitor_dict[node] = monitor
 
-        self.visit(node.children[0])
-        self.visit(node.children[1])
+        self.visit(node.children[0], args)
+        self.visit(node.children[1], args)
 
     def visitVariable(self, node, args):
         pass
@@ -48,88 +52,88 @@ class STLOnlineDiscreteTimeCPPMonitor(STLVisitor):
         monitor = AbsOperation()
         self.node_monitor_dict[node] = monitor
 
-        self.visit(node.children[0])
+        self.visit(node.children[0], args)
 
     def visitAddition(self, node, args):
         monitor = AdditionOperation()
         self.node_monitor_dict[node] = monitor
 
-        self.visit(node.children[0])
-        self.visit(node.children[1])
+        self.visit(node.children[0], args)
+        self.visit(node.children[1], args)
 
     def visitSubtraction(self, node, args):
         monitor = SubtractionOperation()
         self.node_monitor_dict[node] = monitor
 
-        self.visit(node.children[0])
-        self.visit(node.children[1])
+        self.visit(node.children[0], args)
+        self.visit(node.children[1], args)
 
     def visitMultiplication(self, node, args):
         monitor = MultiplicationOperation()
         self.node_monitor_dict[node] = monitor
 
-        self.visit(node.children[0])
-        self.visit(node.children[1])
+        self.visit(node.children[0], args)
+        self.visit(node.children[1], args)
 
     def visitDivision(self, node, args):
         monitor = DivisionOperation()
         self.node_monitor_dict[node] = monitor
 
-        self.visit(node.children[0])
-        self.visit(node.children[1])
+        self.visit(node.children[0], args)
+        self.visit(node.children[1], args)
 
     def visitNot(self, node, args):
         monitor = NotOperation()
         self.node_monitor_dict[node] = monitor
 
-        self.visit(node.children[0])
+        self.visit(node.children[0], args)
 
     def visitAnd(self, node, args):
         monitor = AndOperation()
         self.node_monitor_dict[node] = monitor
 
-        self.visit(node.children[0])
-        self.visit(node.children[1])
+        self.visit(node.children[0], args)
+        self.visit(node.children[1], args)
 
     def visitOr(self, node, args):
         monitor = OrOperation()
         self.node_monitor_dict[node] = monitor
 
-        self.visit(node.children[0])
-        self.visit(node.children[1])
+        self.visit(node.children[0], args)
+        self.visit(node.children[1], args)
 
     def visitImplies(self, node, args):
         monitor = ImpliesOperation()
         self.node_monitor_dict[node] = monitor
 
-        self.visit(node.children[0])
-        self.visit(node.children[1])
+        self.visit(node.children[0], args)
+        self.visit(node.children[1], args)
 
     def visitIff(self, node, args):
         monitor = IffOperation()
         self.node_monitor_dict[node] = monitor
 
-        self.visit(node.children[0])
-        self.visit(node.children[1])
+        self.visit(node.children[0], args)
+        self.visit(node.children[1], args)
 
     def visitXor(self, node, args):
         monitor = XorOperation()
         self.node_monitor_dict[node] = monitor
 
-        self.visit(node.children[0])
-        self.visit(node.children[1])
+        self.visit(node.children[0], args)
+        self.visit(node.children[1], args)
 
     def visitEventually(self, node, args):
         monitor = EventuallyOperation()
         self.node_monitor_dict[node] = monitor
 
-        self.visit(node.children[0])
+        self.visit(node.children[0], args)
 
     def visitAlways(self, node, args):
         monitor = AlwaysOperation()
         self.node_monitor_dict[node] = monitor
 
-        self.visit(node.children[0])
+        self.visit(node.children[0], args)
 
     def visitUntil(self, node, args):
         raise STLNotImplementedException('Until operator is not implemented in the STL online monitor.')
@@ -138,42 +142,42 @@ class STLOnlineDiscreteTimeCPPMonitor(STLVisitor):
         monitor = OnceOperation()
         self.node_monitor_dict[node] = monitor
 
-        self.visit(node.children[0])
+        self.visit(node.children[0], args)
 
     def visitHistorically(self, node, args):
         monitor = HistoricallyOperation()
         self.node_monitor_dict[node] = monitor
 
-        self.visit(node.children[0])
+        self.visit(node.children[0], args)
 
     def visitSince(self, node, args):
         monitor = SinceOperation()
         self.node_monitor_dict[node] = monitor
 
-        self.visit(node.children[0])
-        self.visit(node.children[1])
+        self.visit(node.children[0], args)
+        self.visit(node.children[1], args)
 
     def visitRise(self, node, args):
         monitor = RiseOperation()
         self.node_monitor_dict[node] = monitor
 
-        self.visit(node.children[0])
+        self.visit(node.children[0], args)
 
     def visitFall(self, node, args):
         monitor = FallOperation()
         self.node_monitor_dict[node] = monitor
 
-        self.visit(node.children[0])
+        self.visit(node.children[0], args)
 
     def visitConstant(self, node, args):
-        monitor = ConstantOperation(node.value)
+        monitor = ConstantOperation(node.val)
         self.node_monitor_dict[node] = monitor
 
     def visitPrevious(self, node, args):
         monitor = PreviousOperation()
         self.node_monitor_dict[node] = monitor
 
-        self.visit(node.children[0])
+        self.visit(node.children[0], args)
 
     def visitNext(self, node, args):
         raise STLNotImplementedException('Next operator not implemented in STL online monitor.')
@@ -182,27 +186,27 @@ class STLOnlineDiscreteTimeCPPMonitor(STLVisitor):
         monitor = PrecedesBoundedOperation(node.begin, node.end)
         self.node_monitor_dict[node] = monitor
 
-        self.visit(node.children[0])
-        self.visit(node.children[1])
+        self.visit(node.children[0], args)
+        self.visit(node.children[1], args)
 
     def visitTimedOnce(self, node, args):
         monitor = OnceBoundedOperation(node.begin, node.end)
         self.node_monitor_dict[node] = monitor
 
-        self.visit(node.children[0])
+        self.visit(node.children[0], args)
 
     def visitTimedHistorically(self, node, args):
         monitor = HistoricallyBoundedOperation(node.begin, node.end)
         self.node_monitor_dict[node] = monitor
 
-        self.visit(node.children[0])
+        self.visit(node.children[0], args)
 
     def visitTimedSince(self, node, args):
         monitor = SinceBoundedOperation(node.begin, node.end)
         self.node_monitor_dict[node] = monitor
 
-        self.visit(node.children[0])
-        self.visit(node.children[1])
+        self.visit(node.children[0], args)
+        self.visit(node.children[1], args)
 
     def visitTimedAlways(self, node, args):
         raise STLNotImplementedException('Bounded always operator not implemented in STL online monitor.')
@@ -215,6 +219,20 @@ class STLOnlineDiscreteTimeCPPMonitor(STLVisitor):
 
     def visitDefault(self, node, args):
         pass
+
+    def op_cpp(self, op):
+        if op == CompOp.GEQ:
+            return StlComparisonOperator.GEQ
+        elif op == CompOp.GREATER:
+            return StlComparisonOperator.GREATER
+        elif op == CompOp.LEQ:
+            return StlComparisonOperator.LEQ
+        elif op == CompOp.LESS:
+            return StlComparisonOperator.LESS
+        elif op == CompOp.NEQ:
+            return StlComparisonOperator.NEQ
+        else:
+            return StlComparisonOperator.EQUAL
         
     
         

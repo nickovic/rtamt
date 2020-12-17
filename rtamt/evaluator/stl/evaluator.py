@@ -1,6 +1,7 @@
 import operator
 from rtamt.enumerations.options import *
 from rtamt.evaluator.stl.generator.online_discrete_time_python_evaluator_generator import STLOnlineDiscreteTimePythonMonitor
+from rtamt.evaluator.stl.generator.online_discrete_time_cpp_evaluator_generator import STLOnlineDiscreteTimeCPPMonitor
 from rtamt.exception.stl.exception import STLNotImplementedException
 from rtamt.spec.stl.visitor import STLVisitor
 
@@ -14,10 +15,18 @@ class STLEvaluator(STLVisitor):
 
         if self.spec.time_interpretation == TimeInterpretation.DISCRETE_TIME:
             if self.spec.deployment_type == DeploymentType.ONLINE:
-                generator = STLOnlineDiscreteTimePythonMonitor()
+                if self.spec.language == Language.PYTHON:
+                    generator = STLOnlineDiscreteTimePythonMonitor()
+                elif self.spec.language == Language.CPP:
+                    generator = STLOnlineDiscreteTimeCPPMonitor()
 
         if generator is None:
-            raise STLNotImplementedException('This monitor is not implemented')
+            raise STLNotImplementedException('The monitor with {0} interpretation of time, '
+                                             '{1} deployment and {2} implementation is not '
+                                             'available in this version '
+                                             'of the library'.format(self.spec.time_interpretation,
+                                                                     self.spec.deployment_type,
+                                                                     self.spec.language))
 
         self.node_monitor_dict = generator.generate(self.spec.top)
 

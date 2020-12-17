@@ -27,9 +27,6 @@ from rtamt.spec.stl.reset import STLReset
 from rtamt.enumerations.options import *
 
 
-
-
-
 class STLSpecification(AbstractSpecification):
     """A class used as a container for STL specifications
 
@@ -47,14 +44,18 @@ class STLSpecification(AbstractSpecification):
         evaluator : AbstractEvaluator - pointer to the object that implements the monitoring algorithm
     """
 
-    def __init__(self, is_pure_python=True):
+    def __init__(self, is_pure_python=True, semantics=Semantics.STANDARD,
+                 time_interpretation=TimeInterpretation.DISCRETE_TIME,
+                 deployment_type=DeploymentType.ONLINE, language=Language.PYTHON):
         """Constructor for STL Specification"""
         super(STLSpecification, self).__init__(is_pure_python)
         self.name = 'STL Specification'
         self.reseter = STLReset()
-        self.semantics = Semantics.STANDARD
-        self.time_interpretation = TimeInterpretation.DISCRETE_TIME
-        self.deployment_type = DeploymentType.ONLINE
+        self.semantics = semantics
+        self.time_interpretation = time_interpretation
+        self.deployment_type = deployment_type
+        self.language = language
+
         self.in_vars = set()
         self.out_vars = set()
 

@@ -8,4 +8,5 @@ from rtamt.exception.stl.exception import STLOfflineException
 from rtamt.exception.stl.exception import STLSpecificationException
 from rtamt.spec.io_stl.io_interpretation import IOInterpretation
 from rtamt.spec.stl.io_type import StlIOType
+from rtamt.enumerations.options import Language, DeploymentType, Semantics, TimeInterpretation
 

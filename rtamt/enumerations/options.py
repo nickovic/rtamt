@@ -21,3 +21,9 @@ class DeploymentType(Enum):
     OFFLINE = "offline"
     def __str__(self):
         return self.value
+
+class Language(Enum):
+    PYTHON = "python"
+    CPP = "C++"
+    def __str__(self):
+        return self.value
