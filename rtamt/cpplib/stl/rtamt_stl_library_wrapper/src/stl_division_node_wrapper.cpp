@@ -11,16 +11,15 @@
 
 #include <rtamt_stl_library/stl_node.h>
 #include <rtamt_stl_library/stl_division_node.h>
-#include <rtamt_stl_library/stl_sample.h>
 
 using namespace boost::python;
 using namespace stl_library;
 
 BOOST_PYTHON_MODULE(stl_division_node)
 {
-    class_<StlDivisionNode, bases<StlNode> >("StlDivisionNode")
+    class_<StlDivisionNode, bases<StlNode> >("DivisionOperation")
         .def("update", &StlDivisionNode::update)
         .def("reset", &StlDivisionNode::reset)
-        .def("addNewInput", static_cast<void (StlDivisionNode::*)(Sample, Sample)>(&StlDivisionNode::addNewInput))
+        .def("addNewInput", static_cast<void (StlDivisionNode::*)(double, double)>(&StlDivisionNode::addNewInput))
     ;
 }

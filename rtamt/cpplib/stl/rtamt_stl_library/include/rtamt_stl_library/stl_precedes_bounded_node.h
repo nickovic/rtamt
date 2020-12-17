@@ -25,15 +25,15 @@ class StlPrecedesBoundedNode : public StlNode {
     private:
         int begin;
         int end;
-        Sample in;
-        boost::circular_buffer<Sample> buffer[2];
-        void addNewInput(int i, Sample msg);
+        double in;
+        boost::circular_buffer<double> buffer[2];
+        void addNewInput(int i, double msg);
         
         
     public:
         StlPrecedesBoundedNode(int begin, int end);
-        Sample update();
-        void addNewInput(Sample left, Sample right);
+        double update();
+        void addNewInput(double left, double right);
         void reset();
        
 };

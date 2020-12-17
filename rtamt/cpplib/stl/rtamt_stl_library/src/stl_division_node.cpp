@@ -11,30 +11,21 @@ StlDivisionNode::StlDivisionNode() {
 void StlDivisionNode::reset() {
 }
 
-void StlDivisionNode::addNewInput(int i, Sample sample) {
+void StlDivisionNode::addNewInput(int i, double sample) {
     if (i > 1 or i < 0)
         return;
-    
-    in[i].seq = sample.seq;
-    in[i].time.sec = sample.time.sec;
-    in[i].time.msec = sample.time.msec;
-    in[i].value = sample.value;
+    in[i] = sample;
 }
 
-void StlDivisionNode::addNewInput(Sample left, Sample right) {
+void StlDivisionNode::addNewInput(double left, double right) {
     addNewInput(0, left);
     addNewInput(1, right);
 }
 
-Sample StlDivisionNode::update() {
-    Sample out;
-    double val;
-    
-    val = in[0].value / in[1].value;
- 
-    out.seq = in[0].seq;
-    out.value = val;
-   
+double StlDivisionNode::update() {
+    double out;
+    out = in[0] / in[1];
+
     return out;
 }
 

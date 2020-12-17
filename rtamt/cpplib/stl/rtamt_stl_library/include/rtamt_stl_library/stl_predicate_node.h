@@ -24,16 +24,16 @@ class StlPredicateNode : public StlNode {
     private:
         StlComparisonOperator op;
 
-        Sample in[2];
+        double in[2];
 
-        void addNewInput(int i, Sample msg);
+        void addNewInput(int i, double msg);
         
         
         
     public:
         StlPredicateNode(StlComparisonOperator op);
-        Sample update();
-        void addNewInput(Sample left, Sample right);
+        double update();
+        void addNewInput(double left, double right);
         void reset();
 };
 

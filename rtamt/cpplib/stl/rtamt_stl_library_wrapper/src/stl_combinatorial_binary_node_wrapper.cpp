@@ -11,7 +11,6 @@
 
 #include <rtamt_stl_library/stl_node.h>
 #include <rtamt_stl_library/stl_combinatorial_binary_node.h>
-#include <rtamt_stl_library/stl_sample.h>
 #include <rtamt_stl_library/stl_operator_type.h>
 
 using namespace boost::python;
@@ -22,6 +21,6 @@ BOOST_PYTHON_MODULE(stl_combinatorial_binary_node)
     class_<StlCombinatorialBinaryNode, bases<StlNode> >("StlCombinatorialBinaryNode", init<StlOperatorType>())
         .def("update", &StlCombinatorialBinaryNode::update)
         .def("reset", &StlCombinatorialBinaryNode::reset)
-        .def("addNewInput", static_cast<void (StlCombinatorialBinaryNode::*)(Sample, Sample)>(&StlCombinatorialBinaryNode::addNewInput))
+        .def("addNewInput", static_cast<void (StlCombinatorialBinaryNode::*)(double, double)>(&StlCombinatorialBinaryNode::addNewInput))
     ;
 }

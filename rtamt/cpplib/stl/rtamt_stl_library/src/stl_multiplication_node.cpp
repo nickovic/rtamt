@@ -11,30 +11,24 @@ StlMultiplicationNode::StlMultiplicationNode() {
 void StlMultiplicationNode::reset() {
 }
 
-void StlMultiplicationNode::addNewInput(int i, Sample sample) {
+void StlMultiplicationNode::addNewInput(int i, double sample) {
     if (i > 1 or i < 0)
         return;
     
-    in[i].seq = sample.seq;
-    in[i].time.sec = sample.time.sec;
-    in[i].time.msec = sample.time.msec;
-    in[i].value = sample.value;
+    in[i] = sample;
 }
 
-void StlMultiplicationNode::addNewInput(Sample left, Sample right) {
+void StlMultiplicationNode::addNewInput(double left, double right) {
     addNewInput(0, left);
     addNewInput(1, right);
 }
 
-Sample StlMultiplicationNode::update() {
-    Sample out;
-    double val;
-    
-    val = in[0].value * in[1].value;
+double StlMultiplicationNode::update() {
+    double out;
+
+    out = in[0] * in[1];
  
-    out.seq = in[0].seq;
-    out.value = val;
-   
+
     return out;
 }
 

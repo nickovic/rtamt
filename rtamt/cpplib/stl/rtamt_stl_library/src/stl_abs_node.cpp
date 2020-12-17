@@ -19,27 +19,21 @@ StlAbsNode::StlAbsNode() {
 void StlAbsNode::reset() {
 }
 
-void StlAbsNode::addNewInput(int i, Sample sample) {
+void StlAbsNode::addNewInput(int i, double sample) {
     if (i != 0)
         return;
     
-    in.seq = sample.seq;
-    in.time.sec = sample.time.sec;
-    in.time.msec = sample.time.msec;
-    in.value = sample.value;
+    in = sample;
 }
 
-void StlAbsNode::addNewInput(Sample sample) {
+void StlAbsNode::addNewInput(double sample) {
     addNewInput(0,sample);
 }
 
-Sample StlAbsNode::update() {
-    Sample out;
+double StlAbsNode::update() {
+    double out;
     
-    out.seq = in.seq;
-    out.time.msec = in.time.msec;
-    out.time.sec = in.time.sec;
-    out.value = abs(in.value);
+    out = abs(in);
 
     return out;
 }

@@ -18,9 +18,9 @@ using namespace stl_library;
 
 BOOST_PYTHON_MODULE(stl_eventually_node)
 {
-    class_<StlEventuallyNode, bases<StlNode> >("StlEventuallyNode")
+    class_<StlEventuallyNode, bases<StlNode> >("EventuallyOperation")
         .def("update", &StlEventuallyNode::update)
         .def("reset", &StlEventuallyNode::reset)
-        .def("addNewInput", static_cast<void (StlEventuallyNode::*)(Sample)>(&StlEventuallyNode::addNewInput))
+        .def("addNewInput", static_cast<void (StlEventuallyNode::*)(double)>(&StlEventuallyNode::addNewInput))
     ;
 }

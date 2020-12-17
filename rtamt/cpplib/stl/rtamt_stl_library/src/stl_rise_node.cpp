@@ -12,47 +12,29 @@ using namespace stl_library;
 
 // Initialize previous and current value
 StlRiseNode::StlRiseNode() {
-    prev_in.seq = 0;
-    prev_in.time.sec = 0;
-    prev_in.time.msec = 0;
-    prev_in.value = - std::numeric_limits<double>::infinity();
+    prev_in = - std::numeric_limits<double>::infinity();
 }
 
 void StlRiseNode::reset() {
-    prev_in.seq = 0;
-    prev_in.time.sec = 0;
-    prev_in.time.msec = 0;
-    prev_in.value = - std::numeric_limits<double>::infinity();
+    prev_in = - std::numeric_limits<double>::infinity();
 }
 
-void StlRiseNode::addNewInput(int i, Sample sample) {
+void StlRiseNode::addNewInput(int i, double sample) {
     if (i != 0)
         return;
     
-    in.seq = sample.seq;
-    in.time.sec = sample.time.sec;
-    in.time.msec = sample.time.msec;
-    in.value = sample.value;
+    in = sample;
 }
 
-void StlRiseNode::addNewInput(Sample sample) {
+void StlRiseNode::addNewInput(double sample) {
     addNewInput(0,sample);
 }
 
-Sample StlRiseNode::update() {
-    Sample out;
+double StlRiseNode::update() {
+    double out;
     
-    out.seq = in.seq;
-    out.time.msec = in.time.msec;
-    out.time.sec = in.time.sec;
-    out.value = in.value;
-    
-    out.value = std::min(in.value, - prev_in.value);
-    
-    prev_in.seq = in.seq;
-    prev_in.time.sec = in.time.sec;
-    prev_in.time.msec = in.time.msec;
-    prev_in.value = in.value;
+    out = std::min(in, - prev_in);
+    prev_in = in;
     
     return out;
 }

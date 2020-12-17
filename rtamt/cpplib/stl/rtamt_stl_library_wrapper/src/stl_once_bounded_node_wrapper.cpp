@@ -11,16 +11,15 @@
 
 #include <rtamt_stl_library/stl_node.h>
 #include <rtamt_stl_library/stl_once_bounded_node.h>
-#include <rtamt_stl_library/stl_sample.h>
 
 using namespace boost::python;
 using namespace stl_library;
 
 BOOST_PYTHON_MODULE(stl_once_bounded_node)
 {
-    class_<StlOnceBoundedNode, bases<StlNode> >("StlOnceBoundedNode", init<int,int>())
+    class_<StlOnceBoundedNode, bases<StlNode> >("OnceBoundedOperation", init<int,int>())
         .def("update", &StlOnceBoundedNode::update)
         .def("reset", &StlOnceBoundedNode::reset)
-        .def("addNewInput", static_cast<void (StlOnceBoundedNode::*)(Sample)>(&StlOnceBoundedNode::addNewInput))
+        .def("addNewInput", static_cast<void (StlOnceBoundedNode::*)(double)>(&StlOnceBoundedNode::addNewInput))
     ;
 }

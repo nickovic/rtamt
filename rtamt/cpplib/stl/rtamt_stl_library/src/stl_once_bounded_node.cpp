@@ -14,12 +14,12 @@ using namespace stl_library;
 StlOnceBoundedNode::StlOnceBoundedNode(int begin, int end) {
     this->begin = begin;
     this->end = end;
-    this->buffer = boost::circular_buffer<Sample>(end+1);
+    this->buffer = boost::circular_buffer<double>(end+1);
     
     int i;
     for(i=0; i <= end; i++) {
-        Sample s;
-        s.value = - std::numeric_limits<double>::infinity();
+        double s;
+        s = - std::numeric_limits<double>::infinity();
         this->buffer.push_back(s);
     }
 }
@@ -27,35 +27,32 @@ StlOnceBoundedNode::StlOnceBoundedNode(int begin, int end) {
 void StlOnceBoundedNode::reset() {
     int i;
     for(i=0; i <= end; i++) {
-        Sample s;
-        s.value = - std::numeric_limits<double>::infinity();
+        double s;
+        s = - std::numeric_limits<double>::infinity();
         this->buffer.push_back(s);
     }
 }
 
-void StlOnceBoundedNode::addNewInput(int i, Sample sample) {
+void StlOnceBoundedNode::addNewInput(int i, double sample) {
     if (i != 0)
         return;
     
-    in.seq = sample.seq;
-    in.time.sec = sample.time.sec;
-    in.time.msec = sample.time.msec;
-    in.value = sample.value;
+    in = sample;
     
     this->buffer.push_back(in);
 }
 
-void StlOnceBoundedNode::addNewInput(Sample sample) {
+void StlOnceBoundedNode::addNewInput(double sample) {
     addNewInput(0,sample);
 }
 
-Sample StlOnceBoundedNode::update() {
-    Sample out;
+double StlOnceBoundedNode::update() {
+    double out;
     
-    out.value = - std::numeric_limits<double>::infinity();
+    out = - std::numeric_limits<double>::infinity();
     int i;
     for (i=0; i <= end - begin; i++) {
-        out.value = std::max(out.value, buffer[i].value);
+        out = std::max(out, buffer[i]);
     }
     return out;
 }

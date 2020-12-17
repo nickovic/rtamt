@@ -20,18 +20,12 @@ void StlConstantNode::reset() {
     this->time = 0;
 }
 
-void StlConstantNode::addNewInput(int i, Sample sample) {
+void StlConstantNode::addNewInput(int i, double sample) {
         return;
 }
 
 
-Sample StlConstantNode::update() {
-    Sample out;
-    
-    out.seq = this->time;
-    out.value = this->val;
-    this->time = this->time + 1;
-    
-    return out;
+double StlConstantNode::update() {
+    return this->val;
 }
 

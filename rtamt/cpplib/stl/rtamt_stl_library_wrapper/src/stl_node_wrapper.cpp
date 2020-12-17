@@ -10,11 +10,11 @@ using namespace stl_library;
 
 struct StlNodeWrap : StlNode, wrapper<StlNode>
 {
-    Sample update() {
+    double update() {
         return this->get_override("update")();
     }
     
-    void addNewInput(int i, Sample msg) {
+    void addNewInput(int i, double msg) {
         this->get_override("addNewInput")(i, msg);
     }
 };
@@ -22,7 +22,7 @@ struct StlNodeWrap : StlNode, wrapper<StlNode>
 
 BOOST_PYTHON_MODULE(stl_node)
 {
-    class_<StlNodeWrap, boost::noncopyable>("StlNode")
+    class_<StlNodeWrap, boost::noncopyable>("Operation")
         .def("update", pure_virtual(&StlNode::update))
     ;
 }

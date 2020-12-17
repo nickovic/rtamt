@@ -14,15 +14,15 @@ using namespace stl_library;
 StlSinceBoundedNode::StlSinceBoundedNode(int begin, int end) {
     this->begin = begin;
     this->end = end;
-    this->buffer[0] = boost::circular_buffer<Sample>(end+1);
-    this->buffer[1] = boost::circular_buffer<Sample>(end+1);
+    this->buffer[0] = boost::circular_buffer<double>(end+1);
+    this->buffer[1] = boost::circular_buffer<double>(end+1);
     
     int i;
     for(i=0; i <= end; i++) {
-        Sample s_left;
-        Sample s_right;
-        s_left.value = std::numeric_limits<double>::infinity();
-        s_right.value = - std::numeric_limits<double>::infinity();
+        double s_left;
+        double s_right;
+        s_left = std::numeric_limits<double>::infinity();
+        s_right = - std::numeric_limits<double>::infinity();
         this->buffer[0].push_back(s_left);
         this->buffer[1].push_back(s_right);
     }
@@ -31,47 +31,42 @@ StlSinceBoundedNode::StlSinceBoundedNode(int begin, int end) {
 void StlSinceBoundedNode::reset() {
     int i;
     for(i=0; i <= end; i++) {
-        Sample s_left;
-        Sample s_right;
-        s_left.value = std::numeric_limits<double>::infinity();
-        s_right.value = - std::numeric_limits<double>::infinity();
+        double s_left;
+        double s_right;
+        s_left = std::numeric_limits<double>::infinity();
+        s_right = - std::numeric_limits<double>::infinity();
         this->buffer[0].push_back(s_left);
         this->buffer[1].push_back(s_right);
     }
 }
 
-void StlSinceBoundedNode::addNewInput(int i, Sample sample) {
+void StlSinceBoundedNode::addNewInput(int i, double sample) {
     if (i < 0 || i > 1)
         return;
-    
-    in.seq = sample.seq;
-    in.time.sec = sample.time.sec;
-    in.time.msec = sample.time.msec;
-    in.value = sample.value;
-    
-    this->buffer[i].push_back(in);
+
+    this->buffer[i].push_back(sample);
 }
 
-void StlSinceBoundedNode::addNewInput(Sample left, Sample right) {
+void StlSinceBoundedNode::addNewInput(double left, double right) {
     addNewInput(0, left);
     addNewInput(1, right);
 }
 
-Sample StlSinceBoundedNode::update() {
-    Sample out;
+double StlSinceBoundedNode::update() {
+    double out;
     
-    out.value = - std::numeric_limits<double>::infinity();
+    out = - std::numeric_limits<double>::infinity();
     int i;
     for (i=0; i <= end - begin; i++) {
-        Sample left; 
-        Sample right;
-        right.value = buffer[1][i].value;
-        left.value = std::numeric_limits<double>::infinity();
+        double left; 
+        double right;
+        right = buffer[1][i];
+        left = std::numeric_limits<double>::infinity();
         int j;
         for(j=i + 1; j <= end; j++) {
-            left.value = std::min(left.value, buffer[0][j].value);
+            left = std::min(left, buffer[0][j]);
         }
-        out.value = std::max(out.value, std::min(left.value, right.value));
+        out = std::max(out, std::min(left, right));
     }
     return out;
 }

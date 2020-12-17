@@ -23,15 +23,15 @@ namespace stl_library {
 
 class StlHistoricallyNode : public StlNode {
     private:
-        Sample in;
-        Sample prev_out;
-        void addNewInput(int i, Sample msg);
+        double in;
+        double prev_out;
+        void addNewInput(int i, double msg);
         
         
     public:
         StlHistoricallyNode();
-        Sample update();
-        void addNewInput(Sample msg);
+        double update();
+        void addNewInput(double msg);
         void reset();
        
 };

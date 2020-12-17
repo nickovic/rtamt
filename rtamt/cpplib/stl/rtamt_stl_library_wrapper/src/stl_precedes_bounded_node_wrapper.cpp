@@ -11,16 +11,15 @@
 
 #include <rtamt_stl_library/stl_node.h>
 #include <rtamt_stl_library/stl_precedes_bounded_node.h>
-#include <rtamt_stl_library/stl_sample.h>
 
 using namespace boost::python;
 using namespace stl_library;
 
 BOOST_PYTHON_MODULE(stl_precedes_bounded_node)
 {
-    class_<StlPrecedesBoundedNode, bases<StlNode> >("StlPrecedesBoundedNode", init<int,int>())
+    class_<StlPrecedesBoundedNode, bases<StlNode> >("PrecedesBoundedOperation", init<int,int>())
         .def("update", &StlPrecedesBoundedNode::update)
         .def("reset", &StlPrecedesBoundedNode::reset)
-        .def("addNewInput", static_cast<void (StlPrecedesBoundedNode::*)(Sample, Sample)>(&StlPrecedesBoundedNode::addNewInput))
+        .def("addNewInput", static_cast<void (StlPrecedesBoundedNode::*)(double, double)>(&StlPrecedesBoundedNode::addNewInput))
     ;
 }

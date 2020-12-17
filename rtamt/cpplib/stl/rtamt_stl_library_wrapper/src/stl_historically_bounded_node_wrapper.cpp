@@ -11,16 +11,15 @@
 
 #include <rtamt_stl_library/stl_node.h>
 #include <rtamt_stl_library/stl_historically_bounded_node.h>
-#include <rtamt_stl_library/stl_sample.h>
 
 using namespace boost::python;
 using namespace stl_library;
 
 BOOST_PYTHON_MODULE(stl_historically_bounded_node)
 {
-    class_<StlHistoricallyBoundedNode, bases<StlNode> >("StlHistoricallyBoundedNode", init<int,int>())
+    class_<StlHistoricallyBoundedNode, bases<StlNode> >("HistoricallyBoundedOperation", init<int,int>())
         .def("update", &StlHistoricallyBoundedNode::update)
         .def("reset", &StlHistoricallyBoundedNode::reset)
-        .def("addNewInput", static_cast<void (StlHistoricallyBoundedNode::*)(Sample)>(&StlHistoricallyBoundedNode::addNewInput))
+        .def("addNewInput", static_cast<void (StlHistoricallyBoundedNode::*)(double)>(&StlHistoricallyBoundedNode::addNewInput))
     ;
 }

@@ -19,9 +19,9 @@ using namespace stl_library;
 
 BOOST_PYTHON_MODULE(stl_and_node)
 {
-    class_<StlAndNode, bases<StlCombinatorialBinaryNode, StlNode> >("StlAndNode")
+    class_<StlAndNode, bases<StlCombinatorialBinaryNode, StlNode> >("AndOperation")
         .def("update", &StlAndNode::update)
         .def("reset", &StlAndNode::reset)
-        .def("addNewInput", static_cast<void (StlAndNode::*)(Sample, Sample)>(&StlAndNode::addNewInput))
+        .def("addNewInput", static_cast<void (StlAndNode::*)(double, double)>(&StlAndNode::addNewInput))
     ;
 }

@@ -16,37 +16,32 @@ StlPredicateNode::StlPredicateNode(StlComparisonOperator op) {
 void StlPredicateNode::reset() {
 }
 
-void StlPredicateNode::addNewInput(int i, Sample msg) {
-    in[i].seq = msg.seq;
-    in[i].time.msec = msg.time.msec;
-    in[i].time.sec = msg.time.sec;
-    in[i].value = msg.value;
+void StlPredicateNode::addNewInput(int i, double msg) {
+    in[i] = msg;
 }
 
-void StlPredicateNode::addNewInput(Sample left, Sample right) {
+void StlPredicateNode::addNewInput(double left, double right) {
     addNewInput(0, left);
     addNewInput(1, right);
 }
 
-Sample StlPredicateNode::update() {
-    Sample out;
+double StlPredicateNode::update() {
+    double out;
     
-    out.seq = in[0].seq;
-
     switch(op) {
         case EQUAL:
-            out.value = -std::abs(in[0].value - in[1].value);
+            out = -std::abs(in[0] - in[1]);
             break;
         case NEQ:
-            out.value = std::abs(in[0].value - in[1].value);
+            out = std::abs(in[0] - in[1]);
             break;
         case LEQ:
         case LESS:
-            out.value = in[1].value - in[0].value;
+            out = in[1] - in[0];
             break;
         case GEQ:
         case GREATER:
-            out.value = in[0].value - in[1].value;
+            out = in[0] - in[1];
             break;
     }
     

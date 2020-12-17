@@ -21,14 +21,14 @@ namespace stl_library {
 
 class StlAbsNode : public StlNode {
     private:
-        Sample in;
-        void addNewInput(int i, Sample msg);
+        double in;
+        void addNewInput(int i, double msg);
         
         
     public:
         StlAbsNode();
-        Sample update();
-        void addNewInput(Sample msg);
+        double update();
+        void addNewInput(double msg);
         void reset();
        
 };

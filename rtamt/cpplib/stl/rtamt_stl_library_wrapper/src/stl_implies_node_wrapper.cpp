@@ -12,16 +12,15 @@
 #include <rtamt_stl_library/stl_node.h>
 #include <rtamt_stl_library/stl_implies_node.h>
 #include <rtamt_stl_library/stl_combinatorial_binary_node.h>
-#include <rtamt_stl_library/stl_sample.h>
 
 using namespace boost::python;
 using namespace stl_library;
 
 BOOST_PYTHON_MODULE(stl_implies_node)
 {
-    class_<StlImpliesNode, bases<StlCombinatorialBinaryNode, StlNode> >("StlImpliesNode")
+    class_<StlImpliesNode, bases<StlCombinatorialBinaryNode, StlNode> >("ImpliesOperation")
         .def("update", &StlImpliesNode::update)
         .def("reset", &StlImpliesNode::reset)
-        .def("addNewInput", static_cast<void (StlImpliesNode::*)(Sample, Sample)>(&StlImpliesNode::addNewInput))
+        .def("addNewInput", static_cast<void (StlImpliesNode::*)(double, double)>(&StlImpliesNode::addNewInput))
     ;
 }

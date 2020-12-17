@@ -14,48 +14,41 @@ StlCombinatorialBinaryNode::StlCombinatorialBinaryNode(StlOperatorType type) {
 void StlCombinatorialBinaryNode::reset() {
 }
 
-void StlCombinatorialBinaryNode::addNewInput(int i, Sample sample) {
+void StlCombinatorialBinaryNode::addNewInput(int i, double sample) {
     if (i > 1 or i < 0)
         return;
     
-    in[i].seq = sample.seq;
-    in[i].time.sec = sample.time.sec;
-    in[i].time.msec = sample.time.msec;
-    in[i].value = sample.value;
+    in[i] = sample;
 }
 
-void StlCombinatorialBinaryNode::addNewInput(Sample left, Sample right) {
+void StlCombinatorialBinaryNode::addNewInput(double left, double right) {
     addNewInput(0, left);
     addNewInput(1, right);
 }
 
-Sample StlCombinatorialBinaryNode::update() {
-    Sample out;
+double StlCombinatorialBinaryNode::update() {
     double val;
     
     switch(type) {
         case AND:
-            val = std::min(in[0].value, in[1].value);
+            val = std::min(in[0], in[1]);
             break;
         case OR:
-            val = std::max(in[0].value, in[1].value);
+            val = std::max(in[0], in[1]);
             break;
         case IMPLIES:
-            val = std::max(-in[0].value, in[1].value);
+            val = std::max(-in[0], in[1]);
             break;
         case IFF:
-            val = -std::abs(in[0].value - in[1].value);
+            val = -std::abs(in[0] - in[1]);
             break;
         case XOR:
-            val = std::abs(in[0].value - in[1].value);
+            val = std::abs(in[0] - in[1]);
             break;
         default:
             val = nan("");
     }
-    
-    out.seq = in[0].seq;
-    out.value = val;
-   
-    return out;
+
+    return val;
 }
 

@@ -23,12 +23,12 @@ class StlConstantNode : public StlNode {
     private:
         double val;
         long time;
-        void addNewInput(int i, Sample msg);
+        void addNewInput(int i, double msg);
 
         
     public:
         StlConstantNode(double val);
-        Sample update();
+        double update();
         void reset();
 };
 

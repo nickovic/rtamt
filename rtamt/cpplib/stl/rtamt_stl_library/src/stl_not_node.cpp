@@ -17,27 +17,20 @@ StlNotNode::StlNotNode() {
 void StlNotNode::reset() {
 }
 
-void StlNotNode::addNewInput(int i, Sample sample) {
+void StlNotNode::addNewInput(int i, double sample) {
     if (i != 0)
         return;
     
-    in.seq = sample.seq;
-    in.time.sec = sample.time.sec;
-    in.time.msec = sample.time.msec;
-    in.value = sample.value;
+    in = sample;
 }
 
-void StlNotNode::addNewInput(Sample sample) {
+void StlNotNode::addNewInput(double sample) {
     addNewInput(0,sample);
 }
 
-Sample StlNotNode::update() {
-    Sample out;
-    
-    out.seq = in.seq;
-    out.time.msec = in.time.msec;
-    out.time.sec = in.time.sec;
-    out.value = -in.value;
+double StlNotNode::update() {
+    double out;
+    out = -in;
     
     return out;
 }

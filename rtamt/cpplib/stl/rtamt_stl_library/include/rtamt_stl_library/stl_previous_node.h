@@ -8,15 +8,15 @@ namespace stl_library {
 
 class StlPreviousNode : public StlNode {
     private:
-        Sample in;
-        Sample prev_in;
-        void addNewInput(int i, Sample msg);
+        double in;
+        double prev_in;
+        void addNewInput(int i, double msg);
         
         
     public:
         StlPreviousNode();
-        Sample update();
-        void addNewInput(Sample msg);
+        double update();
+        void addNewInput(double msg);
         void reset();
        
 };

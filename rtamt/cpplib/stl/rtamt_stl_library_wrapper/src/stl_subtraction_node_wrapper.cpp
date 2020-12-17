@@ -11,16 +11,15 @@
 
 #include <rtamt_stl_library/stl_node.h>
 #include <rtamt_stl_library/stl_subtraction_node.h>
-#include <rtamt_stl_library/stl_sample.h>
 
 using namespace boost::python;
 using namespace stl_library;
 
 BOOST_PYTHON_MODULE(stl_subtraction_node)
 {
-    class_<StlSubtractionNode, bases<StlNode> >("StlSubtractionNode")
+    class_<StlSubtractionNode, bases<StlNode> >("SubtractionOperation")
         .def("update", &StlSubtractionNode::update)
         .def("reset", &StlSubtractionNode::reset)
-        .def("addNewInput", static_cast<void (StlSubtractionNode::*)(Sample, Sample)>(&StlSubtractionNode::addNewInput))
+        .def("addNewInput", static_cast<void (StlSubtractionNode::*)(double, double)>(&StlSubtractionNode::addNewInput))
     ;
 }

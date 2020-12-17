@@ -25,15 +25,15 @@ class StlHistoricallyBoundedNode : public StlNode {
     private:
         int begin;
         int end;
-        Sample in;
-        boost::circular_buffer<Sample> buffer;
-        void addNewInput(int i, Sample msg);
+        double in;
+        boost::circular_buffer<double> buffer;
+        void addNewInput(int i, double msg);
         
         
     public:
         StlHistoricallyBoundedNode(int begin, int end);
-        Sample update();
-        void addNewInput(Sample msg);
+        double update();
+        void addNewInput(double msg);
         void reset();
        
 };

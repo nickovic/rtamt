@@ -11,16 +11,15 @@
 
 #include <rtamt_stl_library/stl_node.h>
 #include <rtamt_stl_library/stl_multiplication_node.h>
-#include <rtamt_stl_library/stl_sample.h>
 
 using namespace boost::python;
 using namespace stl_library;
 
 BOOST_PYTHON_MODULE(stl_multiplication_node)
 {
-    class_<StlMultiplicationNode, bases<StlNode> >("StlMultiplicationNode")
+    class_<StlMultiplicationNode, bases<StlNode> >("MultiplicationOperation")
         .def("update", &StlMultiplicationNode::update)
         .def("reset", &StlMultiplicationNode::reset)
-        .def("addNewInput", static_cast<void (StlMultiplicationNode::*)(Sample, Sample)>(&StlMultiplicationNode::addNewInput))
+        .def("addNewInput", static_cast<void (StlMultiplicationNode::*)(double, double)>(&StlMultiplicationNode::addNewInput))
     ;
 }

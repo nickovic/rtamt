@@ -22,10 +22,10 @@ class StlNode {
     public:
         ~StlNode() {}
         // We update the monitor and compute the next outcome
-        virtual Sample update()=0;
+        virtual double update()=0;
     private:
         // We add the new ith input msg
-        virtual void addNewInput(int i, Sample msg)=0;
+        virtual void addNewInput(int i, double msg)=0;
 
 };
 

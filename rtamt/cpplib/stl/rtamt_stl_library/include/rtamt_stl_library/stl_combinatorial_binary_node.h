@@ -23,14 +23,14 @@ namespace stl_library {
 class StlCombinatorialBinaryNode : public StlNode {
     protected:
         StlOperatorType type;
-        Sample in[2];
-        void addNewInput(int i, Sample msg);
+        double in[2];
+        void addNewInput(int i, double msg);
         
         
     public:
         StlCombinatorialBinaryNode(StlOperatorType type);
-        Sample update();
-        void addNewInput(Sample left, Sample right);
+        double update();
+        void addNewInput(double left, double right);
         void reset();
 };
 

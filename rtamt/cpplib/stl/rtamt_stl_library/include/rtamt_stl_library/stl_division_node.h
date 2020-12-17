@@ -21,14 +21,14 @@ namespace stl_library {
 
 class StlDivisionNode : public StlNode {
     private:
-        Sample in[2];
-        void addNewInput(int i, Sample msg);
+        double in[2];
+        void addNewInput(int i, double msg);
         
         
     public:
         StlDivisionNode();
-        Sample update();
-        void addNewInput(Sample left, Sample right);
+        double update();
+        void addNewInput(double left, double right);
         void reset();
 };
 

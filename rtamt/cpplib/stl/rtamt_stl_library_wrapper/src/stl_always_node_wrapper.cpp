@@ -12,10 +12,10 @@ using namespace stl_library;
 
 BOOST_PYTHON_MODULE(stl_always_node)
 {
-    class_<StlAlwaysNode, bases<StlNode> >("StlAlwaysNode", init<>())
+    class_<StlAlwaysNode, bases<StlNode> >("AlwaysOperation", init<>())
         .def("update", &StlAlwaysNode::update)
         .def("reset", &StlAlwaysNode::reset)
-        .def("addNewInput", static_cast<void (StlAlwaysNode::*)(Sample)>(&StlAlwaysNode::addNewInput))
+        .def("addNewInput", static_cast<void (StlAlwaysNode::*)(double)>(&StlAlwaysNode::addNewInput))
     ;
 }
 

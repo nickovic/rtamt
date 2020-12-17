@@ -21,15 +21,15 @@ namespace stl_library {
 
 class StlAlwaysNode : public StlNode {
     private:
-        Sample in;
-        Sample prev_out;
-        void addNewInput(int i, Sample msg);
+        double in;
+        double prev_out;
+        void addNewInput(int i, double msg);
         
         
     public:
         StlAlwaysNode();
-        Sample update();
-        void addNewInput(Sample msg);
+        double update();
+        void addNewInput(double msg);
         void reset();
        
 };
