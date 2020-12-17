@@ -26,18 +26,3 @@ class Conjunction(BinaryNode):
 
         self.name = '(' + child1.name + ')and(' + child2.name + ')'
 
-        if is_pure_python:
-            name = 'rtamt.operation.stl.and_operation'
-            mod = __import__(name, fromlist=[''])
-            self.node = mod.AndOperation()
-        else:
-            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_node'
-            mod = __import__(name, fromlist=[''])
-
-            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_combinatorial_binary_node'
-            mod = __import__(name, fromlist=[''])
-
-            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_and_node'
-            mod = __import__(name, fromlist=[''])
-            self.node = mod.StlAndNode()
-

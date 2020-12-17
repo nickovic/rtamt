@@ -16,17 +16,6 @@ class Fall(UnaryNode):
 
         self.name = 'fall(' + child.name + ')'
 
-        if is_pure_python:
-            name = 'rtamt.operation.stl.fall_operation'
-            mod = __import__(name, fromlist=[''])
-            self.node = mod.FallOperation()
-        else:
-            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_node'
-            mod = __import__(name, fromlist=[''])
-
-            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_fall_node'
-            mod = __import__(name, fromlist=[''])
-            self.node = mod.StlFallNode()
 
 
 

@@ -22,15 +22,3 @@ class TimedPrecedes(BinaryNode, TimeBound):
         self.out_vars = child1.out_vars + child2.out_vars
 
         self.name = '(' + child1.name + ')precedes[' + str(self.begin) + ',' + str(self.end) + '](' + child2.name + ')'
-
-        if is_pure_python:
-            name = 'rtamt.operation.stl.precedes_bounded_operation'
-            mod = __import__(name, fromlist=[''])
-            self.node = mod.PrecedesBoundedOperation(int(self.begin), int(self.end))
-        else:
-            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_node'
-            mod = __import__(name, fromlist=[''])
-
-            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_precedes_bounded_node'
-            mod = __import__(name, fromlist=[''])
-            self.node = mod.StlPrecedesBoundedNode(int(self.begin), int(self.end))

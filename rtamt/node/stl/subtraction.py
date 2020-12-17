@@ -19,15 +19,3 @@ class Subtraction(BinaryNode):
 
         self.name = '(' + child1.name + ')-(' + child2.name + ')'
 
-        if is_pure_python:
-            name = 'rtamt.operation.arithmetic.subtraction_operation'
-            mod = __import__(name, fromlist=[''])
-            self.node = mod.SubtractionOperation()
-        else:
-            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_node'
-            mod = __import__(name, fromlist=[''])
-
-            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_subtraction_node'
-            mod = __import__(name, fromlist=[''])
-            self.node = mod.StlSubtractionNode()
-

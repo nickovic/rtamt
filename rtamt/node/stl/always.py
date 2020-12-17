@@ -20,17 +20,6 @@ class Always(UnaryNode):
         self.name = 'always(' + child.name + ')'
 
 
-        if is_pure_python:
-            name = 'rtamt.operation.stl.always_operation'
-            mod = __import__(name, fromlist=[''])
-            self.node = mod.AlwaysOperation()
-        else:
-            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_node'
-            mod = __import__(name, fromlist=[''])
-
-            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_always_node'
-            mod = __import__(name, fromlist=[''])
-            self.node = mod.StlAlwaysNode()
 
 
 

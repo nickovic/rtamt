@@ -18,15 +18,4 @@ class Since(BinaryNode):
         self.out_vars = child1.out_vars + child2.out_vars
         self.name = '(' + child1.name + ')since(' + child2.name + ')'
 
-        if is_pure_python:
-            name = 'rtamt.operation.stl.since_operation'
-            mod = __import__(name, fromlist=[''])
-            self.node = mod.SinceOperation()
-        else:
-            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_node'
-            mod = __import__(name, fromlist=[''])
-
-            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_since_node'
-            mod = __import__(name, fromlist=[''])
-            self.node = mod.StlSinceNode()
 

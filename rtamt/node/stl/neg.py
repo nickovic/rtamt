@@ -17,17 +17,6 @@ class Neg(UnaryNode):
 
         self.name = 'not(' + child.name + ')'
 
-        if is_pure_python:
-            name = 'rtamt.operation.stl.not_operation'
-            mod = __import__(name, fromlist=[''])
-            self.node = mod.NotOperation()
-        else:
-            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_node'
-            mod = __import__(name, fromlist=[''])
-
-            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_not_node'
-            mod = __import__(name, fromlist=[''])
-            self.node = mod.StlNotNode()
 
 
 

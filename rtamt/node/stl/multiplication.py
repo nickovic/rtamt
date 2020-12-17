@@ -18,15 +18,4 @@ class Multiplication(BinaryNode):
 
         self.name = '(' + child1.name + ')*(' + child2.name + ')'
 
-        if is_pure_python:
-            name = 'rtamt.operation.arithmetic.multiplication_operation'
-            mod = __import__(name, fromlist=[''])
-            self.node = mod.MultiplicationOperation()
-        else:
-            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_node'
-            mod = __import__(name, fromlist=[''])
-
-            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_multiplication_node'
-            mod = __import__(name, fromlist=[''])
-            self.node = mod.StlMultiplicationNode()
 

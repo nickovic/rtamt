@@ -23,18 +23,3 @@ class Xor(Node):
         self.addChild(child2)
 
         self.name = '(' + child1.name + ')xor(' + child2.name + ')'
-
-        if is_pure_python:
-            name = 'rtamt.operation.stl.xor_operation'
-            mod = __import__(name, fromlist=[''])
-            self.node = mod.XorOperation()
-        else:
-            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_node'
-            mod = __import__(name, fromlist=[''])
-
-            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_combinatorial_binary_node'
-            mod = __import__(name, fromlist=[''])
-
-            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_xor_node'
-            mod = __import__(name, fromlist=[''])
-            self.node = mod.StlXorNode()

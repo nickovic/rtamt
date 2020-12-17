@@ -16,17 +16,6 @@ class Previous(UnaryNode):
 
         self.name = 'previous(' + child.name + ')'
 
-        if is_pure_python:
-            name = 'rtamt.operation.stl.previous_operation'
-            mod = __import__(name, fromlist=[''])
-            self.node = mod.PreviousOperation()
-        else:
-            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_node'
-            mod = __import__(name, fromlist=[''])
-
-            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_previous_node'
-            mod = __import__(name, fromlist=[''])
-            self.node = mod.StlPreviousNode()
 
 
 

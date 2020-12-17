@@ -16,17 +16,6 @@ class Rise(UnaryNode):
 
         self.name = 'rise(' + child.name + ')'
 
-        if is_pure_python:
-            name = 'rtamt.operation.stl.rise_operation'
-            mod = __import__(name, fromlist=[''])
-            self.node = mod.RiseOperation()
-        else:
-            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_node'
-            mod = __import__(name, fromlist=[''])
-
-            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_rise_node'
-            mod = __import__(name, fromlist=[''])
-            self.node = mod.StlRiseNode()
 
 
 

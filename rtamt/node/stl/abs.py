@@ -24,17 +24,4 @@ class Abs(UnaryNode):
 
         self.name = 'abs(' + child.name + ')'
 
-        if is_pure_python:
-            name = 'rtamt.operation.arithmetic.abs_operation'
-            mod = __import__(name, fromlist=[''])
-            self.node = mod.AbsOperation()
-        else:
-            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_node'
-            mod = __import__(name, fromlist=[''])
-
-            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_abs_node'
-            mod = __import__(name, fromlist=[''])
-            self.node = mod.StlAbsNode()
-
-
 

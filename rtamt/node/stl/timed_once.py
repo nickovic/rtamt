@@ -20,16 +20,4 @@ class TimedOnce(UnaryNode, TimeBound):
 
         self.name = 'once[' + str(self.begin) + ',' + str(self.end) + '](' + child.name + ')'
 
-        if is_pure_python:
-            name = 'rtamt.operation.stl.once_bounded_operation'
-            mod = __import__(name, fromlist=[''])
-            self.node = mod.OnceBoundedOperation(int(self.begin), int(self.end))
-        else:
-            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_node'
-            mod = __import__(name, fromlist=[''])
-
-            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_once_bounded_node'
-            mod = __import__(name, fromlist=[''])
-            self.node = mod.StlOnceBoundedNode(int(self.begin), int(self.end))
-
 

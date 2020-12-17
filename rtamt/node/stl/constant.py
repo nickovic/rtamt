@@ -26,17 +26,6 @@ class Constant(LeafNode):
 
         self.name = str(val)
 
-        if is_pure_python:
-            name = 'rtamt.operation.stl.constant_operation'
-            mod = __import__(name, fromlist=[''])
-            self.node = mod.ConstantOperation(val)
-        else:
-            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_node'
-            mod = __import__(name, fromlist=[''])
-
-            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_constant_node'
-            mod = __import__(name, fromlist=[''])
-            self.node = mod.StlConstantNode(val)
 
     @property
     def val(self):

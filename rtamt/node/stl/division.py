@@ -19,15 +19,4 @@ class Division(BinaryNode):
 
         self.name = '(' + child1.name + ')/(' + child2.name + ')'
 
-        if is_pure_python:
-            name = 'rtamt.operation.arithmetic.division_operation'
-            mod = __import__(name, fromlist=[''])
-            self.node = mod.DivisionOperation()
-        else:
-            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_node'
-            mod = __import__(name, fromlist=[''])
-
-            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_division_node'
-            mod = __import__(name, fromlist=[''])
-            self.node = mod.StlDivisionNode()
 

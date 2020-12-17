@@ -22,15 +22,3 @@ class TimedSince(BinaryNode, TimeBound):
 
         self.name = '(' + child1.name + ')since[' + str(self.begin) + ',' + str(
                 self.end) + '](' + child2.name + ')'
-
-        if is_pure_python:
-            name = 'rtamt.operation.stl.since_bounded_operation'
-            mod = __import__(name, fromlist=[''])
-            self.node = mod.SinceBoundedOperation(int(self.begin), int(self.end))
-        else:
-            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_node'
-            mod = __import__(name, fromlist=[''])
-
-            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_since_bounded_node'
-            mod = __import__(name, fromlist=[''])
-            self.node = mod.StlSinceBoundedNode(int(self.begin), int(self.end))

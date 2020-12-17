@@ -18,16 +18,3 @@ class TimedHistorically(UnaryNode, TimeBound):
         self.out_vars = child.out_vars
 
         self.name = 'historically[' + str(self.begin) + ',' + str(self.end) + '](' + child.name + ')'
-
-
-        if is_pure_python:
-            name = 'rtamt.operation.stl.historically_bounded_operation'
-            mod = __import__(name, fromlist=[''])
-            self.node = mod.HistoricallyBoundedOperation(int(self.begin), int(self.end))
-        else:
-            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_node'
-            mod = __import__(name, fromlist=[''])
-
-            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_historically_bounded_node'
-            mod = __import__(name, fromlist=[''])
-            self.node = mod.StlHistoricallyBoundedNode(int(self.begin), int(self.end))

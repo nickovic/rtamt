@@ -18,20 +18,6 @@ class Disjunction(BinaryNode):
 
         self.name = '(' + child1.name + ')or(' + child2.name + ')'
 
-        if is_pure_python:
-            name = 'rtamt.operation.stl.or_operation'
-            mod = __import__(name, fromlist=[''])
-            self.node = mod.OrOperation()
-        else:
-            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_node'
-            mod = __import__(name, fromlist=[''])
-
-            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_combinatorial_binary_node'
-            mod = __import__(name, fromlist=[''])
-
-            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_or_node'
-            mod = __import__(name, fromlist=[''])
-            self.node = mod.StlOrNode()
 
 
 

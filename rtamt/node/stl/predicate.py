@@ -26,17 +26,6 @@ class Predicate(BinaryNode):
 
         self.name = '(' + child1.name + ')' + str(self.operator) + '(' + child2.name + ')'
 
-        if is_pure_python:
-            name = 'rtamt.operation.stl.predicate_operation'
-            mod = __import__(name, fromlist=[''])
-            self.node = mod.PredicateOperation(operator)
-        else:
-            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_node'
-            mod = __import__(name, fromlist=[''])
-
-            name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_predicate_node'
-            mod = __import__(name, fromlist=[''])
-            self.node = mod.StlPredicateNode(operator)
 
         
     @property
