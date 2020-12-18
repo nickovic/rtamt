@@ -1,8 +1,5 @@
 import operator
 from rtamt.enumerations.options import *
-from rtamt.evaluator.stl.generator.online_discrete_time_python_evaluator_generator import STLOnlineDiscreteTimePythonMonitor
-from rtamt.evaluator.stl.generator.online_discrete_time_cpp_evaluator_generator import STLOnlineDiscreteTimeCPPMonitor
-from rtamt.evaluator.stl.generator.online_dense_time_python_evaluator_generator import STLOnlineDenseTimePythonMonitor
 from rtamt.exception.stl.exception import STLNotImplementedException
 from rtamt.spec.stl.visitor import STLVisitor
 
@@ -17,12 +14,18 @@ class STLEvaluator(STLVisitor):
         if self.spec.time_interpretation == TimeInterpretation.DISCRETE_TIME:
             if self.spec.deployment_type == DeploymentType.ONLINE:
                 if self.spec.language == Language.PYTHON:
+                    from rtamt.evaluator.stl.generator.online_discrete_time_python_evaluator_generator import \
+                        STLOnlineDiscreteTimePythonMonitor
                     generator = STLOnlineDiscreteTimePythonMonitor()
                 elif self.spec.language == Language.CPP:
+                    from rtamt.evaluator.stl.generator.online_discrete_time_cpp_evaluator_generator import \
+                        STLOnlineDiscreteTimeCPPMonitor
                     generator = STLOnlineDiscreteTimeCPPMonitor()
         elif self.spec.time_interpretation == TimeInterpretation.DENSE_TIME:
             if self.spec.deployment_type == DeploymentType.ONLINE:
                 if self.spec.language == Language.PYTHON:
+                    from rtamt.evaluator.stl.generator.online_dense_time_python_evaluator_generator import \
+                        STLOnlineDenseTimePythonMonitor
                     generator = STLOnlineDenseTimePythonMonitor()
 
         if generator is None:

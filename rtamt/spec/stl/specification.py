@@ -206,6 +206,7 @@ class STLSpecification(AbstractSpecification):
 
         self.normalize = float(self.U[self.unit]) / float(self.U[self.sampling_period_unit])
 
+
     def update(self, *args, **kargs):
         # args[0] : timestamp - float
         # args[1] : inputs - list of [var name, var value] pairs
