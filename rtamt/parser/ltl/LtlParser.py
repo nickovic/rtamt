@@ -150,8 +150,8 @@ class LtlParser ( Parser ):
                       u"Identifier", u"LINE_TERMINATOR", u"WHITESPACE", 
                       u"COMMENT", u"LINE_COMMENT" ]
 
-    RULE_ltlfile = 0
-    RULE_ltlSpecification = 1
+    RULE_specification_file = 0
+    RULE_specification = 1
     RULE_spec = 2
     RULE_modimport = 3
     RULE_assertion = 4
@@ -169,7 +169,7 @@ class LtlParser ( Parser ):
     RULE_literal = 16
     RULE_identifier = 17
 
-    ruleNames =  [ u"ltlfile", u"ltlSpecification", u"spec", u"modimport", 
+    ruleNames =  [ u"specification_file", u"specification", u"spec", u"modimport", 
                    u"assertion", u"declaration", u"annotation", u"annotation_type", 
                    u"variableDeclaration", u"constantDeclaration", u"assignment", 
                    u"domainType", u"ioType", u"expression", u"real_expression", 
@@ -255,39 +255,39 @@ class LtlParser ( Parser ):
 
 
 
-    class LtlfileContext(ParserRuleContext):
+    class Specification_fileContext(ParserRuleContext):
 
         def __init__(self, parser, parent=None, invokingState=-1):
-            super(LtlParser.LtlfileContext, self).__init__(parent, invokingState)
+            super(LtlParser.Specification_fileContext, self).__init__(parent, invokingState)
             self.parser = parser
 
-        def ltlSpecification(self):
-            return self.getTypedRuleContext(LtlParser.LtlSpecificationContext,0)
+        def specification(self):
+            return self.getTypedRuleContext(LtlParser.SpecificationContext,0)
 
 
         def EOF(self):
             return self.getToken(LtlParser.EOF, 0)
 
         def getRuleIndex(self):
-            return LtlParser.RULE_ltlfile
+            return LtlParser.RULE_specification_file
 
         def accept(self, visitor):
-            if hasattr(visitor, "visitLtlfile"):
-                return visitor.visitLtlfile(self)
+            if hasattr(visitor, "visitSpecification_file"):
+                return visitor.visitSpecification_file(self)
             else:
                 return visitor.visitChildren(self)
 
 
 
 
-    def ltlfile(self):
+    def specification_file(self):
 
-        localctx = LtlParser.LtlfileContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 0, self.RULE_ltlfile)
+        localctx = LtlParser.Specification_fileContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 0, self.RULE_specification_file)
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 36
-            self.ltlSpecification()
+            self.specification()
             self.state = 37
             self.match(LtlParser.EOF)
         except RecognitionException as re:
@@ -298,10 +298,10 @@ class LtlParser ( Parser ):
             self.exitRule()
         return localctx
 
-    class LtlSpecificationContext(ParserRuleContext):
+    class SpecificationContext(ParserRuleContext):
 
         def __init__(self, parser, parent=None, invokingState=-1):
-            super(LtlParser.LtlSpecificationContext, self).__init__(parent, invokingState)
+            super(LtlParser.SpecificationContext, self).__init__(parent, invokingState)
             self.parser = parser
 
         def spec(self):
@@ -337,21 +337,21 @@ class LtlParser ( Parser ):
 
 
         def getRuleIndex(self):
-            return LtlParser.RULE_ltlSpecification
+            return LtlParser.RULE_specification
 
         def accept(self, visitor):
-            if hasattr(visitor, "visitLtlSpecification"):
-                return visitor.visitLtlSpecification(self)
+            if hasattr(visitor, "visitSpecification"):
+                return visitor.visitSpecification(self)
             else:
                 return visitor.visitChildren(self)
 
 
 
 
-    def ltlSpecification(self):
+    def specification(self):
 
-        localctx = LtlParser.LtlSpecificationContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 2, self.RULE_ltlSpecification)
+        localctx = LtlParser.SpecificationContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 2, self.RULE_specification)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
@@ -430,10 +430,10 @@ class LtlParser ( Parser ):
 
 
 
-    class SpecificationContext(SpecContext):
+    class SpecificationIdContext(SpecContext):
 
         def __init__(self, parser, ctx): # actually a LtlParser.SpecContext)
-            super(LtlParser.SpecificationContext, self).__init__(parser)
+            super(LtlParser.SpecificationIdContext, self).__init__(parser)
             self.copyFrom(ctx)
 
         def Specification(self):
@@ -442,8 +442,8 @@ class LtlParser ( Parser ):
             return self.getToken(LtlParser.Identifier, 0)
 
         def accept(self, visitor):
-            if hasattr(visitor, "visitSpecification"):
-                return visitor.visitSpecification(self)
+            if hasattr(visitor, "visitSpecificationId"):
+                return visitor.visitSpecificationId(self)
             else:
                 return visitor.visitChildren(self)
 
@@ -454,7 +454,7 @@ class LtlParser ( Parser ):
         localctx = LtlParser.SpecContext(self, self._ctx, self.state)
         self.enterRule(localctx, 4, self.RULE_spec)
         try:
-            localctx = LtlParser.SpecificationContext(self, localctx)
+            localctx = LtlParser.SpecificationIdContext(self, localctx)
             self.enterOuterAlt(localctx, 1)
             self.state = 60
             self.match(LtlParser.Specification)

@@ -16,6 +16,7 @@ from rtamt.node.ltl.predicate import Predicate
 from rtamt.node.ltl.previous import Previous
 from rtamt.node.ltl.next import Next
 from rtamt.node.ltl.neg import Neg
+from rtamt.node.ltl.until import Until
 from rtamt.node.ltl.conjunction import Conjunction
 from rtamt.node.ltl.disjunction import Disjunction
 from rtamt.node.ltl.implies import Implies
@@ -316,7 +317,7 @@ class LTLSpecificationParser(LtlParserVisitor):
         child2 = self.visit(ctx.expression(1))
 
         node = Until(child1, child2, self.spec.is_pure_python)
-        node.horizon = max(child1.horizon, child2.horizon) + interval.end
+        node.horizon = max(child1.horizon, child2.horizon)
         return node
 
     def visitExprUnless(self, ctx):
@@ -382,13 +383,13 @@ class LTLSpecificationParser(LtlParserVisitor):
         self.spec.free_vars.discard(id_head)
         return out
 
-    def visitLtlfile(self, ctx):
-        return self.visit(ctx.ltlSpecification())
-
-    def visitLtlSpecification(self, ctx):
-        return self.visitChildren(ctx)
+    def visitSpecification_file(self, ctx):
+        return self.visit(ctx.specification())
 
     def visitSpecification(self, ctx):
+        return self.visitChildren(ctx)
+
+    def visitSpecificationId(self, ctx):
         self.visitChildren(ctx)
         # The specification name is updated only if it is given
         # by the user

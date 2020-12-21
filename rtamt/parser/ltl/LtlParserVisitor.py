@@ -5,18 +5,18 @@ from antlr4 import *
 
 class LtlParserVisitor(ParseTreeVisitor):
 
-    # Visit a parse tree produced by LtlParser#ltlfile.
-    def visitLtlfile(self, ctx):
+    # Visit a parse tree produced by LtlParser#specification_file.
+    def visitSpecification_file(self, ctx):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by LtlParser#ltlSpecification.
-    def visitLtlSpecification(self, ctx):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by LtlParser#Specification.
+    # Visit a parse tree produced by LtlParser#specification.
     def visitSpecification(self, ctx):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by LtlParser#SpecificationId.
+    def visitSpecificationId(self, ctx):
         return self.visitChildren(ctx)
 
 

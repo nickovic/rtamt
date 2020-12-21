@@ -5,18 +5,133 @@ from antlr4 import *
 
 class StlParserVisitor(ParseTreeVisitor):
 
-    # Visit a parse tree produced by StlParser#stlfile.
-    def visitStlfile(self, ctx):
+    # Visit a parse tree produced by StlParser#interval.
+    def visitInterval(self, ctx):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by StlParser#stlSpecification.
-    def visitStlSpecification(self, ctx):
+    # Visit a parse tree produced by StlParser#intervalTimeLiteral.
+    def visitIntervalTimeLiteral(self, ctx):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by StlParser#Specification.
+    # Visit a parse tree produced by StlParser#unit.
+    def visitUnit(self, ctx):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by StlParser#ExprSince.
+    def visitExprSince(self, ctx):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by StlParser#ExprParen.
+    def visitExprParen(self, ctx):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by StlParser#ExprIff.
+    def visitExprIff(self, ctx):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by StlParser#ExpreOnce.
+    def visitExpreOnce(self, ctx):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by StlParser#ExprEv.
+    def visitExprEv(self, ctx):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by StlParser#ExprImplies.
+    def visitExprImplies(self, ctx):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by StlParser#ExprUntil.
+    def visitExprUntil(self, ctx):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by StlParser#ExprNot.
+    def visitExprNot(self, ctx):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by StlParser#ExprNext.
+    def visitExprNext(self, ctx):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by StlParser#ExprAnd.
+    def visitExprAnd(self, ctx):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by StlParser#ExprUnless.
+    def visitExprUnless(self, ctx):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by StlParser#ExprPrevious.
+    def visitExprPrevious(self, ctx):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by StlParser#ExprHist.
+    def visitExprHist(self, ctx):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by StlParser#ExprFall.
+    def visitExprFall(self, ctx):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by StlParser#ExprPredicate.
+    def visitExprPredicate(self, ctx):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by StlParser#ExprXor.
+    def visitExprXor(self, ctx):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by StlParser#ExprRise.
+    def visitExprRise(self, ctx):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by StlParser#ExprOr.
+    def visitExprOr(self, ctx):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by StlParser#ExprAlways.
+    def visitExprAlways(self, ctx):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by StlParser#ExprReal.
+    def visitExprReal(self, ctx):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by StlParser#specification_file.
+    def visitSpecification_file(self, ctx):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by StlParser#specification.
     def visitSpecification(self, ctx):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by StlParser#SpecificationId.
+    def visitSpecificationId(self, ctx):
         return self.visitChildren(ctx)
 
 
@@ -80,141 +195,6 @@ class StlParserVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by StlParser#interval.
-    def visitInterval(self, ctx):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by StlParser#intervalTimeLiteral.
-    def visitIntervalTimeLiteral(self, ctx):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by StlParser#constantTimeLiteral.
-    def visitConstantTimeLiteral(self, ctx):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by StlParser#unit.
-    def visitUnit(self, ctx):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by StlParser#ExprUntimedAlwaysExpr.
-    def visitExprUntimedAlwaysExpr(self, ctx):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by StlParser#ExprUntimedEvExpr.
-    def visitExprUntimedEvExpr(self, ctx):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by StlParser#Expr.
-    def visitExpr(self, ctx):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by StlParser#ExprParen.
-    def visitExprParen(self, ctx):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by StlParser#ExprAndExpr.
-    def visitExprAndExpr(self, ctx):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by StlParser#ExpreOnceExpr.
-    def visitExpreOnceExpr(self, ctx):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by StlParser#ExprAlwaysExpr.
-    def visitExprAlwaysExpr(self, ctx):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by StlParser#ExprImpliesExpr.
-    def visitExprImpliesExpr(self, ctx):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by StlParser#ExprXorExpr.
-    def visitExprXorExpr(self, ctx):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by StlParser#ExprSinceExpr.
-    def visitExprSinceExpr(self, ctx):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by StlParser#ExprNot.
-    def visitExprNot(self, ctx):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by StlParser#ExprOrExpr.
-    def visitExprOrExpr(self, ctx):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by StlParser#ExprNext.
-    def visitExprNext(self, ctx):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by StlParser#ExprUnless.
-    def visitExprUnless(self, ctx):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by StlParser#ExprPrevious.
-    def visitExprPrevious(self, ctx):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by StlParser#ExprIffExpr.
-    def visitExprIffExpr(self, ctx):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by StlParser#ExprFall.
-    def visitExprFall(self, ctx):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by StlParser#ExprRise.
-    def visitExprRise(self, ctx):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by StlParser#ExprHistExpr.
-    def visitExprHistExpr(self, ctx):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by StlParser#ExprReal.
-    def visitExprReal(self, ctx):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by StlParser#ExprUntilExpr.
-    def visitExprUntilExpr(self, ctx):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by StlParser#ExprEvExpr.
-    def visitExprEvExpr(self, ctx):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by StlParser#IdCompInt.
-    def visitIdCompInt(self, ctx):
-        return self.visitChildren(ctx)
-
-
     # Visit a parse tree produced by StlParser#ExprSubtraction.
     def visitExprSubtraction(self, ctx):
         return self.visitChildren(ctx)
@@ -250,33 +230,33 @@ class StlParserVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by StlParser#CmpOpLs.
-    def visitCmpOpLs(self, ctx):
+    # Visit a parse tree produced by StlParser#Leq.
+    def visitLeq(self, ctx):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by StlParser#CmpOpGte.
-    def visitCmpOpGte(self, ctx):
+    # Visit a parse tree produced by StlParser#Geq.
+    def visitGeq(self, ctx):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by StlParser#CmpOpLse.
-    def visitCmpOpLse(self, ctx):
+    # Visit a parse tree produced by StlParser#Less.
+    def visitLess(self, ctx):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by StlParser#CmpOpGt.
-    def visitCmpOpGt(self, ctx):
+    # Visit a parse tree produced by StlParser#Greater.
+    def visitGreater(self, ctx):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by StlParser#CmpOpEq.
-    def visitCmpOpEq(self, ctx):
+    # Visit a parse tree produced by StlParser#Eq.
+    def visitEq(self, ctx):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by StlParser#ComOpNeq.
-    def visitComOpNeq(self, ctx):
+    # Visit a parse tree produced by StlParser#Neq.
+    def visitNeq(self, ctx):
         return self.visitChildren(ctx)
 
 

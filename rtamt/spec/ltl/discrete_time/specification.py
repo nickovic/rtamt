@@ -185,11 +185,11 @@ class LTLDiscreteTimeSpecification(AbstractSpecification):
         stream = CommonTokenStream(lexer)
         parser = LtlParser(stream)
         parser._listeners = [LTLParserErrorListener()]
-        ctx = parser.ltlfile()
+        ctx = parser.specification_file()
 
         # Create the visitor for the actual spec nodes
         visitor = LTLSpecificationParser(self)
-        self.top = visitor.visitLtlfile(ctx)
+        self.top = visitor.visitSpecification_file(ctx)
 
         # Translate bounded future STL to past STL
         pastifier = LTLPastifier(self.is_pure_python)
