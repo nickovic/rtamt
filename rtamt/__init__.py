@@ -1,12 +1,10 @@
-from rtamt.spec.stl.specification import STLSpecification
-from rtamt.spec.io_stl.specification import STLIOSpecification
-from rtamt.spec.stl_ct.specification import STLCTSpecification
-from rtamt.spec.io_stl_ct.specification import STLIOCTSpecification
 from rtamt.exception.stl.exception import STLException
 from rtamt.exception.stl.exception import STLParseException
 from rtamt.exception.stl.exception import STLOfflineException
 from rtamt.exception.stl.exception import STLSpecificationException
-from rtamt.spec.io_stl.io_interpretation import IOInterpretation
-from rtamt.spec.stl.io_type import StlIOType
-from rtamt.enumerations.options import Language, DeploymentType, Semantics, TimeInterpretation
-
+from rtamt.spec.stl.discrete_time.io_type import StlIOType
+from rtamt.enumerations.options import Language, Semantics, TimeInterpretation
+from rtamt.spec.stl.discrete_time.specification import STLDiscreteTimeSpecification
+from rtamt.spec.stl.discrete_time.specification import STLDiscreteTimeSpecification as STLSpecification
+from rtamt.spec.stl.dense_time.specification import STLDenseTimeSpecification
+from rtamt.spec.stl.dense_time.specification import STLDenseTimeSpecification as STLCTSpecification

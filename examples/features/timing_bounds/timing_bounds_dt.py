@@ -14,7 +14,7 @@ def monitor():
     # We require that the bound is divisible by the sampling period
 
     # # stl
-    spec = rtamt.STLSpecification(1)
+    spec = rtamt.STLDiscreteTimeSpecification(1)
     spec.name = 'HandMadeMonitor'
     spec.declare_var('a', 'float')
     spec.declare_var('c', 'float')
@@ -32,7 +32,7 @@ def monitor():
         print('STL Offline Evaluation Exception: {}'.format(err))
 
     # # stl
-    spec = rtamt.STLSpecification(1)
+    spec = rtamt.STLDiscreteTimeSpecification(1)
     spec.name = 'HandMadeMonitor'
     spec.declare_var('a', 'float')
     spec.declare_var('c', 'float')
@@ -51,7 +51,7 @@ def monitor():
         print('STL Offline Evaluation Exception: {}'.format(err))
 
     # # stl
-    spec = rtamt.STLSpecification(1)
+    spec = rtamt.STLDiscreteTimeSpecification(1)
     spec.name = 'HandMadeMonitor'
     spec.declare_var('a', 'float')
     spec.declare_var('c', 'float')
@@ -71,7 +71,7 @@ def monitor():
         print('STL Offline Evaluation Exception: {}'.format(err))
 
     # # stl
-    spec = rtamt.STLSpecification(1)
+    spec = rtamt.STLDiscreteTimeSpecification(1)
     spec.name = 'HandMadeMonitor'
     spec.declare_var('a', 'float')
     spec.declare_var('c', 'float')

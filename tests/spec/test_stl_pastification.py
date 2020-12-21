@@ -1,5 +1,5 @@
 import unittest
-from rtamt.spec.stl.pastifier import STLPastifier
+from rtamt.spec.stl.discrete_time.pastifier import STLPastifier
 from rtamt.node.stl.constant import Constant
 from rtamt.node.stl.variable import Variable
 from rtamt.node.stl.abs import Abs
@@ -21,12 +21,10 @@ from rtamt.node.stl.historically import Historically
 from rtamt.node.stl.eventually import Eventually
 from rtamt.node.stl.always import Always
 from rtamt.node.stl.since import Since
-from rtamt.node.stl.until import Until
 from rtamt.node.stl.timed_precedes import TimedPrecedes
 from rtamt.node.stl.previous import Previous
 from rtamt.node.stl.next import Next
-from rtamt.interval.interval import Interval
-from rtamt.spec.stl.comp_op import StlComparisonOperator
+from rtamt.spec.stl.discrete_time.comp_op import StlComparisonOperator
 from rtamt.node.stl.timed_always import TimedAlways
 from rtamt.node.stl.timed_eventually import TimedEventually
 from rtamt.node.stl.timed_historically import TimedHistorically

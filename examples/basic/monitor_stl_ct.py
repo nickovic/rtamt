@@ -13,7 +13,7 @@ def monitor():
     b3 = [(15, 0)]
 
     # # stl
-    spec = rtamt.STLCTSpecification(1)
+    spec = rtamt.STLDenseTimeSpecification(1)
     spec.name = 'HandMadeMonitor'
     spec.declare_var('a', 'float')
     spec.declare_var('b', 'float')

@@ -6,7 +6,7 @@ class TestSTLSamplingTimeUnits(unittest.TestCase):
         super(TestSTLSamplingTimeUnits, self).__init__(*args, **kwargs)
 
     def test_example(self):
-        spec = rtamt.STLSpecification(0)
+        spec = rtamt.STLDiscreteTimeSpecification(0)
         spec.name = 'STL Example specification'
 
         self.assertEqual(spec.name, 'STL Example specification', 'Spec name assertion')

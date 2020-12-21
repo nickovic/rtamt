@@ -10,20 +10,14 @@ class Semantics(Enum):
     def __str__(self):
         return self.value
 
-class TimeInterpretation(Enum):
-    DISCRETE_TIME = "discrete-time"
-    DENSE_TIME = "dense-time"
-    def __str__(self):
-        return self.value
-
-class DeploymentType(Enum):
-    ONLINE = "online"
-    OFFLINE = "offline"
-    def __str__(self):
-        return self.value
-
 class Language(Enum):
     PYTHON = "python"
     CPP = "C++"
+    def __str__(self):
+        return self.value
+
+class TimeInterpretation(Enum):
+    DISCRETE = "discrete-time"
+    DENSE = "dense-time"
     def __str__(self):
         return self.value

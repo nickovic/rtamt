@@ -10,7 +10,7 @@ def monitor():
     }
 
     # # stl
-    spec = rtamt.STLSpecification(1)
+    spec = rtamt.STLDiscreteTimeSpecification(1)
     spec.name = 'HandMadeMonitor'
     spec.declare_var('a', 'float')
     spec.declare_var('b', 'float')

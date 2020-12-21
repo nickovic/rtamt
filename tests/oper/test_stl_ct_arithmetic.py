@@ -1,10 +1,10 @@
 import unittest
 
-from rtamt.operation.arithmetic_ct.subtraction_operation import SubtractionOperation
-from rtamt.operation.arithmetic_ct.addition_operation import AdditionOperation
-from rtamt.operation.arithmetic_ct.multiplication_operation import MultiplicationOperation
-from rtamt.operation.arithmetic_ct.division_operation import DivisionOperation
-from rtamt.operation.arithmetic_ct.abs_operation import AbsOperation
+from rtamt.operation.arithmetic.dense_time.subtraction_operation import SubtractionOperation
+from rtamt.operation.arithmetic.dense_time.addition_operation import AdditionOperation
+from rtamt.operation.arithmetic.dense_time import MultiplicationOperation
+from rtamt.operation.arithmetic.dense_time.division_operation import DivisionOperation
+from rtamt.operation.arithmetic.dense_time import AbsOperation
 
 class TestSTLCTArithmetic(unittest.TestCase):
 

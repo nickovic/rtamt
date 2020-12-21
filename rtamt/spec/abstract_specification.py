@@ -9,7 +9,7 @@ import os
 import logging
 import sys
 from abc import ABCMeta, abstractmethod
-from rtamt.exception.stl.exception import STLSpecificationException
+from rtamt.enumerations.options import TimeInterpretation
 
 
 class AbstractSpecification:
@@ -26,8 +26,6 @@ class AbstractSpecification:
         publish_var : String - variable name to be published
         publish_var_field : String - variable field to be published
 
-        sampling_period : int - size of the sampling period in ps (default = 10^12 ps = 1s
-
         var_subspec_dict : dict(String, AbstractNode) - dictionary that maps variable names to the AST
         var_object_dict : dict(String, double) - dictionary that maps variable names to their value
         modules : dict(String,String) - dictionary that maps module paths to module names
@@ -39,14 +37,11 @@ class AbstractSpecification:
 
         top : AbstractNode - pointer to the specification parse tree
 
-        evaluator : AbstractEvaluator - pointer to the object that implements the monitoring algorithm
+        online_evaluator : AbstractEvaluator - pointer to the object that implements the monitoring algorithm
         offline_evaluator : OfflineEvaluator - pointer to the object that implements the monitoring algorithm
 
         is_pure_python : Boolean - flag denoting whether to use pure Python or mixed Python/C++ implementation (default = True)
 
-        update_counter : int
-        previous_time : float
-        sampling_violation_counter : int
 
 
     Methods
@@ -62,7 +57,6 @@ class AbstractSpecification:
         self.US_UNIT = int(1000)
         self.NS_UNIT = int(1)
 
-        self.DEFAULT_TOLERANCE = float(0.1)
 
         self.U = {
             's': self.S_UNIT,
@@ -70,6 +64,8 @@ class AbstractSpecification:
             'us': self.US_UNIT,
             'ns': self.NS_UNIT
         }
+
+        self.time_interpretation = TimeInterpretation.DISCRETE
 
         self.horizon = 0
 
@@ -81,13 +77,6 @@ class AbstractSpecification:
         self.free_vars = set()
         self.publish_var = ''
         self.publish_var_field = ''
-
-        # Default sampling period - 1s
-        self.sampling_period = int(1)
-        self.sampling_period_unit = 's'
-
-        # Default sampling tolerance
-        self.sampling_tolerance = float(0.1)
 
         # Default unit
         self.unit = 's'
@@ -103,22 +92,10 @@ class AbstractSpecification:
 
         self.top = None
 
-        self.evaluator = None
+        self.online_evaluator = None
         self.offline_evaluator = None
 
         self.is_pure_python = is_pure_python
-
-        self.update_counter = int(0)
-        self.previous_time = float(0.0)
-        self.sampling_violation_counter = int(0)
-
-        self.normalize = float(1.0)
-
-    def reset(self):
-        # TODO: add the reset visitor
-        self.update_counter = int(0)
-        self.previous_time = float(0.0)
-        self.sampling_violation_counter = int(0)
 
     # setters and getters
     @property
@@ -162,51 +139,12 @@ class AbstractSpecification:
         self.__top = top
 
     @property
-    def sampling_period(self):
-        return self.__sampling_period
-
-    @sampling_period.setter
-    def sampling_period(self, sampling_period):
-        self.__sampling_period = sampling_period
-
-    @property
-    def sampling_period_unit(self):
-        return self.__sampling_period_unit
-
-    @sampling_period_unit.setter
-    def sampling_period_unit(self, sampling_period_unit):
-        self.__sampling_period_unit = sampling_period_unit
-
-    @property
-    def sampling_violation_counter(self):
-        return self.__sampling_violation_counter
-
-    @sampling_violation_counter.setter
-    def sampling_violation_counter(self, sampling_violation_counter):
-        self.__sampling_violation_counter = sampling_violation_counter
-
-    @property
     def unit(self):
         return self.__unit
 
     @unit.setter
     def unit(self, unit):
         self.__unit = unit
-
-    def set_sampling_period(self, sampling_period=int(1), unit='s', tolerance=float(0.1)):
-        self.sampling_period = sampling_period
-        self.sampling_period_unit = unit
-
-        if tolerance < 0.0 or tolerance > 1.0:
-            raise STLSpecificationException
-
-        self.sampling_tolerance = tolerance
-
-    def get_sampling_period(self):
-        return self.sampling_period * self.U[self.sampling_period_unit]
-
-    def get_sampling_frequency(self):
-        return 1e12 * 1/self.sampling_period
 
     @property
     def publish_var(self):
@@ -247,14 +185,6 @@ class AbstractSpecification:
     @modules.setter
     def modules(self, modules):
         self.__modules = modules
-
-    @property
-    def update_counter(self):
-        return self.__update_counter
-
-    @update_counter.setter
-    def update_counter(self, update_counter):
-        self.__update_counter = update_counter
 
     def add_input_var(self, input_var):
         self.in_vars.add(input_var)
@@ -309,7 +239,11 @@ class AbstractSpecification:
         pass
 
     @abstractmethod
-    def offline(self, args):
+    def evaluate(self, args):
+        pass
+
+    @abstractmethod
+    def reset(self):
         pass
 
 

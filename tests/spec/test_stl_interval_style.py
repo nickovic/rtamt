@@ -6,10 +6,10 @@ class TestSTLIntervalStyle(unittest.TestCase):
         super(TestSTLIntervalStyle, self).__init__(*args, **kwargs)
 
     def test_interval_style(self):
-        spec_comma = rtamt.STLSpecification()
+        spec_comma = rtamt.STLDiscreteTimeSpecification()
         spec_comma.name = 'STL Comma Style'
 
-        spec_column = rtamt.STLSpecification()
+        spec_column = rtamt.STLDiscreteTimeSpecification()
         spec_column.name = 'STL Column Style'
 
         spec_comma.declare_var('req', 'float')

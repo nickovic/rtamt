@@ -10,7 +10,7 @@ def monitor():
     }
 
     # # stl
-    spec = rtamt.STLSpecification()
+    spec = rtamt.STLDiscreteTimeSpecification()
     spec.name = 'HandMadeMonitor'
     spec.declare_var('a', 'float')
     spec.declare_var('b', 'float')
@@ -31,7 +31,7 @@ def monitor():
         rob = spec.update(aData[0], [('a', aData[1]), ('b', bData[1])])
         print('time='+str(aData[0])+' rob='+str(rob))
 
-    spec = rtamt.STLSpecification(language=rtamt.Language.CPP)
+    spec = rtamt.STLDiscreteTimeSpecification(language=rtamt.Language.CPP)
     spec.name = 'HandMadeMonitor'
     spec.declare_var('a', 'float')
     spec.declare_var('b', 'float')
@@ -52,7 +52,7 @@ def monitor():
         rob = spec.update(aData[0], [('a', aData[1]), ('b', bData[1])])
         print('time=' + str(aData[0]) + ' rob=' + str(rob))
 
-    spec = rtamt.STLSpecification(deployment_type=rtamt.DeploymentType.OFFLINE)
+    spec = rtamt.STLDiscreteTimeSpecification(deployment_type=rtamt.DeploymentType.OFFLINE)
     spec.name = 'HandMadeMonitor'
     spec.declare_var('a', 'float')
     spec.declare_var('b', 'float')
