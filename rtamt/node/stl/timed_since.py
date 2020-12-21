@@ -1,4 +1,4 @@
-from rtamt.node.stl.binary_node import BinaryNode
+from rtamt.node.binary_node import BinaryNode
 from rtamt.node.stl.time_bound import TimeBound
 
 class TimedSince(BinaryNode, TimeBound):
