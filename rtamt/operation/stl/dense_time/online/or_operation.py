@@ -1,7 +1,7 @@
 from rtamt.operation.abstract_operation import AbstractOperation
-import rtamt.operation.stl.dense_time.intersection as intersect
+import rtamt.operation.stl.dense_time.online.intersection as intersect
 
-class AndOperation(AbstractOperation):
+class OrOperation(AbstractOperation):
     def __init__(self):
         self.left = []
         self.right = []
@@ -12,7 +12,7 @@ class AndOperation(AbstractOperation):
         left_list = self.left + args[0]
         right_list = self.right + args[1]
 
-        out, last, left, right = intersect.intersection(left_list, right_list, intersect.conjunction)
+        out, last, left, right = intersect.intersection(left_list, right_list, intersect.disjunction)
 
         self.left = left
         self.right = right
@@ -28,8 +28,11 @@ class AndOperation(AbstractOperation):
         out = []
         left_list = args[0]
         right_list = args[1]
+        self.left = self.left + left_list
+        self.right = self.right + right_list
 
-        out, last, a, b = intersect.intersection(left_list, right_list, intersect.conjunction)
+        out, last, left, right = intersect.intersection(self.left, self.right, intersect.disjunction)
+
         if last:
             out.append(last)
 

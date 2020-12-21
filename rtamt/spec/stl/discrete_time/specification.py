@@ -14,7 +14,7 @@ from rtamt.parser.stl.error.parser_error_listener import STLParserErrorListener
 from rtamt.exception.stl.exception import STLParseException
 
 from rtamt.spec.stl.discrete_time.pastifier import STLPastifier
-from rtamt.evaluator.stl.online_evaluator import STLEvaluator
+from rtamt.evaluator.stl.online_evaluator import STLOnlineEvaluator
 from rtamt.spec.stl.discrete_time.reset import STLReset
 from rtamt.enumerations.options import *
 
@@ -95,7 +95,7 @@ class STLDiscreteTimeSpecification(LTLDiscreteTimeSpecification):
         self.top = past
 
         # Initialize the online_evaluator
-        self.online_evaluator = STLEvaluator(self)
+        self.online_evaluator = STLOnlineEvaluator(self)
         self.top.accept(self.online_evaluator)
 
         self.normalize = float(self.U[self.unit]) / float(self.U[self.sampling_period_unit])
