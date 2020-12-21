@@ -1,27 +1,23 @@
 import operator
 from rtamt.enumerations.options import *
 from rtamt.exception.stl.exception import STLNotImplementedException
-from rtamt.spec.stl.discrete_time.visitor import STLVisitor
+from rtamt.spec.ltl.discrete_time.visitor import LTLVisitor
 
 
-class STLEvaluator(STLVisitor):
+class LTLEvaluator(LTLVisitor):
     def __init__(self, spec):
         self.spec = spec
         generator = None
 
         if self.spec.language == Language.PYTHON:
             if self.spec.time_interpretation == TimeInterpretation.DISCRETE:
-                from rtamt.evaluator.stl.discrete_time.online.python.online_discrete_time_python_monitor import \
-                    STLOnlineDiscreteTimePythonMonitor
-                generator = STLOnlineDiscreteTimePythonMonitor()
-            elif self.spec.time_interpretation == TimeInterpretation.DENSE:
-                from rtamt.evaluator.stl.dense_time.online.python.online_dense_time_python_monitor import \
-                    STLOnlineDenseTimePythonMonitor
-                generator = STLOnlineDenseTimePythonMonitor()
+                from rtamt.evaluator.ltl.discrete_time.online.python.online_discrete_time_python_monitor import \
+                    LTLOnlineDiscreteTimePythonMonitor
+                generator = LTLOnlineDiscreteTimePythonMonitor()
         elif self.spec.language == Language.CPP:
-            from rtamt.evaluator.stl.discrete_time.online.cpp.online_discrete_time_cpp_monitor import \
-                STLOnlineDiscreteTimeCPPMonitor
-            generator = STLOnlineDiscreteTimeCPPMonitor()
+            from rtamt.evaluator.ltl.discrete_time.online.cpp.online_discrete_time_cpp_monitor import \
+                LTLOnlineDiscreteTimeCPPMonitor
+            generator = LTLOnlineDiscreteTimeCPPMonitor()
 
         if generator is None:
             raise STLNotImplementedException('The monitor with discrete_time interptetation,'
@@ -247,65 +243,6 @@ class STLEvaluator(STLVisitor):
 
         monitor = self.node_monitor_dict[node]
         out_sample = monitor.update(in_sample_1, in_sample_2)
-
-        return out_sample
-
-    def visitTimedPrecedes(self, node, args):
-        in_sample_1 = self.visit(node.children[0], args)
-        in_sample_2 = self.visit(node.children[1], args)
-
-        monitor = self.node_monitor_dict[node]
-        out_sample = monitor.update(in_sample_1, in_sample_2)
-
-        return out_sample
-
-    def visitTimedUntil(self, node, args):
-        in_sample_1 = self.visit(node.children[0], args)
-        in_sample_2 = self.visit(node.children[1], args)
-
-        monitor = self.node_monitor_dict[node]
-        out_sample = monitor.update(in_sample_1, in_sample_2)
-
-        return out_sample
-
-    def visitTimedAlways(self, node, args):
-        in_sample = self.visit(node.children[0], args)
-
-        monitor = self.node_monitor_dict[node]
-        out_sample = monitor.update(in_sample)
-
-        return out_sample
-
-    def visitTimedEventually(self, node, args):
-        in_sample = self.visit(node.children[0], args)
-
-        monitor = self.node_monitor_dict[node]
-        out_sample = monitor.update(in_sample)
-
-        return out_sample
-
-    def visitTimedSince(self, node, args):
-        in_sample_1 = self.visit(node.children[0], args)
-        in_sample_2 = self.visit(node.children[1], args)
-
-        monitor = self.node_monitor_dict[node]
-        out_sample = monitor.update(in_sample_1, in_sample_2)
-
-        return out_sample
-
-    def visitTimedOnce(self, node, args):
-        in_sample = self.visit(node.children[0], args)
-
-        monitor = self.node_monitor_dict[node]
-        out_sample = monitor.update(in_sample)
-
-        return out_sample
-
-    def visitTimedHistorically(self, node, args):
-        in_sample = self.visit(node.children[0], args)
-
-        monitor = self.node_monitor_dict[node]
-        out_sample = monitor.update(in_sample)
 
         return out_sample
 

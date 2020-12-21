@@ -24,16 +24,10 @@ from rtamt.node.ltl.fall import Fall
 from rtamt.node.ltl.constant import Constant
 from rtamt.node.ltl.next import Next
 from rtamt.node.ltl.previous import Previous
-from rtamt.node.stl.timed_since import TimedSince
-from rtamt.node.stl.timed_once import TimedOnce
-from rtamt.node.stl.timed_historically import TimedHistorically
-from rtamt.node.stl.timed_eventually import TimedEventually
-from rtamt.node.stl.timed_always import TimedAlways
-from rtamt.node.stl.timed_until import TimedUntil
 
 NOT_IMPLEMENTED = "You should implement this."
 
-class STLVisitor:
+class LTLVisitor:
     __metaclass__ = ABCMeta
 
     def visit(self, element, args):
@@ -90,18 +84,6 @@ class STLVisitor:
             out = self.visitPrevious(element, args)
         elif isinstance(element, Next):
             out = self.visitNext(element, args)
-        elif isinstance(element, TimedUntil):
-            out = self.visitTimedUntil(element, args)
-        elif isinstance(element, TimedAlways):
-            out = self.visitTimedAlways(element, args)
-        elif isinstance(element, TimedEventually):
-            out = self.visitTimedEventually(element, args)
-        elif isinstance(element, TimedSince):
-            out = self.visitTimedSince(element, args)
-        elif isinstance(element, TimedOnce):
-            out = self.visitTimedOnce(element, args)
-        elif isinstance(element, TimedHistorically):
-            out = self.visitTimedHistorically(element, args)
         else:
             out = self.visitDefault(element, args)
         return out
@@ -201,34 +183,6 @@ class STLVisitor:
 
     @abstractmethod
     def visitNext(self, element, args):
-        raise NotImplementedError(NOT_IMPLEMENTED)
-
-    @abstractmethod
-    def visitTimedPrecedes(self, element, args):
-        raise NotImplementedError(NOT_IMPLEMENTED)
-
-    @abstractmethod
-    def visitTimedOnce(self, element, args):
-        raise NotImplementedError(NOT_IMPLEMENTED)
-
-    @abstractmethod
-    def visitTimedHistorically(self, element, args):
-        raise NotImplementedError(NOT_IMPLEMENTED)
-
-    @abstractmethod
-    def visitTimedSince(self, element, args):
-        raise NotImplementedError(NOT_IMPLEMENTED)
-
-    @abstractmethod
-    def visitTimedAlways(self, element, args):
-        raise NotImplementedError(NOT_IMPLEMENTED)
-
-    @abstractmethod
-    def visitTimedEventually(self, element, args):
-        raise NotImplementedError(NOT_IMPLEMENTED)
-
-    @abstractmethod
-    def visitTimedUntil(self, element, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod

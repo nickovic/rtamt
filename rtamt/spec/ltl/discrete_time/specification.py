@@ -6,20 +6,20 @@ from antlr4.InputStream import InputStream
 
 from rtamt.spec.abstract_specification import AbstractSpecification
 
-from rtamt.parser.stl.StlLexer import StlLexer
-from rtamt.parser.stl.StlParser import StlParser
-from rtamt.spec.stl.discrete_time.specification_parser import STLSpecificationParser
+from rtamt.parser.ltl.LtlLexer import LtlLexer
+from rtamt.parser.ltl.LtlParser import LtlParser
+from rtamt.spec.ltl.discrete_time.specification_parser import LTLSpecificationParser
 
-from rtamt.parser.stl.error.parser_error_listener import STLParserErrorListener
+from rtamt.parser.ltl.error.parser_error_listener import LTLParserErrorListener
 from rtamt.exception.stl.exception import STLParseException
 
-from rtamt.spec.stl.discrete_time.pastifier import STLPastifier
-from rtamt.evaluator.stl.online_evaluator import STLEvaluator
-from rtamt.spec.stl.discrete_time.reset import STLReset
+from rtamt.spec.ltl.discrete_time.pastifier import LTLPastifier
+from rtamt.evaluator.ltl.online_evaluator import LTLEvaluator
+from rtamt.spec.ltl.discrete_time.reset import LTLReset
 from rtamt.enumerations.options import *
 
 
-class STLDiscreteTimeSpecification(AbstractSpecification):
+class LTLDiscreteTimeSpecification(AbstractSpecification):
     """A class used as a container for STL specifications
 
     Attributes:
@@ -46,25 +46,10 @@ class STLDiscreteTimeSpecification(AbstractSpecification):
 
     def __init__(self, is_pure_python=True, semantics=Semantics.STANDARD, language=Language.PYTHON):
         """Constructor for STL Specification"""
-        super(STLDiscreteTimeSpecification, self).__init__(is_pure_python)
-        self.name = 'STL Specification'
+        super(LTLDiscreteTimeSpecification, self).__init__(is_pure_python)
+        self.name = 'LTL Specification'
 
-        self.DEFAULT_TOLERANCE = float(0.1)
-
-        # Default sampling period - 1s
-        self.sampling_period = int(1)
-        self.sampling_period_unit = 's'
-
-        # Default sampling tolerance
-        self.sampling_tolerance = float(0.1)
-
-        self.update_counter = int(0)
-        self.previous_time = float(0.0)
-        self.sampling_violation_counter = int(0)
-
-        self.normalize = float(1.0)
-
-        self.reseter = STLReset()
+        self.reseter = LTLReset()
         self.semantics = semantics
         self.language = language
 
@@ -196,27 +181,25 @@ class STLDiscreteTimeSpecification(AbstractSpecification):
 
         entire_spec = self.modular_spec + self.spec
         input_stream = InputStream(entire_spec)
-        lexer = StlLexer(input_stream)
+        lexer = LtlLexer(input_stream)
         stream = CommonTokenStream(lexer)
-        parser = StlParser(stream)
-        parser._listeners = [STLParserErrorListener()]
-        ctx = parser.stlfile()
+        parser = LtlParser(stream)
+        parser._listeners = [LTLParserErrorListener()]
+        ctx = parser.ltlfile()
 
         # Create the visitor for the actual spec nodes
-        visitor = STLSpecificationParser(self)
-        self.top = visitor.visitStlfile(ctx)
+        visitor = LTLSpecificationParser(self)
+        self.top = visitor.visitLtlfile(ctx)
 
         # Translate bounded future STL to past STL
-        pastifier = STLPastifier(self.is_pure_python)
+        pastifier = LTLPastifier(self.is_pure_python)
         self.top.accept(pastifier)
         past = pastifier.pastify(self.top)
         self.top = past
 
         # Initialize the online_evaluator
-        self.online_evaluator = STLEvaluator(self)
+        self.online_evaluator = LTLEvaluator(self)
         self.top.accept(self.online_evaluator)
-
-        self.normalize = float(self.U[self.unit]) / float(self.U[self.sampling_period_unit])
 
 
     def update(self, timestamp, list_inputs):
@@ -224,14 +207,6 @@ class STLDiscreteTimeSpecification(AbstractSpecification):
         # inputs - list of [var name, var value] pairs
         # Example:
         # update(3.48, [['a', 2.2], ['b', 3.3]])
-
-        # Check if the difference between two consecutive timestamps is between
-        # the accepted tolerance - if not, increase the violation counter
-        if self.update_counter > 0:
-            duration = (timestamp - self.previous_time) * self.normalize
-            tolerance = self.sampling_period * self.sampling_tolerance
-            if duration < self.sampling_period - tolerance or duration > self.sampling_period + tolerance:
-                self.sampling_violation_counter = self.sampling_violation_counter + 1
 
         # update the value of every input variable
         for inp in list_inputs:
@@ -248,9 +223,6 @@ class STLDiscreteTimeSpecification(AbstractSpecification):
         # The evaluation done wrt the discrete counter (logical time)
         out = self.online_evaluator.evaluate(self.top, [])
 
-        self.previous_time = timestamp
-        self.update_counter = self.update_counter + 1
-
         return out
 
     def evaluate(self, *args, **kargs):
@@ -262,54 +234,6 @@ class STLDiscreteTimeSpecification(AbstractSpecification):
         self.update_counter = int(0);
         self.previous_time = float(0.0);
         self.sampling_violation_counter = int(0);
-
-
-    @property
-    def sampling_period(self):
-        return self.__sampling_period
-
-    @sampling_period.setter
-    def sampling_period(self, sampling_period):
-        self.__sampling_period = sampling_period
-
-    @property
-    def sampling_period_unit(self):
-        return self.__sampling_period_unit
-
-    @sampling_period_unit.setter
-    def sampling_period_unit(self, sampling_period_unit):
-        self.__sampling_period_unit = sampling_period_unit
-
-    @property
-    def sampling_violation_counter(self):
-        return self.__sampling_violation_counter
-
-    @sampling_violation_counter.setter
-    def sampling_violation_counter(self, sampling_violation_counter):
-        self.__sampling_violation_counter = sampling_violation_counter
-
-    def set_sampling_period(self, sampling_period=int(1), unit='s', tolerance=float(0.1)):
-        self.sampling_period = sampling_period
-        self.sampling_period_unit = unit
-
-        if tolerance < 0.0 or tolerance > 1.0:
-            raise STLSpecificationException
-
-        self.sampling_tolerance = tolerance
-
-    def get_sampling_period(self):
-        return self.sampling_period * self.U[self.sampling_period_unit]
-
-    def get_sampling_frequency(self):
-        return 1e12 * 1/self.sampling_period
-
-    @property
-    def update_counter(self):
-        return self.__update_counter
-
-    @update_counter.setter
-    def update_counter(self, update_counter):
-        self.__update_counter = update_counter
 
 
     # def offline(self, dataset):

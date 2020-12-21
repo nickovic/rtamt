@@ -17,7 +17,7 @@ class Language(Enum):
         return self.value
 
 class TimeInterpretation(Enum):
-    DISCRETE = "discrete-time"
+    DISCRETE = "discrete_time"
     DENSE = "dense-time"
     def __str__(self):
         return self.value

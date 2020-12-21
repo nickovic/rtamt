@@ -1,7 +1,7 @@
 import operator
 
-import rtamt.spec.stl.discrete_time.specification
-from rtamt.spec.stl.discrete_time.visitor import STLVisitor
+import rtamt.spec.ltl.discrete_time.specification
+from rtamt.spec.ltl.discrete_time.visitor import LTLVisitor
 
 class STLEvaluator(STLVisitor):
 

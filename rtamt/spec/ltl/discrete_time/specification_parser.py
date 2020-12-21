@@ -7,12 +7,9 @@ Created on Tue Jul 23 21:38:29 2019
 import logging
 import operator
 
-from decimal import Decimal
-from fractions import Fraction
 
 from rtamt import Language
-from rtamt.parser.stl.StlParserVisitor import StlParserVisitor
-from rtamt.interval.interval import Interval
+from rtamt.parser.ltl.LtlParserVisitor import LtlParserVisitor
 
 from rtamt.node.ltl.variable import Variable
 from rtamt.node.ltl.predicate import Predicate
@@ -26,10 +23,6 @@ from rtamt.node.ltl.iff import Iff
 from rtamt.node.ltl.xor import Xor
 from rtamt.node.stl.timed_always import TimedAlways
 from rtamt.node.stl.timed_eventually import TimedEventually
-from rtamt.node.stl.timed_historically import TimedHistorically
-from rtamt.node.stl.timed_once import TimedOnce
-from rtamt.node.stl.timed_since import TimedSince
-from rtamt.node.stl.timed_until import TimedUntil
 from rtamt.node.ltl.always import Always
 from rtamt.node.ltl.eventually import Eventually
 from rtamt.node.ltl.once import Once
@@ -47,7 +40,7 @@ from rtamt.node.ltl.constant import Constant
 from rtamt.exception.stl.exception import STLParseException
 
 
-class STLSpecificationParser(StlParserVisitor):
+class LTLSpecificationParser(LtlParserVisitor):
     
     def __init__(self, spec):
         self.ops = set()
@@ -78,7 +71,7 @@ class STLSpecificationParser(StlParserVisitor):
     def ops(self, ops):
         self.__ops = ops
 
-    def visitIdCompInt(self, ctx):
+    def visitExprPredicate(self, ctx):
         child1 = self.visit(ctx.expression(0))
         child2 = self.visit(ctx.expression(1))
         op_type = self.str_to_op_type(ctx.comparisonOp().getText())
@@ -281,19 +274,9 @@ class STLSpecificationParser(StlParserVisitor):
         node.horizon = horizon
         return node
 
-    def visitExprEvExpr(self, ctx):
+    def visitExprEv(self, ctx):
         child = self.visit(ctx.expression())
-        interval = self.visit(ctx.interval())
-        horizon = child.horizon + interval.end
-        node = TimedEventually(child, interval.begin, interval.end, self.spec.is_pure_python)
-        node.horizon = horizon
-        return node
-
-    def visitExprUntimedEvExpr(self, ctx):
-        child = self.visit(ctx.expression())
-        horizon = child.horizon
         node = Eventually(child, self.spec.is_pure_python)
-        node.horizon = horizon
         return node
 
     def visitExprPrevious(self, ctx):
@@ -308,44 +291,31 @@ class STLSpecificationParser(StlParserVisitor):
         node.horizon = child.horizon + 1
         return node
 
-    def visitExpreOnceExpr(self, ctx):
+    def visitExpreOnce(self, ctx):
         child = self.visit(ctx.expression())
-        if ctx.interval() == None:
-            node = Once(child, self.spec.is_pure_python)
-        else:
-            interval = self.visit(ctx.interval())
-            node = TimedOnce(child, interval.begin, interval.end, self.spec.is_pure_python)
+        node = Once(child, self.spec.is_pure_python)
         node.horizon = child.horizon
         return node
 
-    def visitExprHistExpr(self, ctx):
+    def visitExprHist(self, ctx):
         child = self.visit(ctx.expression())
-        if ctx.interval() == None:
-            node = Historically(child, self.spec.is_pure_python)
-        else:
-            interval = self.visit(ctx.interval())
-            node = TimedHistorically(child, interval.begin, interval.end, self.spec.is_pure_python)
+        node = Historically(child, self.spec.is_pure_python)
         node.horizon = child.horizon
         return node
 
-    def visitExprSinceExpr(self, ctx):
+    def visitExprSince(self, ctx):
         child1 = self.visit(ctx.expression(0))
         child2 = self.visit(ctx.expression(1))
-        if ctx.interval() == None:
-            node = Since(child1, child2, self.spec.is_pure_python)
-        else:
-            interval = self.visit(ctx.interval())
-            node = TimedSince(child1, child2, interval.begin, interval.end, self.spec.is_pure_python)
+        node = Since(child1, child2, self.spec.is_pure_python)
         node.horizon = max(child1.horizon, child2.horizon)
         return node
 
-    def visitExprUntilExpr(self, ctx):
+    def visitExprUntil(self, ctx):
         # Parse children
         child1 = self.visit(ctx.expression(0))
         child2 = self.visit(ctx.expression(1))
-        interval = self.visit(ctx.interval())
 
-        node = TimedUntil(child1, child2, interval.begin, interval.end, self.spec.is_pure_python)
+        node = Until(child1, child2, self.spec.is_pure_python)
         node.horizon = max(child1.horizon, child2.horizon) + interval.end
         return node
 
@@ -354,8 +324,8 @@ class STLSpecificationParser(StlParserVisitor):
         child2 = self.visit(ctx.expression(1))
         interval = self.visit(ctx.interval())
 
-        left = TimedAlways(child1, 0, interval.end, self.spec.is_pure_python)
-        right = TimedUntil(child1, child2, interval.begin, interval.end, self.spec.is_pure_python)
+        left = Always(child1, 0, interval.end, self.spec.is_pure_python)
+        right = Until(child1, child2, self.spec.is_pure_python)
         node = Disjunction(left, right)
 
         node.horizon = max(child1.horizon, child2.horizon) + interval.end
@@ -368,7 +338,7 @@ class STLSpecificationParser(StlParserVisitor):
         return self.visit(ctx.expression())
 
     def visitAssertion(self, ctx):
-        out = self.visit(ctx.topExpression())
+        out = self.visit(ctx.expression())
 
         implicit = False
         if not ctx.Identifier():
@@ -412,12 +382,11 @@ class STLSpecificationParser(StlParserVisitor):
         self.spec.free_vars.discard(id_head)
         return out
 
-    def visitStlfile(self, ctx):
-        return self.visit(ctx.stlSpecification())
+    def visitLtlfile(self, ctx):
+        return self.visit(ctx.ltlSpecification())
 
-    def visitStlSpecification(self, ctx):
+    def visitLtlSpecification(self, ctx):
         return self.visitChildren(ctx)
-        # return self.visit(ctx.assertion())
 
     def visitSpecification(self, ctx):
         self.visitChildren(ctx)
@@ -425,87 +394,6 @@ class STLSpecificationParser(StlParserVisitor):
         # by the user
         if not ctx.Identifier() is None:
             self.spec.name = ctx.Identifier().getText()
-
-    def visitIntervalTimeLiteral(self, ctx):
-        text = ctx.literal().getText()
-        out = Fraction(Decimal(text))
-
-        if ctx.unit() == None:
-            # default time unit is seconds - conversion of the bound to ps
-            unit = self.spec.unit
-        else:
-            unit = ctx.unit().getText()
-
-        out = out * self.spec.U[unit]
-
-        sp = Fraction(self.spec.get_sampling_period())
-
-        out = out / sp
-
-        if out.numerator % out.denominator > 0:
-            raise STLParseException('The STL operator bound must be a multiple of the sampling period')
-
-        out = int(out / self.spec.sampling_period)
-
-        return out
-
-    def visitConstantTimeLiteral(self, ctx):
-        const_name = ctx.Identifier().getText()
-
-        if const_name not in self.spec.const_val_dict:
-            raise STLParseException('Bound {} not declared'.format(const_name))
-
-        val = self.spec.const_val_dict[const_name]
-
-        out = Fraction(Decimal(val))
-
-        if ctx.unit() == None:
-            # default time unit is seconds - conversion of the bound to ps
-            unit = self.spec.unit
-        else:
-            unit = ctx.unit().getText()
-
-        out = out * self.spec.U[unit]
-
-        sp = Fraction(self.spec.get_sampling_period())
-
-        out = out / sp
-
-        if out.numerator % out.denominator > 0:
-            raise STLParseException('The STL operator bound must be a multiple of the sampling period')
-
-        out = int(out / self.spec.sampling_period)
-
-        return out
-
-    def visitIntervalFloatTimeLiteral(self, ctx):
-        text = ctx.literal().getText()
-        out = Fraction(Decimal(text))
-
-        if ctx.unit() == None:
-            # default time unit is seconds - conversion of the bound to ps
-            unit = self.spec.unit
-        else:
-            unit = ctx.unit().getText()
-
-        out = out * self.spec.U[unit]
-
-        sp = Fraction(self.spec.get_sampling_period())
-
-        out = out / sp
-
-        if out.numerator % out.denominator > 0:
-            raise STLParseException('The STL operator bound must be a multiple of the sampling period')
-
-        out = int(out / self.spec.sampling_period)
-
-        return out
-
-    def visitInterval(self, ctx):
-        begin = self.visit(ctx.intervalTime(0))
-        end = self.visit(ctx.intervalTime(1))
-        interval = Interval(begin, end)
-        return interval
 
     def str_to_op_type(self, input):
         if input == "<":
