@@ -33,7 +33,6 @@ class LTLVisitor:
     def visit(self, element, args):
         out = None
 
-
         if isinstance(element, Predicate):
             out = self.visitPredicate(element, args)
         elif isinstance(element, Variable):
