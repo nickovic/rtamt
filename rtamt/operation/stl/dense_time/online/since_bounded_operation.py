@@ -1,8 +1,8 @@
 from rtamt.operation.abstract_operation import AbstractOperation
-from rtamt.operation.stl.dense_time.since_operation import SinceOperation
-from rtamt.operation.stl.dense_time.once_bounded_operation import OnceBoundedOperation
-from rtamt.operation.stl.dense_time.historically_bounded_operation import HistoricallyBoundedOperation
-from rtamt.operation.stl.dense_time.and_operation import AndOperation
+from rtamt.operation.stl.dense_time.online.since_operation import SinceOperation
+from rtamt.operation.stl.dense_time.online.once_bounded_operation import OnceBoundedOperation
+from rtamt.operation.stl.dense_time.online.historically_bounded_operation import HistoricallyBoundedOperation
+from rtamt.operation.stl.dense_time.online.and_operation import AndOperation
 
 class SinceBoundedOperation(AbstractOperation):
     def __init__(self, begin, end):

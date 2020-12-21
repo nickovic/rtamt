@@ -1,7 +1,7 @@
 from rtamt.operation.abstract_operation import AbstractOperation
-import rtamt.operation.stl.dense_time.intersection as intersect
+import rtamt.operation.stl.dense_time.online.intersection as intersect
 
-class DivisionOperation(AbstractOperation):
+class MultiplicationOperation(AbstractOperation):
     def __init__(self):
         self.left = []
         self.right = []
@@ -11,8 +11,7 @@ class DivisionOperation(AbstractOperation):
         self.left = self.left + left_list
         self.right = self.right + right_list
 
-        out, last, left, right = intersect.intersection(self.left, self.right, intersect.division)
-
+        out, last, left, right = intersect.intersection(self.left, self.right, intersect.multiplication)
 
         self.left = left
         self.right = right
@@ -29,7 +28,7 @@ class DivisionOperation(AbstractOperation):
         self.left = self.left + left_list
         self.right = self.right + right_list
 
-        out, last, left, right = intersect.intersection(self.left, self.right, intersect.division)
+        out, last, left, right = intersect.intersection(self.left, self.right, intersect.multiplication)
         out.append(last)
 
         return out

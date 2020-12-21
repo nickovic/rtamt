@@ -1,9 +1,9 @@
 import unittest
 from rtamt.operation.stl.dense_time import AndOperation
-from rtamt.operation.stl.dense_time.not_operation import NotOperation
+from rtamt.operation.stl.dense_time.online.not_operation import NotOperation
 from rtamt.operation.stl.dense_time import OrOperation
 from rtamt.operation.stl.dense_time import ImpliesOperation
-from rtamt.operation.stl.dense_time.iff_operation import IffOperation
+from rtamt.operation.stl.dense_time.online.iff_operation import IffOperation
 from rtamt.operation.stl.dense_time import XorOperation
 from rtamt.operation.stl.dense_time import AlwaysOperation
 from rtamt.operation.stl.dense_time import HistoricallyOperation

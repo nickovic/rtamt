@@ -1,28 +1,28 @@
 from rtamt.spec.stl.discrete_time.visitor import STLVisitor
 from rtamt.exception.stl.exception import STLNotImplementedException
-from rtamt.operation.stl.dense_time.online.predicate_operation import PredicateOperation
-from rtamt.operation.arithmetic.dense_time.online.addition_operation import AdditionOperation
-from rtamt.operation.arithmetic.dense_time.online.multiplication_operation import MultiplicationOperation
-from rtamt.operation.arithmetic.dense_time.online.subtraction_operation import SubtractionOperation
-from rtamt.operation.arithmetic.dense_time.online.division_operation import DivisionOperation
-from rtamt.operation.stl.dense_time.online.and_operation import AndOperation
-from rtamt.operation.stl.dense_time.online.or_operation import OrOperation
-from rtamt.operation.stl.dense_time.online.implies_operation import ImpliesOperation
-from rtamt.operation.stl.dense_time.online.iff_operation import IffOperation
-from rtamt.operation.stl.dense_time.online.xor_operation import XorOperation
-from rtamt.operation.stl.dense_time.online.since_operation import SinceOperation
-from rtamt.operation.arithmetic.dense_time.online.abs_operation import AbsOperation
-from rtamt.operation.stl.dense_time.online.not_operation import NotOperation
-from rtamt.operation.stl.dense_time.online.once_operation import OnceOperation
-from rtamt.operation.stl.dense_time.online.historically_operation import HistoricallyOperation
-from rtamt.operation.stl.dense_time.online.always_operation import AlwaysOperation
-from rtamt.operation.stl.dense_time.online.constant_operation import ConstantOperation
-from rtamt.operation.stl.dense_time.online.once_bounded_operation import OnceBoundedOperation
-from rtamt.operation.stl.dense_time.online.historically_bounded_operation import HistoricallyBoundedOperation
-from rtamt.operation.stl.dense_time.online.since_bounded_operation import SinceBoundedOperation
+from rtamt.operation.stl.dense_time.offline.predicate_operation import PredicateOperation
+from rtamt.operation.arithmetic.dense_time.offline.addition_operation import AdditionOperation
+from rtamt.operation.arithmetic.dense_time.offline.multiplication_operation import MultiplicationOperation
+from rtamt.operation.arithmetic.dense_time.offline.subtraction_operation import SubtractionOperation
+from rtamt.operation.arithmetic.dense_time.offline.division_operation import DivisionOperation
+from rtamt.operation.stl.dense_time.offline.and_operation import AndOperation
+from rtamt.operation.stl.dense_time.offline.or_operation import OrOperation
+from rtamt.operation.stl.dense_time.offline.implies_operation import ImpliesOperation
+from rtamt.operation.stl.dense_time.offline.iff_operation import IffOperation
+from rtamt.operation.stl.dense_time.offline.xor_operation import XorOperation
+from rtamt.operation.stl.dense_time.offline.since_operation import SinceOperation
+from rtamt.operation.arithmetic.dense_time.offline.abs_operation import AbsOperation
+from rtamt.operation.stl.dense_time.offline.not_operation import NotOperation
+from rtamt.operation.stl.dense_time.offline.once_operation import OnceOperation
+from rtamt.operation.stl.dense_time.offline.historically_operation import HistoricallyOperation
+from rtamt.operation.stl.dense_time.offline.always_operation import AlwaysOperation
+from rtamt.operation.stl.dense_time.offline.constant_operation import ConstantOperation
+from rtamt.operation.stl.dense_time.offline.once_bounded_operation import OnceBoundedOperation
+from rtamt.operation.stl.dense_time.offline.historically_bounded_operation import HistoricallyBoundedOperation
+from rtamt.operation.stl.dense_time.offline.since_bounded_operation import SinceBoundedOperation
 
 
-class STLOnlineDenseTimePythonMonitor(STLVisitor):
+class STLOfflineDenseTimePythonMonitor(STLVisitor):
     def __init__(self):
         self.node_monitor_dict = dict()
         

@@ -34,6 +34,9 @@ def monitor():
     rob = spec.update(['a', a3], ['b', b3])
     print('rob: ' + str(rob))
 
+    rob = spec.evaluate(['a', a3], ['b', b3])
+    print('rob: ' + str(rob))
+
     # # eval
     # aTraj = dataSet['a']
     # bTraj = dataSet['b']
