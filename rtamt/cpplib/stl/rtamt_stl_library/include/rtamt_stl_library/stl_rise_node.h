@@ -1,11 +1,9 @@
 #ifndef STL_RISE_H
 #define STL_RISE_H
 
-#include <rtamt_stl_library/stl_node.h>
-
 namespace stl_library {
 
-class StlRiseNode : public StlNode {
+class StlRiseNode {
     private:
         double prev_in;
 

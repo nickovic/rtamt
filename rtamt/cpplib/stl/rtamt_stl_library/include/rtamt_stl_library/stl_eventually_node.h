@@ -1,11 +1,9 @@
 #ifndef STL_EVENTUALLY_NODE_H
 #define STL_EVENTUALLY_NODE_H
 
-#include <rtamt_stl_library/stl_node.h>
-
 namespace stl_library {
 
-class StlEventuallyNode : public StlNode {
+class StlEventuallyNode {
     private:
         double prev_out;
 

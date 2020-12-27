@@ -2,8 +2,10 @@ from rtamt.spec.stl.discrete_time.visitor import STLVisitor
 from rtamt.exception.stl.exception import STLNotImplementedException
 from rtamt.spec.stl.discrete_time.comp_op import StlComparisonOperator as CompOp
 from rtamt.lib.rtamt_stl_library_wrapper.stl_comp_op import StlComparisonOperator
-from rtamt.lib.rtamt_stl_library_wrapper.stl_predicate_node import PredicateOperation
+from rtamt.lib.rtamt_stl_library_wrapper.stl_combinatorial_binary_node import CombinatorialBinaryOperation
+from rtamt.lib.rtamt_stl_library_wrapper.stl_not_node import NotOperation
 from rtamt.lib.rtamt_stl_library_wrapper.stl_addition_node import AdditionOperation
+from rtamt.lib.rtamt_stl_library_wrapper.stl_predicate_node import PredicateOperation
 from rtamt.lib.rtamt_stl_library_wrapper.stl_multiplication_node import MultiplicationOperation
 from rtamt.lib.rtamt_stl_library_wrapper.stl_subtraction_node import SubtractionOperation
 from rtamt.lib.rtamt_stl_library_wrapper.stl_division_node import DivisionOperation
@@ -14,7 +16,6 @@ from rtamt.lib.rtamt_stl_library_wrapper.stl_iff_node import IffOperation
 from rtamt.lib.rtamt_stl_library_wrapper.stl_xor_node import XorOperation
 from rtamt.lib.rtamt_stl_library_wrapper.stl_since_node import SinceOperation
 from rtamt.lib.rtamt_stl_library_wrapper.stl_abs_node import AbsOperation
-from rtamt.lib.rtamt_stl_library_wrapper.stl_not_node import NotOperation
 from rtamt.lib.rtamt_stl_library_wrapper.stl_rise_node import RiseOperation
 from rtamt.lib.rtamt_stl_library_wrapper.stl_fall_node import FallOperation
 from rtamt.lib.rtamt_stl_library_wrapper.stl_once_node import OnceOperation

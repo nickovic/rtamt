@@ -9,7 +9,6 @@
 #include <boost/python/module.hpp>
 #include <boost/python/wrapper.hpp>
 
-#include <rtamt_stl_library/stl_node.h>
 #include <rtamt_stl_library/stl_historically_node.h>
 
 using namespace boost::python;
@@ -17,9 +16,8 @@ using namespace stl_library;
 
 BOOST_PYTHON_MODULE(stl_historically_node)
 {
-    class_<StlHistoricallyNode, bases<StlNode> >("HistoricallyOperation")
-        .def("update", &StlHistoricallyNode::update)
+    class_<StlHistoricallyNode>("HistoricallyOperation")
+        .def("update", static_cast<double (StlHistoricallyNode::*)(double)>(&StlHistoricallyNode::update))
         .def("reset", &StlHistoricallyNode::reset)
-        .def("addNewInput", static_cast<void (StlHistoricallyNode::*)(double)>(&StlHistoricallyNode::addNewInput))
     ;
 }

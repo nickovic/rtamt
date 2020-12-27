@@ -14,7 +14,7 @@ StlCombinatorialBinaryNode::StlCombinatorialBinaryNode(StlOperatorType type) {
 void StlCombinatorialBinaryNode::reset() {
 }
 
-double StlCombinatorialBinaryNode::update() {
+double StlCombinatorialBinaryNode::update(double left, double right) {
     double val;
     
     switch(type) {

@@ -1,11 +1,9 @@
 #ifndef STL_PREVIOUS_H
 #define STL_PREVIOUS_H
 
-#include <rtamt_stl_library/stl_node.h>
-
 namespace stl_library {
 
-class StlPreviousNode : public StlNode {
+class StlPreviousNode {
     private:
         double prev_in;
 

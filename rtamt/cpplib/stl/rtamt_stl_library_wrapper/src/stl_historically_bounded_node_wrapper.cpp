@@ -9,7 +9,6 @@
 #include <boost/python/module.hpp>
 #include <boost/python/wrapper.hpp>
 
-#include <rtamt_stl_library/stl_node.h>
 #include <rtamt_stl_library/stl_historically_bounded_node.h>
 
 using namespace boost::python;
@@ -17,9 +16,8 @@ using namespace stl_library;
 
 BOOST_PYTHON_MODULE(stl_historically_bounded_node)
 {
-    class_<StlHistoricallyBoundedNode, bases<StlNode> >("HistoricallyBoundedOperation", init<int,int>())
-        .def("update", &StlHistoricallyBoundedNode::update)
+    class_<StlHistoricallyBoundedNode>("HistoricallyBoundedOperation", init<int,int>())
+        .def("update", static_cast<double (StlHistoricallyBoundedNode::*)(double)>(&StlHistoricallyBoundedNode::update))
         .def("reset", &StlHistoricallyBoundedNode::reset)
-        .def("addNewInput", static_cast<void (StlHistoricallyBoundedNode::*)(double)>(&StlHistoricallyBoundedNode::addNewInput))
     ;
 }

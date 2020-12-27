@@ -1,12 +1,11 @@
 #ifndef STL_COMBINATORIAL_BINARY_NODE_H
 #define STL_COMBINATORIAL_BINARY_NODE_H
 
-#include <rtamt_stl_library/stl_node.h>
 #include <rtamt_stl_library/stl_operator_type.h>
 
 namespace stl_library {
 
-class StlCombinatorialBinaryNode : public StlNode {
+class StlCombinatorialBinaryNode {
     protected:
         StlOperatorType type;
 

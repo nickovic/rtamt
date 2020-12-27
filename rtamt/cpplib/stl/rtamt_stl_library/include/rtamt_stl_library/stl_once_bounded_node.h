@@ -1,12 +1,11 @@
 #ifndef STL_ONCE_BOUNDED_NODE_H
 #define STL_ONCE_BOUNDED_NODE_H
 
-#include <rtamt_stl_library/stl_node.h>
 #include <boost/circular_buffer.hpp>
 
 namespace stl_library {
 
-class StlOnceBoundedNode : public StlNode {
+class StlOnceBoundedNode {
     private:
         int begin;
         int end;

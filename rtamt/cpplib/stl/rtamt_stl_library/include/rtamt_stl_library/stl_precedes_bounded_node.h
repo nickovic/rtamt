@@ -1,12 +1,11 @@
 #ifndef STL_PRECEDES_BOUNDED_NODE_H
 #define STL_PRECEDES_BOUNDED_NODE_H
 
-#include <rtamt_stl_library/stl_node.h>
 #include <boost/circular_buffer.hpp>
 
 namespace stl_library {
 
-class StlPrecedesBoundedNode : public StlNode {
+class StlPrecedesBoundedNode {
     private:
         int begin;
         int end;

@@ -1,12 +1,11 @@
 #ifndef STL_ONCE_NODE_H
 #define STL_ONCE_NODE_H
 
-#include <rtamt_stl_library/stl_node.h>
 #include <boost/circular_buffer.hpp>
 
 namespace stl_library {
 
-class StlOnceNode : public StlNode {
+class StlOnceNode {
     private:
         double prev_out;
 

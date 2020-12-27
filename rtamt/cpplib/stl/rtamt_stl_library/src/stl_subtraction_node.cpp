@@ -14,7 +14,7 @@ void StlSubtractionNode::reset() {
 double StlSubtractionNode::update(double left, double right) {
     double out;
 
-    out = in[0] - in[1];
+    out = left - right;
 
     return out;
 }

@@ -1,12 +1,11 @@
 #ifndef STL_PREDICATE_NODE_H
 #define STL_PREDICATE_NODE_H
 
-#include <rtamt_stl_library/stl_node.h>
 #include <rtamt_stl_library/stl_comp_op.h>
 
 namespace stl_library {
 
-class StlPredicateNode : public StlNode {
+class StlPredicateNode {
     private:
         StlComparisonOperator op;
 

@@ -1,12 +1,11 @@
 #ifndef STL_SINCE_NODE_H
 #define STL_SINCE_NODE_H
 
-#include <rtamt_stl_library/stl_node.h>
 #include <boost/circular_buffer.hpp>
 
 namespace stl_library {
 
-class StlSinceNode : public StlNode {
+class StlSinceNode {
     private:
         double prev_out;
 

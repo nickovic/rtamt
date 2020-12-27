@@ -1,11 +1,10 @@
 #ifndef STL_ABS_NODE_H
 #define STL_ABS_NODE_H
 
-#include <rtamt_stl_library/stl_node.h>
 
 namespace stl_library {
 
-class StlAbsNode : public StlNode {
+class StlAbsNode {
     public:
         StlAbsNode();
         double update(double sample);
