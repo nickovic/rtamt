@@ -60,6 +60,7 @@ class STLDenseTimeSpecification(STLDiscreteTimeSpecification):
         self.offline_evaluator = STLOfflineEvaluator(self)
         self.top.accept(self.online_evaluator)
 
+    # Online
     def update(self, *args, **kargs):
         # list_inputs:
         # example [['p', [[1.1, 2.2], [1.3, 2.5], [1.7, 2]]], ['q', [[1, 2], [1.5, 3.5]]]
@@ -80,6 +81,7 @@ class STLDenseTimeSpecification(STLDiscreteTimeSpecification):
     #     self.var_object_dict = self.var_object_dict.fromkeys(self.var_object_dict, [])
     #     return out
 
+    # Offline
     def evaluate(self, *args, **kargs):
          for arg in args:
              var_name = arg[0]
