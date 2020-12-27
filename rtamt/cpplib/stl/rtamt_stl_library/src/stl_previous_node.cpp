@@ -13,21 +13,10 @@ void StlPreviousNode::reset() {
     prev_in = std::numeric_limits<double>::infinity();
 }
 
-void StlPreviousNode::addNewInput(int i, double sample) {
-    if (i != 0)
-        return;
-    
-   in = sample;
-}
-
-void StlPreviousNode::addNewInput(double sample) {
-    addNewInput(0,sample);
-}
-
-double StlPreviousNode::update() {
+double StlPreviousNode::update(double sample) {
     double out;
     out = prev_in;
-    prev_in = in;
+    prev_in = sample;
     
     return out;
 }

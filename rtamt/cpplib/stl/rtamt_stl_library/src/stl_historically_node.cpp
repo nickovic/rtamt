@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 #include <rtamt_stl_library/stl_historically_node.h>
 #include <algorithm>
 #include <limits>
@@ -19,21 +13,10 @@ void StlHistoricallyNode::reset() {
     prev_out = std::numeric_limits<double>::infinity();
 }
 
-void StlHistoricallyNode::addNewInput(int i, double sample) {
-    if (i != 0)
-        return;
-    
-    in = sample;
-}
-
-void StlHistoricallyNode::addNewInput(double sample) {
-    addNewInput(0,sample);
-}
-
-double StlHistoricallyNode::update() {
+double StlHistoricallyNode::update(double sample) {
     double out;
     
-    out = std::min(in, prev_out);
+    out = std::min(sample, prev_out);
 
     prev_out = out;
     

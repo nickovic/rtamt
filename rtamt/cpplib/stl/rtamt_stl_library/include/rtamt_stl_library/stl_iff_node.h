@@ -1,16 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/* 
- * File:   stl_iff_node.h
- * Author: nickovic
- *
- * Created on August 5, 2019, 3:09 PM
- */
-
 #ifndef STL_IFF_NODE_H
 #define STL_IFF_NODE_H
 

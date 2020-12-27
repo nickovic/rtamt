@@ -14,36 +14,24 @@ StlCombinatorialBinaryNode::StlCombinatorialBinaryNode(StlOperatorType type) {
 void StlCombinatorialBinaryNode::reset() {
 }
 
-void StlCombinatorialBinaryNode::addNewInput(int i, double sample) {
-    if (i > 1 or i < 0)
-        return;
-    
-    in[i] = sample;
-}
-
-void StlCombinatorialBinaryNode::addNewInput(double left, double right) {
-    addNewInput(0, left);
-    addNewInput(1, right);
-}
-
 double StlCombinatorialBinaryNode::update() {
     double val;
     
     switch(type) {
         case AND:
-            val = std::min(in[0], in[1]);
+            val = std::min(left, right);
             break;
         case OR:
-            val = std::max(in[0], in[1]);
+            val = std::max(left, right);
             break;
         case IMPLIES:
-            val = std::max(-in[0], in[1]);
+            val = std::max(-left, right);
             break;
         case IFF:
-            val = -std::abs(in[0] - in[1]);
+            val = -std::abs(left - right);
             break;
         case XOR:
-            val = std::abs(in[0] - in[1]);
+            val = std::abs(left - right);
             break;
         default:
             val = nan("");

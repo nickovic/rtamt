@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 #include <rtamt_stl_library/stl_since_bounded_node.h>
 #include <algorithm>
 #include <limits>
@@ -40,20 +34,11 @@ void StlSinceBoundedNode::reset() {
     }
 }
 
-void StlSinceBoundedNode::addNewInput(int i, double sample) {
-    if (i < 0 || i > 1)
-        return;
-
-    this->buffer[i].push_back(sample);
-}
-
-void StlSinceBoundedNode::addNewInput(double left, double right) {
-    addNewInput(0, left);
-    addNewInput(1, right);
-}
-
-double StlSinceBoundedNode::update() {
+double StlSinceBoundedNode::update(double left, double right) {
     double out;
+
+    this->buffer[0].push_back(left);
+    this->buffer[1].push_back(right);
     
     out = - std::numeric_limits<double>::infinity();
     int i;

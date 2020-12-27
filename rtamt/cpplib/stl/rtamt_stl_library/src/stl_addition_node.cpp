@@ -11,22 +11,10 @@ StlAdditionNode::StlAdditionNode() {
 void StlAdditionNode::reset() {
 }
 
-void StlAdditionNode::addNewInput(int i, double sample) {
-    if (i > 1 or i < 0)
-        return;
-    
-    in[i] = sample;
-}
-
-void StlAdditionNode::addNewInput(double left, double right) {
-    addNewInput(0, left);
-    addNewInput(1, right);
-}
-
-double StlAdditionNode::update() {
+double StlAdditionNode::update(double left, double right) {
     double out;
 
-    out = in[0] + in[1];
+    out = left + right;
 
     return out;
 }

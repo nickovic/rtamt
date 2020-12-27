@@ -11,19 +11,7 @@ StlSubtractionNode::StlSubtractionNode() {
 void StlSubtractionNode::reset() {
 }
 
-void StlSubtractionNode::addNewInput(int i, double sample) {
-    if (i > 1 or i < 0)
-        return;
-    
-    in[i] = sample;
-}
-
-void StlSubtractionNode::addNewInput(double left, double right) {
-    addNewInput(0, left);
-    addNewInput(1, right);
-}
-
-double StlSubtractionNode::update() {
+double StlSubtractionNode::update(double left, double right) {
     double out;
 
     out = in[0] - in[1];

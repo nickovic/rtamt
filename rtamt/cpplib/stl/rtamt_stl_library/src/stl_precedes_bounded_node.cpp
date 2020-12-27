@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 #include <rtamt_stl_library/stl_precedes_bounded_node.h>
 #include <algorithm>
 #include <limits>
@@ -40,22 +34,11 @@ void StlPrecedesBoundedNode::reset() {
     }
 }
 
-void StlPrecedesBoundedNode::addNewInput(int i, double sample) {
-    if (i < 0 || i > 1)
-        return;
-    
-    in = sample;
-    
-    this->buffer[i].push_back(in);
-}
-
-void StlPrecedesBoundedNode::addNewInput(double left, double right) {
-    addNewInput(0, left);
-    addNewInput(1, right);
-}
-
-double StlPrecedesBoundedNode::update() {
+double StlPrecedesBoundedNode::update(double left, double right) {
     double out;
+
+    this->buffer[0].push_back(left);
+    this->buffer[1].push_back(right);
     
     out = - std::numeric_limits<double>::infinity();
     int i;

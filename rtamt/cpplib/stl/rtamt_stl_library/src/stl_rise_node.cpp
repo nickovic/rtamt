@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 #include <rtamt_stl_library/stl_rise_node.h>
 #include <algorithm>
 #include <limits>
@@ -19,22 +13,11 @@ void StlRiseNode::reset() {
     prev_in = - std::numeric_limits<double>::infinity();
 }
 
-void StlRiseNode::addNewInput(int i, double sample) {
-    if (i != 0)
-        return;
-    
-    in = sample;
-}
-
-void StlRiseNode::addNewInput(double sample) {
-    addNewInput(0,sample);
-}
-
-double StlRiseNode::update() {
+double StlRiseNode::update(double sample) {
     double out;
     
-    out = std::min(in, - prev_in);
-    prev_in = in;
+    out = std::min(sample, - prev_in);
+    prev_in = sample;
     
     return out;
 }

@@ -1,20 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/* 
- * File:   stl_predicate_node.h
- * Author: nickovic
- *
- * Created on July 8, 2019, 3:27 PM
- */
-
 #ifndef STL_PREDICATE_NODE_H
 #define STL_PREDICATE_NODE_H
 
-#include <rtamt_stl_library/stl_sample.h>
 #include <rtamt_stl_library/stl_node.h>
 #include <rtamt_stl_library/stl_comp_op.h>
 
@@ -24,16 +10,9 @@ class StlPredicateNode : public StlNode {
     private:
         StlComparisonOperator op;
 
-        double in[2];
-
-        void addNewInput(int i, double msg);
-        
-        
-        
     public:
         StlPredicateNode(StlComparisonOperator op);
-        double update();
-        void addNewInput(double left, double right);
+        double update(double left, double right);
         void reset();
 };
 
