@@ -10,11 +10,11 @@ def monitor():
     }
 
     # # stl
-    spec = rtamt.STLSpecification(1)
-    spec.name = 'HandMadeMonitor'
+    spec = rtamt.LTLSpecification(language=rtamt.Language.PYTHON)
+    spec.name = 'LTL discrete-time online Python monitor'
     spec.declare_var('a', 'float')
     spec.declare_var('b', 'float')
-    spec.spec = 'a + b >= - 2'
+    spec.spec = 'prev(next(a + b)) >= - 2'
 
     try:
         spec.parse()

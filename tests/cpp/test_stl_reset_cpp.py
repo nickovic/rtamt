@@ -7,7 +7,7 @@ class TestSTLReset(unittest.TestCase):
         super(TestSTLReset, self).__init__(*args, **kwargs)
 
     def test_constant(self):
-        spec = STLDiscreteTimeSpecification(0)
+        spec = STLDiscreteTimeSpecification()
         spec.declare_var('out', 'float')
         spec.spec = 'out = 5'
         spec.parse()
@@ -24,7 +24,7 @@ class TestSTLReset(unittest.TestCase):
         self.assertEqual(5, out, 'Constant reset assertion')
 
     def test_variable(self):
-        spec = STLDiscreteTimeSpecification(0)
+        spec = STLDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = req'
@@ -42,7 +42,7 @@ class TestSTLReset(unittest.TestCase):
         self.assertEqual(3.3, out, 'Variable reset assertion')
 
     def test_abs(self):
-        spec = STLDiscreteTimeSpecification(0)
+        spec = STLDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = abs(req)'
@@ -60,7 +60,7 @@ class TestSTLReset(unittest.TestCase):
         self.assertEqual(3.3, out, 'Abs reset assertion')
 
     def test_addition(self):
-        spec = STLDiscreteTimeSpecification(0)
+        spec = STLDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
@@ -79,7 +79,7 @@ class TestSTLReset(unittest.TestCase):
         self.assertEqual(3.3 + 4.3, out, 'Addition reset assertion')
 
     def test_subtraction(self):
-        spec = STLDiscreteTimeSpecification(0)
+        spec = STLDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')

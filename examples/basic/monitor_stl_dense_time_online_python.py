@@ -13,10 +13,9 @@ def monitor():
     b3 = [(15, 0)]
 
     # # stl
-    spec = rtamt.STLDiscreteTimeSpecification(time_interpretation=rtamt.TimeInterpretation.DENSE_TIME)
-    spec.name = 'HandMadeMonitor'
+    spec = rtamt.STLDenseTimeSpecification()
+    spec.name = 'STL dense-time specification'
     spec.declare_var('a', 'float')
-    spec.declare_var('b', 'float')
     spec.declare_var('c', 'float')
     spec.spec = 'c=a>=2'
     try:
@@ -33,15 +32,6 @@ def monitor():
 
     rob = spec.update(['a', a3], ['b', b3])
     print('rob: ' + str(rob))
-
-    # # eval
-    # aTraj = dataSet['a']
-    # bTraj = dataSet['b']
-    # for i in range(len(dataSet['a'])):
-    #     aData = aTraj[i]
-    #     bData = bTraj[i]
-    #     rob = spec.update(aData[0], [('a', aData[1]), ('b', bData[1])])
-    #     print('time='+str(aData[0])+' rob='+str(rob))
 
 if __name__ == '__main__':
     # Process arguments

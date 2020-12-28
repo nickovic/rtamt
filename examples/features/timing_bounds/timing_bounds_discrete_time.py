@@ -14,7 +14,7 @@ def monitor():
     # We require that the bound is divisible by the sampling period
 
     # # stl
-    spec = rtamt.STLDiscreteTimeSpecification(1)
+    spec = rtamt.STLDiscreteTimeSpecification()
     spec.name = 'HandMadeMonitor'
     spec.declare_var('a', 'float')
     spec.declare_var('c', 'float')
@@ -24,15 +24,12 @@ def monitor():
     spec.spec = 'c = always[0:1](a>=0)'
     try:
         spec.parse()
-        robustness = spec.offline(dataSet)
-        print('Robustness: {}'.format(robustness))
+        print('Succesfully parsed.')
     except rtamt.STLParseException as err:
         print('STL Parse Exception: {}'.format(err))
-    except rtamt.STLOfflineException as err:
-        print('STL Offline Evaluation Exception: {}'.format(err))
 
     # # stl
-    spec = rtamt.STLDiscreteTimeSpecification(1)
+    spec = rtamt.STLDiscreteTimeSpecification()
     spec.name = 'HandMadeMonitor'
     spec.declare_var('a', 'float')
     spec.declare_var('c', 'float')
@@ -42,16 +39,12 @@ def monitor():
     spec.spec = 'c = always[0:100ms](a>=0)'
     try:
         spec.parse()
-        robustness = spec.offline(dataSet)
-        print('Robustness: {}'.format(robustness))
-
+        print('Succesfully parsed.')
     except rtamt.STLParseException as err:
         print('STL Parse Exception: {}'.format(err))
-    except rtamt.STLOfflineException as err:
-        print('STL Offline Evaluation Exception: {}'.format(err))
 
     # # stl
-    spec = rtamt.STLDiscreteTimeSpecification(1)
+    spec = rtamt.STLDiscreteTimeSpecification()
     spec.name = 'HandMadeMonitor'
     spec.declare_var('a', 'float')
     spec.declare_var('c', 'float')
@@ -62,16 +55,12 @@ def monitor():
     spec.set_sampling_period(10,'ms')
     try:
         spec.parse()
-        robustness = spec.offline(dataSet)
-        print('Robustness: {}'.format(robustness))
-
+        print('Succesfully parsed.')
     except rtamt.STLParseException as err:
         print('STL Parse Exception: {}'.format(err))
-    except rtamt.STLOfflineException as err:
-        print('STL Offline Evaluation Exception: {}'.format(err))
 
     # # stl
-    spec = rtamt.STLDiscreteTimeSpecification(1)
+    spec = rtamt.STLDiscreteTimeSpecification()
     spec.name = 'HandMadeMonitor'
     spec.declare_var('a', 'float')
     spec.declare_var('c', 'float')
@@ -82,13 +71,9 @@ def monitor():
     spec.set_sampling_period(10, 'ms')
     try:
         spec.parse()
-        robustness = spec.offline(dataSet)
-        print('Robustness: {}'.format(robustness))
-
+        print('Succesfully parsed.')
     except rtamt.STLParseException as err:
         print('STL Parse Exception: {}'.format(err))
-    except rtamt.STLOfflineException as err:
-        print('STL Offline Evaluation Exception: {}'.format(err))
 
 if __name__ == '__main__':
     # Process arguments

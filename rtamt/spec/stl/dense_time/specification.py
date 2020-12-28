@@ -15,7 +15,8 @@ from rtamt.evaluator.stl.online_evaluator import STLOnlineEvaluator
 from rtamt.evaluator.stl.offline_evaluator import STLOfflineEvaluator
 from rtamt.spec.stl.dense_time.specification_parser import STLDenseTimeSpecificationParser
 
-from rtamt.enumerations.options import TimeInterpretation
+from rtamt.enumerations.options import *
+
 
 class STLDenseTimeSpecification(STLDiscreteTimeSpecification):
     """A class used as a container for STL continuous time specifications
@@ -24,9 +25,9 @@ class STLDenseTimeSpecification(STLDiscreteTimeSpecification):
     Attributes:
 
     """
-    def __init__(self,is_pure_python=True):
+    def __init__(self,is_pure_python=True, semantics=Semantics.STANDARD, language=Language.PYTHON):
         """Constructor for STL Specification"""
-        super(STLDenseTimeSpecification, self).__init__(is_pure_python)
+        super(STLDenseTimeSpecification, self).__init__(is_pure_python, semantics, language)
         self.visitor = STLDenseTimeSpecificationParser(self)
         self.time_interpretation = TimeInterpretation.DENSE
 
@@ -43,11 +44,11 @@ class STLDenseTimeSpecification(STLDiscreteTimeSpecification):
         stream = CommonTokenStream(lexer)
         parser = StlParser(stream)
         parser._listeners = [STLParserErrorListener()]
-        ctx = parser.stlfile()
+        ctx = parser.specification_file()
 
         # Create the visitor for the actual spec nodes
         visitor = STLSpecificationParser(self)
-        self.top = visitor.visitStlfile(ctx)
+        self.top = visitor.visitSpecification_file(ctx)
 
         # Translate bounded future STL to past STL
         pastifier = STLPastifier(self.is_pure_python)

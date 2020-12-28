@@ -8,7 +8,7 @@ def monitor():
     data1 = read_csv('example.csv')
 
 
-    spec = rtamt.STLIOCTSpecification(1)
+    spec = rtamt.STLDenseTimeSpecification(semantics=rtamt.Semantics.STANDARD)
     spec.name = 'Example 1'
     spec.declare_var('req', 'float')
     spec.declare_var('gnt', 'float')
@@ -16,7 +16,6 @@ def monitor():
     spec.set_var_io_type('req', 'input')
     spec.set_var_io_type('gnt', 'output')
     spec.spec = 'out = always((req>=3) implies (eventually[0:5.1s](gnt>=3)))'
-    spec.iosem = 'standard'
     try:
         spec.parse()
     except rtamt.STLParseException as err:
@@ -24,12 +23,12 @@ def monitor():
         sys.exit()
 
 
-    rob = spec.offline(['req', data1[' req']], ['gnt', data1[' gnt']])
+    rob = spec.evaluate(['req', data1[' req']], ['gnt', data1[' gnt']])
 
     # print('Example (a) - standard robustness: {}'.format(rob[len(rob)-1][1]))
     print('Example (a) - standard robustness: {}'.format(rob))
 
-    spec = rtamt.STLIOCTSpecification(1)
+    spec = rtamt.STLDenseTimeSpecification(semantics=rtamt.Semantics.STANDARD)
     spec.name = 'Example 1'
     spec.declare_var('req', 'float')
     spec.declare_var('gnt', 'float')
@@ -37,7 +36,6 @@ def monitor():
     spec.set_var_io_type('req', 'input')
     spec.set_var_io_type('gnt', 'output')
     spec.spec = 'out = always((req>=3) implies (eventually[0:5100ms](gnt>=3)))'
-    spec.iosem = 'standard'
     try:
         spec.parse()
     except rtamt.STLParseException as err:
@@ -45,7 +43,7 @@ def monitor():
         sys.exit()
 
 
-    rob = spec.offline(['req', data1[' req']], ['gnt', data1[' gnt']])
+    rob = spec.evaluate(['req', data1[' req']], ['gnt', data1[' gnt']])
 
     # print('Example (a) - standard robustness: {}'.format(rob[len(rob)-1][1]))
     print('Example (a) - standard robustness: {}'.format(rob))
