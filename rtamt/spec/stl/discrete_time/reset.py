@@ -3,6 +3,10 @@ from rtamt.spec.stl.discrete_time.visitor import STLVisitor
 
 class STLReset(LTLReset, STLVisitor):
 
+
+    def visit(self, element, args):
+        STLVisitor.visit(element, args)
+
     def visitTimedPrecedes(self, element, args):
         self.visit(element.children[0], args)
         self.visit(element.children[1], args)

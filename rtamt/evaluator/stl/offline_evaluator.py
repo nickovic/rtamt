@@ -39,17 +39,24 @@ class STLOfflineEvaluator(STLVisitor):
 
         monitor = self.node_monitor_dict[node]
         out_sample = monitor.update(in_sample_1, in_sample_2)
+        out = []
 
         if (self.spec.semantics == Semantics.OUTPUT_ROBUSTNESS and not node.out_vars):
-            out_sample = out_sample*float('inf')
+            for sample in out_sample:
+                out.append([sample[0], sample[1]*float('inf')])
         elif(self.spec.semantics == Semantics.INPUT_VACUITY and not node.in_vars):
-            out_sample = 0
+            for sample in out_sample:
+                out.append([sample[0], 0.0])
         elif(self.spec.semantics == Semantics.INPUT_ROBUSTNESS and not node.in_vars):
-            out_sample = out_sample*float('inf')
+            for sample in out_sample:
+                out.append([sample[0], sample[1] * float('inf')])
         elif(self.spec.semantics == Semantics.OUTPUT_VACUITY and not node.out_vars):
-            out_sample = 0
+            for sample in out_sample:
+                out.append([sample[0], 0])
+        else:
+            out = out_sample
 
-        return out_sample
+        return out
 
     def visitVariable(self, node, args):
         var = self.spec.var_object_dict[node.var]

@@ -15,7 +15,7 @@ def monitor():
     # Example (a) - standard robustness
     #
     # # #
-    spec = rtamt.STLIOCTSpecification(1)
+    spec = rtamt.STLDenseTimeSpecification(semantics=rtamt.Semantics.STANDARD)
     spec.name = 'Example 1'
     spec.declare_var('req', 'float')
     spec.declare_var('gnt', 'float')
@@ -23,7 +23,6 @@ def monitor():
     spec.set_var_io_type('req', 'input')
     spec.set_var_io_type('gnt', 'output')
     spec.spec = 'out = always((req>=3) implies (eventually[0:5](gnt>=3)))'
-    spec.iosem = 'standard'
     try:
         spec.parse()
     except rtamt.STLParseException as err:
@@ -31,7 +30,7 @@ def monitor():
         sys.exit()
 
 
-    rob = spec.offline(['req', data1[' req']], ['gnt', data1[' gnt']])
+    rob = spec.evaluate(['req', data1[' req']], ['gnt', data1[' gnt']])
 
     # print('Example (a) - standard robustness: {}'.format(rob[len(rob)-1][1]))
     print('Example (a) - standard robustness: {}'.format(rob))
@@ -41,7 +40,7 @@ def monitor():
     # Example (a) - output robustness
     #
     # # #
-    spec = rtamt.STLIOCTSpecification(1)
+    spec = rtamt.STLDenseTimeSpecification(semantics=rtamt.Semantics.OUTPUT_ROBUSTNESS)
     spec.name = 'Example 1'
     spec.declare_var('req', 'float')
     spec.declare_var('gnt', 'float')
@@ -49,14 +48,13 @@ def monitor():
     spec.set_var_io_type('req', 'input')
     spec.set_var_io_type('gnt', 'output')
     spec.spec = 'out = always((req>=3) implies (eventually[0:5](gnt>=3)))'
-    spec.iosem = 'output-robustness'
     try:
         spec.parse()
     except rtamt.STLParseException as err:
         print('STL Parse Exception: {}'.format(err))
         sys.exit()
 
-    rob = spec.offline(['req', data1[' req']], ['gnt', data1[' gnt']])
+    rob = spec.evaluate(['req', data1[' req']], ['gnt', data1[' gnt']])
 
     print('Example (a) - output robustness: {}'.format(rob))
 
@@ -65,7 +63,7 @@ def monitor():
     # Example (a) - input vacuity
     #
     # # # #
-    spec = rtamt.STLIOCTSpecification(1)
+    spec = rtamt.STLDenseTimeSpecification(semantics=rtamt.Semantics.INPUT_VACUITY)
     spec.name = 'Example 1'
     spec.declare_var('req', 'float')
     spec.declare_var('gnt', 'float')
@@ -73,14 +71,13 @@ def monitor():
     spec.set_var_io_type('req', 'input')
     spec.set_var_io_type('gnt', 'output')
     spec.spec = 'out = always((req >= 3) implies eventually[0:5] (gnt >= 3))'
-    spec.iosem = 'input-vacuity'
     try:
         spec.parse()
     except rtamt.STLParseException as err:
         print('STL Parse Exception: {}'.format(err))
         sys.exit()
 
-    rob = spec.offline(['req', data1[' req']], ['gnt', data1[' gnt']])
+    rob = spec.evaluate(['req', data1[' req']], ['gnt', data1[' gnt']])
 
     # print('Example (a) - input vacuity: {}'.format(rob[len(rob)-1][1]))
     print('Example (a) - input vacuity: {}'.format(rob))
@@ -89,7 +86,7 @@ def monitor():
     # Example (b) - standard robustness
     #
     # # #
-    spec = rtamt.STLIOCTSpecification(1)
+    spec = rtamt.STLDenseTimeSpecification(semantics=rtamt.Semantics.STANDARD)
     spec.name = 'Example 1'
     spec.declare_var('req', 'float')
     spec.declare_var('gnt', 'float')
@@ -97,14 +94,13 @@ def monitor():
     spec.set_var_io_type('req', 'input')
     spec.set_var_io_type('gnt', 'output')
     spec.spec = 'out = always((req >= 3) implies eventually[0:5] (gnt >= 3))'
-    spec.iosem = 'standard'
     try:
         spec.parse()
     except rtamt.STLParseException as err:
         print('STL Parse Exception: {}'.format(err))
         sys.exit()
 
-    rob = spec.offline(['req', data2[' req']], ['gnt', data2[' gnt']])
+    rob = spec.evaluate(['req', data2[' req']], ['gnt', data2[' gnt']])
 
     print('Example (b) - standard robustness: {}'.format(rob))
 
@@ -113,7 +109,7 @@ def monitor():
     # Example (b) - output robustness
     #
     # # #
-    spec = rtamt.STLIOCTSpecification(1)
+    spec = rtamt.STLDenseTimeSpecification(semantics=rtamt.Semantics.OUTPUT_ROBUSTNESS)
     spec.name = 'Example 1'
     spec.declare_var('req', 'float')
     spec.declare_var('gnt', 'float')
@@ -121,14 +117,13 @@ def monitor():
     spec.set_var_io_type('req', 'input')
     spec.set_var_io_type('gnt', 'output')
     spec.spec = 'out = always((req >= 3) implies eventually[0:5] (gnt >= 3))'
-    spec.iosem = 'output-robustness'
     try:
         spec.parse()
     except rtamt.STLParseException as err:
         print('STL Parse Exception: {}'.format(err))
         sys.exit()
 
-    rob = spec.offline(['req', data2[' req']], ['gnt', data2[' gnt']])
+    rob = spec.evaluate(['req', data2[' req']], ['gnt', data2[' gnt']])
 
     print('Example (b) - output robustness: {}'.format(rob))
 
@@ -137,7 +132,7 @@ def monitor():
     # Example (b) - input vacuity
     #
     # # #
-    spec = rtamt.STLIOCTSpecification(1)
+    spec = rtamt.STLDenseTimeSpecification(semantics=rtamt.Semantics.INPUT_VACUITY)
     spec.name = 'Example 1'
     spec.declare_var('req', 'float')
     spec.declare_var('gnt', 'float')
@@ -145,14 +140,13 @@ def monitor():
     spec.set_var_io_type('req', 'input')
     spec.set_var_io_type('gnt', 'output')
     spec.spec = 'out = always((req >= 3) implies eventually[0:5] (gnt >= 3))'
-    spec.iosem = 'input-vacuity'
     try:
         spec.parse()
     except rtamt.STLParseException as err:
         print('STL Parse Exception: {}'.format(err))
         sys.exit()
 
-    rob = spec.offline(['req', data2[' req']], ['gnt', data2[' gnt']])
+    rob = spec.evaluate(['req', data2[' req']], ['gnt', data2[' gnt']])
 
     print('Example (b) - input vacuity: {}'.format(rob))
 
@@ -161,7 +155,7 @@ def monitor():
     # Example (c) - standard robustness
     #
     # # #
-    spec = rtamt.STLIOCTSpecification(1)
+    spec = rtamt.STLDenseTimeSpecification(semantics=rtamt.Semantics.STANDARD)
     spec.name = 'Example 1'
     spec.declare_var('req', 'float')
     spec.declare_var('gnt', 'float')
@@ -169,14 +163,13 @@ def monitor():
     spec.set_var_io_type('req', 'input')
     spec.set_var_io_type('gnt', 'output')
     spec.spec = 'out = always((req >= 3) implies eventually[0:5] (gnt >= 3))'
-    spec.iosem = 'standard'
     try:
         spec.parse()
     except rtamt.STLParseException as err:
         print('STL Parse Exception: {}'.format(err))
         sys.exit()
 
-    rob = spec.offline(['req', data3[' req']], ['gnt', data3[' gnt']])
+    rob = spec.evaluate(['req', data3[' req']], ['gnt', data3[' gnt']])
 
 
 
@@ -188,7 +181,7 @@ def monitor():
     # Example (c) - output robustness
     #
     # # #
-    spec = rtamt.STLIOCTSpecification(1)
+    spec = rtamt.STLDenseTimeSpecification(semantics=rtamt.Semantics.OUTPUT_ROBUSTNESS)
     spec.name = 'Example 1'
     spec.declare_var('req', 'float')
     spec.declare_var('gnt', 'float')
@@ -196,14 +189,13 @@ def monitor():
     spec.set_var_io_type('req', 'input')
     spec.set_var_io_type('gnt', 'output')
     spec.spec = 'out = always((req >= 3) implies eventually[0:5] (gnt >= 3))'
-    spec.iosem = 'output-robustness'
     try:
         spec.parse()
     except rtamt.STLParseException as err:
         print('STL Parse Exception: {}'.format(err))
         sys.exit()
 
-    rob = spec.offline(['req', data3[' req']], ['gnt', data3[' gnt']])
+    rob = spec.evaluate(['req', data3[' req']], ['gnt', data3[' gnt']])
 
     print('Example (c) - output robustness: {}'.format(rob))
 
@@ -212,7 +204,7 @@ def monitor():
     # Example (c) - input vacuity
     #
     # # #
-    spec = rtamt.STLIOCTSpecification(1)
+    spec = rtamt.STLDenseTimeSpecification(semantics=rtamt.Semantics.INPUT_VACUITY)
     spec.name = 'Example 1'
     spec.declare_var('req', 'float')
     spec.declare_var('gnt', 'float')
@@ -220,14 +212,13 @@ def monitor():
     spec.set_var_io_type('req', 'input')
     spec.set_var_io_type('gnt', 'output')
     spec.spec = 'out = always((req >= 3) implies eventually[0:5] (gnt >= 3))'
-    spec.iosem = 'input-vacuity'
     try:
         spec.parse()
     except rtamt.STLParseException as err:
         print('STL Parse Exception: {}'.format(err))
         sys.exit()
 
-    rob = spec.offline(['req', data3[' req']], ['gnt', data3[' gnt']])
+    rob = spec.evaluate(['req', data3[' req']], ['gnt', data3[' gnt']])
 
     print('Example (c) - input vacuity: {}'.format(rob))
 
@@ -236,7 +227,8 @@ def monitor():
     # # Example (d) - standard robustness
     # #
     # # # #
-    spec = rtamt.STLIOCTSpecification(1)
+    spec = rtamt.STLDenseTimeSpecification(semantics=rtamt.Semantics.STANDARD)
+
     spec.name = 'Example d'
     spec.declare_var('req', 'float')
     spec.declare_var('gnt', 'float')
@@ -244,14 +236,13 @@ def monitor():
     spec.set_var_io_type('req', 'input')
     spec.set_var_io_type('gnt', 'output')
     spec.spec = 'out = always((req >= 3) implies eventually[0:5] (gnt >= 3))'
-    spec.iosem = 'standard'
     try:
         spec.parse()
     except rtamt.STLParseException as err:
         print('STL Parse Exception: {}'.format(err))
         sys.exit()
 
-    rob = spec.offline(['req', data4[' req']], ['gnt', data4[' gnt']])
+    rob = spec.evaluate(['req', data4[' req']], ['gnt', data4[' gnt']])
 
     print('Example (d) - standard robustness: {}'.format(rob))
     # # # #
@@ -259,7 +250,7 @@ def monitor():
     # # Example (d) - output robustness
     # #
     # # # #
-    spec = rtamt.STLIOCTSpecification(1)
+    spec = rtamt.STLDenseTimeSpecification(semantics=rtamt.Semantics.OUTPUT_ROBUSTNESS)
     spec.name = 'Example d'
     spec.declare_var('req', 'float')
     spec.declare_var('gnt', 'float')
@@ -267,14 +258,13 @@ def monitor():
     spec.set_var_io_type('req', 'input')
     spec.set_var_io_type('gnt', 'output')
     spec.spec = 'out = always((req >= 3) implies eventually[0:5] (gnt >= 3))'
-    spec.iosem = 'output-robustness'
     try:
         spec.parse()
     except rtamt.STLParseException as err:
         print('STL Parse Exception: {}'.format(err))
         sys.exit()
 
-    rob = spec.offline(['req', data4[' req']], ['gnt', data4[' gnt']])
+    rob = spec.evaluate(['req', data4[' req']], ['gnt', data4[' gnt']])
 
     print('Example (d) - output robustness: {}'.format(rob))
 
@@ -284,7 +274,7 @@ def monitor():
     # # Example (d) - input vacuity
     # #
     # # # #
-    spec = rtamt.STLIOCTSpecification(1)
+    spec = rtamt.STLDenseTimeSpecification(semantics=rtamt.Semantics.INPUT_VACUITY)
     spec.name = 'Example 1'
     spec.declare_var('req', 'float')
     spec.declare_var('gnt', 'float')
@@ -292,14 +282,13 @@ def monitor():
     spec.set_var_io_type('req', 'input')
     spec.set_var_io_type('gnt', 'output')
     spec.spec = 'out = always((req >= 3) implies eventually[0:5] (gnt >= 3))'
-    spec.iosem = 'input-vacuity'
     try:
         spec.parse()
     except rtamt.STLParseException as err:
         print('STL Parse Exception: {}'.format(err))
         sys.exit()
 
-    rob = spec.offline(['req', data4[' req']], ['gnt', data4[' gnt']])
+    rob = spec.evaluate(['req', data4[' req']], ['gnt', data4[' gnt']])
 
     print('Example (d) - input vacuity: {}'.format(rob))
 

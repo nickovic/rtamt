@@ -8,8 +8,6 @@ from rtamt.node.ltl.disjunction import Disjunction
 from rtamt.node.ltl.implies import Implies
 from rtamt.node.ltl.iff import Iff
 from rtamt.node.ltl.xor import Xor
-from rtamt.node.ltl.eventually import Eventually
-from rtamt.node.ltl.always import Always
 from rtamt.node.ltl.once import Once
 from rtamt.node.ltl.historically import Historically
 from rtamt.node.ltl.since import Since
@@ -22,6 +20,8 @@ from rtamt.node.ltl.fall import Fall
 from rtamt.node.ltl.rise import Rise
 from rtamt.node.ltl.constant import Constant
 from rtamt.node.ltl.previous import Previous
+
+from rtamt.exception.ltl.exception import LTLPastifyException
 
 
 class LTLPastifier(LTLVisitor):
@@ -132,17 +132,13 @@ class LTLPastifier(LTLVisitor):
         return node
 
     def visitEventually(self, element, args):
-        child_node = self.visit(element.children[0], args)
-        node = Eventually(child_node, self.is_pure_python)
-        return node
+        raise LTLPastifyException('Cannot pastify an unbounded eventually.')
 
     def visitAlways(self, element, args):
-        child_node = self.visit(element.children[0], args)
-        node = Always(child_node, self.is_pure_python)
-        return node
+        raise LTLPastifyException('Cannot pastify an unbounded always.')
 
     def visitUntil(self, element, args):
-        return None
+        raise LTLPastifyException('Cannot pastify an unbounded until.')
 
     def visitOnce(self, element, args):
         child_node = self.visit(element.children[0], args)
@@ -164,7 +160,6 @@ class LTLPastifier(LTLVisitor):
         node = Historically(child_node, self.is_pure_python)
         return node
 
-
     def visitSince(self, element, args):
         child_node_1 = self.visit(element.children[0], args)
         child_node_2 = self.visit(element.children[1], args)
@@ -172,4 +167,4 @@ class LTLPastifier(LTLVisitor):
         return node
 
     def visitDefault(self, element):
-        return None
+        raise LTLPastifyException('LTL Pastifier: encountered unexpected type of object.')

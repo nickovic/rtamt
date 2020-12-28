@@ -7,11 +7,15 @@ from rtamt.node.stl.timed_historically import TimedHistorically
 from rtamt.node.stl.timed_once import TimedOnce
 from rtamt.node.stl.timed_since import TimedSince
 
+from rtamt.exception.stl.exception import STLException
 
 class STLPastifier(LTLPastifier, STLVisitor):
 
     def __init__(self, is_pure_python=True):
         self.is_pure_python = is_pure_python
+
+    def visit(self, element, args):
+        return STLVisitor.visit(self, element, args)
         
     @property
     def is_pure_python(self):
@@ -80,4 +84,4 @@ class STLPastifier(LTLPastifier, STLVisitor):
         return node
 
     def visitDefault(self, element):
-        return None
+        raise STLException('STL Pastifier: encountered unexpected type of node.')

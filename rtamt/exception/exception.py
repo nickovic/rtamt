@@ -1,0 +1,2 @@
+class RTAMTException(Exception):
+    pass
