@@ -137,7 +137,7 @@ class STLSpecificationParser(LTLSpecificationParser, StlParserVisitor):
         node.horizon = max(child1.horizon, child2.horizon)
         return node
 
-    def visitExprUntilExpr(self, ctx):
+    def visitExprUntil(self, ctx):
         child1 = self.visit(ctx.expression(0))
         child2 = self.visit(ctx.expression(1))
         if ctx.interval() == None:

@@ -452,41 +452,41 @@ class TestSTLReset(unittest.TestCase):
         out = spec.update(0, [['req', 4.3]])
         self.assertEqual(4.3, out, 'Historically reset assertion')
 
-    def test_eventually(self):
-        spec = STLDiscreteTimeSpecification()
-        spec.declare_var('req', 'float')
-        spec.declare_var('out', 'float')
-        spec.spec = 'out = eventually(req)'
-        spec.parse()
+    # def test_eventually(self):
+    #     spec = STLDiscreteTimeSpecification()
+    #     spec.declare_var('req', 'float')
+    #     spec.declare_var('out', 'float')
+    #     spec.spec = 'out = eventually(req)'
+    #     spec.parse()
+    #
+    #     out = spec.update(0, [['req', 5]])
+    #     self.assertEqual(5, out, 'Eventually reset assertion')
+    #
+    #     out = spec.update(1, [['req', 2]])
+    #     self.assertEqual(5, out, 'Eventually reset assertion')
+    #
+    #     spec.reset()
+    #
+    #     out = spec.update(0, [['req', 4.3]])
+    #     self.assertEqual(4.3, out, 'Eventually reset assertion')
 
-        out = spec.update(0, [['req', 5]])
-        self.assertEqual(5, out, 'Eventually reset assertion')
-
-        out = spec.update(1, [['req', 2]])
-        self.assertEqual(5, out, 'Eventually reset assertion')
-
-        spec.reset()
-
-        out = spec.update(0, [['req', 4.3]])
-        self.assertEqual(4.3, out, 'Eventually reset assertion')
-
-    def test_always(self):
-        spec = STLDiscreteTimeSpecification()
-        spec.declare_var('req', 'float')
-        spec.declare_var('out', 'float')
-        spec.spec = 'out = always(req)'
-        spec.parse()
-
-        out = spec.update(0, [['req', 1.1]])
-        self.assertEqual(1.1, out, 'Always reset assertion')
-
-        out = spec.update(1, [['req', 2]])
-        self.assertEqual(1.1, out, 'Always reset assertion')
-
-        spec.reset()
-
-        out = spec.update(0, [['req', 4.3]])
-        self.assertEqual(4.3, out, 'Always reset assertion')
+    # def test_always(self):
+    #     spec = STLDiscreteTimeSpecification()
+    #     spec.declare_var('req', 'float')
+    #     spec.declare_var('out', 'float')
+    #     spec.spec = 'out = always(req)'
+    #     spec.parse()
+    #
+    #     out = spec.update(0, [['req', 1.1]])
+    #     self.assertEqual(1.1, out, 'Always reset assertion')
+    #
+    #     out = spec.update(1, [['req', 2]])
+    #     self.assertEqual(1.1, out, 'Always reset assertion')
+    #
+    #     spec.reset()
+    #
+    #     out = spec.update(0, [['req', 4.3]])
+    #     self.assertEqual(4.3, out, 'Always reset assertion')
 
     def test_since(self):
         spec = STLDiscreteTimeSpecification()

@@ -20,9 +20,6 @@ class AbstractNode:
         self.name = ''
         self.node = None
 
-    def reset(self):
-        self.node.reset()
-
     def addChild(self, child):
         self.children.append(child)
 

@@ -1,16 +1,16 @@
 import unittest
-from rtamt.operation.stl.dense_time import AndOperation
+from rtamt.operation.stl.dense_time.online.and_operation import AndOperation
 from rtamt.operation.stl.dense_time.online.not_operation import NotOperation
-from rtamt.operation.stl.dense_time import OrOperation
-from rtamt.operation.stl.dense_time import ImpliesOperation
+from rtamt.operation.stl.dense_time.online.or_operation import OrOperation
+from rtamt.operation.stl.dense_time.online.implies_operation import ImpliesOperation
 from rtamt.operation.stl.dense_time.online.iff_operation import IffOperation
-from rtamt.operation.stl.dense_time import XorOperation
-from rtamt.operation.stl.dense_time import AlwaysOperation
-from rtamt.operation.stl.dense_time import HistoricallyOperation
-from rtamt.operation.stl.dense_time import OnceOperation
-from rtamt.operation.stl.dense_time import SinceOperation
-from rtamt.operation.stl.dense_time import OnceBoundedOperation
-from rtamt.operation.stl.dense_time import HistoricallyBoundedOperation
+from rtamt.operation.stl.dense_time.online.xor_operation import XorOperation
+from rtamt.operation.stl.dense_time.online.always_operation import AlwaysOperation
+from rtamt.operation.stl.dense_time.online.historically_operation import HistoricallyOperation
+from rtamt.operation.stl.dense_time.online.once_operation import OnceOperation
+from rtamt.operation.stl.dense_time.online.since_operation import SinceOperation
+from rtamt.operation.stl.dense_time.online.once_bounded_operation import OnceBoundedOperation
+from rtamt.operation.stl.dense_time.online.historically_bounded_operation import HistoricallyBoundedOperation
 
 
 class TestSTLBooleanAndTemporalOnline(unittest.TestCase):

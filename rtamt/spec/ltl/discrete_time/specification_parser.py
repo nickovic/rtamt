@@ -225,42 +225,42 @@ class LTLSpecificationParser(LtlParserVisitor):
         node.horizon = child.horizon
         return node
 
-    def visitExprAndExpr(self, ctx):
+    def visitExprAnd(self, ctx):
         child1 = self.visit(ctx.expression(0))
         child2 = self.visit(ctx.expression(1))
         node = Conjunction(child1, child2, self.spec.is_pure_python)
         node.horizon = max(child1.horizon, child2.horizon)
         return node
 
-    def visitExprOrExpr(self, ctx):
+    def visitExprOr(self, ctx):
         child1 = self.visit(ctx.expression(0))
         child2 = self.visit(ctx.expression(1))
         node = Disjunction(child1, child2, self.spec.is_pure_python)
         node.horizon = max(child1.horizon, child2.horizon)
         return node
 
-    def visitExprImpliesExpr(self, ctx):
+    def visitExprImplies(self, ctx):
         child1 = self.visit(ctx.expression(0))
         child2 = self.visit(ctx.expression(1))
         node = Implies(child1, child2, self.spec.is_pure_python)
         node.horizon = max(child1.horizon, child2.horizon)
         return node
 
-    def visitExprIffExpr(self, ctx):
+    def visitExprIff(self, ctx):
         child1 = self.visit(ctx.expression(0))
         child2 = self.visit(ctx.expression(1))
         node = Iff(child1, child2, self.spec.is_pure_python)
         node.horizon = max(child1.horizon, child2.horizon)
         return node
 
-    def visitExprXorExpr(self, ctx):
+    def visitExprXor(self, ctx):
         child1 = self.visit(ctx.expression(0))
         child2 = self.visit(ctx.expression(1))
         node = Xor(child1, child2, self.spec.is_pure_python)
         node.horizon = max(child1.horizon, child2.horizon)
         return node
 
-    def visitExprAlwaysExpr(self, ctx):
+    def visitExprAlways(self, ctx):
         child = self.visit(ctx.expression())
         interval = self.visit(ctx.interval())
         horizon = child.horizon + interval.end
@@ -268,7 +268,7 @@ class LTLSpecificationParser(LtlParserVisitor):
         node.horizon = horizon
         return node
 
-    def visitExprUntimedAlwaysExpr(self, ctx):
+    def visitExprUntimedAlways(self, ctx):
         child = self.visit(ctx.expression())
         horizon = child.horizon
         node = Always(child, self.spec.is_pure_python)

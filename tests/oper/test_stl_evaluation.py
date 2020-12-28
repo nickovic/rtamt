@@ -58,20 +58,11 @@ class TestSTLEvaluation(unittest.TestCase):
     def test_addition(self):
         oper = AdditionOperation()
 
-        oper.addNewInput(self.left1, self.right1)
-        out1 = oper.update()
-
-        oper.addNewInput(self.left2, self.right2)
-        out2 = oper.update()
-
-        oper.addNewInput(self.left3, self.right3)
-        out3 = oper.update()
-
-        oper.addNewInput(self.left4, self.right4)
-        out4 = oper.update()
-
-        oper.addNewInput(self.left5, self.right5)
-        out5 = oper.update()
+        out1 = oper.update(self.left1, self.right1)
+        out2 = oper.update(self.left2, self.right2)
+        out3 = oper.update(self.left3, self.right3)
+        out4 = oper.update(self.left4, self.right4)
+        out5 = oper.update(self.left5, self.right5)
 
         self.assertEqual(out1, 120, "input 1")
         self.assertEqual(out2, -3, "input 2")
@@ -82,20 +73,11 @@ class TestSTLEvaluation(unittest.TestCase):
     def test_subtraction(self):
         oper = SubtractionOperation()
 
-        oper.addNewInput(self.left1, self.right1)
-        out1 = oper.update()
-
-        oper.addNewInput(self.left2, self.right2)
-        out2 = oper.update()
-
-        oper.addNewInput(self.left3, self.right3)
-        out3 = oper.update()
-
-        oper.addNewInput(self.left4, self.right4)
-        out4 = oper.update()
-
-        oper.addNewInput(self.left5, self.right5)
-        out5 = oper.update()
+        out1 = oper.update(self.left1, self.right1)
+        out2 = oper.update(self.left2, self.right2)
+        out3 = oper.update(self.left3, self.right3)
+        out4 = oper.update(self.left4, self.right4)
+        out5 = oper.update(self.left5, self.right5)
 
         self.assertEqual(out1, 80, "input 1")
         self.assertEqual(out2, 1, "input 2")
@@ -106,20 +88,11 @@ class TestSTLEvaluation(unittest.TestCase):
     def test_multiplication(self):
         oper = MultiplicationOperation()
 
-        oper.addNewInput(self.left1, self.right1)
-        out1 = oper.update()
-
-        oper.addNewInput(self.left2, self.right2)
-        out2 = oper.update()
-
-        oper.addNewInput(self.left3, self.right3)
-        out3 = oper.update()
-
-        oper.addNewInput(self.left4, self.right4)
-        out4 = oper.update()
-
-        oper.addNewInput(self.left5, self.right5)
-        out5 = oper.update()
+        out1 = oper.update(self.left1, self.right1)
+        out2 = oper.update(self.left2, self.right2)
+        out3 = oper.update(self.left3, self.right3)
+        out4 = oper.update(self.left4, self.right4)
+        out5 = oper.update(self.left5, self.right5)
 
         self.assertEqual(out1, 2000, "input 1")
         self.assertEqual(out2, 2, "input 2")
@@ -130,20 +103,11 @@ class TestSTLEvaluation(unittest.TestCase):
     def test_division(self):
         oper = DivisionOperation()
 
-        oper.addNewInput(self.left1, self.right1)
-        out1 = oper.update()
-
-        oper.addNewInput(self.left2, self.right2)
-        out2 = oper.update()
-
-        oper.addNewInput(self.left3, self.right3)
-        out3 = oper.update()
-
-        oper.addNewInput(self.left4, self.right4)
-        out4 = oper.update()
-
-        oper.addNewInput(self.left5, self.right5)
-        out5 = oper.update()
+        out1 = oper.update(self.left1, self.right1)
+        out2 = oper.update(self.left2, self.right2)
+        out3 = oper.update(self.left3, self.right3)
+        out4 = oper.update(self.left4, self.right4)
+        out5 = oper.update(self.left5, self.right5)
 
         self.assertEqual(out1, 100 / 20, "input 1")
         self.assertEqual(out2, -1 / -2, "input 2")
@@ -154,20 +118,11 @@ class TestSTLEvaluation(unittest.TestCase):
     def test_abs(self):
         oper = AbsOperation()
 
-        oper.addNewInput(self.left1)
-        out1 = oper.update()
-
-        oper.addNewInput(self.left2)
-        out2 = oper.update()
-
-        oper.addNewInput(self.left3)
-        out3 = oper.update()
-
-        oper.addNewInput(self.left4)
-        out4 = oper.update()
-
-        oper.addNewInput(self.left5)
-        out5 = oper.update()
+        out1 = oper.update(self.left1)
+        out2 = oper.update(self.left2)
+        out3 = oper.update(self.left3)
+        out4 = oper.update(self.left4)
+        out5 = oper.update(self.left5)
 
         self.assertEqual(out1, 100, "input 1")
         self.assertEqual(out2, 1, "input 2")
@@ -178,20 +133,11 @@ class TestSTLEvaluation(unittest.TestCase):
     def test_previous(self):
         oper = PreviousOperation()
 
-        oper.addNewInput(self.left1)
-        out1 = oper.update()
-
-        oper.addNewInput(self.left2)
-        out2 = oper.update()
-
-        oper.addNewInput(self.left3)
-        out3 = oper.update()
-
-        oper.addNewInput(self.left4)
-        out4 = oper.update()
-
-        oper.addNewInput(self.left5)
-        out5 = oper.update()
+        out1 = oper.update(self.left1)
+        out2 = oper.update(self.left2)
+        out3 = oper.update(self.left3)
+        out4 = oper.update(self.left4)
+        out5 = oper.update(self.left5)
 
         self.assertEqual(out1, float("inf"), "input 1")
         self.assertEqual(out2, 100, "input 2")
@@ -202,20 +148,11 @@ class TestSTLEvaluation(unittest.TestCase):
     def test_and(self):
         oper = AndOperation()
 
-        oper.addNewInput(self.left1, self.right1)
-        out1 = oper.update()
-
-        oper.addNewInput(self.left2, self.right2)
-        out2 = oper.update()
-
-        oper.addNewInput(self.left3, self.right3)
-        out3 = oper.update()
-
-        oper.addNewInput(self.left4, self.right4)
-        out4 = oper.update()
-
-        oper.addNewInput(self.left5, self.right5)
-        out5 = oper.update()
+        out1 = oper.update(self.left1, self.right1)
+        out2 = oper.update(self.left2, self.right2)
+        out3 = oper.update(self.left3, self.right3)
+        out4 = oper.update(self.left4, self.right4)
+        out5 = oper.update(self.left5, self.right5)
 
         self.assertEqual(out1, 20, "input 1")
         self.assertEqual(out2, -2, "input 2")
@@ -226,20 +163,11 @@ class TestSTLEvaluation(unittest.TestCase):
     def test_or(self):
         oper = OrOperation()
 
-        oper.addNewInput(self.left1, self.right1)
-        out1 = oper.update()
-
-        oper.addNewInput(self.left2, self.right2)
-        out2 = oper.update()
-
-        oper.addNewInput(self.left3, self.right3)
-        out3 = oper.update()
-
-        oper.addNewInput(self.left4, self.right4)
-        out4 = oper.update()
-
-        oper.addNewInput(self.left5, self.right5)
-        out5 = oper.update()
+        out1 = oper.update(self.left1, self.right1)
+        out2 = oper.update(self.left2, self.right2)
+        out3 = oper.update(self.left3, self.right3)
+        out4 = oper.update(self.left4, self.right4)
+        out5 = oper.update(self.left5, self.right5)
 
         self.assertEqual(out1, 100, "input 1")
         self.assertEqual(out2, -1, "input 2")
@@ -250,20 +178,11 @@ class TestSTLEvaluation(unittest.TestCase):
     def test_iff(self):
         oper = IffOperation()
 
-        oper.addNewInput(self.left1, self.right1)
-        out1 = oper.update()
-
-        oper.addNewInput(self.left2, self.right2)
-        out2 = oper.update()
-
-        oper.addNewInput(self.left3, self.right3)
-        out3 = oper.update()
-
-        oper.addNewInput(self.left4, self.right4)
-        out4 = oper.update()
-
-        oper.addNewInput(self.left5, self.right5)
-        out5 = oper.update()
+        out1 = oper.update(self.left1, self.right1)
+        out2 = oper.update(self.left2, self.right2)
+        out3 = oper.update(self.left3, self.right3)
+        out4 = oper.update(self.left4, self.right4)
+        out5 = oper.update(self.left5, self.right5)
 
         self.assertEqual(out1, -80, "input 1")
         self.assertEqual(out2, -1, "input 2")
@@ -274,20 +193,11 @@ class TestSTLEvaluation(unittest.TestCase):
     def test_xor(self):
         oper = XorOperation()
 
-        oper.addNewInput(self.left1, self.right1)
-        out1 = oper.update()
-
-        oper.addNewInput(self.left2, self.right2)
-        out2 = oper.update()
-
-        oper.addNewInput(self.left3, self.right3)
-        out3 = oper.update()
-
-        oper.addNewInput(self.left4, self.right4)
-        out4 = oper.update()
-
-        oper.addNewInput(self.left5, self.right5)
-        out5 = oper.update()
+        out1 = oper.update(self.left1, self.right1)
+        out2 = oper.update(self.left2, self.right2)
+        out3 = oper.update(self.left3, self.right3)
+        out4 = oper.update(self.left4, self.right4)
+        out5 = oper.update(self.left5, self.right5)
 
         self.assertEqual(out1, 80, "input 1")
         self.assertEqual(out2, 1, "input 2")
@@ -298,20 +208,11 @@ class TestSTLEvaluation(unittest.TestCase):
     def test_implies(self):
         oper = ImpliesOperation()
 
-        oper.addNewInput(self.left1, self.right1)
-        out1 = oper.update()
-
-        oper.addNewInput(self.left2, self.right2)
-        out2 = oper.update()
-
-        oper.addNewInput(self.left3, self.right3)
-        out3 = oper.update()
-
-        oper.addNewInput(self.left4, self.right4)
-        out4 = oper.update()
-
-        oper.addNewInput(self.left5, self.right5)
-        out5 = oper.update()
+        out1 = oper.update(self.left1, self.right1)
+        out2 = oper.update(self.left2, self.right2)
+        out3 = oper.update(self.left3, self.right3)
+        out4 = oper.update(self.left4, self.right4)
+        out5 = oper.update(self.left5, self.right5)
 
         self.assertEqual(out1, 20, "input 1")
         self.assertEqual(out2, 1, "input 2")
@@ -322,20 +223,11 @@ class TestSTLEvaluation(unittest.TestCase):
     def test_always(self):
         oper = AlwaysOperation()
 
-        oper.addNewInput(self.left1)
-        out1 = oper.update()
-
-        oper.addNewInput(self.left2)
-        out2 = oper.update()
-
-        oper.addNewInput(self.left3)
-        out3 = oper.update()
-
-        oper.addNewInput(self.left4)
-        out4 = oper.update()
-
-        oper.addNewInput(self.left5)
-        out5 = oper.update()
+        out1 = oper.update(self.left1)
+        out2 = oper.update(self.left2)
+        out3 = oper.update(self.left3)
+        out4 = oper.update(self.left4)
+        out5 = oper.update(self.left5)
 
         self.assertEqual(out1, 100, "input 1")
         self.assertEqual(out2, -1, "input 2")
@@ -346,20 +238,11 @@ class TestSTLEvaluation(unittest.TestCase):
     def test_historically(self):
         oper = HistoricallyOperation()
 
-        oper.addNewInput(self.left1)
-        out1 = oper.update()
-
-        oper.addNewInput(self.left2)
-        out2 = oper.update()
-
-        oper.addNewInput(self.left3)
-        out3 = oper.update()
-
-        oper.addNewInput(self.left4)
-        out4 = oper.update()
-
-        oper.addNewInput(self.left5)
-        out5 = oper.update()
+        out1 = oper.update(self.left1)
+        out2 = oper.update(self.left2)
+        out3 = oper.update(self.left3)
+        out4 = oper.update(self.left4)
+        out5 = oper.update(self.left5)
 
         self.assertEqual(out1, 100, "input 1")
         self.assertEqual(out2, -1, "input 2")
@@ -370,20 +253,11 @@ class TestSTLEvaluation(unittest.TestCase):
     def test_once(self):
         oper = OnceOperation()
 
-        oper.addNewInput(self.left1)
-        out1 = oper.update()
-
-        oper.addNewInput(self.left2)
-        out2 = oper.update()
-
-        oper.addNewInput(self.left3)
-        out3 = oper.update()
-
-        oper.addNewInput(self.left4)
-        out4 = oper.update()
-
-        oper.addNewInput(self.left5)
-        out5 = oper.update()
+        out1 = oper.update(self.left1)
+        out2 = oper.update(self.left2)
+        out3 = oper.update(self.left3)
+        out4 = oper.update(self.left4)
+        out5 = oper.update(self.left5)
 
         self.assertEqual(out1, 100, "input 1")
         self.assertEqual(out2, 100, "input 2")
@@ -394,20 +268,11 @@ class TestSTLEvaluation(unittest.TestCase):
     def test_eventually(self):
         oper = EventuallyOperation()
 
-        oper.addNewInput(self.left1)
-        out1 = oper.update()
-
-        oper.addNewInput(self.left2)
-        out2 = oper.update()
-
-        oper.addNewInput(self.left3)
-        out3 = oper.update()
-
-        oper.addNewInput(self.left4)
-        out4 = oper.update()
-
-        oper.addNewInput(self.left5)
-        out5 = oper.update()
+        out1 = oper.update(self.left1)
+        out2 = oper.update(self.left2)
+        out3 = oper.update(self.left3)
+        out4 = oper.update(self.left4)
+        out5 = oper.update(self.left5)
 
         self.assertEqual(out1, 100, "input 1")
         self.assertEqual(out2, 100, "input 2")
@@ -418,20 +283,11 @@ class TestSTLEvaluation(unittest.TestCase):
     def test_since(self):
         oper = SinceOperation()
 
-        oper.addNewInput(self.left1, self.right1)
-        out1 = oper.update()
-
-        oper.addNewInput(self.left2, self.right2)
-        out2 = oper.update()
-
-        oper.addNewInput(self.left3, self.right3)
-        out3 = oper.update()
-
-        oper.addNewInput(self.left4, self.right4)
-        out4 = oper.update()
-
-        oper.addNewInput(self.left5, self.right5)
-        out5 = oper.update()
+        out1 = oper.update(self.left1, self.right1)
+        out2 = oper.update(self.left2, self.right2)
+        out3 = oper.update(self.left3, self.right3)
+        out4 = oper.update(self.left4, self.right4)
+        out5 = oper.update(self.left5, self.right5)
 
         self.assertEqual(out1, 20, "input 1")
         self.assertEqual(out2, -1, "input 2")
@@ -442,20 +298,11 @@ class TestSTLEvaluation(unittest.TestCase):
     def test_once_0_1(self):
         oper = OnceBoundedOperation(0,1)
 
-        oper.addNewInput(self.left1)
-        out1 = oper.update()
-
-        oper.addNewInput(self.left2)
-        out2 = oper.update()
-
-        oper.addNewInput(self.left3)
-        out3 = oper.update()
-
-        oper.addNewInput(self.left4)
-        out4 = oper.update()
-
-        oper.addNewInput(self.left5)
-        out5 = oper.update()
+        out1 = oper.update(self.left1)
+        out2 = oper.update(self.left2)
+        out3 = oper.update(self.left3)
+        out4 = oper.update(self.left4)
+        out5 = oper.update(self.left5)
 
         self.assertEqual(out1, 100, "input 1")
         self.assertEqual(out2, 100, "input 2")
@@ -466,20 +313,11 @@ class TestSTLEvaluation(unittest.TestCase):
     def test_once_1_2(self):
         oper = OnceBoundedOperation(1,2)
 
-        oper.addNewInput(self.left1)
-        out1 = oper.update()
-
-        oper.addNewInput(self.left2)
-        out2 = oper.update()
-
-        oper.addNewInput(self.left3)
-        out3 = oper.update()
-
-        oper.addNewInput(self.left4)
-        out4 = oper.update()
-
-        oper.addNewInput(self.left5)
-        out5 = oper.update()
+        out1 = oper.update(self.left1)
+        out2 = oper.update(self.left2)
+        out3 = oper.update(self.left3)
+        out4 = oper.update(self.left4)
+        out5 = oper.update(self.left5)
 
         self.assertEqual(out1, -float("inf"), "input 1")
         self.assertEqual(out2, 100, "input 2")
@@ -490,20 +328,11 @@ class TestSTLEvaluation(unittest.TestCase):
     def test_historically_0_1(self):
         oper = HistoricallyBoundedOperation(0,1)
 
-        oper.addNewInput(self.left1)
-        out1 = oper.update()
-
-        oper.addNewInput(self.left2)
-        out2 = oper.update()
-
-        oper.addNewInput(self.left3)
-        out3 = oper.update()
-
-        oper.addNewInput(self.left4)
-        out4 = oper.update()
-
-        oper.addNewInput(self.left5)
-        out5 = oper.update()
+        out1 = oper.update(self.left1)
+        out2 = oper.update(self.left2)
+        out3 = oper.update(self.left3)
+        out4 = oper.update(self.left4)
+        out5 = oper.update(self.left5)
 
         self.assertEqual(out1, 100, "input 1")
         self.assertEqual(out2, -1, "input 2")
@@ -514,20 +343,11 @@ class TestSTLEvaluation(unittest.TestCase):
     def test_historically_1_2(self):
         oper = HistoricallyBoundedOperation(1,2)
 
-        oper.addNewInput(self.left1)
-        out1 = oper.update()
-
-        oper.addNewInput(self.left2)
-        out2 = oper.update()
-
-        oper.addNewInput(self.left3)
-        out3 = oper.update()
-
-        oper.addNewInput(self.left4)
-        out4 = oper.update()
-
-        oper.addNewInput(self.left5)
-        out5 = oper.update()
+        out1 = oper.update(self.left1)
+        out2 = oper.update(self.left2)
+        out3 = oper.update(self.left3)
+        out4 = oper.update(self.left4)
+        out5 = oper.update(self.left5)
 
         self.assertEqual(out1, float("inf"), "input 1")
         self.assertEqual(out2, 100, "input 2")
@@ -538,20 +358,11 @@ class TestSTLEvaluation(unittest.TestCase):
     def test_since_0_1(self):
         oper = SinceBoundedOperation(0,1)
 
-        oper.addNewInput(self.left1, self.right1)
-        out1 = oper.update()
-
-        oper.addNewInput(self.left2, self.right2)
-        out2 = oper.update()
-
-        oper.addNewInput(self.left3, self.right3)
-        out3 = oper.update()
-
-        oper.addNewInput(self.left4, self.right4)
-        out4 = oper.update()
-
-        oper.addNewInput(self.left5, self.right5)
-        out5 = oper.update()
+        out1 = oper.update(self.left1, self.right1)
+        out2 = oper.update(self.left2, self.right2)
+        out3 = oper.update(self.left3, self.right3)
+        out4 = oper.update(self.left4, self.right4)
+        out5 = oper.update(self.left5, self.right5)
 
         self.assertEqual(out1, 20, "input 1")
         self.assertEqual(out2, -1, "input 2")
@@ -562,20 +373,11 @@ class TestSTLEvaluation(unittest.TestCase):
     def test_precedes_1_2(self):
         oper = PrecedesBoundedOperation(1, 2)
 
-        oper.addNewInput(self.left1, self.right1)
-        out1 = oper.update()
-
-        oper.addNewInput(self.left2, self.right2)
-        out2 = oper.update()
-
-        oper.addNewInput(self.left3, self.right3)
-        out3 = oper.update()
-
-        oper.addNewInput(self.left4, self.right4)
-        out4 = oper.update()
-
-        oper.addNewInput(self.left5, self.right5)
-        out5 = oper.update()
+        out1 = oper.update(self.left1, self.right1)
+        out2 = oper.update(self.left2, self.right2)
+        out3 = oper.update(self.left3, self.right3)
+        out4 = oper.update(self.left4, self.right4)
+        out5 = oper.update(self.left5, self.right5)
 
         self.assertEqual(out1, 20, "input 1")
         self.assertEqual(out2, 20, "input 2")
@@ -586,20 +388,11 @@ class TestSTLEvaluation(unittest.TestCase):
     def test_not(self):
         oper = NotOperation()
 
-        oper.addNewInput(self.left1)
-        out1 = oper.update()
-
-        oper.addNewInput(self.left2)
-        out2 = oper.update()
-
-        oper.addNewInput(self.left3)
-        out3 = oper.update()
-
-        oper.addNewInput(self.left4)
-        out4 = oper.update()
-
-        oper.addNewInput(self.left5)
-        out5 = oper.update()
+        out1 = oper.update(self.left1)
+        out2 = oper.update(self.left2)
+        out3 = oper.update(self.left3)
+        out4 = oper.update(self.left4)
+        out5 = oper.update(self.left5)
 
         self.assertEqual(out1, -100, "input 1")
         self.assertEqual(out2, 1, "input 2")
@@ -610,20 +403,11 @@ class TestSTLEvaluation(unittest.TestCase):
     def test_rise(self):
         oper = RiseOperation()
 
-        oper.addNewInput(self.left1)
-        out1 = oper.update()
-
-        oper.addNewInput(self.left2)
-        out2 = oper.update()
-
-        oper.addNewInput(self.left3)
-        out3 = oper.update()
-
-        oper.addNewInput(self.left4)
-        out4 = oper.update()
-
-        oper.addNewInput(self.left5)
-        out5 = oper.update()
+        out1 = oper.update(self.left1)
+        out2 = oper.update(self.left2)
+        out3 = oper.update(self.left3)
+        out4 = oper.update(self.left4)
+        out5 = oper.update(self.left5)
 
         self.assertEqual(out1, 100, "input 1")
         self.assertEqual(out2, -100, "input 2")
@@ -634,20 +418,11 @@ class TestSTLEvaluation(unittest.TestCase):
     def test_fall(self):
         oper = FallOperation()
 
-        oper.addNewInput(self.left1)
-        out1 = oper.update()
-
-        oper.addNewInput(self.left2)
-        out2 = oper.update()
-
-        oper.addNewInput(self.left3)
-        out3 = oper.update()
-
-        oper.addNewInput(self.left4)
-        out4 = oper.update()
-
-        oper.addNewInput(self.left5)
-        out5 = oper.update()
+        out1 = oper.update(self.left1)
+        out2 = oper.update(self.left2)
+        out3 = oper.update(self.left3)
+        out4 = oper.update(self.left4)
+        out5 = oper.update(self.left5)
 
         self.assertEqual(out1, -100, "input 1")
         self.assertEqual(out2, 1, "input 2")
@@ -659,20 +434,11 @@ class TestSTLEvaluation(unittest.TestCase):
     def test_predicate_leq(self):
         oper = PredicateOperation(StlComparisonOperator.LEQ)
 
-        oper.addNewInput(self.left1, self.right1)
-        out1 = oper.update()
-
-        oper.addNewInput(self.left2, self.right2)
-        out2 = oper.update()
-
-        oper.addNewInput(self.left3, self.right3)
-        out3 = oper.update()
-
-        oper.addNewInput(self.left4, self.right4)
-        out4 = oper.update()
-
-        oper.addNewInput(self.left5, self.right5)
-        out5 = oper.update()
+        out1 = oper.update(self.left1, self.right1)
+        out2 = oper.update(self.left2, self.right2)
+        out3 = oper.update(self.left3, self.right3)
+        out4 = oper.update(self.left4, self.right4)
+        out5 = oper.update(self.left5, self.right5)
 
         self.assertEqual(out1, -80, "input 1")
         self.assertEqual(out2, -1, "input 2")
@@ -683,20 +449,11 @@ class TestSTLEvaluation(unittest.TestCase):
     def test_predicate_less(self):
         oper = PredicateOperation(StlComparisonOperator.LESS)
 
-        oper.addNewInput(self.left1, self.right1)
-        out1 = oper.update()
-
-        oper.addNewInput(self.left2, self.right2)
-        out2 = oper.update()
-
-        oper.addNewInput(self.left3, self.right3)
-        out3 = oper.update()
-
-        oper.addNewInput(self.left4, self.right4)
-        out4 = oper.update()
-
-        oper.addNewInput(self.left5, self.right5)
-        out5 = oper.update()
+        out1 = oper.update(self.left1, self.right1)
+        out2 = oper.update(self.left2, self.right2)
+        out3 = oper.update(self.left3, self.right3)
+        out4 = oper.update(self.left4, self.right4)
+        out5 = oper.update(self.left5, self.right5)
 
         self.assertEqual(out1, -80, "input 1")
         self.assertEqual(out2, -1, "input 2")
@@ -707,20 +464,11 @@ class TestSTLEvaluation(unittest.TestCase):
     def test_predicate_geq(self):
         oper = PredicateOperation(StlComparisonOperator.GEQ)
 
-        oper.addNewInput(self.left1, self.right1)
-        out1 = oper.update()
-
-        oper.addNewInput(self.left2, self.right2)
-        out2 = oper.update()
-
-        oper.addNewInput(self.left3, self.right3)
-        out3 = oper.update()
-
-        oper.addNewInput(self.left4, self.right4)
-        out4 = oper.update()
-
-        oper.addNewInput(self.left5, self.right5)
-        out5 = oper.update()
+        out1 = oper.update(self.left1, self.right1)
+        out2 = oper.update(self.left2, self.right2)
+        out3 = oper.update(self.left3, self.right3)
+        out4 = oper.update(self.left4, self.right4)
+        out5 = oper.update(self.left5, self.right5)
 
         self.assertEqual(out1, 80, "input 1")
         self.assertEqual(out2, 1, "input 2")
@@ -731,20 +479,11 @@ class TestSTLEvaluation(unittest.TestCase):
     def test_predicate_greater(self):
         oper = PredicateOperation(StlComparisonOperator.GREATER)
 
-        oper.addNewInput(self.left1, self.right1)
-        out1 = oper.update()
-
-        oper.addNewInput(self.left2, self.right2)
-        out2 = oper.update()
-
-        oper.addNewInput(self.left3, self.right3)
-        out3 = oper.update()
-
-        oper.addNewInput(self.left4, self.right4)
-        out4 = oper.update()
-
-        oper.addNewInput(self.left5, self.right5)
-        out5 = oper.update()
+        out1 = oper.update(self.left1, self.right1)
+        out2 = oper.update(self.left2, self.right2)
+        out3 = oper.update(self.left3, self.right3)
+        out4 = oper.update(self.left4, self.right4)
+        out5 = oper.update(self.left5, self.right5)
 
         self.assertEqual(out1, 80, "input 1")
         self.assertEqual(out2, 1, "input 2")
@@ -755,20 +494,11 @@ class TestSTLEvaluation(unittest.TestCase):
     def test_predicate_eq(self):
         oper = PredicateOperation(StlComparisonOperator.EQUAL)
 
-        oper.addNewInput(self.left1, self.right1)
-        out1 = oper.update()
-
-        oper.addNewInput(self.left2, self.right2)
-        out2 = oper.update()
-
-        oper.addNewInput(self.left3, self.right3)
-        out3 = oper.update()
-
-        oper.addNewInput(self.left4, self.right4)
-        out4 = oper.update()
-
-        oper.addNewInput(self.left5, self.right5)
-        out5 = oper.update()
+        out1 = oper.update(self.left1, self.right1)
+        out2 = oper.update(self.left2, self.right2)
+        out3 = oper.update(self.left3, self.right3)
+        out4 = oper.update(self.left4, self.right4)
+        out5 = oper.update(self.left5, self.right5)
 
         self.assertEqual(out1, -80, "input 1")
         self.assertEqual(out2, -1, "input 2")
@@ -779,20 +509,11 @@ class TestSTLEvaluation(unittest.TestCase):
     def test_predicate_neq(self):
         oper = PredicateOperation(StlComparisonOperator.NEQ)
 
-        oper.addNewInput(self.left1, self.right1)
-        out1 = oper.update()
-
-        oper.addNewInput(self.left2, self.right2)
-        out2 = oper.update()
-
-        oper.addNewInput(self.left3, self.right3)
-        out3 = oper.update()
-
-        oper.addNewInput(self.left4, self.right4)
-        out4 = oper.update()
-
-        oper.addNewInput(self.left5, self.right5)
-        out5 = oper.update()
+        out1 = oper.update(self.left1, self.right1)
+        out2 = oper.update(self.left2, self.right2)
+        out3 = oper.update(self.left3, self.right3)
+        out4 = oper.update(self.left4, self.right4)
+        out5 = oper.update(self.left5, self.right5)
 
         self.assertEqual(out1, 80, "input 1")
         self.assertEqual(out2, 1, "input 2")

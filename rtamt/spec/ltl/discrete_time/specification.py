@@ -200,6 +200,8 @@ class LTLDiscreteTimeSpecification(AbstractSpecification):
         # Initialize the online_evaluator
         self.online_evaluator = LTLEvaluator(self)
         self.top.accept(self.online_evaluator)
+        self.reseter.node_monitor_dict = self.online_evaluator.node_monitor_dict
+
 
 
     def update(self, timestamp, list_inputs):

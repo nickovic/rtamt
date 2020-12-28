@@ -18,6 +18,7 @@ from rtamt.evaluator.stl.online_evaluator import STLOnlineEvaluator
 from rtamt.spec.stl.discrete_time.reset import STLReset
 from rtamt.enumerations.options import *
 
+from rtamt.exception.stl.exception import STLException
 
 class STLDiscreteTimeSpecification(LTLDiscreteTimeSpecification):
     """A class used as a container for STL specifications
@@ -97,6 +98,7 @@ class STLDiscreteTimeSpecification(LTLDiscreteTimeSpecification):
         # Initialize the online_evaluator
         self.online_evaluator = STLOnlineEvaluator(self)
         self.top.accept(self.online_evaluator)
+        self.reseter.node_monitor_dict = self.online_evaluator.node_monitor_dict
 
         self.normalize = float(self.U[self.unit]) / float(self.U[self.sampling_period_unit])
 
@@ -175,7 +177,7 @@ class STLDiscreteTimeSpecification(LTLDiscreteTimeSpecification):
         self.sampling_period_unit = unit
 
         if tolerance < 0.0 or tolerance > 1.0:
-            raise STLSpecificationException
+            raise STLException('Tolerance must be in [0,1]')
 
         self.sampling_tolerance = tolerance
 

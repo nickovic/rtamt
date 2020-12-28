@@ -34,7 +34,7 @@ class TestSTLSamplingTimeUnits(unittest.TestCase):
 
     def test_wrong_tolerance(self):
         spec = rtamt.STLDiscreteTimeSpecification()
-        with self.assertRaises(rtamt.STLSpecificationException):
+        with self.assertRaises(rtamt.STLException):
             spec.set_sampling_period(1, 's', 1.5)
 
     def test_default_unit_default_sampling_unit_greater_tolerance_ok_samples(self):
