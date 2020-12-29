@@ -1,54 +1,67 @@
 parser grammar LtlParser ;
 
 options {
-	tokenVocab = LtlLexer ;
+	tokenVocab = LtlLexer
+	;
 }
 
 specification_file
-	: specification EOF ;
+	: specification EOF
+	;
 
 specification
-    : ( spec )? ( modimport )* ( declaration | annotation )* ( assertion )+ ;
+    : ( spec )? ( modimport )* ( declaration | annotation )* ( assertion )+
+    ;
 
 spec
-	: Specification Identifier #SpecificationId ;
+	: Specification Identifier #SpecificationId
+	;
 
 modimport :
-        From Identifier Import Identifier #modImport ;
+        From Identifier Import Identifier #modImport
+        ;
 
 assertion 
-	: (Identifier EQUAL)? expression ;
+	: (Identifier EQUAL)? expression
+	;
 
 declaration 
 	: variableDeclaration                                         #declVariable
-	| constantDeclaration                                         #declConstant;
+	| constantDeclaration                                         #declConstant
+	;
 
 annotation
         : '@' annotation_type ;
 
 annotation_type
-        : ROS_Topic LPAREN Identifier COMMA Identifier RPAREN #rosTopic;
+        : ROS_Topic LPAREN Identifier COMMA Identifier RPAREN #rosTopic
+        ;
 
 variableDeclaration
-	: ioType? domainType Identifier assignment?  ;
+	: ioType? domainType Identifier assignment?
+	;
 
 constantDeclaration
-	: Constant domainType Identifier EQUAL literal  ;
+	: Constant domainType Identifier EQUAL literal
+	;
 
 assignment
 	: EQUAL literal 				#AsgnLiteral
-	| EQUAL expression 				#AsgnExpr ;
+	| EQUAL expression 				#AsgnExpr
+	;
 
 domainType
 	: DomainTypeFloat
 	| DomainTypeInt
     | DomainTypeLong
     | DomainTypeComplex
-    | Identifier ;
+    | Identifier
+    ;
 
 ioType
 	: Input
-	| Output ;
+	| Output
+	;
 
 
 expression
@@ -105,5 +118,6 @@ literal
 	;
 
 identifier
-	: Identifier											 #Id ;
+	: Identifier											 #Id
+	;
 

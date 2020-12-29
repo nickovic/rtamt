@@ -1,15 +1,8 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Jul 21 20:32:57 2019
-
-@author: NickovicD
-"""
-
 import os
-import logging
 import sys
 from abc import ABCMeta, abstractmethod
 from rtamt.enumerations.options import TimeInterpretation
+from rtamt.exception.exception import RTAMTException
 
 
 class AbstractSpecification:
@@ -226,7 +219,7 @@ class AbstractSpecification:
             out = f.read()
             f.close()
         else:
-            logging.error('The file %s does not exist.', path)
+            raise RTAMTException('The file {} does not exist.'.format(path))
             sys.exit()
         return out
 

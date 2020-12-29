@@ -349,6 +349,7 @@ class LTLSpecificationParser(LtlParserVisitor):
             implicit = True
         else:
             id = ctx.Identifier().getText();
+            self.spec.var_subspec_dict[id] = out
             id_tokens = id.split('.')
             id_head = id_tokens[0]
             id_tokens.pop(0)

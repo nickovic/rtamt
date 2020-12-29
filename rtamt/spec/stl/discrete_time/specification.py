@@ -98,6 +98,7 @@ class STLDiscreteTimeSpecification(LTLDiscreteTimeSpecification):
         # Initialize the online_evaluator
         self.online_evaluator = STLOnlineEvaluator(self)
         self.top.accept(self.online_evaluator)
+
         self.reseter.node_monitor_dict = self.online_evaluator.node_monitor_dict
 
         self.normalize = float(self.U[self.unit]) / float(self.U[self.sampling_period_unit])

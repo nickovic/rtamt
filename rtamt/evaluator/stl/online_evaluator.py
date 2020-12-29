@@ -45,16 +45,16 @@ class STLOnlineEvaluator(STLVisitor):
         in_sample_1 = self.visit(node.children[0], args)
         in_sample_2 = self.visit(node.children[1], args)
 
-        monitor = self.node_monitor_dict[node]
+        monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample_1, in_sample_2)
 
-        if (self.spec.semantics == Semantics.OUTPUT_ROBUSTNESS and not node.out_vars):
+        if self.spec.semantics == Semantics.OUTPUT_ROBUSTNESS and not node.out_vars:
             out_sample = out_sample*float('inf')
-        elif(self.spec.semantics == Semantics.INPUT_VACUITY and not node.in_vars):
+        elif self.spec.semantics == Semantics.INPUT_VACUITY and not node.in_vars:
             out_sample = 0
-        elif(self.spec.semantics == Semantics.INPUT_ROBUSTNESS and not node.in_vars):
+        elif self.spec.semantics == Semantics.INPUT_ROBUSTNESS and not node.in_vars:
             out_sample = out_sample*float('inf')
-        elif(self.spec.semantics == Semantics.OUTPUT_VACUITY and not node.out_vars):
+        elif self.spec.semantics == Semantics.OUTPUT_VACUITY and not node.out_vars:
             out_sample = 0
 
         return out_sample
@@ -69,13 +69,13 @@ class STLOnlineEvaluator(STLVisitor):
         return value
 
     def visitConstant(self, node, args):
-        monitor = self.node_monitor_dict[node]
+        monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update()
         return out_sample
 
     def visitAbs(self, node, args):
         in_sample = self.visit(node.children[0], args)
-        monitor = self.node_monitor_dict[node]
+        monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample)
         return out_sample
 
@@ -83,7 +83,8 @@ class STLOnlineEvaluator(STLVisitor):
         in_sample_1 = self.visit(node.children[0], args)
         in_sample_2 = self.visit(node.children[1], args)
 
-        monitor = self.node_monitor_dict[node]
+        monitor = self.node_monitor_dict[node.name]
+
         out_sample = monitor.update(in_sample_1, in_sample_2)
 
         return out_sample
@@ -92,7 +93,7 @@ class STLOnlineEvaluator(STLVisitor):
         in_sample_1 = self.visit(node.children[0], args)
         in_sample_2 = self.visit(node.children[1], args)
 
-        monitor = self.node_monitor_dict[node]
+        monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample_1, in_sample_2)
 
         return out_sample
@@ -101,7 +102,7 @@ class STLOnlineEvaluator(STLVisitor):
         in_sample_1 = self.visit(node.children[0], args)
         in_sample_2 = self.visit(node.children[1], args)
 
-        monitor = self.node_monitor_dict[node]
+        monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample_1, in_sample_2)
 
         return out_sample
@@ -110,7 +111,7 @@ class STLOnlineEvaluator(STLVisitor):
         in_sample_1 = self.visit(node.children[0], args)
         in_sample_2 = self.visit(node.children[1], args)
 
-        monitor = self.node_monitor_dict[node]
+        monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample_1, in_sample_2)
 
         return out_sample
@@ -118,7 +119,7 @@ class STLOnlineEvaluator(STLVisitor):
     def visitNot(self, node, args):
         in_sample = self.visit(node.children[0], args)
 
-        monitor = self.node_monitor_dict[node]
+        monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample)
 
         return out_sample
@@ -126,7 +127,7 @@ class STLOnlineEvaluator(STLVisitor):
     def visitPrevious(self, node, args):
         in_sample = self.visit(node.children[0], args)
 
-        monitor = self.node_monitor_dict[node]
+        monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample)
 
         return out_sample
@@ -134,7 +135,7 @@ class STLOnlineEvaluator(STLVisitor):
     def visitNext(self, node, args):
         in_sample = self.visit(node.children[0], args)
 
-        monitor = self.node_monitor_dict[node]
+        monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample)
 
         return out_sample
@@ -142,7 +143,7 @@ class STLOnlineEvaluator(STLVisitor):
     def visitRise(self, node, args):
         in_sample = self.visit(node.children[0], args)
 
-        monitor = self.node_monitor_dict[node]
+        monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample)
 
         return out_sample
@@ -150,7 +151,7 @@ class STLOnlineEvaluator(STLVisitor):
     def visitFall(self, node, args):
         in_sample = self.visit(node.children[0], args)
 
-        monitor = self.node_monitor_dict[node]
+        monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample)
 
         return out_sample
@@ -159,7 +160,7 @@ class STLOnlineEvaluator(STLVisitor):
         in_sample_1 = self.visit(node.children[0], args)
         in_sample_2 = self.visit(node.children[1], args)
 
-        monitor = self.node_monitor_dict[node]
+        monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample_1, in_sample_2)
 
         return out_sample
@@ -168,7 +169,7 @@ class STLOnlineEvaluator(STLVisitor):
         in_sample_1 = self.visit(node.children[0], args)
         in_sample_2 = self.visit(node.children[1], args)
 
-        monitor = self.node_monitor_dict[node]
+        monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample_1, in_sample_2)
 
         return out_sample
@@ -177,7 +178,7 @@ class STLOnlineEvaluator(STLVisitor):
         in_sample_1 = self.visit(node.children[0], args)
         in_sample_2 = self.visit(node.children[1], args)
 
-        monitor = self.node_monitor_dict[node]
+        monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample_1, in_sample_2)
 
         return out_sample
@@ -186,7 +187,7 @@ class STLOnlineEvaluator(STLVisitor):
         in_sample_1 = self.visit(node.children[0], args)
         in_sample_2 = self.visit(node.children[1], args)
 
-        monitor = self.node_monitor_dict[node]
+        monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample_1, in_sample_2)
 
         return out_sample
@@ -195,7 +196,7 @@ class STLOnlineEvaluator(STLVisitor):
         in_sample_1 = self.visit(node.children[0], args)
         in_sample_2 = self.visit(node.children[1], args)
 
-        monitor = self.node_monitor_dict[node]
+        monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample_1, in_sample_2)
 
         return out_sample
@@ -203,7 +204,7 @@ class STLOnlineEvaluator(STLVisitor):
     def visitEventually(self, node, args):
         in_sample = self.visit(node.children[0], args)
 
-        monitor = self.node_monitor_dict[node]
+        monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample)
 
         return out_sample
@@ -211,7 +212,7 @@ class STLOnlineEvaluator(STLVisitor):
     def visitAlways(self, node, args):
         in_sample = self.visit(node.children[0], args)
 
-        monitor = self.node_monitor_dict[node]
+        monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample)
 
         return out_sample
@@ -220,7 +221,7 @@ class STLOnlineEvaluator(STLVisitor):
         in_sample_1 = self.visit(node.children[0], args)
         in_sample_2 = self.visit(node.children[1], args)
 
-        monitor = self.node_monitor_dict[node]
+        monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample_1, in_sample_2)
 
         return out_sample
@@ -228,7 +229,7 @@ class STLOnlineEvaluator(STLVisitor):
     def visitOnce(self, node, args):
         in_sample = self.visit(node.children[0], args)
 
-        monitor = self.node_monitor_dict[node]
+        monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample)
 
         return out_sample
@@ -236,7 +237,7 @@ class STLOnlineEvaluator(STLVisitor):
     def visitHistorically(self, node, args):
         in_sample = self.visit(node.children[0], args)
 
-        monitor = self.node_monitor_dict[node]
+        monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample)
 
         return out_sample
@@ -245,7 +246,7 @@ class STLOnlineEvaluator(STLVisitor):
         in_sample_1 = self.visit(node.children[0], args)
         in_sample_2 = self.visit(node.children[1], args)
 
-        monitor = self.node_monitor_dict[node]
+        monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample_1, in_sample_2)
 
         return out_sample
@@ -254,7 +255,7 @@ class STLOnlineEvaluator(STLVisitor):
         in_sample_1 = self.visit(node.children[0], args)
         in_sample_2 = self.visit(node.children[1], args)
 
-        monitor = self.node_monitor_dict[node]
+        monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample_1, in_sample_2)
 
         return out_sample
@@ -263,7 +264,7 @@ class STLOnlineEvaluator(STLVisitor):
         in_sample_1 = self.visit(node.children[0], args)
         in_sample_2 = self.visit(node.children[1], args)
 
-        monitor = self.node_monitor_dict[node]
+        monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample_1, in_sample_2)
 
         return out_sample
@@ -271,7 +272,7 @@ class STLOnlineEvaluator(STLVisitor):
     def visitTimedAlways(self, node, args):
         in_sample = self.visit(node.children[0], args)
 
-        monitor = self.node_monitor_dict[node]
+        monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample)
 
         return out_sample
@@ -279,7 +280,7 @@ class STLOnlineEvaluator(STLVisitor):
     def visitTimedEventually(self, node, args):
         in_sample = self.visit(node.children[0], args)
 
-        monitor = self.node_monitor_dict[node]
+        monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample)
 
         return out_sample
@@ -288,7 +289,7 @@ class STLOnlineEvaluator(STLVisitor):
         in_sample_1 = self.visit(node.children[0], args)
         in_sample_2 = self.visit(node.children[1], args)
 
-        monitor = self.node_monitor_dict[node]
+        monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample_1, in_sample_2)
 
         return out_sample
@@ -296,7 +297,7 @@ class STLOnlineEvaluator(STLVisitor):
     def visitTimedOnce(self, node, args):
         in_sample = self.visit(node.children[0], args)
 
-        monitor = self.node_monitor_dict[node]
+        monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample)
 
         return out_sample
@@ -304,7 +305,7 @@ class STLOnlineEvaluator(STLVisitor):
     def visitTimedHistorically(self, node, args):
         in_sample = self.visit(node.children[0], args)
 
-        monitor = self.node_monitor_dict[node]
+        monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample)
 
         return out_sample

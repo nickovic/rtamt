@@ -41,7 +41,7 @@ class LTLEvaluator(LTLVisitor):
         in_sample_1 = self.visit(node.children[0], args)
         in_sample_2 = self.visit(node.children[1], args)
 
-        monitor = self.node_monitor_dict[node]
+        monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample_1, in_sample_2)
 
         if (self.spec.semantics == Semantics.OUTPUT_ROBUSTNESS and not node.out_vars):
@@ -65,13 +65,13 @@ class LTLEvaluator(LTLVisitor):
         return value
 
     def visitConstant(self, node, args):
-        monitor = self.node_monitor_dict[node]
+        monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update()
         return out_sample
 
     def visitAbs(self, node, args):
         in_sample = self.visit(node.children[0], args)
-        monitor = self.node_monitor_dict[node]
+        monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample)
         return out_sample
 
@@ -79,7 +79,7 @@ class LTLEvaluator(LTLVisitor):
         in_sample_1 = self.visit(node.children[0], args)
         in_sample_2 = self.visit(node.children[1], args)
 
-        monitor = self.node_monitor_dict[node]
+        monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample_1, in_sample_2)
 
         return out_sample
@@ -88,7 +88,7 @@ class LTLEvaluator(LTLVisitor):
         in_sample_1 = self.visit(node.children[0], args)
         in_sample_2 = self.visit(node.children[1], args)
 
-        monitor = self.node_monitor_dict[node]
+        monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample_1, in_sample_2)
 
         return out_sample
@@ -97,7 +97,7 @@ class LTLEvaluator(LTLVisitor):
         in_sample_1 = self.visit(node.children[0], args)
         in_sample_2 = self.visit(node.children[1], args)
 
-        monitor = self.node_monitor_dict[node]
+        monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample_1, in_sample_2)
 
         return out_sample
@@ -106,7 +106,7 @@ class LTLEvaluator(LTLVisitor):
         in_sample_1 = self.visit(node.children[0], args)
         in_sample_2 = self.visit(node.children[1], args)
 
-        monitor = self.node_monitor_dict[node]
+        monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample_1, in_sample_2)
 
         return out_sample
@@ -114,7 +114,7 @@ class LTLEvaluator(LTLVisitor):
     def visitNot(self, node, args):
         in_sample = self.visit(node.children[0], args)
 
-        monitor = self.node_monitor_dict[node]
+        monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample)
 
         return out_sample
@@ -122,7 +122,7 @@ class LTLEvaluator(LTLVisitor):
     def visitPrevious(self, node, args):
         in_sample = self.visit(node.children[0], args)
 
-        monitor = self.node_monitor_dict[node]
+        monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample)
 
         return out_sample
@@ -130,7 +130,7 @@ class LTLEvaluator(LTLVisitor):
     def visitNext(self, node, args):
         in_sample = self.visit(node.children[0], args)
 
-        monitor = self.node_monitor_dict[node]
+        monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample)
 
         return out_sample
@@ -138,7 +138,7 @@ class LTLEvaluator(LTLVisitor):
     def visitRise(self, node, args):
         in_sample = self.visit(node.children[0], args)
 
-        monitor = self.node_monitor_dict[node]
+        monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample)
 
         return out_sample
@@ -146,7 +146,7 @@ class LTLEvaluator(LTLVisitor):
     def visitFall(self, node, args):
         in_sample = self.visit(node.children[0], args)
 
-        monitor = self.node_monitor_dict[node]
+        monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample)
 
         return out_sample
@@ -155,7 +155,7 @@ class LTLEvaluator(LTLVisitor):
         in_sample_1 = self.visit(node.children[0], args)
         in_sample_2 = self.visit(node.children[1], args)
 
-        monitor = self.node_monitor_dict[node]
+        monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample_1, in_sample_2)
 
         return out_sample
@@ -164,7 +164,7 @@ class LTLEvaluator(LTLVisitor):
         in_sample_1 = self.visit(node.children[0], args)
         in_sample_2 = self.visit(node.children[1], args)
 
-        monitor = self.node_monitor_dict[node]
+        monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample_1, in_sample_2)
 
         return out_sample
@@ -173,7 +173,7 @@ class LTLEvaluator(LTLVisitor):
         in_sample_1 = self.visit(node.children[0], args)
         in_sample_2 = self.visit(node.children[1], args)
 
-        monitor = self.node_monitor_dict[node]
+        monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample_1, in_sample_2)
 
         return out_sample
@@ -182,7 +182,7 @@ class LTLEvaluator(LTLVisitor):
         in_sample_1 = self.visit(node.children[0], args)
         in_sample_2 = self.visit(node.children[1], args)
 
-        monitor = self.node_monitor_dict[node]
+        monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample_1, in_sample_2)
 
         return out_sample
@@ -191,7 +191,7 @@ class LTLEvaluator(LTLVisitor):
         in_sample_1 = self.visit(node.children[0], args)
         in_sample_2 = self.visit(node.children[1], args)
 
-        monitor = self.node_monitor_dict[node]
+        monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample_1, in_sample_2)
 
         return out_sample
@@ -199,7 +199,7 @@ class LTLEvaluator(LTLVisitor):
     def visitEventually(self, node, args):
         in_sample = self.visit(node.children[0], args)
 
-        monitor = self.node_monitor_dict[node]
+        monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample)
 
         return out_sample
@@ -207,7 +207,7 @@ class LTLEvaluator(LTLVisitor):
     def visitAlways(self, node, args):
         in_sample = self.visit(node.children[0], args)
 
-        monitor = self.node_monitor_dict[node]
+        monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample)
 
         return out_sample
@@ -216,7 +216,7 @@ class LTLEvaluator(LTLVisitor):
         in_sample_1 = self.visit(node.children[0], args)
         in_sample_2 = self.visit(node.children[1], args)
 
-        monitor = self.node_monitor_dict[node]
+        monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample_1, in_sample_2)
 
         return out_sample
@@ -224,7 +224,7 @@ class LTLEvaluator(LTLVisitor):
     def visitOnce(self, node, args):
         in_sample = self.visit(node.children[0], args)
 
-        monitor = self.node_monitor_dict[node]
+        monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample)
 
         return out_sample
@@ -232,7 +232,7 @@ class LTLEvaluator(LTLVisitor):
     def visitHistorically(self, node, args):
         in_sample = self.visit(node.children[0], args)
 
-        monitor = self.node_monitor_dict[node]
+        monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample)
 
         return out_sample
@@ -241,7 +241,7 @@ class LTLEvaluator(LTLVisitor):
         in_sample_1 = self.visit(node.children[0], args)
         in_sample_2 = self.visit(node.children[1], args)
 
-        monitor = self.node_monitor_dict[node]
+        monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample_1, in_sample_2)
 
         return out_sample
