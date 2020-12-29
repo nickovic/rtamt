@@ -15,6 +15,11 @@ class StlParserVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by StlParser#constantTimeLiteral.
+    def visitConstantTimeLiteral(self, ctx):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by StlParser#unit.
     def visitUnit(self, ctx):
         return self.visitChildren(ctx)

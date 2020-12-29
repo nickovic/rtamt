@@ -9,7 +9,8 @@ interval
 	: LBRACK intervalTime ( COLON | COMMA ) intervalTime RBRACK ;
 
 intervalTime
-	: literal ( unit )?      #intervalTimeLiteral ;
+	: literal ( unit )?      #intervalTimeLiteral
+	| Identifier ( unit )?   #constantTimeLiteral ;
 
 unit
     : SEC | MSEC | USEC | NSEC ;
