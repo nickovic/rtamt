@@ -33,7 +33,6 @@ class AbstractSpecification:
         online_evaluator : AbstractEvaluator - pointer to the object that implements the monitoring algorithm
         offline_evaluator : OfflineEvaluator - pointer to the object that implements the monitoring algorithm
 
-        is_pure_python : Boolean - flag denoting whether to use pure Python or mixed Python/C++ implementation (default = True)
 
 
 
@@ -44,7 +43,7 @@ class AbstractSpecification:
     """
     __metaclass__ = ABCMeta
 
-    def __init__(self, is_pure_python):
+    def __init__(self):
         self.S_UNIT = int(1000000000)
         self.MS_UNIT = int(1000000)
         self.US_UNIT = int(1000)
@@ -87,17 +86,6 @@ class AbstractSpecification:
 
         self.online_evaluator = None
         self.offline_evaluator = None
-
-        self.is_pure_python = is_pure_python
-
-    # setters and getters
-    @property
-    def is_pure_python(self):
-        return self.__is_pure_python
-
-    @is_pure_python.setter
-    def is_pure_python(self, is_pure_python):
-        self.__is_pure_python = is_pure_python
 
     @property
     def spec(self):

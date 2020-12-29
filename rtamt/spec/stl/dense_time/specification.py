@@ -25,9 +25,9 @@ class STLDenseTimeSpecification(STLDiscreteTimeSpecification):
     Attributes:
 
     """
-    def __init__(self,is_pure_python=True, semantics=Semantics.STANDARD, language=Language.PYTHON):
+    def __init__(self,semantics=Semantics.STANDARD, language=Language.PYTHON):
         """Constructor for STL Specification"""
-        super(STLDenseTimeSpecification, self).__init__(is_pure_python, semantics, language)
+        super(STLDenseTimeSpecification, self).__init__(semantics, language)
         self.visitor = STLDenseTimeSpecificationParser(self)
         self.time_interpretation = TimeInterpretation.DENSE
 
@@ -51,7 +51,7 @@ class STLDenseTimeSpecification(STLDiscreteTimeSpecification):
         self.top = visitor.visitSpecification_file(ctx)
 
         # Translate bounded future STL to past STL
-        pastifier = STLPastifier(self.is_pure_python)
+        pastifier = STLPastifier()
         self.top.accept(pastifier)
         past = pastifier.pastify(self.top)
         self.top = past

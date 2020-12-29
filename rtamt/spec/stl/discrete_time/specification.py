@@ -45,9 +45,9 @@ class STLDiscreteTimeSpecification(LTLDiscreteTimeSpecification):
 
     """
 
-    def __init__(self, is_pure_python=True, semantics=Semantics.STANDARD, language=Language.PYTHON):
+    def __init__(self, semantics=Semantics.STANDARD, language=Language.PYTHON):
         """Constructor for STL Specification"""
-        super(STLDiscreteTimeSpecification, self).__init__(is_pure_python, semantics, language)
+        super(STLDiscreteTimeSpecification, self).__init__(semantics, language)
         self.name = 'STL Specification'
 
         self.DEFAULT_TOLERANCE = float(0.1)
@@ -90,7 +90,7 @@ class STLDiscreteTimeSpecification(LTLDiscreteTimeSpecification):
         self.top = visitor.visitSpecification_file(ctx)
 
         # Translate bounded future STL to past STL
-        pastifier = STLPastifier(self.is_pure_python)
+        pastifier = STLPastifier()
         self.top.accept(pastifier)
         past = pastifier.pastify(self.top)
         self.top = past
@@ -125,10 +125,10 @@ class STLDiscreteTimeSpecification(LTLDiscreteTimeSpecification):
             self.var_object_dict[var_name] = var_value
 
         # evaluate modular sub-specs
-        for key in self.var_subspec_dict:
-            node = self.var_subspec_dict[key]
-            out = self.online_evaluator.evaluate(node, [])
-            self.var_object_dict[key] = out
+        #for key in self.var_subspec_dict:
+        #    node = self.var_subspec_dict[key]
+        #    out = self.online_evaluator.evaluate(node, [])
+        #    self.var_object_dict[key] = out
 
         # The evaluation done wrt the discrete counter (logical time)
         out = self.online_evaluator.evaluate(self.top, [])

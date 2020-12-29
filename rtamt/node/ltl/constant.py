@@ -14,7 +14,7 @@ class Constant(LeafNode):
     Attributes:
         val : double
     """
-    def __init__(self, val, is_pure_python=True):
+    def __init__(self, val):
         """Constructor for Const node
 
         Parameters:

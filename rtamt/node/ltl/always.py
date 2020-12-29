@@ -5,7 +5,7 @@ class Always(UnaryNode):
         Inherits TemporalNode
     """
 
-    def __init__(self, child, is_pure_python=True):
+    def __init__(self, child):
         """Constructor for Always
 
         Parameters:

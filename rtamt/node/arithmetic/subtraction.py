@@ -4,7 +4,7 @@ class Subtraction(BinaryNode):
     """A class for storing STL Subtraction nodes
         Inherits Node
     """
-    def __init__(self, child1, child2, is_pure_python=True):
+    def __init__(self, child1, child2):
         """Constructor for Subtraction node
 
             Parameters:

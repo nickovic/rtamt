@@ -9,7 +9,7 @@ class Predicate(BinaryNode):
         child2 : Node
         operator : OperatorType (LEQ, GEQ, LESS, GREATER, EQ or NEQ)
     """
-    def __init__(self, child1, child2, operator, is_pure_python=True):
+    def __init__(self, child1, child2, operator):
         """Constructor for Predicate node
 
         Parameters:

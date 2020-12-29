@@ -4,7 +4,7 @@ class Once(UnaryNode):
     """A class for storing STL Once nodes
                 Inherits TemporalNode
     """
-    def __init__(self, child, is_pure_python=True):
+    def __init__(self, child):
         """Constructor for Once node
 
         Parameters:

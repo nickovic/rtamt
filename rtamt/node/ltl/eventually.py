@@ -4,7 +4,7 @@ class Eventually(UnaryNode):
     """A class for storing STL Eventually nodes
             Inherits TemporalNode
     """
-    def __init__(self, child, is_pure_python=True):
+    def __init__(self, child):
         """Constructor for Eventually node
 
         Parameters:

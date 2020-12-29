@@ -4,7 +4,7 @@ class Previous(UnaryNode):
     """A class for storing STL Previous nodes
         Inherits Node
     """
-    def __init__(self, child, is_pure_python=True):
+    def __init__(self, child):
         """Constructor for Previous node
 
             Parameters:

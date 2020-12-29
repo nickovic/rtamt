@@ -11,7 +11,7 @@ class Abs(UnaryNode):
     """A class for storing STL Neg nodes
         Inherits Node
     """
-    def __init__(self, child, is_pure_python=True):
+    def __init__(self, child):
         """Constructor for Neg node
 
             Parameters:

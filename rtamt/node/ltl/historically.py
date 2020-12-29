@@ -4,7 +4,7 @@ class Historically(UnaryNode):
     """A class for storing STL Historically nodes
          Inherits TemporalNode
     """
-    def __init__(self, child, is_pure_python=True):
+    def __init__(self, child):
         """Constructor for Historically node
 
             Parameters:

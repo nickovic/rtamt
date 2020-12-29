@@ -84,11 +84,11 @@ class STLSpecificationParser(LTLSpecificationParser, StlParserVisitor):
     def visitExprAlways(self, ctx):
         child = self.visit(ctx.expression())
         if ctx.interval() == None:
-            node = Once(child, self.spec.is_pure_python)
+            node = Once(child)
             horizon = child.horizon
         else:
             interval = self.visit(ctx.interval())
-            node = TimedOnce(child, interval.begin, interval.end, self.spec.is_pure_python)
+            node = TimedOnce(child, interval.begin, interval.end)
             horizon = child.horizon + interval.end
         node.horizon = horizon
         return node
@@ -97,11 +97,11 @@ class STLSpecificationParser(LTLSpecificationParser, StlParserVisitor):
     def visitExprEv(self, ctx):
         child = self.visit(ctx.expression())
         if ctx.interval() == None:
-            node = Eventually(child, self.spec.is_pure_python)
+            node = Eventually(child)
             horizon = child.horizon
         else:
             interval = self.visit(ctx.interval())
-            node = TimedEventually(child, interval.begin, interval.end, self.spec.is_pure_python)
+            node = TimedEventually(child, interval.begin, interval.end)
             horizon = child.horizon + interval.end
         node.horizon = horizon
         return node
@@ -109,20 +109,20 @@ class STLSpecificationParser(LTLSpecificationParser, StlParserVisitor):
     def visitExpreOnce(self, ctx):
         child = self.visit(ctx.expression())
         if ctx.interval() == None:
-            node = Once(child, self.spec.is_pure_python)
+            node = Once(child)
         else:
             interval = self.visit(ctx.interval())
-            node = TimedOnce(child, interval.begin, interval.end, self.spec.is_pure_python)
+            node = TimedOnce(child, interval.begin, interval.end)
         node.horizon = child.horizon
         return node
 
     def visitExprHist(self, ctx):
         child = self.visit(ctx.expression())
         if ctx.interval() == None:
-            node = Historically(child, self.spec.is_pure_python)
+            node = Historically(child)
         else:
             interval = self.visit(ctx.interval())
-            node = TimedHistorically(child, interval.begin, interval.end, self.spec.is_pure_python)
+            node = TimedHistorically(child, interval.begin, interval.end)
         node.horizon = child.horizon
         return node
 
@@ -130,10 +130,10 @@ class STLSpecificationParser(LTLSpecificationParser, StlParserVisitor):
         child1 = self.visit(ctx.expression(0))
         child2 = self.visit(ctx.expression(1))
         if ctx.interval() == None:
-            node = Since(child1, child2, self.spec.is_pure_python)
+            node = Since(child1, child2)
         else:
             interval = self.visit(ctx.interval())
-            node = TimedSince(child1, child2, interval.begin, interval.end, self.spec.is_pure_python)
+            node = TimedSince(child1, child2, interval.begin, interval.end)
         node.horizon = max(child1.horizon, child2.horizon)
         return node
 
@@ -141,11 +141,11 @@ class STLSpecificationParser(LTLSpecificationParser, StlParserVisitor):
         child1 = self.visit(ctx.expression(0))
         child2 = self.visit(ctx.expression(1))
         if ctx.interval() == None:
-            node = Until(child1, child2, self.spec.is_pure_python)
+            node = Until(child1, child2)
             node.horizon = max(child1.horizon, child2.horizon)
         else:
             interval = self.visit(ctx.interval())
-            node = TimedUntil(child1, child2, interval.begin, interval.end, self.spec.is_pure_python)
+            node = TimedUntil(child1, child2, interval.begin, interval.end)
             node.horizon = max(child1.horizon, child2.horizon) + interval.end
         return node
 
@@ -154,13 +154,13 @@ class STLSpecificationParser(LTLSpecificationParser, StlParserVisitor):
         child2 = self.visit(ctx.expression(1))
         interval = self.visit(ctx.interval())
         if ctx.interval() == None:
-            left = Always(child1, self.spec.is_pure_python)
-            right = Until(child1, child2, self.spec.is_pure_python)
+            left = Always(child1)
+            right = Until(child1, child2)
             node = Disjunction(left, right)
             node.horizon = max(child1.horizon, child2.horizon)
         else:
-            left = TimedAlways(child1, 0, interval.end, self.spec.is_pure_python)
-            right = TimedUntil(child1, child2, interval.begin, interval.end, self.spec.is_pure_python)
+            left = TimedAlways(child1, 0, interval.end)
+            right = TimedUntil(child1, child2, interval.begin, interval.end)
             node = Disjunction(left, right)
             node.horizon = max(child1.horizon, child2.horizon) + interval.end
         return node

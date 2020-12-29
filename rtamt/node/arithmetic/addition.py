@@ -12,7 +12,7 @@ class Addition(BinaryNode):
     """A class for storing STL Conjunction nodes
         Inherits TemporalNode
     """
-    def __init__(self, child1, child2, is_pure_python=True):
+    def __init__(self, child1, child2):
         """Constructor for Conjunction node
 
             Parameters:

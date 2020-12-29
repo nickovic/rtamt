@@ -26,109 +26,101 @@ from rtamt.exception.ltl.exception import LTLPastifyException
 
 class LTLPastifier(LTLVisitor):
 
-    def __init__(self, is_pure_python=True):
-        self.is_pure_python = is_pure_python
-        
-    @property
-    def is_pure_python(self):
-        return self.__is_pure_python
-
-    @is_pure_python.setter
-    def is_pure_python(self, is_pure_python):
-        self.__is_pure_python = is_pure_python
+    def __init__(self):
+        pass
 
     def pastify(self, element):
         return self.visit(element, [element.horizon])
 
     def visitConstant(self, element, args):
-        node = Constant(element.val, self.is_pure_python)
+        node = Constant(element.val)
         return node
 
     def visitPredicate(self, element, args):
         child1_node = self.visit(element.children[0], args)
         child2_node = self.visit(element.children[1], args)
-        node = Predicate(child1_node, child2_node, element.operator, self.is_pure_python)
+        node = Predicate(child1_node, child2_node, element.operator)
         return node
 
     def visitVariable(self, element, args):
         horizon = args[0]
         node = Variable(element.var, element.field, element.io_type)
         for i in range(horizon):
-            node = Previous(node, self.is_pure_python)
+            node = Previous(node)
         return node
 
     def visitAddition(self, element, args):
         child1_node = self.visit(element.children[0], args)
         child2_node = self.visit(element.children[1], args)
-        node = Addition(child1_node, child2_node, self.is_pure_python)
+        node = Addition(child1_node, child2_node)
         return node
 
     def visitMultiplication(self, element, args):
         child1_node = self.visit(element.children[0], args)
         child2_node = self.visit(element.children[1], args)
-        node = Multiplication(child1_node, child2_node, self.is_pure_python)
+        node = Multiplication(child1_node, child2_node)
         return node
 
     def visitSubtraction(self, element, args):
         child1_node = self.visit(element.children[0], args)
         child2_node = self.visit(element.children[1], args)
-        node = Subtraction(child1_node, child2_node, self.is_pure_python)
+        node = Subtraction(child1_node, child2_node)
         return node
 
     def visitDivision(self, element, args):
         child1_node = self.visit(element.children[0], args)
         child2_node = self.visit(element.children[1], args)
-        node = Division(child1_node, child2_node, self.is_pure_python)
+        node = Division(child1_node, child2_node)
         return node
 
     def visitAbs(self, element, args):
         child_node = self.visit(element.children[0], args)
-        node = Abs(child_node, self.is_pure_python)
+        node = Abs(child_node)
         return node
 
     def visitRise(self, element, args):
         child_node = self.visit(element.children[0], args)
-        node = Rise(child_node, self.is_pure_python)
+        node = Rise(child_node)
         return node
 
     def visitFall(self, element, args):
         child_node = self.visit(element.children[0], args)
-        node = Fall(child_node, self.is_pure_python)
+        node = Fall(child_node)
         return node
 
     def visitNot(self, element, args):
         child_node = self.visit(element.children[0], args)
-        node = Neg(child_node, self.is_pure_python)
+        node = Neg(child_node)
         return node
 
     def visitAnd(self, element, args):
         child1_node = self.visit(element.children[0], args)
         child2_node = self.visit(element.children[1], args)
-        node = Conjunction(child1_node, child2_node, self.is_pure_python)
+        node = Conjunction(child1_node, child2_node)
         return node
 
     def visitOr(self, element, args):
         child1_node = self.visit(element.children[0], args)
         child2_node = self.visit(element.children[1], args)
-        node = Disjunction(child1_node, child2_node, self.is_pure_python)
+        node = Disjunction(child1_node, child2_node)
         return node
 
     def visitImplies(self, element, args):
         child1_node = self.visit(element.children[0], args)
         child2_node = self.visit(element.children[1], args)
-        node = Implies(child1_node, child2_node, self.is_pure_python)
+        node = Implies(child1_node, child2_node)
         return node
 
     def visitIff(self, element, args):
         child1_node = self.visit(element.children[0], args)
         child2_node = self.visit(element.children[1], args)
-        node = Iff(child1_node, child2_node, self.is_pure_python)
+        node = Iff(child1_node, child2_node)
         return node
 
     def visitXor(self, element, args):
         child1_node = self.visit(element.children[0], args)
         child2_node = self.visit(element.children[1], args)
-        node = Xor(child1_node, child2_node, self.is_pure_python)
+        node = Xor(child1_node, child2_node)
         return node
 
     def visitEventually(self, element, args):
@@ -142,12 +134,12 @@ class LTLPastifier(LTLVisitor):
 
     def visitOnce(self, element, args):
         child_node = self.visit(element.children[0], args)
-        node = Once(child_node, self.is_pure_python)
+        node = Once(child_node)
         return node
 
     def visitPrevious(self, element, args):
         child_node = self.visit(element.children[0], args)
-        node = Previous(child_node, self.is_pure_python)
+        node = Previous(child_node)
         return node
 
     def visitNext(self, element, args):
@@ -157,13 +149,13 @@ class LTLPastifier(LTLVisitor):
 
     def visitHistorically(self, element, args):
         child_node = self.visit(element.children[0], args)
-        node = Historically(child_node, self.is_pure_python)
+        node = Historically(child_node)
         return node
 
     def visitSince(self, element, args):
         child_node_1 = self.visit(element.children[0], args)
         child_node_2 = self.visit(element.children[1], args)
-        node = Since(child_node_1, child_node_2, self.is_pure_python)
+        node = Since(child_node_1, child_node_2)
         return node
 
     def visitDefault(self, element):

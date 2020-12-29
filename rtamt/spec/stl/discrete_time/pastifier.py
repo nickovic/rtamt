@@ -11,25 +11,18 @@ from rtamt.exception.stl.exception import STLException
 
 class STLPastifier(LTLPastifier, STLVisitor):
 
-    def __init__(self, is_pure_python=True):
-        self.is_pure_python = is_pure_python
-
+    def __init__(self):
+        pass 
+    
     def visit(self, element, args):
         return STLVisitor.visit(self, element, args)
-        
-    @property
-    def is_pure_python(self):
-        return self.__is_pure_python
 
-    @is_pure_python.setter
-    def is_pure_python(self, is_pure_python):
-        self.__is_pure_python = is_pure_python
 
     def visitVariable(self, element, args):
         horizon = args[0]
         node = Variable(element.var, element.field, element.io_type)
         if horizon > 0:
-            node = TimedOnce(node, horizon, horizon, self.is_pure_python)
+            node = TimedOnce(node, horizon, horizon)
         return node
 
     def visitTimedEventually(self, element, args):
@@ -38,7 +31,7 @@ class STLPastifier(LTLPastifier, STLVisitor):
         begin = 0
         end = element.end - element.begin
         if end > 0:
-            node = TimedOnce(node, begin, end, self.is_pure_python)
+            node = TimedOnce(node, begin, end)
         return node
 
     def visitTimedAlways(self, element, args):
@@ -47,7 +40,7 @@ class STLPastifier(LTLPastifier, STLVisitor):
         begin = 0
         end = element.end - element.begin
         if end > 0:
-            node = TimedHistorically(node, begin, end, self.is_pure_python)
+            node = TimedHistorically(node, begin, end)
         return node
 
     def visitTimedUntil(self, element, args):
@@ -56,23 +49,23 @@ class STLPastifier(LTLPastifier, STLVisitor):
         end = element.end
         child1_node = self.visit(element.children[0], [horizon])
         child2_node = self.visit(element.children[1], [horizon])
-        node = TimedPrecedes(child1_node, child2_node, begin, end, self.is_pure_python)
+        node = TimedPrecedes(child1_node, child2_node, begin, end)
         return node
 
     def visitTimedOnce(self, element, args):
         child_node = self.visit(element.children[0], args)
-        node = TimedOnce(child_node, element.begin, element.end, self.is_pure_python)
+        node = TimedOnce(child_node, element.begin, element.end)
         return node
 
     def visitTimedHistorically(self, element, args):
         child_node = self.visit(element.children[0], args)
-        node = TimedHistorically(child_node, element.begin, element.end, self.is_pure_python)
+        node = TimedHistorically(child_node, element.begin, element.end)
         return node
 
     def visitTimedSince(self, element, args):
         child_node_1 = self.visit(element.children[0], args)
         child_node_2 = self.visit(element.children[1], args)
-        node = TimedSince(child_node_1, child_node_2, element.begin, element.end, self.is_pure_python)
+        node = TimedSince(child_node_1, child_node_2, element.begin, element.end)
         return node
 
     def visitTimedPrecedes(self, element, args):
@@ -80,7 +73,7 @@ class STLPastifier(LTLPastifier, STLVisitor):
         begin = element.begin
         child1_node = self.visit(element.children[0], args)
         child2_node = self.visit(element.children[1], args)
-        node = TimedPrecedes(child1_node, child2_node, begin, end, self.is_pure_python)
+        node = TimedPrecedes(child1_node, child2_node, begin, end)
         return node
 
     def visitDefault(self, element):
