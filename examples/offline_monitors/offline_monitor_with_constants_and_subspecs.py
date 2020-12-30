@@ -8,7 +8,7 @@ def monitor():
     # Load traces
     data = read_csv('example1.csv')
 
-    spec = rtamt.STLIOSpecification(1)
+    spec = rtamt.STLDiscreteTimeSpecification()
     spec.name = 'Example 1'
     spec.declare_const('threshold', 'float', '3')
     spec.declare_const('T', 'float', '5')
@@ -20,7 +20,6 @@ def monitor():
     spec.set_var_io_type('gnt', 'output')
     spec.add_sub_spec('response = eventually[0:T s](gnt >= threshold)')
     spec.spec = 'out = always((req >= threshold) implies response)'
-    spec.iosem = 'standard'
     try:
         spec.parse()
     except rtamt.STLParseException as err:

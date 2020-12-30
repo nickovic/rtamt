@@ -22,7 +22,7 @@ def monitor():
     # Example - offline robustness
     #
     # # #
-    spec = rtamt.STLIOCTSpecification(1)
+    spec = rtamt.STLDenseTimeSpecification()
     spec.name = 'Example 1'
     spec.declare_var('req', 'float')
     spec.declare_var('gnt', 'float')
@@ -30,7 +30,6 @@ def monitor():
     spec.set_var_io_type('req', 'input')
     spec.set_var_io_type('gnt', 'output')
     spec.spec = 'out = always((req>=3) implies (eventually[1:2](gnt>=3)))'
-    spec.iosem = 'standard'
     try:
         spec.parse()
     except rtamt.STLParseException as err:
@@ -38,7 +37,7 @@ def monitor():
         sys.exit()
 
 
-    rob = spec.offline(['req', req], ['gnt', gnt])
+    rob = spec.evaluate(['req', req], ['gnt', gnt])
     print('Robustness offline: {}'.format(rob))
 
     # # #
@@ -46,7 +45,7 @@ def monitor():
     # Example - online robustness
     #
     # # #
-    spec = rtamt.STLIOCTSpecification(1)
+    spec = rtamt.STLDenseTimeSpecification()
     spec.name = 'Example 1'
     spec.declare_var('req', 'float')
     spec.declare_var('gnt', 'float')
@@ -54,7 +53,6 @@ def monitor():
     spec.set_var_io_type('req', 'input')
     spec.set_var_io_type('gnt', 'output')
     spec.spec = 'out = always((req>=3) implies (eventually[1:2](gnt>=3)))'
-    spec.iosem = 'standard'
     try:
         spec.parse()
     except rtamt.STLParseException as err:
@@ -70,8 +68,8 @@ def monitor():
     rob = spec.update(['req', req_3], ['gnt', gnt_3])
     print('Robustness online - step 3: {}'.format(rob))
 
-    rob = spec.update_final(['req', []], ['gnt', []])
-    print('Robustness online - step final: {}'.format(rob))
+    #rob = spec.update_final(['req', []], ['gnt', []])
+    #print('Robustness online - step final: {}'.format(rob))
 
 
 def read_csv(filename):
