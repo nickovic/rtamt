@@ -12,27 +12,32 @@ class STLOfflineEvaluator(STLVisitor):
         if self.spec.language == Language.PYTHON:
             if self.spec.time_interpretation == TimeInterpretation.DENSE:
                 from rtamt.evaluator.stl.dense_time.offline.python.offline_dense_time_python_monitor import \
-                STLOfflineDenseTimePythonMonitor
+                    STLOfflineDenseTimePythonMonitor
                 generator = STLOfflineDenseTimePythonMonitor()
 
+            elif self.spec.time_interpretation == TimeInterpretation.DISCRETE:
+                from rtamt.evaluator.stl.discrete_time.offline.python.offline_discrete_time_python_monitor import \
+                    STLOfflineDiscreteTimePythonMonitor
+                generator = STLOfflineDiscreteTimePythonMonitor()
+
         if generator is None:
-            raise STLNotImplementedException('The monitor with discrete_time interptetation,'
-                                             'online deployment and {} implementation is not '
+            raise STLNotImplementedException('The monitor with {0} interptetation,'
+                                             'offline deployment and {1} implementation is not '
                                              'available in this version '
-                                             'of the library'.format(self.spec.language))
+                                             'of the library'.format(self.spec.time_interpretation, self.spec.language))
 
         self.node_monitor_dict = generator.generate(self.spec.top)
 
     def evaluate(self, node, args):
         sample = self.visit(node, args)
-        
+
         out_sample = self.spec.var_object_dict[self.spec.out_var]
         if self.spec.out_var_field:
             setattr(out_sample, self.spec.out_var_field, sample)
         else:
             out_sample = sample
         return out_sample
-    
+
     def visitPredicate(self, node, args):
         in_sample_1 = self.visit(node.children[0], args)
         in_sample_2 = self.visit(node.children[1], args)
@@ -41,16 +46,16 @@ class STLOfflineEvaluator(STLVisitor):
         out_sample = monitor.update(in_sample_1, in_sample_2)
         out = []
 
-        if (self.spec.semantics == Semantics.OUTPUT_ROBUSTNESS and not node.out_vars):
-            for sample in out_sample:
-                out.append([sample[0], sample[1]*float('inf')])
-        elif(self.spec.semantics == Semantics.INPUT_VACUITY and not node.in_vars):
-            for sample in out_sample:
-                out.append([sample[0], 0.0])
-        elif(self.spec.semantics == Semantics.INPUT_ROBUSTNESS and not node.in_vars):
+        if self.spec.semantics == Semantics.OUTPUT_ROBUSTNESS and not node.out_vars:
             for sample in out_sample:
                 out.append([sample[0], sample[1] * float('inf')])
-        elif(self.spec.semantics == Semantics.OUTPUT_VACUITY and not node.out_vars):
+        elif self.spec.semantics == Semantics.INPUT_VACUITY and not node.in_vars:
+            for sample in out_sample:
+                out.append([sample[0], 0.0])
+        elif self.spec.semantics == Semantics.INPUT_ROBUSTNESS and not node.in_vars:
+            for sample in out_sample:
+                out.append([sample[0], sample[1] * float('inf')])
+        elif self.spec.semantics == Semantics.OUTPUT_VACUITY and not node.out_vars:
             for sample in out_sample:
                 out.append([sample[0], 0])
         else:
@@ -310,4 +315,3 @@ class STLOfflineEvaluator(STLVisitor):
 
     def visitDefault(self, node, args):
         return None
-
