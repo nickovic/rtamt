@@ -30,6 +30,7 @@ def monitor():
     spec.semantics = Semantics.STANDARD
     try:
         spec.parse()
+        spec.pastify()
     except rtamt.STLParseException as err:
         print('STL Parse Exception: {}'.format(err))
         sys.exit()
@@ -55,6 +56,7 @@ def monitor():
     spec.semantics = Semantics.OUTPUT_ROBUSTNESS
     try:
         spec.parse()
+        spec.pastify()
     except rtamt.STLParseException as err:
         print('STL Parse Exception: {}'.format(err))
         sys.exit()
@@ -80,6 +82,7 @@ def monitor():
     spec.semantics = Semantics.INPUT_VACUITY
     try:
         spec.parse()
+        spec.pastify()
     except rtamt.STLParseException as err:
         print('STL Parse Exception: {}'.format(err))
         sys.exit()
@@ -105,6 +108,7 @@ def monitor():
     spec.semantics = Semantics.STANDARD
     try:
         spec.parse()
+        spec.pastify()
     except rtamt.STLParseException as err:
         print('STL Parse Exception: {}'.format(err))
         sys.exit()
@@ -136,7 +140,6 @@ def monitor():
 
     for i in range(len(data2[' gnt'])):
         rob = spec.update(i, [('req', data2[' req'][i][1]), ('gnt', data2[' gnt'][i][1])])
-
     print('Example (b) - output robustness: {}'.format(rob))
 
     # # #

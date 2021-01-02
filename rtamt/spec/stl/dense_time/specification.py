@@ -50,21 +50,24 @@ class STLDenseTimeSpecification(STLDiscreteTimeSpecification):
         visitor = STLSpecificationParser(self)
         self.top = visitor.visitSpecification_file(ctx)
 
+
+    def pastify(self):
         # Translate bounded future STL to past STL
         pastifier = STLPastifier()
         self.top.accept(pastifier)
         past = pastifier.pastify(self.top)
         self.top = past
 
-        # Initialize the online_evaluator
-        self.online_evaluator = STLOnlineEvaluator(self)
-        self.offline_evaluator = STLOfflineEvaluator(self)
-        self.top.accept(self.online_evaluator)
-
     # Online
     def update(self, *args, **kargs):
         # list_inputs:
         # example [['p', [[1.1, 2.2], [1.3, 2.5], [1.7, 2]]], ['q', [[1, 2], [1.5, 3.5]]]
+
+        if self.online_evaluator is None:
+            # Initialize the online_evaluator
+            self.online_evaluator = STLOnlineEvaluator(self)
+            self.top.accept(self.online_evaluator)
+
         for arg in args:
             var_name = arg[0]
             var_object = arg[1]
@@ -84,13 +87,19 @@ class STLDenseTimeSpecification(STLDiscreteTimeSpecification):
 
     # Offline
     def evaluate(self, *args, **kargs):
-         for arg in args:
-             var_name = arg[0]
-             var_object = arg[1]
-             self.var_object_dict[var_name] = var_object
-         out = self.offline_evaluator.evaluate(self.top, [])
-         self.var_object_dict = self.var_object_dict.fromkeys(self.var_object_dict, [])
-         return out
+        if self.offline_evaluator is None:
+            # Initialize the online_evaluator
+            self.offline_evaluator = STLOfflineEvaluator(self)
+            # self.offline_evaluator = STLOfflineEvaluator(self)
+            self.top.accept(self.offline_evaluator)
+
+        for arg in args:
+            var_name = arg[0]
+            var_object = arg[1]
+            self.var_object_dict[var_name] = var_object
+        out = self.offline_evaluator.evaluate(self.top, [])
+        self.var_object_dict = self.var_object_dict.fromkeys(self.var_object_dict, [])
+        return out
 
 
 

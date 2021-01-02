@@ -11,8 +11,11 @@
 
 # About
 
-RTAMT is a Python (2- and 3-compatible) library for online monitoring of bounded-future 
-Signal Temporal Logic (STL). The library has an optional C++ back-end. 
+RTAMT is a Python (2- and 3-compatible) library for monitoring of  
+Signal Temporal Logic (STL). The library implements algorithms offline and online 
+monitoring of discrete-time and dense-time STL. The online monitors support 
+the bounded future fragment of STL. The online discrete-time part of the library 
+has an optimized C++ back-end. 
 
 # Installation
 
@@ -99,20 +102,20 @@ sudo pip3 uninstall rtamt
 
 # Theory
 
-RTAMT is a Python library for online monitoring of bounded-future 
+RTAMT is a Python library for offline and online monitoring of (bounded-future) 
 Signal Temporal Logic (STL). The library is inspired by several theoretical and practical 
 works:
 - The bounded-future fragment of STL is inspired by [2]
 - The interface-aware interpretation of STL quantitative semantics is inspired by [3]
 - The periodic-sampling interpretation of specifications (even in presence of timestamps that are not prefectly periodic) is inpired by [4]
-- The translation of bounded-future STL to "equirobust" past STL prior to the monitoring phase is inpired by [2] 
+- The translation of bounded-future STL to "equirobust" past STL prior to the online monitoring phase is inspired by [2] 
 
 ## Specification Language
 
-RTAMT uses the bounded-future fragment of Signal Temporal Logic (STL) and interface-aware STL (IA-STL).
+RTAMT supports Signal Temporal Logic (STL) and interface-aware STL (IA-STL).
 
 The library supports a variant of STL with past and future temporal operators as well as basic arithmetic and absolute value operators. 
-Semantics of STL is defined in terms of a robustess degree `rho(phi,w,t)`, a function defined over reals extended with `+inf` and `-inf` that takes as input an STL specification `phi`, an input signal 
+Semantics of STL is defined in terms of a robustness degree `rho(phi,w,t)`, a function defined over real numbers extended with `+inf` and `-inf` that takes as input an STL specification `phi`, an input signal 
 `w` and time index `t`, and computes how far is the signal `w` at time `t` from satisfying/violating `phi`. The robustness degree function is defined inductively as follows
 (`c` is a real constant, `x` is a variable, `w_x(t)` denotes the value of `w` projected to `x` at time `t`, `a,b` are rational constants such that `0 <= a <= b` and `|w|` is the length of `w`):
 ```
@@ -171,8 +174,11 @@ rho(phi since[a,b] psi,w,t) = -inf                                              
 
 % Future untimed temporal operators
 rho(next phi,w,t) = rho(phi,w,t+1)
-rho(eventually phi,w,t) = max_{t' in [0,t]} rho(phi,w,t')
-rho(always phi,w,t) = min_{t' in [0,t]} rho(phi,w,t')
+rho(eventually phi,w,t) = max_{t' in [t,|w|]} rho(phi,w,t')
+rho(always phi,w,t) = min_{t' in [t, |w|]} rho(phi,w,t')
+rho(phi until psi,w,t) = max_{t' in [t,|w|] min(rho(psi,w,t'), 
+                              min_{t'' in [t,t')}rho(psi,w,t') rho(phi,w,t'')))         otherwise
+
 
 % Future timed temporal operators
 rho(eventually[a,b] phi,w,t) = -inf                                                     if t+a >= |w|
@@ -187,9 +193,7 @@ rho(phi until[a,b] psi,w,t) = -inf                                              
 We define the robustness degree `rho(phi,w)` as `rho(phi,w,0)`.
 
 There are several important points to note about the above syntax and semantics:
-- The library allows only bounded-future STL specifications, meaning that _unbounded_ future operators `always` and `eventually` can appear only at the top level of the specification. For example, `always(x<=2)` is a bounded-future STL specification, while `always(eventually(x<=2))` is not.
-- The library does not allow _unbounded_ `until` operator.
-- The library uses _non-standard_ semantics for unbounded `always` and `eventually` operators. For instance, standard TL semantics says that `always phi` holds at time `t` iff `phi` holds at all future times `t'>=t`. This interpretation cannot be monitored in online fashion. We define semantics that says that `always phi` holds at time `t` iff `phi` has been continuously holding so far. Note that this interpretation of `always` is equivalent to the `historically`operator. The situation is symmetric for the non-standard semantics of  `eventually` and `once`.
+- In the online monitoring mode, the library allows only bounded-future STL specifications, meaning that _unbounded_ future operators `always` `eventually` and `until` cannot appear in the specification. 
 - The `prev` and `next` operators are valid only under the discrete-time interpretation of STL
 - The `unless` operator is added as syntactic sugar - `phi unless[a,b] psi = always[0,b] phi or phi until[a,b] psi
 
@@ -198,7 +202,91 @@ The library monitors bounded-future STL formulas with a fixed _delay_. In order 
 
 # Usage
 
-## Working with time units and timing assumptions
+The API provides two monitoring classes:
+- `STLDiscreteTimeSpecification` for discrete-time monitors
+- `STLDenseTimeSpecification` for dense-time monitors
+
+Both classes implement online and offline monitors:
+- `update` method is used for online evaluation
+. `evaluate` method is used for offline evaluation
+
+## Example Usage
+
+### Discrete-time online monitor
+```
+import sys
+import rtamt
+
+def monitor():
+    # # stl
+    spec = rtamt.STLSpecification()
+    spec.declare_var('a', 'float')
+    spec.declare_var('b', 'float')
+    spec.spec = 'eventually[0,1] (a >= b)'
+
+    try:
+        spec.parse()
+        spec.pastify()
+    except rtamt.RTAMTException as err:
+        print('RTAMT Exception: {}'.format(err))
+        sys.exit()
+
+    rob = spec.update(0, [('a', 100.0), ('b', 20.0)])
+    print('time=' + str(0) + ' rob=' + str(rob))
+
+    rob = spec.update(1, [('a', -1.0), ('b', 2.0)])
+    print('time=' + str(0) + ' rob=' + str(rob))
+
+    rob = spec.update(2, [('a', -2.0), ('b', -10.0)])
+    print('time=' + str(0) + ' rob=' + str(rob))
+
+if __name__ == '__main__':
+    monitor()
+```
+
+### Dense-time online monitor
+
+```
+import sys
+import rtamt
+
+def monitor():
+    a1 = [(0, 3), (3, 2)]
+    b1 = [(0, 2), (2, 5), (4, 1), (7, -7)]
+
+    a2 = [(5, 6), (6, -2), (8, 7), (11, -1)]
+    b2 = [(10, 4)]
+
+    a3 = [(13, -6), (15, 0)]
+    b3 = [(15, 0)]
+
+    # # stl
+    spec = rtamt.STLDenseTimeSpecification()
+    spec.name = 'STL dense-time specification'
+    spec.declare_var('a', 'float')
+    spec.spec = 'a>=2'
+    try:
+        spec.parse()
+    except rtamt.STLParseException as err:
+        print('STL Parse Exception: {}'.format(err))
+        sys.exit()
+
+    rob = spec.update(['a', a1], ['b', b1])
+    print('rob: ' + str(rob))
+
+    rob = spec.update(['a', a2], ['b', b2])
+    print('rob: ' + str(rob))
+
+    rob = spec.update(['a', a3], ['b', b3])
+    print('rob: ' + str(rob))
+
+if __name__ == '__main__':
+    monitor()
+```
+
+## Discrete-time Specifics
+
+### Working with time units and timing assumptions
 
 The default unit in RTAMT is seconds, and the default expected period between 
 two consecutive input samples is `1s` with `10%` tolerance. 
@@ -218,7 +306,7 @@ import sys
 import rtamt
 
 def monitor():
-    spec = rtamt.STLSpecification()
+    spec = rtamt.STLDiscreteTimeSpecification()
     spec.name = 'Bounded-response Request-Grant'
 
     spec.declare_var('req', 'float')

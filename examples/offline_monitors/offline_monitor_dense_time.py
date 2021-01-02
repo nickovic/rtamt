@@ -25,6 +25,7 @@ def monitor():
     spec.spec = 'out = always((req>=3) implies (eventually[0:5](gnt>=3)))'
     try:
         spec.parse()
+        spec.pastify()
     except rtamt.STLParseException as err:
         print('STL Parse Exception: {}'.format(err))
         sys.exit()
@@ -50,6 +51,7 @@ def monitor():
     spec.spec = 'out = always((req>=3) implies (eventually[0:5](gnt>=3)))'
     try:
         spec.parse()
+        spec.pastify()
     except rtamt.STLParseException as err:
         print('STL Parse Exception: {}'.format(err))
         sys.exit()
@@ -73,6 +75,7 @@ def monitor():
     spec.spec = 'out = always((req >= 3) implies eventually[0:5] (gnt >= 3))'
     try:
         spec.parse()
+        spec.pastify()
     except rtamt.STLParseException as err:
         print('STL Parse Exception: {}'.format(err))
         sys.exit()
@@ -96,6 +99,7 @@ def monitor():
     spec.spec = 'out = always((req >= 3) implies eventually[0:5] (gnt >= 3))'
     try:
         spec.parse()
+        spec.pastify()
     except rtamt.STLParseException as err:
         print('STL Parse Exception: {}'.format(err))
         sys.exit()
@@ -119,6 +123,7 @@ def monitor():
     spec.spec = 'out = always((req >= 3) implies eventually[0:5] (gnt >= 3))'
     try:
         spec.parse()
+        spec.pastify()
     except rtamt.STLParseException as err:
         print('STL Parse Exception: {}'.format(err))
         sys.exit()
@@ -142,6 +147,7 @@ def monitor():
     spec.spec = 'out = always((req >= 3) implies eventually[0:5] (gnt >= 3))'
     try:
         spec.parse()
+        spec.pastify()
     except rtamt.STLParseException as err:
         print('STL Parse Exception: {}'.format(err))
         sys.exit()
@@ -165,6 +171,7 @@ def monitor():
     spec.spec = 'out = always((req >= 3) implies eventually[0:5] (gnt >= 3))'
     try:
         spec.parse()
+        spec.pastify()
     except rtamt.STLParseException as err:
         print('STL Parse Exception: {}'.format(err))
         sys.exit()
@@ -191,6 +198,7 @@ def monitor():
     spec.spec = 'out = always((req >= 3) implies eventually[0:5] (gnt >= 3))'
     try:
         spec.parse()
+        spec.pastify()
     except rtamt.STLParseException as err:
         print('STL Parse Exception: {}'.format(err))
         sys.exit()
@@ -214,6 +222,7 @@ def monitor():
     spec.spec = 'out = always((req >= 3) implies eventually[0:5] (gnt >= 3))'
     try:
         spec.parse()
+        spec.pastify()
     except rtamt.STLParseException as err:
         print('STL Parse Exception: {}'.format(err))
         sys.exit()
@@ -238,6 +247,7 @@ def monitor():
     spec.spec = 'out = always((req >= 3) implies eventually[0:5] (gnt >= 3))'
     try:
         spec.parse()
+        spec.pastify()
     except rtamt.STLParseException as err:
         print('STL Parse Exception: {}'.format(err))
         sys.exit()
@@ -260,6 +270,7 @@ def monitor():
     spec.spec = 'out = always((req >= 3) implies eventually[0:5] (gnt >= 3))'
     try:
         spec.parse()
+        spec.pastify()
     except rtamt.STLParseException as err:
         print('STL Parse Exception: {}'.format(err))
         sys.exit()
@@ -284,6 +295,7 @@ def monitor():
     spec.spec = 'out = always((req >= 3) implies eventually[0:5] (gnt >= 3))'
     try:
         spec.parse()
+        spec.pastify()
     except rtamt.STLParseException as err:
         print('STL Parse Exception: {}'.format(err))
         sys.exit()

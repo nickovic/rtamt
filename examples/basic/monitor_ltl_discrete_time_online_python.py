@@ -18,8 +18,9 @@ def monitor():
 
     try:
         spec.parse()
-    except rtamt.STLParseException as err:
-        print('STL Parse Exception: {}'.format(err))
+        spec.pastify()
+    except rtamt.RTAMTException as err:
+        print('RTAMT Exception: {}'.format(err))
         sys.exit()
 
     # # eval

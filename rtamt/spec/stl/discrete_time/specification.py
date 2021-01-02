@@ -89,19 +89,16 @@ class STLDiscreteTimeSpecification(LTLDiscreteTimeSpecification):
         visitor = STLSpecificationParser(self)
         self.top = visitor.visitSpecification_file(ctx)
 
+        self.normalize = float(self.U[self.unit]) / float(self.U[self.sampling_period_unit])
+
+    def pastify(self):
         # Translate bounded future STL to past STL
         pastifier = STLPastifier()
         self.top.accept(pastifier)
         past = pastifier.pastify(self.top)
         self.top = past
 
-        # Initialize the online_evaluator
-        self.online_evaluator = STLOnlineEvaluator(self)
-        self.top.accept(self.online_evaluator)
 
-        self.reseter.node_monitor_dict = self.online_evaluator.node_monitor_dict
-
-        self.normalize = float(self.U[self.unit]) / float(self.U[self.sampling_period_unit])
 
 
     def update(self, timestamp, list_inputs):
@@ -109,6 +106,12 @@ class STLDiscreteTimeSpecification(LTLDiscreteTimeSpecification):
         # inputs - list of [var name, var value] pairs
         # Example:
         # update(3.48, [['a', 2.2], ['b', 3.3]])
+
+        if self.online_evaluator is None:
+            # Initialize the online_evaluator
+            self.online_evaluator = STLOnlineEvaluator(self)
+            self.top.accept(self.online_evaluator)
+            self.reseter.node_monitor_dict = self.online_evaluator.node_monitor_dict
 
         # Check if the difference between two consecutive timestamps is between
         # the accepted tolerance - if not, increase the violation counter
@@ -142,11 +145,13 @@ class STLDiscreteTimeSpecification(LTLDiscreteTimeSpecification):
         pass
 
     def reset(self):
-        self.top.accept(self.reseter)
-        self.reseter.reset(self.top)
-        self.update_counter = int(0);
-        self.previous_time = float(0.0);
-        self.sampling_violation_counter = int(0);
+        if self.online_evaluator is not None:
+            self.reseter.node_monitor_dict = self.online_evaluator.node_monitor_dict
+            self.top.accept(self.reseter)
+            self.reseter.reset(self.top)
+            self.update_counter = int(0);
+            self.previous_time = float(0.0);
+            self.sampling_violation_counter = int(0);
 
 
     @property

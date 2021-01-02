@@ -13,6 +13,7 @@ def monitor():
 
     try:
         spec.parse()
+        spec.pastify()
         spec.update(0, [('req', 0.1), ('gnt', 0.3)])
         spec.update(1, [('req', 0.45), ('gnt', 0.12)])
         spec.update(2, [('req', 0.78), ('gnt', 0.18)])

@@ -2,6 +2,7 @@ from rtamt.exception.stl.exception import STLException
 from rtamt.exception.stl.exception import STLParseException
 from rtamt.exception.stl.exception import STLOfflineException
 from rtamt.exception.stl.exception import STLSpecificationException
+from rtamt.exception.exception import RTAMTException
 from rtamt.spec.stl.discrete_time.io_type import StlIOType
 from rtamt.enumerations.options import Language, Semantics, TimeInterpretation
 from rtamt.spec.stl.discrete_time.specification import STLDiscreteTimeSpecification

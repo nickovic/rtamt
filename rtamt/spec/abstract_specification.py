@@ -28,18 +28,16 @@ class AbstractSpecification:
         const_type_dict : dict(String, String) - dictionary mapping const var names to var types
         const_val_dict : dict(String, String) - dictionary mapping const var names to var vals encoded as strings
 
-        top : AbstractNode - pointer to the specification parse tree
+        top : Node - pointer to the specification parse tree
 
-        online_evaluator : AbstractEvaluator - pointer to the object that implements the monitoring algorithm
+        online_evaluator : OnlineEvaluator - pointer to the object that implements the monitoring algorithm
         offline_evaluator : OfflineEvaluator - pointer to the object that implements the monitoring algorithm
-
-
-
 
     Methods
         get_spec_from_file - create and populate specification object from the text file
         parse - parse the specification
-        update - update the specification
+        update - update the specification online
+        evaluate - evaluate the specification offline
     """
     __metaclass__ = ABCMeta
 

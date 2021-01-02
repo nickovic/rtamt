@@ -191,24 +191,22 @@ class LTLDiscreteTimeSpecification(AbstractSpecification):
         visitor = LTLSpecificationParser(self)
         self.top = visitor.visitSpecification_file(ctx)
 
+    def pastify(self):
         # Translate bounded future STL to past STL
         pastifier = LTLPastifier()
         self.top.accept(pastifier)
         past = pastifier.pastify(self.top)
         self.top = past
 
-        # Initialize the online_evaluator
-        self.online_evaluator = LTLEvaluator(self)
-        self.top.accept(self.online_evaluator)
-        self.reseter.node_monitor_dict = self.online_evaluator.node_monitor_dict
-
-
-
     def update(self, timestamp, list_inputs):
         # timestamp - float
         # inputs - list of [var name, var value] pairs
         # Example:
         # update(3.48, [['a', 2.2], ['b', 3.3]])
+
+        if self.online_evaluator == None:
+            self.online_evaluator = LTLEvaluator(self)
+            self.top.accept(self.online_evaluator)
 
         # update the value of every input variable
         for inp in list_inputs:
@@ -217,7 +215,7 @@ class LTLDiscreteTimeSpecification(AbstractSpecification):
             self.var_object_dict[var_name] = var_value
 
         # evaluate modular sub-specs
-        #for key in self.var_subspec_dict:
+        # for key in self.var_subspec_dict:
         #    node = self.var_subspec_dict[key]
         #    out = self.online_evaluator.evaluate(node, [])
         #    self.var_object_dict[key] = out
@@ -231,12 +229,13 @@ class LTLDiscreteTimeSpecification(AbstractSpecification):
         pass
 
     def reset(self):
-        self.top.accept(self.reseter)
-        self.reseter.reset(self.top)
-        self.update_counter = int(0);
-        self.previous_time = float(0.0);
-        self.sampling_violation_counter = int(0);
-
+        if self.online_evaluator is not None:
+            self.reseter.node_monitor_dict = self.online_evaluator.node_monitor_dict
+            self.top.accept(self.reseter)
+            self.reseter.reset(self.top)
+            self.update_counter = int(0);
+            self.previous_time = float(0.0);
+            self.sampling_violation_counter = int(0);
 
     # def offline(self, dataset):
     #     counter = 0
