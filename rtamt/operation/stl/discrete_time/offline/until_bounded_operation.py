@@ -2,7 +2,7 @@ import collections
 from rtamt.operation.abstract_operation import AbstractOperation
 
 
-class SinceBoundedOperation(AbstractOperation):
+class UntilBoundedOperation(AbstractOperation):
     def __init__(self, begin, end):
         self.begin = begin
         self.end = end
@@ -26,7 +26,7 @@ class SinceBoundedOperation(AbstractOperation):
     def update(self, left, right):
 
         out = []
-        for i in range(len(left)):
+        for i in range(len(left)-1, -1, -1):
             self.buffer_left.append(left[i])
             self.buffer_right.append(right[i])
             out_sample = - float("inf")
@@ -38,5 +38,6 @@ class SinceBoundedOperation(AbstractOperation):
                     c_left = min(c_left, self.buffer_left[k])
                 out_sample = max(out_sample, min(c_left, c_right))
             out.append(out_sample)
+        out.reverse()
         return out
 

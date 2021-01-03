@@ -12,7 +12,7 @@ class IffOperation(AbstractOperation):
         out = []
 
         for i in range(len(left)):
-            out_sample = -abs(left(i) - right(i))
+            out_sample = -abs(left[i] - right[i])
             out.append(out_sample)
 
         return out
