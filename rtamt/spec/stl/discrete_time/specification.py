@@ -4,6 +4,7 @@ import importlib
 from antlr4 import *
 from antlr4.InputStream import InputStream
 
+from rtamt.evaluator.stl.offline_evaluator import STLOfflineEvaluator
 from rtamt.spec.ltl.discrete_time.specification import LTLDiscreteTimeSpecification
 
 from rtamt.parser.stl.StlLexer import StlLexer
@@ -98,8 +99,12 @@ class STLDiscreteTimeSpecification(LTLDiscreteTimeSpecification):
         past = pastifier.pastify(self.top)
         self.top = past
 
-
-
+        # evaluate modular sub-specs
+        for key in self.var_subspec_dict:
+            node = self.var_subspec_dict[key]
+            node.accept(pastifier)
+            node = pastifier.pastify(node)
+            self.var_subspec_dict[key] = node
 
     def update(self, timestamp, list_inputs):
         # timestamp - float
@@ -128,10 +133,10 @@ class STLDiscreteTimeSpecification(LTLDiscreteTimeSpecification):
             self.var_object_dict[var_name] = var_value
 
         # evaluate modular sub-specs
-        #for key in self.var_subspec_dict:
-        #    node = self.var_subspec_dict[key]
-        #    out = self.online_evaluator.evaluate(node, [])
-        #    self.var_object_dict[key] = out
+        for key in self.var_subspec_dict:
+            node = self.var_subspec_dict[key]
+            out = self.online_evaluator.evaluate(node, [])
+            self.var_object_dict[key] = out
 
         # The evaluation done wrt the discrete counter (logical time)
         out = self.online_evaluator.evaluate(self.top, [])
@@ -142,7 +147,89 @@ class STLDiscreteTimeSpecification(LTLDiscreteTimeSpecification):
         return out
 
     def evaluate(self, *args, **kargs):
-        pass
+        if len(args) is not 1:
+            raise STLException('evaluate: Wrong number of arguments')
+
+        dataset = args[0]
+
+        if not dataset['time']:
+            raise STLException('evaluate: The input does not contain the time field')
+
+        length = len(dataset['time'])
+
+        for key in dataset:
+            if len(dataset[key]) is not length:
+                raise STLException('evaluate: The input ' + key + ' does not have the same number of samples as time')
+
+        if self.offline_evaluator is None:
+            # Initialize the offline_evaluator
+            self.offline_evaluator = STLOfflineEvaluator(self)
+            self.top.accept(self.offline_evaluator)
+            self.reseter.node_monitor_dict = self.offline_evaluator.node_monitor_dict
+
+        # Check if the difference between two consecutive timestamps is between
+        # the accepted tolerance - if not, increase the violation counter
+        ts = dataset['time']
+        for i in range(len(ts) - 1):
+            duration = (ts[i+1] - ts[i]) * self.normalize
+        tolerance = self.sampling_period * self.sampling_tolerance
+        if duration < self.sampling_period - tolerance or duration > self.sampling_period + tolerance:
+            self.sampling_violation_counter = self.sampling_violation_counter + 1
+
+
+        # update the value of every input variable
+        for key in dataset:
+            if key is not 'time':
+                self.var_object_dict[key] = dataset[key]
+
+        # evaluate modular sub-specs
+        for key in self.var_subspec_dict:
+            node = self.var_subspec_dict[key]
+            out = self.offline_evaluator.evaluate(node, [length])
+            self.var_object_dict[key] = out
+
+        # The evaluation done wrt the discrete counter (logical time)
+        out = self.offline_evaluator.evaluate(self.top, [length])
+
+        out_t = []
+        for i in range(len(ts)):
+            out_sample = [ts[i], out[i]]
+            out_t.append(out_sample)
+        out = out_t
+
+        return out
+
+
+    # def offline(self, dataset):
+    #     counter = 0
+    #     prev_signal_length = 0
+    #     signal_length = 0
+    #     out = 0
+    #
+    #     for var_name in dataset:
+    #         signal_length = len(dataset[var_name])
+    #         if counter > 0 and not (signal_length == prev_signal_length):
+    #             raise STLOfflineException('Input signals have different length')
+    #         prev_signal_length = signal_length
+    #         counter = counter + 1
+    #
+    #     for i in range(signal_length):
+    #         signal_snapshot = []
+    #         counter = 0
+    #         prev_time = 0
+    #         for var_name in dataset:
+    #             signal = dataset[var_name]
+    #             sample = signal[i]
+    #             time = sample[0]
+    #             value = sample[1]
+    #             if counter > 0 and not (time == prev_time):
+    #                 raise STLOfflineException('The time indices do not agree')
+    #             signal_snapshot.append((var_name, value))
+    #             counter = counter + 1
+    #             prev_time = time
+    #         out = self.update(time, signal_snapshot)
+    #
+    #     return out
 
     def reset(self):
         if self.online_evaluator is not None:
@@ -202,33 +289,3 @@ class STLDiscreteTimeSpecification(LTLDiscreteTimeSpecification):
         self.__update_counter = update_counter
 
 
-    # def offline(self, dataset):
-    #     counter = 0
-    #     prev_signal_length = 0
-    #     signal_length = 0
-    #     out = 0
-    #
-    #     for var_name in dataset:
-    #         signal_length = len(dataset[var_name])
-    #         if counter > 0 and not (signal_length == prev_signal_length):
-    #             raise STLOfflineException('Input signals have different length')
-    #         prev_signal_length = signal_length
-    #         counter = counter + 1
-    #
-    #     for i in range(signal_length):
-    #         signal_snapshot = []
-    #         counter = 0
-    #         prev_time = 0
-    #         for var_name in dataset:
-    #             signal = dataset[var_name]
-    #             sample = signal[i]
-    #             time = sample[0]
-    #             value = sample[1]
-    #             if counter > 0 and not (time == prev_time):
-    #                 raise STLOfflineException('The time indices do not agree')
-    #             signal_snapshot.append((var_name, value))
-    #             counter = counter + 1
-    #             prev_time = time
-    #         out = self.update(time, signal_snapshot)
-    #
-    #     return out

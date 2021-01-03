@@ -18,11 +18,11 @@ from rtamt.operation.stl.discrete_time.online.once_bounded_operation import Once
 from rtamt.operation.stl.discrete_time.online.historically_bounded_operation import HistoricallyBoundedOperation
 from rtamt.operation.stl.discrete_time.online.since_bounded_operation import SinceBoundedOperation
 from rtamt.operation.stl.discrete_time.online.precedes_bounded_operation import PrecedesBoundedOperation
-from rtamt.operation.arithmetic.discrete_time.subtraction_operation import SubtractionOperation
-from rtamt.operation.arithmetic.discrete_time.addition_operation import AdditionOperation
-from rtamt.operation.arithmetic.discrete_time.multiplication_operation import MultiplicationOperation
-from rtamt.operation.arithmetic.discrete_time.division_operation import DivisionOperation
-from rtamt.operation.arithmetic.discrete_time.abs_operation import AbsOperation
+from rtamt.operation.arithmetic.discrete_time.online.subtraction_operation import SubtractionOperation
+from rtamt.operation.arithmetic.discrete_time.online.addition_operation import AdditionOperation
+from rtamt.operation.arithmetic.discrete_time.online.multiplication_operation import MultiplicationOperation
+from rtamt.operation.arithmetic.discrete_time.online.division_operation import DivisionOperation
+from rtamt.operation.arithmetic.discrete_time.online.abs_operation import AbsOperation
 from rtamt.operation.stl.discrete_time.online.previous_operation import PreviousOperation
 from rtamt.spec.stl.discrete_time.comp_op import StlComparisonOperator
 

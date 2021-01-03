@@ -75,12 +75,22 @@ class STLOfflineEvaluator(STLVisitor):
     def visitConstant(self, node, args):
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update()
+        if len(args) > 0:
+            length = args[0]
+            out = []
+            for i in range(length):
+                out.append(out_sample)
+            out_sample = out
+
         return out_sample
 
     def visitAbs(self, node, args):
         in_sample = self.visit(node.children[0], args)
         monitor = self.node_monitor_dict[node.name]
+
+
         out_sample = monitor.update(in_sample)
+
         return out_sample
 
     def visitAddition(self, node, args):

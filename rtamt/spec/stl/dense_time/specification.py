@@ -58,6 +58,13 @@ class STLDenseTimeSpecification(STLDiscreteTimeSpecification):
         past = pastifier.pastify(self.top)
         self.top = past
 
+        # evaluate modular sub-specs
+        for key in self.var_subspec_dict:
+            node = self.var_subspec_dict[key]
+            node.accept(pastifier)
+            node = pastifier.pastify(node)
+            self.var_subspec_dict[key] = node
+
     # Online
     def update(self, *args, **kargs):
         # list_inputs:
@@ -74,6 +81,8 @@ class STLDenseTimeSpecification(STLDiscreteTimeSpecification):
             self.var_object_dict[var_name] = var_object
         out = self.online_evaluator.evaluate(self.top, [])
         self.var_object_dict = self.var_object_dict.fromkeys(self.var_object_dict, [])
+
+
         return out
 
     # def update_final(self, *args, **kargs):
@@ -97,6 +106,13 @@ class STLDenseTimeSpecification(STLDiscreteTimeSpecification):
             var_name = arg[0]
             var_object = arg[1]
             self.var_object_dict[var_name] = var_object
+
+        # evaluate modular sub-specs
+        for key in self.var_subspec_dict:
+            node = self.var_subspec_dict[key]
+            out = self.offline_evaluator.evaluate(node, [])
+            self.var_object_dict[key] = out
+
         out = self.offline_evaluator.evaluate(self.top, [])
         self.var_object_dict = self.var_object_dict.fromkeys(self.var_object_dict, [])
         return out

@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 import sys
 import csv
 import rtamt
@@ -19,9 +18,10 @@ def monitor():
     spec.set_var_io_type('req', 'input')
     spec.set_var_io_type('gnt', 'output')
     spec.add_sub_spec('response = eventually[0:T s](gnt >= threshold)')
-    spec.spec = 'out = always((req >= threshold) implies response)'
+    spec.spec = 'out = ((req >= threshold) implies response)'
     try:
         spec.parse()
+        spec.pastify()
     except rtamt.STLParseException as err:
         print('STL Parse Exception: {}'.format(err))
         sys.exit()

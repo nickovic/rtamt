@@ -13,13 +13,13 @@ class PredicateOperation(AbstractOperation):
         out = []
         for i in range(len(left)):
             if self.op.value == StlComparisonOperator.EQ.value:
-                val = - abs(left(i) - right(i))
+                val = - abs(left[i] - right[i])
             elif self.op.value == StlComparisonOperator.NEQ.value:
-                val = abs(left(i) - right(i))
+                val = abs(left[i] - right[i])
             elif self.op.value == StlComparisonOperator.LEQ.value or self.op.value == StlComparisonOperator.LESS.value:
-                val = right(i) - left(i)
+                val = right[i] - left[i]
             elif self.op.value == StlComparisonOperator.GEQ.value or self.op.value == StlComparisonOperator.GREATER.value:
-                val = left(i) - right(i)
+                val = left[i] - right[i]
             else:
                 val = float('nan')
             out.append(val)
