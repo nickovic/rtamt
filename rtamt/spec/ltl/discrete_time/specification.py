@@ -139,7 +139,7 @@ class LTLDiscreteTimeSpecification(AbstractSpecification):
             var = complex()
         else:
             try:
-                var_module = self.spec.modules[var_type]
+                var_module = self.modules[var_type]
                 class_ = getattr(var_module, var_type)
                 var = class_()
             except KeyError:

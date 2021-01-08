@@ -66,7 +66,10 @@ class STLOfflineEvaluator(STLVisitor):
     def visitVariable(self, node, args):
         var = self.spec.var_object_dict[node.var]
         if node.field:
-            value = operator.attrgetter(node.field)(var)
+            value = []
+            for v in var:
+                val = operator.attrgetter(node.field)(v[1])
+                value.append([v[0], val])
         else:
             value = var
 
