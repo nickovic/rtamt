@@ -24,6 +24,11 @@ from rtamt.operation.stl.discrete_time.offline.constant_operation import Constan
 from rtamt.operation.stl.discrete_time.offline.once_bounded_operation import OnceBoundedOperation
 from rtamt.operation.stl.discrete_time.offline.historically_bounded_operation import HistoricallyBoundedOperation
 from rtamt.operation.stl.discrete_time.offline.since_bounded_operation import SinceBoundedOperation
+from rtamt.operation.stl.discrete_time.offline.until_operation import UntilOperation
+from rtamt.operation.stl.discrete_time.offline.until_bounded_operation import UntilBoundedOperation
+from rtamt.operation.stl.discrete_time.offline.always_bounded_operation import AlwaysBoundedOperation
+from rtamt.operation.stl.discrete_time.offline.eventually_bounded_operation import EventuallyBoundedOperation
+from rtamt.operation.stl.discrete_time.offline.next_operation import NextOperation
 
 class STLOfflineDiscreteTimePythonMonitor(STLVisitor):
     def __init__(self):
@@ -131,7 +136,11 @@ class STLOfflineDiscreteTimePythonMonitor(STLVisitor):
         self.visit(node.children[0], args)
 
     def visitUntil(self, node, args):
-        raise STLNotImplementedException('Until operator is not implemented in the STL offline monitor.')
+        monitor = UntilOperation()
+        self.node_monitor_dict[node.name] = monitor
+
+        self.visit(node.children[0], args)
+        self.visit(node.children[1], args)
 
     def visitOnce(self, node, args):
         monitor = OnceOperation()
@@ -175,7 +184,10 @@ class STLOfflineDiscreteTimePythonMonitor(STLVisitor):
         self.visit(node.children[0], args)
 
     def visitNext(self, node, args):
-        raise STLNotImplementedException('Next operator not implemented in STL offline monitor.')
+        monitor = NextOperation()
+        self.node_monitor_dict[node.name] = monitor
+
+        self.visit(node.children[0], args)
 
     def visitTimedPrecedes(self, node, args):
         raise STLNotImplementedException('Precedes operator not implemented in STL offline monitor.')
@@ -200,13 +212,23 @@ class STLOfflineDiscreteTimePythonMonitor(STLVisitor):
         self.visit(node.children[1], args)
 
     def visitTimedAlways(self, node, args):
-        raise STLNotImplementedException('Bounded always operator not implemented in STL offline monitor.')
+        monitor = AlwaysBoundedOperation(node.begin, node.end)
+        self.node_monitor_dict[node.name] = monitor
+
+        self.visit(node.children[0], args)
 
     def visitTimedEventually(self, node, args):
-        raise STLNotImplementedException('Bounded eventually operator not implemented in STL offline monitor.')
+        monitor = EventuallyBoundedOperation(node.begin, node.end)
+        self.node_monitor_dict[node.name] = monitor
+
+        self.visit(node.children[0], args)
 
     def visitTimedUntil(self, node, args):
-        raise STLNotImplementedException('Bounded until operator not implemented in STL offline monitor.')
+        monitor = UntilBoundedOperation(node.begin, node.end)
+        self.node_monitor_dict[node.name] = monitor
+
+        self.visit(node.children[0], args)
+        self.visit(node.children[1], args)
 
     def visitDefault(self, node, args):
         pass
