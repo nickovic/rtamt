@@ -64,8 +64,11 @@ class STLOnlineEvaluator(STLVisitor):
         if type(var) is list:
             value = []
             for v in var:
-                val = operator.attrgetter(node.field)(v[1])
-                value.append([v[0], val])
+                if node.field:
+                    val = operator.attrgetter(node.field)(v[1])
+                    value.append([v[0], val])
+                else:
+                    value = var
         else:
             if node.field:
                 value = operator.attrgetter(node.field)(var)
