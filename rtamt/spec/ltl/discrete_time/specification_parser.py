@@ -7,7 +7,7 @@ Created on Tue Jul 23 21:38:29 2019
 import logging
 import operator
 
-
+import rtamt
 from rtamt import Language
 from rtamt.parser.ltl.LtlParserVisitor import LtlParserVisitor
 
@@ -39,7 +39,7 @@ from rtamt.node.ltl.rise import Rise
 from rtamt.node.ltl.constant import Constant
 
 from rtamt.exception.stl.exception import STLParseException
-
+from rtamt.exception.exception import RTAMTException
 
 class LTLSpecificationParser(LtlParserVisitor):
     
@@ -344,16 +344,15 @@ class LTLSpecificationParser(LtlParserVisitor):
         implicit = False
         if not ctx.Identifier():
             id = 'out'
-            id_head = 'out'
-            id_tail = ''
             implicit = True
         else:
             id = ctx.Identifier().getText();
-            self.spec.var_subspec_dict[id] = out
-            id_tokens = id.split('.')
-            id_head = id_tokens[0]
-            id_tokens.pop(0)
-            id_tail = '.'.join(id_tokens)
+
+        self.spec.var_subspec_dict[id] = out
+        id_tokens = id.split('.')
+        id_head = id_tokens[0]
+        id_tokens.pop(0)
+        id_tail = '.'.join(id_tokens)
 
         try:
             var = self.spec.var_object_dict[id_head]
@@ -388,7 +387,12 @@ class LTLSpecificationParser(LtlParserVisitor):
         return self.visit(ctx.specification())
 
     def visitSpecification(self, ctx):
-        return self.visitChildren(ctx)
+        out = self.visitChildren(ctx)
+        try:
+            del self.spec.var_subspec_dict[self.spec.out_var + self.spec.out_var_field]
+        except KeyError:
+            raise RTAMTException('Could not remove an entry from var_subspec_dict.')
+        return out
 
     def visitSpecificationId(self, ctx):
         self.visitChildren(ctx)

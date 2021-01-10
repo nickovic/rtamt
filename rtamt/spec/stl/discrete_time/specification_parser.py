@@ -84,11 +84,11 @@ class STLSpecificationParser(LTLSpecificationParser, StlParserVisitor):
     def visitExprAlways(self, ctx):
         child = self.visit(ctx.expression())
         if ctx.interval() == None:
-            node = Once(child)
+            node = Always(child)
             horizon = child.horizon
         else:
             interval = self.visit(ctx.interval())
-            node = TimedOnce(child, interval.begin, interval.end)
+            node = TimedAlways(child, interval.begin, interval.end)
             horizon = child.horizon + interval.end
         node.horizon = horizon
         return node

@@ -1,5 +1,6 @@
 from rtamt.spec.stl.discrete_time.visitor import STLVisitor
 from rtamt.exception.stl.exception import STLNotImplementedException
+from rtamt.exception.ltl.exception import LTLNotImplementedException
 from rtamt.operation.stl.dense_time.online.predicate_operation import PredicateOperation
 from rtamt.operation.arithmetic.dense_time.online.addition_operation import AdditionOperation
 from rtamt.operation.arithmetic.dense_time.online.multiplication_operation import MultiplicationOperation
@@ -128,7 +129,7 @@ class STLOnlineDenseTimePythonMonitor(STLVisitor):
         self.visit(node.children[0], args)
 
     def visitUntil(self, node, args):
-        raise STLNotImplementedException('Until operator is not implemented in the STL online monitor.')
+        raise LTLNotImplementedException('Until operator is not implemented in the STL online monitor.')
 
     def visitOnce(self, node, args):
         monitor = OnceOperation()
@@ -150,20 +151,20 @@ class STLOnlineDenseTimePythonMonitor(STLVisitor):
         self.visit(node.children[1], args)
 
     def visitRise(self, node, args):
-        raise STLNotImplementedException('Rise operator not implemented in STL dense monitor.')
+        raise LTLNotImplementedException('Rise operator not implemented in STL dense monitor.')
 
     def visitFall(self, node, args):
-        raise STLNotImplementedException('Fall operator not implemented in STL dense monitor.')
+        raise LTLNotImplementedException('Fall operator not implemented in STL dense monitor.')
 
     def visitConstant(self, node, args):
         monitor = ConstantOperation(node.val)
         self.node_monitor_dict[node.name] = monitor
 
     def visitPrevious(self, node, args):
-        raise STLNotImplementedException('Previous operator not implemented in STL dense-time monitor.')
+        raise LTLNotImplementedException('Previous operator not implemented in STL dense-time monitor.')
 
     def visitNext(self, node, args):
-        raise STLNotImplementedException('Next operator not implemented in STL dense-time monitor.')
+        raise LTLNotImplementedException('Next operator not implemented in STL dense-time monitor.')
 
     def visitTimedPrecedes(self, node, args):
         raise STLNotImplementedException('Precedes operator not implemented in STL dense-time monitor.')
