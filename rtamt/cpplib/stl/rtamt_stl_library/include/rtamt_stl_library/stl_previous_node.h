@@ -1,24 +1,16 @@
 #ifndef STL_PREVIOUS_H
 #define STL_PREVIOUS_H
 
-#include <rtamt_stl_library/stl_sample.h>
-#include <rtamt_stl_library/stl_node.h>
-
 namespace stl_library {
 
-class StlPreviousNode : public StlNode {
+class StlPreviousNode {
     private:
-        Sample in;
-        Sample prev_in;
-        void addNewInput(int i, Sample msg);
-        
-        
+        double prev_in;
+
     public:
         StlPreviousNode();
-        Sample update();
-        void addNewInput(Sample msg);
+        double update(double sample);
         void reset();
-       
 };
 
 } // namespace stl_library

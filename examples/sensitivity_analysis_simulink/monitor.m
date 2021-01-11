@@ -4,15 +4,14 @@ function [rob] = monitor( in )
 % Created:  20-01-2020
 % Author:   Dejan Nickovic
 
-import py.rtamt.STLIOSpecification;
-spec = STLIOSpecification(1);
+import py.rtamt.STLDiscreteTimeSpecification;
+spec = STLDiscreteTimeSpecification();
 declare_var(spec, 'pc', 'float');
 declare_var(spec, 'lep', 'float');
 declare_var(spec, 'out', 'float');
 set_var_io_type(spec, 'pc', 'input');
 set_var_io_type(spec, 'lep', 'output');
 set_var_io_type(spec, 'out', 'output');
-spec.iosem = 'output-robustness';
 spec.spec = 'out = always((rise(pc >= 0.9)) implies (eventually[0:100] always[0:100] (abs(pc - lep) <= 3)))';
 
 parse(spec);

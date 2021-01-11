@@ -9,18 +9,15 @@
 #include <boost/python/module.hpp>
 #include <boost/python/wrapper.hpp>
 
-#include <rtamt_stl_library/stl_node.h>
 #include <rtamt_stl_library/stl_eventually_node.h>
-#include <rtamt_stl_library/stl_sample.h>
 
 using namespace boost::python;
 using namespace stl_library;
 
 BOOST_PYTHON_MODULE(stl_eventually_node)
 {
-    class_<StlEventuallyNode, bases<StlNode> >("StlEventuallyNode")
-        .def("update", &StlEventuallyNode::update)
+    class_<StlEventuallyNode>("EventuallyOperation")
+        .def("update", static_cast<double (StlEventuallyNode::*)(double)>(&StlEventuallyNode::update))
         .def("reset", &StlEventuallyNode::reset)
-        .def("addNewInput", static_cast<void (StlEventuallyNode::*)(Sample)>(&StlEventuallyNode::addNewInput))
     ;
 }

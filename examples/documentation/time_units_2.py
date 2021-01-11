@@ -2,17 +2,18 @@ import sys
 import rtamt
 
 def monitor():
-    spec = rtamt.STLSpecification()
+    spec = rtamt.STLDiscreteTimeSpecification()
     spec.name = 'Bounded-response Request-Grant'
 
     spec.declare_var('req', 'float')
     spec.declare_var('gnt', 'float')
     spec.declare_var('out', 'float')
 
-    spec.spec = 'out = always((req>=3) implies (eventually[0:5](gnt>=3)))'
+    spec.spec = 'out = (req>=3) implies (eventually[0:5](gnt>=3))'
 
     try:
         spec.parse()
+        spec.pastify()
         spec.update(0, [('req', 0.1), ('gnt', 0.3)])
         spec.update(1.02, [('req', 0.45), ('gnt', 0.12)])
         spec.update(1.98, [('req', 0.78), ('gnt', 0.18)])

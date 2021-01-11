@@ -9,9 +9,7 @@
 #include <boost/python/module.hpp>
 #include <boost/python/wrapper.hpp>
 
-#include <rtamt_stl_library/stl_node.h>
 #include <rtamt_stl_library/stl_combinatorial_binary_node.h>
-#include <rtamt_stl_library/stl_sample.h>
 #include <rtamt_stl_library/stl_operator_type.h>
 
 using namespace boost::python;
@@ -19,9 +17,8 @@ using namespace stl_library;
 
 BOOST_PYTHON_MODULE(stl_combinatorial_binary_node)
 {
-    class_<StlCombinatorialBinaryNode, bases<StlNode> >("StlCombinatorialBinaryNode", init<StlOperatorType>())
-        .def("update", &StlCombinatorialBinaryNode::update)
+    class_<StlCombinatorialBinaryNode>("CombinatorialBinaryOperation", init<StlOperatorType>())
+        .def("update", static_cast<double (StlCombinatorialBinaryNode::*)(double, double)>(&StlCombinatorialBinaryNode::update))
         .def("reset", &StlCombinatorialBinaryNode::reset)
-        .def("addNewInput", static_cast<void (StlCombinatorialBinaryNode::*)(Sample, Sample)>(&StlCombinatorialBinaryNode::addNewInput))
     ;
 }

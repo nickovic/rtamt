@@ -1,17 +1,8 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Jul 21 20:32:57 2019
-
-@author: NickovicD
-"""
-
 import os
-import logging
 import sys
 from abc import ABCMeta, abstractmethod
-from rtamt.exception.stl.exception import STLSpecificationException
-from decimal import Decimal
-from fractions import Fraction
+from rtamt.enumerations.options import TimeInterpretation
+from rtamt.exception.exception import RTAMTException
 
 
 class AbstractSpecification:
@@ -19,6 +10,8 @@ class AbstractSpecification:
 
     Attributes:
         name : String
+
+        modular_spec : String - specification text
         spec : String - specification text
 
         vars : set(String) - set of variable names
@@ -26,41 +19,34 @@ class AbstractSpecification:
         publish_var : String - variable name to be published
         publish_var_field : String - variable field to be published
 
-        sampling_period : int - size of the sampling period in ps (default = 10^12 ps = 1s
-
-        var_value_dict : dict(String, double) - dictionary that maps variable names to their value
-        var_subspec_dict : dict(String, AbstractNode) - dicrtionary that maps variables to the formulas they represent
+        var_subspec_dict : dict(String, AbstractNode) - dictionary that maps variable names to the AST
+        var_object_dict : dict(String, double) - dictionary that maps variable names to their value
         modules : dict(String,String) - dictionary that maps module paths to module names
         var_type_dict : dict(String, String) - dictionary that maps var names to var types
         var_io_dict : dict(String, String) - dictionary that maps var names to var io signature
         var_topic_dict : dict(String,String) - dictionaty that mapts var names to ROS topic names
+        const_type_dict : dict(String, String) - dictionary mapping const var names to var types
+        const_val_dict : dict(String, String) - dictionary mapping const var names to var vals encoded as strings
 
-        top : AbstractNode - pointer to the specification parse tree
+        top : Node - pointer to the specification parse tree
 
-        evaluator : AbstractEvaluator - pointer to the object that implements the monitoring algorithm
+        online_evaluator : OnlineEvaluator - pointer to the object that implements the monitoring algorithm
         offline_evaluator : OfflineEvaluator - pointer to the object that implements the monitoring algorithm
-
-        is_pure_python : Boolean - flag denoting whether to use pure Python or mixed Python/C++ implementation (default = True)
-
-        update_counter : int
-        previous_time : float
-        sampling_violation_counter : int
-
 
     Methods
         get_spec_from_file - create and populate specification object from the text file
         parse - parse the specification
-        update - update the specification
+        update - update the specification online
+        evaluate - evaluate the specification offline
     """
     __metaclass__ = ABCMeta
 
-    def __init__(self, is_pure_python):
+    def __init__(self):
         self.S_UNIT = int(1000000000)
         self.MS_UNIT = int(1000000)
         self.US_UNIT = int(1000)
         self.NS_UNIT = int(1)
 
-        self.DEFAULT_TOLERANCE = float(0.1)
 
         self.U = {
             's': self.S_UNIT,
@@ -69,55 +55,35 @@ class AbstractSpecification:
             'ns': self.NS_UNIT
         }
 
+        self.time_interpretation = TimeInterpretation.DISCRETE
+
+        self.horizon = 0
+
         self.name = 'Abstract Specification'
         self.spec = None
+        self.modular_spec = ''
 
         self.vars = set()
         self.free_vars = set()
         self.publish_var = ''
         self.publish_var_field = ''
 
-        # Default sampling period - 1s
-        self.sampling_period = int(1)
-        self.sampling_period_unit = 's'
-
-        # Default sampling tolerance
-        self.sampling_tolerance = float(0.1)
-
         # Default unit
         self.unit = 's'
 
-        self.var_value_dict = dict()
         self.var_subspec_dict = dict()
+        self.var_object_dict = dict()
         self.modules = dict()
         self.var_type_dict = dict()
         self.var_io_dict = dict()
         self.var_topic_dict = dict()
+        self.const_type_dict = dict()
+        self.const_val_dict = dict()
 
         self.top = None
 
-        self.evaluator = None
+        self.online_evaluator = None
         self.offline_evaluator = None
-
-        self.is_pure_python = is_pure_python
-
-        self.update_counter = int(0)
-        self.previous_time = float(0.0)
-        self.sampling_violation_counter = int(0)
-
-        self.normalize = float(1.0)
-
-    def reset(self):
-        pass
-
-    # setters and getters
-    @property
-    def is_pure_python(self):
-        return self.__is_pure_python
-
-    @is_pure_python.setter
-    def is_pure_python(self, is_pure_python):
-        self.__is_pure_python = is_pure_python
 
     @property
     def spec(self):
@@ -134,6 +100,14 @@ class AbstractSpecification:
     @name.setter
     def name(self, name):
         self.__name = name
+
+    @property
+    def horizon(self):
+        return self.__horizon
+
+    @horizon.setter
+    def horizon(self, horizon):
+        self.__horizon = horizon
         
     @property
     def top(self):
@@ -144,51 +118,12 @@ class AbstractSpecification:
         self.__top = top
 
     @property
-    def sampling_period(self):
-        return self.__sampling_period
-
-    @sampling_period.setter
-    def sampling_period(self, sampling_period):
-        self.__sampling_period = sampling_period
-
-    @property
-    def sampling_period_unit(self):
-        return self.__sampling_period_unit
-
-    @sampling_period_unit.setter
-    def sampling_period_unit(self, sampling_period_unit):
-        self.__sampling_period_unit = sampling_period_unit
-
-    @property
-    def sampling_violation_counter(self):
-        return self.__sampling_violation_counter
-
-    @sampling_violation_counter.setter
-    def sampling_violation_counter(self, sampling_violation_counter):
-        self.__sampling_violation_counter = sampling_violation_counter
-
-    @property
     def unit(self):
         return self.__unit
 
     @unit.setter
     def unit(self, unit):
         self.__unit = unit
-
-    def set_sampling_period(self, sampling_period=int(1), unit='s', tolerance=float(0.1)):
-        self.sampling_period = sampling_period
-        self.sampling_period_unit = unit
-
-        if tolerance < 0.0 or tolerance > 1.0:
-            raise STLSpecificationException
-
-        self.sampling_tolerance = tolerance
-
-    def get_sampling_period(self):
-        return self.sampling_period * self.U[self.sampling_period_unit]
-
-    def get_sampling_frequency(self):
-        return 1e12 * 1/self.sampling_period
 
     @property
     def publish_var(self):
@@ -230,14 +165,6 @@ class AbstractSpecification:
     def modules(self, modules):
         self.__modules = modules
 
-    @property
-    def update_counter(self):
-        return self.__update_counter
-
-    @update_counter.setter
-    def update_counter(self, update_counter):
-        self.__update_counter = update_counter
-
     def add_input_var(self, input_var):
         self.in_vars.add(input_var)
 
@@ -256,6 +183,12 @@ class AbstractSpecification:
     def add_op(self, op):
         self.ops.add(op)
 
+    def get_value(self, var_name):
+        return self.var_object_dict[var_name]
+
+    def add_sub_spec(self, sub_spec):
+        self.modular_spec = self.modular_spec + sub_spec + '\n'
+
     def get_var_object(self, name):
         return self.var_value_dict[name]
 
@@ -272,7 +205,7 @@ class AbstractSpecification:
             out = f.read()
             f.close()
         else:
-            logging.error('The file %s does not exist.', path)
+            raise RTAMTException('The file {} does not exist.'.format(path))
             sys.exit()
         return out
 
@@ -285,7 +218,11 @@ class AbstractSpecification:
         pass
 
     @abstractmethod
-    def offline(self, args):
+    def evaluate(self, args):
+        pass
+
+    @abstractmethod
+    def reset(self):
         pass
 
 

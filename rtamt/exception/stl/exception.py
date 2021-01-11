@@ -1,4 +1,6 @@
-class STLException(Exception):
+from rtamt.exception.exception import RTAMTException
+
+class STLException(RTAMTException):
     pass
 
 class STLParseException(STLException):
@@ -8,4 +10,7 @@ class STLOfflineException(STLException):
     pass
 
 class STLSpecificationException(STLException):
+    pass
+
+class STLNotImplementedException(STLException):
     pass

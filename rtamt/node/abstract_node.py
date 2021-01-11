@@ -20,9 +20,6 @@ class AbstractNode:
         self.name = ''
         self.node = None
 
-    def reset(self):
-        self.node.reset()
-
     def addChild(self, child):
         self.children.append(child)
 
@@ -36,12 +33,12 @@ class AbstractNode:
 
     @property
     def evaluator(self):
-        """Getter for the evaluator"""
+        """Getter for the online_evaluator"""
         return self.__evaluator
 
     @evaluator.setter
     def evaluator(self, evaluator):
-        """Setter for the evaluator"""
+        """Setter for the online_evaluator"""
         self.__evaluator = evaluator
 
     @property
