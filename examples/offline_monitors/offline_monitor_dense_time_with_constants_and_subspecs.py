@@ -27,7 +27,7 @@ def monitor():
         sys.exit()
 
     rob = spec.evaluate(['req', data[' req']], ['gnt', data[' gnt']])
-    print('Example (a) - standard robustness: {}'.format(rob))
+    print('robustness: ' + str(rob) + ', response: ' + str(spec.get_value('response')))
 
 
 def read_csv(filename):

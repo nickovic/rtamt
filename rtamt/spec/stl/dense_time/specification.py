@@ -47,7 +47,7 @@ class STLDenseTimeSpecification(STLDiscreteTimeSpecification):
         ctx = parser.specification_file()
 
         # Create the visitor for the actual spec nodes
-        visitor = STLSpecificationParser(self)
+        visitor = STLDenseTimeSpecificationParser(self)
         self.top = visitor.visitSpecification_file(ctx)
 
 
@@ -79,20 +79,19 @@ class STLDenseTimeSpecification(STLDiscreteTimeSpecification):
             var_name = arg[0]
             var_object = arg[1]
             self.var_object_dict[var_name] = var_object
+
+        # evaluate modular sub-specs
+        for key in self.var_subspec_dict:
+            node = self.var_subspec_dict[key]
+            out = self.online_evaluator.evaluate(node, [])
+            self.var_object_dict[key] = out
+
         out = self.online_evaluator.evaluate(self.top, [])
+
         self.var_object_dict = self.var_object_dict.fromkeys(self.var_object_dict, [])
 
 
         return out
-
-    # def update_final(self, *args, **kargs):
-    #     for arg in args:
-    #         var_name = arg[0]
-    #         var_object = arg[1]
-    #         self.var_object_dict[var_name] = var_object
-    #     out = self.evaluator.evaluate(self.top, ['final'])
-    #     self.var_object_dict = self.var_object_dict.fromkeys(self.var_object_dict, [])
-    #     return out
 
     # Offline
     def evaluate(self, *args, **kargs):

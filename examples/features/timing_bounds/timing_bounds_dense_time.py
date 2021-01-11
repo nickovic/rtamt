@@ -15,9 +15,10 @@ def monitor():
     spec.declare_var('out', 'float')
     spec.set_var_io_type('req', 'input')
     spec.set_var_io_type('gnt', 'output')
-    spec.spec = 'out = always((req>=3) implies (eventually[0:5.1s](gnt>=3)))'
+    spec.spec = 'out = ((req>=3) implies (eventually[0:5.1s](gnt>=3)))'
     try:
         spec.parse()
+        spec.pastify()
     except rtamt.STLParseException as err:
         print('STL Parse Exception: {}'.format(err))
         sys.exit()
@@ -25,7 +26,6 @@ def monitor():
 
     rob = spec.evaluate(['req', data1[' req']], ['gnt', data1[' gnt']])
 
-    # print('Example (a) - standard robustness: {}'.format(rob[len(rob)-1][1]))
     print('Example (a) - standard robustness: {}'.format(rob))
 
     spec = rtamt.STLDenseTimeSpecification(semantics=rtamt.Semantics.STANDARD)
@@ -35,9 +35,10 @@ def monitor():
     spec.declare_var('out', 'float')
     spec.set_var_io_type('req', 'input')
     spec.set_var_io_type('gnt', 'output')
-    spec.spec = 'out = always((req>=3) implies (eventually[0:5100ms](gnt>=3)))'
+    spec.spec = 'out = ((req>=3) implies (eventually[0:5100ms](gnt>=3)))'
     try:
         spec.parse()
+        spec.pastify()
     except rtamt.STLParseException as err:
         print('STL Parse Exception: {}'.format(err))
         sys.exit()
