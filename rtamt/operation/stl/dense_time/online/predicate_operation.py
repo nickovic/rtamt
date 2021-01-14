@@ -12,6 +12,7 @@ class PredicateOperation(AbstractOperation):
         out = []
         input_list_1 = args[0]
         input_list_2 = args[1]
+
         input_list = self.sub.update(input_list_1, input_list_2)
 
         prev = float("nan")

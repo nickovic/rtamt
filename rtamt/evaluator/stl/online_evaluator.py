@@ -74,7 +74,6 @@ class STLOnlineEvaluator(STLVisitor):
                 value = operator.attrgetter(node.field)(var)
             else:
                 value = var
-
         return value
 
     def visitConstant(self, node, args):

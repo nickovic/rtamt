@@ -99,7 +99,7 @@ class LTLSpecificationParser(LtlParserVisitor):
             id_tail = '.'.join(id_tokens)
 
             try:
-                var = self.spec.var_object_dict[id_head]
+                var = self.spec.create_var_from_name(id_head)
                 if (not id_tail):
                     if (not isinstance(var, (int, float))):
                         raise STLParseException('Variable {} is not of type int or float'.format(id))
@@ -355,7 +355,8 @@ class LTLSpecificationParser(LtlParserVisitor):
         id_tail = '.'.join(id_tokens)
 
         try:
-            var = self.spec.var_object_dict[id_head]
+            #var = self.spec.var_object_dict[id_head]
+            var = self.spec.create_var_from_name(id_head)
             if (not id_tail):
                 if (not isinstance(var, (int, float))):
                     raise STLParseException('Variable {} is not of type int or float'.format(id))
