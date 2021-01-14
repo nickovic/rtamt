@@ -47,7 +47,6 @@ class AbstractSpecification:
         self.US_UNIT = int(1000)
         self.NS_UNIT = int(1)
 
-
         self.U = {
             's': self.S_UNIT,
             'ms': self.MS_UNIT,
@@ -90,13 +89,13 @@ class AbstractSpecification:
         return self.__spec
 
     @spec.setter
-    def spec(self,spec):
+    def spec(self, spec):
         self.__spec = spec
 
     @property
     def name(self):
         return self.__name
-    
+
     @name.setter
     def name(self, name):
         self.__name = name
@@ -108,11 +107,11 @@ class AbstractSpecification:
     @horizon.setter
     def horizon(self, horizon):
         self.__horizon = horizon
-        
+
     @property
     def top(self):
         return self.__top
-    
+
     @top.setter
     def top(self, top):
         self.__top = top
@@ -128,7 +127,7 @@ class AbstractSpecification:
     @property
     def publish_var(self):
         return self.__publish_var
-    
+
     @publish_var.setter
     def publish_var(self, publish_var):
         self.__publish_var = publish_var
@@ -179,7 +178,7 @@ class AbstractSpecification:
 
     def add_var(self, var):
         self.vars.add(var)
-        
+
     def add_op(self, op):
         self.ops.add(op)
 
@@ -190,7 +189,7 @@ class AbstractSpecification:
         self.modular_spec = self.modular_spec + sub_spec + '\n'
 
     def get_var_object(self, name):
-        return self.var_value_dict[name]
+        return self.var_object_dict[name]
 
     def get_spec_from_file(self, path):
         """Opens a text file and returns its content as a string
@@ -224,9 +223,3 @@ class AbstractSpecification:
     @abstractmethod
     def reset(self):
         pass
-
-
-
-
-
-
