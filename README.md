@@ -102,6 +102,12 @@ sudo pip2 uninstall rtamt
 sudo pip3 uninstall rtamt
 ```
 
+## test tool
+
+```bash
+python -m unittest discover tests/
+```
+
 # Theory
 
 RTAMT is a Python library for offline and online monitoring of (bounded-future)  
