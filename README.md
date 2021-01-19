@@ -40,7 +40,7 @@ sudo apt install cmake
 ```
 
 In our experience, Ubuntu 16.04, 18.04 don't support the versions in default. You can check manual intallation of cmake.  
-https://cmake.org/install/
+<https://cmake.org/install/>
 
 ## Build the tool
 
@@ -50,7 +50,8 @@ https://cmake.org/install/
 git clone https://github.com/nickovic/rtamt
 ```
 
-#### Build CPP libraries for Python 2 
+#### Build CPP libraries for Python 2
+
 This step is needed only if you want to use the CPP backend and
 can be skipped if you want to use pure Python monitors.
 
@@ -69,7 +70,8 @@ cd rtamt/
 sudo pip2 install .
 ```
 
-#### build CPP libraries for Python 3 
+#### build CPP libraries for Python 3
+
 This step is needed only if you want to use the CPP backend and
 can be skipped if you want to use pure Python monitors.
 
@@ -102,23 +104,23 @@ sudo pip3 uninstall rtamt
 
 # Theory
 
-RTAMT is a Python library for offline and online monitoring of (bounded-future) 
-Signal Temporal Logic (STL). The library is inspired by several theoretical and practical 
+RTAMT is a Python library for offline and online monitoring of (bounded-future)  
+Signal Temporal Logic (STL). The library is inspired by several theoretical and practical  
 works:
+
 - The bounded-future fragment of STL is inspired by [2]
 - The interface-aware interpretation of STL quantitative semantics is inspired by [3]
 - The periodic-sampling interpretation of specifications (even in presence of timestamps that are not prefectly periodic) is inpired by [4]
-- The translation of bounded-future STL to "equirobust" past STL prior to the online monitoring phase is inspired by [2] 
+- The translation of bounded-future STL to "equirobust" past STL prior to the online monitoring phase is inspired by [2]
 
 ## Specification Language
 
 RTAMT supports Signal Temporal Logic (STL) and interface-aware STL (IA-STL).
 
-The library supports a variant of STL with past and future temporal operators as well as basic arithmetic and absolute value operators. 
-Semantics of STL is defined in terms of a robustness degree `rho(phi,w,t)`, a function defined over real numbers extended with `+inf` and `-inf` that takes as input an STL specification `phi`, an input signal 
-`w` and time index `t`, and computes how far is the signal `w` at time `t` from satisfying/violating `phi`. The robustness degree function is defined inductively as follows
-(`c` is a real constant, `x` is a variable, `w_x(t)` denotes the value of `w` projected to `x` at time `t`, `a,b` are rational constants such that `0 <= a <= b` and `|w|` is the length of `w`):
-```
+The library supports a variant of STL with past and future temporal operators as well as basic arithmetic and absolute value operators.  
+Semantics of STL is defined in terms of a robustness degree `rho(phi,w,t)`, a function defined over real numbers extended with `+inf` and `-inf` that takes as input an STL specification `phi`, an input signal `w` and time index `t`, and computes how far is the signal `w` at time `t` from satisfying/violating `phi`. The robustness degree function is defined inductively as follows (`c` is a real constant, `x` is a variable, `w_x(t)` denotes the value of `w` projected to `x` at time `t`, `a,b` are rational constants such that `0 <= a <= b` and `|w|` is the length of `w`):
+
+```txt
 % Constant
 rho(c,w,t) = c
 
@@ -193,7 +195,8 @@ rho(phi until[a,b] psi,w,t) = -inf                                              
 We define the robustness degree `rho(phi,w)` as `rho(phi,w,0)`.
 
 There are several important points to note about the above syntax and semantics:
-- In the online monitoring mode, the library allows only bounded-future STL specifications, meaning that _unbounded_ future operators `always` `eventually` and `until` cannot appear in the specification. 
+
+- In the online monitoring mode, the library allows only bounded-future STL specifications, meaning that _unbounded_ future operators `always` `eventually` and `until` cannot appear in the specification.  
 - The `prev` and `next` operators are valid only under the discrete-time interpretation of STL
 - The `unless` operator is added as syntactic sugar - `phi unless[a,b] psi = always[0,b] phi or phi until[a,b] psi
 
@@ -203,17 +206,20 @@ The library monitors bounded-future STL formulas with a fixed _delay_. In order 
 # Usage
 
 The API provides two monitoring classes:
+
 - `STLDiscreteTimeSpecification` for discrete-time monitors
 - `STLDenseTimeSpecification` for dense-time monitors
 
 Both classes implement online and offline monitors:
+
 - `update` method is used for online evaluation
 . `evaluate` method is used for offline evaluation
 
 ## Example Usage
 
 ### Discrete-time online monitor
-```
+
+```python
 import sys
 import rtamt
 
@@ -246,7 +252,7 @@ if __name__ == '__main__':
 
 ### Dense-time online monitor
 
-```
+```python
 import sys
 import rtamt
 
@@ -285,7 +291,8 @@ if __name__ == '__main__':
 ```
 
 ## Dense-time Offline Monitor
-```
+
+```python
 import sys
 import rtamt
 
@@ -322,19 +329,15 @@ if __name__ == '__main__':
 
 ### Working with time units and timing assumptions
 
-The default unit in RTAMT is seconds, and the default expected period between 
-two consecutive input samples is `1s` with `10%` tolerance. 
-The following program uses these default values to implicitely set up the monitor. 
-The specification intuitively states that whenever the `req` is above `3`, 
-eventually within `5s` `gnt` also goes above `3`. 
-The user feeds the monitor with values timestamped _exactly_ `1s` apart 
-from each other. It follows that the periodic sampling assumption holds.
+The default unit in RTAMT is seconds, and the default expected period between two consecutive input samples is `1s` with `10%` tolerance.  
+The following program uses these default values to implicitely set up the monitor.  
+The specification intuitively states that whenever the `req` is above `3`, eventually within `5s` `gnt` also goes above `3`.  
+The user feeds the monitor with values timestamped _exactly_ `1s` apart from each other. It follows that the periodic sampling assumption holds.
 
-RTAMT counts how many times the periodic sampling assumption has been violated 
-up to the moment of being invoked via the `sampling_violation_counter` member. 
+RTAMT counts how many times the periodic sampling assumption has been violated up to the moment of being invoked via the `sampling_violation_counter` member.  
 In this example, this violation obviously occurs `0` times.
 
-```
+```python
 # examples/documentation/time_units_1.py
 import sys
 import rtamt
@@ -364,13 +367,10 @@ if __name__ == '__main__':
     monitor()
 }
 ```
-The same program, but with slightly different timestamps still reports `0` 
-number of periodic sampling assumption violations. This is because the 
-difference between all consecutive sampling timestamps remains within 
-the (implicitely) specified `10%` tolerance.
 
+The same program, but with slightly different timestamps still reports `0` number of periodic sampling assumption violations. This is because the difference between all consecutive sampling timestamps remains within the (implicitely) specified `10%` tolerance.
 
-```
+```python
 # examples/documentation/time_units_2.py
     ...
     spec.update(0, [('req', 0.1), ('gnt', 0.3)])
@@ -379,12 +379,11 @@ the (implicitely) specified `10%` tolerance.
     nb_violations = spec.sampling_violation_counter // nb_violations = 0
     ....
 ```
-On the other hand, the following sequence of inputs results in `1` reported 
-violation of periodic sampling assumption. This is because the third 
-input is `1.12s` away from the second sample, which is `12%` above the 
-assumed `1s` period. 
 
-```
+On the other hand, the following sequence of inputs results in `1` reported violation of periodic sampling assumption.
+This is because the third input is `1.12s` away from the second sample, which is `12%` above the assumed `1s` period.
+
+```python
 # examples/documentation/time_units_3.py
     ...
     spec.update(0, [('req', 0.1), ('gnt', 0.3)])
@@ -392,10 +391,10 @@ assumed `1s` period.
     spec.update(2.14, [('req', 0.78), ('gnt', 0.18)])
     nb_violations = spec.sampling_violation_counter // nb_violations = 1
 ```
-This same sequence of inputs results in `0` reported violation of periodic 
-sampling assumption if we explicitely set the sampling period tolerance value to `20%`. 
 
-```
+This same sequence of inputs results in `0` reported violation of periodic sampling assumption if we explicitely set the sampling period tolerance value to `20%`.  
+
+```python
 # examples/documentation/time_units_4.py
     ...
     spec.set_sampling_period(1, 's', 0.2)
@@ -406,15 +405,9 @@ sampling assumption if we explicitely set the sampling period tolerance value to
     nb_violations = spec.sampling_violation_counter // nb_violations = 0
 ```
 
-The user can also explicitely set the default unit, as well as the 
-expected period and tolerance. In that case, the user must ensure that 
-the timing bounds declared in the specification are divisible by the 
-sampling period. The following specification is correct, since the 
-sampling period is set to `500ms`, the default unit is set to seconds, 
-and the specification implicitely defines the bound from `0.5s = 500ms` 
-and `1.5s = 1500ms`, i.e. between `1` amd `3` sampling periods. 
+The user can also explicitely set the default unit, as well as the expected period and tolerance. In that case, the user must ensure that the timing bounds declared in the specification are divisible by the sampling period. The following specification is correct, since the sampling period is set to `500ms`, the default unit is set to seconds, and the specification implicitely defines the bound from `0.5s = 500ms` and `1.5s = 1500ms`, i.e. between `1` amd `3` sampling periods.
 
-```
+```python
 # examples/documentation/time_units_5.py
     ...
     spec.unit = 's'
@@ -428,9 +421,10 @@ and `1.5s = 1500ms`, i.e. between `1` amd `3` sampling periods.
     nb_violations = spec.sampling_violation_counter // nb_violations = 0
 }
 ```
-The following defines the same program, but now with `ms` as the default unit. 
 
-```
+The following defines the same program, but now with `ms` as the default unit.
+
+```python
  # examples/documentation/time_units_6.py
     ...
     spec.unit = 'ms'
@@ -445,9 +439,9 @@ The following defines the same program, but now with `ms` as the default unit.
 }
 ```
 
-The following program throws an exception - the temporal bound is defined between `500ms` and `1500ms`, while the sampling period equals to `1s = 1000ms`. 
+The following program throws an exception - the temporal bound is defined between `500ms` and `1500ms`, while the sampling period equals to `1s = 1000ms`.
 
-```
+```python
 # examples/documentation/time_units_7.py
     ...
     spec.unit = 'ms'
@@ -461,9 +455,9 @@ The following program throws an exception - the temporal bound is defined betwee
 }
 ```
 
-Finally, the following program is correct, because the temporal bound is explicitely defined between `500s` and `1500s`, while the sampling period equals to `1s`. 
+Finally, the following program is correct, because the temporal bound is explicitely defined between `500s` and `1500s`, while the sampling period equals to `1s`.
 
-```
+```python
 # examples/documentation/time_units_8.py
     ...
     spec.unit = 'ms'
