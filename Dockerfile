@@ -6,4 +6,15 @@ RUN apt-get update && apt-get install -y \
     python3.6 \
     python3-dev \
     python3-pip
+# for cmake
+RUN apt-get install -y \
+    libssl-dev \
+    wget
+RUN wget https://github.com/Kitware/CMake/releases/download/v3.19.3/cmake-3.19.3.tar.gz && \
+    tar -zxvf cmake-3.19.3.tar.gz
+RUN cd cmake-3.19.3 && \
+    ./bootstrap && \
+    make && \
+    make install
+# install rtamt
 RUN pip3 install .
