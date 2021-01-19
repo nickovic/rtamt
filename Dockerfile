@@ -16,5 +16,10 @@ RUN cd cmake-3.19.3 && \
     ./bootstrap && \
     make && \
     make install
+# for rtamt C++ build
+RUN cd /rtamt && mkdir -p rtamt/build && \
+    cd rtamt/build && \
+    cmake -DPythonVersion=3 ../ && \
+    make
 # install rtamt
 RUN pip3 install .
