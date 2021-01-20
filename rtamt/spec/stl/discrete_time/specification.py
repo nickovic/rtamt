@@ -234,6 +234,12 @@ class STLDiscreteTimeSpecification(LTLDiscreteTimeSpecification):
     def reset(self):
         if self.online_evaluator is not None:
             self.reseter.node_monitor_dict = self.online_evaluator.node_monitor_dict
+
+            # evaluate modular sub-specs
+            for key in self.var_subspec_dict:
+                node = self.var_subspec_dict[key]
+                self.reseter.reset(node)
+
             self.top.accept(self.reseter)
             self.reseter.reset(self.top)
             self.update_counter = int(0);

@@ -12,39 +12,39 @@ class STLReset(LTLReset, STLVisitor):
     def visitTimedPrecedes(self, element, args):
         self.visit(element.children[0], args)
         self.visit(element.children[1], args)
-        monitor = self.node_monitor_dict[element]
+        monitor = self.node_monitor_dict[element.name]
         monitor.reset()
 
     def visitTimedUntil(self, element, args):
         self.visit(element.children[0], args)
         self.visit(element.children[1], args)
-        monitor = self.node_monitor_dict[element]
+        monitor = self.node_monitor_dict[element.name]
         monitor.reset()
 
     def visitTimedAlways(self, element, args):
         self.visit(element.children[0], args)
-        monitor = self.node_monitor_dict[element]
+        monitor = self.node_monitor_dict[element.name]
         monitor.reset()
 
     def visitTimedEventually(self, element, args):
         self.visit(element.children[0], args)
-        monitor = self.node_monitor_dict[element]
+        monitor = self.node_monitor_dict[element.name]
         monitor.reset()
 
     def visitTimedSince(self, element, args):
         self.visit(element.children[0], args)
         self.visit(element.children[1], args)
-        monitor = self.node_monitor_dict[element]
+        monitor = self.node_monitor_dict[element.name]
         monitor.reset()
 
     def visitTimedHistorically(self, element, args):
         self.visit(element.children[0], args)
-        monitor = self.node_monitor_dict[element]
+        monitor = self.node_monitor_dict[element.name]
         monitor.reset()
 
     def visitTimedOnce(self, element, args):
         self.visit(element.children[0], args)
-        monitor = self.node_monitor_dict[element]
+        monitor = self.node_monitor_dict[element.name]
         monitor.reset()
 
     def visitDefault(self, element):
