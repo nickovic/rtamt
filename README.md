@@ -12,10 +12,7 @@
 # About
 
 RTAMT is a Python (2- and 3-compatible) library for monitoring of  
-Signal Temporal Logic (STL). The library implements algorithms offline and online 
-monitoring of discrete-time and dense-time STL. The online monitors support 
-the bounded future fragment of STL. The online discrete-time part of the library 
-has an optimized C++ back-end. 
+Signal Temporal Logic (STL). The library implements algorithms offline and online monitoring of discrete-time and dense-time STL. The online monitors support the bounded future fragment of STL. The online discrete-time part of the library has an optimized C++ back-end.
 
 # Installation
 
@@ -50,10 +47,12 @@ In our experience, Ubuntu 16.04, 18.04 don't support the versions in default. Yo
 git clone https://github.com/nickovic/rtamt
 ```
 
-#### Build CPP libraries for Python 2
+### Build CPP libraries
 
 This step is needed only if you want to use the CPP backend and
 can be skipped if you want to use pure Python monitors.
+
+for Python 2
 
 ```bash
 cd rtamt/rtamt
@@ -63,17 +62,7 @@ cmake -DPythonVersion=2 ../
 make
 ```
 
-#### Install RTAMT for Python 2
-
-```bash
-cd rtamt/
-sudo pip2 install .
-```
-
-#### build CPP libraries for Python 3
-
-This step is needed only if you want to use the CPP backend and
-can be skipped if you want to use pure Python monitors.
+for Python 3
 
 ```bash
 cd rtamt/rtamt
@@ -83,29 +72,50 @@ cmake -DPythonVersion=3 ../
 make
 ```
 
-#### install RTAMT for Python 3
+### Install RTAMT
+
+for Python 2
+
+```bash
+cd rtamt/
+sudo pip2 install .
+```
+
+for Python 3
 
 ```bash
 cd rtamt/
 sudo pip3 install .
 ```
 
-#### uninstall RTAMT (Python 2)
+### uninstall RTAMT
+
+for Python 2
 
 ```bash
 sudo pip2 uninstall rtamt
 ```
 
-#### uninstall RTAMT (Python 3)
+for Python 3
 
 ```bash
 sudo pip3 uninstall rtamt
 ```
 
-## test tool
+## test RTAMT
+
+for Python 2
 
 ```bash
-python -m unittest discover tests/
+cd rtamt/
+python2 -m unittest discover tests/
+```
+
+for Python 3
+
+```bash
+cd rtamt/
+python3 -m unittest discover tests/
 ```
 
 # Theory
