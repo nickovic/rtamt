@@ -1,4 +1,4 @@
-function [rob] = monitor( in )
+function [rob] = monitor( in, param1, param2 )
 % FUNCTION: monitot the input data in using rtamt
 %
 % Created:  20-01-2020
@@ -13,7 +13,9 @@ set_var_io_type(spec, 'pc', 'input');
 set_var_io_type(spec, 'lep', 'output');
 set_var_io_type(spec, 'out', 'output');
 spec.iosem = 'output-robustness';
-spec.spec = 'out = always((rise(pc >= 0.9)) implies (eventually[0:100] always[0:100] (abs(pc - lep) <= 3)))';
+spec.spec = sprintf('out = always((pc >= %d ) implies (eventually[0:100] always[0:%d] (abs(pc - lep) <= 3)))',param1, param2);
+
+display(spec.spec)
 
 parse(spec);
 

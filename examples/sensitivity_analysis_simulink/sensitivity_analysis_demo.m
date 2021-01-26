@@ -38,8 +38,8 @@ input_name = strcat(model_name_wo_ext, '/Pilot Command');
 freq = '0.2';
 amp = '1';
 
-for(i=1:4)
-    for(j=1:4)
+for(i=1:1)
+    for(j=1:1)
         freq = 0.2*i;
         amp = 1+(0.25*(j-1));
         
@@ -63,32 +63,16 @@ save_system(system);
 close_system(system);
 
 counter = 1;
-for(i=1:4)
-    for(j=1:4)
+for(i=1:1)
+    for(j=1:1)
         disp(['Monitoring the specification phi on simulation trace ', num2str(counter)]);
-        rob = monitor (out(i,j));
+        rob = monitor (out(i,j), 1, 100);
         disp(['phi robustness for trace ', num2str(counter), ': ', num2str(min(rob))]);
         R(i,j) = rob;
         counter = counter + 1;
     end
 end
 
-ylab = [0.2 0.4 0.8 1];
-xlab = [1 1.25 1.5 1.75];
-
-color_map(1:150,1) = linspace(1, 1, 150);
-color_map(1:150,2) = linspace(0, 1, 150);
-color_map(1:150,3) = linspace(0, 1, 150);
-
-color_map(151:200,1) = linspace(1, 0, 50);
-color_map(151:200,2) = linspace(1, 1, 50);
-color_map(151:200,3) = linspace(1, 0, 50);
-
-
-color_std = [1 0 0; 0 1 0];
-hm_std = heatmap(xlab, ylab, R, 'ColorMap', color_map, 'XLabel', 'Amplitude', 'YLabel', 'Frequency', 'FontSize', 12);
-title('Sensitivity of phi to input frequency and amplitude');
-set(gcf,'color','w');
 
 
 
