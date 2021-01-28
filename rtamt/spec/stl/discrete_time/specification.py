@@ -147,7 +147,7 @@ class STLDiscreteTimeSpecification(LTLDiscreteTimeSpecification):
         return out
 
     def evaluate(self, *args, **kargs):
-        if len(args) is not 1:
+        if len(args) != 1:
             raise STLException('evaluate: Wrong number of arguments')
 
         dataset = args[0]
@@ -158,7 +158,7 @@ class STLDiscreteTimeSpecification(LTLDiscreteTimeSpecification):
         length = len(dataset['time'])
 
         for key in dataset:
-            if len(dataset[key]) is not length:
+            if len(dataset[key]) != length:
                 raise STLException('evaluate: The input ' + key + ' does not have the same number of samples as time')
 
         if self.offline_evaluator is None:
