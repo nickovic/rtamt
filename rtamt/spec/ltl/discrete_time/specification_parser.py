@@ -130,7 +130,7 @@ class LTLSpecificationParser(LtlParserVisitor):
 
     def visitVariableDeclaration(self, ctx):
         # fetch the variable name, type and io signature
-        var_name = ctx.identifier().getText()
+        var_name = ctx.Identifier().getText()
         var_type = ctx.domainType().getText()
 
         self.spec.declare_var(var_name, var_type)
@@ -392,7 +392,8 @@ class LTLSpecificationParser(LtlParserVisitor):
         try:
             del self.spec.var_subspec_dict[self.spec.out_var + self.spec.out_var_field]
         except KeyError:
-            raise RTAMTException('Could not remove an entry from var_subspec_dict.')
+            #raise RTAMTException('Could not remove an entry from var_subspec_dict.')
+            pass
         return out
 
     def visitSpecificationId(self, ctx):

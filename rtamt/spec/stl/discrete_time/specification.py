@@ -90,6 +90,12 @@ class STLDiscreteTimeSpecification(LTLDiscreteTimeSpecification):
         visitor = STLSpecificationParser(self)
         self.top = visitor.visitSpecification_file(ctx)
 
+        print('Hello')
+        print(self.unit)
+        print('sampling period unit: ' + str(self.sampling_period_unit))
+        print(self.U[self.unit])
+        print(self.U[self.sampling_period_unit])
+
         self.normalize = float(self.U[self.unit]) / float(self.U[self.sampling_period_unit])
 
     def pastify(self):
