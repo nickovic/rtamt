@@ -507,7 +507,7 @@ class TestSTLSpecDiscreteTimeOnlineEvaluation(unittest.TestCase):
 
         spec.parse()
 
-        self.failUnlessRaises(rtamt.STLNotImplementedException, spec.update, 0, [('req', self.left1)])
+        self.assertRaises(rtamt.STLNotImplementedException, spec.update, 0, [('req', self.left1)])
 
     def test_always_0_1_with_pastify(self):
         spec = rtamt.STLDiscreteTimeSpecification();
@@ -579,7 +579,7 @@ class TestSTLSpecDiscreteTimeOnlineEvaluation(unittest.TestCase):
 
         spec.parse()
 
-        self.failUnlessRaises(rtamt.STLNotImplementedException, spec.update, 0, [('req', self.left1), ('gnt', self.right1)])
+        self.assertRaises(rtamt.STLNotImplementedException, spec.update, 0, [('req', self.left1), ('gnt', self.right1)])
 
     def test_until_1_2_with_pastify(self):
         spec = rtamt.STLDiscreteTimeSpecification();
