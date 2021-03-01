@@ -27,9 +27,9 @@ class SinceBoundedOperation(AbstractOperation):
         once = OnceBoundedOperation(self.begin, self.end)
         andop = AndOperation()
 
-        out1 = once.offline(right_list)
-        out2 = since.offline(left_list, right_list)
-        out3 = hist.offline(out2)
-        out = andop.offline(out1, out3)
+        out1 = once.update(right_list)
+        out2 = since.update(left_list, right_list)
+        out3 = hist.update(out2)
+        out = andop.update(out1, out3)
 
         return out

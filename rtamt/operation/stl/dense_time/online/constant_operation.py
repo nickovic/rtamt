@@ -11,7 +11,7 @@ class ConstantOperation(AbstractOperation):
     def update_final(self, *args, **kargs):
         out = [[0, self.val], [float("inf"), self.val]]
         return out
-
-    def offline(self, *args, **kargs):
-        out = [[0, self.val], [float("inf"), self.val]]
-        return out
+    #
+    # def offline(self, *args, **kargs):
+    #     out = [[0, self.val], [float("inf"), self.val]]
+    #     return out

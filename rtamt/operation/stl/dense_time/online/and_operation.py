@@ -23,14 +23,14 @@ class AndOperation(AbstractOperation):
 
     def update_final(self, *args, **kargs):
         return self.update(args[0], args[1]) + [self.last]
-
-    def offline(self, *args, **kargs):
-        out = []
-        left_list = args[0]
-        right_list = args[1]
-
-        out, last, a, b = intersect.intersection(left_list, right_list, intersect.conjunction)
-        if last:
-            out.append(last)
-
-        return out
+    #
+    # def offline(self, *args, **kargs):
+    #     out = []
+    #     left_list = args[0]
+    #     right_list = args[1]
+    #
+    #     out, last, a, b = intersect.intersection(left_list, right_list, intersect.conjunction)
+    #     if last:
+    #         out.append(last)
+    #
+    #     return out

@@ -24,16 +24,16 @@ class OrOperation(AbstractOperation):
     def update_final(self, *args, **kargs):
         return self.update(args[0], args[1]) + [self.last]
 
-    def offline(self, *args, **kargs):
-        out = []
-        left_list = args[0]
-        right_list = args[1]
-        self.left = self.left + left_list
-        self.right = self.right + right_list
-
-        out, last, left, right = intersect.intersection(self.left, self.right, intersect.disjunction)
-
-        if last:
-            out.append(last)
-
-        return out
+    # def offline(self, *args, **kargs):
+    #     out = []
+    #     left_list = args[0]
+    #     right_list = args[1]
+    #     self.left = self.left + left_list
+    #     self.right = self.right + right_list
+    #
+    #     out, last, left, right = intersect.intersection(self.left, self.right, intersect.disjunction)
+    #
+    #     if last:
+    #         out.append(last)
+    #
+    #     return out
