@@ -28,7 +28,7 @@ class LTLDiscreteTimeSpecification(AbstractSpecification):
         vars : set(String) - set of variable names
         free_vars : set(String) - set of free variable names
 
-        sampling_period : int - size of the sampling period in ps (default = 10^12 ps = 1s
+        sampling_period : int - size of the sampling period
 
 
         var_object_dict : dict(String,AbstractNode) - dictionary that maps variable names to their Node instances
