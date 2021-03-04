@@ -722,6 +722,209 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
                              out_expected, out_computed))
 
 
+    def test_predicate_leq(self):
+        spec = rtamt.STLDenseTimeSpecification();
+        spec.declare_var('req', 'float')
+        spec.declare_var('out', 'float')
+        spec.spec = 'out = req <= 2'
+
+        spec.parse();
+
+        in_data_1 = [[5, 3], [5.3, 1]]
+        in_data_2 = [[5.75, 2], [6.5, 5], [6.75, 6], [9, 5], [9.25, 4]]
+        in_data_3 = [[10, 2]]
+
+        out_expected_1 = [[5, -1]]
+        out_expected_2 = [[5.3, 1], [5.75, 0], [6.5, -3], [6.75, -4], [9, -3]]
+        out_expected_3 = [[9.25, -2]]
+
+        out_computed_1 = spec.update(['req', in_data_1])
+        out_computed_2 = spec.update(['req', in_data_2])
+        out_computed_3 = spec.update(['req', in_data_3])
+
+
+        self.assertListEqual(out_expected_1, out_computed_1,
+                              "Problem with 1st example:\nExpected output: %s\nComputed output: %s" % (
+                                  out_expected_1, out_computed_1))
+
+        self.assertListEqual(out_expected_2, out_computed_2,
+                         "Problem with 1st example:\nExpected output: %s\nComputed output: %s" % (
+                             out_expected_2, out_computed_2))
+
+        self.assertListEqual(out_expected_3, out_computed_3,
+                              "Problem with 1st example:\nExpected output: %s\nComputed output: %s" % (
+                                  out_expected_3, out_computed_3))
+
+    def test_predicate_less(self):
+        spec = rtamt.STLDenseTimeSpecification();
+        spec.declare_var('req', 'float')
+        spec.declare_var('out', 'float')
+        spec.spec = 'out = req < 2'
+
+        spec.parse();
+
+        in_data_1 = [[5, 3], [5.3, 1]]
+        in_data_2 = [[5.75, 2], [6.5, 5], [6.75, 6], [9, 5], [9.25, 4]]
+        in_data_3 = [[10, 2]]
+
+        out_expected_1 = [[5, -1]]
+        out_expected_2 = [[5.3, 1], [5.75, 0], [6.5, -3], [6.75, -4], [9, -3]]
+        out_expected_3 = [[9.25, -2]]
+
+        out_computed_1 = spec.update(['req', in_data_1])
+        out_computed_2 = spec.update(['req', in_data_2])
+        out_computed_3 = spec.update(['req', in_data_3])
+
+
+        self.assertListEqual(out_expected_1, out_computed_1,
+                              "Problem with 1st example:\nExpected output: %s\nComputed output: %s" % (
+                                  out_expected_1, out_computed_1))
+
+        self.assertListEqual(out_expected_2, out_computed_2,
+                         "Problem with 1st example:\nExpected output: %s\nComputed output: %s" % (
+                             out_expected_2, out_computed_2))
+
+        self.assertListEqual(out_expected_3, out_computed_3,
+                              "Problem with 1st example:\nExpected output: %s\nComputed output: %s" % (
+                                  out_expected_3, out_computed_3))
+
+    def test_predicate_geq(self):
+        spec = rtamt.STLDenseTimeSpecification();
+        spec.declare_var('req', 'float')
+        spec.declare_var('out', 'float')
+        spec.spec = 'out = req >= 2'
+
+        spec.parse();
+
+        in_data_1 = [[5, 3], [5.3, 1]]
+        in_data_2 = [[5.75, 2], [6.5, 5], [6.75, 6], [9, 5], [9.25, 4]]
+        in_data_3 = [[10, 2]]
+
+        out_expected_1 = [[5, 1]]
+        out_expected_2 = [[5.3, -1], [5.75, 0], [6.5, 3], [6.75, 4], [9, 3]]
+        out_expected_3 = [[9.25, 2]]
+
+        out_computed_1 = spec.update(['req', in_data_1])
+        out_computed_2 = spec.update(['req', in_data_2])
+        out_computed_3 = spec.update(['req', in_data_3])
+
+
+        self.assertListEqual(out_expected_1, out_computed_1,
+                              "Problem with 1st example:\nExpected output: %s\nComputed output: %s" % (
+                                  out_expected_1, out_computed_1))
+
+        self.assertListEqual(out_expected_2, out_computed_2,
+                         "Problem with 1st example:\nExpected output: %s\nComputed output: %s" % (
+                             out_expected_2, out_computed_2))
+
+        self.assertListEqual(out_expected_3, out_computed_3,
+                              "Problem with 1st example:\nExpected output: %s\nComputed output: %s" % (
+                                  out_expected_3, out_computed_3))
+
+    def test_predicate_greater(self):
+        spec = rtamt.STLDenseTimeSpecification();
+        spec.declare_var('req', 'float')
+        spec.declare_var('out', 'float')
+        spec.spec = 'out = req > 2'
+
+        spec.parse();
+
+        in_data_1 = [[5, 3], [5.3, 1]]
+        in_data_2 = [[5.75, 2], [6.5, 5], [6.75, 6], [9, 5], [9.25, 4]]
+        in_data_3 = [[10, 2]]
+
+        out_expected_1 = [[5, 1]]
+        out_expected_2 = [[5.3, -1], [5.75, 0], [6.5, 3], [6.75, 4], [9, 3]]
+        out_expected_3 = [[9.25, 2]]
+
+        out_computed_1 = spec.update(['req', in_data_1])
+        out_computed_2 = spec.update(['req', in_data_2])
+        out_computed_3 = spec.update(['req', in_data_3])
+
+
+        self.assertListEqual(out_expected_1, out_computed_1,
+                              "Problem with 1st example:\nExpected output: %s\nComputed output: %s" % (
+                                  out_expected_1, out_computed_1))
+
+        self.assertListEqual(out_expected_2, out_computed_2,
+                         "Problem with 1st example:\nExpected output: %s\nComputed output: %s" % (
+                             out_expected_2, out_computed_2))
+
+        self.assertListEqual(out_expected_3, out_computed_3,
+                              "Problem with 1st example:\nExpected output: %s\nComputed output: %s" % (
+                                  out_expected_3, out_computed_3))
+
+    def test_predicate_eq(self):
+        spec = rtamt.STLDenseTimeSpecification();
+        spec.declare_var('req', 'float')
+        spec.declare_var('out', 'float')
+        spec.spec = 'out = req == 2'
+
+        spec.parse();
+
+        in_data_1 = [[5, 3], [5.3, 1]]
+        in_data_2 = [[5.75, 2], [6.5, 5], [6.75, 6], [9, 5], [9.25, 4]]
+        in_data_3 = [[10, 2]]
+
+        out_expected_1 = [[5, -1]]
+        out_expected_2 = [[5.3, -1], [5.75, 0], [6.5, -3], [6.75, -4], [9, -3]]
+        out_expected_3 = [[9.25, -2]]
+
+        out_computed_1 = spec.update(['req', in_data_1])
+        out_computed_2 = spec.update(['req', in_data_2])
+        out_computed_3 = spec.update(['req', in_data_3])
+
+
+        self.assertListEqual(out_expected_1, out_computed_1,
+                              "Problem with 1st example:\nExpected output: %s\nComputed output: %s" % (
+                                  out_expected_1, out_computed_1))
+
+        self.assertListEqual(out_expected_2, out_computed_2,
+                         "Problem with 1st example:\nExpected output: %s\nComputed output: %s" % (
+                             out_expected_2, out_computed_2))
+
+        self.assertListEqual(out_expected_3, out_computed_3,
+                              "Problem with 1st example:\nExpected output: %s\nComputed output: %s" % (
+                                  out_expected_3, out_computed_3))
+
+    def test_predicate_neq(self):
+        spec = rtamt.STLDenseTimeSpecification();
+        spec.declare_var('req', 'float')
+        spec.declare_var('out', 'float')
+        spec.spec = 'out = req !== 2'
+
+        spec.parse();
+
+        in_data_1 = [[5, 3], [5.3, 1]]
+        in_data_2 = [[5.75, 2], [6.5, 5], [6.75, 6], [9, 5], [9.25, 4]]
+        in_data_3 = [[10, 2]]
+
+        out_expected_1 = [[5, 1]]
+        out_expected_2 = [[5.3, 1], [5.75, 0], [6.5, 3], [6.75, 4], [9, 3]]
+        out_expected_3 = [[9.25, 2]]
+
+        out_computed_1 = spec.update(['req', in_data_1])
+        out_computed_2 = spec.update(['req', in_data_2])
+        out_computed_3 = spec.update(['req', in_data_3])
+
+
+        self.assertListEqual(out_expected_1, out_computed_1,
+                              "Problem with 1st example:\nExpected output: %s\nComputed output: %s" % (
+                                  out_expected_1, out_computed_1))
+
+        self.assertListEqual(out_expected_2, out_computed_2,
+                         "Problem with 1st example:\nExpected output: %s\nComputed output: %s" % (
+                             out_expected_2, out_computed_2))
+
+        self.assertListEqual(out_expected_3, out_computed_3,
+                              "Problem with 1st example:\nExpected output: %s\nComputed output: %s" % (
+                                  out_expected_3, out_computed_3))
+
+
+
+
+
+
 
 if __name__ == '__main__':
     unittest.main()
