@@ -234,4 +234,4 @@ class STLOnlineDiscreteTimeCPPMonitor(STLVisitor):
         elif op == CompOp.EQUAL:
             return StlComparisonOperator.EQUAL
         else:
-            raise STLParseException(f'Could not find operator {op}!')
+            raise STLParseException('Could not find operator {}!'.format(op))
