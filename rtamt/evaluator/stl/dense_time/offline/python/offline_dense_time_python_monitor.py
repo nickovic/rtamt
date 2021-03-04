@@ -116,16 +116,10 @@ class STLOfflineDenseTimePythonMonitor(STLVisitor):
         self.visit(node.children[1], args)
 
     def visitEventually(self, node, args):
-        monitor = EventuallyOperation()
-        self.node_monitor_dict[node.name] = monitor
-
-        self.visit(node.children[0], args)
+        raise STLNotImplementedException('Until operator is not implemented in the STL online monitor.')
 
     def visitAlways(self, node, args):
-        monitor = AlwaysOperation()
-        self.node_monitor_dict[node.name] = monitor
-
-        self.visit(node.children[0], args)
+        raise STLNotImplementedException('Until operator is not implemented in the STL online monitor.')
 
     def visitUntil(self, node, args):
         raise STLNotImplementedException('Until operator is not implemented in the STL online monitor.')
