@@ -6,8 +6,6 @@ Created on Mon Sep 23 2019
 """
 from abc import ABCMeta
 
-## Dummy comment
-
 class AbstractNode:
     """
     Abstract Node: tree-like data structure containing
