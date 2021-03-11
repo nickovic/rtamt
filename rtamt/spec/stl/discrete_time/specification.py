@@ -185,7 +185,7 @@ class STLDiscreteTimeSpecification(LTLDiscreteTimeSpecification):
 
         # update the value of every input variable
         for key in dataset:
-            if key is not 'time':
+            if key != 'time':
                 self.var_object_dict[key] = dataset[key]
 
         # evaluate modular sub-specs
