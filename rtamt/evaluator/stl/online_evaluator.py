@@ -46,16 +46,20 @@ class STLOnlineEvaluator(STLVisitor):
         in_sample_2 = self.visit(node.children[1], args)
 
         monitor = self.node_monitor_dict[node.name]
-        out_sample = monitor.update(in_sample_1, in_sample_2)
+        samples = monitor.update(in_sample_1, in_sample_2)
+        sat_sample = monitor.sat(in_sample_1, in_sample_2)
+        out_sample = []
 
-        if self.spec.semantics == Semantics.OUTPUT_ROBUSTNESS and not node.out_vars:
-            out_sample = out_sample*float('inf')
-        elif self.spec.semantics == Semantics.INPUT_VACUITY and not node.in_vars:
-            out_sample = 0
-        elif self.spec.semantics == Semantics.INPUT_ROBUSTNESS and not node.in_vars:
-            out_sample = out_sample*float('inf')
-        elif self.spec.semantics == Semantics.OUTPUT_VACUITY and not node.out_vars:
-            out_sample = 0
+        if (self.spec.semantics == Semantics.OUTPUT_ROBUSTNESS and not node.out_vars) or (self.spec.semantics == Semantics.INPUT_ROBUSTNESS and not node.in_vars):
+            for i in range(len(sat_sample)):
+                sample = float('inf') if sat_sample[i][1] == True else -float("inf")
+                out_sample.append([sat_sample[i][0], sample])
+        elif (self.spec.semantics == Semantics.INPUT_VACUITY and not node.in_vars) or (self.spec.semantics == Semantics.OUTPUT_VACUITY and not node.out_vars):
+            for i in range(len(sat_sample)):
+                sample = 0
+                out_sample.append([sat_sample[i][0], sample])
+        else:
+            out_sample = samples
 
         return out_sample
 
