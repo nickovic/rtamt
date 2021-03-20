@@ -65,12 +65,15 @@ ioType
 
 expression
 	:
-
 	ABS LPAREN expression RPAREN                                #ExprAbs
 	| expression TIMES expression                               #ExprMultiplication
 	| expression DIVIDE expression                              #ExprDivision
 	| expression PLUS expression                                #ExprAddition
 	| expression MINUS expression                               #ExprSubtraction
+
+	| expression comparisonOp expression                        #ExprPredicate
+
+
 
 	| NotOperator expression                                    #ExprNot
 	| AlwaysOperator expression                                 #ExprAlways
@@ -91,8 +94,6 @@ expression
 	| expression OrOperator expression                          #ExprOr
     | expression ImpliesOperator expression                     #ExprImplies
     | expression XorOperator expression                         #ExprXor
-
-	| expression comparisonOp expression              #ExprPredicate
 
     | LPAREN expression RPAREN                                  #ExprParen
     | literal                                                   #ExprLiteral

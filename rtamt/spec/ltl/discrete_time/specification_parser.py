@@ -168,35 +168,35 @@ class LTLSpecificationParser(LtlParserVisitor):
         self.spec.import_module(module_name, var_type)
 
     def visitExprAddition(self, ctx):
-        child1 = self.visit(ctx.real_expression(0))
-        child2 = self.visit(ctx.real_expression(1))
+        child1 = self.visit(ctx.expression(0))
+        child2 = self.visit(ctx.expression(1))
         node = Addition(child1, child2)
         node.horizon = max(child1.horizon, child2.horizon)
         return node
 
     def visitExprSubtraction(self, ctx):
-        child1 = self.visit(ctx.real_expression(0))
-        child2 = self.visit(ctx.real_expression(1))
+        child1 = self.visit(ctx.expression(0))
+        child2 = self.visit(ctx.expression(1))
         node = Subtraction(child1, child2)
         node.horizon = max(child1.horizon, child2.horizon)
         return node
 
     def visitExprMultiplication(self, ctx):
-        child1 = self.visit(ctx.real_expression(0))
-        child2 = self.visit(ctx.real_expression(1))
+        child1 = self.visit(ctx.expression(0))
+        child2 = self.visit(ctx.expression(1))
         node = Multiplication(child1, child2)
         node.horizon = max(child1.horizon, child2.horizon)
         return node
 
     def visitExprDivision(self, ctx):
-        child1 = self.visit(ctx.real_expression(0))
-        child2 = self.visit(ctx.real_expression(1))
+        child1 = self.visit(ctx.expression(0))
+        child2 = self.visit(ctx.expression(1))
         node = Division(child1, child2)
         node.horizon = max(child1.horizon, child2.horizon)
         return node
 
     def visitExprAbs(self, ctx):
-        child = self.visit(ctx.real_expression())
+        child = self.visit(ctx.expression())
         node = Abs(child)
         node.horizon = child.horizon
         return node
