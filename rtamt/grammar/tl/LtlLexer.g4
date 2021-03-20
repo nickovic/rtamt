@@ -6,6 +6,12 @@ lexer grammar LtlLexer ;
 
 // Separators
 
+LPAREN
+	: '(' ;
+
+RPAREN
+	: ')' ;
+
 MINUS
     : '-' ;
 
@@ -17,12 +23,6 @@ TIMES
 
 DIVIDE
     : '/' ;
-
-LPAREN
-	: '(' ;
-
-RPAREN
-	: ')' ;
 
 LBRACE
 	: '{' ;
