@@ -1,6 +1,63 @@
 # How to implimnet a new temproal logic in RTAMT
 
-## Overview of RTAMT archtecture
+This document explains the architecture of the library and provides guidelines 
+for extending the library with (1) new operators, (2) existing syntax, 
+but new semantics, and (3) alternative implementation of the existing algorithms.
+
+## Overview of RTAMT architecture
+
+### Top-level Architecture
+
+The `AbstractSpecification` class as the main container class 
+that also acts as the API between the user and the library. 
+Concrete specifications are derived from this abstract class. Figure below 
+depicts the most important attributes and methods of the class. 
+The main attributes are:
+- `top` – a pointer to a `Node` structure that encodes the parse-tree of the specification
+- `offline_evaluator` – a pointer to an evaluator object that implements 
+the offline evaluation (monitoring) algorithm
+- `online_evaluator` - a pointer to an evaluator object that implements the 
+online evaluation (monitoring) algorithm
+- `semantics` – can be standard, output robustness, input vacuity, output vacuity 
+and input robustness
+- `time_interpretation` – can be discrete-time or dense-time
+- `language` – implementation language of the monitoring algorithm, 
+can be CPP or PYTHON
+
+The main methods are:
+- `parse()` – generates the parse tree of the specification from 
+its textual description
+- `update()` – does one monitoring step (evaluation) in the online monitor
+- `evaluate()` – does the offline evaluation over the entire trace 
+in the offline monitor
+- `reset()` – resets the monitoring state of the monitor
+
+The `AbstractSpecification` class does not implement these methods, but any 
+derived class is expected to implement them (or throw a 
+`NotImplemented` exception if a method is not meant to be implemented).
+
+`LTLDiscreteTimeSpecification` is a class that is derived from 
+`AbstractSpecification` and that is contains the implementation of 
+discrete-time monitors for LTL. It provides a concrete implementation of 
+`parse()`, `update()`, `evaluate()` and `reset()` methods. 
+
+`STLDiscreteTimeSpecification` extends `LTLDiscreteTimeSpecification` 
+with additional STL (timed) operators. 
+
+![alt text](resources/top-diagram.png)
+
+### Node
+
+[rtamt/node](rtamt/node)  
+
+![alt text](resources/node-diagram.png)
+
+### Evaluator
+
+[rtamt/evaluator](rtamt/evaluator)  
+
+![alt text](resources/evaluator-diagram.png)
+
 
 ### grammar
 
@@ -22,22 +79,13 @@ parser grammar StlParser ;
 import LtlParser;
 ```
 
-### paser
+### parser
 
-[rtamt/paser](rtamt/paser)  
+[rtamt/parser](rtamt/paser)  
 This contains auto-generated parsers from Antrl based on the grammer.
 
-### spec
 
-[rtamt/spec](rtamt/spec)  
-It connects paser result to node.
-The componets handle time interpretation, exception as an intermidate abstract class.
 
-### node
-
-[rtamt/node](rtamt/node)  
-It has actual semantics for each predicates.
-Besically here temporal logic desinger need to impliment.
 
 ### cpplib
 
@@ -69,9 +117,9 @@ Then compile the grammer with antlr4
 
 ### Choose update and time handler
 
-### Impliment semantics
+### Implement semantics
 
-You can inpliment your own semantics in [rtamt/node](rtamt/node).
+You can impliment your own semantics in [rtamt/node](rtamt/node).
 
 ### Test
 
