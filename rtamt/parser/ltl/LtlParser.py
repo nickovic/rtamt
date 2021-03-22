@@ -1,100 +1,103 @@
 # Generated from LtlParser.g4 by ANTLR 4.5.1
 # encoding: utf-8
+from __future__ import print_function
 from antlr4 import *
 from io import StringIO
 
 def serializedATN():
     with StringIO() as buf:
-        buf.write("\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3H")
-        buf.write("\u00d4\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
-        buf.write("\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f\t\f\4\r\t\r\4\16")
-        buf.write("\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22\3\2\3\2")
-        buf.write("\3\2\3\3\5\3)\n\3\3\3\7\3,\n\3\f\3\16\3/\13\3\3\3\3\3")
-        buf.write("\7\3\63\n\3\f\3\16\3\66\13\3\3\3\6\39\n\3\r\3\16\3:\3")
-        buf.write("\4\3\4\3\4\3\5\3\5\3\5\3\5\3\5\3\6\3\6\5\6G\n\6\3\6\3")
-        buf.write("\6\3\7\3\7\5\7M\n\7\3\b\3\b\3\b\3\t\3\t\3\t\3\t\3\t\3")
-        buf.write("\t\3\t\3\n\5\nZ\n\n\3\n\3\n\3\n\5\n_\n\n\3\13\3\13\3\13")
-        buf.write("\3\13\3\13\3\13\3\f\3\f\3\f\3\f\5\fk\n\f\3\r\3\r\3\16")
-        buf.write("\3\16\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17")
-        buf.write("\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17")
-        buf.write("\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17")
-        buf.write("\3\17\3\17\3\17\3\17\5\17\u0095\n\17\3\17\3\17\3\17\3")
-        buf.write("\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17")
-        buf.write("\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17")
-        buf.write("\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17")
-        buf.write("\3\17\3\17\3\17\3\17\7\17\u00bf\n\17\f\17\16\17\u00c2")
-        buf.write("\13\17\3\20\3\20\3\20\3\20\3\20\3\20\5\20\u00ca\n\20\3")
-        buf.write("\21\3\21\3\21\3\21\5\21\u00d0\n\21\3\22\3\22\3\22\2\3")
-        buf.write("\34\23\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"\2\4\4")
-        buf.write("\2\37\"DD\3\2\32\33\u00ec\2$\3\2\2\2\4(\3\2\2\2\6<\3\2")
-        buf.write("\2\2\b?\3\2\2\2\nF\3\2\2\2\fL\3\2\2\2\16N\3\2\2\2\20Q")
-        buf.write("\3\2\2\2\22Y\3\2\2\2\24`\3\2\2\2\26j\3\2\2\2\30l\3\2\2")
-        buf.write("\2\32n\3\2\2\2\34\u0094\3\2\2\2\36\u00c9\3\2\2\2 \u00cf")
-        buf.write("\3\2\2\2\"\u00d1\3\2\2\2$%\5\4\3\2%&\7\2\2\3&\3\3\2\2")
-        buf.write("\2\')\5\6\4\2(\'\3\2\2\2()\3\2\2\2)-\3\2\2\2*,\5\b\5\2")
-        buf.write("+*\3\2\2\2,/\3\2\2\2-+\3\2\2\2-.\3\2\2\2.\64\3\2\2\2/")
-        buf.write("-\3\2\2\2\60\63\5\f\7\2\61\63\5\16\b\2\62\60\3\2\2\2\62")
-        buf.write("\61\3\2\2\2\63\66\3\2\2\2\64\62\3\2\2\2\64\65\3\2\2\2")
-        buf.write("\658\3\2\2\2\66\64\3\2\2\2\679\5\n\6\28\67\3\2\2\29:\3")
-        buf.write("\2\2\2:8\3\2\2\2:;\3\2\2\2;\5\3\2\2\2<=\7%\2\2=>\7D\2")
-        buf.write("\2>\7\3\2\2\2?@\7&\2\2@A\7D\2\2AB\7\31\2\2BC\7D\2\2C\t")
-        buf.write("\3\2\2\2DE\7D\2\2EG\7>\2\2FD\3\2\2\2FG\3\2\2\2GH\3\2\2")
-        buf.write("\2HI\5\34\17\2I\13\3\2\2\2JM\5\22\n\2KM\5\24\13\2LJ\3")
-        buf.write("\2\2\2LK\3\2\2\2M\r\3\2\2\2NO\7\21\2\2OP\5\20\t\2P\17")
-        buf.write("\3\2\2\2QR\7\30\2\2RS\7\7\2\2ST\7D\2\2TU\7\17\2\2UV\7")
-        buf.write("D\2\2VW\7\b\2\2W\21\3\2\2\2XZ\5\32\16\2YX\3\2\2\2YZ\3")
-        buf.write("\2\2\2Z[\3\2\2\2[\\\5\30\r\2\\^\7D\2\2]_\5\26\f\2^]\3")
-        buf.write("\2\2\2^_\3\2\2\2_\23\3\2\2\2`a\7\35\2\2ab\5\30\r\2bc\7")
-        buf.write("D\2\2cd\7>\2\2de\5 \21\2e\25\3\2\2\2fg\7>\2\2gk\5 \21")
-        buf.write("\2hi\7>\2\2ik\5\34\17\2jf\3\2\2\2jh\3\2\2\2k\27\3\2\2")
-        buf.write("\2lm\t\2\2\2m\31\3\2\2\2no\t\3\2\2o\33\3\2\2\2pq\b\17")
-        buf.write("\1\2qr\7\'\2\2r\u0095\5\34\17\26st\7/\2\2t\u0095\5\34")
-        buf.write("\17\25uv\7\60\2\2v\u0095\5\34\17\24wx\7\63\2\2x\u0095")
-        buf.write("\5\34\17\23yz\7\64\2\2z\u0095\5\34\17\22{|\7\67\2\2|\u0095")
-        buf.write("\5\34\17\17}~\7\66\2\2~\u0095\5\34\17\16\177\u0080\7\22")
-        buf.write("\2\2\u0080\u0081\7\7\2\2\u0081\u0082\5\34\17\2\u0082\u0083")
-        buf.write("\7\b\2\2\u0083\u0095\3\2\2\2\u0084\u0085\7-\2\2\u0085")
-        buf.write("\u0086\7\7\2\2\u0086\u0087\5\34\17\2\u0087\u0088\7\b\2")
-        buf.write("\2\u0088\u0095\3\2\2\2\u0089\u008a\7.\2\2\u008a\u008b")
-        buf.write("\7\7\2\2\u008b\u008c\5\34\17\2\u008c\u008d\7\b\2\2\u008d")
-        buf.write("\u0095\3\2\2\2\u008e\u008f\7\7\2\2\u008f\u0090\5\34\17")
-        buf.write("\2\u0090\u0091\7\b\2\2\u0091\u0095\3\2\2\2\u0092\u0095")
-        buf.write("\5 \21\2\u0093\u0095\7D\2\2\u0094p\3\2\2\2\u0094s\3\2")
-        buf.write("\2\2\u0094u\3\2\2\2\u0094w\3\2\2\2\u0094y\3\2\2\2\u0094")
-        buf.write("{\3\2\2\2\u0094}\3\2\2\2\u0094\177\3\2\2\2\u0094\u0084")
-        buf.write("\3\2\2\2\u0094\u0089\3\2\2\2\u0094\u008e\3\2\2\2\u0094")
-        buf.write("\u0092\3\2\2\2\u0094\u0093\3\2\2\2\u0095\u00c0\3\2\2\2")
-        buf.write("\u0096\u0097\f\33\2\2\u0097\u0098\7\5\2\2\u0098\u00bf")
-        buf.write("\5\34\17\34\u0099\u009a\f\32\2\2\u009a\u009b\7\6\2\2\u009b")
-        buf.write("\u00bf\5\34\17\33\u009c\u009d\f\31\2\2\u009d\u009e\7\4")
-        buf.write("\2\2\u009e\u00bf\5\34\17\32\u009f\u00a0\f\30\2\2\u00a0")
-        buf.write("\u00a1\7\3\2\2\u00a1\u00bf\5\34\17\31\u00a2\u00a3\f\27")
-        buf.write("\2\2\u00a3\u00a4\5\36\20\2\u00a4\u00a5\5\34\17\30\u00a5")
-        buf.write("\u00bf\3\2\2\2\u00a6\u00a7\f\r\2\2\u00a7\u00a8\7\61\2")
-        buf.write("\2\u00a8\u00bf\5\34\17\16\u00a9\u00aa\f\f\2\2\u00aa\u00ab")
-        buf.write("\7\62\2\2\u00ab\u00bf\5\34\17\r\u00ac\u00ad\f\13\2\2\u00ad")
-        buf.write("\u00ae\7\65\2\2\u00ae\u00bf\5\34\17\f\u00af\u00b0\f\n")
-        buf.write("\2\2\u00b0\u00b1\7)\2\2\u00b1\u00bf\5\34\17\13\u00b2\u00b3")
-        buf.write("\f\t\2\2\u00b3\u00b4\7*\2\2\u00b4\u00bf\5\34\17\n\u00b5")
-        buf.write("\u00b6\f\b\2\2\u00b6\u00b7\7(\2\2\u00b7\u00bf\5\34\17")
-        buf.write("\t\u00b8\u00b9\f\7\2\2\u00b9\u00ba\7+\2\2\u00ba\u00bf")
-        buf.write("\5\34\17\b\u00bb\u00bc\f\6\2\2\u00bc\u00bd\7,\2\2\u00bd")
-        buf.write("\u00bf\5\34\17\7\u00be\u0096\3\2\2\2\u00be\u0099\3\2\2")
-        buf.write("\2\u00be\u009c\3\2\2\2\u00be\u009f\3\2\2\2\u00be\u00a2")
-        buf.write("\3\2\2\2\u00be\u00a6\3\2\2\2\u00be\u00a9\3\2\2\2\u00be")
-        buf.write("\u00ac\3\2\2\2\u00be\u00af\3\2\2\2\u00be\u00b2\3\2\2\2")
-        buf.write("\u00be\u00b5\3\2\2\2\u00be\u00b8\3\2\2\2\u00be\u00bb\3")
-        buf.write("\2\2\2\u00bf\u00c2\3\2\2\2\u00c0\u00be\3\2\2\2\u00c0\u00c1")
-        buf.write("\3\2\2\2\u00c1\35\3\2\2\2\u00c2\u00c0\3\2\2\2\u00c3\u00ca")
-        buf.write("\7;\2\2\u00c4\u00ca\7:\2\2\u00c5\u00ca\7=\2\2\u00c6\u00ca")
-        buf.write("\7<\2\2\u00c7\u00ca\78\2\2\u00c8\u00ca\79\2\2\u00c9\u00c3")
-        buf.write("\3\2\2\2\u00c9\u00c4\3\2\2\2\u00c9\u00c5\3\2\2\2\u00c9")
-        buf.write("\u00c6\3\2\2\2\u00c9\u00c7\3\2\2\2\u00c9\u00c8\3\2\2\2")
-        buf.write("\u00ca\37\3\2\2\2\u00cb\u00d0\7B\2\2\u00cc\u00d0\7C\2")
-        buf.write("\2\u00cd\u00ce\7\3\2\2\u00ce\u00d0\5 \21\2\u00cf\u00cb")
-        buf.write("\3\2\2\2\u00cf\u00cc\3\2\2\2\u00cf\u00cd\3\2\2\2\u00d0")
-        buf.write("!\3\2\2\2\u00d1\u00d2\7D\2\2\u00d2#\3\2\2\2\21(-\62\64")
-        buf.write(":FLY^j\u0094\u00be\u00c0\u00c9\u00cf")
+        buf.write(u"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3")
+        buf.write(u"H\u00d4\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t")
+        buf.write(u"\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f\t\f\4\r\t\r")
+        buf.write(u"\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22\3")
+        buf.write(u"\2\3\2\3\2\3\3\5\3)\n\3\3\3\7\3,\n\3\f\3\16\3/\13\3\3")
+        buf.write(u"\3\3\3\7\3\63\n\3\f\3\16\3\66\13\3\3\3\6\39\n\3\r\3\16")
+        buf.write(u"\3:\3\4\3\4\3\4\3\5\3\5\3\5\3\5\3\5\3\6\3\6\5\6G\n\6")
+        buf.write(u"\3\6\3\6\3\7\3\7\5\7M\n\7\3\b\3\b\3\b\3\t\3\t\3\t\3\t")
+        buf.write(u"\3\t\3\t\3\t\3\n\5\nZ\n\n\3\n\3\n\3\n\5\n_\n\n\3\13\3")
+        buf.write(u"\13\3\13\3\13\3\13\3\13\3\f\3\f\3\f\3\f\5\fk\n\f\3\r")
+        buf.write(u"\3\r\3\16\3\16\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17")
+        buf.write(u"\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3")
+        buf.write(u"\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17")
+        buf.write(u"\3\17\3\17\3\17\3\17\3\17\3\17\3\17\5\17\u0095\n\17\3")
+        buf.write(u"\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17")
+        buf.write(u"\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3")
+        buf.write(u"\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17")
+        buf.write(u"\3\17\3\17\3\17\3\17\3\17\3\17\3\17\3\17\7\17\u00bf\n")
+        buf.write(u"\17\f\17\16\17\u00c2\13\17\3\20\3\20\3\20\3\20\3\20\3")
+        buf.write(u"\20\5\20\u00ca\n\20\3\21\3\21\3\21\3\21\5\21\u00d0\n")
+        buf.write(u"\21\3\22\3\22\3\22\2\3\34\23\2\4\6\b\n\f\16\20\22\24")
+        buf.write(u"\26\30\32\34\36 \"\2\4\4\2\37\"DD\3\2\32\33\u00ec\2$")
+        buf.write(u"\3\2\2\2\4(\3\2\2\2\6<\3\2\2\2\b?\3\2\2\2\nF\3\2\2\2")
+        buf.write(u"\fL\3\2\2\2\16N\3\2\2\2\20Q\3\2\2\2\22Y\3\2\2\2\24`\3")
+        buf.write(u"\2\2\2\26j\3\2\2\2\30l\3\2\2\2\32n\3\2\2\2\34\u0094\3")
+        buf.write(u"\2\2\2\36\u00c9\3\2\2\2 \u00cf\3\2\2\2\"\u00d1\3\2\2")
+        buf.write(u"\2$%\5\4\3\2%&\7\2\2\3&\3\3\2\2\2\')\5\6\4\2(\'\3\2\2")
+        buf.write(u"\2()\3\2\2\2)-\3\2\2\2*,\5\b\5\2+*\3\2\2\2,/\3\2\2\2")
+        buf.write(u"-+\3\2\2\2-.\3\2\2\2.\64\3\2\2\2/-\3\2\2\2\60\63\5\f")
+        buf.write(u"\7\2\61\63\5\16\b\2\62\60\3\2\2\2\62\61\3\2\2\2\63\66")
+        buf.write(u"\3\2\2\2\64\62\3\2\2\2\64\65\3\2\2\2\658\3\2\2\2\66\64")
+        buf.write(u"\3\2\2\2\679\5\n\6\28\67\3\2\2\29:\3\2\2\2:8\3\2\2\2")
+        buf.write(u":;\3\2\2\2;\5\3\2\2\2<=\7%\2\2=>\7D\2\2>\7\3\2\2\2?@")
+        buf.write(u"\7&\2\2@A\7D\2\2AB\7\31\2\2BC\7D\2\2C\t\3\2\2\2DE\7D")
+        buf.write(u"\2\2EG\7>\2\2FD\3\2\2\2FG\3\2\2\2GH\3\2\2\2HI\5\34\17")
+        buf.write(u"\2I\13\3\2\2\2JM\5\22\n\2KM\5\24\13\2LJ\3\2\2\2LK\3\2")
+        buf.write(u"\2\2M\r\3\2\2\2NO\7\21\2\2OP\5\20\t\2P\17\3\2\2\2QR\7")
+        buf.write(u"\30\2\2RS\7\3\2\2ST\7D\2\2TU\7\17\2\2UV\7D\2\2VW\7\4")
+        buf.write(u"\2\2W\21\3\2\2\2XZ\5\32\16\2YX\3\2\2\2YZ\3\2\2\2Z[\3")
+        buf.write(u"\2\2\2[\\\5\30\r\2\\^\7D\2\2]_\5\26\f\2^]\3\2\2\2^_\3")
+        buf.write(u"\2\2\2_\23\3\2\2\2`a\7\35\2\2ab\5\30\r\2bc\7D\2\2cd\7")
+        buf.write(u">\2\2de\5 \21\2e\25\3\2\2\2fg\7>\2\2gk\5 \21\2hi\7>\2")
+        buf.write(u"\2ik\5\34\17\2jf\3\2\2\2jh\3\2\2\2k\27\3\2\2\2lm\t\2")
+        buf.write(u"\2\2m\31\3\2\2\2no\t\3\2\2o\33\3\2\2\2pq\b\17\1\2qr\7")
+        buf.write(u"\'\2\2r\u0095\5\34\17\26st\7/\2\2t\u0095\5\34\17\25u")
+        buf.write(u"v\7\60\2\2v\u0095\5\34\17\24wx\7\63\2\2x\u0095\5\34\17")
+        buf.write(u"\23yz\7\64\2\2z\u0095\5\34\17\22{|\7\67\2\2|\u0095\5")
+        buf.write(u"\34\17\17}~\7\66\2\2~\u0095\5\34\17\16\177\u0080\7\22")
+        buf.write(u"\2\2\u0080\u0081\7\3\2\2\u0081\u0082\5\34\17\2\u0082")
+        buf.write(u"\u0083\7\4\2\2\u0083\u0095\3\2\2\2\u0084\u0085\7-\2\2")
+        buf.write(u"\u0085\u0086\7\3\2\2\u0086\u0087\5\34\17\2\u0087\u0088")
+        buf.write(u"\7\4\2\2\u0088\u0095\3\2\2\2\u0089\u008a\7.\2\2\u008a")
+        buf.write(u"\u008b\7\3\2\2\u008b\u008c\5\34\17\2\u008c\u008d\7\4")
+        buf.write(u"\2\2\u008d\u0095\3\2\2\2\u008e\u008f\7\3\2\2\u008f\u0090")
+        buf.write(u"\5\34\17\2\u0090\u0091\7\4\2\2\u0091\u0095\3\2\2\2\u0092")
+        buf.write(u"\u0095\5 \21\2\u0093\u0095\7D\2\2\u0094p\3\2\2\2\u0094")
+        buf.write(u"s\3\2\2\2\u0094u\3\2\2\2\u0094w\3\2\2\2\u0094y\3\2\2")
+        buf.write(u"\2\u0094{\3\2\2\2\u0094}\3\2\2\2\u0094\177\3\2\2\2\u0094")
+        buf.write(u"\u0084\3\2\2\2\u0094\u0089\3\2\2\2\u0094\u008e\3\2\2")
+        buf.write(u"\2\u0094\u0092\3\2\2\2\u0094\u0093\3\2\2\2\u0095\u00c0")
+        buf.write(u"\3\2\2\2\u0096\u0097\f\33\2\2\u0097\u0098\7\7\2\2\u0098")
+        buf.write(u"\u00bf\5\34\17\34\u0099\u009a\f\32\2\2\u009a\u009b\7")
+        buf.write(u"\b\2\2\u009b\u00bf\5\34\17\33\u009c\u009d\f\31\2\2\u009d")
+        buf.write(u"\u009e\7\6\2\2\u009e\u00bf\5\34\17\32\u009f\u00a0\f\30")
+        buf.write(u"\2\2\u00a0\u00a1\7\5\2\2\u00a1\u00bf\5\34\17\31\u00a2")
+        buf.write(u"\u00a3\f\27\2\2\u00a3\u00a4\5\36\20\2\u00a4\u00a5\5\34")
+        buf.write(u"\17\30\u00a5\u00bf\3\2\2\2\u00a6\u00a7\f\r\2\2\u00a7")
+        buf.write(u"\u00a8\7\61\2\2\u00a8\u00bf\5\34\17\16\u00a9\u00aa\f")
+        buf.write(u"\f\2\2\u00aa\u00ab\7\62\2\2\u00ab\u00bf\5\34\17\r\u00ac")
+        buf.write(u"\u00ad\f\13\2\2\u00ad\u00ae\7\65\2\2\u00ae\u00bf\5\34")
+        buf.write(u"\17\f\u00af\u00b0\f\n\2\2\u00b0\u00b1\7)\2\2\u00b1\u00bf")
+        buf.write(u"\5\34\17\13\u00b2\u00b3\f\t\2\2\u00b3\u00b4\7*\2\2\u00b4")
+        buf.write(u"\u00bf\5\34\17\n\u00b5\u00b6\f\b\2\2\u00b6\u00b7\7(\2")
+        buf.write(u"\2\u00b7\u00bf\5\34\17\t\u00b8\u00b9\f\7\2\2\u00b9\u00ba")
+        buf.write(u"\7+\2\2\u00ba\u00bf\5\34\17\b\u00bb\u00bc\f\6\2\2\u00bc")
+        buf.write(u"\u00bd\7,\2\2\u00bd\u00bf\5\34\17\7\u00be\u0096\3\2\2")
+        buf.write(u"\2\u00be\u0099\3\2\2\2\u00be\u009c\3\2\2\2\u00be\u009f")
+        buf.write(u"\3\2\2\2\u00be\u00a2\3\2\2\2\u00be\u00a6\3\2\2\2\u00be")
+        buf.write(u"\u00a9\3\2\2\2\u00be\u00ac\3\2\2\2\u00be\u00af\3\2\2")
+        buf.write(u"\2\u00be\u00b2\3\2\2\2\u00be\u00b5\3\2\2\2\u00be\u00b8")
+        buf.write(u"\3\2\2\2\u00be\u00bb\3\2\2\2\u00bf\u00c2\3\2\2\2\u00c0")
+        buf.write(u"\u00be\3\2\2\2\u00c0\u00c1\3\2\2\2\u00c1\35\3\2\2\2\u00c2")
+        buf.write(u"\u00c0\3\2\2\2\u00c3\u00ca\7;\2\2\u00c4\u00ca\7:\2\2")
+        buf.write(u"\u00c5\u00ca\7=\2\2\u00c6\u00ca\7<\2\2\u00c7\u00ca\7")
+        buf.write(u"8\2\2\u00c8\u00ca\79\2\2\u00c9\u00c3\3\2\2\2\u00c9\u00c4")
+        buf.write(u"\3\2\2\2\u00c9\u00c5\3\2\2\2\u00c9\u00c6\3\2\2\2\u00c9")
+        buf.write(u"\u00c7\3\2\2\2\u00c9\u00c8\3\2\2\2\u00ca\37\3\2\2\2\u00cb")
+        buf.write(u"\u00d0\7B\2\2\u00cc\u00d0\7C\2\2\u00cd\u00ce\7\5\2\2")
+        buf.write(u"\u00ce\u00d0\5 \21\2\u00cf\u00cb\3\2\2\2\u00cf\u00cc")
+        buf.write(u"\3\2\2\2\u00cf\u00cd\3\2\2\2\u00d0!\3\2\2\2\u00d1\u00d2")
+        buf.write(u"\7D\2\2\u00d2#\3\2\2\2\21(-\62\64:FLY^j\u0094\u00be\u00c0")
+        buf.write(u"\u00c9\u00cf")
         return buf.getvalue()
 
 
@@ -108,36 +111,39 @@ class LtlParser ( Parser ):
 
     sharedContextCache = PredictionContextCache()
 
-    literalNames = [ "<INVALID>", "'-'", "'+'", "'*'", "'/'", "'('", "')'", 
-                     "'{'", "'}'", "'['", "']'", "';'", "':'", "','", "'.'", 
-                     "'@'", "'abs'", "'s'", "'ms'", "'us'", "'ns'", "'ps'", 
-                     "'topic'", "'import'", "'input'", "'output'", "'internal'", 
-                     "'const'", "'real'", "'float'", "'long'", "'complex'", 
-                     "'int'", "'bool'", "'assertion'", "'specification'", 
-                     "'from'", "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                     "<INVALID>", "'xor'", "'rise'", "'fall'", "<INVALID>", 
-                     "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                     "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                     "'=='", "'!=='", "'>='", "'<='", "'>'", "'<'", "'='" ]
+    literalNames = [ u"<INVALID>", u"'('", u"')'", u"'-'", u"'+'", u"'*'", 
+                     u"'/'", u"'{'", u"'}'", u"'['", u"']'", u"';'", u"':'", 
+                     u"','", u"'.'", u"'@'", u"'abs'", u"'s'", u"'ms'", 
+                     u"'us'", u"'ns'", u"'ps'", u"'topic'", u"'import'", 
+                     u"'input'", u"'output'", u"'internal'", u"'const'", 
+                     u"'real'", u"'float'", u"'long'", u"'complex'", u"'int'", 
+                     u"'bool'", u"'assertion'", u"'specification'", u"'from'", 
+                     u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>", 
+                     u"<INVALID>", u"'xor'", u"'rise'", u"'fall'", u"<INVALID>", 
+                     u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>", 
+                     u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>", 
+                     u"'=='", u"'!=='", u"'>='", u"'<='", u"'>'", u"'<'", 
+                     u"'='" ]
 
-    symbolicNames = [ "<INVALID>", "MINUS", "PLUS", "TIMES", "DIVIDE", "LPAREN", 
-                      "RPAREN", "LBRACE", "RBRACE", "LBRACK", "RBRACK", 
-                      "SEMICOLON", "COLON", "COMMA", "DOT", "AT", "ABS", 
-                      "SEC", "MSEC", "USEC", "NSEC", "PSEC", "ROS_Topic", 
-                      "Import", "Input", "Output", "Internal", "Constant", 
-                      "DomainTypeReal", "DomainTypeFloat", "DomainTypeLong", 
-                      "DomainTypeComplex", "DomainTypeInt", "DomainTypeBool", 
-                      "Assertion", "Specification", "From", "NotOperator", 
-                      "OrOperator", "AndOperator", "IffOperator", "ImpliesOperator", 
-                      "XorOperator", "RiseOperator", "FallOperator", "AlwaysOperator", 
-                      "EventuallyOperator", "UntilOperator", "UnlessOperator", 
-                      "HistoricallyOperator", "OnceOperator", "SinceOperator", 
-                      "NextOperator", "PreviousOperator", "EqualOperator", 
-                      "NotEqualOperator", "GreaterOrEqualOperator", "LesserOrEqualOperator", 
-                      "GreaterOperator", "LesserOperator", "EQUAL", "BooleanLiteral", 
-                      "TRUE", "FALSE", "IntegerLiteral", "RealLiteral", 
-                      "Identifier", "LINE_TERMINATOR", "WHITESPACE", "COMMENT", 
-                      "LINE_COMMENT" ]
+    symbolicNames = [ u"<INVALID>", u"LPAREN", u"RPAREN", u"MINUS", u"PLUS", 
+                      u"TIMES", u"DIVIDE", u"LBRACE", u"RBRACE", u"LBRACK", 
+                      u"RBRACK", u"SEMICOLON", u"COLON", u"COMMA", u"DOT", 
+                      u"AT", u"ABS", u"SEC", u"MSEC", u"USEC", u"NSEC", 
+                      u"PSEC", u"ROS_Topic", u"Import", u"Input", u"Output", 
+                      u"Internal", u"Constant", u"DomainTypeReal", u"DomainTypeFloat", 
+                      u"DomainTypeLong", u"DomainTypeComplex", u"DomainTypeInt", 
+                      u"DomainTypeBool", u"Assertion", u"Specification", 
+                      u"From", u"NotOperator", u"OrOperator", u"AndOperator", 
+                      u"IffOperator", u"ImpliesOperator", u"XorOperator", 
+                      u"RiseOperator", u"FallOperator", u"AlwaysOperator", 
+                      u"EventuallyOperator", u"UntilOperator", u"UnlessOperator", 
+                      u"HistoricallyOperator", u"OnceOperator", u"SinceOperator", 
+                      u"NextOperator", u"PreviousOperator", u"EqualOperator", 
+                      u"NotEqualOperator", u"GreaterOrEqualOperator", u"LesserOrEqualOperator", 
+                      u"GreaterOperator", u"LesserOperator", u"EQUAL", u"BooleanLiteral", 
+                      u"TRUE", u"FALSE", u"IntegerLiteral", u"RealLiteral", 
+                      u"Identifier", u"LINE_TERMINATOR", u"WHITESPACE", 
+                      u"COMMENT", u"LINE_COMMENT" ]
 
     RULE_specification_file = 0
     RULE_specification = 1
@@ -157,19 +163,19 @@ class LtlParser ( Parser ):
     RULE_literal = 15
     RULE_identifier = 16
 
-    ruleNames =  [ "specification_file", "specification", "spec", "modimport", 
-                   "assertion", "declaration", "annotation", "annotation_type", 
-                   "variableDeclaration", "constantDeclaration", "assignment", 
-                   "domainType", "ioType", "expression", "comparisonOp", 
-                   "literal", "identifier" ]
+    ruleNames =  [ u"specification_file", u"specification", u"spec", u"modimport", 
+                   u"assertion", u"declaration", u"annotation", u"annotation_type", 
+                   u"variableDeclaration", u"constantDeclaration", u"assignment", 
+                   u"domainType", u"ioType", u"expression", u"comparisonOp", 
+                   u"literal", u"identifier" ]
 
     EOF = Token.EOF
-    MINUS=1
-    PLUS=2
-    TIMES=3
-    DIVIDE=4
-    LPAREN=5
-    RPAREN=6
+    LPAREN=1
+    RPAREN=2
+    MINUS=3
+    PLUS=4
+    TIMES=5
+    DIVIDE=6
     LBRACE=7
     RBRACE=8
     LBRACK=9
@@ -235,8 +241,8 @@ class LtlParser ( Parser ):
     COMMENT=69
     LINE_COMMENT=70
 
-    def __init__(self, input:TokenStream):
-        super().__init__(input)
+    def __init__(self, input):
+        super(LtlParser, self).__init__(input)
         self.checkVersion("4.5.1")
         self._interp = ParserATNSimulator(self, self.atn, self.decisionsToDFA, self.sharedContextCache)
         self._predicates = None
@@ -245,8 +251,8 @@ class LtlParser ( Parser ):
 
     class Specification_fileContext(ParserRuleContext):
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
+        def __init__(self, parser, parent=None, invokingState=-1):
+            super(LtlParser.Specification_fileContext, self).__init__(parent, invokingState)
             self.parser = parser
 
         def specification(self):
@@ -259,8 +265,8 @@ class LtlParser ( Parser ):
         def getRuleIndex(self):
             return LtlParser.RULE_specification_file
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitSpecification_file" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitSpecification_file"):
                 return visitor.visitSpecification_file(self)
             else:
                 return visitor.visitChildren(self)
@@ -288,36 +294,36 @@ class LtlParser ( Parser ):
 
     class SpecificationContext(ParserRuleContext):
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
+        def __init__(self, parser, parent=None, invokingState=-1):
+            super(LtlParser.SpecificationContext, self).__init__(parent, invokingState)
             self.parser = parser
 
         def spec(self):
             return self.getTypedRuleContext(LtlParser.SpecContext,0)
 
 
-        def modimport(self, i:int=None):
+        def modimport(self, i=None):
             if i is None:
                 return self.getTypedRuleContexts(LtlParser.ModimportContext)
             else:
                 return self.getTypedRuleContext(LtlParser.ModimportContext,i)
 
 
-        def declaration(self, i:int=None):
+        def declaration(self, i=None):
             if i is None:
                 return self.getTypedRuleContexts(LtlParser.DeclarationContext)
             else:
                 return self.getTypedRuleContext(LtlParser.DeclarationContext,i)
 
 
-        def annotation(self, i:int=None):
+        def annotation(self, i=None):
             if i is None:
                 return self.getTypedRuleContexts(LtlParser.AnnotationContext)
             else:
                 return self.getTypedRuleContext(LtlParser.AnnotationContext,i)
 
 
-        def assertion(self, i:int=None):
+        def assertion(self, i=None):
             if i is None:
                 return self.getTypedRuleContexts(LtlParser.AssertionContext)
             else:
@@ -327,8 +333,8 @@ class LtlParser ( Parser ):
         def getRuleIndex(self):
             return LtlParser.RULE_specification
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitSpecification" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitSpecification"):
                 return visitor.visitSpecification(self)
             else:
                 return visitor.visitChildren(self)
@@ -391,7 +397,7 @@ class LtlParser ( Parser ):
                 self.state = 56 
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << LtlParser.MINUS) | (1 << LtlParser.LPAREN) | (1 << LtlParser.ABS) | (1 << LtlParser.NotOperator) | (1 << LtlParser.RiseOperator) | (1 << LtlParser.FallOperator) | (1 << LtlParser.AlwaysOperator) | (1 << LtlParser.EventuallyOperator) | (1 << LtlParser.HistoricallyOperator) | (1 << LtlParser.OnceOperator) | (1 << LtlParser.NextOperator) | (1 << LtlParser.PreviousOperator))) != 0) or ((((_la - 64)) & ~0x3f) == 0 and ((1 << (_la - 64)) & ((1 << (LtlParser.IntegerLiteral - 64)) | (1 << (LtlParser.RealLiteral - 64)) | (1 << (LtlParser.Identifier - 64)))) != 0)):
+                if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << LtlParser.LPAREN) | (1 << LtlParser.MINUS) | (1 << LtlParser.ABS) | (1 << LtlParser.NotOperator) | (1 << LtlParser.RiseOperator) | (1 << LtlParser.FallOperator) | (1 << LtlParser.AlwaysOperator) | (1 << LtlParser.EventuallyOperator) | (1 << LtlParser.HistoricallyOperator) | (1 << LtlParser.OnceOperator) | (1 << LtlParser.NextOperator) | (1 << LtlParser.PreviousOperator))) != 0) or ((((_la - 64)) & ~0x3f) == 0 and ((1 << (_la - 64)) & ((1 << (LtlParser.IntegerLiteral - 64)) | (1 << (LtlParser.RealLiteral - 64)) | (1 << (LtlParser.Identifier - 64)))) != 0)):
                     break
 
         except RecognitionException as re:
@@ -404,8 +410,8 @@ class LtlParser ( Parser ):
 
     class SpecContext(ParserRuleContext):
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
+        def __init__(self, parser, parent=None, invokingState=-1):
+            super(LtlParser.SpecContext, self).__init__(parent, invokingState)
             self.parser = parser
 
 
@@ -413,15 +419,15 @@ class LtlParser ( Parser ):
             return LtlParser.RULE_spec
 
      
-        def copyFrom(self, ctx:ParserRuleContext):
-            super().copyFrom(ctx)
+        def copyFrom(self, ctx):
+            super(LtlParser.SpecContext, self).copyFrom(ctx)
 
 
 
     class SpecificationIdContext(SpecContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a LtlParser.SpecContext
-            super().__init__(parser)
+        def __init__(self, parser, ctx): # actually a LtlParser.SpecContext)
+            super(LtlParser.SpecificationIdContext, self).__init__(parser)
             self.copyFrom(ctx)
 
         def Specification(self):
@@ -429,8 +435,8 @@ class LtlParser ( Parser ):
         def Identifier(self):
             return self.getToken(LtlParser.Identifier, 0)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitSpecificationId" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitSpecificationId"):
                 return visitor.visitSpecificationId(self)
             else:
                 return visitor.visitChildren(self)
@@ -458,8 +464,8 @@ class LtlParser ( Parser ):
 
     class ModimportContext(ParserRuleContext):
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
+        def __init__(self, parser, parent=None, invokingState=-1):
+            super(LtlParser.ModimportContext, self).__init__(parent, invokingState)
             self.parser = parser
 
 
@@ -467,20 +473,20 @@ class LtlParser ( Parser ):
             return LtlParser.RULE_modimport
 
      
-        def copyFrom(self, ctx:ParserRuleContext):
-            super().copyFrom(ctx)
+        def copyFrom(self, ctx):
+            super(LtlParser.ModimportContext, self).copyFrom(ctx)
 
 
 
     class ModImportContext(ModimportContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a LtlParser.ModimportContext
-            super().__init__(parser)
+        def __init__(self, parser, ctx): # actually a LtlParser.ModimportContext)
+            super(LtlParser.ModImportContext, self).__init__(parser)
             self.copyFrom(ctx)
 
         def From(self):
             return self.getToken(LtlParser.From, 0)
-        def Identifier(self, i:int=None):
+        def Identifier(self, i=None):
             if i is None:
                 return self.getTokens(LtlParser.Identifier)
             else:
@@ -488,8 +494,8 @@ class LtlParser ( Parser ):
         def Import(self):
             return self.getToken(LtlParser.Import, 0)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitModImport" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitModImport"):
                 return visitor.visitModImport(self)
             else:
                 return visitor.visitChildren(self)
@@ -521,8 +527,8 @@ class LtlParser ( Parser ):
 
     class AssertionContext(ParserRuleContext):
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
+        def __init__(self, parser, parent=None, invokingState=-1):
+            super(LtlParser.AssertionContext, self).__init__(parent, invokingState)
             self.parser = parser
 
         def expression(self):
@@ -538,8 +544,8 @@ class LtlParser ( Parser ):
         def getRuleIndex(self):
             return LtlParser.RULE_assertion
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitAssertion" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitAssertion"):
                 return visitor.visitAssertion(self)
             else:
                 return visitor.visitChildren(self)
@@ -574,8 +580,8 @@ class LtlParser ( Parser ):
 
     class DeclarationContext(ParserRuleContext):
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
+        def __init__(self, parser, parent=None, invokingState=-1):
+            super(LtlParser.DeclarationContext, self).__init__(parent, invokingState)
             self.parser = parser
 
 
@@ -583,23 +589,23 @@ class LtlParser ( Parser ):
             return LtlParser.RULE_declaration
 
      
-        def copyFrom(self, ctx:ParserRuleContext):
-            super().copyFrom(ctx)
+        def copyFrom(self, ctx):
+            super(LtlParser.DeclarationContext, self).copyFrom(ctx)
 
 
 
     class DeclVariableContext(DeclarationContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a LtlParser.DeclarationContext
-            super().__init__(parser)
+        def __init__(self, parser, ctx): # actually a LtlParser.DeclarationContext)
+            super(LtlParser.DeclVariableContext, self).__init__(parser)
             self.copyFrom(ctx)
 
         def variableDeclaration(self):
             return self.getTypedRuleContext(LtlParser.VariableDeclarationContext,0)
 
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitDeclVariable" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitDeclVariable"):
                 return visitor.visitDeclVariable(self)
             else:
                 return visitor.visitChildren(self)
@@ -607,16 +613,16 @@ class LtlParser ( Parser ):
 
     class DeclConstantContext(DeclarationContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a LtlParser.DeclarationContext
-            super().__init__(parser)
+        def __init__(self, parser, ctx): # actually a LtlParser.DeclarationContext)
+            super(LtlParser.DeclConstantContext, self).__init__(parser)
             self.copyFrom(ctx)
 
         def constantDeclaration(self):
             return self.getTypedRuleContext(LtlParser.ConstantDeclarationContext,0)
 
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitDeclConstant" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitDeclConstant"):
                 return visitor.visitDeclConstant(self)
             else:
                 return visitor.visitChildren(self)
@@ -655,8 +661,8 @@ class LtlParser ( Parser ):
 
     class AnnotationContext(ParserRuleContext):
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
+        def __init__(self, parser, parent=None, invokingState=-1):
+            super(LtlParser.AnnotationContext, self).__init__(parent, invokingState)
             self.parser = parser
 
         def annotation_type(self):
@@ -666,8 +672,8 @@ class LtlParser ( Parser ):
         def getRuleIndex(self):
             return LtlParser.RULE_annotation
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitAnnotation" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitAnnotation"):
                 return visitor.visitAnnotation(self)
             else:
                 return visitor.visitChildren(self)
@@ -695,8 +701,8 @@ class LtlParser ( Parser ):
 
     class Annotation_typeContext(ParserRuleContext):
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
+        def __init__(self, parser, parent=None, invokingState=-1):
+            super(LtlParser.Annotation_typeContext, self).__init__(parent, invokingState)
             self.parser = parser
 
 
@@ -704,22 +710,22 @@ class LtlParser ( Parser ):
             return LtlParser.RULE_annotation_type
 
      
-        def copyFrom(self, ctx:ParserRuleContext):
-            super().copyFrom(ctx)
+        def copyFrom(self, ctx):
+            super(LtlParser.Annotation_typeContext, self).copyFrom(ctx)
 
 
 
     class RosTopicContext(Annotation_typeContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a LtlParser.Annotation_typeContext
-            super().__init__(parser)
+        def __init__(self, parser, ctx): # actually a LtlParser.Annotation_typeContext)
+            super(LtlParser.RosTopicContext, self).__init__(parser)
             self.copyFrom(ctx)
 
         def ROS_Topic(self):
             return self.getToken(LtlParser.ROS_Topic, 0)
         def LPAREN(self):
             return self.getToken(LtlParser.LPAREN, 0)
-        def Identifier(self, i:int=None):
+        def Identifier(self, i=None):
             if i is None:
                 return self.getTokens(LtlParser.Identifier)
             else:
@@ -729,8 +735,8 @@ class LtlParser ( Parser ):
         def RPAREN(self):
             return self.getToken(LtlParser.RPAREN, 0)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitRosTopic" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitRosTopic"):
                 return visitor.visitRosTopic(self)
             else:
                 return visitor.visitChildren(self)
@@ -766,8 +772,8 @@ class LtlParser ( Parser ):
 
     class VariableDeclarationContext(ParserRuleContext):
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
+        def __init__(self, parser, parent=None, invokingState=-1):
+            super(LtlParser.VariableDeclarationContext, self).__init__(parent, invokingState)
             self.parser = parser
 
         def domainType(self):
@@ -788,8 +794,8 @@ class LtlParser ( Parser ):
         def getRuleIndex(self):
             return LtlParser.RULE_variableDeclaration
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitVariableDeclaration" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitVariableDeclaration"):
                 return visitor.visitVariableDeclaration(self)
             else:
                 return visitor.visitChildren(self)
@@ -832,8 +838,8 @@ class LtlParser ( Parser ):
 
     class ConstantDeclarationContext(ParserRuleContext):
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
+        def __init__(self, parser, parent=None, invokingState=-1):
+            super(LtlParser.ConstantDeclarationContext, self).__init__(parent, invokingState)
             self.parser = parser
 
         def Constant(self):
@@ -856,8 +862,8 @@ class LtlParser ( Parser ):
         def getRuleIndex(self):
             return LtlParser.RULE_constantDeclaration
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitConstantDeclaration" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitConstantDeclaration"):
                 return visitor.visitConstantDeclaration(self)
             else:
                 return visitor.visitChildren(self)
@@ -891,8 +897,8 @@ class LtlParser ( Parser ):
 
     class AssignmentContext(ParserRuleContext):
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
+        def __init__(self, parser, parent=None, invokingState=-1):
+            super(LtlParser.AssignmentContext, self).__init__(parent, invokingState)
             self.parser = parser
 
 
@@ -900,15 +906,15 @@ class LtlParser ( Parser ):
             return LtlParser.RULE_assignment
 
      
-        def copyFrom(self, ctx:ParserRuleContext):
-            super().copyFrom(ctx)
+        def copyFrom(self, ctx):
+            super(LtlParser.AssignmentContext, self).copyFrom(ctx)
 
 
 
     class AsgnExprContext(AssignmentContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a LtlParser.AssignmentContext
-            super().__init__(parser)
+        def __init__(self, parser, ctx): # actually a LtlParser.AssignmentContext)
+            super(LtlParser.AsgnExprContext, self).__init__(parser)
             self.copyFrom(ctx)
 
         def EQUAL(self):
@@ -917,8 +923,8 @@ class LtlParser ( Parser ):
             return self.getTypedRuleContext(LtlParser.ExpressionContext,0)
 
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitAsgnExpr" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitAsgnExpr"):
                 return visitor.visitAsgnExpr(self)
             else:
                 return visitor.visitChildren(self)
@@ -926,8 +932,8 @@ class LtlParser ( Parser ):
 
     class AsgnLiteralContext(AssignmentContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a LtlParser.AssignmentContext
-            super().__init__(parser)
+        def __init__(self, parser, ctx): # actually a LtlParser.AssignmentContext)
+            super(LtlParser.AsgnLiteralContext, self).__init__(parser)
             self.copyFrom(ctx)
 
         def EQUAL(self):
@@ -936,8 +942,8 @@ class LtlParser ( Parser ):
             return self.getTypedRuleContext(LtlParser.LiteralContext,0)
 
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitAsgnLiteral" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitAsgnLiteral"):
                 return visitor.visitAsgnLiteral(self)
             else:
                 return visitor.visitChildren(self)
@@ -980,8 +986,8 @@ class LtlParser ( Parser ):
 
     class DomainTypeContext(ParserRuleContext):
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
+        def __init__(self, parser, parent=None, invokingState=-1):
+            super(LtlParser.DomainTypeContext, self).__init__(parent, invokingState)
             self.parser = parser
 
         def DomainTypeFloat(self):
@@ -1002,8 +1008,8 @@ class LtlParser ( Parser ):
         def getRuleIndex(self):
             return LtlParser.RULE_domainType
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitDomainType" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitDomainType"):
                 return visitor.visitDomainType(self)
             else:
                 return visitor.visitChildren(self)
@@ -1034,8 +1040,8 @@ class LtlParser ( Parser ):
 
     class IoTypeContext(ParserRuleContext):
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
+        def __init__(self, parser, parent=None, invokingState=-1):
+            super(LtlParser.IoTypeContext, self).__init__(parent, invokingState)
             self.parser = parser
 
         def Input(self):
@@ -1047,8 +1053,8 @@ class LtlParser ( Parser ):
         def getRuleIndex(self):
             return LtlParser.RULE_ioType
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitIoType" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitIoType"):
                 return visitor.visitIoType(self)
             else:
                 return visitor.visitChildren(self)
@@ -1079,8 +1085,8 @@ class LtlParser ( Parser ):
 
     class ExpressionContext(ParserRuleContext):
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
+        def __init__(self, parser, parent=None, invokingState=-1):
+            super(LtlParser.ExpressionContext, self).__init__(parent, invokingState)
             self.parser = parser
 
 
@@ -1088,14 +1094,14 @@ class LtlParser ( Parser ):
             return LtlParser.RULE_expression
 
      
-        def copyFrom(self, ctx:ParserRuleContext):
-            super().copyFrom(ctx)
+        def copyFrom(self, ctx):
+            super(LtlParser.ExpressionContext, self).copyFrom(ctx)
 
 
     class ExprNotContext(ExpressionContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a LtlParser.ExpressionContext
-            super().__init__(parser)
+        def __init__(self, parser, ctx): # actually a LtlParser.ExpressionContext)
+            super(LtlParser.ExprNotContext, self).__init__(parser)
             self.copyFrom(ctx)
 
         def NotOperator(self):
@@ -1104,8 +1110,8 @@ class LtlParser ( Parser ):
             return self.getTypedRuleContext(LtlParser.ExpressionContext,0)
 
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitExprNot" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitExprNot"):
                 return visitor.visitExprNot(self)
             else:
                 return visitor.visitChildren(self)
@@ -1113,8 +1119,8 @@ class LtlParser ( Parser ):
 
     class ExprNextContext(ExpressionContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a LtlParser.ExpressionContext
-            super().__init__(parser)
+        def __init__(self, parser, ctx): # actually a LtlParser.ExpressionContext)
+            super(LtlParser.ExprNextContext, self).__init__(parser)
             self.copyFrom(ctx)
 
         def NextOperator(self):
@@ -1123,8 +1129,8 @@ class LtlParser ( Parser ):
             return self.getTypedRuleContext(LtlParser.ExpressionContext,0)
 
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitExprNext" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitExprNext"):
                 return visitor.visitExprNext(self)
             else:
                 return visitor.visitChildren(self)
@@ -1132,11 +1138,11 @@ class LtlParser ( Parser ):
 
     class ExprUnlessContext(ExpressionContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a LtlParser.ExpressionContext
-            super().__init__(parser)
+        def __init__(self, parser, ctx): # actually a LtlParser.ExpressionContext)
+            super(LtlParser.ExprUnlessContext, self).__init__(parser)
             self.copyFrom(ctx)
 
-        def expression(self, i:int=None):
+        def expression(self, i=None):
             if i is None:
                 return self.getTypedRuleContexts(LtlParser.ExpressionContext)
             else:
@@ -1145,8 +1151,8 @@ class LtlParser ( Parser ):
         def UnlessOperator(self):
             return self.getToken(LtlParser.UnlessOperator, 0)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitExprUnless" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitExprUnless"):
                 return visitor.visitExprUnless(self)
             else:
                 return visitor.visitChildren(self)
@@ -1154,8 +1160,8 @@ class LtlParser ( Parser ):
 
     class ExprFallContext(ExpressionContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a LtlParser.ExpressionContext
-            super().__init__(parser)
+        def __init__(self, parser, ctx): # actually a LtlParser.ExpressionContext)
+            super(LtlParser.ExprFallContext, self).__init__(parser)
             self.copyFrom(ctx)
 
         def FallOperator(self):
@@ -1168,8 +1174,8 @@ class LtlParser ( Parser ):
         def RPAREN(self):
             return self.getToken(LtlParser.RPAREN, 0)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitExprFall" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitExprFall"):
                 return visitor.visitExprFall(self)
             else:
                 return visitor.visitChildren(self)
@@ -1177,11 +1183,11 @@ class LtlParser ( Parser ):
 
     class ExprPredicateContext(ExpressionContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a LtlParser.ExpressionContext
-            super().__init__(parser)
+        def __init__(self, parser, ctx): # actually a LtlParser.ExpressionContext)
+            super(LtlParser.ExprPredicateContext, self).__init__(parser)
             self.copyFrom(ctx)
 
-        def expression(self, i:int=None):
+        def expression(self, i=None):
             if i is None:
                 return self.getTypedRuleContexts(LtlParser.ExpressionContext)
             else:
@@ -1191,8 +1197,8 @@ class LtlParser ( Parser ):
             return self.getTypedRuleContext(LtlParser.ComparisonOpContext,0)
 
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitExprPredicate" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitExprPredicate"):
                 return visitor.visitExprPredicate(self)
             else:
                 return visitor.visitChildren(self)
@@ -1200,8 +1206,8 @@ class LtlParser ( Parser ):
 
     class ExprRiseContext(ExpressionContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a LtlParser.ExpressionContext
-            super().__init__(parser)
+        def __init__(self, parser, ctx): # actually a LtlParser.ExpressionContext)
+            super(LtlParser.ExprRiseContext, self).__init__(parser)
             self.copyFrom(ctx)
 
         def RiseOperator(self):
@@ -1214,8 +1220,8 @@ class LtlParser ( Parser ):
         def RPAREN(self):
             return self.getToken(LtlParser.RPAREN, 0)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitExprRise" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitExprRise"):
                 return visitor.visitExprRise(self)
             else:
                 return visitor.visitChildren(self)
@@ -1223,11 +1229,11 @@ class LtlParser ( Parser ):
 
     class ExprOrContext(ExpressionContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a LtlParser.ExpressionContext
-            super().__init__(parser)
+        def __init__(self, parser, ctx): # actually a LtlParser.ExpressionContext)
+            super(LtlParser.ExprOrContext, self).__init__(parser)
             self.copyFrom(ctx)
 
-        def expression(self, i:int=None):
+        def expression(self, i=None):
             if i is None:
                 return self.getTypedRuleContexts(LtlParser.ExpressionContext)
             else:
@@ -1236,8 +1242,8 @@ class LtlParser ( Parser ):
         def OrOperator(self):
             return self.getToken(LtlParser.OrOperator, 0)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitExprOr" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitExprOr"):
                 return visitor.visitExprOr(self)
             else:
                 return visitor.visitChildren(self)
@@ -1245,15 +1251,15 @@ class LtlParser ( Parser ):
 
     class ExprIdContext(ExpressionContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a LtlParser.ExpressionContext
-            super().__init__(parser)
+        def __init__(self, parser, ctx): # actually a LtlParser.ExpressionContext)
+            super(LtlParser.ExprIdContext, self).__init__(parser)
             self.copyFrom(ctx)
 
         def Identifier(self):
             return self.getToken(LtlParser.Identifier, 0)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitExprId" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitExprId"):
                 return visitor.visitExprId(self)
             else:
                 return visitor.visitChildren(self)
@@ -1261,11 +1267,11 @@ class LtlParser ( Parser ):
 
     class ExprAdditionContext(ExpressionContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a LtlParser.ExpressionContext
-            super().__init__(parser)
+        def __init__(self, parser, ctx): # actually a LtlParser.ExpressionContext)
+            super(LtlParser.ExprAdditionContext, self).__init__(parser)
             self.copyFrom(ctx)
 
-        def expression(self, i:int=None):
+        def expression(self, i=None):
             if i is None:
                 return self.getTypedRuleContexts(LtlParser.ExpressionContext)
             else:
@@ -1274,8 +1280,8 @@ class LtlParser ( Parser ):
         def PLUS(self):
             return self.getToken(LtlParser.PLUS, 0)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitExprAddition" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitExprAddition"):
                 return visitor.visitExprAddition(self)
             else:
                 return visitor.visitChildren(self)
@@ -1283,11 +1289,11 @@ class LtlParser ( Parser ):
 
     class ExprSinceContext(ExpressionContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a LtlParser.ExpressionContext
-            super().__init__(parser)
+        def __init__(self, parser, ctx): # actually a LtlParser.ExpressionContext)
+            super(LtlParser.ExprSinceContext, self).__init__(parser)
             self.copyFrom(ctx)
 
-        def expression(self, i:int=None):
+        def expression(self, i=None):
             if i is None:
                 return self.getTypedRuleContexts(LtlParser.ExpressionContext)
             else:
@@ -1296,8 +1302,8 @@ class LtlParser ( Parser ):
         def SinceOperator(self):
             return self.getToken(LtlParser.SinceOperator, 0)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitExprSince" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitExprSince"):
                 return visitor.visitExprSince(self)
             else:
                 return visitor.visitChildren(self)
@@ -1305,8 +1311,8 @@ class LtlParser ( Parser ):
 
     class ExprParenContext(ExpressionContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a LtlParser.ExpressionContext
-            super().__init__(parser)
+        def __init__(self, parser, ctx): # actually a LtlParser.ExpressionContext)
+            super(LtlParser.ExprParenContext, self).__init__(parser)
             self.copyFrom(ctx)
 
         def LPAREN(self):
@@ -1317,8 +1323,8 @@ class LtlParser ( Parser ):
         def RPAREN(self):
             return self.getToken(LtlParser.RPAREN, 0)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitExprParen" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitExprParen"):
                 return visitor.visitExprParen(self)
             else:
                 return visitor.visitChildren(self)
@@ -1326,11 +1332,11 @@ class LtlParser ( Parser ):
 
     class ExprDivisionContext(ExpressionContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a LtlParser.ExpressionContext
-            super().__init__(parser)
+        def __init__(self, parser, ctx): # actually a LtlParser.ExpressionContext)
+            super(LtlParser.ExprDivisionContext, self).__init__(parser)
             self.copyFrom(ctx)
 
-        def expression(self, i:int=None):
+        def expression(self, i=None):
             if i is None:
                 return self.getTypedRuleContexts(LtlParser.ExpressionContext)
             else:
@@ -1339,8 +1345,8 @@ class LtlParser ( Parser ):
         def DIVIDE(self):
             return self.getToken(LtlParser.DIVIDE, 0)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitExprDivision" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitExprDivision"):
                 return visitor.visitExprDivision(self)
             else:
                 return visitor.visitChildren(self)
@@ -1348,11 +1354,11 @@ class LtlParser ( Parser ):
 
     class ExprIffContext(ExpressionContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a LtlParser.ExpressionContext
-            super().__init__(parser)
+        def __init__(self, parser, ctx): # actually a LtlParser.ExpressionContext)
+            super(LtlParser.ExprIffContext, self).__init__(parser)
             self.copyFrom(ctx)
 
-        def expression(self, i:int=None):
+        def expression(self, i=None):
             if i is None:
                 return self.getTypedRuleContexts(LtlParser.ExpressionContext)
             else:
@@ -1361,8 +1367,8 @@ class LtlParser ( Parser ):
         def IffOperator(self):
             return self.getToken(LtlParser.IffOperator, 0)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitExprIff" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitExprIff"):
                 return visitor.visitExprIff(self)
             else:
                 return visitor.visitChildren(self)
@@ -1370,8 +1376,8 @@ class LtlParser ( Parser ):
 
     class ExpreOnceContext(ExpressionContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a LtlParser.ExpressionContext
-            super().__init__(parser)
+        def __init__(self, parser, ctx): # actually a LtlParser.ExpressionContext)
+            super(LtlParser.ExpreOnceContext, self).__init__(parser)
             self.copyFrom(ctx)
 
         def OnceOperator(self):
@@ -1380,8 +1386,8 @@ class LtlParser ( Parser ):
             return self.getTypedRuleContext(LtlParser.ExpressionContext,0)
 
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitExpreOnce" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitExpreOnce"):
                 return visitor.visitExpreOnce(self)
             else:
                 return visitor.visitChildren(self)
@@ -1389,11 +1395,11 @@ class LtlParser ( Parser ):
 
     class ExprMultiplicationContext(ExpressionContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a LtlParser.ExpressionContext
-            super().__init__(parser)
+        def __init__(self, parser, ctx): # actually a LtlParser.ExpressionContext)
+            super(LtlParser.ExprMultiplicationContext, self).__init__(parser)
             self.copyFrom(ctx)
 
-        def expression(self, i:int=None):
+        def expression(self, i=None):
             if i is None:
                 return self.getTypedRuleContexts(LtlParser.ExpressionContext)
             else:
@@ -1402,8 +1408,8 @@ class LtlParser ( Parser ):
         def TIMES(self):
             return self.getToken(LtlParser.TIMES, 0)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitExprMultiplication" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitExprMultiplication"):
                 return visitor.visitExprMultiplication(self)
             else:
                 return visitor.visitChildren(self)
@@ -1411,8 +1417,8 @@ class LtlParser ( Parser ):
 
     class ExprEvContext(ExpressionContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a LtlParser.ExpressionContext
-            super().__init__(parser)
+        def __init__(self, parser, ctx): # actually a LtlParser.ExpressionContext)
+            super(LtlParser.ExprEvContext, self).__init__(parser)
             self.copyFrom(ctx)
 
         def EventuallyOperator(self):
@@ -1421,8 +1427,8 @@ class LtlParser ( Parser ):
             return self.getTypedRuleContext(LtlParser.ExpressionContext,0)
 
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitExprEv" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitExprEv"):
                 return visitor.visitExprEv(self)
             else:
                 return visitor.visitChildren(self)
@@ -1430,11 +1436,11 @@ class LtlParser ( Parser ):
 
     class ExprImpliesContext(ExpressionContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a LtlParser.ExpressionContext
-            super().__init__(parser)
+        def __init__(self, parser, ctx): # actually a LtlParser.ExpressionContext)
+            super(LtlParser.ExprImpliesContext, self).__init__(parser)
             self.copyFrom(ctx)
 
-        def expression(self, i:int=None):
+        def expression(self, i=None):
             if i is None:
                 return self.getTypedRuleContexts(LtlParser.ExpressionContext)
             else:
@@ -1443,8 +1449,8 @@ class LtlParser ( Parser ):
         def ImpliesOperator(self):
             return self.getToken(LtlParser.ImpliesOperator, 0)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitExprImplies" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitExprImplies"):
                 return visitor.visitExprImplies(self)
             else:
                 return visitor.visitChildren(self)
@@ -1452,11 +1458,11 @@ class LtlParser ( Parser ):
 
     class ExprUntilContext(ExpressionContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a LtlParser.ExpressionContext
-            super().__init__(parser)
+        def __init__(self, parser, ctx): # actually a LtlParser.ExpressionContext)
+            super(LtlParser.ExprUntilContext, self).__init__(parser)
             self.copyFrom(ctx)
 
-        def expression(self, i:int=None):
+        def expression(self, i=None):
             if i is None:
                 return self.getTypedRuleContexts(LtlParser.ExpressionContext)
             else:
@@ -1465,8 +1471,8 @@ class LtlParser ( Parser ):
         def UntilOperator(self):
             return self.getToken(LtlParser.UntilOperator, 0)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitExprUntil" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitExprUntil"):
                 return visitor.visitExprUntil(self)
             else:
                 return visitor.visitChildren(self)
@@ -1474,8 +1480,8 @@ class LtlParser ( Parser ):
 
     class ExprAbsContext(ExpressionContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a LtlParser.ExpressionContext
-            super().__init__(parser)
+        def __init__(self, parser, ctx): # actually a LtlParser.ExpressionContext)
+            super(LtlParser.ExprAbsContext, self).__init__(parser)
             self.copyFrom(ctx)
 
         def ABS(self):
@@ -1488,8 +1494,8 @@ class LtlParser ( Parser ):
         def RPAREN(self):
             return self.getToken(LtlParser.RPAREN, 0)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitExprAbs" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitExprAbs"):
                 return visitor.visitExprAbs(self)
             else:
                 return visitor.visitChildren(self)
@@ -1497,11 +1503,11 @@ class LtlParser ( Parser ):
 
     class ExprSubtractionContext(ExpressionContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a LtlParser.ExpressionContext
-            super().__init__(parser)
+        def __init__(self, parser, ctx): # actually a LtlParser.ExpressionContext)
+            super(LtlParser.ExprSubtractionContext, self).__init__(parser)
             self.copyFrom(ctx)
 
-        def expression(self, i:int=None):
+        def expression(self, i=None):
             if i is None:
                 return self.getTypedRuleContexts(LtlParser.ExpressionContext)
             else:
@@ -1510,8 +1516,8 @@ class LtlParser ( Parser ):
         def MINUS(self):
             return self.getToken(LtlParser.MINUS, 0)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitExprSubtraction" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitExprSubtraction"):
                 return visitor.visitExprSubtraction(self)
             else:
                 return visitor.visitChildren(self)
@@ -1519,11 +1525,11 @@ class LtlParser ( Parser ):
 
     class ExprAndContext(ExpressionContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a LtlParser.ExpressionContext
-            super().__init__(parser)
+        def __init__(self, parser, ctx): # actually a LtlParser.ExpressionContext)
+            super(LtlParser.ExprAndContext, self).__init__(parser)
             self.copyFrom(ctx)
 
-        def expression(self, i:int=None):
+        def expression(self, i=None):
             if i is None:
                 return self.getTypedRuleContexts(LtlParser.ExpressionContext)
             else:
@@ -1532,8 +1538,8 @@ class LtlParser ( Parser ):
         def AndOperator(self):
             return self.getToken(LtlParser.AndOperator, 0)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitExprAnd" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitExprAnd"):
                 return visitor.visitExprAnd(self)
             else:
                 return visitor.visitChildren(self)
@@ -1541,8 +1547,8 @@ class LtlParser ( Parser ):
 
     class ExprPreviousContext(ExpressionContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a LtlParser.ExpressionContext
-            super().__init__(parser)
+        def __init__(self, parser, ctx): # actually a LtlParser.ExpressionContext)
+            super(LtlParser.ExprPreviousContext, self).__init__(parser)
             self.copyFrom(ctx)
 
         def PreviousOperator(self):
@@ -1551,8 +1557,8 @@ class LtlParser ( Parser ):
             return self.getTypedRuleContext(LtlParser.ExpressionContext,0)
 
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitExprPrevious" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitExprPrevious"):
                 return visitor.visitExprPrevious(self)
             else:
                 return visitor.visitChildren(self)
@@ -1560,8 +1566,8 @@ class LtlParser ( Parser ):
 
     class ExprHistContext(ExpressionContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a LtlParser.ExpressionContext
-            super().__init__(parser)
+        def __init__(self, parser, ctx): # actually a LtlParser.ExpressionContext)
+            super(LtlParser.ExprHistContext, self).__init__(parser)
             self.copyFrom(ctx)
 
         def HistoricallyOperator(self):
@@ -1570,8 +1576,8 @@ class LtlParser ( Parser ):
             return self.getTypedRuleContext(LtlParser.ExpressionContext,0)
 
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitExprHist" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitExprHist"):
                 return visitor.visitExprHist(self)
             else:
                 return visitor.visitChildren(self)
@@ -1579,11 +1585,11 @@ class LtlParser ( Parser ):
 
     class ExprXorContext(ExpressionContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a LtlParser.ExpressionContext
-            super().__init__(parser)
+        def __init__(self, parser, ctx): # actually a LtlParser.ExpressionContext)
+            super(LtlParser.ExprXorContext, self).__init__(parser)
             self.copyFrom(ctx)
 
-        def expression(self, i:int=None):
+        def expression(self, i=None):
             if i is None:
                 return self.getTypedRuleContexts(LtlParser.ExpressionContext)
             else:
@@ -1592,8 +1598,8 @@ class LtlParser ( Parser ):
         def XorOperator(self):
             return self.getToken(LtlParser.XorOperator, 0)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitExprXor" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitExprXor"):
                 return visitor.visitExprXor(self)
             else:
                 return visitor.visitChildren(self)
@@ -1601,8 +1607,8 @@ class LtlParser ( Parser ):
 
     class ExprAlwaysContext(ExpressionContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a LtlParser.ExpressionContext
-            super().__init__(parser)
+        def __init__(self, parser, ctx): # actually a LtlParser.ExpressionContext)
+            super(LtlParser.ExprAlwaysContext, self).__init__(parser)
             self.copyFrom(ctx)
 
         def AlwaysOperator(self):
@@ -1611,8 +1617,8 @@ class LtlParser ( Parser ):
             return self.getTypedRuleContext(LtlParser.ExpressionContext,0)
 
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitExprAlways" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitExprAlways"):
                 return visitor.visitExprAlways(self)
             else:
                 return visitor.visitChildren(self)
@@ -1620,23 +1626,23 @@ class LtlParser ( Parser ):
 
     class ExprLiteralContext(ExpressionContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a LtlParser.ExpressionContext
-            super().__init__(parser)
+        def __init__(self, parser, ctx): # actually a LtlParser.ExpressionContext)
+            super(LtlParser.ExprLiteralContext, self).__init__(parser)
             self.copyFrom(ctx)
 
         def literal(self):
             return self.getTypedRuleContext(LtlParser.LiteralContext,0)
 
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitExprLiteral" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitExprLiteral"):
                 return visitor.visitExprLiteral(self)
             else:
                 return visitor.visitChildren(self)
 
 
 
-    def expression(self, _p:int=0):
+    def expression(self, _p=0):
         _parentctx = self._ctx
         _parentState = self.state
         localctx = LtlParser.ExpressionContext(self, self._ctx, _parentState)
@@ -1973,8 +1979,8 @@ class LtlParser ( Parser ):
 
     class ComparisonOpContext(ParserRuleContext):
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
+        def __init__(self, parser, parent=None, invokingState=-1):
+            super(LtlParser.ComparisonOpContext, self).__init__(parent, invokingState)
             self.parser = parser
 
 
@@ -1982,22 +1988,22 @@ class LtlParser ( Parser ):
             return LtlParser.RULE_comparisonOp
 
      
-        def copyFrom(self, ctx:ParserRuleContext):
-            super().copyFrom(ctx)
+        def copyFrom(self, ctx):
+            super(LtlParser.ComparisonOpContext, self).copyFrom(ctx)
 
 
 
     class GeqContext(ComparisonOpContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a LtlParser.ComparisonOpContext
-            super().__init__(parser)
+        def __init__(self, parser, ctx): # actually a LtlParser.ComparisonOpContext)
+            super(LtlParser.GeqContext, self).__init__(parser)
             self.copyFrom(ctx)
 
         def GreaterOrEqualOperator(self):
             return self.getToken(LtlParser.GreaterOrEqualOperator, 0)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitGeq" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitGeq"):
                 return visitor.visitGeq(self)
             else:
                 return visitor.visitChildren(self)
@@ -2005,15 +2011,15 @@ class LtlParser ( Parser ):
 
     class LeqContext(ComparisonOpContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a LtlParser.ComparisonOpContext
-            super().__init__(parser)
+        def __init__(self, parser, ctx): # actually a LtlParser.ComparisonOpContext)
+            super(LtlParser.LeqContext, self).__init__(parser)
             self.copyFrom(ctx)
 
         def LesserOrEqualOperator(self):
             return self.getToken(LtlParser.LesserOrEqualOperator, 0)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitLeq" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitLeq"):
                 return visitor.visitLeq(self)
             else:
                 return visitor.visitChildren(self)
@@ -2021,15 +2027,15 @@ class LtlParser ( Parser ):
 
     class GreaterContext(ComparisonOpContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a LtlParser.ComparisonOpContext
-            super().__init__(parser)
+        def __init__(self, parser, ctx): # actually a LtlParser.ComparisonOpContext)
+            super(LtlParser.GreaterContext, self).__init__(parser)
             self.copyFrom(ctx)
 
         def GreaterOperator(self):
             return self.getToken(LtlParser.GreaterOperator, 0)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitGreater" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitGreater"):
                 return visitor.visitGreater(self)
             else:
                 return visitor.visitChildren(self)
@@ -2037,15 +2043,15 @@ class LtlParser ( Parser ):
 
     class NeqContext(ComparisonOpContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a LtlParser.ComparisonOpContext
-            super().__init__(parser)
+        def __init__(self, parser, ctx): # actually a LtlParser.ComparisonOpContext)
+            super(LtlParser.NeqContext, self).__init__(parser)
             self.copyFrom(ctx)
 
         def NotEqualOperator(self):
             return self.getToken(LtlParser.NotEqualOperator, 0)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitNeq" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitNeq"):
                 return visitor.visitNeq(self)
             else:
                 return visitor.visitChildren(self)
@@ -2053,15 +2059,15 @@ class LtlParser ( Parser ):
 
     class EqContext(ComparisonOpContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a LtlParser.ComparisonOpContext
-            super().__init__(parser)
+        def __init__(self, parser, ctx): # actually a LtlParser.ComparisonOpContext)
+            super(LtlParser.EqContext, self).__init__(parser)
             self.copyFrom(ctx)
 
         def EqualOperator(self):
             return self.getToken(LtlParser.EqualOperator, 0)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitEq" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitEq"):
                 return visitor.visitEq(self)
             else:
                 return visitor.visitChildren(self)
@@ -2069,15 +2075,15 @@ class LtlParser ( Parser ):
 
     class LessContext(ComparisonOpContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a LtlParser.ComparisonOpContext
-            super().__init__(parser)
+        def __init__(self, parser, ctx): # actually a LtlParser.ComparisonOpContext)
+            super(LtlParser.LessContext, self).__init__(parser)
             self.copyFrom(ctx)
 
         def LesserOperator(self):
             return self.getToken(LtlParser.LesserOperator, 0)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitLess" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitLess"):
                 return visitor.visitLess(self)
             else:
                 return visitor.visitChildren(self)
@@ -2140,8 +2146,8 @@ class LtlParser ( Parser ):
 
     class LiteralContext(ParserRuleContext):
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
+        def __init__(self, parser, parent=None, invokingState=-1):
+            super(LtlParser.LiteralContext, self).__init__(parent, invokingState)
             self.parser = parser
 
         def IntegerLiteral(self):
@@ -2160,8 +2166,8 @@ class LtlParser ( Parser ):
         def getRuleIndex(self):
             return LtlParser.RULE_literal
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitLiteral" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitLiteral"):
                 return visitor.visitLiteral(self)
             else:
                 return visitor.visitChildren(self)
@@ -2206,8 +2212,8 @@ class LtlParser ( Parser ):
 
     class IdentifierContext(ParserRuleContext):
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
+        def __init__(self, parser, parent=None, invokingState=-1):
+            super(LtlParser.IdentifierContext, self).__init__(parent, invokingState)
             self.parser = parser
 
 
@@ -2215,22 +2221,22 @@ class LtlParser ( Parser ):
             return LtlParser.RULE_identifier
 
      
-        def copyFrom(self, ctx:ParserRuleContext):
-            super().copyFrom(ctx)
+        def copyFrom(self, ctx):
+            super(LtlParser.IdentifierContext, self).copyFrom(ctx)
 
 
 
     class IdContext(IdentifierContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a LtlParser.IdentifierContext
-            super().__init__(parser)
+        def __init__(self, parser, ctx): # actually a LtlParser.IdentifierContext)
+            super(LtlParser.IdContext, self).__init__(parser)
             self.copyFrom(ctx)
 
         def Identifier(self):
             return self.getToken(LtlParser.Identifier, 0)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitId" ):
+        def accept(self, visitor):
+            if hasattr(visitor, "visitId"):
                 return visitor.visitId(self)
             else:
                 return visitor.visitChildren(self)
@@ -2256,7 +2262,7 @@ class LtlParser ( Parser ):
 
 
 
-    def sempred(self, localctx:RuleContext, ruleIndex:int, predIndex:int):
+    def sempred(self, localctx, ruleIndex, predIndex):
         if self._predicates == None:
             self._predicates = dict()
         self._predicates[13] = self.expression_sempred
@@ -2266,7 +2272,7 @@ class LtlParser ( Parser ):
         else:
             return pred(localctx, predIndex)
 
-    def expression_sempred(self, localctx:ExpressionContext, predIndex:int):
+    def expression_sempred(self, localctx, predIndex):
             if predIndex == 0:
                 return self.precpred(self._ctx, 25)
          

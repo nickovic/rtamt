@@ -122,11 +122,11 @@ def serializedATN():
         buf.write(u"\2\u00b1\u0287\3\2\2\2\u00b3\u0290\3\2\2\2\u00b5\u0295")
         buf.write(u"\3\2\2\2\u00b7\u0299\3\2\2\2\u00b9\u029b\3\2\2\2\u00bb")
         buf.write(u"\u029d\3\2\2\2\u00bd\u02a2\3\2\2\2\u00bf\u02a8\3\2\2")
-        buf.write(u"\2\u00c1\u02b6\3\2\2\2\u00c3\u00c4\7/\2\2\u00c4\4\3\2")
-        buf.write(u"\2\2\u00c5\u00c6\7-\2\2\u00c6\6\3\2\2\2\u00c7\u00c8\7")
-        buf.write(u",\2\2\u00c8\b\3\2\2\2\u00c9\u00ca\7\61\2\2\u00ca\n\3")
-        buf.write(u"\2\2\2\u00cb\u00cc\7*\2\2\u00cc\f\3\2\2\2\u00cd\u00ce")
-        buf.write(u"\7+\2\2\u00ce\16\3\2\2\2\u00cf\u00d0\7}\2\2\u00d0\20")
+        buf.write(u"\2\u00c1\u02b6\3\2\2\2\u00c3\u00c4\7*\2\2\u00c4\4\3\2")
+        buf.write(u"\2\2\u00c5\u00c6\7+\2\2\u00c6\6\3\2\2\2\u00c7\u00c8\7")
+        buf.write(u"/\2\2\u00c8\b\3\2\2\2\u00c9\u00ca\7-\2\2\u00ca\n\3\2")
+        buf.write(u"\2\2\u00cb\u00cc\7,\2\2\u00cc\f\3\2\2\2\u00cd\u00ce\7")
+        buf.write(u"\61\2\2\u00ce\16\3\2\2\2\u00cf\u00d0\7}\2\2\u00d0\20")
         buf.write(u"\3\2\2\2\u00d1\u00d2\7\177\2\2\u00d2\22\3\2\2\2\u00d3")
         buf.write(u"\u00d4\7]\2\2\u00d4\24\3\2\2\2\u00d5\u00d6\7_\2\2\u00d6")
         buf.write(u"\26\3\2\2\2\u00d7\u00d8\7=\2\2\u00d8\30\3\2\2\2\u00d9")
@@ -338,12 +338,12 @@ class LtlLexer(Lexer):
     decisionsToDFA = [ DFA(ds, i) for i, ds in enumerate(atn.decisionToState) ]
 
 
-    MINUS = 1
-    PLUS = 2
-    TIMES = 3
-    DIVIDE = 4
-    LPAREN = 5
-    RPAREN = 6
+    LPAREN = 1
+    RPAREN = 2
+    MINUS = 3
+    PLUS = 4
+    TIMES = 5
+    DIVIDE = 6
     LBRACE = 7
     RBRACE = 8
     LBRACK = 9
@@ -412,7 +412,7 @@ class LtlLexer(Lexer):
     modeNames = [ u"DEFAULT_MODE" ]
 
     literalNames = [ u"<INVALID>",
-            u"'-'", u"'+'", u"'*'", u"'/'", u"'('", u"')'", u"'{'", u"'}'", 
+            u"'('", u"')'", u"'-'", u"'+'", u"'*'", u"'/'", u"'{'", u"'}'", 
             u"'['", u"']'", u"';'", u"':'", u"','", u"'.'", u"'@'", u"'abs'", 
             u"'s'", u"'ms'", u"'us'", u"'ns'", u"'ps'", u"'topic'", u"'import'", 
             u"'input'", u"'output'", u"'internal'", u"'const'", u"'real'", 
@@ -421,7 +421,7 @@ class LtlLexer(Lexer):
             u"'=='", u"'!=='", u"'>='", u"'<='", u"'>'", u"'<'", u"'='" ]
 
     symbolicNames = [ u"<INVALID>",
-            u"MINUS", u"PLUS", u"TIMES", u"DIVIDE", u"LPAREN", u"RPAREN", 
+            u"LPAREN", u"RPAREN", u"MINUS", u"PLUS", u"TIMES", u"DIVIDE", 
             u"LBRACE", u"RBRACE", u"LBRACK", u"RBRACK", u"SEMICOLON", u"COLON", 
             u"COMMA", u"DOT", u"AT", u"ABS", u"SEC", u"MSEC", u"USEC", u"NSEC", 
             u"PSEC", u"ROS_Topic", u"Import", u"Input", u"Output", u"Internal", 
@@ -437,7 +437,7 @@ class LtlLexer(Lexer):
             u"TRUE", u"FALSE", u"IntegerLiteral", u"RealLiteral", u"Identifier", 
             u"LINE_TERMINATOR", u"WHITESPACE", u"COMMENT", u"LINE_COMMENT" ]
 
-    ruleNames = [ u"MINUS", u"PLUS", u"TIMES", u"DIVIDE", u"LPAREN", u"RPAREN", 
+    ruleNames = [ u"LPAREN", u"RPAREN", u"MINUS", u"PLUS", u"TIMES", u"DIVIDE", 
                   u"LBRACE", u"RBRACE", u"LBRACK", u"RBRACK", u"SEMICOLON", 
                   u"COLON", u"COMMA", u"DOT", u"AT", u"ABS", u"SEC", u"MSEC", 
                   u"USEC", u"NSEC", u"PSEC", u"ROS_Topic", u"Import", u"Input", 
