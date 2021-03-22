@@ -1,4 +1,4 @@
-# How to implimnet a new temproal logic in RTAMT
+# Guideline for Extending RTAMT
 
 This document explains the architecture of the library and provides guidelines 
 for extending the library with (1) new operators, (2) existing syntax, 
@@ -71,7 +71,7 @@ So, we implimented [Linier Temporal Logic](https://en.wikipedia.org/wiki/Linear_
 [LtlParser.g4](rtamt/grammar/tl/LtlParser.g4)  
 and Signal Temporal Logic (STL) in  
 [StlLexer.g4](rtamt/grammar/tl/StlLexer.g4)  
-[StlParser.g4](rtamt/grammar/tl/StlParser.g4)  
+[StlParser.g4](rtamt/grammar/tl/StlParser.g4)   
 while importing LTL with
 
 ```g4
@@ -92,28 +92,100 @@ This contains auto-generated parsers from Antrl based on the grammer.
 [rtamt/cpplib](rtamt/cpplib)  
 cpp version of nodes.
 
-## How to impleiment new TL?
+## Examples of Extending RTAMT
 
-### Impliment syntax
+### Extending STL with a new operator
 
-You can designe your own syntax in [rtamt/paser](rtamt/paser).
-If it is LTL or STL base, you can just use default our implimentation.
+In this scenario, we extend STL with the past-time Backto operator. 
+We first need a new grammar that defines the Backto operator. Hence, 
+we create two new files - `StlExtendedLexer.g4` and `StlExtendedParser.g4` 
+in [rtamt/grammar/tl](rtamt/grammar/tl). 
 
-Then compile the grammer with antlr4
+`StlExtendedLexer.g4` has the same content as `StlLexer.g4`, except for an 
+additional token.
+```
+BacktoOperator
+	: 'backto' | 'B' ;
+```
+`StlExtendedLexer.g4` imports `StlParser` and uses `StlExtendedLexer` as its 
+lexer. 
+```antlrv4
+parser grammar StlExtendedParser ;
+import StlParser;
 
-- python 2 case
+options {
+	tokenVocab = StlExtendedLexer ;
+}
+```
+It inherits all the rules from `StlParser`, except the `expression` rule that 
+it overrides, by adding an additional sub-rule for the Backto operator:
+```antlrv4
+expression
+	:
+    // ...
+    | expression BacktoOperator ( interval )? expression         #ExprBackto
+    // ...
+    ;
+```
+In the next step, we need to compile the new grammar with `antlr4`, using the 
+following commands. 
 
-    ```bash
-    antlr4 StlParser.g4 -Dlanguage=Python2 -no-listener -visitor -o ../../parser/stl/python2/
-    antlr4 StlLexer.g4 -Dlanguage=Python2 -no-listener -visitor -o ../../parser/stl/python2/
-    ```
+We will generate the parser in a new Python package [rtamt/parser/xstl](rtamt/parser/xstl) 
+that we manually create (we should not forget adding the (empty) file `__init__.py`). 
+In addition, we create another Python package [rtamt/parser/xstl/error](rtamt/parser/xstl/error) 
+for handling parsing errors and add the `parser_error_lister.py` file with the
+`STLExtendedParserErrorListener` class that has the same content as 
+`STLParserErrorListener` from [rtamt/parser/stl/error](rtamt/parser/stl/error).
 
-- python 3 case
+```bash
+antlr4 StlExtendedLexer.g4 -Dlanguage=Python3 -no-listener -visitor -o ../../parser/xstl/
+antlr4 StlExtendedParser.g4 -Dlanguage=Python3 -no-listener -visitor -o ../../parser/xstl/
+```
 
-    ```bash
-    antlr4 StlParser.g4 -Dlanguage=Python3 -no-listener -visitor -o ../../parser/stl/python3/
-    antlr4 StlLexer.g4 -Dlanguage=Python3 -no-listener -visitor -o ../../parser/stl/python3/
-    ```
+The package [rtamt/parser/xstl](rtamt/parser/xstl) contains 5 new files:
+```antlrv4
+StlExtendedLexer.py
+StlExtendedLexer.tokens
+StlExtendedParser.py
+StlExtendedParser.tokens
+StlExtendedParserVisitor.py
+```
+
+In the next step, we need to create a Visitor that inherits from the 
+(automatically generated) class `StlExtendedParserVisitor` and create a 
+parse-tree of the specification. Before we are able to do that, we 
+need to create a `Node` for the Backto operator in [rtamt/node]. 
+We create a new Python package [rtamt/node/xstl] and add the 
+file `timed_backto.py`, which defines the `BacktoNode` class.
+
+```python
+from rtamt.node.binary_node import BinaryNode
+from rtamt.node.stl.time_bound import TimeBound
+
+class TimedBackto(BinaryNode, TimeBound):
+    """A class for storing STL Backto nodes
+                Inherits TemporalNode
+    """
+    def __init__(self, child1, child2, begin, end, is_pure_python=True):
+        """Constructor for Backto node
+
+            Parameters:
+                child1 : stl.Node
+                child2 : stl.Node
+                bound : Interval
+        """
+
+        BinaryNode.__init__(self, child1, child2)
+        TimeBound.__init__(self, begin, end)
+
+        self.in_vars = child1.in_vars + child2.in_vars
+        self.out_vars = child1.out_vars + child2.out_vars
+
+        self.name = '(' + child1.name + ')backto[' + str(self.begin) + ',' + str(
+                self.end) + '](' + child2.name + ')'
+```
+
+
 
 ### Choose update and time handler
 
