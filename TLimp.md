@@ -58,7 +58,6 @@ with additional STL (timed) operators.
 
 ![alt text](resources/evaluator-diagram.png)
 
-
 ### grammar
 
 [rtamt/grammar](rtamt/grammar)  
@@ -84,9 +83,6 @@ import LtlParser;
 [rtamt/parser](rtamt/paser)  
 This contains auto-generated parsers from Antrl based on the grammer.
 
-
-
-
 ### cpplib
 
 [rtamt/cpplib](rtamt/cpplib)  
@@ -103,30 +99,36 @@ in [rtamt/grammar/tl](rtamt/grammar/tl).
 
 `StlExtendedLexer.g4` has the same content as `StlLexer.g4`, except for an 
 additional token.
-```
+
+```antlrv4
 BacktoOperator
-	: 'backto' | 'B' ;
+    : 'backto' | 'B' ;
 ```
+
 `StlExtendedLexer.g4` imports `StlParser` and uses `StlExtendedLexer` as its 
 lexer. 
+
 ```antlrv4
 parser grammar StlExtendedParser ;
 import StlParser;
 
 options {
-	tokenVocab = StlExtendedLexer ;
+    tokenVocab = StlExtendedLexer ;
 }
 ```
+
 It inherits all the rules from `StlParser`, except the `expression` rule that 
 it overrides, by adding an additional sub-rule for the Backto operator:
+
 ```antlrv4
 expression
-	:
+    :
     // ...
     | expression BacktoOperator ( interval )? expression         #ExprBackto
     // ...
     ;
 ```
+
 In the next step, we need to compile the new grammar with `antlr4`, using the 
 following commands. 
 
@@ -143,7 +145,8 @@ antlr4 StlExtendedParser.g4 -Dlanguage=Python3 -no-listener -visitor -o ../../pa
 ```
 
 The package [rtamt/parser/xstl](rtamt/parser/xstl) contains 5 new files:
-```antlrv4
+
+```text
 StlExtendedLexer.py
 StlExtendedLexer.tokens
 StlExtendedParser.py
