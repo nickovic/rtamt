@@ -6,9 +6,9 @@ but new semantics, and (3) alternative implementation of the existing algorithms
 
 ## Overview of RTAMT architecture
 
-### Top-level Architecture
+### Top-level Architecture [rtamt/spec](rtamt/spec)
 
-The `AbstractSpecification` class as the main container class 
+The [AbstractSpecification](rtamt/spec/abstract_specification.py) class as the main container class 
 that also acts as the API between the user and the library. 
 Concrete specifications are derived from this abstract class. Figure below 
 depicts the most important attributes and methods of the class. 
@@ -36,31 +36,18 @@ The `AbstractSpecification` class does not implement these methods, but any
 derived class is expected to implement them (or throw a 
 `NotImplemented` exception if a method is not meant to be implemented).
 
-`LTLDiscreteTimeSpecification` is a class that is derived from 
+[LTLDiscreteTimeSpecification](rtamt/spec/ltl/discrete_time/specification.py) is a class that is derived from 
 `AbstractSpecification` and that is contains the implementation of 
 discrete-time monitors for LTL. It provides a concrete implementation of 
 `parse()`, `update()`, `evaluate()` and `reset()` methods. 
 
-`STLDiscreteTimeSpecification` extends `LTLDiscreteTimeSpecification` 
+[STLDiscreteTimeSpecification](rtamt/spec/stl/discrete_time/specification_parser.py) extends `LTLDiscreteTimeSpecification` 
 with additional STL (timed) operators. 
 
 ![alt text](resources/top-diagram.png)
 
-### Node
+### grammar [rtamt/grammar](rtamt/grammar)
 
-[rtamt/node](rtamt/node)  
-
-![alt text](resources/node-diagram.png)
-
-### Evaluator
-
-[rtamt/evaluator](rtamt/evaluator)  
-
-![alt text](resources/evaluator-diagram.png)
-
-### grammar
-
-[rtamt/grammar](rtamt/grammar)  
 This contains lexser and paser setting based on [Antrl](https://www.antlr.org/).  
 
 [rtamt/grammar/tl](rtamt/grammar/tl)  
@@ -70,22 +57,28 @@ So, we implimented [Linier Temporal Logic](https://en.wikipedia.org/wiki/Linear_
 [LtlParser.g4](rtamt/grammar/tl/LtlParser.g4)  
 and Signal Temporal Logic (STL) in  
 [StlLexer.g4](rtamt/grammar/tl/StlLexer.g4)  
-[StlParser.g4](rtamt/grammar/tl/StlParser.g4)   
+[StlParser.g4](rtamt/grammar/tl/StlParser.g4)  
 while importing LTL with
 
 ```g4
-parser grammar StlParser ;
+parser grammar StlParser;
 import LtlParser;
 ```
 
-### parser
+### parser [rtamt/parser](rtamt/paser)
 
-[rtamt/parser](rtamt/paser)  
 This contains auto-generated parsers from Antrl based on the grammer.
 
-### cpplib
+### Evaluator [rtamt/evaluator](rtamt/evaluator)  
 
-[rtamt/cpplib](rtamt/cpplib)  
+![alt text](resources/evaluator-diagram.png)
+
+### Node [rtamt/node](rtamt/node)  
+
+![alt text](resources/node-diagram.png)
+
+### cpplib [rtamt/cpplib](rtamt/cpplib)
+
 cpp version of nodes.
 
 ## Examples of Extending RTAMT
@@ -106,7 +99,7 @@ BacktoOperator
 ```
 
 `StlExtendedLexer.g4` imports `StlParser` and uses `StlExtendedLexer` as its 
-lexer. 
+lexer.
 
 ```antlrv4
 parser grammar StlExtendedParser ;
