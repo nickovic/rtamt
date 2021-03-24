@@ -67,19 +67,22 @@ import LtlParser;
 
 ### parser [rtamt/parser](rtamt/paser)
 
-This contains auto-generated parsers from Antrl based on the grammer.
+This contains auto-generated parsers from Antrl based on the above grammer.
 
-### Evaluator [rtamt/evaluator](rtamt/evaluator)  
+### Evaluator [rtamt/evaluator](rtamt/evaluator)
 
+The parsed formulas are connected to the evaluator.
+This seprates evaluation method, like online or offline, then went to node.
 ![alt text](resources/evaluator-diagram.png)
 
-### Node [rtamt/node](rtamt/node)  
+### Node [rtamt/node](rtamt/node)
 
+Finally, each fromulas reasch the nodes which are implimented spesific semantics.
 ![alt text](resources/node-diagram.png)
 
 ### cpplib [rtamt/cpplib](rtamt/cpplib)
 
-cpp version of nodes.
+cpp version of the nodes.
 
 ## Examples of Extending RTAMT
 
