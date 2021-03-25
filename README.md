@@ -50,8 +50,7 @@ You will also need CMake version 3.12 or higher if you need to build the CPP bac
 sudo apt install cmake
 ```
 
-In our experience, Ubuntu 16.04, 18.04 don't support the versions in default. You can check manual intallation of cmake.  
-<https://cmake.org/install/>
+In our experience, Ubuntu 16.04, 18.04 don't support the versions in default. You can check [our manual intallation of cmake](README_cmake.md).
 
 ## Build the tool
 
