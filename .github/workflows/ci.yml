@@ -32,6 +32,6 @@ jobs:
         pytest --ignore=tests/cpp
     - name: Build coverage file
       run: |
-        pytest --ignore=tests/cpp --cache-clear --cov=app tests/ > pytest-coverage.txt
+        pytest --ignore=tests/cpp --cache-clear --cov=rtamt tests/ > pytest-coverage.txt
     - name: Comment coverage
       uses: coroo/pytest-coverage-commentator@v1.0.2
