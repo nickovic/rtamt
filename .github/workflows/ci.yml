@@ -22,10 +22,10 @@ jobs:
         pip install flake8 pytest pytest-coverage codecov antlr4-python3-runtime==4.5 enum34==1.1.10
       if: matrix.python_version != '2.7'
     - name: Install dependencies (Python 2.7)
-        run: |
-          python -m pip install --upgrade pip
-          pip install flake8 pytest pytest-coverage codecov antlr4-python2-runtime==4.5 enum34==1.1.10
-        if: matrix.python_version == '2.7'
+      run: |
+        python -m pip install --upgrade pip
+        pip install flake8 pytest pytest-coverage codecov antlr4-python2-runtime==4.5 enum34==1.1.10
+      if: matrix.python_version == '2.7'
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
