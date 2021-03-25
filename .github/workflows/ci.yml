@@ -33,3 +33,6 @@ jobs:
     - name: Build coverage file
       run: |
         pytest --ignore=tests/cpp --cache-clear --cov-report term --cov=rtamt tests/
+
+    after_success:
+      - codecov
