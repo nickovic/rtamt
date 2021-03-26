@@ -53,6 +53,50 @@ def intersection(a, b, method):
 
     prev = float("nan")
     last = []
+
+    if len(a)==0 or len(b)==0:
+        return ans, last, a, b
+
+    if len(a)==1 and len(b)==1:
+        if a[0][0] == b[0][0]:
+            val = method(a[0][1], b[0][1])
+            ans.append([a[0][0], val])
+        return ans, last, a, b
+
+    if len(a) == 1:
+        i = 0
+        while i < len(b):
+            if i == len(b)-1:
+                if a[0][0] == b[i][0]:
+                    val = method(a[0][1], b[i][1])
+                    ans.append([a[0][0], val])
+            else:
+                t = a[0][0]
+                t1 = b[i][0]
+                t2 = b[i+1][0]
+                if t1 <= t < t2:
+                    val = method(a[0][1], b[i][1])
+                    ans.append([a[0][0], val])
+            i += 1
+        return ans, last, a, b
+
+    if len(b) == 1:
+        i = 0
+        while i < len(a):
+            if i == len(a)-1:
+                if b[0][0] == a[i][0]:
+                    val = method(a[i][1], b[0][1])
+                    ans.append([b[0][0], val])
+            else:
+                t = b[0][0]
+                t1 = a[i][0]
+                t2 = a[i+1][0]
+                if t1 <= t < t2:
+                    val = method(a[i][1], b[0][1])
+                    ans.append([b[0][0], val])
+            i += 1
+        return ans, last, a, b
+
     while len(a) > 1 and len(b) > 1:
         a_start = a[i - 1][0]
         a_end = a[i][0]
@@ -125,3 +169,6 @@ def multiplication(a, b):
 
 def division(a, b):
     return float(a) / float(b)
+
+def split(a, b):
+    return [a,b]

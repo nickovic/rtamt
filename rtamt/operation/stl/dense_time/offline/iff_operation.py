@@ -1,5 +1,5 @@
 from rtamt.operation.abstract_operation import AbstractOperation
-import rtamt.operation.stl.dense_time.online.intersection as intersect
+import rtamt.operation.stl.dense_time.offline.intersection as intersect
 
 class IffOperation(AbstractOperation):
     def __init__(self):

@@ -1,6 +1,6 @@
 from rtamt.operation.abstract_operation import AbstractOperation
 from rtamt.enumerations.comp_oper import StlComparisonOperator
-from rtamt.operation.arithmetic.dense_time.online.subtraction_operation import SubtractionOperation
+from rtamt.operation.arithmetic.dense_time.offline.subtraction_operation import SubtractionOperation
 from rtamt.exception.ltl.exception import LTLException
 
 

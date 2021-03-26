@@ -20,7 +20,7 @@ from rtamt.operation.arithmetic.dense_time.offline.addition_operation import Add
 from rtamt.operation.arithmetic.dense_time.offline.multiplication_operation import MultiplicationOperation
 from rtamt.operation.arithmetic.dense_time.offline.division_operation import DivisionOperation
 from rtamt.operation.arithmetic.dense_time.offline.abs_operation import AbsOperation
-#from rtamt.operation.stl.dense_time.offline.until_operation import UntilOperation
+from rtamt.operation.stl.dense_time.offline.until_operation import UntilOperation
 #from rtamt.operation.stl.dense_time.offline.eventually_bounded_operation import EventuallyBoundedOperation
 #from rtamt.operation.stl.dense_time.offline.always_bounded_operation import AlwaysBoundedOperation
 #from rtamt.operation.stl.dense_time.offline.until_bounded_operation import UntilBoundedOperation
@@ -154,6 +154,45 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
         expected = []
 
         self.assertListEqual(expected, out, "addition dense time offline 9")
+
+        #################################################################################
+
+        oper = AdditionOperation()
+
+        left = [[0, 2]]
+        right = [[0, 3]]
+
+        out = oper.update(left, right)
+
+        expected = [[0, 2+3]]
+
+        self.assertListEqual(expected, out, "addition dense time offline 10")
+
+        #################################################################################
+
+        oper = AdditionOperation()
+
+        left = [[0, 2]]
+        right = [[0.2, 3]]
+
+        out = oper.update(left, right)
+
+        expected = []
+
+        self.assertListEqual(expected, out, "addition dense time offline 11")
+
+        #################################################################################
+
+        oper = AdditionOperation()
+
+        left = [[0, 2], [1.3, 7], [4.5, 2.6], [6.6, 7]]
+        right = [[5.2, 3]]
+
+        out = oper.update(left, right)
+
+        expected = [[5.2, 2.6+3]]
+
+        self.assertListEqual(expected, out, "addition dense time offline 11")
 
     def test_subtraction(self):
         oper = SubtractionOperation()
@@ -369,10 +408,76 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
     def test_historically(self):
         oper = HistoricallyOperation()
 
-        out = oper.update(self.left)
-        expected = [100, -1, -2, -2, -2]
+        op = [[0, 2.5], [0.7, 4], [1.3, -1.2], [2.1, 1.7]]
 
-        self.assertListEqual(out, expected, "historically")
+        out = oper.update(op)
+        expected = [[0, 2.5], [1.3, -1.2], [2.1, -1.2]]
+
+        self.assertListEqual(out, expected, "historically dense time offline 1")
+
+        ####################################################################
+
+        oper = OnceOperation()
+
+        op = [[0, 2.5]]
+
+        out = oper.update(op)
+        expected = [[0, 2.5]]
+
+        self.assertListEqual(out, expected, "historically dense time offline 2")
+
+        ####################################################################
+
+        oper = HistoricallyOperation()
+
+        op = []
+
+        out = oper.update(op)
+        expected = []
+
+        self.assertListEqual(out, expected, "historically dense time offline 3")
+
+        oper = HistoricallyOperation()
+
+        op = [[0, -2.5], [0.7, 4], [1.3, -1.2], [2.1, 6]]
+
+        out = oper.update(op)
+        expected = [[0, -2.5], [2.1, -2.5]]
+
+        self.assertListEqual(out, expected, "historically dense time offline 4")
+
+        ####################################################################
+
+        oper = HistoricallyOperation()
+
+        op = [[0, 2], [2.1, 2.1]]
+
+        out = oper.update(op)
+        expected = [[0, 2], [2.1, 2]]
+
+        self.assertListEqual(out, expected, "historically dense time offline 5")
+
+        ####################################################################
+
+        oper = HistoricallyOperation()
+
+        op = [[0, 1], [0.7, 2], [1.3, 3], [2.1, 4]]
+
+        out = oper.update(op)
+        expected = [[0, 1], [2.1, 1]]
+
+        self.assertListEqual(out, expected, "historically dense time offline 6")
+
+        ####################################################################
+
+        oper = HistoricallyOperation()
+
+        op = [[0, 4], [0.7, 3], [1.3, 2], [2.1, 1]]
+
+        out = oper.update(op)
+        expected = [[0, 4], [0.7, 3], [1.3, 2], [2.1, 1]]
+
+        self.assertListEqual(out, expected, "historically dense time offline 7")
 
     def test_once(self):
         oper = OnceOperation()
@@ -380,73 +485,73 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
         op = [[0, 2.5], [0.7, 4], [1.3, -1.2], [2.1, 1.7]]
 
         out = oper.update(op)
-        expected = [[0, 2], [1.3, 1.7], [2.1, 1.7]]
+        expected = [[0, 2.5], [0.7, 4], [2.1, 4]]
 
-        self.assertListEqual(out, expected, "ev dense time offline 1")
+        self.assertListEqual(out, expected, "once dense time offline 1")
 
         ####################################################################
 
-        oper = EventuallyOperation()
+        oper = OnceOperation()
 
         op = [[0, 2.5]]
 
         out = oper.update(op)
         expected = [[0, 2.5]]
 
-        self.assertListEqual(out, expected, "eventually dense time offline 2")
+        self.assertListEqual(out, expected, "once dense time offline 2")
 
         ####################################################################
 
-        oper = EventuallyOperation()
+        oper = OnceOperation()
 
         op = []
 
         out = oper.update(op)
         expected = []
 
-        self.assertListEqual(out, expected, "eventually dense time offline 3")
+        self.assertListEqual(out, expected, "once dense time offline 3")
 
-        oper = EventuallyOperation()
+        oper = OnceOperation()
 
-        op = [[0, 2.5], [0.7, 4], [1.3, -1.2], [2.1, -1.7]]
+        op = [[0, 2.5], [0.7, 4], [1.3, -1.2], [2.1, 6]]
 
         out = oper.update(op)
-        expected = [[0, 4], [1.3, -1.2], [2.1, -1.7]]
+        expected = [[0, 2.5], [0.7, 4], [2.1, 6]]
 
-        self.assertListEqual(out, expected, "eventually dense time offline 4")
+        self.assertListEqual(out, expected, "once dense time offline 4")
 
         ####################################################################
 
-        oper = EventuallyOperation()
+        oper = OnceOperation()
 
-        op = [[0, 2.5], [2.1, 3]]
+        op = [[0, 2.5], [2.1, 2.1]]
 
         out = oper.update(op)
-        expected = [[0, 3], [2.1, 3]]
+        expected = [[0, 2.5], [2.1, 2.5]]
 
-        self.assertListEqual(out, expected, "eventually dense time offline 5")
+        self.assertListEqual(out, expected, "once dense time offline 5")
 
         ####################################################################
 
-        oper = EventuallyOperation()
+        oper = OnceOperation()
 
         op = [[0, 1], [0.7, 2], [1.3, 3], [2.1, 4]]
 
         out = oper.update(op)
-        expected = [[0, 4], [2.1, 4]]
+        expected = [[0, 1], [0.7, 2], [1.3, 3], [2.1, 4]]
 
-        self.assertListEqual(out, expected, "eventually dense time offline 6")
+        self.assertListEqual(out, expected, "once dense time offline 6")
 
         ####################################################################
 
-        oper = EventuallyOperation()
+        oper = OnceOperation()
 
         op = [[0, 4], [0.7, 3], [1.3, 2], [2.1, 1]]
 
         out = oper.update(op)
-        expected = [[0, 4], [0.7, 3], [1.3, 2], [2.1, 1]]
+        expected = [[0, 4], [2.1, 4]]
 
-        self.assertListEqual(out, expected, "eventually dense time offline 7")
+        self.assertListEqual(out, expected, "once dense time offline 7")
 
     def test_eventually(self):
         oper = EventuallyOperation()
@@ -533,18 +638,141 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
     def test_since(self):
         oper = SinceOperation()
 
-        out = oper.update(self.left, self.right)
-        expected = [20, -1, 10, 5, -1]
+        left = [[0, 2], [5, 2]]
+        right = [[0, 4], [5, 4]]
 
-        self.assertListEqual(out, expected, "since")
+        out = oper.update(left, right)
+        expected = [[0, 2], [5, 2]]
+
+        self.assertListEqual(expected, out, "since dense time offline 1")
+
+        ###################################################################
+
+        oper = SinceOperation()
+
+        left = [[0, 2]]
+        right = [[0, 4], [5, 4]]
+
+        out = oper.update(left, right)
+        expected = [[0, 2]]
+
+        self.assertListEqual(expected, out, "since dense time offline 2")
+
+        ###################################################################
+
+        oper = SinceOperation()
+
+        left = [[2.3, 2]]
+        right = [[0, 4], [2, 6], [5, 4]]
+
+        out = oper.update(left, right)
+        expected = [[2.3, 2]]
+
+        self.assertListEqual(expected, out, "since dense time offline 3")
+
+        ###################################################################
+
+        oper = SinceOperation()
+
+        left = [[0, 1.3], [0.7, 3], [1.3, 0.1], [2.1, -2.2]]
+        right = [[0, 2.5], [0.7, 4], [1.3, -1.2], [2.1, 1.7]]
+
+        out = oper.update(left, right)
+        expected = [[0, 1.3], [0.7, 3], [1.3, 0.1], [2.1, -2.2]]
+
+        self.assertListEqual(expected, out, "since dense time offline 4")
+
+        ###################################################################
+
+        oper = SinceOperation()
+
+        left = [[1, 1], [3.5, 7], [4.7, 3], [5.3, 5], [6.2, 1]]
+        right = [[0, 2], [7, 3]]
+
+        out = oper.update(left, right)
+        expected = [[1, 1], [3.5, 2], [6.2, 1]]
+
+        self.assertListEqual(expected, out, "since dense time offline 4")
+
+
+        oper = SinceOperation()
+
+        left = [[1, 1], [3.5, 7], [4.7, 3], [5.3, 5], [6.2, 1]]
+        right = [[4, 2], [6, 3]]
+
+        out = oper.update(left, right)
+        expected = [[4, 2], [6, 3]]
+
+        self.assertListEqual(expected, out, "since dense time offline 4")
 
     def test_until(self):
         oper = UntilOperation()
 
-        out = oper.update(self.left, self.right)
-        expected = [20, -1, 10, 4, -1]
+        left = [[0, 2], [5, 2]]
+        right = [[0, 4], [5, 4]]
 
-        self.assertListEqual(out, expected, "until")
+        out = oper.update(left, right)
+        expected = [[0, 2], [5, 2]]
+
+        self.assertListEqual(expected, out, "until dense time offline 1")
+
+        ###################################################################
+
+        oper = UntilOperation()
+
+        left = [[0, 2]]
+        right = [[0, 4], [5, 4]]
+
+        out = oper.update(left, right)
+        expected = [[0, 2]]
+
+        self.assertListEqual(expected, out, "until dense time offline 2")
+
+        ###################################################################
+
+        oper = UntilOperation()
+
+        left = [[2.3, 2]]
+        right = [[0, 4], [2, 6], [5, 4]]
+
+        out = oper.update(left, right)
+        expected = [[2.3, 2]]
+
+        self.assertListEqual(expected, out, "until dense time offline 3")
+
+        ###################################################################
+
+        oper = UntilOperation()
+
+        left = [[0, 1.3], [0.7, 3], [1.3, 0.1], [2.1, -2.2]]
+        right = [[0, 2.5], [0.7, 4], [1.3, -1.2], [2.1, 1.7]]
+
+        out = oper.update(left, right)
+        expected = [[0, 1.3], [0.7, 3], [1.3, -1.2], [2.1, -2.2]]
+
+        self.assertListEqual(expected, out, "until dense time offline 4")
+
+        ###################################################################
+
+        oper = UntilOperation()
+
+        left = [[1, 1], [3.5, 7], [4.7, 3], [5.3, 5], [6.2, 1]]
+        right = [[0, 2], [7, 3]]
+
+        out = oper.update(left, right)
+        expected = [[1, 1], [3.5, 2], [6.2, 1]]
+
+        self.assertListEqual(expected, out, "until dense time offline 5")
+
+        oper = UntilOperation()
+
+        left = [[1, 1], [3.5, 7], [4.7, 3], [5.3, 5], [6.2, 1]]
+        right = [[4, 2], [6, 3]]
+
+        out = oper.update(left, right)
+        expected = [[4, 3], [6, 3]]
+
+        self.assertListEqual(expected, out, "until dense time offline 6")
 
     def test_until_0_1(self):
         oper = UntilBoundedOperation(0, 1)
@@ -597,74 +825,210 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
     def test_not(self):
         oper = NotOperation()
 
-        out = oper.update(self.left)
-        expected = [-100, 1, 2, -5, 1]
+        op = [[1.3, 4], [3.7, -2.2], [9.4, -33]]
 
-        self.assertListEqual(out, expected, "not")
+        out = oper.update(op)
+        expected = [[1.3, -4], [3.7, 2.2], [9.4, 33]]
 
-    def test_rise(self):
-        oper = RiseOperation()
+        self.assertListEqual(out, expected, "not dense time offline 1")
 
-        out = oper.update(self.left)
-        expected = [100, -100, -2, 2, -5]
+        #################################################################
 
-        self.assertListEqual(out, expected, "rise")
+        oper = NotOperation()
 
-    def test_fall(self):
-        oper = FallOperation()
+        op = [[1.3, -4]]
 
-        out = oper.update(self.left)
-        expected = [-100, 1, -1, -5, 1]
+        out = oper.update(op)
+        expected = [[1.3, 4]]
 
-        self.assertListEqual(out, expected, "fall")
+        self.assertListEqual(out, expected, "not dense time offline 2")
+
+        #################################################################
+
+        oper = NotOperation()
+
+        op = []
+
+        out = oper.update(op)
+        expected = []
+
+        self.assertListEqual(out, expected, "not dense time offline 3")
 
     def test_predicate_leq(self):
         oper = PredicateOperation(StlComparisonOperator.LEQ)
 
-        out = oper.update(self.left, self.right)
-        expected = [-80, -1, 12, -1, 0]
+        left = [[0, 1.3], [0.7, 3], [1.3, 0.1], [2.1, -2.2]]
+        right = [[0, 2.5], [0.7, 4], [1.3, -1.2], [2.1, 1.7]]
 
-        self.assertListEqual(out, expected, "leq")
+        out = oper.update(left, right)
+
+        expected = [[0, 2.5 - 1.3], [0.7, 4 - 3], [1.3, -1.2-0.1], [2.1, 1.7+2.2]]
+
+        self.assertListEqual(expected, out, "leq dense time offline 1")
+
+        #################################################################################
+
+        oper = PredicateOperation(StlComparisonOperator.LEQ)
+
+        left = [[0, 1.3], [0.7, 3], [1.3, 4], [2.1, 3]]
+        right = [[0, 2.5], [0.7, 4], [1.3, 5], [2.1, 4]]
+
+        out = oper.update(left, right)
+
+        expected = [[0, 2.5-1.3], [0.7, 4-3], [2.1, 4-3]]
+
+        self.assertListEqual(expected, out, "leq dense time offline 2")
+
+        #################################################################################
+
+        oper = PredicateOperation(StlComparisonOperator.LEQ)
+
+        left = [[1, 1], [3.5, 7], [4.7, 3], [5.3, 5], [6.2, 1]]
+        right = [[0, 2], [7, 3]]
+
+        out = oper.update(left, right)
+
+        expected = [[1, 2-1], [3.5, 2-7], [4.7, 2-3], [5.3, 2-5], [6.2, 2-1]]
+
+        self.assertListEqual(expected, out, "leq dense time offline 3")
+
+        #################################################################################
+
+        oper = PredicateOperation(StlComparisonOperator.LEQ)
+
+        left = [[1, 1], [3.5, 7], [4.7, 3], [5.3, 5], [6.2, 1]]
+        right = [[4, 2], [6, 3]]
+
+        out = oper.update(left, right)
+
+        expected = [[4, 2-7], [4.7, 2-3], [5.3, 2-5], [6, 3-5]]
+
+        self.assertListEqual(expected, out, "leq dense time offline 4")
+
+        #################################################################################
+
+        oper = PredicateOperation(StlComparisonOperator.LEQ)
+
+        left = [[1, 1], [2, 8], [3, 4], [4.5, 7]]
+        right = [[1.5, 1], [1.7, 2], [2.7, 3], [3, 5], [4, 1]]
+
+        out = oper.update(left, right)
+
+        expected = [[1.5, 1-1], [1.7, 2-1], [2, 2-8], [2.7, 3-8], [3, 5-4], [4, 1-4]]
+
+        self.assertListEqual(expected, out, "leq dense time offline 5")
+
+        #################################################################################
+
+        oper = PredicateOperation(StlComparisonOperator.LEQ)
+
+        left = [[1, 1], [2, 8], [3, 4], [4.5, 7]]
+        right = [[5, 1], [6, 2], [7, 3], [8, 5], [9, 1]]
+
+        out = oper.update(left, right)
+
+        expected = []
+
+        self.assertListEqual(expected, out, "leq dense time offline 6")
+
+        #################################################################################
+
+        oper = PredicateOperation(StlComparisonOperator.LEQ)
+
+        left = []
+        right = [[5, 1], [6, 2], [7, 3], [8, 5], [9, 1]]
+
+        out = oper.update(left, right)
+
+        expected = []
+
+        self.assertListEqual(expected, out, "leq dense time offline 7")
+
+        #################################################################################
+
+        oper = PredicateOperation(StlComparisonOperator.LEQ)
+
+        left = [[1, 1], [2, 8], [3, 4], [4.5, 7]]
+        right = []
+
+        out = oper.update(left, right)
+
+        expected = []
+
+        self.assertListEqual(expected, out, "leq dense time offline 8")
+
+        #################################################################################
+
+        oper = PredicateOperation(StlComparisonOperator.LEQ)
+
+        left = []
+        right = []
+
+        out = oper.update(left, right)
+
+        expected = []
+
+        self.assertListEqual(expected, out, "leq dense time offline 9")
 
     def test_predicate_less(self):
         oper = PredicateOperation(StlComparisonOperator.LESS)
 
-        out = oper.update(self.left, self.right)
-        expected = [-80, -1, 12, -1, 0]
+        left = [[0, 1.3], [0.7, 3], [1.3, 0.1], [2.1, -2.2]]
+        right = [[0, 2.5], [0.7, 4], [1.3, -1.2], [2.1, 1.7]]
 
-        self.assertListEqual(out, expected, "less")
+        out = oper.update(left, right)
+
+        expected = [[0, 2.5 - 1.3], [0.7, 4 - 3], [1.3, -1.2 - 0.1], [2.1, 1.7 + 2.2]]
+
+        self.assertListEqual(expected, out, "less dense time offline 1")
 
     def test_predicate_geq(self):
         oper = PredicateOperation(StlComparisonOperator.GEQ)
 
-        out = oper.update(self.left, self.right)
-        expected = [80, 1, -12, 1, 0]
+        left = [[0, 1.3], [0.7, 3], [1.3, 0.1], [2.1, -2.2]]
+        right = [[0, 2.5], [0.7, 4], [1.3, -1.2], [2.1, 1.7]]
 
-        self.assertListEqual(out, expected, "geq")
+        out = oper.update(left, right)
+
+        expected = [[0, 1.3-2.5], [0.7, 3-4], [1.3, 0.1+1.2], [2.1, -2.2-1.7]]
+
+        self.assertListEqual(expected, out, "geq dense time offline 1")
 
     def test_predicate_greater(self):
         oper = PredicateOperation(StlComparisonOperator.GREATER)
 
-        out = oper.update(self.left, self.right)
-        expected = [80, 1, -12, 1, 0]
+        left = [[0, 1.3], [0.7, 3], [1.3, 0.1], [2.1, -2.2]]
+        right = [[0, 2.5], [0.7, 4], [1.3, -1.2], [2.1, 1.7]]
 
-        self.assertListEqual(out, expected, "greater")
+        out = oper.update(left, right)
+
+        expected = [[0, 1.3 - 2.5], [0.7, 3 - 4], [1.3, 0.1 + 1.2], [2.1, -2.2 - 1.7]]
+
+        self.assertListEqual(expected, out, "greater dense time offline 1")
 
     def test_predicate_eq(self):
         oper = PredicateOperation(StlComparisonOperator.EQUAL)
 
-        out = oper.update(self.left, self.right)
-        expected = [-80, -1, -12, -1, 0]
+        left = [[0, 1.3], [0.7, 3], [1.3, 0.1], [2.1, -2.2]]
+        right = [[0, 2.5], [0.7, 4], [1.3, -1.2], [2.1, 1.7]]
 
-        self.assertListEqual(out, expected, "eq")
+        out = oper.update(left, right)
+
+        expected = [[0, 1.3 - 2.5], [0.7, 3 - 4], [1.3, -0.1 - 1.2], [2.1, -2.2 - 1.7]]
+
+        self.assertListEqual(expected, out, "eq dense time offline 1")
 
     def test_predicate_neq(self):
         oper = PredicateOperation(StlComparisonOperator.NEQ)
 
-        out = oper.update(self.left, self.right)
-        expected = [80, 1, 12, 1, 0]
+        left = [[0, 1.3], [0.7, 3], [1.3, 0.1], [2.1, -2.2]]
+        right = [[0, 2.5], [0.7, 4], [1.3, -1.2], [2.1, 1.7]]
 
-        self.assertListEqual(out, expected, "neq")
+        out = oper.update(left, right)
+
+        expected = [[0, 2.5-1.3], [0.7, 4-3], [1.3, 0.1 + 1.2], [2.1, 2.2+1.7]]
+
+        self.assertListEqual(expected, out, "neq dense time offline 1")
 
 if __name__ == '__main__':
     unittest.main()
