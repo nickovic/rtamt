@@ -11,6 +11,7 @@ class SubtractionOperation(AbstractOperation):
         self.right = self.right + right_list
 
         out, last, left, right = intersect.intersection(self.left, self.right, intersect.subtraction)
-        out.append(last)
+        if last:
+            out.append(last)
 
         return out
