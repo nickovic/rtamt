@@ -1,9 +1,9 @@
 from rtamt.operation.abstract_operation import AbstractOperation
 
 
-class AlwaysOperation(AbstractOperation):
+class EventuallyOperation(AbstractOperation):
     def __init__(self):
-        self.next = float("inf")
+        self.next = -float("inf")
 
     def update(self, *args, **kargs):
         out = []
@@ -13,7 +13,7 @@ class AlwaysOperation(AbstractOperation):
 
         for i, in_sample in reversed(list(enumerate(input_list))):
             out_time = in_sample[0]
-            out_value = min(in_sample[1], self.next)
+            out_value = max(in_sample[1], self.next)
             self.next = out_value
             if out_value == next and i < len(input_list) - 2:
                 out.pop(0)

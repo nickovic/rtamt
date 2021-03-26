@@ -8,7 +8,7 @@ from rtamt.operation.stl.dense_time.offline.implies_operation import ImpliesOper
 from rtamt.operation.stl.dense_time.offline.iff_operation import IffOperation
 from rtamt.operation.stl.dense_time.offline.xor_operation import XorOperation
 from rtamt.operation.stl.dense_time.offline.always_operation import AlwaysOperation
-#from rtamt.operation.stl.dense_time.offline.eventually_operation import EventuallyOperation
+from rtamt.operation.stl.dense_time.offline.eventually_operation import EventuallyOperation
 from rtamt.operation.stl.dense_time.offline.historically_operation import HistoricallyOperation
 from rtamt.operation.stl.dense_time.offline.once_operation import OnceOperation
 from rtamt.operation.stl.dense_time.offline.since_operation import SinceOperation
@@ -287,10 +287,76 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
     def test_always(self):
         oper = AlwaysOperation()
 
-        out = oper.update(self.left)
-        expected = [-2, -2, -2, -1, -1]
+        op = [[0, 2.5], [0.7, 4], [1.3, -1.2], [2.1, 1.7]]
 
-        self.assertListEqual(out, expected, "always")
+        out = oper.update(op)
+        expected = [[0, -1.2], [2.1, 1.7]]
+
+        self.assertListEqual(out, expected, "always dense time offline 1")
+
+        ####################################################################
+
+        oper = AlwaysOperation()
+
+        op = [[0, 2.5]]
+
+        out = oper.update(op)
+        expected = [[0, 2.5]]
+
+        self.assertListEqual(out, expected, "always dense time offline 2")
+
+        ####################################################################
+
+        oper = AlwaysOperation()
+
+        op = []
+
+        out = oper.update(op)
+        expected = []
+
+        self.assertListEqual(out, expected, "always dense time offline 3")
+
+        oper = AlwaysOperation()
+
+        op = [[0, 2.5], [0.7, 4], [1.3, -1.2], [2.1, -1.7]]
+
+        out = oper.update(op)
+        expected = [[0, -1.7], [2.1, -1.7]]
+
+        self.assertListEqual(out, expected, "always dense time offline 4")
+
+        ####################################################################
+
+        oper = AlwaysOperation()
+
+        op = [[0, 2.5], [2.1, -1.7]]
+
+        out = oper.update(op)
+        expected = [[0, -1.7], [2.1, -1.7]]
+
+        self.assertListEqual(out, expected, "always dense time offline 5")
+
+        ####################################################################
+
+        oper = AlwaysOperation()
+
+        op = [[0, 1], [0.7, 2], [1.3, 3], [2.1, 4]]
+
+        out = oper.update(op)
+        expected = [[0, 1], [0.7, 2], [1.3, 3], [2.1, 4]]
+
+        self.assertListEqual(out, expected, "always dense time offline 6")
+
+        ####################################################################
+
+        oper = AlwaysOperation()
+
+        op = [[0, 4], [0.7, 3], [1.3, 2], [2.1, 1]]
+
+        out = oper.update(op)
+        expected = [[0, 1], [2.1, 1]]
+
+        self.assertListEqual(out, expected, "always dense time offline 7")
 
     def test_always_0_1(self):
         oper = AlwaysBoundedOperation(0, 1)
@@ -311,18 +377,150 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
     def test_once(self):
         oper = OnceOperation()
 
-        out = oper.update(self.left)
-        expected = [100, 100, 100, 100, 100]
+        op = [[0, 2.5], [0.7, 4], [1.3, -1.2], [2.1, 1.7]]
 
-        self.assertListEqual(out, expected, "once")
+        out = oper.update(op)
+        expected = [[0, 2], [1.3, 1.7], [2.1, 1.7]]
+
+        self.assertListEqual(out, expected, "ev dense time offline 1")
+
+        ####################################################################
+
+        oper = EventuallyOperation()
+
+        op = [[0, 2.5]]
+
+        out = oper.update(op)
+        expected = [[0, 2.5]]
+
+        self.assertListEqual(out, expected, "eventually dense time offline 2")
+
+        ####################################################################
+
+        oper = EventuallyOperation()
+
+        op = []
+
+        out = oper.update(op)
+        expected = []
+
+        self.assertListEqual(out, expected, "eventually dense time offline 3")
+
+        oper = EventuallyOperation()
+
+        op = [[0, 2.5], [0.7, 4], [1.3, -1.2], [2.1, -1.7]]
+
+        out = oper.update(op)
+        expected = [[0, 4], [1.3, -1.2], [2.1, -1.7]]
+
+        self.assertListEqual(out, expected, "eventually dense time offline 4")
+
+        ####################################################################
+
+        oper = EventuallyOperation()
+
+        op = [[0, 2.5], [2.1, 3]]
+
+        out = oper.update(op)
+        expected = [[0, 3], [2.1, 3]]
+
+        self.assertListEqual(out, expected, "eventually dense time offline 5")
+
+        ####################################################################
+
+        oper = EventuallyOperation()
+
+        op = [[0, 1], [0.7, 2], [1.3, 3], [2.1, 4]]
+
+        out = oper.update(op)
+        expected = [[0, 4], [2.1, 4]]
+
+        self.assertListEqual(out, expected, "eventually dense time offline 6")
+
+        ####################################################################
+
+        oper = EventuallyOperation()
+
+        op = [[0, 4], [0.7, 3], [1.3, 2], [2.1, 1]]
+
+        out = oper.update(op)
+        expected = [[0, 4], [0.7, 3], [1.3, 2], [2.1, 1]]
+
+        self.assertListEqual(out, expected, "eventually dense time offline 7")
 
     def test_eventually(self):
         oper = EventuallyOperation()
 
-        out = oper.update(self.left)
-        expected = [100, 5, 5, 5, -1]
+        op = [[0, 2.5], [0.7, 4], [1.3, -1.2], [2.1, 1.7]]
 
-        self.assertListEqual(out, expected, "eventually")
+        out = oper.update(op)
+        expected = [[0, 4], [1.3, 1.7], [2.1, 1.7]]
+
+        self.assertListEqual(out, expected, "ev dense time offline 1")
+
+        ####################################################################
+
+        oper = EventuallyOperation()
+
+        op = [[0, 2.5]]
+
+        out = oper.update(op)
+        expected = [[0, 2.5]]
+
+        self.assertListEqual(out, expected, "eventually dense time offline 2")
+
+        ####################################################################
+
+        oper = EventuallyOperation()
+
+        op = []
+
+        out = oper.update(op)
+        expected = []
+
+        self.assertListEqual(out, expected, "eventually dense time offline 3")
+
+        oper = EventuallyOperation()
+
+        op = [[0, 2.5], [0.7, 4], [1.3, -1.2], [2.1, -1.7]]
+
+        out = oper.update(op)
+        expected = [[0, 4], [1.3, -1.2], [2.1, -1.7]]
+
+        self.assertListEqual(out, expected, "eventually dense time offline 4")
+
+        ####################################################################
+
+        oper = EventuallyOperation()
+
+        op = [[0, 2.5], [2.1, 3]]
+
+        out = oper.update(op)
+        expected = [[0, 3], [2.1, 3]]
+
+        self.assertListEqual(out, expected, "eventually dense time offline 5")
+
+        ####################################################################
+
+        oper = EventuallyOperation()
+
+        op = [[0, 1], [0.7, 2], [1.3, 3], [2.1, 4]]
+
+        out = oper.update(op)
+        expected = [[0, 4], [2.1, 4]]
+
+        self.assertListEqual(out, expected, "eventually dense time offline 6")
+
+        ####################################################################
+
+        oper = EventuallyOperation()
+
+        op = [[0, 4], [0.7, 3], [1.3, 2], [2.1, 1]]
+
+        out = oper.update(op)
+        expected = [[0, 4], [0.7, 3], [1.3, 2], [2.1, 1]]
+
+        self.assertListEqual(out, expected, "eventually dense time offline 7")
 
     def test_eventually_0_1(self):
         oper = EventuallyBoundedOperation(0, 1)
