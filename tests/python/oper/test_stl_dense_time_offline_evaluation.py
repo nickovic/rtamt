@@ -782,37 +782,205 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
 
         self.assertListEqual(out, expected, "until")
 
-    def test_once_0_1(self):
-        oper = OnceBoundedOperation(0,1)
+    def test_once_bounded(self):
+        oper = OnceBoundedOperation(0, 1)
 
-        out = oper.update(self.left)
-        expected = [100, 100, -1, 5, 5]
+        op = [[0, 4], [5, 2], [10, 5], [15, 3]]
 
-        self.assertListEqual(out, expected, "once[0,1]")
+        out = oper.update(op)
+        expected = [[0, 4], [6, 2], [10, 5], [15, 5]]
 
-    def test_once_1_2(self):
-        oper = OnceBoundedOperation(1,2)
+        self.assertListEqual(expected, out, "once[0,1] offline dense time 1")
 
-        out = oper.update(self.left)
-        expected = [-float("inf"), 100, 100, -1, 5]
+        #######################################################################
 
-        self.assertListEqual(out, expected, "once[1,2]")
+        oper = OnceBoundedOperation(0, 1)
 
-    def test_historically_0_1(self):
-        oper = HistoricallyBoundedOperation(0,1)
+        op = [[0, 4], [5, 2], [10, 5], [15, 6]]
 
-        out = oper.update(self.left)
-        expected = [100, -1, -2, -2, -1]
+        out = oper.update(op)
+        expected = [[0, 4], [6, 2], [10, 5], [15, 6]]
 
-        self.assertListEqual(out, expected, "historically[0,1]")
+        self.assertListEqual(expected, out, "once[0,1] offline dense time 2")
 
-    def test_historically_1_2(self):
-        oper = HistoricallyBoundedOperation(1,2)
+        #######################################################################
 
-        out = oper.update(self.left)
-        expected = [float("inf"), 100, -1, -2, -2]
+        oper = OnceBoundedOperation(0, 1)
 
-        self.assertListEqual(out, expected, "historically[1,2]")
+        op = []
+
+        out = oper.update(op)
+        expected = []
+
+        self.assertListEqual(expected, out, "once[0,1] offline dense time 3")
+
+        #######################################################################
+
+        oper = OnceBoundedOperation(0, 1)
+
+        op = [[2, 1]]
+
+        out = oper.update(op)
+        expected = [[2, 1]]
+
+        self.assertListEqual(expected, out, "once[0,1] offline dense time 4")
+
+        #######################################################################
+
+        oper = OnceBoundedOperation(0, 1)
+
+        op = [[0, 4], [5, 2], [5.5, 5], [15, 6]]
+
+        out = oper.update(op)
+        expected = [[0, 4], [5.5, 5], [15, 6]]
+
+        self.assertListEqual(expected, out, "once[0,1] offline dense time 5")
+
+        #######################################################################
+
+        oper = OnceBoundedOperation(1, 2)
+
+        op = [[0, 4], [5, 2], [10, 5], [15, 3]]
+
+        out = oper.update(op)
+        expected = [[0, -float('inf')], [1, 4], [7, 2], [11, 5], [15, 5]]
+
+        self.assertListEqual(expected, out, "once[0,1] offline dense time 6")
+
+        #######################################################################
+
+        oper = OnceBoundedOperation(2, 2)
+
+        op = [[0, 4], [5, 2], [10, 5], [15, 3]]
+
+        out = oper.update(op)
+        expected = [[0, -float('inf')], [2, 4], [7, 2], [12, 5], [15, 5]]
+
+        self.assertListEqual(expected, out, "once[0,1] offline dense time 7")
+
+        #######################################################################
+
+        oper = OnceBoundedOperation(1, 2)
+
+        op = [[0, 4], [5, 6], [5.1, 3], [5.2, 2], [5.3, 1], [5.5, 5], [15, 3]]
+
+        out = oper.update(op)
+        expected = [[0, -float('inf')], [1, 4], [6, 6], [7.1, 5], [15, 5]]
+
+        self.assertListEqual(expected, out, "once[0,1] offline dense time 8")
+
+        #######################################################################
+
+        oper = OnceBoundedOperation(0, 1)
+
+        op = [[0, 4], [5, 6], [7, 3], [7.5, 6], [15, 3]]
+
+        out = oper.update(op)
+        expected = [[0, 4], [5, 6], [15, 6]]
+
+        self.assertListEqual(expected, out, "once[0,1] offline dense time 9")
+
+        #######################################################################
+
+    def test_historically_bounded(self):
+        oper = HistoricallyBoundedOperation(0, 1)
+
+        op = [[0, 4], [5, 2], [10, 5], [15, 3]]
+
+        out = oper.update(op)
+        expected = [[0, 4], [5, 2], [11, 5], [15, 3]]
+
+        self.assertListEqual(expected, out, "historically[0,1] offline dense time 1")
+
+        #######################################################################
+
+        oper = HistoricallyBoundedOperation(0, 1)
+
+        op = [[0, 4], [5, 2], [10, 5], [15, 6]]
+
+        out = oper.update(op)
+        expected = [[0, 4], [5, 2], [11, 5], [15, 5]]
+
+        self.assertListEqual(expected, out, "historically[0,1] offline dense time 2")
+
+        #######################################################################
+
+        oper = HistoricallyBoundedOperation(0, 1)
+
+        op = []
+
+        out = oper.update(op)
+        expected = []
+
+        self.assertListEqual(expected, out, "historically[0,1] offline dense time 3")
+
+        #######################################################################
+
+        oper = HistoricallyBoundedOperation(0, 1)
+
+        op = [[2, 1]]
+
+        out = oper.update(op)
+        expected = [[2, 1]]
+
+        self.assertListEqual(expected, out, "historically[0,1] offline dense time 4")
+
+        #######################################################################
+
+        oper = HistoricallyBoundedOperation(0, 1)
+
+        op = [[0, 4], [5, 6], [5.5, 3], [15, 6]]
+
+        out = oper.update(op)
+        expected = [[0, 4], [5.5, 3], [15, 3]]
+
+        self.assertListEqual(expected, out, "historically[0,1] offline dense time 5")
+
+        #######################################################################
+
+        oper = HistoricallyBoundedOperation(1, 2)
+
+        op = [[0, 4], [5, 2], [10, 5], [15, 3]]
+
+        out = oper.update(op)
+        expected = [[0, float('inf')], [1, 4], [6, 2], [12, 5], [15, 3]]
+
+        self.assertListEqual(expected, out, "historically[1,2] offline dense time 6")
+
+        #######################################################################
+
+        oper = OnceBoundedOperation(2, 2)
+
+        op = [[0, 4], [5, 2], [10, 5], [15, 3]]
+
+        out = oper.update(op)
+        expected = [[0, float('inf')], [2, 4], [7, 2], [12, 5], [15, 5]]
+
+        self.assertListEqual(expected, out, "historically[2,2] offline dense time 7")
+
+        #######################################################################
+
+        oper = OnceBoundedOperation(1, 2)
+
+        op = [[0, 4], [5, 6], [5.1, 10], [5.2, 11], [5.3, 12], [5.5, 7], [15, 3]]
+
+        out = oper.update(op)
+        expected = [[0, -float('inf')], [1, 4], [6, 6], [7.1, 7], [15, 3]]
+
+        self.assertListEqual(expected, out, "historically[1,2] offline dense time 8")
+
+        #######################################################################
+
+        oper = OnceBoundedOperation(0, 1)
+
+        op = [[0, 10], [5, 6], [7, 8], [7.5, 6], [15, 8]]
+
+        out = oper.update(op)
+        expected = [[0, 10], [5, 6], [15, 6]]
+
+        self.assertListEqual(expected, out, "historically[0,1] offline dense time 9")
+
+        #######################################################################
 
     def test_since_0_1(self):
         oper = SinceBoundedOperation(0,1)
