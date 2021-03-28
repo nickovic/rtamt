@@ -21,8 +21,8 @@ from rtamt.operation.arithmetic.dense_time.offline.multiplication_operation impo
 from rtamt.operation.arithmetic.dense_time.offline.division_operation import DivisionOperation
 from rtamt.operation.arithmetic.dense_time.offline.abs_operation import AbsOperation
 from rtamt.operation.stl.dense_time.offline.until_operation import UntilOperation
-#from rtamt.operation.stl.dense_time.offline.eventually_bounded_operation import EventuallyBoundedOperation
-#from rtamt.operation.stl.dense_time.offline.always_bounded_operation import AlwaysBoundedOperation
+from rtamt.operation.stl.dense_time.offline.eventually_bounded_operation import EventuallyBoundedOperation
+from rtamt.operation.stl.dense_time.offline.always_bounded_operation import AlwaysBoundedOperation
 #from rtamt.operation.stl.dense_time.offline.until_bounded_operation import UntilBoundedOperation
 from rtamt.spec.stl.discrete_time.comp_op import StlComparisonOperator
 
@@ -627,13 +627,223 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
 
         self.assertListEqual(out, expected, "eventually dense time offline 7")
 
-    def test_eventually_0_1(self):
+    def test_eventually_bounded(self):
         oper = EventuallyBoundedOperation(0, 1)
 
-        out = oper.update(self.left)
-        expected = [100, -1, 5, 5, -1]
+        op = [[0, 4], [5, 2], [10, 5], [15, 3]]
 
-        self.assertListEqual(out, expected, "eventually[0,1]")
+        out = oper.update(op)
+        expected = [[0, 4], [5, 2], [9, 5], [15, 5]]
+
+        self.assertListEqual(expected, out, "eventually[0,1] offline dense time 1")
+
+        #####################
+
+        oper = EventuallyBoundedOperation(0, 1)
+
+        op = []
+
+        out = oper.update(op)
+        expected = []
+
+        self.assertListEqual(expected, out, "eventually[0,1] offline dense time 2")
+
+        #####################
+
+        oper = EventuallyBoundedOperation(0, 1)
+
+        op = [[0, 2]]
+
+        out = oper.update(op)
+        expected = [[0, 2]]
+
+        self.assertListEqual(expected, out, "eventually[0,1] offline dense time 3")
+
+        #####################
+
+        oper = EventuallyBoundedOperation(0, 1)
+
+        op = [[2, 2]]
+
+        out = oper.update(op)
+        expected = [[1, 2], [2, 2]]
+
+        self.assertListEqual(expected, out, "eventually[0,1] offline dense time 4")
+
+
+        #####################
+
+        oper = EventuallyBoundedOperation(1, 2)
+
+        op = [[0, 4], [5, 2], [10, 5], [15, 3]]
+
+        out = oper.update(op)
+        expected = [[0, 4], [4, 2], [8, 5], [14, 5]]
+
+        self.assertListEqual(expected, out, "eventually[0,1] offline dense time 5")
+
+        #####################
+
+        oper = EventuallyBoundedOperation(2, 2)
+
+        op = [[0, 4], [5, 2], [10, 5], [15, 3]]
+
+        out = oper.update(op)
+        expected = [[0, 4], [3, 2], [8, 5], [13, 5]]
+
+        self.assertListEqual(expected, out, "eventually[0,1] offline dense time 6")
+
+        #####################
+
+        oper = EventuallyBoundedOperation(11, 11)
+
+        op = [[0, 4], [5, 2], [10, 5], [15, 3]]
+
+        out = oper.update(op)
+        expected = [[0, 5], [4, 5]]
+
+        self.assertListEqual(expected, out, "eventually[0,1] offline dense time 7")
+
+        #####################
+
+        oper = EventuallyBoundedOperation(0, 2)
+
+        op = [[0, 4], [5, 2], [5.1, 1], [5.2, 0], [6, 5], [15, 3]]
+
+        out = oper.update(op)
+        expected = [[0, 4], [4, 5], [15, 5]]
+
+        self.assertListEqual(expected, out, "eventually[0,1] offline dense time 8")
+
+        #########################
+        oper = EventuallyBoundedOperation(0, 2)
+
+        op = [[0, 4], [5, 2], [5.1, 1], [5.2, 0], [7, 5], [15, 3]]
+
+        out = oper.update(op)
+        expected = [[0, 4], [5, 5], [15, 5]]
+
+        self.assertListEqual(expected, out, "eventually[0,1] offline dense time 9")
+
+        #########################
+        oper = EventuallyBoundedOperation(0, 2)
+
+        op = [[0, 4], [5, 2], [5.1, 1], [5.2, 0], [7.1, 5], [15, 3]]
+
+        out = oper.update(op)
+        expected = [[0, 4], [5, 2], [5.1, 5], [15, 5]]
+
+        self.assertListEqual(expected, out, "eventually[0,1] offline dense time 10")
+
+    def test_always_bounded(self):
+        oper = AlwaysBoundedOperation(0, 1)
+
+        op = [[0, 4], [5, 2], [10, 5], [15, 3]]
+
+        out = oper.update(op)
+        expected = [[0, 4], [4, 2], [10, 5], [15, 5]]
+
+        self.assertListEqual(expected, out, "always[0,1] offline dense time 1")
+
+        #####################
+
+        oper = AlwaysBoundedOperation(0, 1)
+
+        op = []
+
+        out = oper.update(op)
+        expected = []
+
+        self.assertListEqual(expected, out, "always[0,1] offline dense time 2")
+
+        #####################
+
+        oper = AlwaysBoundedOperation(0, 1)
+
+        op = [[0, 2]]
+
+        out = oper.update(op)
+        expected = [[0, 2]]
+
+        self.assertListEqual(expected, out, "always[0,1] offline dense time 3")
+
+        #####################
+
+        oper = AlwaysBoundedOperation(0, 1)
+
+        op = [[2, 2]]
+
+        out = oper.update(op)
+        expected = [[1, 2], [2, 2]]
+
+        self.assertListEqual(expected, out, "always[0,1] offline dense time 4")
+
+
+        #####################
+
+        oper = AlwaysBoundedOperation(1, 2)
+
+        op = [[0, 4], [5, 2], [10, 5], [15, 3]]
+
+        out = oper.update(op)
+        expected = [[0, 4], [3, 2], [9, 5], [14, 5]]
+
+        self.assertListEqual(expected, out, "always[1,2] offline dense time 5")
+
+        #####################
+
+        oper = AlwaysBoundedOperation(2, 2)
+
+        op = [[0, 4], [5, 2], [10, 5], [15, 3]]
+
+        out = oper.update(op)
+        expected = [[0, 4], [3, 2], [8, 5], [13, 5]]
+
+        self.assertListEqual(expected, out, "always[2,2] offline dense time 6")
+
+        #####################
+
+        oper = AlwaysBoundedOperation(11, 11)
+
+        op = [[0, 4], [5, 2], [10, 5], [15, 3]]
+
+        out = oper.update(op)
+        expected = [[0, 5], [4, 5]]
+
+        self.assertListEqual(expected, out, "always[0,1] offline dense time 7")
+
+        #####################
+
+        oper = AlwaysBoundedOperation(0, 2)
+
+        op = [[0, 4], [5, 6], [5.1, 8], [5.2, 10], [6, 5], [15, 3]]
+
+        out = oper.update(op)
+        expected = [[0, 4], [5, 5], [15, 5]]
+
+        self.assertListEqual(expected, out, "always[0,1] offline dense time 8")
+
+        #########################
+        oper = AlwaysBoundedOperation(0, 2)
+
+        op = [[0, 4], [5, 8], [5.1, 9], [5.2, 10], [7, 5], [15, 3]]
+
+        out = oper.update(op)
+        expected = [[0, 4], [5, 5], [15, 5]]
+
+        self.assertListEqual(expected, out, "always[0,1] offline dense time 9")
+
+        #########################
+        oper = AlwaysBoundedOperation(0, 2)
+
+        op = [[0, 4], [5, 8], [5.1, 9], [5.2, 10], [7.1, 5], [15, 3]]
+
+        out = oper.update(op)
+        expected = [[0, 4], [5, 8], [5.1, 5], [15, 5]]
+
+        self.assertListEqual(expected, out, "always[0,1] offline dense time 10")
+
+
 
     def test_since(self):
         oper = SinceOperation()
