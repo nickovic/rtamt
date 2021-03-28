@@ -943,13 +943,13 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
         op = [[0, 4], [5, 2], [10, 5], [15, 3]]
 
         out = oper.update(op)
-        expected = [[0, float('inf')], [1, 4], [6, 2], [12, 5], [15, 3]]
+        expected = [[0, float('inf')], [1, 4], [6, 2], [12, 5], [15, 5]]
 
         self.assertListEqual(expected, out, "historically[1,2] offline dense time 6")
 
         #######################################################################
 
-        oper = OnceBoundedOperation(2, 2)
+        oper = HistoricallyBoundedOperation(2, 2)
 
         op = [[0, 4], [5, 2], [10, 5], [15, 3]]
 
@@ -960,18 +960,18 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
 
         #######################################################################
 
-        oper = OnceBoundedOperation(1, 2)
+        oper = HistoricallyBoundedOperation(1, 2)
 
         op = [[0, 4], [5, 6], [5.1, 10], [5.2, 11], [5.3, 12], [5.5, 7], [15, 3]]
 
         out = oper.update(op)
-        expected = [[0, -float('inf')], [1, 4], [6, 6], [7.1, 7], [15, 3]]
+        expected = [[0, float('inf')], [1, 4], [7, 6], [7.1, 7], [15, 7]]
 
         self.assertListEqual(expected, out, "historically[1,2] offline dense time 8")
 
         #######################################################################
 
-        oper = OnceBoundedOperation(0, 1)
+        oper = HistoricallyBoundedOperation(0, 1)
 
         op = [[0, 10], [5, 6], [7, 8], [7.5, 6], [15, 8]]
 

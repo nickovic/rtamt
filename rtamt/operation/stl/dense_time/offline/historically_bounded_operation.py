@@ -35,7 +35,7 @@ class HistoricallyBoundedOperation(AbstractOperation):
                 out.append(b)
             else:
                 a = out[len(out) - 1]
-                while (a[2] > b[2]) and (b[0] > a[0]):
+                while (a[2] > b[2]) and (b[0] < a[0]):
                     del (out[len(out) - 1])
                     a = out[len(out) - 1]
                 if not intersect.intersects(a[0], a[1], b[0], b[1]):
