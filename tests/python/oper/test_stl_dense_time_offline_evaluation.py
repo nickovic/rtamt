@@ -23,7 +23,7 @@ from rtamt.operation.arithmetic.dense_time.offline.abs_operation import AbsOpera
 from rtamt.operation.stl.dense_time.offline.until_operation import UntilOperation
 from rtamt.operation.stl.dense_time.offline.eventually_bounded_operation import EventuallyBoundedOperation
 from rtamt.operation.stl.dense_time.offline.always_bounded_operation import AlwaysBoundedOperation
-#from rtamt.operation.stl.dense_time.offline.until_bounded_operation import UntilBoundedOperation
+from rtamt.operation.stl.dense_time.offline.until_bounded_operation import UntilBoundedOperation
 from rtamt.spec.stl.discrete_time.comp_op import StlComparisonOperator
 
 class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
@@ -396,14 +396,6 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
         expected = [[0, 1], [2.1, 1]]
 
         self.assertListEqual(out, expected, "always dense time offline 7")
-
-    def test_always_0_1(self):
-        oper = AlwaysBoundedOperation(0, 1)
-
-        out = oper.update(self.left)
-        expected = [-1, -2, -2, -1, -1]
-
-        self.assertListEqual(out, expected, "always[0,1]")
 
     def test_historically(self):
         oper = HistoricallyOperation()
@@ -1195,10 +1187,50 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
     def test_since_0_1(self):
         oper = SinceBoundedOperation(0,1)
 
-        out = oper.update(self.left, self.right)
-        expected = [20, -1, 10, 5, -1]
+        op1 = [[0, 2], [10, 2]]
+        op2 = [[0, 4], [10, 4]]
+
+        out = oper.update(op1, op2)
+        expected = [[0, 2], [10, 2]]
 
         self.assertListEqual(out, expected, "since[0,1]")
+
+        ########################################################################
+
+        oper = SinceBoundedOperation(1, 2)
+
+        op1 = [[0, 2], [10, 2]]
+        op2 = [[0, 4], [10, 4]]
+
+        out = oper.update(op1, op2)
+        expected = [[0, -float('inf')], [1, 2], [10, 2]]
+
+        self.assertListEqual(out, expected, "since[0,1]")
+
+        ########################################################################
+
+    def test_until_0_1(self):
+        oper = UntilBoundedOperation(0,1)
+
+        op1 = [[0, 2], [10, 2]]
+        op2 = [[0, 4], [10, 4]]
+
+        out = oper.update(op1, op2)
+        expected = [[0, 2], [10, 2]]
+
+        self.assertListEqual(out, expected, "until[0,1]")
+
+        ###############################################################
+
+        oper = UntilBoundedOperation(1, 2)
+
+        op1 = [[0, 2], [10, 2]]
+        op2 = [[0, 4], [10, 4]]
+
+        out = oper.update(op1, op2)
+        expected = [[0, 2], [9, 2]]
+
+        self.assertListEqual(out, expected, "until[0,1]")
 
     def test_not(self):
         oper = NotOperation()

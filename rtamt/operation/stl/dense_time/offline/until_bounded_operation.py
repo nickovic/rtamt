@@ -13,14 +13,24 @@ class UntilBoundedOperation(AbstractOperation):
         left_list = args[0]
         right_list = args[1]
 
-        unt = UntilOperation()
-        alw = AlwaysBoundedOperation(0, self.begin)
-        ev = EventuallyBoundedOperation(self.begin, self.end)
-        andop = AndOperation()
+        if self.begin > 0:
+            unt = UntilOperation()
+            alw = AlwaysBoundedOperation(0, self.begin)
+            ev = EventuallyBoundedOperation(self.begin, self.end)
+            andop = AndOperation()
 
-        out1 = ev.update(right_list)
-        out2 = unt.update(left_list, right_list)
-        out3 = alw.update(out2)
-        out = andop.update(out1, out3)
+            out1 = ev.update(right_list)
+            out2 = unt.update(left_list, right_list)
+            out3 = alw.update(out2)
+            out = andop.update(out1, out3)
+
+        else:
+            unt = UntilOperation()
+            ev = EventuallyBoundedOperation(self.begin, self.end)
+            andop = AndOperation()
+
+            out1 = ev.update(right_list)
+            out2 = unt.update(left_list, right_list)
+            out = andop.update(out1, out2)
 
         return out
