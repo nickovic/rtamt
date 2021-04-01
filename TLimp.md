@@ -157,8 +157,8 @@ StlExtendedParserVisitor.py
 In the next step, we need to create a Visitor that inherits from the 
 (automatically generated) class `StlExtendedParserVisitor` and create a 
 parse-tree of the specification. Before we are able to do that, we 
-need to create a `Node` for the Backto operator in [rtamt/node]. 
-We create a new Python package [rtamt/node/xstl] and add the 
+need to create a `Node` for the Backto operator in [rtamt/node](rtamt/node). 
+We create a new Python package [rtamt/node/xstl](rtamt/node/xstl) and add the 
 files `backto.py` and `timed_backto.py`, which define the `BacktoNode` and 
 `TimedBacktoNode` classes, respectively.
 
