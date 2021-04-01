@@ -84,6 +84,10 @@ Finally, each fromulas reasch the nodes which are implimented spesific semantics
 
 cpp version of the nodes.
 
+### Operation [rtamt/operation](rtamt/operation)
+
+TOM Comment: We need to explain here. The most of sematincs seems to be implimented in here in python case...
+
 ## Examples of Extending RTAMT
 
 ### Extending STL with a new operator
