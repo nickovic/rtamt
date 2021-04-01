@@ -7,7 +7,7 @@ Created on Tue Jul 23 21:38:29 2019
 
 from rtamt.spec.stl.discrete_time.specification_parser import STLSpecificationParser
 
-class STLDenseTimeSpecificationParser(STLSpecificationParser):
+class STLabDenseTimeSpecificationParser(STLSpecificationParser):
     
     def __init__(self, spec):
         super(STLDenseTimeSpecificationParser, self).__init__(spec)

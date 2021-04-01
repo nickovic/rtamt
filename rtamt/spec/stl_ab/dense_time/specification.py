@@ -3,24 +3,25 @@ import logging
 from antlr4 import *
 from antlr4.InputStream import InputStream
 
-from rtamt.parser.stl.StlLexer import StlLexer
-from rtamt.parser.stl.StlParser import StlParser
-from rtamt.spec.stl.discrete_time.specification_parser import STLSpecificationParser
+from rtamt.parser.stl_ab.StlLexer import StlLexer
+from rtamt.parser.stl_ab.StlParser import StlParser
+from rtamt.parser.stl_ab.error.parser_error_listener import STLParserErrorListener
 
-from rtamt.parser.stl.error.parser_error_listener import STLParserErrorListener
 from rtamt.exception.stl.exception import STLParseException
 
-from rtamt.spec.stl.discrete_time.pastifier import STLPastifier
-
+from rtamt.spec.stl.discrete_time.specification_parser import STLSpecificationParser
+#from rtamt.spec.stl.discrete_time.pastifier import STLPastifier
 from rtamt.spec.stl.discrete_time.specification import STLDiscreteTimeSpecification
+from rtamt.spec.stl_ab.dense_time.specification_parser import STLDenseTimeSpecificationParser
+
+#TODO: I'm not sure I need to copy evaluatro or not.
 from rtamt.evaluator.stl.online_evaluator import STLOnlineEvaluator
 from rtamt.evaluator.stl.offline_evaluator import STLOfflineEvaluator
-from rtamt.spec.stl.dense_time.specification_parser import STLDenseTimeSpecificationParser
 
 from rtamt.enumerations.options import *
 
 
-class STLDenseTimeSpecification(STLDiscreteTimeSpecification):
+class STLabDenseTimeSpecification(STLDiscreteTimeSpecification):
     """A class used as a container for STL continuous time specifications
        Inherits STLSpecification
 
@@ -53,47 +54,47 @@ class STLDenseTimeSpecification(STLDiscreteTimeSpecification):
         self.top = visitor.visitSpecification_file(ctx)
 
 
-    def pastify(self):
-        # Translate bounded future STL to past STL
-        pastifier = STLPastifier()
-        self.top.accept(pastifier)
-        past = pastifier.pastify(self.top)
-        self.top = past
+    # def pastify(self):
+    #     # Translate bounded future STL to past STL
+    #     pastifier = STLPastifier()
+    #     self.top.accept(pastifier)
+    #     past = pastifier.pastify(self.top)
+    #     self.top = past
 
-        # evaluate modular sub-specs
-        for key in self.var_subspec_dict:
-            node = self.var_subspec_dict[key]
-            node.accept(pastifier)
-            node = pastifier.pastify(node)
-            self.var_subspec_dict[key] = node
+    #     # evaluate modular sub-specs
+    #     for key in self.var_subspec_dict:
+    #         node = self.var_subspec_dict[key]
+    #         node.accept(pastifier)
+    #         node = pastifier.pastify(node)
+    #         self.var_subspec_dict[key] = node
 
     # Online
-    def update(self, *args, **kargs):
-        # list_inputs:
-        # example [['p', [[1.1, 2.2], [1.3, 2.5], [1.7, 2]]], ['q', [[1, 2], [1.5, 3.5]]]
+    # def update(self, *args, **kargs):
+    #     # list_inputs:
+    #     # example [['p', [[1.1, 2.2], [1.3, 2.5], [1.7, 2]]], ['q', [[1, 2], [1.5, 3.5]]]
 
-        if self.online_evaluator is None:
-            # Initialize the online_evaluator
-            self.online_evaluator = STLOnlineEvaluator(self)
-            self.top.accept(self.online_evaluator)
+    #     if self.online_evaluator is None:
+    #         # Initialize the online_evaluator
+    #         self.online_evaluator = STLOnlineEvaluator(self)
+    #         self.top.accept(self.online_evaluator)
 
-        for arg in args:
-            var_name = arg[0]
-            var_object = arg[1]
-            self.var_object_dict[var_name] = var_object
+    #     for arg in args:
+    #         var_name = arg[0]
+    #         var_object = arg[1]
+    #         self.var_object_dict[var_name] = var_object
 
-        # evaluate modular sub-specs
-        for key in self.var_subspec_dict:
-            node = self.var_subspec_dict[key]
-            out = self.online_evaluator.evaluate(node, [])
-            self.var_object_dict[key] = out
+    #     # evaluate modular sub-specs
+    #     for key in self.var_subspec_dict:
+    #         node = self.var_subspec_dict[key]
+    #         out = self.online_evaluator.evaluate(node, [])
+    #         self.var_object_dict[key] = out
 
-        out = self.online_evaluator.evaluate(self.top, [])
+    #     out = self.online_evaluator.evaluate(self.top, [])
 
-        self.var_object_dict = self.var_object_dict.fromkeys(self.var_object_dict, [])
+    #     self.var_object_dict = self.var_object_dict.fromkeys(self.var_object_dict, [])
 
 
-        return out
+    #     return out
 
     # Offline
     def evaluate(self, *args, **kargs):
