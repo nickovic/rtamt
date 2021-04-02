@@ -44,7 +44,7 @@ discrete-time monitors for LTL. It provides a concrete implementation of
 [STLDiscreteTimeSpecification](../rtamt/spec/stl/discrete_time/specification_parser.py) extends `LTLDiscreteTimeSpecification` 
 with additional STL (timed) operators. 
 
-![alt text](resources/top-diagram.png)
+![alt text](top-diagram.png)
 
 ### grammar [rtamt/grammar](../rtamt/grammar)
 
@@ -73,12 +73,12 @@ This contains auto-generated parsers from Antrl based on the above grammer.
 
 The parsed formulas are connected to the evaluator.
 This seprates evaluation method, like online or offline, then went to node.
-![alt text](resources/evaluator-diagram.png)
+![alt text](evaluator-diagram.png)
 
 ### Node [rtamt/node](../rtamt/node)
 
 Finally, each fromulas reasch the nodes which are implimented spesific semantics.
-![alt text](resources/node-diagram.png)
+![alt text](node-diagram.png)
 
 ### cpplib [rtamt/cpplib](../rtamt/cpplib)
 
