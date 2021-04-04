@@ -47,22 +47,40 @@ class STLOfflineEvaluator(STLVisitor):
         sat_samples = monitor.sat(in_sample_1, in_sample_2)
         out = []
 
-        if self.spec.semantics == Semantics.OUTPUT_ROBUSTNESS and not node.out_vars:
-            for sample in sat_samples:
-                val = float("inf") if sample==True else -float("inf")
-                out.append(val)
-        elif self.spec.semantics == Semantics.INPUT_VACUITY and not node.in_vars:
-            for sample in sat_samples:
-                out.append(0.0)
-        elif self.spec.semantics == Semantics.INPUT_ROBUSTNESS and not node.in_vars:
-            for sample in sat_samples:
-                val = float("inf") if sample == True else - float("inf")
-                out.append(val)
-        elif self.spec.semantics == Semantics.OUTPUT_VACUITY and not node.out_vars:
-            for sample in sat_samples:
-                out.append(0.0)
+        if self.spec.time_interpretation == TimeInterpretation.DENSE:
+            if self.spec.semantics == Semantics.OUTPUT_ROBUSTNESS and not node.out_vars:
+                for i, sample in enumerate(sat_samples):
+                    val = float("inf") if sample==True else -float("inf")
+                    out.append([out_sample[i][0], val])
+            elif self.spec.semantics == Semantics.INPUT_VACUITY and not node.in_vars:
+                for i, sample in enumerate(sat_samples):
+                    out.append([out_sample[i][0], 0.0])
+            elif self.spec.semantics == Semantics.INPUT_ROBUSTNESS and not node.in_vars:
+                for i, sample in enumerate(sat_samples):
+                    val = float("inf") if sample == True else - float("inf")
+                    out.append([out_sample[i][0], val])
+            elif self.spec.semantics == Semantics.OUTPUT_VACUITY and not node.out_vars:
+                for i, sample in enumerate(sat_samples):
+                    out.append([out_sample[i][0], 0.0])
+            else:
+                out = out_sample
         else:
-            out = out_sample
+            if self.spec.semantics == Semantics.OUTPUT_ROBUSTNESS and not node.out_vars:
+                for i, sample in enumerate(sat_samples):
+                    val = float("inf") if sample==True else -float("inf")
+                    out.append(val)
+            elif self.spec.semantics == Semantics.INPUT_VACUITY and not node.in_vars:
+                for i, sample in enumerate(sat_samples):
+                    out.append(0.0)
+            elif self.spec.semantics == Semantics.INPUT_ROBUSTNESS and not node.in_vars:
+                for i, sample in enumerate(sat_samples):
+                    val = float("inf") if sample == True else - float("inf")
+                    out.append(val)
+            elif self.spec.semantics == Semantics.OUTPUT_VACUITY and not node.out_vars:
+                for i, sample in enumerate(sat_samples):
+                    out.append(0.0)
+            else:
+                out = out_sample
 
         return out
 
