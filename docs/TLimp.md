@@ -72,12 +72,12 @@ This contains auto-generated parsers from Antrl based on the above grammer.
 ### Evaluator [rtamt/evaluator](../rtamt/evaluator)
 
 The parsed formulas are connected to the evaluator.
-This seprates evaluation method, like online or offline, then went to node.
+This seprates evaluation method, like online or offline, then went to node.  
 ![alt text](evaluator-diagram.png)
 
 ### Node [rtamt/node](../rtamt/node)
 
-Finally, each fromulas reasch the nodes which are implimented spesific semantics.
+Finally, each fromulas reasch the nodes which are implimented spesific semantics.  
 ![alt text](node-diagram.png)
 
 ### cpplib [rtamt/cpplib](../rtamt/cpplib)
