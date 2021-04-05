@@ -1,30 +1,16 @@
-import logging
-import importlib
-
 from antlr4 import *
 from antlr4.InputStream import InputStream
-
 from rtamt.parser.xstl.error.parser_error_listener import STLExtendedParserErrorListener
 from rtamt.spec.stl.discrete_time.specification import STLDiscreteTimeSpecification
-
-from rtamt.evaluator.stl.offline_evaluator import STLOfflineEvaluator
-from rtamt.spec.ltl.discrete_time.specification import LTLDiscreteTimeSpecification
-
 from rtamt.parser.xstl.StlExtendedLexer import StlExtendedLexer
 from rtamt.parser.xstl.StlExtendedParser import StlExtendedParser
-from rtamt.spec.stl.discrete_time.specification_parser import STLSpecificationParser
-
-from rtamt.parser.stl.error.parser_error_listener import STLParserErrorListener
 from rtamt.exception.stl.exception import STLParseException
-
-from rtamt.spec.stl.discrete_time.pastifier import STLPastifier
 from rtamt.evaluator.stl.online_evaluator import STLOnlineEvaluator
 from rtamt.enumerations.options import *
-
-from rtamt.exception.stl.exception import STLException
 from rtamt.spec.xstl.discrete_time.pastifier import XSTLPastifier
 from rtamt.spec.xstl.discrete_time.reset import XSTLReset
 from rtamt.spec.xstl.discrete_time.specification_parser import XSTLSpecificationParser
+from rtamt.exception.exception import RTAMTException
 
 
 class XSTLDiscreteTimeSpecification(STLDiscreteTimeSpecification):
@@ -112,55 +98,5 @@ class XSTLDiscreteTimeSpecification(STLDiscreteTimeSpecification):
         return out
 
     def evaluate(self, *args, **kargs):
-        if len(args) != 1:
-            raise STLException('evaluate: Wrong number of arguments')
-
-        dataset = args[0]
-
-        if not dataset['time']:
-            raise STLException('evaluate: The input does not contain the time field')
-
-        length = len(dataset['time'])
-
-        for key in dataset:
-            if len(dataset[key]) != length:
-                raise STLException('evaluate: The input ' + key + ' does not have the same number of samples as time')
-
-        if self.offline_evaluator is None:
-            # Initialize the offline_evaluator
-            self.offline_evaluator = STLOfflineEvaluator(self)
-            self.top.accept(self.offline_evaluator)
-            self.reseter.node_monitor_dict = self.offline_evaluator.node_monitor_dict
-
-        # Check if the difference between two consecutive timestamps is between
-        # the accepted tolerance - if not, increase the violation counter
-        ts = dataset['time']
-        for i in range(len(ts) - 1):
-            duration = (ts[i+1] - ts[i]) * self.normalize
-        tolerance = self.sampling_period * self.sampling_tolerance
-        if duration < self.sampling_period - tolerance or duration > self.sampling_period + tolerance:
-            self.sampling_violation_counter = self.sampling_violation_counter + 1
-
-
-        # update the value of every input variable
-        for key in dataset:
-            if key != 'time':
-                self.var_object_dict[key] = dataset[key]
-
-        # evaluate modular sub-specs
-        for key in self.var_subspec_dict:
-            node = self.var_subspec_dict[key]
-            out = self.offline_evaluator.evaluate(node, [length])
-            self.var_object_dict[key] = out
-
-        # The evaluation done wrt the discrete counter (logical time)
-        out = self.offline_evaluator.evaluate(self.top, [length])
-
-        out_t = []
-        for i in range(len(ts)):
-            out_sample = [ts[i], out[i]]
-            out_t.append(out_sample)
-        out = out_t
-
-        return out
+        raise RTAMTException('Offline monitoring algorithm not implemented.')
 

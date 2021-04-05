@@ -712,6 +712,12 @@ class XSTLOnlineEvaluator(STLOnlineEvaluator, XSTLVisitor):
 
         return out_sample
 ```
+
+The final step consists in create a specification container that puts 
+all these things together. This is done in the `specification.py` file 
+in the package [rtamt/spec/xstl/discrete_time](../rtamt/spec/xstl/discrete_time). 
+
+
  
 ### Test
 
