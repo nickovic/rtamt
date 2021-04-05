@@ -162,6 +162,48 @@ We create a new Python package [rtamt/node/xstl](../rtamt/node/xstl) and add the
 files `backto.py` and `timed_backto.py`, which define the `BacktoNode` and 
 `TimedBacktoNode` classes, respectively.
 
+We now implement the actual algorithm for monitoring the `Backto` operator 
+and its timed variant. The implementation of the actual monitoring 
+algorithms is done in [rtamt/operation](../rtamt/operation) package. 
+In this tutorial, we will only implement discrete-time online monitors for 
+Extended STL implemented in Python. Hence we create the package 
+[rtamt/operation/xstl/discrete_time/online](../rtamt/operation/xstl/discrete_time/online) 
+and two new files `backto_operation.py` and `backto_boundend_operation.py` 
+that implement classes `BacktoOperation` and `BacktoBoundedOperation`. We will 
+use the existing implementation for the other operators. We will also use the 
+following definitions to facilitate the implementation of these two 
+operators:
+```python
+phi backto psi = always psi or (phi since psi)
+phi backto[a,b] psi = always[0,b] psi or (phi since[a,b] psi)
+``` 
+Hence, we implement `BacktoOperation` class as follows (the implementation of 
+`BacktoBoundedOperation` follows the same principles):
+```python
+from rtamt.operation.abstract_operation import AbstractOperation
+from rtamt.operation.stl.discrete_time.online.historically_operation import HistoricallyOperation
+from rtamt.operation.stl.discrete_time.online.or_operation import OrOperation
+from rtamt.operation.stl.discrete_time.online.since_operation import SinceOperation
+
+class BacktoOperation(AbstractOperation):
+    def __init__(self):
+        self.hist = HistoricallyOperation()
+        self.since = SinceOperation()
+        self.top = OrOperation()
+
+    def reset(self):
+        self.hist = HistoricallyOperation()
+        self.since = SinceOperation()
+        self.top = OrOperation()
+
+    def update(self, left, right):
+        out1 = self.hist.update(right)
+        out2 = self.since.update(left, right)
+        out = self.top(out1, out2)
+        return out
+```
+
+
 Now, we are ready to create a container for Extended STL specifications 
 and store them as a `Node` parse tree. In [rtamt/spec](../rtamt/spec), we 
 create a new Python package `xstl`. In this tutorial, we will only 
