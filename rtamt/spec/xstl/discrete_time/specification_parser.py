@@ -1,35 +1,24 @@
-from rtamt import Language
+from rtamt.node.xstl.backto import Backto
+from rtamt.node.xstl.timed_backto import TimedBackto
 from rtamt.parser.xstl.StlExtendedParserVisitor import StlExtendedParserVisitor
-from rtamt.node.stl.timed_always import TimedAlways
-from rtamt.node.ltl.always import Always
 from rtamt.spec.stl.discrete_time.specification_parser import STLSpecificationParser
 
 
-class ExtendedSTLSpecificationParser(STLSpecificationParser, StlExtendedParserVisitor):
-    
+class XSTLSpecificationParser(STLSpecificationParser, StlExtendedParserVisitor):
     def __init__(self, spec):
-        self.ops = set()
-        self.spec = spec
+        STLSpecificationParser.__init__(spec)
+        StlExtendedParserVisitor.__init__()
 
-        io_type_name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_io_type'
-        comp_op_name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_comp_op'
-        if self.spec.language == Language.PYTHON:
-            io_type_name = 'rtamt.spec.stl.discrete_time.io_type'
-            comp_op_name = 'rtamt.spec.stl.discrete_time.comp_op'
-
-        self.io_type_mod = __import__(io_type_name, fromlist=[''])
-        self.comp_op_mod = __import__(comp_op_name, fromlist=[''])
-
-    def visitExprAlways(self, ctx):
-        child = self.visit(ctx.expression())
+    def visitExprBackto(self, ctx):
+        child1 = self.visit(ctx.expression(0))
+        child2 = self.visit(ctx.expression(1))
+        interval = self.visit(ctx.interval())
         if ctx.interval() == None:
-            node = Always(child)
-            horizon = child.horizon
+            node = Backto(child1, child2)
+            node.horizon = max(child1.horizon, child2.horizon)
         else:
-            interval = self.visit(ctx.interval())
-            node = TimedAlways(child, interval.begin, interval.end)
-            horizon = child.horizon + interval.end
-        node.horizon = horizon
+            node = TimedBackto(child1, child2, interval.begin, interval.end)
+            node.horizon = max(child1.horizon, child2.horizon)
         return node
 
 
