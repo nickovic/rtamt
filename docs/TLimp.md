@@ -8,6 +8,14 @@ but new semantics, and (3) alternative implementation of the existing algorithms
 
 ### Top-level Architecture [rtamt/spec](../rtamt/spec)
 
+Our STL implimentation is based on [Visitor pattern](https://en.wikipedia.org/wiki/Visitor_pattern) on [Abstruct Syntax Tree (AST)](https://en.wikipedia.org/wiki/Abstract_syntax_tree).
+RTAMT utlizes [ANTRL](https://www.antlr.org/) in paser lexser layer. However pase tree from ANTRL is too complex and less flexsible for our temporal logic usecase, and lacking functionality too (like supporting dense-time, dicrete-time. offline, online what ever paser and lexser don't care.).
+Hence we define spesific visitor and AST for temporal logic designer in RTAMT.
+
+<span style="color: red; ">TODO: we may need very overview of the TL flow.  
+\(STL forumla\) -> \[paser lexser (ANTRL)\] -> AST(Node) -> [visior] -> instance of TL -> [evaluate/update] -> (rob)  
+or something.</span>
+
 The [AbstractSpecification](../rtamt/spec/abstract_specification.py) class as the main container class 
 that also acts as the API between the user and the library. 
 Concrete specifications are derived from this abstract class. Figure below 
@@ -69,24 +77,37 @@ import LtlParser;
 
 This contains auto-generated parsers from Antrl based on the above grammer.
 
-### Evaluator [rtamt/evaluator](../rtamt/evaluator)
+### Node(AST) [rtamt/node](../rtamt/node)
 
+Paser generate AST which consists of our spesific nodes.  
+<span style="color: red; ">TODO: we may explain what is STL first.</span>  
+<span style="color: red; ">TODO: We may need to check we can say our node is AST.</span>  
+<span style="color: red; ">TODO: We may meniton what we changed from purely pased from ANTRL paser.</span>
+
+![alt text](node-diagram.png)
+
+### Visitor [rtamt/spec/discrete_time/st/visitor.py](../rtamt/spec/stl/discrete_time/visitor.py)
+
+Visitor visits all nodes in AST(node) from top of the tree.  
+<span style="color: red; ">TODO: We can refer <https://people.eecs.berkeley.edu/~necula/cil/api/Cil.cilVisitor.html></span>
+
+### Evaluator(visitor) [rtamt/evaluator](../rtamt/evaluator)
+
+This is the instance of visior for spesific temporal logic.
 The parsed formulas are connected to the evaluator.
-This seprates evaluation method, like online or offline, then went to node.  
+This seprates evaluation method, like online or offline, then went to AST nodes.  
+<span style="color: red; ">TODO: Tom can crify what is connextion between evaluator and visior class.
 ![alt text](evaluator-diagram.png)
 
-### Node [rtamt/node](../rtamt/node)
+### Operation(visitor) [rtamt/operation](../rtamt/operation)
 
-Finally, each fromulas reasch the nodes which are implimented spesific semantics.  
-![alt text](node-diagram.png)
+This opearion inherit visitor class too.  
+Here, finally we impliment spesific semantics for each semantics.
+Now we make different operation for dense-time and discrete-time.
 
 ### cpplib [rtamt/cpplib](../rtamt/cpplib)
 
-cpp version of the nodes.
-
-### Operation [rtamt/operation](../rtamt/operation)
-
-TOM Comment: We need to explain here. The most of sematincs seems to be implimented in here in python case...
+cpp version of the above operation.
 
 ## Examples of Extending RTAMT
 
