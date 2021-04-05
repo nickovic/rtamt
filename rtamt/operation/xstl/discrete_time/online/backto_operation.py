@@ -17,6 +17,6 @@ class BacktoOperation(AbstractOperation):
     def update(self, left, right):
         out1 = self.hist.update(right)
         out2 = self.since.update(left, right)
-        out = self.top(out1, out2)
+        out = self.top.update(out1, out2)
         return out
 
