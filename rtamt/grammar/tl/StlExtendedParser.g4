@@ -25,6 +25,7 @@ expression
     | HistoricallyOperator ( interval )? expression             #ExprHist
     | OnceOperator ( interval )? expression                     #ExpreOnce
     | expression SinceOperator ( interval )? expression         #ExprSince
+    | expression BacktoOperator ( interval )? expression        #ExprBackto
     | RiseOperator LPAREN expression RPAREN                     #ExprRise
     | FallOperator LPAREN expression RPAREN                     #ExprFall
     | PreviousOperator expression                               #ExprPrevious
