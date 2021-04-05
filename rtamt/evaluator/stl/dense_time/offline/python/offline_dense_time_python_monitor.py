@@ -16,10 +16,18 @@ from rtamt.operation.stl.dense_time.offline.not_operation import NotOperation
 from rtamt.operation.stl.dense_time.offline.once_operation import OnceOperation
 from rtamt.operation.stl.dense_time.offline.historically_operation import HistoricallyOperation
 from rtamt.operation.stl.dense_time.offline.always_operation import AlwaysOperation
+from rtamt.operation.stl.dense_time.offline.until_operation import UntilOperation
+from rtamt.operation.stl.dense_time.offline.eventually_operation import EventuallyOperation
 from rtamt.operation.stl.dense_time.offline.constant_operation import ConstantOperation
 from rtamt.operation.stl.dense_time.offline.once_bounded_operation import OnceBoundedOperation
 from rtamt.operation.stl.dense_time.offline.historically_bounded_operation import HistoricallyBoundedOperation
 from rtamt.operation.stl.dense_time.offline.since_bounded_operation import SinceBoundedOperation
+from rtamt.operation.stl.dense_time.offline.always_bounded_operation import AlwaysBoundedOperation
+from rtamt.operation.stl.dense_time.offline.eventually_bounded_operation import EventuallyBoundedOperation
+from rtamt.operation.stl.dense_time.offline.until_bounded_operation import UntilBoundedOperation
+
+
+
 
 
 class STLOfflineDenseTimePythonMonitor(STLVisitor):
@@ -128,7 +136,10 @@ class STLOfflineDenseTimePythonMonitor(STLVisitor):
         self.visit(node.children[0], args)
 
     def visitUntil(self, node, args):
-        raise STLNotImplementedException('Until operator is not implemented in the STL online monitor.')
+        monitor = UntilOperation()
+        self.node_monitor_dict[node.name] = monitor
+
+        self.visit(node.children[0], args)
 
     def visitOnce(self, node, args):
         monitor = OnceOperation()
@@ -188,13 +199,23 @@ class STLOfflineDenseTimePythonMonitor(STLVisitor):
         self.visit(node.children[1], args)
 
     def visitTimedAlways(self, node, args):
-        raise STLNotImplementedException('Bounded always operator not implemented in STL dense-time monitor.')
+        monitor = AlwaysBoundedOperation(node.begin, node.end)
+        self.node_monitor_dict[node.name] = monitor
+
+        self.visit(node.children[0], args)
 
     def visitTimedEventually(self, node, args):
-        raise STLNotImplementedException('Bounded eventually operator not implemented in STL dense-time monitor.')
+        monitor = EventuallyBoundedOperation(node.begin, node.end)
+        self.node_monitor_dict[node.name] = monitor
+
+        self.visit(node.children[0], args)
 
     def visitTimedUntil(self, node, args):
-        raise STLNotImplementedException('Bounded until operator not implemented in STL dense-time monitor.')
+        monitor = UntilBoundedOperation(node.begin, node.end)
+        self.node_monitor_dict[node.name] = monitor
+
+        self.visit(node.children[0], args)
+        self.visit(node.children[1], args)
 
     def visitDefault(self, node, args):
         pass

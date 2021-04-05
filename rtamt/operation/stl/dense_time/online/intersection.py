@@ -125,3 +125,6 @@ def multiplication(a, b):
 
 def division(a, b):
     return float(a) / float(b)
+
+def split(a, b):
+    return [a,b]

@@ -22,13 +22,13 @@ class MultiplicationOperation(AbstractOperation):
 
     def update_final(self, *args, **kargs):
         return self.update(args[0], args[1]) + [self.last]
-
-    def offline(self, left_list, right_list):
-        out = []
-        self.left = self.left + left_list
-        self.right = self.right + right_list
-
-        out, last, left, right = intersect.intersection(self.left, self.right, intersect.multiplication)
-        out.append(last)
-
-        return out
+    #
+    # def offline(self, left_list, right_list):
+    #     out = []
+    #     self.left = self.left + left_list
+    #     self.right = self.right + right_list
+    #
+    #     out, last, left, right = intersect.intersection(self.left, self.right, intersect.multiplication)
+    #     out.append(last)
+    #
+    #     return out

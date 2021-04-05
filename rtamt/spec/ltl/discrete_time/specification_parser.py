@@ -262,14 +262,6 @@ class LTLSpecificationParser(LtlParserVisitor):
 
     def visitExprAlways(self, ctx):
         child = self.visit(ctx.expression())
-        interval = self.visit(ctx.interval())
-        horizon = child.horizon + interval.end
-        node = TimedAlways(child, interval.begin, interval.end)
-        node.horizon = horizon
-        return node
-
-    def visitExprUntimedAlways(self, ctx):
-        child = self.visit(ctx.expression())
         horizon = child.horizon
         node = Always(child)
         node.horizon = horizon

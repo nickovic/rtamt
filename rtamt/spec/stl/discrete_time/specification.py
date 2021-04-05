@@ -90,11 +90,11 @@ class STLDiscreteTimeSpecification(LTLDiscreteTimeSpecification):
         visitor = STLSpecificationParser(self)
         self.top = visitor.visitSpecification_file(ctx)
 
-        print('Hello')
-        print(self.unit)
-        print('sampling period unit: ' + str(self.sampling_period_unit))
-        print(self.U[self.unit])
-        print(self.U[self.sampling_period_unit])
+        # print('Hello')
+        # print(self.unit)
+        # print('sampling period unit: ' + str(self.sampling_period_unit))
+        # print(self.U[self.unit])
+        # print(self.U[self.sampling_period_unit])
 
         self.normalize = float(self.U[self.unit]) / float(self.U[self.sampling_period_unit])
 
@@ -185,7 +185,7 @@ class STLDiscreteTimeSpecification(LTLDiscreteTimeSpecification):
 
         # update the value of every input variable
         for key in dataset:
-            if key is not 'time':
+            if key != 'time':
                 self.var_object_dict[key] = dataset[key]
 
         # evaluate modular sub-specs
@@ -248,9 +248,9 @@ class STLDiscreteTimeSpecification(LTLDiscreteTimeSpecification):
 
             self.top.accept(self.reseter)
             self.reseter.reset(self.top)
-            self.update_counter = int(0);
-            self.previous_time = float(0.0);
-            self.sampling_violation_counter = int(0);
+            self.update_counter = int(0)
+            self.previous_time = float(0.0)
+            self.sampling_violation_counter = int(0)
 
 
     @property

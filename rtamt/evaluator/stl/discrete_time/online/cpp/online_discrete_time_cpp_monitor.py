@@ -1,5 +1,6 @@
 from rtamt.spec.stl.discrete_time.visitor import STLVisitor
-from rtamt.exception.stl.exception import STLNotImplementedException
+from rtamt.exception.stl.exception import STLNotImplementedException, \
+    STLParseException
 from rtamt.spec.stl.discrete_time.comp_op import StlComparisonOperator as CompOp
 from rtamt.lib.rtamt_stl_library_wrapper.stl_comp_op import StlComparisonOperator
 from rtamt.lib.rtamt_stl_library_wrapper.stl_combinatorial_binary_node import CombinatorialBinaryOperation
@@ -38,7 +39,7 @@ class STLOnlineDiscreteTimeCPPMonitor(STLVisitor):
         return self.node_monitor_dict
 
     def visitPredicate(self, node, args):
-        monitor = PredicateOperation(self.op_cpp(node.operator))
+        monitor = PredicateOperation(node.operator)
         self.node_monitor_dict[node.name] = monitor
 
         self.visit(node.children[0], args)
@@ -230,8 +231,7 @@ class STLOnlineDiscreteTimeCPPMonitor(STLVisitor):
             return StlComparisonOperator.LESS
         elif op == CompOp.NEQ:
             return StlComparisonOperator.NEQ
-        else:
+        elif op == CompOp.EQUAL:
             return StlComparisonOperator.EQUAL
-        
-    
-        
+        else:
+            raise STLParseException('Could not find operator {}!'.format(op))

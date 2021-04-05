@@ -11,6 +11,7 @@ class AbstractSpecification:
     Attributes:
         name : String
 
+
         modular_spec : String - specification text
         spec : String - specification text
 

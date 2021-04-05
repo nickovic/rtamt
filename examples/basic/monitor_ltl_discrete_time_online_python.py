@@ -23,7 +23,7 @@ def monitor():
         print('RTAMT Exception: {}'.format(err))
         sys.exit()
 
-    # # eval
+    # # # eval
     aTraj = dataSet['a']
     bTraj = dataSet['b']
     for i in range(len(dataSet['a'])):

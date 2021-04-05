@@ -3,20 +3,21 @@ from rtamt.operation.abstract_operation import AbstractOperation
 
 class AlwaysOperation(AbstractOperation):
     def __init__(self):
-        self.prev = float("inf")
+        self.next = float("inf")
 
     def update(self, *args, **kargs):
         out = []
         input_list = args[0]
 
-        prev = float("nan")
+        next = float("nan")
 
-        for i, in_sample in enumerate(input_list):
+        for i, in_sample in reversed(list(enumerate(input_list))):
             out_time = in_sample[0]
-            out_value = min(in_sample[1], self.prev)
-            self.prev = out_value
-            if out_value != prev or i == len(input_list) - 1:
-                out.append([out_time, out_value])
-            prev = out_value
+            out_value = min(in_sample[1], self.next)
+            self.next = out_value
+            if out_value == next and i < len(input_list) - 2:
+                out.pop(0)
+            out.insert(0, [out_time, out_value])
+            next = out_value
 
         return out

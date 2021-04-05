@@ -3,8 +3,22 @@
 
 - [About](#about)
 - [Installation](#installation)
+  - [Install prerequisites for RTAMT installation](#install-prerequisites-for-rtamt-installation)
+  - [Build the tool](#build-the-tool)
+    - [Clone the repository](#clone-the-repository)
+    - [Build CPP libraries](#build-cpp-libraries)
+    - [Install RTAMT](#install-rtamt)
+    - [uninstall RTAMT](#uninstall-rtamt)
+  - [test RTAMT](#test-rtamt)
 - [Theory](#theory)
+  - [Specification Language](#specification-language)
 - [Usage](#usage)
+  - [Example Usage](#example-usage)
+    - [Discrete-time online monitor](#discrete-time-online-monitor)
+    - [Dense-time online monitor](#dense-time-online-monitor)
+  - [Dense-time Offline Monitor](#dense-time-offline-monitor)
+  - [Discrete-time Specifics](#discrete-time-specifics)
+    - [Working with time units and timing assumptions](#working-with-time-units-and-timing-assumptions)
 - [References](#references)
 
 <!-- markdown-toc end -->
@@ -36,8 +50,7 @@ You will also need CMake version 3.12 or higher if you need to build the CPP bac
 sudo apt install cmake
 ```
 
-In our experience, Ubuntu 16.04, 18.04 don't support the versions in default. You can check manual intallation of cmake.  
-<https://cmake.org/install/>
+In our experience, Ubuntu 16.04, 18.04 don't support the versions in default. You can check [our manual intallation of cmake](README_cmake.md).
 
 ## Build the tool
 
@@ -156,7 +169,7 @@ rho(phi / psi,w,t) = rho(phi,w,t) / rho(psi,w,t)
 rho(phi <= psi,w,t) = rho(psi,w,t) - rho(phi,w,t) 
 rho(phi < psi,w,t) = rho(psi,w,t) - rho(phi,w,t)
 rho(phi >= psi,w,t) = rho(phi,w,t) - rho(psi,w,t)
-rho(phi >= psi,w,t) = rho(phi,w,t) - rho(psi,w,t)
+rho(phi > psi,w,t) = rho(phi,w,t) - rho(psi,w,t)
 rho(phi == psi,w,t) = -|rho(phi,w,t) - rho(psi,w,t)|
 rho(phi !== psi,w,t) = |rho(phi,w,t) - rho(psi,w,t)|
 

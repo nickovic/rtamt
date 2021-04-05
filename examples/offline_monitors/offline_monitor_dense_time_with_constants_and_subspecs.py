@@ -21,7 +21,6 @@ def monitor():
     spec.spec = 'out = ((req >= threshold) implies response)'
     try:
         spec.parse()
-        spec.pastify()
     except rtamt.STLParseException as err:
         print('STL Parse Exception: {}'.format(err))
         sys.exit()

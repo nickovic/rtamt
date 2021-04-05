@@ -187,3 +187,5 @@ class LTLVisitor:
     @abstractmethod
     def visitDefault(self, element, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
+
+    #### Comment

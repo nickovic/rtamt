@@ -1,5 +1,5 @@
 from rtamt.operation.abstract_operation import AbstractOperation
-import rtamt.operation.stl.dense_time.online.intersection as intersect
+import rtamt.operation.stl.dense_time.offline.intersection as intersect
 
 class AdditionOperation(AbstractOperation):
     def __init__(self):
@@ -12,6 +12,7 @@ class AdditionOperation(AbstractOperation):
         self.right = self.right + right_list
 
         out, last, left, right = intersect.intersection(self.left, self.right, intersect.addition)
-        out.append(last)
+        if last:
+            out.append(last)
 
         return out
