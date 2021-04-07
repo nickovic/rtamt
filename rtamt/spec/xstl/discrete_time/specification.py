@@ -16,7 +16,7 @@ from rtamt.exception.exception import RTAMTException
 class XSTLDiscreteTimeSpecification(STLDiscreteTimeSpecification):
     def __init__(self, semantics=Semantics.STANDARD, language=Language.PYTHON):
         """Constructor for STL Specification"""
-        STLDiscreteTimeSpecification.__init__(semantics, language)
+        STLDiscreteTimeSpecification.__init__(self, semantics, language)
         self.reseter = XSTLReset()
 
 

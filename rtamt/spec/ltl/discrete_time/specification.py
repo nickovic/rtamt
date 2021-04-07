@@ -46,7 +46,7 @@ class LTLDiscreteTimeSpecification(AbstractSpecification):
 
     def __init__(self, semantics=Semantics.STANDARD, language=Language.PYTHON):
         """Constructor for STL Specification"""
-        super(LTLDiscreteTimeSpecification, self).__init__()
+        AbstractSpecification.__init__(self)
         self.name = 'LTL Specification'
 
         self.reseter = LTLReset()

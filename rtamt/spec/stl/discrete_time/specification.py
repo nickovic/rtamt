@@ -48,7 +48,7 @@ class STLDiscreteTimeSpecification(LTLDiscreteTimeSpecification):
 
     def __init__(self, semantics=Semantics.STANDARD, language=Language.PYTHON):
         """Constructor for STL Specification"""
-        super(STLDiscreteTimeSpecification, self).__init__(semantics, language)
+        LTLDiscreteTimeSpecification.__init__(self, semantics, language)
         self.name = 'STL Specification'
 
         self.DEFAULT_TOLERANCE = float(0.1)

@@ -6,8 +6,8 @@ from rtamt.spec.stl.discrete_time.specification_parser import STLSpecificationPa
 
 class XSTLSpecificationParser(STLSpecificationParser, StlExtendedParserVisitor):
     def __init__(self, spec):
-        STLSpecificationParser.__init__(spec)
-        StlExtendedParserVisitor.__init__()
+        STLSpecificationParser.__init__(self, spec)
+        StlExtendedParserVisitor.__init__(self)
 
     def visitExprBackto(self, ctx):
         child1 = self.visit(ctx.expression(0))
