@@ -93,10 +93,10 @@ Visitor visits all nodes in AST(node) from top of the tree.
 
 ### Evaluator(visitor) [rtamt/evaluator](../rtamt/evaluator)
 
-This is the instance of visior for spesific temporal logic.
+This is the instance of a visitor for a specific temporal logic.
 The parsed formulas are connected to the evaluator.
-This seprates evaluation method, like online or offline, then went to AST nodes.  
-<span style="color: red; ">TODO: Tom can crify what is connextion between evaluator and visior class.
+This separates evaluation method, like online or offline, then went to AST nodes.  
+<span style="color: red; ">TODO: Tom can clarify what is connection between evaluator and visior class.
 ![alt text](evaluator-diagram.png)
 
 ### Operation(visitor) [rtamt/operation](../rtamt/operation)
@@ -115,10 +115,14 @@ cpp version of the above operation.
 
 In this scenario, we extend STL with the past-time Backto operator. 
 We first need a new grammar that defines the Backto operator. Hence, 
-we create two new files - `StlExtendedLexer.g4` and `StlExtendedParser.g4` 
+we create two new files - 
+[StlExtendedLexer.g4](../rtamt/grammar/tl/StlExtendedLexer.g4) and 
+[StlExtendedParser.g4](../rtamt/grammar/tl/StlExtendedParser.g4) 
 in [rtamt/grammar/tl](../rtamt/grammar/tl). 
 
-`StlExtendedLexer.g4` has the same content as `StlLexer.g4`, except for an 
+[StlExtendedLexer.g4](../rtamt/grammar/tl/StlExtendedLexer.g4) has 
+the same content as 
+[StlLexer.g4](../rtamt/grammar/tl/StlLexer.g4), except for an 
 additional token.
 
 ```antlrv4
@@ -126,7 +130,9 @@ BacktoOperator
     : 'backto' | 'B' ;
 ```
 
-`StlExtendedLexer.g4` imports `StlParser` and uses `StlExtendedLexer` as its 
+[StlExtendedParser.g4](../rtamt/grammar/tl/StlExtendedParser.g4) imports 
+[StlParser](../rtamt/grammar/tl/StlParser.g4) 
+and uses [StlExtendedLexer](../rtamt/grammar/tl/StlExtendedLexer.g4) as its 
 lexer.
 
 ```antlrv4
@@ -138,8 +144,9 @@ options {
 }
 ```
 
-It inherits all the rules from `StlParser`, except the `expression` rule that 
-it overrides, by adding an additional sub-rule for the Backto operator:
+It inherits all the rules from [StlParser](../rtamt/grammar/tl/StlParser.g4), 
+except the `expression` rule that 
+it overrides, by adding an additional sub-rule for the `Backto` operator:
 
 ```antlrv4
 expression
@@ -161,8 +168,8 @@ for handling parsing errors and add the `parser_error_lister.py` file with the
 `STLParserErrorListener` from [rtamt/parser/stl/error](../rtamt/parser/stl/error).
 
 ```bash
-antlr4 StlExtendedLexer.g4 -Dlanguage=Python3 -no-listener -visitor -o ../../parser/xstl/
-antlr4 StlExtendedParser.g4 -Dlanguage=Python3 -no-listener -visitor -o ../../parser/xstl/
+antlr4 StlExtendedLexer.g4 -Dlanguage=Python2 -no-listener -visitor -o ../../parser/xstl/
+antlr4 StlExtendedParser.g4 -Dlanguage=Python2 -no-listener -visitor -o ../../parser/xstl/
 ```
 
 The package [rtamt/parser/xstl](../rtamt/parser/xstl) contains 5 new files:
