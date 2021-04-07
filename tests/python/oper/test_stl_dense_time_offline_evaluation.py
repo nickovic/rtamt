@@ -221,12 +221,12 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
     def test_division(self):
         oper = DivisionOperation()
 
-        left = [[0, 1.3], [0.7, 3], [1.3, 0.1], [2.1, -2.2]]
-        right = [[0, 2.5], [0.7, 4], [1.3, -1.2], [2.1, 1.7]]
+        left = [[0, 1.3], [0.7, 3.], [1.3, 0.1], [2.1, -2.2]]
+        right = [[0, 2.5], [0.7, 4.], [1.3, -1.2], [2.1, 1.7]]
 
         out = oper.update(left, right)
 
-        expected = [[0, 1.3 / 2.5], [0.7, 3 / 4], [1.3, 0.1 / -1.2], [2.1, -2.2 / 1.7]]
+        expected = [[0, 1.3 / 2.5], [0.7, 3. / 4.], [1.3, 0.1 / -1.2], [2.1, -2.2 / 1.7]]
 
         self.assertListEqual(expected, out, "division dense time offline 1")
 
