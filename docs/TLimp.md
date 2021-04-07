@@ -9,8 +9,8 @@ but new semantics, and (3) alternative implementation of the existing algorithms
 ### Top-level Architecture [rtamt/spec](../rtamt/spec)
 
 Our STL implimentation is based on [Visitor pattern](https://en.wikipedia.org/wiki/Visitor_pattern) on [Abstruct Syntax Tree (AST)](https://en.wikipedia.org/wiki/Abstract_syntax_tree).
-RTAMT utlizes [ANTRL](https://www.antlr.org/) in paser lexser layer. However pase tree from ANTRL is too complex and less flexsible for our temporal logic usecase, and lacking functionality too (like supporting dense-time, dicrete-time. offline, online what ever paser and lexser don't care.).
-Hence we define spesific visitor and AST for temporal logic designer in RTAMT.
+RTAMT utlizes [ANTRL](https://www.antlr.org/) in paser lexser layer. However parse tree from ANTRL is too complex and less flexsible for our temporal logic usecase, and lacking functionality too (like supporting dense-time, dicrete-time. offline, online what ever paser and lexser don't care.).
+Hence we define specific visitor and AST for temporal logic designer in RTAMT.
 
 <span style="color: red; ">TODO: we may need very overview of the TL flow.  
 \(STL forumla\) -> \[paser lexser (ANTRL)\] -> AST(Node) -> [visior] -> instance of TL -> [evaluate/update] -> (rob)  
@@ -56,7 +56,7 @@ with additional STL (timed) operators.
 
 ### grammar [rtamt/grammar](../rtamt/grammar)
 
-This contains lexser and paser setting based on [Antrl](https://www.antlr.org/).  
+This contains lexer and parser setting based on [Antrl](https://www.antlr.org/).  
 
 [rtamt/grammar/tl](../rtamt/grammar/tl)  
 expects to contain typical temporal logics.
@@ -68,7 +68,7 @@ and Signal Temporal Logic (STL) in
 [StlParser.g4](../rtamt/grammar/tl/StlParser.g4)  
 while importing LTL with
 
-```g4
+```antlr4
 parser grammar StlParser;
 import LtlParser;
 ```
