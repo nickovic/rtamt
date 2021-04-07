@@ -18,8 +18,6 @@ from rtamt.operation.stl.discrete_time.online.rise_operation import RiseOperatio
 from rtamt.operation.stl.discrete_time.online.fall_operation import FallOperation
 from rtamt.operation.stl.discrete_time.online.once_operation import OnceOperation
 from rtamt.operation.stl.discrete_time.online.historically_operation import HistoricallyOperation
-from rtamt.operation.stl.discrete_time.online.always_operation import AlwaysOperation
-from rtamt.operation.stl.discrete_time.online.eventually_operation import EventuallyOperation
 from rtamt.operation.stl.discrete_time.online.previous_operation import PreviousOperation
 from rtamt.operation.stl.discrete_time.online.constant_operation import ConstantOperation
 from rtamt.operation.stl.discrete_time.online.once_bounded_operation import OnceBoundedOperation

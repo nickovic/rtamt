@@ -1,5 +1,7 @@
 from antlr4 import *
 from antlr4.InputStream import InputStream
+
+from rtamt.evaluator.xstl.online_evaluator import XSTLOnlineEvaluator
 from rtamt.parser.xstl.error.parser_error_listener import STLExtendedParserErrorListener
 from rtamt.spec.stl.discrete_time.specification import STLDiscreteTimeSpecification
 from rtamt.parser.xstl.StlExtendedLexer import StlExtendedLexer
@@ -65,7 +67,7 @@ class XSTLDiscreteTimeSpecification(STLDiscreteTimeSpecification):
 
         if self.online_evaluator is None:
             # Initialize the online_evaluator
-            self.online_evaluator = STLOnlineEvaluator(self)
+            self.online_evaluator = XSTLOnlineEvaluator(self)
             self.top.accept(self.online_evaluator)
             self.reseter.node_monitor_dict = self.online_evaluator.node_monitor_dict
 

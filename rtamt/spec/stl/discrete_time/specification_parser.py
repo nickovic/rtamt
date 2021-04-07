@@ -152,13 +152,13 @@ class STLSpecificationParser(LTLSpecificationParser, StlParserVisitor):
     def visitExprUnless(self, ctx):
         child1 = self.visit(ctx.expression(0))
         child2 = self.visit(ctx.expression(1))
-        interval = self.visit(ctx.interval())
         if ctx.interval() == None:
             left = Always(child1)
             right = Until(child1, child2)
             node = Disjunction(left, right)
             node.horizon = max(child1.horizon, child2.horizon)
         else:
+            interval = self.visit(ctx.interval())
             left = TimedAlways(child1, 0, interval.end)
             right = TimedUntil(child1, child2, interval.begin, interval.end)
             node = Disjunction(left, right)

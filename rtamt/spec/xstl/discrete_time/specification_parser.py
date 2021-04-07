@@ -12,11 +12,11 @@ class XSTLSpecificationParser(STLSpecificationParser, StlExtendedParserVisitor):
     def visitExprBackto(self, ctx):
         child1 = self.visit(ctx.expression(0))
         child2 = self.visit(ctx.expression(1))
-        interval = self.visit(ctx.interval())
         if ctx.interval() == None:
             node = Backto(child1, child2)
             node.horizon = max(child1.horizon, child2.horizon)
         else:
+            interval = self.visit(ctx.interval())
             node = TimedBackto(child1, child2, interval.begin, interval.end)
             node.horizon = max(child1.horizon, child2.horizon)
         return node
