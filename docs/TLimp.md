@@ -96,7 +96,7 @@ Visitor visits all nodes in AST(node) from top of the tree.
 This is the instance of a visitor for a specific temporal logic.
 The parsed formulas are connected to the evaluator.
 This separates evaluation method, like online or offline, then went to AST nodes.  
-<span style="color: red; ">TODO: Tom can clarify what is connection between evaluator and visior class.
+<span style="color: red; ">TODO: Tom can clarify what is connection between evaluator and visior class.  
 ![alt text](evaluator-diagram.png)
 
 ### Operation(visitor) [rtamt/operation](../rtamt/operation)
