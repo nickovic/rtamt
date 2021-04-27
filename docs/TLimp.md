@@ -231,8 +231,10 @@ class XSTLSpecificationParser(STLSpecificationParser, StlExtendedParserVisitor):
 We are now able to store parse trees of extended STL specifications using 
 our own internal `Node` (tree) data structure. We will define all the 
 operations on the extended STL specifications using a visitor pattern. 
-Hence in [rtamt/spec/xstl] we create an abstract visitor template class `visitor.py`, 
+Hence in [rtamt/spec/xstl](../rtamt/spec/xstl) we create an abstract visitor template class `visitor.py`, 
 which defines all the visitor methods that need to be implemented.
+
+<span style="color: red; ">Tom could not understand why we need to reimpliment visitor instead of StlExtendedParserVisitor. Tom can see only "NotImplementedError" and it is too long. we can spesify where we need to copy it and which line we need to impliment our self.</span>
 
 ```python
 from abc import ABCMeta, abstractmethod
@@ -496,6 +498,8 @@ We also use inheritence to only implement visit methods for `Backto`
 and `TimedBackto` nodes, and inherit the implementations for all 
 other nodes from classes `STLPastifier` and `STLReset`.
 
+<span style="color: red; "> Tom can understand both XSTLPastifier and STLReset are extended from XSTLVisitor. and manuplate somthing the AST. but designer don't know why we need it. Reset: I don't know. Pastifier: It is for use feature-opereators in online updates. But we don't know all user needs it.</span>
+
 ```python
 from rtamt.node.xstl.backto import Backto
 from rtamt.node.xstl.timed_backto import TimedBackto
@@ -562,12 +566,17 @@ that implement classes `BacktoOperation` and `BacktoBoundedOperation`. We will
 use the existing implementation for the other operators. We will also use the 
 following definitions to facilitate the implementation of these two 
 operators:
+
 ```python
 phi backto psi = always psi or (phi since psi)
 phi backto[a,b] psi = always[0,b] psi or (phi since[a,b] psi)
-``` 
+```
+
+<span style="color: red; "> There are no explanation why online is inevitably.</span>
+
 Hence, we implement `BacktoOperation` class as follows (the implementation of 
 `BacktoBoundedOperation` follows the same principles):
+
 ```python
 from rtamt.operation.abstract_operation import AbstractOperation
 from rtamt.operation.stl.discrete_time.online.historically_operation import HistoricallyOperation
@@ -591,6 +600,7 @@ class BacktoOperation(AbstractOperation):
         out = self.top.update(out1, out2)
         return out
 ```
+
 We are now ready to check that our implementation does what it is intended to 
 do. Hence we write two unit tests for the implementation of `BacktoOperation` 
 and `BacktoBoundedOperation` in the file 
@@ -668,8 +678,7 @@ only define the binding for the `BacktoOperation` and `BacktoBoundedOperation`,
 and inherit the previous implementation for all the other operators. 
 
 ```python
-from rtamt.evaluator.stl.discrete_time.online.python.online_discrete_time_python_monitor import \
-    STLOnlineDiscreteTimePythonMonitor
+from rtamt.evaluator.stl.discrete_time.online.python.online_discrete_time_python_monitor import STLOnlineDiscreteTimePythonMonitor
 from rtamt.operation.xstl.discrete_time.online.backto_bounded_operation import BacktoBoundedOperation
 from rtamt.operation.xstl.discrete_time.online.backto_operation import BacktoOperation
 from rtamt.spec.xstl.discrete_time.visitor import XSTLVisitor
@@ -691,10 +700,10 @@ class XSTLOnlineDiscreteTimePythonMonitor(STLOnlineDiscreteTimePythonMonitor, XS
 
         self.visit(node.children[0], args)
         self.visit(node.children[1], args)
-```  
+```
 
 In the second step, we create a generic `XSTLOnlineEvaluator` class 
-in the file `online_evaluator.py` of the [rtamt/xstl](../rtamt/xstl) package. 
+in the file `online_evaluator.py` of the [rtamt/evaluator/xstl](../rtamt/evaluator/xstl) package. 
 This class simply instantiates the above monitor when the flags 
 `language` and `time_interpretation` are set to `Python` and `discrete-time`, 
 and raise an exception in all other cases.
@@ -741,12 +750,9 @@ class XSTLOnlineEvaluator(STLOnlineEvaluator, XSTLVisitor):
         return out_sample
 ```
 
+<span style="color: red; "> What is the difference of XSTLOnlineEvaluator and XSTLOnlineDiscreteTimePythonMonitor?</span>
+
+
 The final step consists in create a specification container that puts 
 all these things together. This is done in the `specification.py` file 
 in the package [rtamt/spec/xstl/discrete_time](../rtamt/spec/xstl/discrete_time). 
-
-
- 
-### Test
-
-You can make your own test case here.
