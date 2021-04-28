@@ -1,5 +1,5 @@
 from rtamt.node.unary_node import UnaryNode
-from rtamt.node.stl.time_bound import TimeBound
+from rtamt.node.stl_ab.time_bound import TimeBound
 
 class TimedEventually(UnaryNode, TimeBound):
     """A class for storing STL Eventually nodes

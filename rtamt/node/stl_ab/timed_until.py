@@ -1,5 +1,5 @@
 from rtamt.node.binary_node import BinaryNode
-from rtamt.node.stl.time_bound import TimeBound
+from rtamt.node.stl_ab.time_bound import TimeBound
 
 class TimedUntil(BinaryNode, TimeBound):
     """
