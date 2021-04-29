@@ -13,8 +13,8 @@ from rtamt.exception.stl.exception import STLParseException
 #from rtamt.spec.stl_ab.discrete_time.pastifier import STLPastifier
 
 from rtamt.spec.stl_ab.discrete_time.specification import STLabDiscreteTimeSpecification
-from rtamt.evaluator.stl.online_evaluator import STLOnlineEvaluator
-from rtamt.evaluator.stl.offline_evaluator import STLOfflineEvaluator
+#from rtamt.evaluator.stl_ab.online_evaluator import STLabOnlineEvaluator
+from rtamt.evaluator.stl_ab.offline_evaluator import STLabOfflineEvaluator
 from rtamt.spec.stl_ab.dense_time.specification_parser import STLabDenseTimeSpecificationParser
 
 from rtamt.enumerations.options import *
@@ -49,7 +49,7 @@ class STLabDenseTimeSpecification(STLabDiscreteTimeSpecification):
         ctx = parser.specification_file()
 
         # Create the visitor for the actual spec nodes
-        visitor = STLDenseTimeSpecificationParser(self)
+        visitor = STLabDenseTimeSpecificationParser(self)
         self.top = visitor.visitSpecification_file(ctx)
 
 
@@ -99,7 +99,7 @@ class STLabDenseTimeSpecification(STLabDiscreteTimeSpecification):
     def evaluate(self, *args, **kargs):
         if self.offline_evaluator is None:
             # Initialize the online_evaluator
-            self.offline_evaluator = STLOfflineEvaluator(self)
+            self.offline_evaluator = STLabOfflineEvaluator(self)
             # self.offline_evaluator = STLOfflineEvaluator(self)
             self.top.accept(self.offline_evaluator)
 
