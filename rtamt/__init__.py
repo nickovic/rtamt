@@ -20,3 +20,6 @@ from rtamt.spec.ltl.discrete_time.specification import LTLDiscreteTimeSpecificat
 from rtamt.spec.ltl.discrete_time.specification import LTLDiscreteTimeSpecification as LTLSpecification
 from rtamt.spec.xstl.discrete_time.specification import XSTLDiscreteTimeSpecification
 from rtamt.spec.xstl.discrete_time.specification import XSTLDiscreteTimeSpecification as XSTLSpecification
+
+from rtamt.spec.stl_ab.dense_time.specification import STLabDenseTimeSpecification
+from rtamt.spec.stl_ab.dense_time.specification import STLabDenseTimeSpecification as STLabSpecification

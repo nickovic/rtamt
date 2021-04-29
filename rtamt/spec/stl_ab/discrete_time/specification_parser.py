@@ -11,7 +11,7 @@ from decimal import Decimal
 from fractions import Fraction
 
 from rtamt import Language
-from rtamt.parser.stl_ab.StlParserVisitor import StlabParserVisitor
+from rtamt.parser.stl_ab.StlParserVisitor import StlParserVisitor
 from rtamt.spec.ltl.discrete_time.specification_parser import LTLSpecificationParser
 from rtamt.interval.interval import Interval
 
@@ -50,7 +50,7 @@ from rtamt.node.ltl.constant import Constant
 from rtamt.exception.stl.exception import STLParseException
 
 
-class STLSpecificationParser(LTLSpecificationParser, StlabParserVisitor):
+class STLabSpecificationParser(LTLSpecificationParser, StlParserVisitor):
     
     def __init__(self, spec):
         self.ops = set()

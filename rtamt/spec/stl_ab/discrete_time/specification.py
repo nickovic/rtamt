@@ -9,12 +9,12 @@ from rtamt.spec.ltl.discrete_time.specification import LTLDiscreteTimeSpecificat
 
 from rtamt.parser.stl_ab.StlLexer import StlLexer
 from rtamt.parser.stl_ab.StlParser import StlParser
-from rtamt.spec.stl_ab.discrete_time.specification_parser import STLSpecificationParser
+from rtamt.spec.stl_ab.discrete_time.specification_parser import STLabSpecificationParser
 
-from rtamt.parser.stl_ab.error.parser_error_listener import STLParserErrorListener
+from rtamt.parser.stl.error.parser_error_listener import STLParserErrorListener
 from rtamt.exception.stl.exception import STLParseException
 
-from rtamt.evaluator.stl_ab.online_evaluator import STLOnlineEvaluator
+#from rtamt.evaluator.stl_ab.online_evaluator import STLOnlineEvaluator
 from rtamt.spec.stl_ab.discrete_time.reset import STLReset
 from rtamt.enumerations.options import *
 

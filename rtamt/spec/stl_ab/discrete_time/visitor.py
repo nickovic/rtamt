@@ -34,7 +34,7 @@ from rtamt.node.stl_ab.timed_until import TimedUntil
 
 NOT_IMPLEMENTED = "You should implement this."
 
-class STLVisitor:
+class STLabVisitor:
     __metaclass__ = ABCMeta
 
     def visit(self, element, args):

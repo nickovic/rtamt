@@ -5,12 +5,12 @@ from antlr4.InputStream import InputStream
 
 from rtamt.parser.stl_ab.StlLexer import StlLexer
 from rtamt.parser.stl_ab.StlParser import StlParser
-from rtamt.spec.stl_ab.discrete_time.specification_parser import STLSpecificationParser
+from rtamt.spec.stl_ab.discrete_time.specification_parser import STLabSpecificationParser
 
 from rtamt.parser.stl.error.parser_error_listener import STLParserErrorListener
 from rtamt.exception.stl.exception import STLParseException
 
-from rtamt.spec.stl_ab.discrete_time.pastifier import STLPastifier
+#from rtamt.spec.stl_ab.discrete_time.pastifier import STLPastifier
 
 from rtamt.spec.stl_ab.discrete_time.specification import STLabDiscreteTimeSpecification
 from rtamt.evaluator.stl.online_evaluator import STLOnlineEvaluator
@@ -29,8 +29,8 @@ class STLabDenseTimeSpecification(STLabDiscreteTimeSpecification):
     """
     def __init__(self,semantics=Semantics.STANDARD, language=Language.PYTHON):
         """Constructor for STL Specification"""
-        super(STLDenseTimeSpecification, self).__init__(semantics, language)
-        self.visitor = STLDenseTimeSpecificationParser(self)
+        super(STLabDenseTimeSpecification, self).__init__(semantics, language)
+        self.visitor = STLabDenseTimeSpecificationParser(self)
         self.time_interpretation = TimeInterpretation.DENSE
 
 
