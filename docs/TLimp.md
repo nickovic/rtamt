@@ -752,7 +752,13 @@ class XSTLOnlineEvaluator(STLOnlineEvaluator, XSTLVisitor):
 
 <span style="color: red; "> What is the difference of XSTLOnlineEvaluator and XSTLOnlineDiscreteTimePythonMonitor?</span>
 
-
 The final step consists in create a specification container that puts 
 all these things together. This is done in the `specification.py` file 
 in the package [rtamt/spec/xstl/discrete_time](../rtamt/spec/xstl/discrete_time). 
+
+Finally we need to add the new spesification into [rtamt/__init__.py](../rtamt/__init__.py)
+
+```python
+from rtamt.spec.xstl.discrete_time.specification import XSTLDiscreteTimeSpecification
+from rtamt.spec.xstl.discrete_time.specification import XSTLDiscreteTimeSpecification as XSTLSpecification
+```
