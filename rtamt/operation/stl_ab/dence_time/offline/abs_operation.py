@@ -1,6 +1,6 @@
 import numpy
 
-from rtamt.operation.abstract_operation import offlineDensetimeUnaryOperation
+from .abstract_operation import offlineDensetimeUnaryOperation
 
 from .tllibs import *
 

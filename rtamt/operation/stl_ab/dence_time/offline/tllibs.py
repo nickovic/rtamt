@@ -9,7 +9,7 @@ def interpolation_func_gen(time_series, extrapolation, kind='previous'):
     if extrapolation == 'end' or extrapolation == 'both':
         time_series = numpy.vstack((time_series,
                                     [numpy.inf, time_series[0,-1]],))
-    
+
     interpolation_func = interpolate.interp1d(time_series[:,0], time_series[:,1], kind)
 
     return interpolation_func
@@ -40,7 +40,7 @@ def inflection_time(times, interval):
                                      inflection_time_1,
                                      inflection_time_2))
     inflection_times = numpy.unique(inflection_times, axis=0)
-    
+
     return inflection_times
 
 def inflection_time_filter(inflection_times, interpolation_func):
@@ -56,7 +56,7 @@ def inflection_time_eval(inflection_times, interpolation_func, semantics_func):
     robustness = numpy.empty([inflection_times.shape[0],2])
     for i in range(inflection_times.shape[0]):   #TODO: use here multiprocessing
         robustness[i] = inflection_time_window_eval(inflection_times[i], interpolation_func, semantics_func)
-    
+
     return robustness
 
 def inflection_time_window_eval(inflection_time, interpolation_func, semantics_func):
@@ -101,7 +101,7 @@ def eval_unary_timed_operator_bound(time_series, operator_interval, semantics_fu
     inflection_times = inflection_time(times, operator_interval)
     ## cutting out of range
     inflection_times = inflection_time_filter(inflection_times, interpolation_func)
-    
+
     # calc rob for each inflection time
     robustness = inflection_time_eval(inflection_times, interpolation_func, semantics_func)
 
@@ -116,7 +116,7 @@ def eval_unary_timed_operator_bound_dense_time(input_interpolation_func, operato
     inflection_times = inflection_time(times, operator_interval)
     ## cutting out of range
     inflection_times = inflection_time_filter(inflection_times, input_interpolation_func)
-    
+
     # calc rob for each inflection time
     robustness = inflection_time_eval(inflection_times, input_interpolation_func, semantics_func)
 
@@ -127,7 +127,7 @@ def offline_unary_timed_operator_wrapper(operator_interval, semantics_func, *arg
 
     input_time_series_list = args[0]
     out = []
-    
+
     if len(input_time_series_list) <= 1:
         return out
 
@@ -156,7 +156,7 @@ def eval_binary_logic_operator(left_time_series, right_time_series, semantics_fu
     ## cutting out of range
     index = ((left_interpolation_func.x[0] <= sample_times) & (sample_times <= left_interpolation_func.x[-1])) & ((right_interpolation_func.x[0] <= sample_times) & (sample_times <= right_interpolation_func.x[-1]))
     sample_times = sample_times[index]
-    
+
     # calc rob for each sample time
     left_values  = left_interpolation_func(sample_times)
     normalize_left_time_series = times_values2time_series(sample_times, left_values)
@@ -179,7 +179,7 @@ def eval_binary_logic_operator_dense_time(left_interpolation_func, right_interpo
     ## cutting out of range
     index = ((left_interpolation_func.x[0] <= sample_times) & (sample_times <= left_interpolation_func.x[-1])) & ((right_interpolation_func.x[0] <= sample_times) & (sample_times <= right_interpolation_func.x[-1]))
     sample_times = sample_times[index]
-    
+
     # calc rob for each sample time
     left_values  = left_interpolation_func(sample_times)
     normalize_left_time_series = times_values2time_series(sample_times, left_values)

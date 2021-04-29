@@ -1,5 +1,6 @@
-from rtamt.operation.abstract_operation import AbstractOperation
 import numpy
+
+from .abstract_operation import AbstractOperation
 
 class EventuallyOperation(AbstractOperation):
     def __init__(self):
