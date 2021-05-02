@@ -5,8 +5,8 @@ Created on Sun Jul 21 22:24:09 2019
 @author: NickovicD
 """
 
-from rtamt.node.unary_node import UnaryNode
-from rtamt.node.stl.time_bound import TimeBound
+from rtamt.ast.nodes.unary_node import UnaryNode
+from rtamt.ast.nodes.stl.time_bound import TimeBound
 
 class TimedAlways(UnaryNode, TimeBound):
     """A class for storing STL Always nodes

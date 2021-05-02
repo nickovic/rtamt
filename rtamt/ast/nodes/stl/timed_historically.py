@@ -1,5 +1,5 @@
-from rtamt.node.unary_node import UnaryNode
-from rtamt.node.stl.time_bound import TimeBound
+from rtamt.ast.nodes.unary_node import UnaryNode
+from rtamt.ast.nodes.stl.time_bound import TimeBound
 
 class TimedHistorically(UnaryNode, TimeBound):
     """A class for storing STL Historically nodes
