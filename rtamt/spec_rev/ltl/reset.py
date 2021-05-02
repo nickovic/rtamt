@@ -1,6 +1,6 @@
-from rtamt.spec.ltl.discrete_time.visitor import LTLVisitor
+from rtamt.ast.paser_visitor.ltl.rtamtASTvisitor import LTLrtamtASTvisitor
 
-class LTLReset(LTLVisitor):
+class LTLReset(LTLrtamtASTvisitor):
 
     def __init__(self, node_monitor_dict=None):
         self.node_monitor_dict = node_monitor_dict
