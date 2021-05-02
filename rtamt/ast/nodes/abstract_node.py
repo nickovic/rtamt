@@ -16,7 +16,7 @@ class AbstractNode:
     def __init__(self):
         self.children = list()
         self.evaluator = None
-        self.horizon = 0
+        self.horizon = 0 #TODO: Tom thinks horizon needs only timed autokmaton.
         self.name = ''
         self.node = None
 
@@ -32,12 +32,12 @@ class AbstractNode:
             child.accept(visitor)
 
     @property
-    def evaluator(self):
+    def evaluator(self): #TODO: Tom thinks perhaps we can separete evaluator or operator.
         """Getter for the online_evaluator"""
         return self.__evaluator
 
     @evaluator.setter
-    def evaluator(self, evaluator):
+    def evaluator(self, evaluator): #TODO: Tom thinks perhaps we can separete evaluator or operator.
         """Setter for the online_evaluator"""
         self.__evaluator = evaluator
 
@@ -52,12 +52,12 @@ class AbstractNode:
         self.__name = name
 
     @property
-    def horizon(self):
+    def horizon(self): #TODO: Tom thinks perhaps we can separete horizon. it needs only timed operator.
         """Getter for the horizon"""
         return self.__horizon
 
     @horizon.setter
-    def horizon(self, horizon):
+    def horizon(self, horizon): #TODO: Tom thinks perhaps we can separete horizon. it needs only timed operator.
         """Setter for the horizon"""
         self.__horizon = horizon
 
