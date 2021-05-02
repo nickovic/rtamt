@@ -53,7 +53,7 @@ from rtamt.ast.nodes.stl.timed_until import TimedUntil
 from rtamt.exception.stl.exception import STLParseException
 
 
-class STLSpecificationParser(LTLSpecificationParser, StlParserVisitor):
+class STLSpecificationParser(LTLrtamtASTparser, StlParserVisitor):
 
     def __init__(self, spec):
         self.ops = set()

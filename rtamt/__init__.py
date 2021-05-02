@@ -22,3 +22,4 @@ from rtamt.spec.xstl.discrete_time.specification import XSTLDiscreteTimeSpecific
 from rtamt.spec.xstl.discrete_time.specification import XSTLDiscreteTimeSpecification as XSTLSpecification
 
 from rtamt.spec_rev.ltl.specification import LTLrevSpecification
+from rtamt.spec_rev.stl.discrete_time.specification import STLrevDiscreteTimeSpecification

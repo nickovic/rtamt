@@ -5,23 +5,23 @@ from antlr4 import *
 from antlr4.InputStream import InputStream
 
 from rtamt.evaluator.stl.offline_evaluator import STLOfflineEvaluator
-from rtamt.spec.ltl.discrete_time.specification import LTLDiscreteTimeSpecification
+from rtamt.spec_rev.ltl.specification import LTLrevSpecification
 
 from rtamt.parser.stl.StlLexer import StlLexer
 from rtamt.parser.stl.StlParser import StlParser
-from rtamt.spec.stl.discrete_time.specification_parser import STLSpecificationParser
+from rtamt.ast.paser_visitor.stl.rtamtASTparser import STLSpecificationParser
 
 from rtamt.parser.stl.error.parser_error_listener import STLParserErrorListener
 from rtamt.exception.stl.exception import STLParseException
 
-from rtamt.spec.stl.discrete_time.pastifier import STLPastifier
-from rtamt.evaluator.stl.online_evaluator import STLOnlineEvaluator
+#from rtamt.spec.stl.discrete_time.pastifier import STLPastifier
+#from rtamt.evaluator.stl.online_evaluator import STLOnlineEvaluator
 from rtamt.spec.stl.discrete_time.reset import STLReset
 from rtamt.enumerations.options import *
 
 from rtamt.exception.stl.exception import STLException
 
-class STLDiscreteTimeSpecification(LTLDiscreteTimeSpecification):
+class STLrevDiscreteTimeSpecification(LTLrevSpecification):
     """A class used as a container for STL specifications
 
     Attributes:
@@ -48,7 +48,7 @@ class STLDiscreteTimeSpecification(LTLDiscreteTimeSpecification):
 
     def __init__(self, semantics=Semantics.STANDARD, language=Language.PYTHON):
         """Constructor for STL Specification"""
-        LTLDiscreteTimeSpecification.__init__(self, semantics, language)
+        LTLrevSpecification.__init__(self, semantics, language)
         self.name = 'STL Specification'
 
         self.DEFAULT_TOLERANCE = float(0.1)
