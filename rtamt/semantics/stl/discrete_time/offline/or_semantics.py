@@ -1,6 +1,6 @@
 from rtamt.semantics.abstract_semantics import AbstractSemantics
 
-class OrOperation(AbstractSemantics):
+class OrSemantics(AbstractSemantics):
     def __init__(self):
         pass
 

@@ -1,34 +1,34 @@
 from rtamt.ast.paser_visitor.stl.rtamtASTvisitor import STLVisitor
 from rtamt.exception.stl.exception import STLNotImplementedException
-from rtamt.semantics.arithmetic.discrete_time.offline.addition_semantics import AdditionOperation
-from rtamt.semantics.arithmetic.discrete_time.offline.multiplication_semantics import MultiplicationOperation
-from rtamt.semantics.arithmetic.discrete_time.offline.subtraction_semantics import SubtractionOperation
-from rtamt.semantics.arithmetic.discrete_time.offline.division_semantics import DivisionOperation
-from rtamt.semantics.arithmetic.discrete_time.offline.abs_semantics import AbsOperation
-from rtamt.semantics.stl.discrete_time.offline.predicate_semantics import PredicateOperation
-from rtamt.semantics.stl.discrete_time.offline.and_semantics import AndOperation
-from rtamt.semantics.stl.discrete_time.offline.or_semantics import OrOperation
-from rtamt.semantics.stl.discrete_time.offline.implies_semantics import ImpliesOperation
-from rtamt.semantics.stl.discrete_time.offline.iff_semantics import IffOperation
-from rtamt.semantics.stl.discrete_time.offline.xor_semantics import XorOperation
-from rtamt.semantics.stl.discrete_time.offline.since_semantics import SinceOperation
-from rtamt.semantics.stl.discrete_time.offline.not_semantics import NotOperation
-from rtamt.semantics.stl.discrete_time.offline.rise_semantics import RiseOperation
-from rtamt.semantics.stl.discrete_time.offline.fall_semantics import FallOperation
-from rtamt.semantics.stl.discrete_time.offline.once_semantics import OnceOperation
-from rtamt.semantics.stl.discrete_time.offline.historically_semantics import HistoricallyOperation
-from rtamt.semantics.stl.discrete_time.offline.always_semantics import AlwaysOperation
-from rtamt.semantics.stl.discrete_time.offline.eventually_semantics import EventuallyOperation
-from rtamt.semantics.stl.discrete_time.offline.previous_semantics import PreviousOperation
-from rtamt.semantics.stl.discrete_time.offline.constant_semantics import ConstantOperation
-from rtamt.semantics.stl.discrete_time.offline.once_bounded_semantics import OnceBoundedOperation
-from rtamt.semantics.stl.discrete_time.offline.historically_bounded_semantics import HistoricallyBoundedOperation
-from rtamt.semantics.stl.discrete_time.offline.since_bounded_semantics import SinceBoundedOperation
-from rtamt.semantics.stl.discrete_time.offline.until_semantics import UntilOperation
-from rtamt.semantics.stl.discrete_time.offline.until_bounded_semantics import UntilBoundedOperation
-from rtamt.semantics.stl.discrete_time.offline.always_bounded_semantics import AlwaysBoundedOperation
-from rtamt.semantics.stl.discrete_time.offline.eventually_bounded_semantics import EventuallyBoundedOperation
-from rtamt.semantics.stl.discrete_time.offline.next_semantics import NextOperation
+from rtamt.semantics.arithmetic.discrete_time.offline.addition_semantics import AdditionSemantics
+from rtamt.semantics.arithmetic.discrete_time.offline.multiplication_semantics import MultiplicationSemantics
+from rtamt.semantics.arithmetic.discrete_time.offline.subtraction_semantics import SubtractionSemantics
+from rtamt.semantics.arithmetic.discrete_time.offline.division_semantics import DivisionSemantics
+from rtamt.semantics.arithmetic.discrete_time.offline.abs_semantics import AbsSemantics
+from rtamt.semantics.stl.discrete_time.offline.predicate_semantics import PredicateSemantics
+from rtamt.semantics.stl.discrete_time.offline.and_semantics import AndSemantics
+from rtamt.semantics.stl.discrete_time.offline.or_semantics import OrSemantics
+from rtamt.semantics.stl.discrete_time.offline.implies_semantics import ImpliesSemantics
+from rtamt.semantics.stl.discrete_time.offline.iff_semantics import IffSemantics
+from rtamt.semantics.stl.discrete_time.offline.xor_semantics import XorSemantics
+from rtamt.semantics.stl.discrete_time.offline.since_semantics import SinceSemantics
+from rtamt.semantics.stl.discrete_time.offline.not_semantics import NotSemantics
+from rtamt.semantics.stl.discrete_time.offline.rise_semantics import RiseSemantics
+from rtamt.semantics.stl.discrete_time.offline.fall_semantics import FallSemantics
+from rtamt.semantics.stl.discrete_time.offline.once_semantics import OnceSemantics
+from rtamt.semantics.stl.discrete_time.offline.historically_semantics import HistoricallySemantics
+from rtamt.semantics.stl.discrete_time.offline.always_semantics import AlwaysSemantics
+from rtamt.semantics.stl.discrete_time.offline.eventually_semantics import EventuallySemantics
+from rtamt.semantics.stl.discrete_time.offline.previous_semantics import PreviousSemantics
+from rtamt.semantics.stl.discrete_time.offline.constant_semantics import ConstantSemantics
+from rtamt.semantics.stl.discrete_time.offline.once_bounded_semantics import OnceBoundedSemantics
+from rtamt.semantics.stl.discrete_time.offline.historically_bounded_semantics import HistoricallyBoundedSemantics
+from rtamt.semantics.stl.discrete_time.offline.since_bounded_semantics import SinceBoundedSemantics
+from rtamt.semantics.stl.discrete_time.offline.until_semantics import UntilSemantics
+from rtamt.semantics.stl.discrete_time.offline.until_bounded_semantics import UntilBoundedSemantics
+from rtamt.semantics.stl.discrete_time.offline.always_bounded_semantics import AlwaysBoundedSemantics
+from rtamt.semantics.stl.discrete_time.offline.eventually_bounded_semantics import EventuallyBoundedSemantics
+from rtamt.semantics.stl.discrete_time.offline.next_semantics import NextSemantics
 
 class STLOfflineDiscreteTimePythonMonitor(STLVisitor):
     def __init__(self):
@@ -39,7 +39,7 @@ class STLOfflineDiscreteTimePythonMonitor(STLVisitor):
         return self.node_monitor_dict
 
     def visitPredicate(self, node, args):
-        monitor = PredicateOperation(node.operator)
+        monitor = PredicateSemantics(node.operator)
         self.node_monitor_dict[node.name] = monitor
 
         self.visit(node.children[0], args)
@@ -49,142 +49,142 @@ class STLOfflineDiscreteTimePythonMonitor(STLVisitor):
         pass
 
     def visitAbs(self, node, args):
-        monitor = AbsOperation()
+        monitor = AbsSemantics()
         self.node_monitor_dict[node.name] = monitor
 
         self.visit(node.children[0], args)
 
     def visitAddition(self, node, args):
-        monitor = AdditionOperation()
+        monitor = AdditionSemantics()
         self.node_monitor_dict[node.name] = monitor
 
         self.visit(node.children[0], args)
         self.visit(node.children[1], args)
 
     def visitSubtraction(self, node, args):
-        monitor = SubtractionOperation()
+        monitor = SubtractionSemantics()
         self.node_monitor_dict[node.name] = monitor
 
         self.visit(node.children[0], args)
         self.visit(node.children[1], args)
 
     def visitMultiplication(self, node, args):
-        monitor = MultiplicationOperation()
+        monitor = MultiplicationSemantics()
         self.node_monitor_dict[node.name] = monitor
 
         self.visit(node.children[0], args)
         self.visit(node.children[1], args)
 
     def visitDivision(self, node, args):
-        monitor = DivisionOperation()
+        monitor = DivisionSemantics()
         self.node_monitor_dict[node.name] = monitor
 
         self.visit(node.children[0], args)
         self.visit(node.children[1], args)
 
     def visitNot(self, node, args):
-        monitor = NotOperation()
+        monitor = NotSemantics()
         self.node_monitor_dict[node.name] = monitor
 
         self.visit(node.children[0], args)
 
     def visitAnd(self, node, args):
-        monitor = AndOperation()
+        monitor = AndSemantics()
         self.node_monitor_dict[node.name] = monitor
 
         self.visit(node.children[0], args)
         self.visit(node.children[1], args)
 
     def visitOr(self, node, args):
-        monitor = OrOperation()
+        monitor = OrSemantics()
         self.node_monitor_dict[node.name] = monitor
 
         self.visit(node.children[0], args)
         self.visit(node.children[1], args)
 
     def visitImplies(self, node, args):
-        monitor = ImpliesOperation()
+        monitor = ImpliesSemantics()
         self.node_monitor_dict[node.name] = monitor
 
         self.visit(node.children[0], args)
         self.visit(node.children[1], args)
 
     def visitIff(self, node, args):
-        monitor = IffOperation()
+        monitor = IffSemantics()
         self.node_monitor_dict[node.name] = monitor
 
         self.visit(node.children[0], args)
         self.visit(node.children[1], args)
 
     def visitXor(self, node, args):
-        monitor = XorOperation()
+        monitor = XorSemantics()
         self.node_monitor_dict[node.name] = monitor
 
         self.visit(node.children[0], args)
         self.visit(node.children[1], args)
 
     def visitEventually(self, node, args):
-        monitor = EventuallyOperation()
+        monitor = EventuallySemantics()
         self.node_monitor_dict[node.name] = monitor
 
         self.visit(node.children[0], args)
 
     def visitAlways(self, node, args):
-        monitor = AlwaysOperation()
+        monitor = AlwaysSemantics()
         self.node_monitor_dict[node.name] = monitor
 
         self.visit(node.children[0], args)
 
     def visitUntil(self, node, args):
-        monitor = UntilOperation()
+        monitor = UntilSemantics()
         self.node_monitor_dict[node.name] = monitor
 
         self.visit(node.children[0], args)
         self.visit(node.children[1], args)
 
     def visitOnce(self, node, args):
-        monitor = OnceOperation()
+        monitor = OnceSemantics()
         self.node_monitor_dict[node.name] = monitor
 
         self.visit(node.children[0], args)
 
     def visitHistorically(self, node, args):
-        monitor = HistoricallyOperation()
+        monitor = HistoricallySemantics()
         self.node_monitor_dict[node.name] = monitor
 
         self.visit(node.children[0], args)
 
     def visitSince(self, node, args):
-        monitor = SinceOperation()
+        monitor = SinceSemantics()
         self.node_monitor_dict[node.name] = monitor
 
         self.visit(node.children[0], args)
         self.visit(node.children[1], args)
 
     def visitRise(self, node, args):
-        monitor = RiseOperation()
+        monitor = RiseSemantics()
         self.node_monitor_dict[node.name] = monitor
 
         self.visit(node.children[0], args)
 
     def visitFall(self, node, args):
-        monitor = FallOperation()
+        monitor = FallSemantics()
         self.node_monitor_dict[node.name] = monitor
 
         self.visit(node.children[0], args)
 
     def visitConstant(self, node, args):
-        monitor = ConstantOperation(node.val)
+        monitor = ConstantSemantics(node.val)
         self.node_monitor_dict[node.name] = monitor
 
     def visitPrevious(self, node, args):
-        monitor = PreviousOperation()
+        monitor = PreviousSemantics()
         self.node_monitor_dict[node.name] = monitor
 
         self.visit(node.children[0], args)
 
     def visitNext(self, node, args):
-        monitor = NextOperation()
+        monitor = NextSemantics()
         self.node_monitor_dict[node.name] = monitor
 
         self.visit(node.children[0], args)
@@ -193,38 +193,38 @@ class STLOfflineDiscreteTimePythonMonitor(STLVisitor):
         raise STLNotImplementedException('Precedes operator not implemented in STL offline monitor.')
 
     def visitTimedOnce(self, node, args):
-        monitor = OnceBoundedOperation(node.begin, node.end)
+        monitor = OnceBoundedSemantics(node.begin, node.end)
         self.node_monitor_dict[node.name] = monitor
 
         self.visit(node.children[0], args)
 
     def visitTimedHistorically(self, node, args):
-        monitor = HistoricallyBoundedOperation(node.begin, node.end)
+        monitor = HistoricallyBoundedSemantics(node.begin, node.end)
         self.node_monitor_dict[node.name] = monitor
 
         self.visit(node.children[0], args)
 
     def visitTimedSince(self, node, args):
-        monitor = SinceBoundedOperation(node.begin, node.end)
+        monitor = SinceBoundedSemantics(node.begin, node.end)
         self.node_monitor_dict[node.name] = monitor
 
         self.visit(node.children[0], args)
         self.visit(node.children[1], args)
 
     def visitTimedAlways(self, node, args):
-        monitor = AlwaysBoundedOperation(node.begin, node.end)
+        monitor = AlwaysBoundedSemantics(node.begin, node.end)
         self.node_monitor_dict[node.name] = monitor
 
         self.visit(node.children[0], args)
 
     def visitTimedEventually(self, node, args):
-        monitor = EventuallyBoundedOperation(node.begin, node.end)
+        monitor = EventuallyBoundedSemantics(node.begin, node.end)
         self.node_monitor_dict[node.name] = monitor
 
         self.visit(node.children[0], args)
 
     def visitTimedUntil(self, node, args):
-        monitor = UntilBoundedOperation(node.begin, node.end)
+        monitor = UntilBoundedSemantics(node.begin, node.end)
         self.node_monitor_dict[node.name] = monitor
 
         self.visit(node.children[0], args)
@@ -232,6 +232,3 @@ class STLOfflineDiscreteTimePythonMonitor(STLVisitor):
 
     def visitDefault(self, node, args):
         pass
-        
-    
-        

@@ -1,6 +1,6 @@
 from rtamt.semantics.abstract_semantics import AbstractSemantics
 
-class ImpliesOperation(AbstractSemantics):
+class ImpliesSemantics(AbstractSemantics):
     def __init__(self):
         pass
 

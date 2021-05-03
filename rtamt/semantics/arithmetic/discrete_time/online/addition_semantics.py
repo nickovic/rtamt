@@ -1,6 +1,6 @@
 from rtamt.semantics.abstract_semantics import AbstractSemantics
 
-class AdditionOperation(AbstractSemantics):
+class AdditionSemantics(AbstractSemantics):
     def __init__(self):
         pass
 

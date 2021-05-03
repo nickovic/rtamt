@@ -2,7 +2,7 @@ from rtamt.semantics.abstract_semantics import AbstractSemantics
 from rtamt.enumerations.comp_oper import StlComparisonOperator
 from rtamt.exception.ltl.exception import LTLException
 
-class PredicateOperation(AbstractSemantics):
+class PredicateSemantics(AbstractSemantics):
     def __init__(self, op):
         self.op = op
 

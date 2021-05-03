@@ -1,6 +1,6 @@
 from rtamt.semantics.abstract_semantics import AbstractSemantics
 
-class DivisionOperation(AbstractSemantics):
+class DivisionSemantics(AbstractSemantics):
     def __init__(self):
         pass
 

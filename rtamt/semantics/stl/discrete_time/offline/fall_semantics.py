@@ -1,6 +1,6 @@
 from rtamt.semantics.abstract_semantics import AbstractSemantics
 
-class FallOperation(AbstractSemantics):
+class FallSemantics(AbstractSemantics):
     def __init__(self):
         self.prev = float("inf")
 

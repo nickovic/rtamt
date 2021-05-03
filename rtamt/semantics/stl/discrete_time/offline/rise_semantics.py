@@ -1,6 +1,6 @@
 from rtamt.semantics.abstract_semantics import AbstractSemantics
 
-class RiseOperation(AbstractSemantics):
+class RiseSemantics(AbstractSemantics):
     def __init__(self):
         self.prev = -float("inf")
 

@@ -1,6 +1,6 @@
 from rtamt.semantics.abstract_semantics import AbstractSemantics
 
-class NotOperation(AbstractSemantics):
+class NotSemantics(AbstractSemantics):
     def __init__(self):
         pass
 

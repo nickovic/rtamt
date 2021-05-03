@@ -1,6 +1,6 @@
 from rtamt.semantics.abstract_semantics import AbstractSemantics
 
-class SinceOperation(AbstractSemantics):
+class SinceSemantics(AbstractSemantics):
     def __init__(self):
         self.prev_out = -float("inf")
 

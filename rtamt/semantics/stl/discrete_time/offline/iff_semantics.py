@@ -1,6 +1,6 @@
 from rtamt.semantics.abstract_semantics import AbstractSemantics
 
-class IffOperation(AbstractSemantics):
+class IffSemantics(AbstractSemantics):
     def __init__(self):
         pass
 

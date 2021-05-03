@@ -1,6 +1,6 @@
 from rtamt.semantics.abstract_semantics import AbstractSemantics
 
-class XorOperation(AbstractSemantics):
+class XorSemantics(AbstractSemantics):
     def __init__(self):
         pass
 

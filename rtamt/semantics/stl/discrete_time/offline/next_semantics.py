@@ -1,6 +1,6 @@
 from rtamt.semantics.abstract_semantics import AbstractSemantics
 
-class NextOperation(AbstractSemantics):
+class NextSemantics(AbstractSemantics):
     def __init__(self):
         self.nxt = float("inf")
 

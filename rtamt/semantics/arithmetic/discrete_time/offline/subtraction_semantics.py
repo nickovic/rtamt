@@ -1,6 +1,6 @@
 from rtamt.semantics.abstract_semantics import AbstractSemantics
 
-class SubtractionOperation(AbstractSemantics):
+class SubtractionSemantics(AbstractSemantics):
     def __init__(self):
         pass
 

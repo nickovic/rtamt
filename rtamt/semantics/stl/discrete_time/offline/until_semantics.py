@@ -1,6 +1,6 @@
 from rtamt.semantics.abstract_semantics import AbstractSemantics
 
-class UntilOperation(AbstractSemantics):
+class UntilSemantics(AbstractSemantics):
     def __init__(self):
         self.next_out = -float("inf")
 

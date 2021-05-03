@@ -1,7 +1,7 @@
 import collections
 from rtamt.semantics.abstract_semantics import AbstractSemantics
 
-class HistoricallyBoundedOperation(AbstractSemantics):
+class HistoricallyBoundedSemantics(AbstractSemantics):
     def __init__(self, begin, end):
         self.begin = begin
         self.end = end
