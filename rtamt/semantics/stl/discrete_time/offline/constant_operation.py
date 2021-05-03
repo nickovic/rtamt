@@ -1,7 +1,6 @@
-from rtamt.operation.abstract_operation import AbstractOperation
+from rtamt.semantics.abstract_semantics import AbstractSemantics
 
-
-class ConstantOperation(AbstractOperation):
+class ConstantOperation(AbstractSemantics):
     def __init__(self, val):
         self.val = val
 

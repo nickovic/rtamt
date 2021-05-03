@@ -1,7 +1,6 @@
-from rtamt.operation.abstract_operation import AbstractOperation
+from rtamt.semantics.abstract_semantics import AbstractSemantics
 
-
-class OnceOperation(AbstractOperation):
+class OnceOperation(AbstractSemantics):
     def __init__(self):
         self.prev_out = -float("inf")
 
