@@ -1,7 +1,6 @@
-from rtamt.operation.abstract_operation import AbstractOperation
+from rtamt.semantics.abstract_semantics import AbstractSemantics
 
-
-class AbsOperation(AbstractOperation):
+class AbsOperation(AbstractSemantics):
     def __init__(self):
         pass
 

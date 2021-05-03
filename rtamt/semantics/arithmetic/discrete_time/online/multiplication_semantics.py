@@ -1,7 +1,6 @@
-from rtamt.operation.abstract_operation import AbstractOperation
+from rtamt.semantics.abstract_semantics import AbstractSemantics
 
-
-class MultiplicationOperation(AbstractOperation):
+class MultiplicationOperation(AbstractSemantics):
     def __init__(self):
         pass
 
