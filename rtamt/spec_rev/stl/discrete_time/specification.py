@@ -4,7 +4,8 @@ import importlib
 from antlr4 import *
 from antlr4.InputStream import InputStream
 
-from rtamt.evaluator.stl.offline_evaluator import STLOfflineEvaluator
+#from rtamt.evaluator.stl.offline_evaluator import STLOfflineEvaluator
+from rtamt.semantics.stl.discrete_time.offline_evaluator import STLOfflineEvaluator
 from rtamt.spec_rev.ltl.specification import LTLrevSpecification
 
 from rtamt.parser.stl.StlLexer import StlLexer
@@ -205,6 +206,28 @@ class STLrevDiscreteTimeSpecification(LTLrevSpecification):
 
         return out
 
+    # # Offline copy & paste from densetime
+    # def evaluate(self, *args, **kargs):
+    #     if self.offline_evaluator is None:
+    #         # Initialize the online_evaluator
+    #         self.offline_evaluator = STLOfflineEvaluator(self)
+    #         # self.offline_evaluator = STLOfflineEvaluator(self)
+    #         self.top.accept(self.offline_evaluator)
+
+    #     for arg in args:
+    #         var_name = arg[0]
+    #         var_object = arg[1]
+    #         self.var_object_dict[var_name] = var_object
+
+    #     # evaluate modular sub-specs
+    #     for key in self.var_subspec_dict:
+    #         node = self.var_subspec_dict[key]
+    #         out = self.offline_evaluator.evaluate(node, [])
+    #         self.var_object_dict[key] = out
+
+    #     out = self.offline_evaluator.evaluate(self.top, [])
+    #     self.var_object_dict = self.var_object_dict.fromkeys(self.var_object_dict, [])
+    #     return out
 
     # def offline(self, dataset):
     #     counter = 0
