@@ -1,4 +1,3 @@
-from rtamt.ast.nodes.abstract_node import AbstractNode
 
 class Node(object):
     """A class for storing STL nodes
