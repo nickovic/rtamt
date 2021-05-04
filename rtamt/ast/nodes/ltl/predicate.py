@@ -21,7 +21,8 @@ class Predicate(BinaryNode):
             operator : OperatorType (LEQ, GEQ, LESS, GREATER, EQ or NEQ)
         """
 
-        super(Predicate, self).__init__(child1, child2)
+        #super(BinaryNode, self).__init__(child1, child2)
+        BinaryNode.__init__(self, child1, child2)
         self.operator = operator
         self.in_vars = child1.in_vars + child2.in_vars
         self.out_vars = child1.out_vars + child2.out_vars

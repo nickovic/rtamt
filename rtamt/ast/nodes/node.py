@@ -1,6 +1,6 @@
 from rtamt.ast.nodes.abstract_node import AbstractNode
 
-class Node(AbstractNode):
+class Node(object):
     """A class for storing STL nodes
     Attributes
     --------------
@@ -14,7 +14,6 @@ class Node(AbstractNode):
     """
 
     def __init__(self):
-#        super(AbstractNode, self).__init__()
         self.evaluator = None
         self.node = None
 
