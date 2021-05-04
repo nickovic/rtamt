@@ -15,7 +15,7 @@ class Node(AbstractNode):
 
     def __init__(self):
         """Constructor for Node"""
-        self.horizon = 0;
+        self.horizon = 0
         self.in_vars = []
         self.out_vars = []
         self.children = list()
