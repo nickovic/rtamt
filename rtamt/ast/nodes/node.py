@@ -14,12 +14,28 @@ class Node(AbstractNode):
     """
 
     def __init__(self):
+#        super(AbstractNode, self).__init__()
+        self.evaluator = None
+        self.node = None
+
         """Constructor for Node"""
-        self.horizon = 0
+        self.horizon = 0 
+        #TODO: Tom thinks horizon needs only timed autokmaton.
         self.in_vars = []
         self.out_vars = []
         self.children = list()
         self.name = ''
+
+    def addChild(self, child):
+        self.children.append(child)
+
+    def accept(self, visitor):
+        """accept: recursive function needed to implement node visitors
+        Inputs:
+        visitor - Visitor object
+        """
+        for child in self.children:
+            child.accept(visitor)
 
     @property
     def horizon(self):
@@ -83,3 +99,27 @@ class Node(AbstractNode):
     def __repr__(self):
         '''Returns representation of the object'''
         return self.__class__.__name__
+
+    @property
+    def node(self):
+        """Getter for the node"""
+        return self.__node
+
+    @node.setter
+    def node(self, node):
+        """Setter for the horizon"""
+        self.__node = node
+
+    def __repr__(self):
+        '''Returns representation of the object'''
+        return self.__class__.__name__
+
+    @property
+    def evaluator(self): #TODO: Tom thinks perhaps we can separete evaluator or operator.
+        """Getter for the online_evaluator"""
+        return self.__evaluator
+
+    @evaluator.setter
+    def evaluator(self, evaluator): #TODO: Tom thinks perhaps we can separete evaluator or operator.
+        """Setter for the online_evaluator"""
+        self.__evaluator = evaluator
