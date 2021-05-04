@@ -17,8 +17,7 @@ class Node(object):
         self.node = None
 
         """Constructor for Node"""
-        self.horizon = 0 
-        #TODO: Tom thinks horizon needs only timed autokmaton.
+        self.horizon = 0 #TODO: Tom thinks horizon needs only timed autokmaton.
         self.in_vars = []
         self.out_vars = []
         self.children = list()
