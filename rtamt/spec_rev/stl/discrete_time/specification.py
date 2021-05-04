@@ -10,7 +10,7 @@ from rtamt.spec_rev.ltl.specification import LTLrevSpecification
 
 from rtamt.antrl_parser.stl.StlLexer import StlLexer
 from rtamt.antrl_parser.stl.StlParser import StlParser
-from rtamt.ast.paser_visitor.stl.rtamtASTparser import STLSpecificationParser
+from rtamt.ast.parser_visitor.stl.rtamtASTparser import STLSpecificationParser
 
 from rtamt.parser.stl.error.parser_error_listener import STLParserErrorListener
 from rtamt.exception.stl.exception import STLParseException

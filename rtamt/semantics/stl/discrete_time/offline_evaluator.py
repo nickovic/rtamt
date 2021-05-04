@@ -3,7 +3,7 @@
 import operator
 from rtamt.enumerations.options import *
 from rtamt.exception.stl.exception import STLNotImplementedException
-from rtamt.ast.paser_visitor.stl.rtamtASTvisitor import STLVisitor
+from rtamt.ast.parser_visitor.stl.rtamtASTvisitor import STLVisitor
 
 
 class STLOfflineEvaluator(STLVisitor):

@@ -1,4 +1,4 @@
-from rtamt.ast.paser_visitor.stl.rtamtASTvisitor import STLVisitor
+from rtamt.ast.parser_visitor.stl.rtamtASTvisitor import STLVisitor
 from rtamt.exception.stl.exception import STLNotImplementedException
 from rtamt.semantics.arithmetic.discrete_time.offline.addition_semantics import AdditionSemantics
 from rtamt.semantics.arithmetic.discrete_time.offline.multiplication_semantics import MultiplicationSemantics

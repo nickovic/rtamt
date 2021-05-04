@@ -12,7 +12,7 @@ from fractions import Fraction
 
 from rtamt import Language
 from rtamt.antrl_parser.stl.StlParserVisitor import StlParserVisitor
-from rtamt.ast.paser_visitor.ltl.rtamtASTparser import LTLrtamtASTparser
+from rtamt.ast.parser_visitor.ltl.rtamtASTparser import LTLrtamtASTparser
 from rtamt.interval.interval import Interval
 
 from rtamt.ast.nodes.arithmetic.abs import Abs

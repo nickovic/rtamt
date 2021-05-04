@@ -1,4 +1,4 @@
-from rtamt.ast.paser_visitor.ltl.rtamtASTvisitor import LTLrtamtASTvisitor
+from rtamt.ast.parser_visitor.ltl.rtamtASTvisitor import LTLrtamtASTvisitor
 
 class LTLReset(LTLrtamtASTvisitor):
 

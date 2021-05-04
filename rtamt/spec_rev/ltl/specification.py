@@ -8,7 +8,7 @@ from rtamt.spec_rev.abstract_specification import AbstractSpecification
 
 from rtamt.parser.ltl.LtlLexer import LtlLexer
 from rtamt.parser.ltl.LtlParser import LtlParser
-from rtamt.ast.paser_visitor.ltl.rtamtASTparser import LTLrtamtASTparser
+from rtamt.ast.parser_visitor.ltl.rtamtASTparser import LTLrtamtASTparser
 
 from rtamt.parser.ltl.error.parser_error_listener import LTLParserErrorListener
 from rtamt.exception.stl.exception import STLParseException
