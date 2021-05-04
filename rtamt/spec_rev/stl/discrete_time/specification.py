@@ -8,8 +8,8 @@ from antlr4.InputStream import InputStream
 from rtamt.semantics.stl.discrete_time.offline_evaluator import STLOfflineEvaluator
 from rtamt.spec_rev.ltl.specification import LTLrevSpecification
 
-from rtamt.parser.stl.StlLexer import StlLexer
-from rtamt.parser.stl.StlParser import StlParser
+from rtamt.antrl_parser.stl.StlLexer import StlLexer
+from rtamt.antrl_parser.stl.StlParser import StlParser
 from rtamt.ast.paser_visitor.stl.rtamtASTparser import STLSpecificationParser
 
 from rtamt.parser.stl.error.parser_error_listener import STLParserErrorListener
