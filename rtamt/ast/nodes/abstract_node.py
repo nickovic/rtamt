@@ -4,14 +4,12 @@ Created on Mon Sep 23 2019
 
 @author: Dejan Nickovic
 """
-from abc import ABCMeta
 
-class AbstractNode:
+class AbstractNode(object):
     """
     Abstract Node: tree-like data structure containing
     arbitrary specifications
     """
-    __metaclass__ = ABCMeta
 
     def __init__(self):
         self.children = list()
