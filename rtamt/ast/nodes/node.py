@@ -13,7 +13,7 @@ class Node(object):
         Getter and setter for horizon
     """
 
-    def __init__(self, in_vars = [], out_vars = []):
+    def __init__(self, name, in_vars = [], out_vars = []):
         self.evaluator = None #TODO: Tom do not know why the semantics side is needed in node.
         self.node = None
 
@@ -22,7 +22,7 @@ class Node(object):
         self.in_vars = in_vars
         self.out_vars = out_vars
         self.children = list()
-        self.name = ''
+        self.name = name
 
     def addChild(self, child):
         self.children.append(child)

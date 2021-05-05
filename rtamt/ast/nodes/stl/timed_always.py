@@ -20,7 +20,7 @@ class TimedAlways(UnaryNode, TimeBound):
             child : stl.Node
             bound : Interval
         """
-        UnaryNode.__init__(self, child)
-        TimeBound.__init__(self, begin, end)
+        name_phrase = 'always[' + str(begin) + ',' + str(end) + ']' #TODO; Maybe it is not the best choice
 
-        self.name = 'always[' + str(self.begin) + ',' + str(self.end) + '](' + child.name + ')'
+        UnaryNode.__init__(self, name_phrase, child)
+        TimeBound.__init__(self, begin, end)

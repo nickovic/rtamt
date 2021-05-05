@@ -14,7 +14,7 @@ class TimedUntil(BinaryNode, TimeBound):
                 child2 : stl.Node
                 bound : Interval
         """
-        BinaryNode.__init__(self, child1, child2)
-        TimeBound.__init__(self, begin, end)
+        name_phrase = 'until[' + str(begin) + ',' + str(end) + ']' #TODO; Maybe it is not the best choice
 
-        self.name = '(' + child1.name + ')until[' + str(self.begin) + ',' + str(self.end) + '](' + child2.name + ')'
+        BinaryNode.__init__(self, name_phrase, child1, child2)
+        TimeBound.__init__(self, begin, end)

@@ -16,15 +16,14 @@ class Constant(LeafNode):
         Parameters:
             val : double
         """
+        name = str(val)
         if sys.version_info.major == 2:
             #super(LeafNode, self).__init__()    #python2
-            LeafNode.__init__(self, in_vars=[], out_vars=[])
+            LeafNode.__init__(self, name, in_vars=[], out_vars=[])
         else:
-            super().__init__(in_vars=[], out_vars=[])    #python3
+            super().__init__(name, in_vars=[], out_vars=[])    #python3
 
         self.val = val
-
-        self.name = str(val)
 
 
     @property

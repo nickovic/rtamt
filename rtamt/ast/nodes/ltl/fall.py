@@ -13,10 +13,9 @@ class Fall(UnaryNode):
             Parameters:
                 child : stl.Node
         """
+        name_phrase = 'fall'
         if sys.version_info.major == 2:
-            #super(UnaryNode, self).__init__(child)    #python2
-            UnaryNode.__init__(self, child)
+            #super(UnaryNode, self).__init__(name_phrase, child)    #python2
+            UnaryNode.__init__(self, name_phrase, child)
         else:
-            super().__init__(child)    #python3
-
-        self.name = 'fall(' + child.name + ')'
+            super().__init__(name_phrase, child)    #python3

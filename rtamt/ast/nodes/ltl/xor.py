@@ -13,10 +13,9 @@ class Xor(BinaryNode):
             child1 : stl.Node
             child2 : stl.Node
         """
+        name_phrase = 'xor'
         if sys.version_info.major == 2:
-            #super(BinaryNode, self).__init__(child1, child2)    #python2
-            BinaryNode.__init__(self, child1, child2)
+            #super(BinaryNode, self).__init__(name_phrase, child1, child2)    #python2
+            BinaryNode.__init__(self, name_phrase, child1, child2)
         else:
-            super().__init__(child1, child2)    #python3
-
-        self.name = '(' + child1.name + ')xor(' + child2.name + ')'
+            super().__init__(name_phrase, child1, child2)    #python3
