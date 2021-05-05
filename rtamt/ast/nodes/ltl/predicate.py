@@ -1,6 +1,5 @@
 import sys
 
-from rtamt.ast.nodes.unary_node import UnaryNode
 from rtamt.ast.nodes.binary_node import BinaryNode
 
 
