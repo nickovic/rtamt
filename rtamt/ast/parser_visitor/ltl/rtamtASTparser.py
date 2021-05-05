@@ -11,7 +11,7 @@ import rtamt
 from rtamt import Language
 from rtamt.antrl_parser.ltl.LtlParserVisitor import LtlParserVisitor
 
-from rtamt.ast.nodes.ltl.variable import Variable
+from rtamt.ast.nodes.variable import Variable
 from rtamt.ast.nodes.ltl.predicate import Predicate
 from rtamt.ast.nodes.ltl.previous import Previous
 from rtamt.ast.nodes.ltl.next import Next

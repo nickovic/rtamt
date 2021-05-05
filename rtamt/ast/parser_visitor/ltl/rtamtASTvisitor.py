@@ -1,5 +1,7 @@
 from abc import ABCMeta, abstractmethod
 
+from rtamt.ast.nodes.variable import Variable
+
 from rtamt.ast.nodes.arithmetic.abs import Abs
 from rtamt.ast.nodes.arithmetic.addition import Addition
 from rtamt.ast.nodes.arithmetic.subtraction import Subtraction
@@ -7,7 +9,6 @@ from rtamt.ast.nodes.arithmetic.multiplication import Multiplication
 from rtamt.ast.nodes.arithmetic.division import Division
 
 from rtamt.ast.nodes.ltl.predicate import Predicate
-from rtamt.ast.nodes.ltl.variable import Variable
 from rtamt.ast.nodes.ltl.neg import Neg
 from rtamt.ast.nodes.ltl.disjunction import Disjunction
 from rtamt.ast.nodes.ltl.conjunction import Conjunction
