@@ -19,7 +19,6 @@ class Neg(UnaryNode):
         else:
             super().__init__(child)    #python3
 
-        self.add_child(child)
         self.in_vars = child.in_vars
         self.out_vars = child.out_vars
 
