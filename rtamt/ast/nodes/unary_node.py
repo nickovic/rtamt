@@ -8,7 +8,7 @@ class UnaryNode(Node):
         """Constructor for Node"""
         if sys.version_info.major == 2:
             #super(Node, self).__init__()    #python2
-            Node.__init__(self)
+            Node.__init__(self, child.in_vars, child.out_vars)
         else:
             super().__init__(child.in_vars, child.out_vars)    #python3
 
