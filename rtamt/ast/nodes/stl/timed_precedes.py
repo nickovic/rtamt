@@ -1,5 +1,5 @@
 from rtamt.ast.nodes.binary_node import BinaryNode
-from rtamt.ast.nodes.stl.time_bound import TimeBound
+from rtamt.ast.nodes.time_bound import TimeBound
 
 class TimedPrecedes(BinaryNode, TimeBound):
     """A class for storing STL Precedes nodes - an auxilliary operator need for translating

@@ -1,5 +1,5 @@
 from rtamt.ast.nodes.unary_node import UnaryNode
-from rtamt.ast.nodes.stl.time_bound import TimeBound
+from rtamt.ast.nodes.time_bound import TimeBound
 
 class TimedOnce(UnaryNode, TimeBound):
     """A class for storing STL Once nodes
