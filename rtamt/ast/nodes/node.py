@@ -1,4 +1,5 @@
 
+
 class Node(object):
     """A class for storing STL nodes
     Attributes
@@ -13,7 +14,7 @@ class Node(object):
     """
 
     def __init__(self):
-        self.evaluator = None
+        self.evaluator = None #TODO: Tom do not know why the semantics side is needed in node.
         self.node = None
 
         """Constructor for Node"""

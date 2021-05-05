@@ -1,5 +1,7 @@
+import sys
 
 from rtamt.ast.nodes.binary_node import BinaryNode
+
 
 class Until(BinaryNode):
     """
@@ -14,7 +16,11 @@ class Until(BinaryNode):
                 child2 : stl.Node
                 bound : Interval
         """
-        super(Until, self).__init__(child1, child2)
+        if sys.version_info.major == 2:
+            #super(BinaryNode, self).__init__(child1, child2)    #python2
+            BinaryNode.__init__(self, child1, child2)
+        else:
+            super().__init__(child1, child2)    #python3
 
         self.name = '(' + child1.name + ')until(' + child2.name + ')'
 

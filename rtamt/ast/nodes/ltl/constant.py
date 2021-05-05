@@ -1,4 +1,8 @@
+import sys
+import sys
+
 from rtamt.ast.nodes.leaf_node import LeafNode
+
 
 class Constant(LeafNode):
     """A class for storing STL real-valued Constant nodes
@@ -13,8 +17,12 @@ class Constant(LeafNode):
         Parameters:
             val : double
         """
+        if sys.version_info.major == 2:
+            #super(LeafNode, self).__init__()    #python2
+            LeafNode.__init__(self)
+        else:
+            super().__init__()    #python3
 
-        super(Constant, self).__init__()
         self.val = val
 
         self.name = str(val)

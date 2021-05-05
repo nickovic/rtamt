@@ -1,4 +1,6 @@
-from ..leaf_node import LeafNode
+import sys
+
+from rtamt.ast.nodes.leaf_node import LeafNode
 
 class Variable(LeafNode):
     """A class for storing STL real-valued Variable nodes
@@ -11,8 +13,12 @@ class Variable(LeafNode):
             var : String
             field : String
         """
+        if sys.version_info.major == 2:
+            #super(LeafNode, self).__init__()    #python2
+            LeafNode.__init__(self)
+        else:
+            super().__init__()    #python3
 
-        super(Variable, self).__init__()
         self.var = var
         self.field = field
         self.io_type = iotype
