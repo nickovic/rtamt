@@ -1,5 +1,4 @@
 import sys
-import sys
 
 from rtamt.ast.nodes.leaf_node import LeafNode
 

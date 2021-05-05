@@ -1,6 +1,7 @@
 from abc import ABCMeta, abstractmethod
 
 from rtamt.ast.nodes.variable import Variable
+from rtamt.ast.nodes.constant import Constant
 
 from rtamt.ast.nodes.arithmetic.abs import Abs
 from rtamt.ast.nodes.arithmetic.addition import Addition
@@ -23,7 +24,6 @@ from rtamt.ast.nodes.ltl.historically import Historically
 from rtamt.ast.nodes.ltl.since import Since
 from rtamt.ast.nodes.ltl.rise import Rise
 from rtamt.ast.nodes.ltl.fall import Fall
-from rtamt.ast.nodes.ltl.constant import Constant
 from rtamt.ast.nodes.ltl.next import Next
 from rtamt.ast.nodes.ltl.previous import Previous
 

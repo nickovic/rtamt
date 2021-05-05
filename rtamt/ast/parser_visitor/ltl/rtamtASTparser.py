@@ -12,6 +12,14 @@ from rtamt import Language
 from rtamt.antrl_parser.ltl.LtlParserVisitor import LtlParserVisitor
 
 from rtamt.ast.nodes.variable import Variable
+from rtamt.ast.nodes.constant import Constant
+
+from rtamt.ast.nodes.arithmetic.abs import Abs
+from rtamt.ast.nodes.arithmetic.addition import Addition
+from rtamt.ast.nodes.arithmetic.subtraction import Subtraction
+from rtamt.ast.nodes.arithmetic.multiplication import Multiplication
+from rtamt.ast.nodes.arithmetic.division import Division
+
 from rtamt.ast.nodes.ltl.predicate import Predicate
 from rtamt.ast.nodes.ltl.previous import Previous
 from rtamt.ast.nodes.ltl.next import Next
@@ -22,21 +30,14 @@ from rtamt.ast.nodes.ltl.disjunction import Disjunction
 from rtamt.ast.nodes.ltl.implies import Implies
 from rtamt.ast.nodes.ltl.iff import Iff
 from rtamt.ast.nodes.ltl.xor import Xor
-#from rtamt.ast_nodes.stl.timed_always import TimedAlways
-#from rtamt.ast_nodes.stl.timed_eventually import TimedEventually
+
 from rtamt.ast.nodes.ltl.always import Always
 from rtamt.ast.nodes.ltl.eventually import Eventually
 from rtamt.ast.nodes.ltl.once import Once
 from rtamt.ast.nodes.ltl.historically import Historically
 from rtamt.ast.nodes.ltl.since import Since
-from rtamt.ast.nodes.arithmetic.abs import Abs
-from rtamt.ast.nodes.arithmetic.addition import Addition
-from rtamt.ast.nodes.arithmetic.subtraction import Subtraction
-from rtamt.ast.nodes.arithmetic.multiplication import Multiplication
-from rtamt.ast.nodes.arithmetic.division import Division
 from rtamt.ast.nodes.ltl.fall import Fall
 from rtamt.ast.nodes.ltl.rise import Rise
-from rtamt.ast.nodes.ltl.constant import Constant
 
 from rtamt.exception.stl.exception import STLParseException #TODO: why stl is here?
 from rtamt.exception.exception import RTAMTException

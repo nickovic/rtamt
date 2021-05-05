@@ -16,6 +16,7 @@ from rtamt.ast.parser_visitor.ltl.rtamtASTparser import LTLrtamtASTparser
 from rtamt.interval.interval import Interval
 
 from rtamt.ast.nodes.variable import Variable
+from rtamt.ast.nodes.constant import Constant
 
 from rtamt.ast.nodes.arithmetic.abs import Abs
 from rtamt.ast.nodes.arithmetic.addition import Addition
@@ -41,7 +42,6 @@ from rtamt.ast.nodes.ltl.since import Since
 from rtamt.ast.nodes.ltl.until import Until
 from rtamt.ast.nodes.ltl.fall import Fall
 from rtamt.ast.nodes.ltl.rise import Rise
-from rtamt.ast.nodes.ltl.constant import Constant
 
 from rtamt.ast.nodes.stl.timed_always import TimedAlways
 from rtamt.ast.nodes.stl.timed_eventually import TimedEventually
