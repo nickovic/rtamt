@@ -13,32 +13,34 @@ class Variable(LeafNode):
             var : String
             field : String
         """
-        if sys.version_info.major == 2:
-            #super(LeafNode, self).__init__()    #python2
-            LeafNode.__init__(self)
-        else:
-            super().__init__()    #python3
-
         self.var = var
         self.field = field
         self.io_type = iotype
         self.node = None
 
+        in_vars = []
+        out_vars = []
         if (iotype == 'input'):
-            self.in_vars = [var]
+            in_vars = [var]
         else:
-            self.out_vars = [var]
+            out_vars = [var]
 
-        if not self.field:
-            self.name = self.var
+        if not field:
+            self.name = var
         else:
-            self.name = self.var + '.' + self.field
+            self.name = var + '.' + field
+
+        if sys.version_info.major == 2:
+            #super(LeafNode, self).__init__()    #python2
+            LeafNode.__init__(self, in_vars, out_vars)
+        else:
+            super().__init__(in_vars, out_vars)    #python3
 
     @property
     def var(self):
         """Getter for var"""
         return self.__var
-    
+
     @var.setter
     def var(self, var):
         """Setter for var"""
