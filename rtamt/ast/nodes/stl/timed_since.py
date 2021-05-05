@@ -17,7 +17,4 @@ class TimedSince(BinaryNode, TimeBound):
         BinaryNode.__init__(self, child1, child2)
         TimeBound.__init__(self, begin, end)
 
-        self.in_vars = child1.in_vars + child2.in_vars
-        self.out_vars = child1.out_vars + child2.out_vars
-
         self.name = '(' + child1.name + ')since[' + str(self.begin) + ',' + str(self.end) + '](' + child2.name + ')'

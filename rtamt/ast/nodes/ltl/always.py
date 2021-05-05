@@ -21,9 +21,6 @@ class Always(UnaryNode):
         else:
             super().__init__(child)    #python3
 
-        self.in_vars = child.in_vars
-        self.out_vars = child.out_vars
-
         self.name = 'always(' + child.name + ')'
 
 

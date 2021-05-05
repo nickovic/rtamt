@@ -10,6 +10,6 @@ class UnaryNode(Node):
             #super(Node, self).__init__()    #python2
             Node.__init__(self)
         else:
-            super().__init__()    #python3
+            super().__init__(child.in_vars, child.out_vars)    #python3
 
         self.add_child(child)

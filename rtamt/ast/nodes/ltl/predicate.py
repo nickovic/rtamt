@@ -28,11 +28,8 @@ class Predicate(BinaryNode):
             super().__init__(child1, child2)    #python3
 
         self.operator = operator
-        self.in_vars = child1.in_vars + child2.in_vars
-        self.out_vars = child1.out_vars + child2.out_vars
 
         self.name = '(' + child1.name + ')' + str(self.operator) + '(' + child2.name + ')'
-
 
 
     @property

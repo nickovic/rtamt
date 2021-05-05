@@ -15,7 +15,4 @@ class TimedHistorically(UnaryNode, TimeBound):
         UnaryNode.__init__(self, child)
         TimeBound.__init__(self, begin, end)
 
-        self.in_vars = child.in_vars
-        self.out_vars = child.out_vars
-
         self.name = 'historically[' + str(self.begin) + ',' + str(self.end) + '](' + child.name + ')'

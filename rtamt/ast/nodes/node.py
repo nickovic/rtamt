@@ -13,14 +13,14 @@ class Node(object):
         Getter and setter for horizon
     """
 
-    def __init__(self):
+    def __init__(self, in_vars = [], out_vars = []):
         self.evaluator = None #TODO: Tom do not know why the semantics side is needed in node.
         self.node = None
 
         """Constructor for Node"""
         self.horizon = 0 #TODO: Tom thinks horizon needs only timed autokmaton.
-        self.in_vars = []
-        self.out_vars = []
+        self.in_vars = in_vars
+        self.out_vars = out_vars
         self.children = list()
         self.name = ''
 
