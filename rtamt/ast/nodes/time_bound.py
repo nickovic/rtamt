@@ -3,6 +3,9 @@ class TimeBound(object):
         self.begin = begin
         self.end = end
 
+    def strTimeBound(self):
+        return '[' + str(self.begin) + ',' + str(self.end) + ']'
+
     @property
     def begin(self):
         return self.__begin

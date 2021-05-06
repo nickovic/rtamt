@@ -12,7 +12,7 @@ class TimedEventually(UnaryNode, TimeBound):
             child : stl.Node
             bound : Interval
         """
-        name_phrase = 'eventually[' + str(begin) + ',' + str(end) + ']' #TODO; Maybe it is not the best choice
-
-        UnaryNode.__init__(self, name_phrase, child)
         TimeBound.__init__(self, begin, end)
+        strTimeBound = self.strTimeBound()
+        name_phrase = 'eventually' + strTimeBound   #TODO; Maybe it is not the best choice
+        UnaryNode.__init__(self, name_phrase, child)

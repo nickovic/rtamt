@@ -13,7 +13,7 @@ class TimedSince(BinaryNode, TimeBound):
                 child2 : stl.Node
                 bound : Interval
         """
-        name_phrase = 'since[' + str(begin) + ',' + str(end) + ']' #TODO; Maybe it is not the best choice
-
-        BinaryNode.__init__(self, name_phrase, child1, child2)
         TimeBound.__init__(self, begin, end)
+        strTimeBound = self.strTimeBound()
+        name_phrase = 'since' + strTimeBound #TODO; Maybe it is not the best choice
+        BinaryNode.__init__(self, name_phrase, child1, child2)
