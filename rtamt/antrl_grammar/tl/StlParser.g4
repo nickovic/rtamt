@@ -1,20 +1,9 @@
 parser grammar StlParser ;
-import LtlParser;
+import LtlParser, TimeParser ;
 
 options {
 	tokenVocab = StlLexer ;
 }
-
-interval
-	: LBRACK intervalTime ( COLON | COMMA ) intervalTime RBRACK ;
-
-intervalTime
-	: literal ( unit )?      #intervalTimeLiteral
-	| Identifier ( unit )?   #constantTimeLiteral ;
-
-unit
-    : SEC | MSEC | USEC | NSEC ;
-
 
 expression
 	:

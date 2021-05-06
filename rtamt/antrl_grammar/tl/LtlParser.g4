@@ -1,49 +1,10 @@
 parser grammar LtlParser ;
+import arithmeticParser, specifcationParser ;
 
 options {
 	tokenVocab = LtlLexer
 	;
 }
-
-specification_file
-	: specification EOF
-	;
-
-specification
-    : ( spec )? ( modimport )* ( declaration | annotation )* ( assertion )+
-    ;
-
-spec
-	: Specification Identifier #SpecificationId
-	;
-
-modimport :
-        From Identifier Import Identifier #modImport
-        ;
-
-assertion
-	: (Identifier EQUAL)? expression
-	;
-
-declaration
-	: variableDeclaration                                         #declVariable
-	| constantDeclaration                                         #declConstant
-	;
-
-annotation
-        : '@' annotation_type ;
-
-annotation_type
-        : ROS_Topic LPAREN Identifier COMMA Identifier RPAREN #rosTopic
-        ;
-
-variableDeclaration
-	: ioType? domainType Identifier assignment?
-	;
-
-constantDeclaration
-	: Constant domainType Identifier EQUAL literal
-	;
 
 assignment
 	: EQUAL literal 				#AsgnLiteral
@@ -89,18 +50,6 @@ expression
     | PreviousOperator expression                               #ExprPrevious
     | NextOperator expression                                   #ExprNext
 	;
-
-real_expression:
-    Identifier                                                  #ExprId
-    | literal                                                   #ExprLiteral
-    | real_expression PLUS real_expression                      #ExprAddition
-	| real_expression MINUS real_expression                     #ExprSubtraction
-	| real_expression TIMES real_expression                     #ExprMultiplication
-	| real_expression DIVIDE real_expression                    #ExprDivision
-
-	| ABS LPAREN real_expression RPAREN                         #ExprAbs
-	;
-
 
 comparisonOp
 	: LesserOrEqualOperator                                     #Leq
