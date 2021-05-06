@@ -21,11 +21,11 @@ modimport :
         From Identifier Import Identifier #modImport
         ;
 
-assertion 
+assertion
 	: (Identifier EQUAL)? expression
 	;
 
-declaration 
+declaration
 	: variableDeclaration                                         #declVariable
 	| constantDeclaration                                         #declConstant
 	;
@@ -110,9 +110,9 @@ comparisonOp
     | EqualOperator                                             #Eq
     | NotEqualOperator                                          #Neq
 	;
-	
+
 literal
-	: IntegerLiteral		
+	: IntegerLiteral
 	| RealLiteral
 	| MINUS literal
 	;
