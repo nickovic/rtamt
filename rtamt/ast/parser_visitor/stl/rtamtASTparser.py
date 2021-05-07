@@ -63,8 +63,8 @@ class STLSpecificationParser(LTLrtamtASTparser, StlParserVisitor):
         io_type_name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_io_type'
         comp_op_name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_comp_op'
         if self.spec.language == Language.PYTHON:
-            io_type_name = 'rtamt.spec.stl.discrete_time.io_type'
-            comp_op_name = 'rtamt.spec.stl.discrete_time.comp_op'
+            io_type_name = 'rtamt.ast.parser_visitor.io_type'
+            comp_op_name = 'rtamt.ast.parser_visitor.comp_op'
 
         self.io_type_mod = __import__(io_type_name, fromlist=[''])
         self.comp_op_mod = __import__(comp_op_name, fromlist=[''])

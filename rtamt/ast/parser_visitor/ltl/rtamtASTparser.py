@@ -39,7 +39,7 @@ from rtamt.ast.nodes.ltl.since import Since
 from rtamt.ast.nodes.ltl.fall import Fall
 from rtamt.ast.nodes.ltl.rise import Rise
 
-from rtamt.exception.stl.exception import STLParseException #TODO: why stl is here?
+from rtamt.exception.stl.exception import STLParseException #TODO: stl is here is weird. we can consider the exception handling?
 from rtamt.exception.exception import RTAMTException
 
 class LTLrtamtASTparser(LtlParserVisitor):
@@ -48,11 +48,13 @@ class LTLrtamtASTparser(LtlParserVisitor):
         self.ops = set()
         self.spec = spec
 
+        #TODO: Tom did not understant the swithching. Let's separate such a semantics code from here.
         io_type_name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_io_type'
         comp_op_name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_comp_op'
+        #TODO: I don't see above files
         if self.spec.language == Language.PYTHON:
-            io_type_name = 'rtamt.spec.stl.discrete_time.io_type'
-            comp_op_name = 'rtamt.spec.stl.discrete_time.comp_op'
+            io_type_name = 'rtamt.ast.paser_visitor.io_type'
+            comp_op_name = 'rtamt.ast.paser_visitor.comp_op'
 
         self.io_type_mod = __import__(io_type_name, fromlist=[''])
         self.comp_op_mod = __import__(comp_op_name, fromlist=[''])
