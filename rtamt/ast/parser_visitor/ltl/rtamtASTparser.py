@@ -53,8 +53,8 @@ class LTLrtamtASTparser(LtlParserVisitor):
         comp_op_name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_comp_op'
         #TODO: I don't see above files
         if self.spec.language == Language.PYTHON:
-            io_type_name = 'rtamt.ast.paser_visitor.io_type'
-            comp_op_name = 'rtamt.ast.paser_visitor.comp_op'
+            io_type_name = 'rtamt.ast.parser_visitor.io_type'
+            comp_op_name = 'rtamt.ast.parser_visitor.comp_op'
 
         self.io_type_mod = __import__(io_type_name, fromlist=[''])
         self.comp_op_mod = __import__(comp_op_name, fromlist=[''])
