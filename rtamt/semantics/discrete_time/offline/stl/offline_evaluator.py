@@ -18,7 +18,7 @@ class STLOfflineEvaluator(STLVisitor):
                 generator = STLOfflineDenseTimePythonMonitor()
 
             elif self.spec.time_interpretation == TimeInterpretation.DISCRETE:
-                from rtamt.semantics.stl.discrete_time.offline_discrete_time_python_monitor import \
+                from rtamt.semantics.discrete_time.offline.stl.offline_discrete_time_python_monitor import \
                     STLOfflineDiscreteTimePythonMonitor #TODO: tom can not uderstand the hard cording.
                 generator = STLOfflineDiscreteTimePythonMonitor()
 

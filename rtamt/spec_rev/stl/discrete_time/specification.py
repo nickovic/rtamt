@@ -5,7 +5,7 @@ from antlr4 import *
 from antlr4.InputStream import InputStream
 
 #from rtamt.evaluator.stl.offline_evaluator import STLOfflineEvaluator
-from rtamt.semantics.stl.discrete_time.offline_evaluator import STLOfflineEvaluator
+from rtamt.semantics.discrete_time.offline.stl.offline_evaluator import STLOfflineEvaluator
 from rtamt.spec_rev.ltl.specification import LTLrevSpecification
 
 from rtamt.antrl_parser.stl.StlLexer import StlLexer
