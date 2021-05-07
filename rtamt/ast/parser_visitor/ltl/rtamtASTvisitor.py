@@ -27,8 +27,6 @@ from rtamt.ast.nodes.ltl.fall import Fall
 from rtamt.ast.nodes.ltl.next import Next
 from rtamt.ast.nodes.ltl.previous import Previous
 
-#from rtamt.astNode.stl.timed_precedes import TimedPrecedes #TODO: why TimedPrecedes is here?
-
 NOT_IMPLEMENTED = "You should implement this."
 
 class LTLrtamtASTvisitor:
@@ -65,8 +63,6 @@ class LTLrtamtASTvisitor:
             out = self.visitHistorically(element, args)
         elif isinstance(element, Since):
             out = self.visitSince(element, args)
-#        elif isinstance(element, TimedPrecedes):   #TODO: why TimedPrecedes is here?
-#            out = self.visitTimedPrecedes(element, args)
         elif isinstance(element, Abs):
             out = self.visitAbs(element, args)
         elif isinstance(element, Addition):
