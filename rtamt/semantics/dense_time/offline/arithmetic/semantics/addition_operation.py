@@ -1,5 +1,5 @@
 from rtamt.operation.abstract_operation import AbstractOperation
-import rtamt.operation.stl.dense_time.offline.intersection as intersect
+import rtamt.semantics.dense_time.intersection as intersect
 
 class AdditionOperation(AbstractOperation):
     def __init__(self):
