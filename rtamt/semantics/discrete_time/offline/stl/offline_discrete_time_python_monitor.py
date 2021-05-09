@@ -42,9 +42,6 @@ class STLOfflineDiscreteTimePythonMonitor(STLVisitor):
         monitor = PredicateSemantics(node.operator)
         self.node_monitor_dict[node.name] = monitor
 
-        self.visit(node.children[0], args)
-        self.visit(node.children[1], args)
-
     def visitVariable(self, node, args):
         pass
 
@@ -52,126 +49,78 @@ class STLOfflineDiscreteTimePythonMonitor(STLVisitor):
         monitor = AbsSemantics()
         self.node_monitor_dict[node.name] = monitor
 
-        self.visit(node.children[0], args)
-
     def visitAddition(self, node, args):
         monitor = AdditionSemantics()
         self.node_monitor_dict[node.name] = monitor
-
-        self.visit(node.children[0], args)
-        self.visit(node.children[1], args)
 
     def visitSubtraction(self, node, args):
         monitor = SubtractionSemantics()
         self.node_monitor_dict[node.name] = monitor
 
-        self.visit(node.children[0], args)
-        self.visit(node.children[1], args)
-
     def visitMultiplication(self, node, args):
         monitor = MultiplicationSemantics()
         self.node_monitor_dict[node.name] = monitor
-
-        self.visit(node.children[0], args)
-        self.visit(node.children[1], args)
 
     def visitDivision(self, node, args):
         monitor = DivisionSemantics()
         self.node_monitor_dict[node.name] = monitor
 
-        self.visit(node.children[0], args)
-        self.visit(node.children[1], args)
-
     def visitNot(self, node, args):
         monitor = NotSemantics()
         self.node_monitor_dict[node.name] = monitor
-
-        self.visit(node.children[0], args)
 
     def visitAnd(self, node, args):
         monitor = AndSemantics()
         self.node_monitor_dict[node.name] = monitor
 
-        self.visit(node.children[0], args)
-        self.visit(node.children[1], args)
-
     def visitOr(self, node, args):
         monitor = OrSemantics()
         self.node_monitor_dict[node.name] = monitor
-
-        self.visit(node.children[0], args)
-        self.visit(node.children[1], args)
 
     def visitImplies(self, node, args):
         monitor = ImpliesSemantics()
         self.node_monitor_dict[node.name] = monitor
 
-        self.visit(node.children[0], args)
-        self.visit(node.children[1], args)
-
     def visitIff(self, node, args):
         monitor = IffSemantics()
         self.node_monitor_dict[node.name] = monitor
-
-        self.visit(node.children[0], args)
-        self.visit(node.children[1], args)
 
     def visitXor(self, node, args):
         monitor = XorSemantics()
         self.node_monitor_dict[node.name] = monitor
 
-        self.visit(node.children[0], args)
-        self.visit(node.children[1], args)
-
     def visitEventually(self, node, args):
         monitor = EventuallySemantics()
         self.node_monitor_dict[node.name] = monitor
-
-        self.visit(node.children[0], args)
 
     def visitAlways(self, node, args):
         monitor = AlwaysSemantics()
         self.node_monitor_dict[node.name] = monitor
 
-        self.visit(node.children[0], args)
-
     def visitUntil(self, node, args):
         monitor = UntilSemantics()
         self.node_monitor_dict[node.name] = monitor
 
-        self.visit(node.children[0], args)
-        self.visit(node.children[1], args)
 
     def visitOnce(self, node, args):
         monitor = OnceSemantics()
         self.node_monitor_dict[node.name] = monitor
 
-        self.visit(node.children[0], args)
-
     def visitHistorically(self, node, args):
         monitor = HistoricallySemantics()
         self.node_monitor_dict[node.name] = monitor
-
-        self.visit(node.children[0], args)
 
     def visitSince(self, node, args):
         monitor = SinceSemantics()
         self.node_monitor_dict[node.name] = monitor
 
-        self.visit(node.children[0], args)
-        self.visit(node.children[1], args)
-
     def visitRise(self, node, args):
         monitor = RiseSemantics()
         self.node_monitor_dict[node.name] = monitor
 
-        self.visit(node.children[0], args)
-
     def visitFall(self, node, args):
         monitor = FallSemantics()
         self.node_monitor_dict[node.name] = monitor
-
-        self.visit(node.children[0], args)
 
     def visitConstant(self, node, args):
         monitor = ConstantSemantics(node.val)
@@ -181,13 +130,9 @@ class STLOfflineDiscreteTimePythonMonitor(STLVisitor):
         monitor = PreviousSemantics()
         self.node_monitor_dict[node.name] = monitor
 
-        self.visit(node.children[0], args)
-
     def visitNext(self, node, args):
         monitor = NextSemantics()
         self.node_monitor_dict[node.name] = monitor
-
-        self.visit(node.children[0], args)
 
     def visitTimedPrecedes(self, node, args):
         raise STLNotImplementedException('Precedes operator not implemented in STL offline monitor.')
@@ -196,39 +141,25 @@ class STLOfflineDiscreteTimePythonMonitor(STLVisitor):
         monitor = OnceBoundedSemantics(node.begin, node.end)
         self.node_monitor_dict[node.name] = monitor
 
-        self.visit(node.children[0], args)
-
     def visitTimedHistorically(self, node, args):
         monitor = HistoricallyBoundedSemantics(node.begin, node.end)
         self.node_monitor_dict[node.name] = monitor
-
-        self.visit(node.children[0], args)
 
     def visitTimedSince(self, node, args):
         monitor = SinceBoundedSemantics(node.begin, node.end)
         self.node_monitor_dict[node.name] = monitor
 
-        self.visit(node.children[0], args)
-        self.visit(node.children[1], args)
-
     def visitTimedAlways(self, node, args):
         monitor = AlwaysBoundedSemantics(node.begin, node.end)
         self.node_monitor_dict[node.name] = monitor
-
-        self.visit(node.children[0], args)
 
     def visitTimedEventually(self, node, args):
         monitor = EventuallyBoundedSemantics(node.begin, node.end)
         self.node_monitor_dict[node.name] = monitor
 
-        self.visit(node.children[0], args)
-
     def visitTimedUntil(self, node, args):
         monitor = UntilBoundedSemantics(node.begin, node.end)
         self.node_monitor_dict[node.name] = monitor
-
-        self.visit(node.children[0], args)
-        self.visit(node.children[1], args)
 
     def visitDefault(self, node, args):
         pass
