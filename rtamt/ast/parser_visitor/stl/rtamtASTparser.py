@@ -15,13 +15,15 @@ from rtamt.antrl_parser.stl.StlParserVisitor import StlParserVisitor
 from rtamt.ast.parser_visitor.ltl.rtamtASTparser import LTLrtamtASTparser
 from rtamt.interval.interval import Interval
 
+from rtamt.ast.nodes.variable import Variable
+from rtamt.ast.nodes.constant import Constant
+
 from rtamt.ast.nodes.arithmetic.abs import Abs
 from rtamt.ast.nodes.arithmetic.addition import Addition
 from rtamt.ast.nodes.arithmetic.subtraction import Subtraction
 from rtamt.ast.nodes.arithmetic.multiplication import Multiplication
 from rtamt.ast.nodes.arithmetic.division import Division
 
-from rtamt.ast.nodes.ltl.variable import Variable
 from rtamt.ast.nodes.ltl.predicate import Predicate
 from rtamt.ast.nodes.ltl.previous import Previous
 from rtamt.ast.nodes.ltl.next import Next
@@ -40,7 +42,6 @@ from rtamt.ast.nodes.ltl.since import Since
 from rtamt.ast.nodes.ltl.until import Until
 from rtamt.ast.nodes.ltl.fall import Fall
 from rtamt.ast.nodes.ltl.rise import Rise
-from rtamt.ast.nodes.ltl.constant import Constant
 
 from rtamt.ast.nodes.stl.timed_always import TimedAlways
 from rtamt.ast.nodes.stl.timed_eventually import TimedEventually
@@ -62,8 +63,8 @@ class STLSpecificationParser(LTLrtamtASTparser, StlParserVisitor):
         io_type_name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_io_type'
         comp_op_name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_comp_op'
         if self.spec.language == Language.PYTHON:
-            io_type_name = 'rtamt.spec.stl.discrete_time.io_type'
-            comp_op_name = 'rtamt.spec.stl.discrete_time.comp_op'
+            io_type_name = 'rtamt.ast.parser_visitor.io_type'
+            comp_op_name = 'rtamt.ast.parser_visitor.comp_op'
 
         self.io_type_mod = __import__(io_type_name, fromlist=[''])
         self.comp_op_mod = __import__(comp_op_name, fromlist=[''])

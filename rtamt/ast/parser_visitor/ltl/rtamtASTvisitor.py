@@ -1,5 +1,8 @@
 from abc import ABCMeta, abstractmethod
 
+from rtamt.ast.nodes.variable import Variable
+from rtamt.ast.nodes.constant import Constant
+
 from rtamt.ast.nodes.arithmetic.abs import Abs
 from rtamt.ast.nodes.arithmetic.addition import Addition
 from rtamt.ast.nodes.arithmetic.subtraction import Subtraction
@@ -7,7 +10,6 @@ from rtamt.ast.nodes.arithmetic.multiplication import Multiplication
 from rtamt.ast.nodes.arithmetic.division import Division
 
 from rtamt.ast.nodes.ltl.predicate import Predicate
-from rtamt.ast.nodes.ltl.variable import Variable
 from rtamt.ast.nodes.ltl.neg import Neg
 from rtamt.ast.nodes.ltl.disjunction import Disjunction
 from rtamt.ast.nodes.ltl.conjunction import Conjunction
@@ -22,11 +24,8 @@ from rtamt.ast.nodes.ltl.historically import Historically
 from rtamt.ast.nodes.ltl.since import Since
 from rtamt.ast.nodes.ltl.rise import Rise
 from rtamt.ast.nodes.ltl.fall import Fall
-from rtamt.ast.nodes.ltl.constant import Constant
 from rtamt.ast.nodes.ltl.next import Next
 from rtamt.ast.nodes.ltl.previous import Previous
-
-#from rtamt.astNode.stl.timed_precedes import TimedPrecedes #TODO: why TimedPrecedes is here?
 
 NOT_IMPLEMENTED = "You should implement this."
 
@@ -64,8 +63,6 @@ class LTLrtamtASTvisitor:
             out = self.visitHistorically(element, args)
         elif isinstance(element, Since):
             out = self.visitSince(element, args)
-#        elif isinstance(element, TimedPrecedes):   #TODO: why TimedPrecedes is here?
-#            out = self.visitTimedPrecedes(element, args)
         elif isinstance(element, Abs):
             out = self.visitAbs(element, args)
         elif isinstance(element, Addition):

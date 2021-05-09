@@ -6,7 +6,7 @@ Created on Sun Jul 21 22:24:09 2019
 """
 
 from rtamt.ast.nodes.unary_node import UnaryNode
-from rtamt.ast.nodes.stl.time_bound import TimeBound
+from rtamt.ast.nodes.time_bound import TimeBound
 
 class TimedAlways(UnaryNode, TimeBound):
     """A class for storing STL Always nodes
@@ -20,14 +20,7 @@ class TimedAlways(UnaryNode, TimeBound):
             child : stl.Node
             bound : Interval
         """
-        UnaryNode.__init__(self, child)
         TimeBound.__init__(self, begin, end)
-
-        self.in_vars = child.in_vars
-        self.out_vars = child.out_vars
-
-        self.name = 'always[' + str(self.begin) + ',' + str(self.end) + '](' + child.name + ')'
-
-
-
-
+        strTimeBound = self.strTimeBound()
+        name_phrase = 'always' + strTimeBound   #TODO; Maybe it is not the best choice
+        UnaryNode.__init__(self, name_phrase, child)

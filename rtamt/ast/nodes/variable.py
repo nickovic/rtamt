@@ -1,4 +1,6 @@
-from ..leaf_node import LeafNode
+import sys
+
+from rtamt.ast.nodes.leaf_node import LeafNode
 
 class Variable(LeafNode):
     """A class for storing STL real-valued Variable nodes
@@ -11,28 +13,34 @@ class Variable(LeafNode):
             var : String
             field : String
         """
-
-        super(Variable, self).__init__()
         self.var = var
         self.field = field
         self.io_type = iotype
         self.node = None
 
+        in_vars = []
+        out_vars = []
         if (iotype == 'input'):
-            self.in_vars = [var]
+            in_vars = [var]
         else:
-            self.out_vars = [var]
+            out_vars = [var]
 
-        if not self.field:
-            self.name = self.var
+        if not field:
+            name = var
         else:
-            self.name = self.var + '.' + self.field
+            name = var + '.' + field
+
+        if sys.version_info.major == 2:
+            #super(LeafNode, self).__init__()    #python2
+            LeafNode.__init__(self, name, in_vars, out_vars)
+        else:
+            super().__init__(name, in_vars, out_vars)    #python3
 
     @property
     def var(self):
         """Getter for var"""
         return self.__var
-    
+
     @var.setter
     def var(self, var):
         """Setter for var"""

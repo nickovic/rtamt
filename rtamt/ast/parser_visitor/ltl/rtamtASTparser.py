@@ -11,7 +11,15 @@ import rtamt
 from rtamt import Language
 from rtamt.antrl_parser.ltl.LtlParserVisitor import LtlParserVisitor
 
-from rtamt.ast.nodes.ltl.variable import Variable
+from rtamt.ast.nodes.variable import Variable
+from rtamt.ast.nodes.constant import Constant
+
+from rtamt.ast.nodes.arithmetic.abs import Abs
+from rtamt.ast.nodes.arithmetic.addition import Addition
+from rtamt.ast.nodes.arithmetic.subtraction import Subtraction
+from rtamt.ast.nodes.arithmetic.multiplication import Multiplication
+from rtamt.ast.nodes.arithmetic.division import Division
+
 from rtamt.ast.nodes.ltl.predicate import Predicate
 from rtamt.ast.nodes.ltl.previous import Previous
 from rtamt.ast.nodes.ltl.next import Next
@@ -22,23 +30,16 @@ from rtamt.ast.nodes.ltl.disjunction import Disjunction
 from rtamt.ast.nodes.ltl.implies import Implies
 from rtamt.ast.nodes.ltl.iff import Iff
 from rtamt.ast.nodes.ltl.xor import Xor
-#from rtamt.ast_nodes.stl.timed_always import TimedAlways
-#from rtamt.ast_nodes.stl.timed_eventually import TimedEventually
+
 from rtamt.ast.nodes.ltl.always import Always
 from rtamt.ast.nodes.ltl.eventually import Eventually
 from rtamt.ast.nodes.ltl.once import Once
 from rtamt.ast.nodes.ltl.historically import Historically
 from rtamt.ast.nodes.ltl.since import Since
-from rtamt.ast.nodes.arithmetic.abs import Abs
-from rtamt.ast.nodes.arithmetic.addition import Addition
-from rtamt.ast.nodes.arithmetic.subtraction import Subtraction
-from rtamt.ast.nodes.arithmetic.multiplication import Multiplication
-from rtamt.ast.nodes.arithmetic.division import Division
 from rtamt.ast.nodes.ltl.fall import Fall
 from rtamt.ast.nodes.ltl.rise import Rise
-from rtamt.ast.nodes.ltl.constant import Constant
 
-from rtamt.exception.stl.exception import STLParseException #TODO: why stl is here?
+from rtamt.exception.stl.exception import STLParseException #TODO: stl is here is weird. we can consider the exception handling?
 from rtamt.exception.exception import RTAMTException
 
 class LTLrtamtASTparser(LtlParserVisitor):
@@ -47,11 +48,13 @@ class LTLrtamtASTparser(LtlParserVisitor):
         self.ops = set()
         self.spec = spec
 
+        #TODO: Tom did not understant the swithching. Let's separate such a semantics code from here.
         io_type_name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_io_type'
         comp_op_name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_comp_op'
+        #TODO: I don't see above files
         if self.spec.language == Language.PYTHON:
-            io_type_name = 'rtamt.spec.stl.discrete_time.io_type'
-            comp_op_name = 'rtamt.spec.stl.discrete_time.comp_op'
+            io_type_name = 'rtamt.ast.parser_visitor.io_type'
+            comp_op_name = 'rtamt.ast.parser_visitor.comp_op'
 
         self.io_type_mod = __import__(io_type_name, fromlist=[''])
         self.comp_op_mod = __import__(comp_op_name, fromlist=[''])

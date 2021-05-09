@@ -10,7 +10,7 @@ from rtamt.exception.ltl.exception import LTLOfflineException
 from rtamt.exception.ltl.exception import LTLParseException
 from rtamt.exception.ltl.exception import LTLSpecificationException
 from rtamt.exception.exception import RTAMTException
-from rtamt.spec.stl.discrete_time.io_type import StlIOType
+from rtamt.ast.parser_visitor.io_type import StlIOType #TODO: Why need StlIOType in here?
 from rtamt.enumerations.options import Language, Semantics, TimeInterpretation
 from rtamt.spec.stl.discrete_time.specification import STLDiscreteTimeSpecification
 from rtamt.spec.stl.discrete_time.specification import STLDiscreteTimeSpecification as STLSpecification

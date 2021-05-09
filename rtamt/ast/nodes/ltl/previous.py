@@ -1,4 +1,7 @@
+import sys
+
 from rtamt.ast.nodes.unary_node import UnaryNode
+
 
 class Previous(UnaryNode):
     """A class for storing STL Previous nodes
@@ -10,12 +13,9 @@ class Previous(UnaryNode):
             Parameters:
                 child : stl.Node
         """
-        super(Previous, self).__init__(child)
-        self.in_vars = child.in_vars
-        self.out_vars = child.out_vars
-
-        self.name = 'previous(' + child.name + ')'
-
-
-
-
+        name_phrase = 'previous'
+        if sys.version_info.major == 2:
+            #super(UnaryNode, self).__init__(name_phrase, child)    #python2
+            UnaryNode.__init__(self, name_phrase, child)
+        else:
+            super().__init__(name_phrase, child)    #python3

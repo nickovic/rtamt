@@ -1,5 +1,5 @@
 from rtamt.ast.nodes.unary_node import UnaryNode
-from rtamt.ast.nodes.stl.time_bound import TimeBound
+from rtamt.ast.nodes.time_bound import TimeBound
 
 class TimedHistorically(UnaryNode, TimeBound):
     """A class for storing STL Historically nodes
@@ -12,9 +12,7 @@ class TimedHistorically(UnaryNode, TimeBound):
                 child : stl.Node
                 bound : Interval
         """
-        UnaryNode.__init__(self, child)
         TimeBound.__init__(self, begin, end)
-        self.in_vars = child.in_vars
-        self.out_vars = child.out_vars
-
-        self.name = 'historically[' + str(self.begin) + ',' + str(self.end) + '](' + child.name + ')'
+        strTimeBound = self.strTimeBound()
+        name_phrase = 'historically' + strTimeBound #TODO; Maybe it is not the best choice
+        UnaryNode.__init__(self, name_phrase, child)
