@@ -1,6 +1,6 @@
-from rtamt.semantics.abstract_semantics import AbstractSemantics
+from rtamt.semantics.discrete_time_offline_semanitcs import DiscreteTimeOfflineSemanitcs
 
-class ImpliesSemantics(AbstractSemantics):
+class ImpliesSemantics(DiscreteTimeOfflineSemanitcs):
     def __init__(self):
         pass
 

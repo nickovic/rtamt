@@ -1,14 +1,11 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Mon Sep 23 2019
-
-@author: Dejan Nickovic
-"""
 from abc import ABCMeta, abstractmethod
+
+from rtamt.semantics.abstract_evaluator import AbstractEvaluator
 
 NOT_IMPLEMENTED = "You should implement this."
 
-class AbstractSemantics:
+class OfflineEvaluator(AbstractEvaluator):
     """
     Abstract Operation: template for any monitoring operation
     """
@@ -17,4 +14,8 @@ class AbstractSemantics:
     __metaclass__ = ABCMeta
 
     def __init__(self):
-        pass
+        super(AbstractEvaluator, self).__init__()
+
+    @abstractmethod
+    def evaluate(self, *args, **kargs):
+        raise NotImplementedError(NOT_IMPLEMENTED)

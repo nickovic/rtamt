@@ -1,6 +1,6 @@
-from rtamt.semantics.abstract_semantics import AbstractSemantics
+from rtamt.semantics.discrete_time_offline_semanitcs import DiscreteTimeOfflineSemanitcs
 
-class UntilSemantics(AbstractSemantics):
+class UntilSemantics(DiscreteTimeOfflineSemanitcs):
     def __init__(self):
         self.next_out = -float("inf")
 

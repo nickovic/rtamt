@@ -1,7 +1,7 @@
 import collections
-from rtamt.semantics.abstract_semantics import AbstractSemantics
+from rtamt.semantics.discrete_time_offline_semanitcs import DiscreteTimeOfflineSemanitcs
 
-class UntilBoundedSemantics(AbstractSemantics):
+class UntilBoundedSemantics(DiscreteTimeOfflineSemanitcs):
     def __init__(self, begin, end):
         self.begin = begin
         self.end = end

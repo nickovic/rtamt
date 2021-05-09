@@ -1,8 +1,8 @@
-from rtamt.semantics.abstract_semantics import AbstractSemantics
+from rtamt.semantics.discrete_time_offline_semanitcs import DiscreteTimeOfflineSemanitcs
 from rtamt.enumerations.comp_oper import StlComparisonOperator
-from rtamt.exception.ltl.exception import LTLException
+from rtamt.exception.ltl.exception import LTLException #TODO: why ltl is here?
 
-class PredicateSemantics(AbstractSemantics):
+class PredicateSemantics(DiscreteTimeOfflineSemanitcs):
     def __init__(self, op):
         self.op = op
 
