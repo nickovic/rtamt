@@ -1,5 +1,7 @@
 from abc import ABCMeta, abstractmethod
 
+from rtamt.ast.parser_visitor.abstract_visitor import AbstractVisitor
+
 from rtamt.ast.nodes.variable import Variable
 from rtamt.ast.nodes.constant import Constant
 
@@ -37,17 +39,10 @@ from rtamt.ast.nodes.stl.timed_until import TimedUntil
 
 NOT_IMPLEMENTED = "You should implement this."
 
-class STLVisitor:
-    __metaclass__ = ABCMeta
+class STLVisitor(AbstractVisitor):
 
-    def visitNextLayerNodes(self, node, args):
-        for nodeChild in node.children:
-            self.visit(nodeChild, args)
-
-    def visit(self, node, args):
+    def visitHarness(self, node, args):
         out = None
-
-        self.visitNextLayerNodes(node, args)
 
         if isinstance(node, Predicate):
             out = self.visitPredicate(node, args)

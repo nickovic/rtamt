@@ -1,5 +1,7 @@
 from abc import ABCMeta, abstractmethod
 
+from rtamt.ast.parser_visitor.abstract_visitor import AbstractVisitor
+
 from rtamt.ast.nodes.variable import Variable
 from rtamt.ast.nodes.constant import Constant
 
@@ -29,10 +31,10 @@ from rtamt.ast.nodes.ltl.previous import Previous
 
 NOT_IMPLEMENTED = "You should implement this."
 
-class LTLrtamtASTvisitor:
+class LTLrtamtASTvisitor(AbstractVisitor):
     __metaclass__ = ABCMeta
 
-    def visit(self, element, args):
+    def visitHarness(self, element, args):
         out = None
 
         if isinstance(element, Predicate):
