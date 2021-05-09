@@ -27,7 +27,6 @@ from rtamt.ast.nodes.ltl.rise import Rise
 from rtamt.ast.nodes.ltl.fall import Fall
 from rtamt.ast.nodes.ltl.next import Next
 from rtamt.ast.nodes.ltl.previous import Previous
-
 from rtamt.ast.nodes.stl.timed_precedes import TimedPrecedes
 from rtamt.ast.nodes.stl.timed_since import TimedSince
 from rtamt.ast.nodes.stl.timed_once import TimedOnce
@@ -41,201 +40,247 @@ NOT_IMPLEMENTED = "You should implement this."
 class STLVisitor:
     __metaclass__ = ABCMeta
 
-    def visit(self, element, args):
+    def visit(self, node, args):
         out = None
 
 
-        if isinstance(element, Predicate):
-            out = self.visitPredicate(element, args)
-        elif isinstance(element, Variable):
-            out = self.visitVariable(element, args)
-        elif isinstance(element, Neg):
-            out = self.visitNot(element, args)
-        elif isinstance(element, Disjunction):
-            out = self.visitOr(element, args)
-        elif isinstance(element, Conjunction):
-            out = self.visitAnd(element, args)
-        elif isinstance(element, Implies):
-            out = self.visitImplies(element, args)
-        elif isinstance(element, Iff):
-            out = self.visitIff(element, args)
-        elif isinstance(element, Xor):
-            out = self.visitXor(element, args)
-        elif isinstance(element, Eventually):
-            out = self.visitEventually(element, args)
-        elif isinstance(element, Always):
-            out = self.visitAlways(element, args)
-        elif isinstance(element, Until):
-            out = self.visitUntil(element, args)
-        elif isinstance(element, Once):
-            out = self.visitOnce(element, args)
-        elif isinstance(element, Historically):
-            out = self.visitHistorically(element, args)
-        elif isinstance(element, Since):
-            out = self.visitSince(element, args)
-        elif isinstance(element, TimedPrecedes):
-            out = self.visitTimedPrecedes(element, args)
-        elif isinstance(element, Abs):
-            out = self.visitAbs(element, args)
-        elif isinstance(element, Addition):
-            out = self.visitAddition(element, args)
-        elif isinstance(element, Subtraction):
-            out = self.visitSubtraction(element, args)
-        elif isinstance(element, Multiplication):
-            out = self.visitMultiplication(element, args)
-        elif isinstance(element, Division):
-            out = self.visitDivision(element, args)
-        elif isinstance(element, Rise):
-            out = self.visitRise(element, args)
-        elif isinstance(element, Fall):
-            out = self.visitFall(element, args)
-        elif isinstance(element, Constant):
-            out = self.visitConstant(element, args)
-        elif isinstance(element, Previous):
-            out = self.visitPrevious(element, args)
-        elif isinstance(element, Next):
-            out = self.visitNext(element, args)
-        elif isinstance(element, TimedUntil):
-            out = self.visitTimedUntil(element, args)
-        elif isinstance(element, TimedAlways):
-            out = self.visitTimedAlways(element, args)
-        elif isinstance(element, TimedEventually):
-            out = self.visitTimedEventually(element, args)
-        elif isinstance(element, TimedSince):
-            out = self.visitTimedSince(element, args)
-        elif isinstance(element, TimedOnce):
-            out = self.visitTimedOnce(element, args)
-        elif isinstance(element, TimedHistorically):
-            out = self.visitTimedHistorically(element, args)
+        if isinstance(node, Predicate):
+            self.visit(node.children[0], args)
+            self.visit(node.children[1], args)
+            out = self.visitPredicate(node, args)
+        elif isinstance(node, Variable):
+            #Leasf does not need to vist anymore.
+            out = self.visitVariable(node, args)
+        elif isinstance(node, Neg):
+            self.visit(node.children[0], args)
+            out = self.visitNot(node, args)
+        elif isinstance(node, Disjunction):
+            self.visit(node.children[0], args)
+            self.visit(node.children[1], args)
+            out = self.visitOr(node, args)
+        elif isinstance(node, Conjunction):
+            self.visit(node.children[0], args)
+            self.visit(node.children[1], args)
+            out = self.visitAnd(node, args)
+        elif isinstance(node, Implies):
+            self.visit(node.children[0], args)
+            self.visit(node.children[1], args)
+            out = self.visitImplies(node, args)
+        elif isinstance(node, Iff):
+            self.visit(node.children[0], args)
+            self.visit(node.children[1], args)
+            out = self.visitIff(node, args)
+        elif isinstance(node, Xor):
+            self.visit(node.children[0], args)
+            self.visit(node.children[1], args)
+            out = self.visitXor(node, args)
+        elif isinstance(node, Eventually):
+            self.visit(node.children[0], args)
+            out = self.visitEventually(node, args)
+        elif isinstance(node, Always):
+            self.visit(node.children[0], args)
+            out = self.visitAlways(node, args)
+        elif isinstance(node, Until):
+            self.visit(node.children[0], args)
+            self.visit(node.children[1], args)
+            out = self.visitUntil(node, args)
+        elif isinstance(node, Once):
+            self.visit(node.children[0], args)
+            out = self.visitOnce(node, args)
+        elif isinstance(node, Historically):
+            self.visit(node.children[0], args)
+            out = self.visitHistorically(node, args)
+        elif isinstance(node, Since):
+            self.visit(node.children[0], args)
+            self.visit(node.children[1], args)
+            out = self.visitSince(node, args)
+        elif isinstance(node, TimedPrecedes):
+            #Leasf does not need to vist anymore.
+            out = self.visitTimedPrecedes(node, args)
+        elif isinstance(node, Abs):
+            self.visit(node.children[0], args)
+            out = self.visitAbs(node, args)
+        elif isinstance(node, Addition):
+            self.visit(node.children[0], args)
+            self.visit(node.children[1], args)
+            out = self.visitAddition(node, args)
+        elif isinstance(node, Subtraction):
+            self.visit(node.children[0], args)
+            self.visit(node.children[1], args)
+            out = self.visitSubtraction(node, args)
+        elif isinstance(node, Multiplication):
+            self.visit(node.children[0], args)
+            self.visit(node.children[1], args)
+            out = self.visitMultiplication(node, args)
+        elif isinstance(node, Division):
+            self.visit(node.children[0], args)
+            self.visit(node.children[1], args)
+            out = self.visitDivision(node, args)
+        elif isinstance(node, Rise):
+            self.visit(node.children[0], args)
+            out = self.visitRise(node, args)
+        elif isinstance(node, Fall):
+            self.visit(node.children[0], args)
+            out = self.visitFall(node, args)
+        elif isinstance(node, Constant):
+            #Leasf does not need to vist anymore.
+            out = self.visitConstant(node, args)
+        elif isinstance(node, Previous):
+            self.visit(node.children[0], args)
+            out = self.visitPrevious(node, args)
+        elif isinstance(node, Next):
+            out = self.visitNext(node, args)
+            self.visit(node.children[0], args)
+        elif isinstance(node, TimedUntil):
+            self.visit(node.children[0], args)
+            self.visit(node.children[1], args)
+            out = self.visitTimedUntil(node, args)
+        elif isinstance(node, TimedAlways):
+            self.visit(node.children[0], args)
+            out = self.visitTimedAlways(node, args)
+        elif isinstance(node, TimedEventually):
+            out = self.visitTimedEventually(node, args)
+            self.visit(node.children[0], args)
+        elif isinstance(node, TimedSince):
+            self.visit(node.children[0], args)
+            self.visit(node.children[1], args)
+            out = self.visitTimedSince(node, args)
+        elif isinstance(node, TimedOnce):
+            self.visit(node.children[0], args)
+            out = self.visitTimedOnce(node, args)
+        elif isinstance(node, TimedHistorically):
+            self.visit(node.children[0], args)
+            out = self.visitTimedHistorically(node, args)
         else:
-            out = self.visitDefault(element, args)
+            #TODO: perhaps error?
+            out = self.visitDefault(node, args)
         return out
 
 
     @abstractmethod
-    def visitPredicate(self, element, args):
+    def visitPredicate(self, node, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitVariable(self, element, args):
+    def visitVariable(self, node, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitAbs(self, element, args):
+    def visitAbs(self, node, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitAddition(self, element, args):
+    def visitAddition(self, node, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitSubtraction(self, element, args):
+    def visitSubtraction(self, node, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitMultiplication(self, element, args):
+    def visitMultiplication(self, node, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitDivision(self, element, args):
+    def visitDivision(self, node, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitNot(self, element, args):
+    def visitNot(self, node, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitAnd(self, element, args):
+    def visitAnd(self, node, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitOr(self, element, args):
+    def visitOr(self, node, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitImplies(self, element, args):
+    def visitImplies(self, node, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitIff(self, element, args):
+    def visitIff(self, node, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitXor(self, element, args):
+    def visitXor(self, node, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitEventually(self, element, args):
+    def visitEventually(self, node, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitAlways(self, element, args):
+    def visitAlways(self, node, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitUntil(self, element, args):
+    def visitUntil(self, node, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitOnce(self, element, args):
+    def visitOnce(self, node, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitHistorically(self, element, args):
+    def visitHistorically(self, node, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitSince(self, element, args):
+    def visitSince(self, node, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitRise(self, element, args):
+    def visitRise(self, node, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitFall(self, element, args):
+    def visitFall(self, node, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitConstant(self, element, args):
+    def visitConstant(self, node, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitPrevious(self, element, args):
+    def visitPrevious(self, node, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitNext(self, element, args):
+    def visitNext(self, node, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitTimedPrecedes(self, element, args):
+    def visitTimedPrecedes(self, node, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitTimedOnce(self, element, args):
+    def visitTimedOnce(self, node, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitTimedHistorically(self, element, args):
+    def visitTimedHistorically(self, node, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitTimedSince(self, element, args):
+    def visitTimedSince(self, node, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitTimedAlways(self, element, args):
+    def visitTimedAlways(self, node, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitTimedEventually(self, element, args):
+    def visitTimedEventually(self, node, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitTimedUntil(self, element, args):
+    def visitTimedUntil(self, node, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitDefault(self, element, args):
+    def visitDefault(self, node, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
