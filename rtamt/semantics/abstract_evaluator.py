@@ -1,14 +1,9 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Mon Sep 23 2019
-
-@author: Dejan Nickovic
-"""
 from abc import ABCMeta, abstractmethod
 
 NOT_IMPLEMENTED = "You should implement this."
 
-class AbstractSemantics:
+class AbstractEvaluator:
     """
     Abstract Operation: template for any monitoring operation
     """
@@ -18,3 +13,7 @@ class AbstractSemantics:
 
     def __init__(self):
         pass
+
+    @abstractmethod
+    def reset(self, *args, **kargs):
+        raise NotImplementedError(NOT_IMPLEMENTED)

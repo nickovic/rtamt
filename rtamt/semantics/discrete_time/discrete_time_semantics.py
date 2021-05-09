@@ -1,20 +1,18 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Mon Sep 23 2019
-
-@author: Dejan Nickovic
-"""
 from abc import ABCMeta, abstractmethod
+
+from rtamt.semantics.abstract_semantics import AbstractSemantics
 
 NOT_IMPLEMENTED = "You should implement this."
 
-class AbstractSemantics:
+class DiscreteTimeSemantics(AbstractSemantics):
     """
     Abstract Operation: template for any monitoring operation
     """
-    #TODO: so far it does nothing. we need to think what we need to do here.
+    #TODO: standarize time trajectory data structure for Discrete time in here.
 
     __metaclass__ = ABCMeta
 
     def __init__(self):
         pass
+
