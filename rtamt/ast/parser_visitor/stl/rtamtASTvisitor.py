@@ -47,99 +47,71 @@ class STLVisitor:
     def visit(self, node, args):
         out = None
 
+        self.visitNextLayerNodes(node, args)
 
         if isinstance(node, Predicate):
-            self.visitNextLayerNodes(node, args)
             out = self.visitPredicate(node, args)
         elif isinstance(node, Variable):
-            #Leasf does not need to vist anymore.
             out = self.visitVariable(node, args)
         elif isinstance(node, Neg):
-            self.visitNextLayerNodes(node, args)
             out = self.visitNot(node, args)
         elif isinstance(node, Disjunction):
-            self.visitNextLayerNodes(node, args)
             out = self.visitOr(node, args)
         elif isinstance(node, Conjunction):
-            self.visitNextLayerNodes(node, args)
             out = self.visitAnd(node, args)
         elif isinstance(node, Implies):
-            self.visitNextLayerNodes(node, args)
             out = self.visitImplies(node, args)
         elif isinstance(node, Iff):
-            self.visitNextLayerNodes(node, args)
             out = self.visitIff(node, args)
         elif isinstance(node, Xor):
-            self.visitNextLayerNodes(node, args)
             out = self.visitXor(node, args)
         elif isinstance(node, Eventually):
-            self.visitNextLayerNodes(node, args)
             out = self.visitEventually(node, args)
         elif isinstance(node, Always):
-            self.visitNextLayerNodes(node, args)
             out = self.visitAlways(node, args)
         elif isinstance(node, Until):
-            self.visitNextLayerNodes(node, args)
             out = self.visitUntil(node, args)
         elif isinstance(node, Once):
-            self.visitNextLayerNodes(node, args)
             out = self.visitOnce(node, args)
         elif isinstance(node, Historically):
-            self.visitNextLayerNodes(node, args)
             out = self.visitHistorically(node, args)
         elif isinstance(node, Since):
-            self.visitNextLayerNodes(node, args)
             out = self.visitSince(node, args)
         elif isinstance(node, TimedPrecedes):
             #Leasf does not need to vist anymore.
             out = self.visitTimedPrecedes(node, args)
         elif isinstance(node, Abs):
-            self.visitNextLayerNodes(node, args)
             out = self.visitAbs(node, args)
         elif isinstance(node, Addition):
-            self.visitNextLayerNodes(node, args)
             out = self.visitAddition(node, args)
         elif isinstance(node, Subtraction):
-            self.visitNextLayerNodes(node, args)
             out = self.visitSubtraction(node, args)
         elif isinstance(node, Multiplication):
-            self.visitNextLayerNodes(node, args)
             out = self.visitMultiplication(node, args)
         elif isinstance(node, Division):
-            self.visitNextLayerNodes(node, args)
             out = self.visitDivision(node, args)
         elif isinstance(node, Rise):
-            self.visitNextLayerNodes(node, args)
             out = self.visitRise(node, args)
         elif isinstance(node, Fall):
-            self.visitNextLayerNodes(node, args)
             out = self.visitFall(node, args)
         elif isinstance(node, Constant):
             #Leasf does not need to vist anymore.
             out = self.visitConstant(node, args)
         elif isinstance(node, Previous):
-            self.visitNextLayerNodes(node, args)
             out = self.visitPrevious(node, args)
         elif isinstance(node, Next):
-            self.visitNextLayerNodes(node, args)
             self.visit(node.children[0], args)
         elif isinstance(node, TimedUntil):
-            self.visitNextLayerNodes(node, args)
             out = self.visitTimedUntil(node, args)
         elif isinstance(node, TimedAlways):
-            self.visitNextLayerNodes(node, args)
             out = self.visitTimedAlways(node, args)
         elif isinstance(node, TimedEventually):
-            self.visitNextLayerNodes(node, args)
             out = self.visitTimedEventually(node, args)
         elif isinstance(node, TimedSince):
-            self.visitNextLayerNodes(node, args)
             out = self.visitTimedSince(node, args)
         elif isinstance(node, TimedOnce):
-            self.visitNextLayerNodes(node, args)
             out = self.visitTimedOnce(node, args)
         elif isinstance(node, TimedHistorically):
-            self.visitNextLayerNodes(node, args)
             out = self.visitTimedHistorically(node, args)
         else:
             #TODO: perhaps error?
