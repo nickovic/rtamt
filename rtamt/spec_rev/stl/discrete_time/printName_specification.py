@@ -102,7 +102,7 @@ class PrintNameSpecification(LTLrevSpecification):
 
     def printName(self, *args, **kargs):
         printNameVisitor = PrintNameVisitor()
-        printNameVisitor.visit(self.top, {})
+        printNameVisitor.visit(self.top)
 
     @property
     def sampling_period(self):
