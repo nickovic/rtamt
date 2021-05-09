@@ -7,7 +7,7 @@ class NextSemantics(DiscreteTimeOfflineSemanitcs):
     def reset(self):
         self.nxt = float("inf")
 
-    def update(self, samples):
+    def evaluate(self, samples):
         out = []
         for i in range(len(samples)-1, -1, -1):
             out_sample = self.nxt

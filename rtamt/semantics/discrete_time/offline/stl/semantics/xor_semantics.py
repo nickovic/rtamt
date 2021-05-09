@@ -7,7 +7,7 @@ class XorSemantics(DiscreteTimeOfflineSemanitcs):
     def reset(self):
         pass
 
-    def update(self, left, right):
+    def evaluate(self, left, right):
         out = []
 
         for i in range(len(left)):

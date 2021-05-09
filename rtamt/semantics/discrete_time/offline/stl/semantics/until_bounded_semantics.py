@@ -22,7 +22,7 @@ class UntilBoundedSemantics(DiscreteTimeOfflineSemanitcs):
             self.buffer_left.append(s_left)
             self.buffer_right.append(s_right)
 
-    def update(self, left, right):
+    def evaluate(self, left, right):
 
         out = []
         for i in range(len(left)-1, -1, -1):

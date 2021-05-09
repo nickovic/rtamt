@@ -45,7 +45,7 @@ class STLOfflineEvaluator(STLVisitor):
         in_sample_2 = self.visit(node.children[1], args)
 
         monitor = self.node_monitor_dict[node.name]
-        out_sample = monitor.update(in_sample_1, in_sample_2)
+        out_sample = monitor.evaluate(in_sample_1, in_sample_2)
         sat_samples = monitor.sat(in_sample_1, in_sample_2)
         out = []
 
@@ -100,7 +100,7 @@ class STLOfflineEvaluator(STLVisitor):
 
     def visitConstant(self, node, args):
         monitor = self.node_monitor_dict[node.name]
-        out_sample = monitor.update()
+        out_sample = monitor.evaluate()
         if len(args) > 0:
             length = args[0]
             out = []
@@ -115,7 +115,7 @@ class STLOfflineEvaluator(STLVisitor):
         monitor = self.node_monitor_dict[node.name]
 
 
-        out_sample = monitor.update(in_sample)
+        out_sample = monitor.evaluate(in_sample)
 
         return out_sample
 
@@ -124,7 +124,7 @@ class STLOfflineEvaluator(STLVisitor):
         in_sample_2 = self.visit(node.children[1], args)
 
         monitor = self.node_monitor_dict[node.name]
-        out_sample = monitor.update(in_sample_1, in_sample_2)
+        out_sample = monitor.evaluate(in_sample_1, in_sample_2)
 
         return out_sample
 
@@ -133,7 +133,7 @@ class STLOfflineEvaluator(STLVisitor):
         in_sample_2 = self.visit(node.children[1], args)
 
         monitor = self.node_monitor_dict[node.name]
-        out_sample = monitor.update(in_sample_1, in_sample_2)
+        out_sample = monitor.evaluate(in_sample_1, in_sample_2)
 
         return out_sample
 
@@ -142,7 +142,7 @@ class STLOfflineEvaluator(STLVisitor):
         in_sample_2 = self.visit(node.children[1], args)
 
         monitor = self.node_monitor_dict[node.name]
-        out_sample = monitor.update(in_sample_1, in_sample_2)
+        out_sample = monitor.evaluate(in_sample_1, in_sample_2)
 
         return out_sample
 
@@ -151,7 +151,7 @@ class STLOfflineEvaluator(STLVisitor):
         in_sample_2 = self.visit(node.children[1], args)
 
         monitor = self.node_monitor_dict[node.name]
-        out_sample = monitor.update(in_sample_1, in_sample_2)
+        out_sample = monitor.evaluate(in_sample_1, in_sample_2)
 
         return out_sample
 
@@ -159,7 +159,7 @@ class STLOfflineEvaluator(STLVisitor):
         in_sample = self.visit(node.children[0], args)
 
         monitor = self.node_monitor_dict[node.name]
-        out_sample = monitor.update(in_sample)
+        out_sample = monitor.evaluate(in_sample)
 
         return out_sample
 
@@ -167,7 +167,7 @@ class STLOfflineEvaluator(STLVisitor):
         in_sample = self.visit(node.children[0], args)
 
         monitor = self.node_monitor_dict[node.name]
-        out_sample = monitor.update(in_sample)
+        out_sample = monitor.evaluate(in_sample)
 
         return out_sample
 
@@ -175,7 +175,7 @@ class STLOfflineEvaluator(STLVisitor):
         in_sample = self.visit(node.children[0], args)
 
         monitor = self.node_monitor_dict[node.name]
-        out_sample = monitor.update(in_sample)
+        out_sample = monitor.evaluate(in_sample)
 
         return out_sample
 
@@ -183,7 +183,7 @@ class STLOfflineEvaluator(STLVisitor):
         in_sample = self.visit(node.children[0], args)
 
         monitor = self.node_monitor_dict[node.name]
-        out_sample = monitor.update(in_sample)
+        out_sample = monitor.evaluate(in_sample)
 
         return out_sample
 
@@ -191,7 +191,7 @@ class STLOfflineEvaluator(STLVisitor):
         in_sample = self.visit(node.children[0], args)
 
         monitor = self.node_monitor_dict[node.name]
-        out_sample = monitor.update(in_sample)
+        out_sample = monitor.evaluate(in_sample)
 
         return out_sample
 
@@ -200,7 +200,7 @@ class STLOfflineEvaluator(STLVisitor):
         in_sample_2 = self.visit(node.children[1], args)
 
         monitor = self.node_monitor_dict[node.name]
-        out_sample = monitor.update(in_sample_1, in_sample_2)
+        out_sample = monitor.evaluate(in_sample_1, in_sample_2)
 
         return out_sample
 
@@ -209,7 +209,7 @@ class STLOfflineEvaluator(STLVisitor):
         in_sample_2 = self.visit(node.children[1], args)
 
         monitor = self.node_monitor_dict[node.name]
-        out_sample = monitor.update(in_sample_1, in_sample_2)
+        out_sample = monitor.evaluate(in_sample_1, in_sample_2)
 
         return out_sample
 
@@ -218,7 +218,7 @@ class STLOfflineEvaluator(STLVisitor):
         in_sample_2 = self.visit(node.children[1], args)
 
         monitor = self.node_monitor_dict[node.name]
-        out_sample = monitor.update(in_sample_1, in_sample_2)
+        out_sample = monitor.evaluate(in_sample_1, in_sample_2)
 
         return out_sample
 
@@ -227,7 +227,7 @@ class STLOfflineEvaluator(STLVisitor):
         in_sample_2 = self.visit(node.children[1], args)
 
         monitor = self.node_monitor_dict[node.name]
-        out_sample = monitor.update(in_sample_1, in_sample_2)
+        out_sample = monitor.evaluate(in_sample_1, in_sample_2)
 
         return out_sample
 
@@ -236,7 +236,7 @@ class STLOfflineEvaluator(STLVisitor):
         in_sample_2 = self.visit(node.children[1], args)
 
         monitor = self.node_monitor_dict[node.name]
-        out_sample = monitor.update(in_sample_1, in_sample_2)
+        out_sample = monitor.evaluate(in_sample_1, in_sample_2)
 
         return out_sample
 
@@ -244,7 +244,7 @@ class STLOfflineEvaluator(STLVisitor):
         in_sample = self.visit(node.children[0], args)
 
         monitor = self.node_monitor_dict[node.name]
-        out_sample = monitor.update(in_sample)
+        out_sample = monitor.evaluate(in_sample)
 
         return out_sample
 
@@ -252,7 +252,7 @@ class STLOfflineEvaluator(STLVisitor):
         in_sample = self.visit(node.children[0], args)
 
         monitor = self.node_monitor_dict[node.name]
-        out_sample = monitor.update(in_sample)
+        out_sample = monitor.evaluate(in_sample)
 
         return out_sample
 
@@ -261,7 +261,7 @@ class STLOfflineEvaluator(STLVisitor):
         in_sample_2 = self.visit(node.children[1], args)
 
         monitor = self.node_monitor_dict[node.name]
-        out_sample = monitor.update(in_sample_1, in_sample_2)
+        out_sample = monitor.evaluate(in_sample_1, in_sample_2)
 
         return out_sample
 
@@ -269,7 +269,7 @@ class STLOfflineEvaluator(STLVisitor):
         in_sample = self.visit(node.children[0], args)
 
         monitor = self.node_monitor_dict[node.name]
-        out_sample = monitor.update(in_sample)
+        out_sample = monitor.evaluate(in_sample)
 
         return out_sample
 
@@ -277,7 +277,7 @@ class STLOfflineEvaluator(STLVisitor):
         in_sample = self.visit(node.children[0], args)
 
         monitor = self.node_monitor_dict[node.name]
-        out_sample = monitor.update(in_sample)
+        out_sample = monitor.evaluate(in_sample)
 
         return out_sample
 
@@ -286,7 +286,7 @@ class STLOfflineEvaluator(STLVisitor):
         in_sample_2 = self.visit(node.children[1], args)
 
         monitor = self.node_monitor_dict[node.name]
-        out_sample = monitor.update(in_sample_1, in_sample_2)
+        out_sample = monitor.evaluate(in_sample_1, in_sample_2)
 
         return out_sample
 
@@ -295,7 +295,7 @@ class STLOfflineEvaluator(STLVisitor):
         in_sample_2 = self.visit(node.children[1], args)
 
         monitor = self.node_monitor_dict[node.name]
-        out_sample = monitor.update(in_sample_1, in_sample_2)
+        out_sample = monitor.evaluate(in_sample_1, in_sample_2)
 
         return out_sample
 
@@ -304,7 +304,7 @@ class STLOfflineEvaluator(STLVisitor):
         in_sample_2 = self.visit(node.children[1], args)
 
         monitor = self.node_monitor_dict[node.name]
-        out_sample = monitor.update(in_sample_1, in_sample_2)
+        out_sample = monitor.evaluate(in_sample_1, in_sample_2)
 
         return out_sample
 
@@ -312,7 +312,7 @@ class STLOfflineEvaluator(STLVisitor):
         in_sample = self.visit(node.children[0], args)
 
         monitor = self.node_monitor_dict[node.name]
-        out_sample = monitor.update(in_sample)
+        out_sample = monitor.evaluate(in_sample)
 
         return out_sample
 
@@ -320,7 +320,7 @@ class STLOfflineEvaluator(STLVisitor):
         in_sample = self.visit(node.children[0], args)
 
         monitor = self.node_monitor_dict[node.name]
-        out_sample = monitor.update(in_sample)
+        out_sample = monitor.evaluate(in_sample)
 
         return out_sample
 
@@ -329,7 +329,7 @@ class STLOfflineEvaluator(STLVisitor):
         in_sample_2 = self.visit(node.children[1], args)
 
         monitor = self.node_monitor_dict[node.name]
-        out_sample = monitor.update(in_sample_1, in_sample_2)
+        out_sample = monitor.evaluate(in_sample_1, in_sample_2)
 
         return out_sample
 
@@ -337,7 +337,7 @@ class STLOfflineEvaluator(STLVisitor):
         in_sample = self.visit(node.children[0], args)
 
         monitor = self.node_monitor_dict[node.name]
-        out_sample = monitor.update(in_sample)
+        out_sample = monitor.evaluate(in_sample)
 
         return out_sample
 
@@ -345,7 +345,7 @@ class STLOfflineEvaluator(STLVisitor):
         in_sample = self.visit(node.children[0], args)
 
         monitor = self.node_monitor_dict[node.name]
-        out_sample = monitor.update(in_sample)
+        out_sample = monitor.evaluate(in_sample)
 
         return out_sample
 

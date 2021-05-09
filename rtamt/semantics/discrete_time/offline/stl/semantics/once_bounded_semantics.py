@@ -18,7 +18,7 @@ class OnceBoundedSemantics(DiscreteTimeOfflineSemanitcs):
             val = - float("inf")
             self.buffer.append(val)
 
-    def update(self, samples):
+    def evaluate(self, samples):
         out = []
 
         for sample in samples:

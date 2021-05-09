@@ -7,7 +7,7 @@ class AlwaysSemantics(DiscreteTimeOfflineSemanitcs):
     def reset(self):
         self.prev_out = float("inf")
 
-    def update(self, samples):
+    def evaluate(self, samples):
         out = []
         for i in range(len(samples)-1, -1, -1):
             out_sample = min(samples[i], self.prev_out)

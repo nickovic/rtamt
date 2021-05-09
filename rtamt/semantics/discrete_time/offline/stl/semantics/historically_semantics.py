@@ -7,7 +7,7 @@ class HistoricallySemantics(DiscreteTimeOfflineSemanitcs):
     def reset(self):
         self.prev_out = float("inf")
 
-    def update(self, samples):
+    def evaluate(self, samples):
         out = []
         for sample in samples:
             out_sample = min(sample, self.prev_out)

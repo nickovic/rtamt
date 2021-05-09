@@ -7,7 +7,7 @@ class NotSemantics(DiscreteTimeOfflineSemanitcs):
     def reset(self):
         pass
 
-    def update(self, samples):
+    def evaluate(self, samples):
         out = []
         for sample in samples:
             out_sample = - sample

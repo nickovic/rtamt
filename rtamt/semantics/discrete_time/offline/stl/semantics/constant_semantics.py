@@ -7,5 +7,5 @@ class ConstantSemantics(DiscreteTimeOfflineSemanitcs):
     def reset(self):
         pass
 
-    def update(self):
+    def evaluate(self):
         return self.val

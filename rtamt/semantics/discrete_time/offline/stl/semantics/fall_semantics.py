@@ -7,7 +7,7 @@ class FallSemantics(DiscreteTimeOfflineSemanitcs):
     def reset(self):
         self.prev = float("inf")
 
-    def update(self, samples):
+    def evaluate(self, samples):
         out = []
         for sample in samples:
             out_sample = min(self.prev, - sample)
