@@ -14,4 +14,5 @@ spec.declare_var('a', 'float')
 spec.spec = 'always(a>=2)'
 spec.parse()
 
-rob = spec.printName()
+out = spec.printName()
+print('Inclusion relationship = '+out)
