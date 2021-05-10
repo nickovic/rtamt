@@ -95,7 +95,7 @@ class STLVisitor(AbstractVisitor):
         elif isinstance(node, Previous):
             out = self.visitPrevious(node, pre_out, *args, **kwargs)
         elif isinstance(node, Next):
-            self.visit(node.children[0], pre_out, *args, **kwargs)
+            out = self.visitNext(node, pre_out, *args, **kwargs)
         elif isinstance(node, TimedUntil):
             out = self.visitTimedUntil(node, pre_out, *args, **kwargs)
         elif isinstance(node, TimedAlways):
