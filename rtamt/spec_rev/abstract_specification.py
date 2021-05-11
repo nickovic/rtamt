@@ -99,6 +99,10 @@ class AbstractSpecification(object):
         self.online_evaluator = None
         self.offline_evaluator = None
 
+        #
+        self.in_vars = set()
+        self.out_vars = set()
+
     # Parses property
     # string can be either file path containing the STL property
     # or the textual property itself
@@ -119,6 +123,123 @@ class AbstractSpecification(object):
         # Create the visitor for the actual spec nodes
         visitor = self.RtamtPaser(self) #TODO: Why the constructor is self?
         self.top = visitor.visitSpecification_file(ctx)
+
+
+
+    def set_var_io_type(self, var_name, var_iotype):
+        if not var_name in self.vars:
+            logging.warning('The variable {} does not exist'.format(var_name))
+        else:
+            if var_iotype == 'input':
+                self.add_input_var(var_name)
+                self.remove_output_var(var_name)
+                self.var_io_dict[var_name] = 'input'
+            elif var_iotype == 'output':
+                self.add_output_var(var_name)
+                self.remove_input_var(var_name)
+                self.var_io_dict[var_name] = 'output'
+            else:
+                self.remove_input_var(var_name)
+                self.remove_output_var(var_name)
+                self.var_io_dict[var_name] = 'undefined'
+
+    def add_input_var(self, input_var):
+        self.in_vars.add(input_var)
+
+    def remove_input_var(self, var):
+        self.in_vars.discard(var)
+
+    def add_output_var(self, output_var):
+        self.out_vars.add(output_var)
+
+    def remove_output_var(self, var):
+        self.out_vars.discard(var)
+
+    def import_module(self, from_name, module_name):
+        try:
+            module = importlib.import_module(from_name)
+            self.modules[module_name] = module
+        except ImportError:
+            raise STLParseException('The module {} cannot be loaded'.format(from_name))
+
+    def declare_const(self, const_name, const_type, const_val):
+        if const_name in self.vars:
+            raise STLParseException('Constant {} already declared'.format(const_name))
+
+        self.const_type_dict[const_name] = const_type
+        self.const_val_dict[const_name] = const_val
+        self.vars.add(const_name)
+
+    def declare_var(self, var_name, var_type):
+        if var_name in self.vars:
+            logging.warning(
+                'Variable {} was already declared. It is now overriden with the new declaration.'.format(var_name))
+
+        # Associate to variable name 'var' its type 'type'
+        self.var_type_dict[var_name] = var_type
+
+        # Add variable name 'var' to the set of variables
+        self.add_var(var_name)
+        self.free_vars.add(var_name)
+        instance = self.create_var_from_name(var_name)
+        self.var_object_dict[var_name] = instance
+
+        # Add the default variable topic to var
+        self.var_topic_dict[var_name] = 'rtamt/{}'.format(var_name)
+
+        self.var_io_dict[var_name] = 'output'
+
+    def set_var_topic(self, var_name, var_topic):
+        if not var_name in self.vars:
+            logging.warning(
+                'The variable {0} is not declared. Setting its topic name to {1} is ignored.'.format(var_name,
+                                                                                                     var_topic))
+        else:
+            topic = self.var_topic_dict[var_name]
+            self.var_topic_dict[var_name] = var_topic
+
+    def create_var_from_name(self, var_name):
+        var = None
+        var_type = self.var_type_dict[var_name]
+        if var_type.encode('utf-8') == 'float'.encode('utf-8'):
+            var = float()
+        elif var_type.encode('utf-8') == 'int'.encode('utf-8'):
+            var = int()
+        elif var_type.encode('utf-8') == 'complex'.encode('utf-8'):
+            var = complex()
+        else:
+            try:
+                var_module = self.modules[var_type]
+                class_ = getattr(var_module, var_type)
+                var = class_()
+            except KeyError:
+                raise STLParseException('The type {} does not seem to be imported.'.format(var_type))
+        return var
+
+    @property
+    def semantics(self):
+        return self.__semantics
+
+    @semantics.setter
+    def semantics(self, semantics):
+        self.__semantics = semantics
+
+    @property
+    def in_vars(self):
+        return self.__in_vars
+
+    @in_vars.setter
+    def in_vars(self, in_vars):
+        self.__in_vars = in_vars
+
+    @property
+    def out_vars(self):
+        return self.__out_vars
+
+    @out_vars.setter
+    def out_vars(self, out_vars):
+        self.__out_vars = out_vars
+
 
     @property
     def spec(self):
