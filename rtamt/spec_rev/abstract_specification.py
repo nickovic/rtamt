@@ -5,7 +5,6 @@ from abc import ABCMeta, abstractmethod
 from antlr4 import *
 from antlr4.InputStream import InputStream
 
-from rtamt.parser.ltl.error.parser_error_listener import LTLParserErrorListener #TODO: consdier the location of listener
 
 from rtamt.enumerations.options import TimeInterpretation
 from rtamt.exception.exception import RTAMTException
@@ -50,7 +49,7 @@ class AbstractSpecification(object):
     """
     __metaclass__ = ABCMeta
 
-    def __init__(self, AntrlLexer, AntrlParser, RtamtPaser):
+    def __init__(self, AntrlLexer, AntrlParser, AntrlParserErrorListener, RtamtPaser):
         self.S_UNIT = int(1000000000)
         self.MS_UNIT = int(1000000)
         self.US_UNIT = int(1000)
@@ -94,6 +93,7 @@ class AbstractSpecification(object):
         # ANTRL lexser paser
         self.AntrlLexer = AntrlLexer
         self.AntrlParser = AntrlParser
+        self.AntrlParserErrorListener = AntrlParserErrorListener
         self.RtamtPaser = RtamtPaser
 
         self.online_evaluator = None
@@ -113,7 +113,7 @@ class AbstractSpecification(object):
         lexer = self.AntrlLexer(input_stream)
         stream = CommonTokenStream(lexer)
         parser = self.AntrlParser(stream)
-        parser._listeners = [LTLParserErrorListener()]
+        parser._listeners = [self.AntrlParserErrorListener()]
         ctx = parser.specification_file()
 
         # Create the visitor for the actual spec nodes

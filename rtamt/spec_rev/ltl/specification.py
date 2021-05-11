@@ -6,8 +6,9 @@ from antlr4.InputStream import InputStream
 
 from rtamt.spec_rev.abstract_specification import AbstractSpecification
 
-from rtamt.parser.ltl.LtlLexer import LtlLexer
-from rtamt.parser.ltl.LtlParser import LtlParser
+from rtamt.antrl_parser.ltl.LtlLexer import LtlLexer
+from rtamt.antrl_parser.ltl.LtlParser import LtlParser
+from rtamt.antrl_parser.ltl.error.parser_error_listener import LTLParserErrorListener
 from rtamt.ast.parser_visitor.ltl.rtamtASTparser import LTLrtamtASTparser
 
 from rtamt.parser.ltl.error.parser_error_listener import LTLParserErrorListener
@@ -46,7 +47,7 @@ class LTLrevSpecification(AbstractSpecification):
 
     def __init__(self, semantics=Semantics.STANDARD, language=Language.PYTHON):
         """Constructor for STL Specification"""
-        super(LTLrevSpecification, self).__init__(LtlLexer, LtlParser, LTLrtamtASTparser)
+        super(LTLrevSpecification, self).__init__(LtlLexer, LtlParser, LTLParserErrorListener, LTLrtamtASTparser)
 
         self.name = 'LTL Specification'
 
