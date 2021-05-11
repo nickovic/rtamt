@@ -51,7 +51,7 @@ class STLrevDiscreteTimeSpecification(AbstractSpecification):
 
     def __init__(self, semantics=Semantics.STANDARD, language=Language.PYTHON):
         """Constructor for STL Specification"""
-        self.semantics = semantics
+        self.semantics = semantics #TODO: re-think the declearation is here?
         self.language = language
         super(STLrevDiscreteTimeSpecification, self).__init__(StlLexer, StlParser, STLParserErrorListener, STLrtamtASTparser)
         self.name = 'STL Specification'
@@ -188,60 +188,6 @@ class STLrevDiscreteTimeSpecification(AbstractSpecification):
         out = out_t
 
         return out
-
-    # # Offline copy & paste from densetime
-    # def evaluate(self, *args, **kargs):
-    #     if self.offline_evaluator is None:
-    #         # Initialize the online_evaluator
-    #         self.offline_evaluator = STLOfflineEvaluator(self)
-    #         # self.offline_evaluator = STLOfflineEvaluator(self)
-    #         self.top.accept(self.offline_evaluator)
-
-    #     for arg in args:
-    #         var_name = arg[0]
-    #         var_object = arg[1]
-    #         self.var_object_dict[var_name] = var_object
-
-    #     # evaluate modular sub-specs
-    #     for key in self.var_subspec_dict:
-    #         node = self.var_subspec_dict[key]
-    #         out = self.offline_evaluator.evaluate(node, [])
-    #         self.var_object_dict[key] = out
-
-    #     out = self.offline_evaluator.evaluate(self.top, [])
-    #     self.var_object_dict = self.var_object_dict.fromkeys(self.var_object_dict, [])
-    #     return out
-
-    # def offline(self, dataset):
-    #     counter = 0
-    #     prev_signal_length = 0
-    #     signal_length = 0
-    #     out = 0
-    #
-    #     for var_name in dataset:
-    #         signal_length = len(dataset[var_name])
-    #         if counter > 0 and not (signal_length == prev_signal_length):
-    #             raise STLOfflineException('Input signals have different length')
-    #         prev_signal_length = signal_length
-    #         counter = counter + 1
-    #
-    #     for i in range(signal_length):
-    #         signal_snapshot = []
-    #         counter = 0
-    #         prev_time = 0
-    #         for var_name in dataset:
-    #             signal = dataset[var_name]
-    #             sample = signal[i]
-    #             time = sample[0]
-    #             value = sample[1]
-    #             if counter > 0 and not (time == prev_time):
-    #                 raise STLOfflineException('The time indices do not agree')
-    #             signal_snapshot.append((var_name, value))
-    #             counter = counter + 1
-    #             prev_time = time
-    #         out = self.update(time, signal_snapshot)
-    #
-    #     return out
 
     def reset(self):
         if self.online_evaluator is not None:
