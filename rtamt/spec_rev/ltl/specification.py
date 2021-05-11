@@ -46,7 +46,8 @@ class LTLrevSpecification(AbstractSpecification):
 
     def __init__(self, semantics=Semantics.STANDARD, language=Language.PYTHON):
         """Constructor for STL Specification"""
-        AbstractSpecification.__init__(self)
+        AbstractSpecification.__init__(self, LtlLexer, LtlParser, LTLrtamtASTparser)
+
         self.name = 'LTL Specification'
 
         self.reseter = LTLReset()
@@ -169,27 +170,6 @@ class LTLrevSpecification(AbstractSpecification):
     @out_vars.setter
     def out_vars(self, out_vars):
         self.__out_vars = out_vars
-
-    # Parses the STL property
-    # string can be either file path containing the STL property
-    # or the textual property itself
-    def parse(self):
-        if self.spec is None:
-            raise STLParseException('STL specification if empty')
-
-        # Parse the STL spec - ANTLR4 magic
-
-        entire_spec = self.modular_spec + self.spec
-        input_stream = InputStream(entire_spec)
-        lexer = LtlLexer(input_stream)
-        stream = CommonTokenStream(lexer)
-        parser = LtlParser(stream)
-        parser._listeners = [LTLParserErrorListener()]
-        ctx = parser.specification_file()
-
-        # Create the visitor for the actual spec nodes
-        visitor = LTLrtamtASTparser(self)
-        self.top = visitor.visitSpecification_file(ctx)
 
     def pastify(self):
         # Translate bounded future STL to past STL

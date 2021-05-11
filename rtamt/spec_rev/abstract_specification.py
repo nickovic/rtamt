@@ -1,11 +1,19 @@
 import os
 import sys
 from abc import ABCMeta, abstractmethod
+
+from antlr4 import *
+from antlr4.InputStream import InputStream
+
+from rtamt.parser.ltl.error.parser_error_listener import LTLParserErrorListener #TODO: consdier the location of listener
+
 from rtamt.enumerations.options import TimeInterpretation
 from rtamt.exception.exception import RTAMTException
 
+from rtamt.exception.stl.exception import STLParseException #TODO: It should not be stl exception
 
-class AbstractSpecification:
+
+class AbstractSpecification(object):
     """A class used as a container for specifications
 
     Attributes:
@@ -42,7 +50,7 @@ class AbstractSpecification:
     """
     __metaclass__ = ABCMeta
 
-    def __init__(self):
+    def __init__(self, antrl_lexer_class, antrl_parser_class, rtamt_paser_class):
         self.S_UNIT = int(1000000000)
         self.MS_UNIT = int(1000000)
         self.US_UNIT = int(1000)
@@ -63,6 +71,7 @@ class AbstractSpecification:
         self.spec = None
         self.modular_spec = ''
 
+        # ROS
         self.vars = set()
         self.free_vars = set()
         self.publish_var = ''
@@ -82,8 +91,34 @@ class AbstractSpecification:
 
         self.top = None
 
+        # ANTRL lexser paser
+        self.antrl_lexer_class = antrl_lexer_class
+        self.antrl_parser_class = antrl_parser_class
+        self.rtamt_paser_class = rtamt_paser_class
+
         self.online_evaluator = None
         self.offline_evaluator = None
+
+    # Parses property
+    # string can be either file path containing the STL property
+    # or the textual property itself
+    def parse(self):
+        if self.spec is None:
+            raise STLParseException('STL specification if empty')
+
+        # Parse the STL spec - ANTLR4 magic
+
+        entire_spec = self.modular_spec + self.spec
+        input_stream = InputStream(entire_spec)
+        lexer = self.antrl_lexer_class(input_stream)
+        stream = CommonTokenStream(lexer)
+        parser = self.antrl_parser_class(stream)
+        parser._listeners = [LTLParserErrorListener()]
+        ctx = parser.specification_file()
+
+        # Create the visitor for the actual spec nodes
+        visitor = self.rtamt_paser_class(self) #TODO: Why the constructor is self?
+        self.top = visitor.visitSpecification_file(ctx)
 
     @property
     def spec(self):
@@ -208,10 +243,6 @@ class AbstractSpecification:
             raise RTAMTException('The file {} does not exist.'.format(path))
             sys.exit()
         return out
-
-    @abstractmethod
-    def parse(self):
-        pass
 
     @abstractmethod
     def update(self, args):
