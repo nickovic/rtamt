@@ -14,7 +14,7 @@ class OfflineEvaluator(AbstractEvaluator):
     __metaclass__ = ABCMeta
 
     def __init__(self):
-        super(AbstractEvaluator, self).__init__()
+        super(OfflineEvaluator, self).__init__()
 
     @abstractmethod
     def evaluate(self, *args, **kargs):
