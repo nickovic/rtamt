@@ -1,6 +1,5 @@
-import sys
-
 from rtamt.ast.nodes.unary_node import UnaryNode
+
 
 class Historically(UnaryNode):
     """A class for storing STL Historically nodes
@@ -13,7 +12,4 @@ class Historically(UnaryNode):
                 child : stl.Node
         """
         name_phrase = 'historically'
-        if sys.version_info.major == 2:
-            super(Historically, self).__init__(name_phrase, child)    #python2
-        else:
-            super().__init__(name_phrase, child)    #python3
+        super(Historically, self).__init__(name_phrase, child)

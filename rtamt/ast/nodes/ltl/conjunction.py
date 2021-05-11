@@ -1,5 +1,3 @@
-import sys
-
 from rtamt.ast.nodes.binary_node import BinaryNode
 
 
@@ -15,7 +13,4 @@ class Conjunction(BinaryNode):
                 child2 : stl.Node
         """
         name_phrase = 'and'
-        if sys.version_info.major == 2:
-            super(Conjunction, self).__init__(name_phrase, child1, child2)    #python2
-        else:
-            super().__init__(name_phrase, child1, child2)    #python3
+        super(Conjunction, self).__init__(name_phrase, child1, child2)

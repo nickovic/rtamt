@@ -1,6 +1,5 @@
-import sys
-
 from rtamt.ast.nodes.binary_node import BinaryNode
+
 
 class Subtraction(BinaryNode):
     """A class for storing STL Subtraction nodes
@@ -14,7 +13,4 @@ class Subtraction(BinaryNode):
                 child2 : stl.Node
         """
         name_phrase = '-'
-        if sys.version_info.major == 2:
-            super(Subtraction, self).__init__(name_phrase, child1, child2)    #python2
-        else:
-            super().__init__(name_phrase, child1, child2)    #python3
+        super(Subtraction, self).__init__(name_phrase, child1, child2)

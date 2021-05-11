@@ -1,5 +1,3 @@
-import sys
-
 from rtamt.ast.nodes.unary_node import UnaryNode
 
 
@@ -14,7 +12,4 @@ class Abs(UnaryNode):
                 child : stl.Node
         """
         name_phrase = 'abs'
-        if sys.version_info.major == 2:
-            super(Abs, self).__init__(name_phrase, child)    #python2
-        else:
-            super().__init__(name_phrase, child)    #python3
+        super(Abs, self).__init__(name_phrase, child)

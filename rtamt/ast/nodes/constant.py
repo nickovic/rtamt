@@ -1,5 +1,3 @@
-import sys
-
 from rtamt.ast.nodes.leaf_node import LeafNode
 
 
@@ -17,13 +15,9 @@ class Constant(LeafNode):
             val : double
         """
         name = str(val)
-        if sys.version_info.major == 2:
-            super(Constant, self).__init__(name, in_vars=[], out_vars=[])    #python2
-        else:
-            super().__init__(name, in_vars=[], out_vars=[])    #python3
+        super(Constant, self).__init__(name, in_vars=[], out_vars=[])
 
         self.val = val
-
 
     @property
     def val(self):

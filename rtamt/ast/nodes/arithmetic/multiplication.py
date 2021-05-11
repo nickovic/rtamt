@@ -1,6 +1,5 @@
-import sys
-
 from rtamt.ast.nodes.binary_node import BinaryNode
+
 
 class Multiplication(BinaryNode):
     """A class for storing STL Multiplication nodes
@@ -14,7 +13,5 @@ class Multiplication(BinaryNode):
                 child2 : stl.Node
         """
         name_phrase = '*'
-        if sys.version_info.major == 2:
-            super(Multiplication, self).__init__(name_phrase, child1, child2)    #python2
-        else:
-            super().__init__(name_phrase, child1, child2)    #python3
+        super(Multiplication, self).__init__(name_phrase, child1, child2)
+
