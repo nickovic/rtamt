@@ -46,7 +46,7 @@ class LTLrevSpecification(AbstractSpecification):
 
     def __init__(self, semantics=Semantics.STANDARD, language=Language.PYTHON):
         """Constructor for STL Specification"""
-        AbstractSpecification.__init__(self, LtlLexer, LtlParser, LTLrtamtASTparser)
+        super(LTLrevSpecification, self).__init__(LtlLexer, LtlParser, LTLrtamtASTparser)
 
         self.name = 'LTL Specification'
 
