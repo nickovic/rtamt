@@ -23,7 +23,7 @@ from rtamt.enumerations.options import *
 
 from rtamt.exception.stl.exception import STLException
 
-class PrintNameSpecification(LTLrevSpecification):
+class PrintNameSpecification(AbstractSpecification):
     """A class used as a container for STL specifications
 
     Attributes:
@@ -50,7 +50,6 @@ class PrintNameSpecification(LTLrevSpecification):
 
     def __init__(self, semantics=Semantics.STANDARD, language=Language.PYTHON):
         """Constructor for STL Specification"""
-        LTLrevSpecification.__init__(self, semantics, language)
         self.name = 'STL Specification'
 
         self.DEFAULT_TOLERANCE = float(0.1)

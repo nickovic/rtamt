@@ -4,13 +4,15 @@ import importlib
 from antlr4 import *
 from antlr4.InputStream import InputStream
 
+from rtamt.spec_rev.abstract_specification import AbstractSpecification
+
 #from rtamt.evaluator.stl.offline_evaluator import STLOfflineEvaluator
 from rtamt.semantics.discrete_time.offline.stl.offline_evaluator import STLOfflineEvaluator
 from rtamt.spec_rev.ltl.specification import LTLrevSpecification
 
 from rtamt.antrl_parser.stl.StlLexer import StlLexer
 from rtamt.antrl_parser.stl.StlParser import StlParser
-from rtamt.ast.parser_visitor.stl.rtamtASTparser import STLSpecificationParser
+from rtamt.ast.parser_visitor.stl.rtamtASTparser import STLrtamtASTparser
 
 from rtamt.parser.stl.error.parser_error_listener import STLParserErrorListener
 from rtamt.exception.stl.exception import STLParseException
@@ -22,7 +24,7 @@ from rtamt.enumerations.options import *
 
 from rtamt.exception.stl.exception import STLException
 
-class STLrevDiscreteTimeSpecification(LTLrevSpecification):
+class STLrevDiscreteTimeSpecification(AbstractSpecification):
     """A class used as a container for STL specifications
 
     Attributes:
@@ -49,7 +51,9 @@ class STLrevDiscreteTimeSpecification(LTLrevSpecification):
 
     def __init__(self, semantics=Semantics.STANDARD, language=Language.PYTHON):
         """Constructor for STL Specification"""
-        LTLrevSpecification.__init__(self, semantics, language)
+        self.semantics = semantics
+        self.language = language
+        super(STLrevDiscreteTimeSpecification, self).__init__(StlLexer, StlParser, STLParserErrorListener, STLrtamtASTparser)
         self.name = 'STL Specification'
 
         self.DEFAULT_TOLERANCE = float(0.1)
@@ -74,28 +78,7 @@ class STLrevDiscreteTimeSpecification(LTLrevSpecification):
     # string can be either file path containing the STL property
     # or the textual property itself
     def parse(self):
-        if self.spec is None:
-            raise STLParseException('STL specification if empty')
-
-        # Parse the STL spec - ANTLR4 magic
-
-        entire_spec = self.modular_spec + self.spec
-        input_stream = InputStream(entire_spec)
-        lexer = StlLexer(input_stream)
-        stream = CommonTokenStream(lexer)
-        parser = StlParser(stream)
-        parser._listeners = [STLParserErrorListener()]
-        ctx = parser.specification_file()
-
-        # Create the visitor for the actual spec nodes
-        visitor = STLSpecificationParser(self)
-        self.top = visitor.visitSpecification_file(ctx)
-
-        # print('Hello')
-        # print(self.unit)
-        # print('sampling period unit: ' + str(self.sampling_period_unit))
-        # print(self.U[self.unit])
-        # print(self.U[self.sampling_period_unit])
+        super(STLrevDiscreteTimeSpecification, self).parse()
 
         self.normalize = float(self.U[self.unit]) / float(self.U[self.sampling_period_unit])
 
