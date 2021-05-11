@@ -16,7 +16,6 @@ class Eventually(UnaryNode):
         """
         name_phrase = 'eventually'
         if sys.version_info.major == 2:
-            #super(UnaryNode, self).__init__(name_phrase, child)    #python2
-            UnaryNode.__init__(self, name_phrase, child)
+            super(Eventually, self).__init__(name_phrase, child)    #python2
         else:
             super().__init__(name_phrase, child)    #python3

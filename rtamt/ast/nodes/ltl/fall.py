@@ -15,7 +15,6 @@ class Fall(UnaryNode):
         """
         name_phrase = 'fall'
         if sys.version_info.major == 2:
-            #super(UnaryNode, self).__init__(name_phrase, child)    #python2
-            UnaryNode.__init__(self, name_phrase, child)
+            super(Fall, self).__init__(name_phrase, child)    #python2
         else:
             super().__init__(name_phrase, child)    #python3

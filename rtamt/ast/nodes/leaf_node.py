@@ -6,7 +6,6 @@ class LeafNode(Node):
 
     def __init__(self, name, in_vars, out_vars):
         if sys.version_info.major == 2:
-            #super(Node, self).__init__()    #python2
-            Node.__init__(self, name, in_vars, out_vars)
+            super(LeafNode, self).__init__(name, in_vars, out_vars)    #python2
         else:
             super().__init__(name, in_vars, out_vars)    #python3

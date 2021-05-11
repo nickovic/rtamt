@@ -16,7 +16,6 @@ class Since(BinaryNode):
         """
         name_phrase = 'since'
         if sys.version_info.major == 2:
-            #super(BinaryNode, self).__init__(name_phrase, child1, child2)    #python2
-            BinaryNode.__init__(self, name_phrase, child1, child2)
+            super(Since, self).__init__(name_phrase, child1, child2)    #python2
         else:
             super().__init__(name_phrase, child1, child2)    #python3

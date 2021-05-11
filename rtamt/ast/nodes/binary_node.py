@@ -11,8 +11,7 @@ class BinaryNode(Node):
         out_vars = left_child.out_vars + right_child.out_vars
 
         if sys.version_info.major == 2:
-            #super(Node, self).__init__()    #python2
-            Node.__init__(self, name, in_vars, out_vars)
+            super(BinaryNode, self).__init__(name, in_vars, out_vars)    #python2
         else:
             super().__init__(name, in_vars, out_vars)    #python3
 

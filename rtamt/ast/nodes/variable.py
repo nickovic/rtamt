@@ -31,8 +31,7 @@ class Variable(LeafNode):
             name = var + '.' + field
 
         if sys.version_info.major == 2:
-            #super(LeafNode, self).__init__()    #python2
-            LeafNode.__init__(self, name, in_vars, out_vars)
+            super(Variable, self).__init__(name, in_vars, out_vars)    #python2
         else:
             super().__init__(name, in_vars, out_vars)    #python3
 

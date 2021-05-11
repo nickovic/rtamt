@@ -14,7 +14,6 @@ class Historically(UnaryNode):
         """
         name_phrase = 'historically'
         if sys.version_info.major == 2:
-            #super(UnaryNode, self).__init__(name_phrase, child)    #python2
-            UnaryNode.__init__(self, name_phrase, child)
+            super(Historically, self).__init__(name_phrase, child)    #python2
         else:
             super().__init__(name_phrase, child)    #python3
