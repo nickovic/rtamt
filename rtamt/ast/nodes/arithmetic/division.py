@@ -1,5 +1,3 @@
-import sys
-
 from rtamt.ast.nodes.binary_node import BinaryNode
 
 
@@ -15,8 +13,5 @@ class Division(BinaryNode):
                 child2 : stl.Node
         """
         name_phrase ='/'
-        if sys.version_info.major == 2:
-            #super(BinaryNode, self).__init__(name_phrase, child1, child2)    #python2
-            BinaryNode.__init__(self, name_phrase, child1, child2)
-        else:
-            super().__init__(name_phrase, child1, child2)    #python3
+        super(Division, self).__init__(name_phrase, child1, child2)
+
