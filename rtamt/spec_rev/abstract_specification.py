@@ -364,15 +364,3 @@ class AbstractSpecification(object):
             raise RTAMTException('The file {} does not exist.'.format(path))
             sys.exit()
         return out
-
-    @abstractmethod
-    def update(self, args):
-        pass
-
-    @abstractmethod
-    def evaluate(self, args):
-        pass
-
-    @abstractmethod
-    def reset(self):
-        pass
