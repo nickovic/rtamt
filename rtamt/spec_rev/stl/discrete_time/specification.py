@@ -4,19 +4,15 @@ import importlib
 from antlr4 import *
 from antlr4.InputStream import InputStream
 
-from rtamt.spec_rev.abstract_specification import AbstractSpecification
-
-#from rtamt.evaluator.stl.offline_evaluator import STLOfflineEvaluator
-from rtamt.semantics.discrete_time.offline.stl.offline_evaluator import STLOfflineEvaluator
-from rtamt.spec_rev.ltl.specification import LTLrevSpecification
+from rtamt.spec_rev.abstract_offline_specification import AbstractOfflineSpecification
 
 from rtamt.antrl_parser.stl.StlLexer import StlLexer
 from rtamt.antrl_parser.stl.StlParser import StlParser
 from rtamt.ast.parser_visitor.stl.rtamtASTparser import STLrtamtASTparser
-
 from rtamt.parser.stl.error.parser_error_listener import STLParserErrorListener
 from rtamt.exception.stl.exception import STLParseException
 
+from rtamt.semantics.discrete_time.offline.stl.offline_evaluator import STLOfflineEvaluator
 #from rtamt.spec.stl.discrete_time.pastifier import STLPastifier
 #from rtamt.evaluator.stl.online_evaluator import STLOnlineEvaluator
 from rtamt.spec.stl.discrete_time.reset import STLReset
@@ -24,7 +20,7 @@ from rtamt.enumerations.options import *
 
 from rtamt.exception.stl.exception import STLException
 
-class STLrevDiscreteTimeSpecification(AbstractSpecification):
+class STLrevDiscreteTimeSpecification(AbstractOfflineSpecification):
     """A class used as a container for STL specifications
 
     Attributes:
@@ -53,7 +49,7 @@ class STLrevDiscreteTimeSpecification(AbstractSpecification):
         """Constructor for STL Specification"""
         self.semantics = semantics #TODO: re-think the declearation is here?
         self.language = language
-        super(STLrevDiscreteTimeSpecification, self).__init__(StlLexer, StlParser, STLParserErrorListener, STLrtamtASTparser)
+        super(STLrevDiscreteTimeSpecification, self).__init__(StlLexer, StlParser, STLParserErrorListener, STLrtamtASTparser, STLOfflineEvaluator)
         self.name = 'STL Specification'
 
         self.DEFAULT_TOLERANCE = float(0.1)
@@ -151,9 +147,10 @@ class STLrevDiscreteTimeSpecification(AbstractSpecification):
             if len(dataset[key]) != length:
                 raise STLException('evaluate: The input ' + key + ' does not have the same number of samples as time')
 
+        #TODO: this should be done in AbstractOfflineSpecification! but because of difficulty of call evaluator, we could not.
         if self.offline_evaluator is None:
             # Initialize the offline_evaluator
-            self.offline_evaluator = STLOfflineEvaluator(self)
+            self.offline_evaluator = self.RtamtOfflineEvaluator(self)
             self.top.accept(self.offline_evaluator)
             self.reseter.node_monitor_dict = self.offline_evaluator.node_monitor_dict
 
