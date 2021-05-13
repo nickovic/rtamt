@@ -72,7 +72,7 @@ class STLDiscreteTimeOfflineSpecification(AbstractOfflineSpecification):
     # string can be either file path containing the STL property
     # or the textual property itself
     def parse(self):
-        super(STLrevDiscreteTimeSpecification, self).parse()
+        super(STLDiscreteTimeOfflineSpecification, self).parse()
 
         self.normalize = float(self.U[self.unit]) / float(self.U[self.sampling_period_unit])
 
