@@ -3,7 +3,7 @@ from rtamt.evaluator.monitor import Monitor
 from rtamt.exception.exception import RTAMTException
 from rtamt.enumerations.options import TemporalLogic
 
-class LTLMonitor(Monitor, LTLVisitor):
+class LTLOnlineMonitor(Monitor, LTLVisitor):
     def __init__(self, time_interpretation, language, node):
         Monitor.__init__(self, TemporalLogic.LTL, time_interpretation, language)
         LTLVisitor.__init__(self)
@@ -99,13 +99,25 @@ class LTLMonitor(Monitor, LTLVisitor):
         self.visit(node.children[1], args)
 
     def visitEventually(self, node, args):
-        raise RTAMTException('Eventually operator is not implemented in the online monitor.')
+        monitor = self.module.EventuallyOperation()
+        self.node_monitor_dict[node.name] = monitor
+
+        self.visit(node.children[0], args)
+        self.visit(node.children[1], args)
 
     def visitAlways(self, node, args):
-        raise RTAMTException('Always operator is not implemented in the online monitor.')
+        monitor = self.module.AlwaysOperation()
+        self.node_monitor_dict[node.name] = monitor
+
+        self.visit(node.children[0], args)
+        self.visit(node.children[1], args)
 
     def visitUntil(self, node, args):
-        raise RTAMTException('Until operator is not implemented in the online monitor.')
+        monitor = self.module.UntilOperation()
+        self.node_monitor_dict[node.name] = monitor
+
+        self.visit(node.children[0], args)
+        self.visit(node.children[1], args)
 
     def visitOnce(self, node, args):
         monitor = self.module.OnceOperation()

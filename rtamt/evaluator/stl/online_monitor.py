@@ -1,9 +1,9 @@
-from rtamt.evaluator.ltl.monitor import LTLMonitor
+from rtamt.evaluator.ltl.online_monitor import LTLOnlineMonitor
 from rtamt.exception.exception import RTAMTException
 from rtamt.enumerations.options import TemporalLogic
 from rtamt.spec.stl.discrete_time.visitor import STLVisitor
 
-class STLMonitor(LTLMonitor, STLVisitor):
+class STLOnlineMonitor(LTLOnlineMonitor, STLVisitor):
     def __init__(self, time_interpretation, language, node):
         LTLMonitor.__init__(self, TemporalLogic.LTL, time_interpretation, language)
         STLVisitor.__init__(self)
