@@ -19,10 +19,3 @@ from rtamt.operation.ltl.discrete_time.offline.rise_operation import RiseOperati
 from rtamt.operation.ltl.discrete_time.offline.since_operation import SinceOperation
 from rtamt.operation.ltl.discrete_time.offline.subtraction_operation import SubtractionOperation
 from rtamt.operation.ltl.discrete_time.offline.xor_operation import XorOperation
-from rtamt.operation.stl.discrete_time.offline.once_bounded_operation import OnceBoundedOperation
-from rtamt.operation.stl.discrete_time.offline.historically_bounded_operation import HistoricallyBoundedOperation
-from rtamt.operation.stl.discrete_time.offline.since_bounded_operation import SinceBoundedOperation
-from rtamt.operation.stl.discrete_time.offline.always_bounded_operation import AlwaysBoundedOperation
-from rtamt.operation.stl.discrete_time.offline.eventually_bounded_operation import EventuallyBoundedOperation
-from rtamt.operation.stl.discrete_time.offline.until_bounded_operation import UntilBoundedOperation
-
