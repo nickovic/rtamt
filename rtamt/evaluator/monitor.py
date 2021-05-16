@@ -3,6 +3,7 @@ from rtamt.enumerations.options import TimeInterpretation, Language, TemporalLog
 
 class Monitor(object):
     def __init__(self, tl, time_interpretation, language):
+        self.node_monitor_dict = dict()
         self.module = None
         self.monitor = None
         if (tl == TemporalLogic.LTL and time_interpretation == TimeInterpretation.DISCRETE
@@ -12,16 +13,13 @@ class Monitor(object):
         elif (tl == TemporalLogic.LTL and time_interpretation == TimeInterpretation.DISCRETE
                 and language == Language.CPP):
             from rtamt.operation.arithmetic.discrete_time.online.abs_operation import AbsOperation
-            self.monitor = None
         elif (tl == TemporalLogic.STL and time_interpretation == TimeInterpretation.DISCRETE
                 and language == Language.PYTHON):
             from rtamt.operation.arithmetic.discrete_time.online.abs_operation import AbsOperation
-            self.monitor = None
         elif (tl == TemporalLogic.STL and time_interpretation == TimeInterpretation.DISCRETE
                 and language == Language.CPP):
             from rtamt.operation.arithmetic.discrete_time.online.abs_operation import AbsOperation
-            self.monitor = None
         elif (tl == TemporalLogic.STL and time_interpretation == TimeInterpretation.DENSE
                 and language == Language.PYTHON):
             from rtamt.operation.arithmetic.discrete_time.online.abs_operation import AbsOperation
-            self.monitor = None
+

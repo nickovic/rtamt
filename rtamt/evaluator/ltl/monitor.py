@@ -1,10 +1,13 @@
 from rtamt.spec.ltl.discrete_time.visitor import LTLVisitor
 from rtamt.evaluator.monitor import Monitor
 from rtamt.exception.exception import RTAMTException
+from rtamt.enumerations.options import TemporalLogic
 
 class LTLMonitor(Monitor, LTLVisitor):
-    def __init__(self):
-        self.node_monitor_dict = dict()
+    def __init__(self, time_interpretation, language, node):
+        Monitor.__init__(self, TemporalLogic.LTL, time_interpretation, language)
+        LTLVisitor.__init__(self)
+        self.generate(node)
 
     def generate(self, node):
         self.visit(node, [])
