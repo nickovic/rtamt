@@ -103,7 +103,7 @@ class STLVisitor:
         elif isinstance(element, TimedHistorically):
             out = self.visitTimedHistorically(element, args)
         else:
-            out = self.visitDefault(element, args)
+            raise NotImplementedError(NOT_IMPLEMENTED)
         return out
 
 
@@ -229,8 +229,4 @@ class STLVisitor:
 
     @abstractmethod
     def visitTimedUntil(self, element, args):
-        raise NotImplementedError(NOT_IMPLEMENTED)
-
-    @abstractmethod
-    def visitDefault(self, element, args):
         raise NotImplementedError(NOT_IMPLEMENTED)

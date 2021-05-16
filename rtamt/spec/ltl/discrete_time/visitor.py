@@ -84,7 +84,7 @@ class LTLVisitor:
         elif isinstance(element, Next):
             out = self.visitNext(element, args)
         else:
-            out = self.visitDefault(element, args)
+            raise NotImplementedError(NOT_IMPLEMENTED)
         return out
 
 
@@ -182,10 +182,6 @@ class LTLVisitor:
 
     @abstractmethod
     def visitNext(self, element, args):
-        raise NotImplementedError(NOT_IMPLEMENTED)
-
-    @abstractmethod
-    def visitDefault(self, element, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     #### Comment

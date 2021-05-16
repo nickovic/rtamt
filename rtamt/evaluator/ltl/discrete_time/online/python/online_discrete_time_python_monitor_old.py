@@ -1,4 +1,4 @@
-from rtamt import LTLNotImplementedException
+from rtamt import RTAMTException
 from rtamt.spec.ltl.discrete_time.visitor import LTLVisitor
 from rtamt.operation.stl.discrete_time.online.predicate_operation import PredicateOperation
 from rtamt.operation.arithmetic.discrete_time.online.addition_operation import AdditionOperation
@@ -115,13 +115,13 @@ class LTLOnlineDiscreteTimePythonMonitor(LTLVisitor):
         self.visit(node.children[1], args)
 
     def visitEventually(self, node, args):
-        raise LTLNotImplementedException('Eventually operator is not implemented in the STL online monitor.')
+        raise RTAMTException('Eventually operator is not implemented in the online monitor.')
 
     def visitAlways(self, node, args):
-        raise LTLNotImplementedException('Always operator is not implemented in the STL online monitor.')
+        raise RTAMTException('Always operator is not implemented in the online monitor.')
 
     def visitUntil(self, node, args):
-        raise LTLNotImplementedException('Until operator is not implemented in the STL online monitor.')
+        raise RTAMTException('Until operator is not implemented in the online monitor.')
 
     def visitOnce(self, node, args):
         monitor = OnceOperation()
@@ -165,10 +165,7 @@ class LTLOnlineDiscreteTimePythonMonitor(LTLVisitor):
         self.visit(node.children[0], args)
 
     def visitNext(self, node, args):
-        raise LTLNotImplementedException('Next operator not implemented in STL online monitor.')
-
-    def visitDefault(self, node, args):
-        pass
+        raise RTAMTException('Next operator not implemented in online monitor.')
         
     
         

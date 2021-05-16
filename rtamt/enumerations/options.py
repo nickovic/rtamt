@@ -21,3 +21,17 @@ class TimeInterpretation(Enum):
     DENSE = "dense-time"
     def __str__(self):
         return self.value
+
+
+class TemporalLogic(Enum):
+    LTL = "ltl",
+    STL = "stl"
+
+    def __str__(self):
+        return self.value
+
+class Mode(Enum):
+    ONLINE = "online",
+    OFFLINE = "offline"
+    def __str__(self):
+        return self.value
