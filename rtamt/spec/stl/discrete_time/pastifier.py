@@ -13,69 +13,69 @@ from rtamt.exception.stl.exception import STLException
 class STLPastifier(LTLPastifier, STLrtamtASTvisitor):
 
     def __init__(self):
-        pass 
-    
-    def visit(self, element, args):
-        return STLrtamtASTvisitor.visit(self, element, args)
+        pass
+
+    def visit(self, node, *args, **kwargs):
+        return STLrtamtASTvisitor.visit(self, node, *args, **kwargs)
 
 
-    def visitVariable(self, element, args):
+    def visitVariable(self, node, pre_out, *args, **kwargs):
         horizon = args[0]
-        node = Variable(element.var, element.field, element.io_type)
+        node = Variable(node.var, node.field, node.io_type)
         if horizon > 0:
             node = TimedOnce(node, horizon, horizon)
         return node
 
-    def visitTimedEventually(self, element, args):
-        horizon = args[0] - element.end
-        node = self.visit(element.children[0], [horizon])
+    def visitTimedEventually(self, node, pre_out, *args, **kwargs):
+        horizon = args[0] - node.end
+        node = self.visit(node.children[0], [horizon])
         begin = 0
-        end = element.end - element.begin
+        end = node.end - node.begin
         if end > 0:
             node = TimedOnce(node, begin, end)
         return node
 
-    def visitTimedAlways(self, element, args):
-        horizon = args[0] - element.end
-        node = self.visit(element.children[0], [horizon])
+    def visitTimedAlways(self, node, pre_out, *args, **kwargs):
+        horizon = args[0] - node.end
+        node = self.visit(node.children[0], [horizon])
         begin = 0
-        end = element.end - element.begin
+        end = node.end - node.begin
         if end > 0:
             node = TimedHistorically(node, begin, end)
         return node
 
-    def visitTimedUntil(self, element, args):
-        horizon = args[0] - element.end
-        begin = element.begin
-        end = element.end
-        child1_node = self.visit(element.children[0], [horizon])
-        child2_node = self.visit(element.children[1], [horizon])
+    def visitTimedUntil(self, node, pre_out, *args, **kwargs):
+        horizon = args[0] - node.end
+        begin = node.begin
+        end = node.end
+        child1_node = self.visit(node.children[0], [horizon])
+        child2_node = self.visit(node.children[1], [horizon])
         node = TimedPrecedes(child1_node, child2_node, begin, end)
         return node
 
-    def visitTimedOnce(self, element, args):
-        child_node = self.visit(element.children[0], args)
-        node = TimedOnce(child_node, element.begin, element.end)
+    def visitTimedOnce(self, node, pre_out, *args, **kwargs):
+        child_node = self.visit(node.children[0], args)
+        node = TimedOnce(child_node, node.begin, node.end)
         return node
 
-    def visitTimedHistorically(self, element, args):
-        child_node = self.visit(element.children[0], args)
-        node = TimedHistorically(child_node, element.begin, element.end)
+    def visitTimedHistorically(self, node, pre_out, *args, **kwargs):
+        child_node = self.visit(node.children[0], args)
+        node = TimedHistorically(child_node, node.begin, node.end)
         return node
 
-    def visitTimedSince(self, element, args):
-        child_node_1 = self.visit(element.children[0], args)
-        child_node_2 = self.visit(element.children[1], args)
-        node = TimedSince(child_node_1, child_node_2, element.begin, element.end)
+    def visitTimedSince(self, node, pre_out, *args, **kwargs):
+        child_node_1 = self.visit(node.children[0], args)
+        child_node_2 = self.visit(node.children[1], args)
+        node = TimedSince(child_node_1, child_node_2, node.begin, node.end)
         return node
 
-    def visitTimedPrecedes(self, element, args):
-        end = element.end
-        begin = element.begin
-        child1_node = self.visit(element.children[0], args)
-        child2_node = self.visit(element.children[1], args)
+    def visitTimedPrecedes(self, node, pre_out, *args, **kwargs):
+        end = node.end
+        begin = node.begin
+        child1_node = self.visit(node.children[0], args)
+        child2_node = self.visit(node.children[1], args)
         node = TimedPrecedes(child1_node, child2_node, begin, end)
         return node
 
-    def visitDefault(self, element):
+    def visitDefault(self, node):
         raise STLException('STL Pastifier: encountered unexpected type of node.')
