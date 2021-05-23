@@ -1,25 +1,27 @@
 from rtamt.spec.ltl.discrete_time.visitor import LTLVisitor
 
-from rtamt.node.ltl.predicate import Predicate
-from rtamt.node.ltl.variable import Variable
-from rtamt.node.ltl.neg import Neg
-from rtamt.node.ltl.conjunction import Conjunction
-from rtamt.node.ltl.disjunction import Disjunction
-from rtamt.node.ltl.implies import Implies
-from rtamt.node.ltl.iff import Iff
-from rtamt.node.ltl.xor import Xor
-from rtamt.node.ltl.once import Once
-from rtamt.node.ltl.historically import Historically
-from rtamt.node.ltl.since import Since
-from rtamt.node.arithmetic.addition import Addition
-from rtamt.node.arithmetic.subtraction import Subtraction
-from rtamt.node.arithmetic.multiplication import Multiplication
-from rtamt.node.arithmetic.division import Division
-from rtamt.node.arithmetic.abs import Abs
-from rtamt.node.ltl.fall import Fall
-from rtamt.node.ltl.rise import Rise
-from rtamt.node.ltl.constant import Constant
-from rtamt.node.ltl.previous import Previous
+from rtamt.ast.nodes.variable import Variable
+from rtamt.ast.nodes.constant import Constant
+
+from rtamt.ast.nodes.arithmetic.addition import Addition
+from rtamt.ast.nodes.arithmetic.subtraction import Subtraction
+from rtamt.ast.nodes.arithmetic.multiplication import Multiplication
+from rtamt.ast.nodes.arithmetic.division import Division
+from rtamt.ast.nodes.arithmetic.abs import Abs
+
+from rtamt.ast.nodes.ltl.predicate import Predicate
+from rtamt.ast.nodes.ltl.neg import Neg
+from rtamt.ast.nodes.ltl.conjunction import Conjunction
+from rtamt.ast.nodes.ltl.disjunction import Disjunction
+from rtamt.ast.nodes.ltl.implies import Implies
+from rtamt.ast.nodes.ltl.iff import Iff
+from rtamt.ast.nodes.ltl.xor import Xor
+from rtamt.ast.nodes.ltl.once import Once
+from rtamt.ast.nodes.ltl.historically import Historically
+from rtamt.ast.nodes.ltl.since import Since
+from rtamt.ast.nodes.ltl.fall import Fall
+from rtamt.ast.nodes.ltl.rise import Rise
+from rtamt.ast.nodes.ltl.previous import Previous
 
 from rtamt.exception.ltl.exception import LTLPastifyException
 

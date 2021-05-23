@@ -1,11 +1,12 @@
 from rtamt.spec.stl.discrete_time.visitor import STLVisitor
 from rtamt.spec.ltl.discrete_time.pastifier import LTLPastifier
 
-from rtamt.node.ltl.variable import Variable
-from rtamt.node.stl.timed_precedes import TimedPrecedes
-from rtamt.node.stl.timed_historically import TimedHistorically
-from rtamt.node.stl.timed_once import TimedOnce
-from rtamt.node.stl.timed_since import TimedSince
+from rtamt.ast.nodes.variable import Variable
+
+from rtamt.ast.nodes.stl.timed_precedes import TimedPrecedes
+from rtamt.ast.nodes.stl.timed_historically import TimedHistorically
+from rtamt.ast.nodes.stl.timed_once import TimedOnce
+from rtamt.ast.nodes.stl.timed_since import TimedSince
 
 from rtamt.exception.stl.exception import STLException
 
