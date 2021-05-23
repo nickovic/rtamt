@@ -1,6 +1,6 @@
-from rtamt.spec.stl.discrete_time.visitor import STLVisitor
-from rtamt.spec.ltl.discrete_time.pastifier import LTLPastifier
+from rtamt.ast.parser_visitor.stl.rtamtASTvisitor import STLrtamtASTvisitor
 
+from rtamt.spec.ltl.discrete_time.pastifier import LTLPastifier
 from rtamt.ast.nodes.variable import Variable
 
 from rtamt.ast.nodes.stl.timed_precedes import TimedPrecedes
@@ -10,13 +10,13 @@ from rtamt.ast.nodes.stl.timed_since import TimedSince
 
 from rtamt.exception.stl.exception import STLException
 
-class STLPastifier(LTLPastifier, STLVisitor):
+class STLPastifier(LTLPastifier, STLrtamtASTvisitor):
 
     def __init__(self):
         pass 
     
     def visit(self, element, args):
-        return STLVisitor.visit(self, element, args)
+        return STLrtamtASTvisitor.visit(self, element, args)
 
 
     def visitVariable(self, element, args):

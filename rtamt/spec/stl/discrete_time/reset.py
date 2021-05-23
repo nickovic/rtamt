@@ -1,7 +1,7 @@
 from rtamt.spec.ltl.discrete_time.reset import LTLReset
-from rtamt.spec.stl.discrete_time.visitor import STLVisitor
+from rtamt.ast.parser_visitor.stl.rtamtASTvisitor import STLrtamtASTvisitor
 
-class STLReset(LTLReset, STLVisitor):
+class STLReset(LTLReset, STLrtamtASTvisitor):
 
     def __init__(self, node_monitor_dict=None):
         LTLReset.__init__(self, node_monitor_dict)

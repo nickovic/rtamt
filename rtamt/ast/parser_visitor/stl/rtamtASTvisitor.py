@@ -39,7 +39,7 @@ from rtamt.ast.nodes.stl.timed_until import TimedUntil
 
 NOT_IMPLEMENTED = "You should implement this."
 
-class STLVisitor(AbstractVisitor):
+class STLrtamtASTvisitor(AbstractVisitor):
 
     def visitHarness(self, node, pre_out, *args, **kwargs):
         out = None
