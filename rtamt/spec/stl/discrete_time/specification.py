@@ -9,7 +9,7 @@ from rtamt.spec.ltl.discrete_time.specification import LTLDiscreteTimeSpecificat
 
 from rtamt.parser.stl.StlLexer import StlLexer
 from rtamt.parser.stl.StlParser import StlParser
-from rtamt.spec.stl.discrete_time.specification_parser import STLSpecificationParser
+from rtamt.ast.parser_visitor.stl.rtamtASTparser import STLrtamtASTparser
 
 from rtamt.parser.stl.error.parser_error_listener import STLParserErrorListener
 from rtamt.exception.stl.exception import STLParseException
@@ -87,7 +87,7 @@ class STLDiscreteTimeSpecification(LTLDiscreteTimeSpecification):
         ctx = parser.specification_file()
 
         # Create the visitor for the actual spec nodes
-        visitor = STLSpecificationParser(self)
+        visitor = STLrtamtASTparser(self)   #TODO: paser becomes visitor is problematic nameing.
         self.top = visitor.visitSpecification_file(ctx)
 
         # print('Hello')

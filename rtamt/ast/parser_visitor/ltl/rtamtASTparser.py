@@ -9,7 +9,7 @@ import operator
 
 import rtamt
 from rtamt import Language
-from rtamt.antrl_parser.ltl.LtlParserVisitor import LtlParserVisitor
+from rtamt.parser.ltl.LtlParserVisitor import LtlParserVisitor
 
 from rtamt.ast.nodes.variable import Variable
 from rtamt.ast.nodes.constant import Constant

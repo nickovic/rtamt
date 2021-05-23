@@ -4,10 +4,11 @@ Created on Tue Jul 23 21:38:29 2019
 
 @author: NickovicD
 """
+#TODO: this shoud go ast layer.
 
-from rtamt.spec.stl.discrete_time.specification_parser import STLSpecificationParser
+from rtamt.ast.parser_visitor.stl.rtamtASTparser import STLrtamtASTparser
 
-class STLDenseTimeSpecificationParser(STLSpecificationParser):
+class STLDenseTimeSpecificationParser(STLrtamtASTparser):
     
     def __init__(self, spec):
         super(STLDenseTimeSpecificationParser, self).__init__(spec)
