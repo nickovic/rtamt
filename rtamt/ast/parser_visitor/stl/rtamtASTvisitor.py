@@ -37,207 +37,208 @@ from rtamt.ast.nodes.stl.timed_eventually import TimedEventually
 from rtamt.ast.nodes.stl.timed_always import TimedAlways
 from rtamt.ast.nodes.stl.timed_until import TimedUntil
 
+from rtamt.exception.exception import RTAMTException
+
 NOT_IMPLEMENTED = "You should implement this."
 
 class STLrtamtASTvisitor(AbstractVisitor):
 
-    def visitHarness(self, node, pre_out, *args, **kwargs):
+    def post_process(self, node, *args, **kwargs):
         out = None
 
         if isinstance(node, Predicate):
-            out = self.visitPredicate(node, pre_out, *args, **kwargs)
+            out = self.visitPredicate(node, *args, **kwargs)
         elif isinstance(node, Variable):
-            out = self.visitVariable(node, pre_out, *args, **kwargs)
+            out = self.visitVariable(node, *args, **kwargs)
         elif isinstance(node, Neg):
-            out = self.visitNot(node, pre_out, *args, **kwargs)
+            out = self.visitNot(node, *args, **kwargs)
         elif isinstance(node, Disjunction):
-            out = self.visitOr(node, pre_out, *args, **kwargs)
+            out = self.visitOr(node, *args, **kwargs)
         elif isinstance(node, Conjunction):
-            out = self.visitAnd(node, pre_out, *args, **kwargs)
+            out = self.visitAnd(node, *args, **kwargs)
         elif isinstance(node, Implies):
-            out = self.visitImplies(node, pre_out, *args, **kwargs)
+            out = self.visitImplies(node, *args, **kwargs)
         elif isinstance(node, Iff):
-            out = self.visitIff(node, pre_out, *args, **kwargs)
+            out = self.visitIff(node, *args, **kwargs)
         elif isinstance(node, Xor):
-            out = self.visitXor(node, pre_out, *args, **kwargs)
+            out = self.visitXor(node, *args, **kwargs)
         elif isinstance(node, Eventually):
-            out = self.visitEventually(node, pre_out, *args, **kwargs)
+            out = self.visitEventually(node, *args, **kwargs)
         elif isinstance(node, Always):
-            out = self.visitAlways(node, pre_out, *args, **kwargs)
+            out = self.visitAlways(node, *args, **kwargs)
         elif isinstance(node, Until):
-            out = self.visitUntil(node, pre_out, *args, **kwargs)
+            out = self.visitUntil(node, *args, **kwargs)
         elif isinstance(node, Once):
-            out = self.visitOnce(node, pre_out, *args, **kwargs)
+            out = self.visitOnce(node, *args, **kwargs)
         elif isinstance(node, Historically):
-            out = self.visitHistorically(node, pre_out, *args, **kwargs)
+            out = self.visitHistorically(node, *args, **kwargs)
         elif isinstance(node, Since):
-            out = self.visitSince(node, pre_out, *args, **kwargs)
+            out = self.visitSince(node, *args, **kwargs)
         elif isinstance(node, TimedPrecedes):
             #Leasf does not need to vist anymore.
-            out = self.visitTimedPrecedes(node, pre_out, *args, **kwargs)
+            out = self.visitTimedPrecedes(node, *args, **kwargs)
         elif isinstance(node, Abs):
-            out = self.visitAbs(node, pre_out, *args, **kwargs)
+            out = self.visitAbs(node, *args, **kwargs)
         elif isinstance(node, Addition):
-            out = self.visitAddition(node, pre_out, *args, **kwargs)
+            out = self.visitAddition(node, *args, **kwargs)
         elif isinstance(node, Subtraction):
-            out = self.visitSubtraction(node, pre_out, *args, **kwargs)
+            out = self.visitSubtraction(node, *args, **kwargs)
         elif isinstance(node, Multiplication):
-            out = self.visitMultiplication(node, pre_out, *args, **kwargs)
+            out = self.visitMultiplication(node, *args, **kwargs)
         elif isinstance(node, Division):
-            out = self.visitDivision(node, pre_out, *args, **kwargs)
+            out = self.visitDivision(node, *args, **kwargs)
         elif isinstance(node, Rise):
-            out = self.visitRise(node, pre_out, *args, **kwargs)
+            out = self.visitRise(node, *args, **kwargs)
         elif isinstance(node, Fall):
-            out = self.visitFall(node, pre_out, *args, **kwargs)
+            out = self.visitFall(node, *args, **kwargs)
         elif isinstance(node, Constant):
             #Leasf does not need to vist anymore.
-            out = self.visitConstant(node, pre_out, *args, **kwargs)
+            out = self.visitConstant(node, *args, **kwargs)
         elif isinstance(node, Previous):
-            out = self.visitPrevious(node, pre_out, *args, **kwargs)
+            out = self.visitPrevious(node, *args, **kwargs)
         elif isinstance(node, Next):
-            out = self.visitNext(node, pre_out, *args, **kwargs)
+            out = self.visitNext(node, *args, **kwargs)
         elif isinstance(node, TimedUntil):
-            out = self.visitTimedUntil(node, pre_out, *args, **kwargs)
+            out = self.visitTimedUntil(node, *args, **kwargs)
         elif isinstance(node, TimedAlways):
-            out = self.visitTimedAlways(node, pre_out, *args, **kwargs)
+            out = self.visitTimedAlways(node, *args, **kwargs)
         elif isinstance(node, TimedEventually):
-            out = self.visitTimedEventually(node, pre_out, *args, **kwargs)
+            out = self.visitTimedEventually(node, *args, **kwargs)
         elif isinstance(node, TimedSince):
-            out = self.visitTimedSince(node, pre_out, *args, **kwargs)
+            out = self.visitTimedSince(node, *args, **kwargs)
         elif isinstance(node, TimedOnce):
-            out = self.visitTimedOnce(node, pre_out, *args, **kwargs)
+            out = self.visitTimedOnce(node, *args, **kwargs)
         elif isinstance(node, TimedHistorically):
-            out = self.visitTimedHistorically(node, pre_out, *args, **kwargs)
+            out = self.visitTimedHistorically(node, *args, **kwargs)
         else:
-            #TODO: perhaps error?
-            out = self.visitDefault(node, pre_out, *args, **kwargs)
+            raise RTAMTException('Not implemented in the visitor')
         return out
 
 
     @abstractmethod
-    def visitPredicate(self, node, pre_out, *args, **kwargs):
+    def visitPredicate(self, node, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitVariable(self, node, pre_out, *args, **kwargs):
+    def visitVariable(self, node, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitAbs(self, node, pre_out, *args, **kwargs):
+    def visitAbs(self, node, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitAddition(self, node, pre_out, *args, **kwargs):
+    def visitAddition(self, node, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitSubtraction(self, node, pre_out, *args, **kwargs):
+    def visitSubtraction(self, node, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitMultiplication(self, node, pre_out, *args, **kwargs):
+    def visitMultiplication(self, node, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitDivision(self, node, pre_out, *args, **kwargs):
+    def visitDivision(self, node, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitNot(self, node, pre_out, *args, **kwargs):
+    def visitNot(self, node, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitAnd(self, node, pre_out, *args, **kwargs):
+    def visitAnd(self, node, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitOr(self, node, pre_out, *args, **kwargs):
+    def visitOr(self, node, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitImplies(self, node, pre_out, *args, **kwargs):
+    def visitImplies(self, node, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitIff(self, node, pre_out, *args, **kwargs):
+    def visitIff(self, node, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitXor(self, node, pre_out, *args, **kwargs):
+    def visitXor(self, node, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitEventually(self, node, pre_out, *args, **kwargs):
+    def visitEventually(self, node, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitAlways(self, node, pre_out, *args, **kwargs):
+    def visitAlways(self, node, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitUntil(self, node, pre_out, *args, **kwargs):
+    def visitUntil(self, node, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitOnce(self, node, pre_out, *args, **kwargs):
+    def visitOnce(self, node, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitHistorically(self, node, pre_out, *args, **kwargs):
+    def visitHistorically(self, node, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitSince(self, node, pre_out, *args, **kwargs):
+    def visitSince(self, node, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitRise(self, node, pre_out, *args, **kwargs):
+    def visitRise(self, node, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitFall(self, node, pre_out, *args, **kwargs):
+    def visitFall(self, node, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitConstant(self, node, pre_out, *args, **kwargs):
+    def visitConstant(self, node, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitPrevious(self, node, pre_out, *args, **kwargs):
+    def visitPrevious(self, node, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitNext(self, node, pre_out, *args, **kwargs):
+    def visitNext(self, node, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitTimedPrecedes(self, node, pre_out, *args, **kwargs):
+    def visitTimedPrecedes(self, node, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitTimedOnce(self, node, pre_out, *args, **kwargs):
+    def visitTimedOnce(self, node, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitTimedHistorically(self, node, pre_out, *args, **kwargs):
+    def visitTimedHistorically(self, node, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitTimedSince(self, node, pre_out, *args, **kwargs):
+    def visitTimedSince(self, node, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitTimedAlways(self, node, pre_out, *args, **kwargs):
+    def visitTimedAlways(self, node, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitTimedEventually(self, node, pre_out, *args, **kwargs):
+    def visitTimedEventually(self, node, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitTimedUntil(self, node, pre_out, *args, **kwargs):
+    def visitTimedUntil(self, node, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitDefault(self, node, pre_out, *args, **kwargs):
+    def visitDefault(self, node, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)

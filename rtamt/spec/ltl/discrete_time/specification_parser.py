@@ -158,7 +158,7 @@ class LTLSpecificationParser(LtlParserVisitor):
 
         self.spec.declare_const(const_name, const_type, const_value)
 
-        self.spec.visitChildren(ctx)
+        self.spec.visit_children(ctx)
 
     def visitRosTopic(self, ctx):
         var_name = ctx.Identifier(0).getText()

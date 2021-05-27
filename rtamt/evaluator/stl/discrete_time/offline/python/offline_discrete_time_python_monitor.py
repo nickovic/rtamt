@@ -39,128 +39,128 @@ class STLOfflineDiscreteTimePythonMonitor(STLrtamtASTvisitor):
         self.visit(node, [])
         return self.node_monitor_dict
 
-    def visitPredicate(self, node, pre_out, *args, **kwargs):
+    def visitPredicate(self, node, *args, **kwargs):
         monitor = PredicateOperation(node.operator)
         self.node_monitor_dict[node.name] = monitor
 
-    def visitVariable(self, node, pre_out, *args, **kwargs):
+    def visitVariable(self, node, *args, **kwargs):
         pass
 
-    def visitAbs(self, node, pre_out, *args, **kwargs):
+    def visitAbs(self, node, *args, **kwargs):
         monitor = AbsOperation()
         self.node_monitor_dict[node.name] = monitor
 
-    def visitAddition(self, node, pre_out, *args, **kwargs):
+    def visitAddition(self, node, *args, **kwargs):
         monitor = AdditionOperation()
         self.node_monitor_dict[node.name] = monitor
 
-    def visitSubtraction(self, node, pre_out, *args, **kwargs):
+    def visitSubtraction(self, node, *args, **kwargs):
         monitor = SubtractionOperation()
         self.node_monitor_dict[node.name] = monitor
 
-    def visitMultiplication(self, node, pre_out, *args, **kwargs):
+    def visitMultiplication(self, node, *args, **kwargs):
         monitor = MultiplicationOperation()
         self.node_monitor_dict[node.name] = monitor
 
-    def visitDivision(self, node, pre_out, *args, **kwargs):
+    def visitDivision(self, node, *args, **kwargs):
         monitor = DivisionOperation()
         self.node_monitor_dict[node.name] = monitor
 
-    def visitNot(self, node, pre_out, *args, **kwargs):
+    def visitNot(self, node, *args, **kwargs):
         monitor = NotOperation()
         self.node_monitor_dict[node.name] = monitor
 
-    def visitAnd(self, node, pre_out, *args, **kwargs):
+    def visitAnd(self, node, *args, **kwargs):
         monitor = AndOperation()
         self.node_monitor_dict[node.name] = monitor
 
-    def visitOr(self, node, pre_out, *args, **kwargs):
+    def visitOr(self, node, *args, **kwargs):
         monitor = OrOperation()
         self.node_monitor_dict[node.name] = monitor
 
-    def visitImplies(self, node, pre_out, *args, **kwargs):
+    def visitImplies(self, node, *args, **kwargs):
         monitor = ImpliesOperation()
         self.node_monitor_dict[node.name] = monitor
 
-    def visitIff(self, node, pre_out, *args, **kwargs):
+    def visitIff(self, node, *args, **kwargs):
         monitor = IffOperation()
         self.node_monitor_dict[node.name] = monitor
 
-    def visitXor(self, node, pre_out, *args, **kwargs):
+    def visitXor(self, node, *args, **kwargs):
         monitor = XorOperation()
         self.node_monitor_dict[node.name] = monitor
 
-    def visitEventually(self, node, pre_out, *args, **kwargs):
+    def visitEventually(self, node, *args, **kwargs):
         monitor = EventuallyOperation()
         self.node_monitor_dict[node.name] = monitor
 
-    def visitAlways(self, node, pre_out, *args, **kwargs):
+    def visitAlways(self, node, *args, **kwargs):
         monitor = AlwaysOperation()
         self.node_monitor_dict[node.name] = monitor
 
-    def visitUntil(self, node, pre_out, *args, **kwargs):
+    def visitUntil(self, node, *args, **kwargs):
         monitor = UntilOperation()
         self.node_monitor_dict[node.name] = monitor
 
 
-    def visitOnce(self, node, pre_out, *args, **kwargs):
+    def visitOnce(self, node, *args, **kwargs):
         monitor = OnceOperation()
         self.node_monitor_dict[node.name] = monitor
 
-    def visitHistorically(self, node, pre_out, *args, **kwargs):
+    def visitHistorically(self, node, *args, **kwargs):
         monitor = HistoricallyOperation()
         self.node_monitor_dict[node.name] = monitor
 
-    def visitSince(self, node, pre_out, *args, **kwargs):
+    def visitSince(self, node, *args, **kwargs):
         monitor = SinceOperation()
         self.node_monitor_dict[node.name] = monitor
 
-    def visitRise(self, node, pre_out, *args, **kwargs):
+    def visitRise(self, node, *args, **kwargs):
         monitor = RiseOperation()
         self.node_monitor_dict[node.name] = monitor
 
-    def visitFall(self, node, pre_out, *args, **kwargs):
+    def visitFall(self, node, *args, **kwargs):
         monitor = FallOperation()
         self.node_monitor_dict[node.name] = monitor
 
-    def visitConstant(self, node, pre_out, *args, **kwargs):
+    def visitConstant(self, node, *args, **kwargs):
         monitor = ConstantOperation(node.val)
         self.node_monitor_dict[node.name] = monitor
 
-    def visitPrevious(self, node, pre_out, *args, **kwargs):
+    def visitPrevious(self, node, *args, **kwargs):
         monitor = PreviousOperation()
         self.node_monitor_dict[node.name] = monitor
 
-    def visitNext(self, node, pre_out, *args, **kwargs):
+    def visitNext(self, node, *args, **kwargs):
         monitor = NextOperation()
         self.node_monitor_dict[node.name] = monitor
 
-    def visitTimedPrecedes(self, node, pre_out, *args, **kwargs):
+    def visitTimedPrecedes(self, node, *args, **kwargs):
         raise STLNotImplementedException('Precedes operator not implemented in STL offline monitor.')
 
-    def visitTimedOnce(self, node, pre_out, *args, **kwargs):
+    def visitTimedOnce(self, node, *args, **kwargs):
         monitor = OnceBoundedOperation(node.begin, node.end)
         self.node_monitor_dict[node.name] = monitor
 
-    def visitTimedHistorically(self, node, pre_out, *args, **kwargs):
+    def visitTimedHistorically(self, node, *args, **kwargs):
         monitor = HistoricallyBoundedOperation(node.begin, node.end)
         self.node_monitor_dict[node.name] = monitor
 
-    def visitTimedSince(self, node, pre_out, *args, **kwargs):
+    def visitTimedSince(self, node, *args, **kwargs):
         monitor = SinceBoundedOperation(node.begin, node.end)
         self.node_monitor_dict[node.name] = monitor
 
-    def visitTimedAlways(self, node, pre_out, *args, **kwargs):
+    def visitTimedAlways(self, node, *args, **kwargs):
         monitor = AlwaysBoundedOperation(node.begin, node.end)
         self.node_monitor_dict[node.name] = monitor
 
-    def visitTimedEventually(self, node, pre_out, *args, **kwargs):
+    def visitTimedEventually(self, node, *args, **kwargs):
         monitor = EventuallyBoundedOperation(node.begin, node.end)
         self.node_monitor_dict[node.name] = monitor
 
-    def visitTimedUntil(self, node, pre_out, *args, **kwargs):
+    def visitTimedUntil(self, node, *args, **kwargs):
         monitor = UntilBoundedOperation(node.begin, node.end)
         self.node_monitor_dict[node.name] = monitor
 
-    def visitDefault(self, node, pre_out, *args, **kwargs):
+    def visitDefault(self, node, *args, **kwargs):
         pass

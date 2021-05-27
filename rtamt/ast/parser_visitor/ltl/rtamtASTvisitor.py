@@ -29,12 +29,14 @@ from rtamt.ast.nodes.ltl.fall import Fall
 from rtamt.ast.nodes.ltl.next import Next
 from rtamt.ast.nodes.ltl.previous import Previous
 
+from rtamt.exception.exception import RTAMTException
+
 NOT_IMPLEMENTED = "You should implement this."
 
 class LTLrtamtASTvisitor(AbstractVisitor):
     __metaclass__ = ABCMeta
 
-    def visitHarness(self, node, *args, **kwargs):
+    def post_process(self, node, *args, **kwargs):
         out = None
 
         if isinstance(node, Predicate):
@@ -86,7 +88,7 @@ class LTLrtamtASTvisitor(AbstractVisitor):
         elif isinstance(node, Next):
             out = self.visitNext(node, *args, **kwargs)
         else:
-            out = self.visitDefault(node, *args, **kwargs)
+            raise RTAMTException('Not implemented in the visitor')
         return out
 
 

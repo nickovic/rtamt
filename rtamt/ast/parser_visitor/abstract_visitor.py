@@ -3,19 +3,22 @@ from abc import ABCMeta, abstractmethod
 class AbstractVisitor(object):
     __metaclass__ = ABCMeta
 
-    def visitNextLayerNodes(self, node, pre_out, *args, **kwargs):
+    def visit_children(self, node, *args, **kwargs):
         out = []
         for nodeChild in node.children:
-            out.append(self.visit(nodeChild, pre_out, *args, **kwargs))
+            out.append(self.visit(nodeChild, *args, **kwargs))
+        out.append(*args)
         return out
 
     def visit(self, node, *args, **kwargs):
         out = None
-        pre_out = self.visitNextLayerNodes(node, out, *args, **kwargs)
-        out = self.visitHarness(node, pre_out, *args, **kwargs)
+        new_args = self.pre_process(node, *args, **kwargs)
+        pre_out = self.visit_children(node, *new_args, **kwargs)
+        out = self.post_process(node, *pre_out, **kwargs)
         return out
 
-    @abstractmethod
-    def visitHarness(self, node, pre_out, *args, **kwargs):
-        out = pre_out
-        return out
+    def pre_process(self, node, *args, **kwargs):
+        return args
+
+    def post_process(self, node, *args, **kwargs):
+        return args
