@@ -16,7 +16,7 @@ class TestSTLEvaluation(unittest.TestCase):
         spec.declare_var('out', 'float')
         spec.spec = 'out = 5'
 
-        spec.parse();
+        spec.parse()
         out = spec.evaluate(self.dataset)
         expected = [[0, 5], [1, 5], [2, 5], [3, 5], [4, 5]]
 
@@ -28,7 +28,7 @@ class TestSTLEvaluation(unittest.TestCase):
         spec.declare_var('out', 'float')
         spec.spec = 'out = c'
 
-        spec.parse();
+        spec.parse()
         out = spec.evaluate(self.dataset)
         expected = [[0, 5], [1, 5], [2, 5], [3, 5], [4, 5]]
 
@@ -41,7 +41,7 @@ class TestSTLEvaluation(unittest.TestCase):
         spec.declare_var('out', 'float')
         spec.spec = 'out = req + gnt'
 
-        spec.parse();
+        spec.parse()
         out = spec.evaluate(self.dataset)
         expected = [[0, 120], [1, -3], [2, 8], [3, 9], [4, -2]]
 
@@ -54,7 +54,7 @@ class TestSTLEvaluation(unittest.TestCase):
         spec.declare_var('out', 'float')
         spec.spec = 'out = req - gnt'
 
-        spec.parse();
+        spec.parse()
         out = spec.evaluate(self.dataset)
         expected = [[0, 80], [1, 1], [2, -12], [3, 1], [4, 0]]
 
@@ -67,7 +67,7 @@ class TestSTLEvaluation(unittest.TestCase):
         spec.declare_var('out', 'float')
         spec.spec = 'out = req * gnt'
 
-        spec.parse();
+        spec.parse()
         out = spec.evaluate(self.dataset)
         expected = [[0, 2000], [1, 2], [2, -20], [3, 20], [4, 1]]
 
@@ -80,7 +80,7 @@ class TestSTLEvaluation(unittest.TestCase):
         spec.declare_var('out', 'float')
         spec.spec = 'out = req / gnt'
 
-        spec.parse();
+        spec.parse()
         out = spec.evaluate(self.dataset)
         expected = [[0, 100/20], [1, -1/-2], [2, -2/10], [3, 5/4], [4, -1/-1]]
 
@@ -92,7 +92,7 @@ class TestSTLEvaluation(unittest.TestCase):
         spec.declare_var('out', 'float')
         spec.spec = 'out = abs(req)'
 
-        spec.parse();
+        spec.parse()
         out = spec.evaluate(self.dataset)
         expected = [[0, 100], [1, 1], [2, 2], [3, 5], [4, 1]]
 
@@ -104,7 +104,7 @@ class TestSTLEvaluation(unittest.TestCase):
         spec.declare_var('out', 'float')
         spec.spec = 'out = prev req'
 
-        spec.parse();
+        spec.parse()
         out = spec.evaluate(self.dataset)
         expected = [[0, float("inf")], [1, 100], [2, -1], [3, -2], [4, 5]]
 
@@ -116,7 +116,7 @@ class TestSTLEvaluation(unittest.TestCase):
         spec.declare_var('out', 'float')
         spec.spec = 'out = next req'
 
-        spec.parse();
+        spec.parse()
         out = spec.evaluate(self.dataset)
         expected = [[0, -1], [1, -2], [2, 5], [3, -1], [4, float("inf")]]
 
@@ -129,7 +129,7 @@ class TestSTLEvaluation(unittest.TestCase):
         spec.declare_var('out', 'float')
         spec.spec = 'out = req and gnt'
 
-        spec.parse();
+        spec.parse()
         out = spec.evaluate(self.dataset)
         expected = [[0, 20], [1, -2], [2, -2], [3, 4], [4, -1]]
 
@@ -142,7 +142,7 @@ class TestSTLEvaluation(unittest.TestCase):
         spec.declare_var('out', 'float')
         spec.spec = 'out = req or gnt'
 
-        spec.parse();
+        spec.parse()
         out = spec.evaluate(self.dataset)
         expected = [[0, 100], [1, -1], [2, 10], [3, 5], [4, -1]]
 
@@ -155,7 +155,7 @@ class TestSTLEvaluation(unittest.TestCase):
         spec.declare_var('out', 'float')
         spec.spec = 'out = req iff gnt'
 
-        spec.parse();
+        spec.parse()
         out = spec.evaluate(self.dataset)
         expected = [[0, -80], [1, -1], [2, -12], [3, -1], [4, 0]]
 
@@ -168,7 +168,7 @@ class TestSTLEvaluation(unittest.TestCase):
         spec.declare_var('out', 'float')
         spec.spec = 'out = req xor gnt'
 
-        spec.parse();
+        spec.parse()
         out = spec.evaluate(self.dataset)
         expected = [[0, 80], [1, 1], [2, 12], [3, 1], [4, 0]]
 
@@ -182,7 +182,7 @@ class TestSTLEvaluation(unittest.TestCase):
         spec.declare_var('out', 'float')
         spec.spec = 'out = req -> gnt'
 
-        spec.parse();
+        spec.parse()
         out = spec.evaluate(self.dataset)
         expected = [[0, 20], [1, 1], [2, 10], [3, 4], [4, 1]]
 
@@ -194,7 +194,7 @@ class TestSTLEvaluation(unittest.TestCase):
         spec.declare_var('out', 'float')
         spec.spec = 'out = always req'
 
-        spec.parse();
+        spec.parse()
         out = spec.evaluate(self.dataset)
         expected = [[0, -2], [1, -2], [2, -2], [3, -1], [4, -1]]
 
@@ -206,7 +206,7 @@ class TestSTLEvaluation(unittest.TestCase):
         spec.declare_var('out', 'float')
         spec.spec = 'out = always[0,1] req'
 
-        spec.parse();
+        spec.parse()
         out = spec.evaluate(self.dataset)
         expected = [[0, -1], [1, -2], [2, -2], [3, -1], [4, -1]]
 
@@ -218,7 +218,7 @@ class TestSTLEvaluation(unittest.TestCase):
         spec.declare_var('out', 'float')
         spec.spec = 'out = historically req'
 
-        spec.parse();
+        spec.parse()
         out = spec.evaluate(self.dataset)
         expected = [[0, 100], [1, -1], [2, -2], [3, -2], [4, -2]]
 
@@ -230,7 +230,7 @@ class TestSTLEvaluation(unittest.TestCase):
         spec.declare_var('out', 'float')
         spec.spec = 'out = once req'
 
-        spec.parse();
+        spec.parse()
         out = spec.evaluate(self.dataset)
         expected = [[0, 100], [1, 100], [2, 100], [3, 100], [4, 100]]
 
@@ -242,7 +242,7 @@ class TestSTLEvaluation(unittest.TestCase):
         spec.declare_var('out', 'float')
         spec.spec = 'out = eventually req'
 
-        spec.parse();
+        spec.parse()
         out = spec.evaluate(self.dataset)
         expected = [[0, 100], [1, 5], [2, 5], [3, 5], [4, -1]]
 
@@ -254,7 +254,7 @@ class TestSTLEvaluation(unittest.TestCase):
         spec.declare_var('out', 'float')
         spec.spec = 'out = eventually[0,1] req'
 
-        spec.parse();
+        spec.parse()
         out = spec.evaluate(self.dataset)
         expected = [[0, 100], [1, -1], [2, 5], [3, 5], [4, -1]]
 
@@ -267,7 +267,7 @@ class TestSTLEvaluation(unittest.TestCase):
         spec.declare_var('out', 'float')
         spec.spec = 'out = req since gnt'
 
-        spec.parse();
+        spec.parse()
         out = spec.evaluate(self.dataset)
         expected = [[0, 20], [1, -1], [2, 10], [3, 5], [4, -1]]
 
@@ -280,7 +280,7 @@ class TestSTLEvaluation(unittest.TestCase):
         spec.declare_var('out', 'float')
         spec.spec = 'out = req until gnt'
 
-        spec.parse();
+        spec.parse()
         out = spec.evaluate(self.dataset)
         expected = [[0, 20], [1, -1], [2, 10], [3, 4], [4, -1]]
 
@@ -293,7 +293,7 @@ class TestSTLEvaluation(unittest.TestCase):
         spec.declare_var('out', 'float')
         spec.spec = 'out = req until[0,1] gnt'
 
-        spec.parse();
+        spec.parse()
         out = spec.evaluate(self.dataset)
         expected = [[0, 20], [1, -1], [2, 10], [3, 4], [4, -1]]
 
@@ -305,7 +305,7 @@ class TestSTLEvaluation(unittest.TestCase):
         spec.declare_var('out', 'float')
         spec.spec = 'out = once[0,1] req'
 
-        spec.parse();
+        spec.parse()
         out = spec.evaluate(self.dataset)
         expected = [[0, 100], [1, 100], [2, -1], [3, 5], [4, 5]]
 
@@ -317,7 +317,7 @@ class TestSTLEvaluation(unittest.TestCase):
         spec.declare_var('out', 'float')
         spec.spec = 'out = once[1,2] req'
 
-        spec.parse();
+        spec.parse()
         out = spec.evaluate(self.dataset)
         expected = [[0, -float("inf")], [1, 100], [2, 100], [3, -1], [4, 5]]
 
@@ -329,7 +329,7 @@ class TestSTLEvaluation(unittest.TestCase):
         spec.declare_var('out', 'float')
         spec.spec = 'out = historically[0,1] req'
 
-        spec.parse();
+        spec.parse()
         out = spec.evaluate(self.dataset)
         expected = [[0, 100], [1, -1], [2, -2], [3, -2], [4, -1]]
 
@@ -341,7 +341,7 @@ class TestSTLEvaluation(unittest.TestCase):
         spec.declare_var('out', 'float')
         spec.spec = 'out = historically[1,2] req'
 
-        spec.parse();
+        spec.parse()
         out = spec.evaluate(self.dataset)
         expected = [[0, float("inf")], [1, 100], [2, -1], [3, -2], [4, -2]]
 
@@ -354,7 +354,7 @@ class TestSTLEvaluation(unittest.TestCase):
         spec.declare_var('out', 'float')
         spec.spec = 'out = req since[0,1] gnt'
 
-        spec.parse();
+        spec.parse()
         out = spec.evaluate(self.dataset)
         expected = [[0, 20], [1, -1], [2, 10], [3, 5], [4, -1]]
 
@@ -366,7 +366,7 @@ class TestSTLEvaluation(unittest.TestCase):
         spec.declare_var('out', 'float')
         spec.spec = 'out = not req'
 
-        spec.parse();
+        spec.parse()
         out = spec.evaluate(self.dataset)
         expected = [[0, -100], [1, 1], [2, 2], [3, -5], [4, 1]]
 
@@ -378,7 +378,7 @@ class TestSTLEvaluation(unittest.TestCase):
         spec.declare_var('out', 'float')
         spec.spec = 'out = rise(req)'
 
-        spec.parse();
+        spec.parse()
         out = spec.evaluate(self.dataset)
         expected = [[0, 100], [1, -100], [2, -2], [3, 2], [4, -5]]
 
@@ -390,7 +390,7 @@ class TestSTLEvaluation(unittest.TestCase):
         spec.declare_var('out', 'float')
         spec.spec = 'out = fall(req)'
 
-        spec.parse();
+        spec.parse()
         out = spec.evaluate(self.dataset)
         expected = [[0, -100], [1, 1], [2, -1], [3, -5], [4, 1]]
 
@@ -403,7 +403,7 @@ class TestSTLEvaluation(unittest.TestCase):
         spec.declare_var('out', 'float')
         spec.spec = 'out = req <= gnt'
 
-        spec.parse();
+        spec.parse()
         out = spec.evaluate(self.dataset)
         expected = [[0, -80], [1, -1], [2, 12], [3, -1], [4, 0]]
 
@@ -416,7 +416,7 @@ class TestSTLEvaluation(unittest.TestCase):
         spec.declare_var('out', 'float')
         spec.spec = 'out = req < gnt'
 
-        spec.parse();
+        spec.parse()
         out = spec.evaluate(self.dataset)
         expected = [[0, -80], [1, -1], [2, 12], [3, -1], [4, 0]]
 
@@ -429,7 +429,7 @@ class TestSTLEvaluation(unittest.TestCase):
         spec.declare_var('out', 'float')
         spec.spec = 'out = req >= gnt'
 
-        spec.parse();
+        spec.parse()
         out = spec.evaluate(self.dataset)
         expected = [[0, 80], [1, 1], [2, -12], [3, 1], [4, 0]]
 
@@ -442,7 +442,7 @@ class TestSTLEvaluation(unittest.TestCase):
         spec.declare_var('out', 'float')
         spec.spec = 'out = req > gnt'
 
-        spec.parse();
+        spec.parse()
         out = spec.evaluate(self.dataset)
         expected = [[0, 80], [1, 1], [2, -12], [3, 1], [4, 0]]
 
@@ -455,7 +455,7 @@ class TestSTLEvaluation(unittest.TestCase):
         spec.declare_var('out', 'float')
         spec.spec = 'out = req == gnt'
 
-        spec.parse();
+        spec.parse()
         out = spec.evaluate(self.dataset)
         expected = [[0, -80], [1, -1], [2, -12], [3, -1], [4, 0]]
 
@@ -468,7 +468,7 @@ class TestSTLEvaluation(unittest.TestCase):
         spec.declare_var('out', 'float')
         spec.spec = 'out = req !== gnt'
 
-        spec.parse();
+        spec.parse()
         out = spec.evaluate(self.dataset)
         expected = [[0, 80], [1, 1], [2, 12], [3, 1], [4, 0]]
 

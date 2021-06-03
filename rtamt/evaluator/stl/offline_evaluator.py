@@ -9,6 +9,7 @@ from rtamt.ast.parser_visitor.stl.rtamtASTvisitor import STLrtamtASTvisitor
 
 class STLOfflineEvaluator(STLrtamtASTvisitor):
     def __init__(self, spec):
+        STLrtamtASTvisitor.__init__(self)
         self.spec = spec
         generator = None
 
@@ -42,8 +43,9 @@ class STLOfflineEvaluator(STLrtamtASTvisitor):
         return out_sample
 
     def visitPredicate(self, node, *args, **kwargs):
-        in_sample_1 = args[0]
-        in_sample_2 = args[1]
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample_1 = children_out[0]
+        in_sample_2 = children_out[1]
 
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample_1, in_sample_2)
@@ -112,7 +114,8 @@ class STLOfflineEvaluator(STLrtamtASTvisitor):
         return out_sample
 
     def visitAbs(self, node, *args, **kwargs):
-        in_sample = args[0]
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample = children_out[0]
         monitor = self.node_monitor_dict[node.name]
 
 
@@ -121,8 +124,9 @@ class STLOfflineEvaluator(STLrtamtASTvisitor):
         return out_sample
 
     def visitAddition(self, node, *args, **kwargs):
-        in_sample_1 = args[0]
-        in_sample_2 = args[1]
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample_1 = children_out[0]
+        in_sample_2 = children_out[1]
 
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample_1, in_sample_2)
@@ -130,8 +134,9 @@ class STLOfflineEvaluator(STLrtamtASTvisitor):
         return out_sample
 
     def visitSubtraction(self, node, *args, **kwargs):
-        in_sample_1 = args[0]
-        in_sample_2 = args[1]
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample_1 = children_out[0]
+        in_sample_2 = children_out[1]
 
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample_1, in_sample_2)
@@ -139,8 +144,9 @@ class STLOfflineEvaluator(STLrtamtASTvisitor):
         return out_sample
 
     def visitMultiplication(self, node, *args, **kwargs):
-        in_sample_1 = args[0]
-        in_sample_2 = args[1]
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample_1 = children_out[0]
+        in_sample_2 = children_out[1]
 
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample_1, in_sample_2)
@@ -148,8 +154,9 @@ class STLOfflineEvaluator(STLrtamtASTvisitor):
         return out_sample
 
     def visitDivision(self, node, *args, **kwargs):
-        in_sample_1 = args[0]
-        in_sample_2 = args[1]
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample_1 = children_out[0]
+        in_sample_2 = children_out[1]
 
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample_1, in_sample_2)
@@ -157,7 +164,8 @@ class STLOfflineEvaluator(STLrtamtASTvisitor):
         return out_sample
 
     def visitNot(self, node, *args, **kwargs):
-        in_sample = args[0]
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample = children_out[0]
 
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample)
@@ -165,7 +173,8 @@ class STLOfflineEvaluator(STLrtamtASTvisitor):
         return out_sample
 
     def visitPrevious(self, node, *args, **kwargs):
-        in_sample = args[0]
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample = children_out[0]
 
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample)
@@ -173,7 +182,8 @@ class STLOfflineEvaluator(STLrtamtASTvisitor):
         return out_sample
 
     def visitNext(self, node, *args, **kwargs):
-        in_sample = args[0]
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample = children_out[0]
 
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample)
@@ -181,7 +191,8 @@ class STLOfflineEvaluator(STLrtamtASTvisitor):
         return out_sample
 
     def visitRise(self, node, *args, **kwargs):
-        in_sample = args[0]
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample = children_out[0]
 
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample)
@@ -189,7 +200,8 @@ class STLOfflineEvaluator(STLrtamtASTvisitor):
         return out_sample
 
     def visitFall(self, node, *args, **kwargs):
-        in_sample = args[0]
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample = children_out[0]
 
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample)
@@ -197,8 +209,9 @@ class STLOfflineEvaluator(STLrtamtASTvisitor):
         return out_sample
 
     def visitAnd(self, node, *args, **kwargs):
-        in_sample_1 = args[0]
-        in_sample_2 = args[1]
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample_1 = children_out[0]
+        in_sample_2 = children_out[1]
 
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample_1, in_sample_2)
@@ -206,8 +219,9 @@ class STLOfflineEvaluator(STLrtamtASTvisitor):
         return out_sample
 
     def visitOr(self, node, *args, **kwargs):
-        in_sample_1 = args[0]
-        in_sample_2 = args[1]
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample_1 = children_out[0]
+        in_sample_2 = children_out[1]
 
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample_1, in_sample_2)
@@ -215,8 +229,9 @@ class STLOfflineEvaluator(STLrtamtASTvisitor):
         return out_sample
 
     def visitImplies(self, node, *args, **kwargs):
-        in_sample_1 = args[0]
-        in_sample_2 = args[1]
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample_1 = children_out[0]
+        in_sample_2 = children_out[1]
 
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample_1, in_sample_2)
@@ -224,8 +239,9 @@ class STLOfflineEvaluator(STLrtamtASTvisitor):
         return out_sample
 
     def visitIff(self, node, *args, **kwargs):
-        in_sample_1 = args[0]
-        in_sample_2 = args[1]
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample_1 = children_out[0]
+        in_sample_2 = children_out[1]
 
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample_1, in_sample_2)
@@ -233,8 +249,9 @@ class STLOfflineEvaluator(STLrtamtASTvisitor):
         return out_sample
 
     def visitXor(self, node, *args, **kwargs):
-        in_sample_1 = args[0]
-        in_sample_2 = args[1]
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample_1 = children_out[0]
+        in_sample_2 = children_out[1]
 
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample_1, in_sample_2)
@@ -242,7 +259,8 @@ class STLOfflineEvaluator(STLrtamtASTvisitor):
         return out_sample
 
     def visitEventually(self, node, *args, **kwargs):
-        in_sample = args[0]
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample = children_out[0]
 
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample)
@@ -250,7 +268,8 @@ class STLOfflineEvaluator(STLrtamtASTvisitor):
         return out_sample
 
     def visitAlways(self, node, *args, **kwargs):
-        in_sample = args[0]
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample = children_out[0]
 
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample)
@@ -258,8 +277,9 @@ class STLOfflineEvaluator(STLrtamtASTvisitor):
         return out_sample
 
     def visitUntil(self, node, *args, **kwargs):
-        in_sample_1 = args[0]
-        in_sample_2 = args[1]
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample_1 = children_out[0]
+        in_sample_2 = children_out[1]
 
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample_1, in_sample_2)
@@ -267,7 +287,8 @@ class STLOfflineEvaluator(STLrtamtASTvisitor):
         return out_sample
 
     def visitOnce(self, node, *args, **kwargs):
-        in_sample = args[0]
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample = children_out[0]
 
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample)
@@ -275,7 +296,8 @@ class STLOfflineEvaluator(STLrtamtASTvisitor):
         return out_sample
 
     def visitHistorically(self, node, *args, **kwargs):
-        in_sample = args[0]
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample = children_out[0]
 
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample)
@@ -283,8 +305,9 @@ class STLOfflineEvaluator(STLrtamtASTvisitor):
         return out_sample
 
     def visitSince(self, node, *args, **kwargs):
-        in_sample_1 = args[0]
-        in_sample_2 = args[1]
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample_1 = children_out[0]
+        in_sample_2 = children_out[1]
 
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample_1, in_sample_2)
@@ -292,8 +315,9 @@ class STLOfflineEvaluator(STLrtamtASTvisitor):
         return out_sample
 
     def visitTimedPrecedes(self, node, *args, **kwargs):
-        in_sample_1 = args[0]
-        in_sample_2 = args[1]
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample_1 = children_out[0]
+        in_sample_2 = children_out[1]
 
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample_1, in_sample_2)
@@ -301,8 +325,9 @@ class STLOfflineEvaluator(STLrtamtASTvisitor):
         return out_sample
 
     def visitTimedUntil(self, node, *args, **kwargs):
-        in_sample_1 = args[0]
-        in_sample_2 = args[1]
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample_1 = children_out[0]
+        in_sample_2 = children_out[1]
 
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample_1, in_sample_2)
@@ -310,7 +335,8 @@ class STLOfflineEvaluator(STLrtamtASTvisitor):
         return out_sample
 
     def visitTimedAlways(self, node, *args, **kwargs):
-        in_sample = args[0]
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample = children_out[0]
 
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample)
@@ -318,7 +344,8 @@ class STLOfflineEvaluator(STLrtamtASTvisitor):
         return out_sample
 
     def visitTimedEventually(self, node, *args, **kwargs):
-        in_sample = args[0]
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample = children_out[0]
 
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample)
@@ -326,8 +353,9 @@ class STLOfflineEvaluator(STLrtamtASTvisitor):
         return out_sample
 
     def visitTimedSince(self, node, *args, **kwargs):
-        in_sample_1 = args[0]
-        in_sample_2 = args[1]
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample_1 = children_out[0]
+        in_sample_2 = children_out[1]
 
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample_1, in_sample_2)
@@ -335,7 +363,8 @@ class STLOfflineEvaluator(STLrtamtASTvisitor):
         return out_sample
 
     def visitTimedOnce(self, node, *args, **kwargs):
-        in_sample = args[0]
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample = children_out[0]
 
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample)
@@ -343,7 +372,8 @@ class STLOfflineEvaluator(STLrtamtASTvisitor):
         return out_sample
 
     def visitTimedHistorically(self, node, *args, **kwargs):
-        in_sample = args[0]
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample = children_out[0]
 
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample)

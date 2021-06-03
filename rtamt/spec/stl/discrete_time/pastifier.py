@@ -19,61 +19,76 @@ class STLPastifier(LTLPastifier, STLrtamtASTvisitor):
         return STLrtamtASTvisitor.visit(self, node, *args, **kwargs)
 
 
-    def visitVariable(self, node, pre_out, *args, **kwargs):
+    def visitVariable(self, node, *args, **kwargs):
         horizon = args[0]
         node = Variable(node.var, node.field, node.io_type)
         if horizon > 0:
             node = TimedOnce(node, horizon, horizon)
         return node
 
-    def visitTimedEventually(self, node, pre_out, *args, **kwargs):
+    def visitTimedEventually(self, node, *args, **kwargs):
         horizon = args[0] - node.end
-        node = self.visit(node.children[0], [horizon])
+        children_nodes = self.visitChildren(node, horizon)
+        child_node = children_nodes[0]
         begin = 0
         end = node.end - node.begin
         if end > 0:
-            node = TimedOnce(node, begin, end)
+            node = TimedOnce(child_node, begin, end)
+        else:
+            node = child_node
         return node
 
-    def visitTimedAlways(self, node, pre_out, *args, **kwargs):
+    def visitTimedAlways(self, node, *args, **kwargs):
         horizon = args[0] - node.end
-        node = self.visit(node.children[0], [horizon])
+        children_nodes = self.visitChildren(node, horizon)
+        child_node = children_nodes[0]
         begin = 0
         end = node.end - node.begin
         if end > 0:
-            node = TimedHistorically(node, begin, end)
+            node = TimedHistorically(child_node, begin, end)
+        else:
+            node = child_node
         return node
 
-    def visitTimedUntil(self, node, pre_out, *args, **kwargs):
+    def visitTimedUntil(self, node, *args, **kwargs):
         horizon = args[0] - node.end
+        children_nodes = self.visitChildren(node, horizon)
+        child1_node = children_nodes[0]
+        child2_node = children_nodes[1]
         begin = node.begin
         end = node.end
-        child1_node = self.visit(node.children[0], [horizon])
-        child2_node = self.visit(node.children[1], [horizon])
         node = TimedPrecedes(child1_node, child2_node, begin, end)
         return node
 
-    def visitTimedOnce(self, node, pre_out, *args, **kwargs):
-        child_node = self.visit(node.children[0], args)
+    def visitTimedOnce(self, node, *args, **kwargs):
+        horizon = args[0]
+        children_nodes = self.visitChildren(node, horizon)
+        child_node = children_nodes[0]
         node = TimedOnce(child_node, node.begin, node.end)
         return node
 
-    def visitTimedHistorically(self, node, pre_out, *args, **kwargs):
-        child_node = self.visit(node.children[0], args)
+    def visitTimedHistorically(self, node, *args, **kwargs):
+        horizon = args[0]
+        children_nodes = self.visitChildren(node, horizon)
+        child_node = children_nodes[0]
         node = TimedHistorically(child_node, node.begin, node.end)
         return node
 
-    def visitTimedSince(self, node, pre_out, *args, **kwargs):
-        child_node_1 = self.visit(node.children[0], args)
-        child_node_2 = self.visit(node.children[1], args)
-        node = TimedSince(child_node_1, child_node_2, node.begin, node.end)
+    def visitTimedSince(self, node, *args, **kwargs):
+        horizon = args[0]
+        children_nodes = self.visitChildren(node, horizon)
+        child1_node = children_nodes[0]
+        child2_node = children_nodes[1]
+        node = TimedSince(child1_node, child2_node, node.begin, node.end)
         return node
 
-    def visitTimedPrecedes(self, node, pre_out, *args, **kwargs):
+    def visitTimedPrecedes(self, node, *args, **kwargs):
+        horizon = args[0]
+        children_nodes = self.visitChildren(node, horizon)
+        child1_node = children_nodes[0]
+        child2_node = children_nodes[1]
         end = node.end
         begin = node.begin
-        child1_node = self.visit(node.children[0], args)
-        child2_node = self.visit(node.children[1], args)
         node = TimedPrecedes(child1_node, child2_node, begin, end)
         return node
 

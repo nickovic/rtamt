@@ -6,6 +6,7 @@ from rtamt.ast.parser_visitor.stl.rtamtASTvisitor import STLrtamtASTvisitor
 
 class STLOnlineEvaluator(STLrtamtASTvisitor):
     def __init__(self, spec):
+        STLrtamtASTvisitor.__init__(self)
         self.spec = spec
         generator = None
 
@@ -41,9 +42,10 @@ class STLOnlineEvaluator(STLrtamtASTvisitor):
             out_sample = sample
         return out_sample
 
-    def visitPredicate(self, node, pre_out, *args, **kwargs):
-        in_sample_1 = pre_out[0]
-        in_sample_2 = pre_out[1]
+    def visitPredicate(self, node, *args, **kwargs):
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample_1 = children_out[0]
+        in_sample_2 = children_out[1]
         monitor = self.node_monitor_dict[node.name]
 
         if self.spec.time_interpretation == TimeInterpretation.DENSE:
@@ -73,7 +75,7 @@ class STLOnlineEvaluator(STLrtamtASTvisitor):
 
         return out_sample
 
-    def visitVariable(self, node, pre_out, *args, **kwargs):
+    def visitVariable(self, node, *args, **kwargs):
         var = self.spec.var_object_dict[node.var]
         if type(var) is list:
             value = []
@@ -90,20 +92,22 @@ class STLOnlineEvaluator(STLrtamtASTvisitor):
                 value = var
         return value
 
-    def visitConstant(self, node, pre_out, *args, **kwargs):
+    def visitConstant(self, node, *args, **kwargs):
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update()
         return out_sample
 
-    def visitAbs(self, node, pre_out, *args, **kwargs):
-        in_sample = pre_out[0]
+    def visitAbs(self, node, *args, **kwargs):
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample = children_out[0]
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample)
         return out_sample
 
-    def visitAddition(self, node, pre_out, *args, **kwargs):
-        in_sample_1 = pre_out[0]
-        in_sample_2 = pre_out[1]
+    def visitAddition(self, node, *args, **kwargs):
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample_1 = children_out[0]
+        in_sample_2 = children_out[1]
 
         monitor = self.node_monitor_dict[node.name]
 
@@ -111,227 +115,253 @@ class STLOnlineEvaluator(STLrtamtASTvisitor):
 
         return out_sample
 
-    def visitSubtraction(self, node, pre_out, *args, **kwargs):
-        in_sample_1 = pre_out[0]
-        in_sample_2 = pre_out[1]
+    def visitSubtraction(self, node, *args, **kwargs):
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample_1 = children_out[0]
+        in_sample_2 = children_out[1]
 
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample_1, in_sample_2)
 
         return out_sample
 
-    def visitMultiplication(self, node, pre_out, *args, **kwargs):
-        in_sample_1 = pre_out[0]
-        in_sample_2 = pre_out[1]
+    def visitMultiplication(self, node, *args, **kwargs):
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample_1 = children_out[0]
+        in_sample_2 = children_out[1]
 
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample_1, in_sample_2)
 
         return out_sample
 
-    def visitDivision(self, node, pre_out, *args, **kwargs):
-        in_sample_1 = pre_out[0]
-        in_sample_2 = pre_out[1]
+    def visitDivision(self, node, *args, **kwargs):
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample_1 = children_out[0]
+        in_sample_2 = children_out[1]
 
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample_1, in_sample_2)
 
         return out_sample
 
-    def visitNot(self, node, pre_out, *args, **kwargs):
-        in_sample = pre_out[0]
+    def visitNot(self, node, *args, **kwargs):
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample = children_out[0]
 
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample)
 
         return out_sample
 
-    def visitPrevious(self, node, pre_out, *args, **kwargs):
-        in_sample = pre_out[0]
+    def visitPrevious(self, node, *args, **kwargs):
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample = children_out[0]
 
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample)
 
         return out_sample
 
-    def visitNext(self, node, pre_out, *args, **kwargs):
-        in_sample = pre_out[0]
+    def visitNext(self, node, *args, **kwargs):
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample = children_out[0]
 
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample)
 
         return out_sample
 
-    def visitRise(self, node, pre_out, *args, **kwargs):
-        in_sample = pre_out[0]
+    def visitRise(self, node, *args, **kwargs):
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample = children_out[0]
 
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample)
 
         return out_sample
 
-    def visitFall(self, node, pre_out, *args, **kwargs):
-        in_sample = pre_out[0]
+    def visitFall(self, node, *args, **kwargs):
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample = children_out[0]
 
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample)
 
         return out_sample
 
-    def visitAnd(self, node, pre_out, *args, **kwargs):
-        in_sample_1 = pre_out[0]
-        in_sample_2 = pre_out[1]
+    def visitAnd(self, node, *args, **kwargs):
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample_1 = children_out[0]
+        in_sample_2 = children_out[1]
 
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample_1, in_sample_2)
 
         return out_sample
 
-    def visitOr(self, node, pre_out, *args, **kwargs):
-        in_sample_1 = pre_out[0]
-        in_sample_2 = pre_out[1]
+    def visitOr(self, node, *args, **kwargs):
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample_1 = children_out[0]
+        in_sample_2 = children_out[1]
 
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample_1, in_sample_2)
 
         return out_sample
 
-    def visitImplies(self, node, pre_out, *args, **kwargs):
-        in_sample_1 = pre_out[0]
-        in_sample_2 = pre_out[1]
+    def visitImplies(self, node, *args, **kwargs):
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample_1 = children_out[0]
+        in_sample_2 = children_out[1]
 
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample_1, in_sample_2)
 
         return out_sample
 
-    def visitIff(self, node, pre_out, *args, **kwargs):
-        in_sample_1 = pre_out[0]
-        in_sample_2 = pre_out[1]
+    def visitIff(self, node, *args, **kwargs):
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample_1 = children_out[0]
+        in_sample_2 = children_out[1]
 
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample_1, in_sample_2)
 
         return out_sample
 
-    def visitXor(self, node, pre_out, *args, **kwargs):
-        in_sample_1 = pre_out[0]
-        in_sample_2 = pre_out[1]
+    def visitXor(self, node, *args, **kwargs):
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample_1 = children_out[0]
+        in_sample_2 = children_out[1]
 
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample_1, in_sample_2)
 
         return out_sample
 
-    def visitEventually(self, node, pre_out, *args, **kwargs):
-        in_sample = pre_out[0]
+    def visitEventually(self, node, *args, **kwargs):
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample = children_out[0]
 
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample)
 
         return out_sample
 
-    def visitAlways(self, node, pre_out, *args, **kwargs):
-        in_sample = pre_out[0]
+    def visitAlways(self, node, *args, **kwargs):
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample = children_out[0]
 
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample)
 
         return out_sample
 
-    def visitUntil(self, node, pre_out, *args, **kwargs):
-        in_sample_1 = pre_out[0]
-        in_sample_2 = pre_out[1]
+    def visitUntil(self, node, *args, **kwargs):
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample_1 = children_out[0]
+        in_sample_2 = children_out[1]
 
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample_1, in_sample_2)
 
         return out_sample
 
-    def visitOnce(self, node, pre_out, *args, **kwargs):
-        in_sample = pre_out[0]
+    def visitOnce(self, node, *args, **kwargs):
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample = children_out[0]
 
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample)
 
         return out_sample
 
-    def visitHistorically(self, node, pre_out, *args, **kwargs):
-        in_sample = pre_out[0]
+    def visitHistorically(self, node, *args, **kwargs):
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample = children_out[0]
 
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample)
 
         return out_sample
 
-    def visitSince(self, node, pre_out, *args, **kwargs):
-        in_sample_1 = pre_out[0]
-        in_sample_2 = pre_out[1]
+    def visitSince(self, node, *args, **kwargs):
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample_1 = children_out[0]
+        in_sample_2 = children_out[1]
 
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample_1, in_sample_2)
 
         return out_sample
 
-    def visitTimedPrecedes(self, node, pre_out, *args, **kwargs):
-        in_sample_1 = pre_out[0]
-        in_sample_2 = pre_out[1]
+    def visitTimedPrecedes(self, node, *args, **kwargs):
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample_1 = children_out[0]
+        in_sample_2 = children_out[1]
 
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample_1, in_sample_2)
 
         return out_sample
 
-    def visitTimedUntil(self, node, pre_out, *args, **kwargs):
-        in_sample_1 = pre_out[0]
-        in_sample_2 = pre_out[1]
+    def visitTimedUntil(self, node, *args, **kwargs):
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample_1 = children_out[0]
+        in_sample_2 = children_out[1]
 
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample_1, in_sample_2)
 
         return out_sample
 
-    def visitTimedAlways(self, node, pre_out, *args, **kwargs):
-        in_sample = pre_out[0]
+    def visitTimedAlways(self, node, *args, **kwargs):
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample = children_out[0]
 
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample)
 
         return out_sample
 
-    def visitTimedEventually(self, node, pre_out, *args, **kwargs):
-        in_sample = pre_out[0]
+    def visitTimedEventually(self, node, *args, **kwargs):
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample = children_out[0]
 
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample)
 
         return out_sample
 
-    def visitTimedSince(self, node, pre_out, *args, **kwargs):
-        in_sample_1 = pre_out[0]
-        in_sample_2 = pre_out[1]
+    def visitTimedSince(self, node, *args, **kwargs):
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample_1 = children_out[0]
+        in_sample_2 = children_out[1]
 
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample_1, in_sample_2)
 
         return out_sample
 
-    def visitTimedOnce(self, node, pre_out, *args, **kwargs):
-        in_sample = pre_out[0]
+    def visitTimedOnce(self, node, *args, **kwargs):
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample = children_out[0]
 
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample)
 
         return out_sample
 
-    def visitTimedHistorically(self, node, pre_out, *args, **kwargs):
-        in_sample = pre_out[0]
+    def visitTimedHistorically(self, node, *args, **kwargs):
+        children_out = self.visitChildren(node, *args, **kwargs)
+        in_sample = children_out[0]
 
         monitor = self.node_monitor_dict[node.name]
         out_sample = monitor.update(in_sample)
 
         return out_sample
 
-    def visitDefault(self, node, pre_out, *args, **kwargs):
+    def visitDefault(self, node, *args, **kwargs):
         return None
 

@@ -43,8 +43,8 @@ NOT_IMPLEMENTED = "You should implement this."
 
 class STLrtamtASTvisitor(AbstractVisitor):
 
-    def post_process(self, node, *args, **kwargs):
-        out = None
+    def visit(self, node, *args, **kwargs):
+        out = list()
 
         if isinstance(node, Predicate):
             out = self.visitPredicate(node, *args, **kwargs)

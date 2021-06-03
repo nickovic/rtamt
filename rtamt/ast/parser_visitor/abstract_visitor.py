@@ -3,22 +3,12 @@ from abc import ABCMeta, abstractmethod
 class AbstractVisitor(object):
     __metaclass__ = ABCMeta
 
-    def visit_children(self, node, *args, **kwargs):
-        out = []
+    def visitChildren(self, node, *args, **kwargs):
+        children_out = list()
         for nodeChild in node.children:
-            out.append(self.visit(nodeChild, *args, **kwargs))
-        out.append(*args)
-        return out
+            out = self.visit(nodeChild, *args, **kwargs)
+            children_out.append(out)
+        return children_out
 
     def visit(self, node, *args, **kwargs):
-        out = None
-        new_args = self.pre_process(node, *args, **kwargs)
-        pre_out = self.visit_children(node, *new_args, **kwargs)
-        out = self.post_process(node, *pre_out, **kwargs)
-        return out
-
-    def pre_process(self, node, *args, **kwargs):
-        return args
-
-    def post_process(self, node, *args, **kwargs):
-        return args
+        return self.visitChildren(node, *args, **kwargs)

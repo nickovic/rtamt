@@ -36,8 +36,8 @@ NOT_IMPLEMENTED = "You should implement this."
 class LTLrtamtASTvisitor(AbstractVisitor):
     __metaclass__ = ABCMeta
 
-    def post_process(self, node, *args, **kwargs):
-        out = None
+    def visit(self, node, *args, **kwargs):
+        out = list()
 
         if isinstance(node, Predicate):
             out = self.visitPredicate(node, *args, **kwargs)
