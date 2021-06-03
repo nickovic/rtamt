@@ -37,59 +37,59 @@ class LTLrtamtASTvisitor(AbstractVisitor):
     __metaclass__ = ABCMeta
 
     def visit(self, node, *args, **kwargs):
-        out = list()
+        output = list()
 
         if isinstance(node, Predicate):
-            out = self.visitPredicate(node, *args, **kwargs)
+            output = self.visitPredicate(node, *args, **kwargs)
         elif isinstance(node, Variable):
-            out = self.visitVariable(node, *args, **kwargs)
+            output = self.visitVariable(node, *args, **kwargs)
         elif isinstance(node, Neg):
-            out = self.visitNot(node, *args, **kwargs)
+            output = self.visitNot(node, *args, **kwargs)
         elif isinstance(node, Disjunction):
-            out = self.visitOr(node, *args, **kwargs)
+            output = self.visitOr(node, *args, **kwargs)
         elif isinstance(node, Conjunction):
-            out = self.visitAnd(node, *args, **kwargs)
+            output = self.visitAnd(node, *args, **kwargs)
         elif isinstance(node, Implies):
-            out = self.visitImplies(node, *args, **kwargs)
+            output = self.visitImplies(node, *args, **kwargs)
         elif isinstance(node, Iff):
-            out = self.visitIff(node, *args, **kwargs)
+            output = self.visitIff(node, *args, **kwargs)
         elif isinstance(node, Xor):
-            out = self.visitXor(node, *args, **kwargs)
+            output = self.visitXor(node, *args, **kwargs)
         elif isinstance(node, Eventually):
-            out = self.visitEventually(node, *args, **kwargs)
+            output = self.visitEventually(node, *args, **kwargs)
         elif isinstance(node, Always):
-            out = self.visitAlways(node, *args, **kwargs)
+            output = self.visitAlways(node, *args, **kwargs)
         elif isinstance(node, Until):
-            out = self.visitUntil(node, *args, **kwargs)
+            output = self.visitUntil(node, *args, **kwargs)
         elif isinstance(node, Once):
-            out = self.visitOnce(node, *args, **kwargs)
+            output = self.visitOnce(node, *args, **kwargs)
         elif isinstance(node, Historically):
-            out = self.visitHistorically(node, *args, **kwargs)
+            output = self.visitHistorically(node, *args, **kwargs)
         elif isinstance(node, Since):
-            out = self.visitSince(node, *args, **kwargs)
+            output = self.visitSince(node, *args, **kwargs)
         elif isinstance(node, Abs):
-            out = self.visitAbs(node, *args, **kwargs)
+            output = self.visitAbs(node, *args, **kwargs)
         elif isinstance(node, Addition):
-            out = self.visitAddition(node, *args, **kwargs)
+            output = self.visitAddition(node, *args, **kwargs)
         elif isinstance(node, Subtraction):
-            out = self.visitSubtraction(node, *args, **kwargs)
+            output = self.visitSubtraction(node, *args, **kwargs)
         elif isinstance(node, Multiplication):
-            out = self.visitMultiplication(node, *args, **kwargs)
+            output = self.visitMultiplication(node, *args, **kwargs)
         elif isinstance(node, Division):
-            out = self.visitDivision(node, *args, **kwargs)
+            output = self.visitDivision(node, *args, **kwargs)
         elif isinstance(node, Rise):
-            out = self.visitRise(node, *args, **kwargs)
+            output = self.visitRise(node, *args, **kwargs)
         elif isinstance(node, Fall):
-            out = self.visitFall(node, *args, **kwargs)
+            output = self.visitFall(node, *args, **kwargs)
         elif isinstance(node, Constant):
-            out = self.visitConstant(node, *args, **kwargs)
+            output = self.visitConstant(node, *args, **kwargs)
         elif isinstance(node, Previous):
-            out = self.visitPrevious(node, *args, **kwargs)
+            output = self.visitPrevious(node, *args, **kwargs)
         elif isinstance(node, Next):
-            out = self.visitNext(node, *args, **kwargs)
+            output = self.visitNext(node, *args, **kwargs)
         else:
             raise RTAMTException('Not implemented in the visitor')
-        return out
+        return output
 
 
     @abstractmethod

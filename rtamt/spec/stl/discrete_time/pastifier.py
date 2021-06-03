@@ -52,7 +52,9 @@ class STLPastifier(LTLPastifier, STLrtamtASTvisitor):
 
     def visitTimedUntil(self, node, *args, **kwargs):
         horizon = args[0] - node.end
+
         children_nodes = self.visitChildren(node, horizon)
+
         child1_node = children_nodes[0]
         child2_node = children_nodes[1]
         begin = node.begin
