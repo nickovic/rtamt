@@ -22,11 +22,7 @@ class Predicate(BinaryNode):
             operator : OperatorType (LEQ, GEQ, LESS, GREATER, EQ or NEQ)
         """
         name_phrase = str(operator) #TODO: consider how we can make it class
-        if sys.version_info.major == 2:
-            #super(BinaryNode, self).__init__(name_phrase, child1, child2)    #python2
-            BinaryNode.__init__(self, name_phrase, child1, child2)
-        else:
-            super().__init__(name_phrase, child1, child2)    #python3
+        super(Predicate, self).__init__(name_phrase, child1, child2)
 
         self.operator = operator
 

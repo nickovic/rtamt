@@ -17,8 +17,4 @@ class Until(BinaryNode):
                 bound : Interval
         """
         name_phrase = 'until'
-        if sys.version_info.major == 2:
-            #super(BinaryNode, self).__init__(name_phrase, child1, child2)    #python2
-            BinaryNode.__init__(self, name_phrase, child1, child2)
-        else:
-            super().__init__(name_phrase, child1, child2)    #python3
+        super(Until, self).__init__(name_phrase, child1, child2)
