@@ -12,11 +12,11 @@ class STLOnlineEvaluator(STLrtamtASTvisitor):
 
         if self.spec.language == Language.PYTHON:
             if self.spec.time_interpretation == TimeInterpretation.DISCRETE:
-                from rtamt.evaluator.stl.discrete_time.online.python.online_discrete_time_python_monitor import \
+                from rtamt.semantics.discrete_time.online.stl.online_discrete_time_python_monitor import \
                     STLOnlineDiscreteTimePythonMonitor
                 generator = STLOnlineDiscreteTimePythonMonitor()
             elif self.spec.time_interpretation == TimeInterpretation.DENSE:
-                from rtamt.evaluator.stl.dense_time.online.python.online_dense_time_python_monitor import \
+                from rtamt.semantics.dense_time.online.stl.online_dense_time_python_monitor import \
                     STLOnlineDenseTimePythonMonitor
                 generator = STLOnlineDenseTimePythonMonitor()
         elif self.spec.language == Language.CPP:

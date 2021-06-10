@@ -1,16 +1,16 @@
 import unittest
-from rtamt.operation.stl.dense_time.online.and_operation import AndOperation
-from rtamt.operation.stl.dense_time.online.not_operation import NotOperation
-from rtamt.operation.stl.dense_time.online.or_operation import OrOperation
-from rtamt.operation.stl.dense_time.online.implies_operation import ImpliesOperation
-from rtamt.operation.stl.dense_time.online.iff_operation import IffOperation
-from rtamt.operation.stl.dense_time.online.xor_operation import XorOperation
-from rtamt.operation.stl.dense_time.online.always_operation import AlwaysOperation
-from rtamt.operation.stl.dense_time.online.historically_operation import HistoricallyOperation
-from rtamt.operation.stl.dense_time.online.once_operation import OnceOperation
-from rtamt.operation.stl.dense_time.online.since_operation import SinceOperation
-from rtamt.operation.stl.dense_time.online.once_bounded_operation import OnceBoundedOperation
-from rtamt.operation.stl.dense_time.online.historically_bounded_operation import HistoricallyBoundedOperation
+from rtamt.semantics.dense_time.online.stl.operation.and_operation import AndOperation
+from rtamt.semantics.dense_time.online.stl.operation.not_operation import NotOperation
+from rtamt.semantics.dense_time.online.stl.operation.or_operation import OrOperation
+from rtamt.semantics.dense_time.online.stl.operation.implies_operation import ImpliesOperation
+from rtamt.semantics.dense_time.online.stl.operation.iff_operation import IffOperation
+from rtamt.semantics.dense_time.online.stl.operation.xor_operation import XorOperation
+from rtamt.semantics.dense_time.online.stl.operation.always_operation import AlwaysOperation
+from rtamt.semantics.dense_time.online.stl.operation.historically_operation import HistoricallyOperation
+from rtamt.semantics.dense_time.online.stl.operation.once_operation import OnceOperation
+from rtamt.semantics.dense_time.online.stl.operation.since_operation import SinceOperation
+from rtamt.semantics.dense_time.online.stl.operation.once_bounded_operation import OnceBoundedOperation
+from rtamt.semantics.dense_time.online.stl.operation.historically_bounded_operation import HistoricallyBoundedOperation
 
 
 class TestSTLBooleanAndTemporalOnline(unittest.TestCase):

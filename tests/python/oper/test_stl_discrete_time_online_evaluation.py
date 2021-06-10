@@ -1,29 +1,31 @@
 import unittest
-from rtamt.operation.stl.discrete_time.online.constant_operation import ConstantOperation
-from rtamt.operation.stl.discrete_time.online.and_operation import AndOperation
-from rtamt.operation.stl.discrete_time.online.rise_operation import RiseOperation
-from rtamt.operation.stl.discrete_time.online.fall_operation import FallOperation
-from rtamt.operation.stl.discrete_time.online.predicate_operation import PredicateOperation
-from rtamt.operation.stl.discrete_time.online.not_operation import NotOperation
-from rtamt.operation.stl.discrete_time.online.or_operation import OrOperation
-from rtamt.operation.stl.discrete_time.online.implies_operation import ImpliesOperation
-from rtamt.operation.stl.discrete_time.online.iff_operation import IffOperation
-from rtamt.operation.stl.discrete_time.online.xor_operation import XorOperation
-from rtamt.operation.stl.discrete_time.online.always_operation import AlwaysOperation
-from rtamt.operation.stl.discrete_time.online.eventually_operation import EventuallyOperation
-from rtamt.operation.stl.discrete_time.online.historically_operation import HistoricallyOperation
-from rtamt.operation.stl.discrete_time.online.once_operation import OnceOperation
-from rtamt.operation.stl.discrete_time.online.since_operation import SinceOperation
-from rtamt.operation.stl.discrete_time.online.once_bounded_operation import OnceBoundedOperation
-from rtamt.operation.stl.discrete_time.online.historically_bounded_operation import HistoricallyBoundedOperation
-from rtamt.operation.stl.discrete_time.online.since_bounded_operation import SinceBoundedOperation
-from rtamt.operation.stl.discrete_time.online.precedes_bounded_operation import PrecedesBoundedOperation
-from rtamt.operation.arithmetic.discrete_time.online.subtraction_operation import SubtractionOperation
-from rtamt.operation.arithmetic.discrete_time.online.addition_operation import AdditionOperation
-from rtamt.operation.arithmetic.discrete_time.online.multiplication_operation import MultiplicationOperation
-from rtamt.operation.arithmetic.discrete_time.online.division_operation import DivisionOperation
-from rtamt.operation.arithmetic.discrete_time.online.abs_operation import AbsOperation
-from rtamt.operation.stl.discrete_time.online.previous_operation import PreviousOperation
+
+from rtamt.semantics.discrete_time.online.arithmetic.operation.subtraction_operation import SubtractionOperation
+from rtamt.semantics.discrete_time.online.arithmetic.operation.addition_operation import AdditionOperation
+from rtamt.semantics.discrete_time.online.arithmetic.operation.multiplication_operation import MultiplicationOperation
+from rtamt.semantics.discrete_time.online.arithmetic.operation.division_operation import DivisionOperation
+from rtamt.semantics.discrete_time.online.arithmetic.operation.abs_operation import AbsOperation
+
+from rtamt.semantics.discrete_time.online.stl.operation.constant_operation import ConstantOperation
+from rtamt.semantics.discrete_time.online.stl.operation.and_operation import AndOperation
+from rtamt.semantics.discrete_time.online.stl.operation.rise_operation import RiseOperation
+from rtamt.semantics.discrete_time.online.stl.operation.fall_operation import FallOperation
+from rtamt.semantics.discrete_time.online.stl.operation.predicate_operation import PredicateOperation
+from rtamt.semantics.discrete_time.online.stl.operation.not_operation import NotOperation
+from rtamt.semantics.discrete_time.online.stl.operation.or_operation import OrOperation
+from rtamt.semantics.discrete_time.online.stl.operation.implies_operation import ImpliesOperation
+from rtamt.semantics.discrete_time.online.stl.operation.iff_operation import IffOperation
+from rtamt.semantics.discrete_time.online.stl.operation.xor_operation import XorOperation
+from rtamt.semantics.discrete_time.online.stl.operation.always_operation import AlwaysOperation
+from rtamt.semantics.discrete_time.online.stl.operation.eventually_operation import EventuallyOperation
+from rtamt.semantics.discrete_time.online.stl.operation.historically_operation import HistoricallyOperation
+from rtamt.semantics.discrete_time.online.stl.operation.once_operation import OnceOperation
+from rtamt.semantics.discrete_time.online.stl.operation.since_operation import SinceOperation
+from rtamt.semantics.discrete_time.online.stl.operation.once_bounded_operation import OnceBoundedOperation
+from rtamt.semantics.discrete_time.online.stl.operation.historically_bounded_operation import HistoricallyBoundedOperation
+from rtamt.semantics.discrete_time.online.stl.operation.since_bounded_operation import SinceBoundedOperation
+from rtamt.semantics.discrete_time.online.stl.operation.precedes_bounded_operation import PrecedesBoundedOperation
+from rtamt.semantics.discrete_time.online.stl.operation.previous_operation import PreviousOperation
 from rtamt.spec.stl.discrete_time.comp_op import StlComparisonOperator
 
 class TestSTLEvaluation(unittest.TestCase):

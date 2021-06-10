@@ -11,7 +11,7 @@ class LTLEvaluator(LTLVisitor):
 
         if self.spec.language == Language.PYTHON:
             if self.spec.time_interpretation == TimeInterpretation.DISCRETE:
-                from rtamt.evaluator.ltl.discrete_time.online.python.online_discrete_time_python_monitor import \
+                from rtamt.semantics.discrete_time.online.ltl.online_discrete_time_python_monitor import \
                     LTLOnlineDiscreteTimePythonMonitor
                 generator = LTLOnlineDiscreteTimePythonMonitor()
         elif self.spec.language == Language.CPP:

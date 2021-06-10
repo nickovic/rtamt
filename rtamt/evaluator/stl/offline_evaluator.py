@@ -15,12 +15,12 @@ class STLOfflineEvaluator(STLrtamtASTvisitor):
 
         if self.spec.language == Language.PYTHON:
             if self.spec.time_interpretation == TimeInterpretation.DENSE:
-                from rtamt.evaluator.stl.dense_time.offline.python.offline_dense_time_python_monitor import \
+                from rtamt.semantics.dense_time.offline.stl.offline_dense_time_python_monitor import \
                     STLOfflineDenseTimePythonMonitor
                 generator = STLOfflineDenseTimePythonMonitor()
 
             elif self.spec.time_interpretation == TimeInterpretation.DISCRETE:
-                from rtamt.evaluator.stl.discrete_time.offline.python.offline_discrete_time_python_monitor import \
+                from rtamt.semantics.discrete_time.offline.stl.offline_discrete_time_python_monitor import \
                     STLOfflineDiscreteTimePythonMonitor #TODO: tom can not uderstand the hard cording.
                 generator = STLOfflineDiscreteTimePythonMonitor()
 
