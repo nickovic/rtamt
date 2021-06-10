@@ -14,7 +14,7 @@ class OfflineOperation(AbstractOperation):
     __metaclass__ = ABCMeta
 
     def __init__(self):
-        super(OfflineOperator, self).__init__()
+        super(OfflineOperation, self).__init__()
 
     @abstractmethod
     def evaluate(self, *args, **kargs):

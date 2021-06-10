@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 from abc import ABCMeta, abstractmethod
 
-from rtamt.semantics.discrete_time_semantics import DiscreteTimeSemantics
-from rtamt.semantics.offline_evaluator import OfflineEvaluator
+from rtamt.semantics.discrete_time_operation import DiscreteTimeOperation
+from rtamt.semantics.online_operation import OnlineOperation
 
 NOT_IMPLEMENTED = "You should implement this."
 
-class DiscreteTimeOfflineSemanitcs(DiscreteTimeSemantics, OfflineEvaluator):
+class DiscreteTimeOnlineOperation(DiscreteTimeOperation, OnlineOperation):
     """
     Abstract Operation: template for any monitoring operation
     """
@@ -16,3 +16,4 @@ class DiscreteTimeOfflineSemanitcs(DiscreteTimeSemantics, OfflineEvaluator):
 
     def __init__(self):
         pass
+

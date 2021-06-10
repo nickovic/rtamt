@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 from abc import ABCMeta, abstractmethod
 
-from rtamt.semantics.abstract_semantics import AbstractSemantics
+from rtamt.semantics.abstract_time_operation import AbstractTimeOperation
 
 NOT_IMPLEMENTED = "You should implement this."
 
-class DenseTimeSemantics(AbstractSemantics):
+class DenseTimeOperation(AbstractTimeOperation):
     """
     Abstract Operation: template for any monitoring operation
     """
@@ -15,4 +15,3 @@ class DenseTimeSemantics(AbstractSemantics):
 
     def __init__(self):
         pass
-
