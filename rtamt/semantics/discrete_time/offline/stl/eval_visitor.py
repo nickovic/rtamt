@@ -39,7 +39,7 @@ from rtamt.semantics.discrete_time.offline.stl.operation.next_operation import N
 
 class STLOfflineDiscreteTimePythonEvalVisitor(STLrtamtASTvisitor):
     def __init__(self, spec):
-        super(STLOfflineDiscreteTimePythonEvalVisitor, self).__init__(spec)
+        super(STLOfflineDiscreteTimePythonEvalVisitor, self).__init__(STLrtamtASTvisitor, spec)
 
     def visitPredicate(self, node, *args, **kwargs):
         children_out = self.visitChildren(node, *args, **kwargs)
