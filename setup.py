@@ -19,8 +19,8 @@ setup(
     license='BSD',
     python_requires='>=2.7',
     install_requires=[
-        'antlr4-python2-runtime==4.5; python_version<"3"',
-        'antlr4-python3-runtime==4.5; python_version>="3"',
+        'antlr4-python2-runtime>=4.5, <4.6; python_version<"3"',
+        'antlr4-python3-runtime>=4.5, <4.6; python_version>="3"',
         'enum34; python_version<"3.4"'
     ],
     package_data={'': ['*.so']},
