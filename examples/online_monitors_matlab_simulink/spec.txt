@@ -1,0 +1,5 @@
+input float pc
+output float lep
+output float out
+
+out = (rise(pc >= 0.9)) implies (eventually[0:100] always[0:100] (abs(pc - lep) <= 3))

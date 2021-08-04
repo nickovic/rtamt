@@ -43,7 +43,7 @@ block.OutputPort(1).DatatypeID  = 0; % double
 block.OutputPort(1).Complexity  = 'Real';
 
 % Register parameters
-block.NumDialogPrms     = 0;
+block.NumDialogPrms     = 1;
 
 % Register sample times
 %  [0 offset]            : Continuous sample time
@@ -115,17 +115,22 @@ function InitializeConditions(block)
 %%   C-MEX counterpart: mdlStart
 %%
 function Start(block)
+    spec_filename = block.DialogPrm(1).Data;
+    
     import py.rtamt.STLDiscreteTimeSpecification;
     spec = STLDiscreteTimeSpecification();
-    declare_var(spec, 'pc', 'float');
-    declare_var(spec, 'lep', 'float');
-    declare_var(spec, 'out', 'float');
-    set_var_io_type(spec, 'pc', 'input');
-    set_var_io_type(spec, 'lep', 'output');
-    set_var_io_type(spec, 'out', 'output');
-    spec.spec = 'out = (rise(pc >= 0.9)) implies (eventually[0:100] always[0:100] (abs(pc - lep) <= 3))';
+    spec.spec = get_spec_from_file(spec, spec_filename);
+    
+    %declare_var(spec, 'pc', 'float');
+    %declare_var(spec, 'lep', 'float');
+    %declare_var(spec, 'out', 'float');
+    %set_var_io_type(spec, 'pc', 'input');
+    %set_var_io_type(spec, 'lep', 'output');
+    %set_var_io_type(spec, 'out', 'output');
+    %spec.spec = 'out = (rise(pc >= 0.9)) implies (eventually[0:100] always[0:100] (abs(pc - lep) <= 3))';
 
     parse(spec);
+    pastify(spec);
     
     set_param(block.BlockHandle, 'UserData', spec);
 
