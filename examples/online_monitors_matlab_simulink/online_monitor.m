@@ -43,7 +43,7 @@ block.OutputPort(1).DatatypeID  = 0; % double
 block.OutputPort(1).Complexity  = 'Real';
 
 % Register parameters
-block.NumDialogPrms     = 1;
+block.NumDialogPrms     = 2;
 
 % Register sample times
 %  [0 offset]            : Continuous sample time
@@ -121,14 +121,6 @@ function Start(block)
     spec = STLDiscreteTimeSpecification();
     spec.spec = get_spec_from_file(spec, spec_filename);
     
-    %declare_var(spec, 'pc', 'float');
-    %declare_var(spec, 'lep', 'float');
-    %declare_var(spec, 'out', 'float');
-    %set_var_io_type(spec, 'pc', 'input');
-    %set_var_io_type(spec, 'lep', 'output');
-    %set_var_io_type(spec, 'out', 'output');
-    %spec.spec = 'out = (rise(pc >= 0.9)) implies (eventually[0:100] always[0:100] (abs(pc - lep) <= 3))';
-
     parse(spec);
     pastify(spec);
     
@@ -148,21 +140,21 @@ function Outputs(block)
     val = block.InputPort(1).Data;
     
     spec = get_param(block.BlockHandle, 'UserData');
+    
+    spec_vars = block.DialogPrm(2).Data;
+    spec_vars_len = length(spec_vars);
      
-    pc_tuple = py.tuple({'pc',val(1)});
-    lep_tuple = py.tuple({'lep',val(2)});
     l = py.list;
-    append(l, pc_tuple);
-    append(l, lep_tuple);
+    for i=1:spec_vars_len
+        var_val = py.tuple({spec_vars(i), val(i)});
+        append(l, var_val)
+    end
+    
     out = update(spec,0, l);
      
-     set_param(block.BlockHandle, 'UserData', spec);
-     
-     %if(out <= 0)
-     %    set_param(bdroot, 'SimulationCommand', 'stop');
-     %end
-     
-     block.OutputPort(1).Data = out;
+    set_param(block.BlockHandle, 'UserData', spec);
+      
+    block.OutputPort(1).Data = out;
 
 %end Outputs
 
