@@ -99,6 +99,9 @@ real_expression:
 	| real_expression DIVIDE real_expression                    #ExprDivision
 
 	| ABS LPAREN real_expression RPAREN                         #ExprAbs
+	| SQRT LPAREN real_expression RPAREN                        #ExprSqrt
+	| EXP LPAREN real_expression RPAREN                         #ExprExp
+	| POW LPAREN real_expression COMMA real_expression RPAREN   #ExprPow
 	;
 
 

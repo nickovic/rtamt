@@ -1,3 +1,5 @@
+import math
+
 def interval_union(a, b, method):
     out = []
 
@@ -169,6 +171,9 @@ def multiplication(a, b):
 
 def division(a, b):
     return float(a) / float(b)
+
+def power(a, b):
+    return math.pow(a, b)
 
 def split(a, b):
     return [a,b]

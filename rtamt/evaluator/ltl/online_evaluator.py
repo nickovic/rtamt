@@ -75,6 +75,27 @@ class LTLEvaluator(LTLVisitor):
         out_sample = monitor.update(in_sample)
         return out_sample
 
+    def visitSqrt(self, node, args):
+        in_sample = self.visit(node.children[0], args)
+        monitor = self.node_monitor_dict[node.name]
+        out_sample = monitor.update(in_sample)
+        return out_sample
+
+    def visitExp(self, node, args):
+        in_sample = self.visit(node.children[0], args)
+        monitor = self.node_monitor_dict[node.name]
+        out_sample = monitor.update(in_sample)
+        return out_sample
+
+    def visitPow(self, node, args):
+        in_sample_1 = self.visit(node.children[0], args)
+        in_sample_2 = self.visit(node.children[1], args)
+
+        monitor = self.node_monitor_dict[node.name]
+        out_sample = monitor.update(in_sample_1, in_sample_2)
+
+        return out_sample
+
     def visitAddition(self, node, args):
         in_sample_1 = self.visit(node.children[0], args)
         in_sample_2 = self.visit(node.children[1], args)

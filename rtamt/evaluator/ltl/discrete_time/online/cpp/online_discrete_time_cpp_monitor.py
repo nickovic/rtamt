@@ -48,6 +48,15 @@ class LTLOnlineDiscreteTimeCPPMonitor(LTLVisitor):
 
         self.visit(node.children[0], args)
 
+    def visitSqrt(self, node, args):
+        raise Exception('sqrt not yet supported in C++')
+
+    def visitExp(self, node, args):
+        raise Exception('exp not yet supported in C++')
+
+    def visitPow(self, node, args):
+        raise Exception('pow not yet supported in C++')
+
     def visitAddition(self, node, args):
         monitor = AdditionOperation()
         self.node_monitor_dict[node.name] = monitor

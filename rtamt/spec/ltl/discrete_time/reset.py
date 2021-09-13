@@ -52,6 +52,22 @@ class LTLReset(LTLVisitor):
         monitor = self.node_monitor_dict[element.name]
         monitor.reset()
 
+    def visitSqrt(self, element, args):
+        self.visit(element.children[0], args)
+        monitor = self.node_monitor_dict[element.name]
+        monitor.reset()
+
+    def visitExp(self, element, args):
+        self.visit(element.children[0], args)
+        monitor = self.node_monitor_dict[element.name]
+        monitor.reset()
+
+    def visitPow(self, element, args):
+        self.visit(element.children[0], args)
+        self.visit(element.children[1], args)
+        monitor = self.node_monitor_dict[element.name]
+        monitor.reset()
+
     def visitRise(self, element, args):
         self.visit(element.children[0], args)
         monitor = self.node_monitor_dict[element.name]

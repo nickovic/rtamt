@@ -13,10 +13,12 @@ from rtamt.operation.stl.dense_time.online.iff_operation import IffOperation
 from rtamt.operation.stl.dense_time.online.xor_operation import XorOperation
 from rtamt.operation.stl.dense_time.online.since_operation import SinceOperation
 from rtamt.operation.arithmetic.dense_time.online.abs_operation import AbsOperation
+from rtamt.operation.arithmetic.dense_time.online.sqrt_operation import SqrtOperation
+from rtamt.operation.arithmetic.dense_time.online.pow_operation import PowOperation
+from rtamt.operation.arithmetic.dense_time.online.exp_operation import ExpOperation
 from rtamt.operation.stl.dense_time.online.not_operation import NotOperation
 from rtamt.operation.stl.dense_time.online.once_operation import OnceOperation
 from rtamt.operation.stl.dense_time.online.historically_operation import HistoricallyOperation
-from rtamt.operation.stl.dense_time.online.always_operation import AlwaysOperation
 from rtamt.operation.stl.dense_time.online.constant_operation import ConstantOperation
 from rtamt.operation.stl.dense_time.online.once_bounded_operation import OnceBoundedOperation
 from rtamt.operation.stl.dense_time.online.historically_bounded_operation import HistoricallyBoundedOperation
@@ -46,6 +48,22 @@ class STLOnlineDenseTimePythonMonitor(STLVisitor):
         self.node_monitor_dict[node.name] = monitor
 
         self.visit(node.children[0], args)
+
+    def visitSqrt(self, node, args):
+        monitor = SqrtOperation()
+        self.node_monitor_dict[node.name] = monitor
+        self.visit(node.children[0], args)
+
+    def visitExp(self, node, args):
+        monitor = ExpOperation()
+        self.node_monitor_dict[node.name] = monitor
+        self.visit(node.children[0], args)
+
+    def visitPow(self, node, args):
+        monitor = PowOperation()
+        self.node_monitor_dict[node.name] = monitor
+        self.visit(node.children[0], args)
+        self.visit(node.children[1], args)
 
     def visitAddition(self, node, args):
         monitor = AdditionOperation()

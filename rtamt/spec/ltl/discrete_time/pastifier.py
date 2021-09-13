@@ -16,6 +16,9 @@ from rtamt.node.arithmetic.subtraction import Subtraction
 from rtamt.node.arithmetic.multiplication import Multiplication
 from rtamt.node.arithmetic.division import Division
 from rtamt.node.arithmetic.abs import Abs
+from rtamt.node.arithmetic.sqrt import Sqrt
+from rtamt.node.arithmetic.exp import Exp
+from rtamt.node.arithmetic.pow import Pow
 from rtamt.node.ltl.fall import Fall
 from rtamt.node.ltl.rise import Rise
 from rtamt.node.ltl.constant import Constant
@@ -76,6 +79,22 @@ class LTLPastifier(LTLVisitor):
     def visitAbs(self, element, args):
         child_node = self.visit(element.children[0], args)
         node = Abs(child_node)
+        return node
+
+    def visitSqrt(self, element, args):
+        child_node = self.visit(element.children[0], args)
+        node = Sqrt(child_node)
+        return node
+
+    def visitExp(self, element, args):
+        child_node = self.visit(element.children[0], args)
+        node = Exp(child_node)
+        return node
+
+    def visitPow(self, element, args):
+        child1_node = self.visit(element.children[0], args)
+        child2_node = self.visit(element.children[1], args)
+        node = Pow(child1_node, child2_node)
         return node
 
     def visitRise(self, element, args):

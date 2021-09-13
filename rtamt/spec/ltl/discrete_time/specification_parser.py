@@ -30,6 +30,9 @@ from rtamt.node.ltl.once import Once
 from rtamt.node.ltl.historically import Historically
 from rtamt.node.ltl.since import Since
 from rtamt.node.arithmetic.abs import Abs
+from rtamt.node.arithmetic.sqrt import Sqrt
+from rtamt.node.arithmetic.exp import Exp
+from rtamt.node.arithmetic.pow import Pow
 from rtamt.node.arithmetic.addition import Addition
 from rtamt.node.arithmetic.subtraction import Subtraction
 from rtamt.node.arithmetic.multiplication import Multiplication
@@ -199,6 +202,25 @@ class LTLSpecificationParser(LtlParserVisitor):
         child = self.visit(ctx.real_expression())
         node = Abs(child)
         node.horizon = child.horizon
+        return node
+
+    def visitExprSqrt(self, ctx):
+        child = self.visit(ctx.real_expression())
+        node = Sqrt(child)
+        node.horizon = child.horizon
+        return node
+
+    def visitExprExp(self, ctx):
+        child = self.visit(ctx.real_expression())
+        node = Exp(child)
+        node.horizon = child.horizon
+        return node
+
+    def visitExprPow(self, ctx):
+        child1 = self.visit(ctx.real_expression(0))
+        child2 = self.visit(ctx.real_expression(1))
+        node = Pow(child1, child2)
+        node.horizon = max(child1.horizon, child2.horizon)
         return node
 
     def visitExprNot(self, ctx):

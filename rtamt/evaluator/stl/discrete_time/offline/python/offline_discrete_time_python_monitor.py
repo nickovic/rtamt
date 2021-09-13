@@ -12,6 +12,9 @@ from rtamt.operation.stl.discrete_time.offline.iff_operation import IffOperation
 from rtamt.operation.stl.discrete_time.offline.xor_operation import XorOperation
 from rtamt.operation.stl.discrete_time.offline.since_operation import SinceOperation
 from rtamt.operation.arithmetic.discrete_time.offline.abs_operation import AbsOperation
+from rtamt.operation.arithmetic.discrete_time.offline.sqrt_operation import SqrtOperation
+from rtamt.operation.arithmetic.discrete_time.offline.exp_operation import ExpOperation
+from rtamt.operation.arithmetic.discrete_time.offline.pow_operation import PowOperation
 from rtamt.operation.stl.discrete_time.offline.not_operation import NotOperation
 from rtamt.operation.stl.discrete_time.offline.rise_operation import RiseOperation
 from rtamt.operation.stl.discrete_time.offline.fall_operation import FallOperation
@@ -51,8 +54,23 @@ class STLOfflineDiscreteTimePythonMonitor(STLVisitor):
     def visitAbs(self, node, args):
         monitor = AbsOperation()
         self.node_monitor_dict[node.name] = monitor
-
         self.visit(node.children[0], args)
+
+    def visitSqrt(self, node, args):
+        monitor = SqrtOperation()
+        self.node_monitor_dict[node.name] = monitor
+        self.visit(node.children[0], args)
+
+    def visitExp(self, node, args):
+        monitor = ExpOperation()
+        self.node_monitor_dict[node.name] = monitor
+        self.visit(node.children[0], args)
+
+    def visitPow(self, node, args):
+        monitor = PowOperation()
+        self.node_monitor_dict[node.name] = monitor
+        self.visit(node.children[0], args)
+        self.visit(node.children[1], args)
 
     def visitAddition(self, node, args):
         monitor = AdditionOperation()
