@@ -1,4 +1,5 @@
 import unittest
+import math
 from rtamt.operation.stl.discrete_time.offline.constant_operation import ConstantOperation
 from rtamt.operation.stl.discrete_time.offline.and_operation import AndOperation
 from rtamt.operation.stl.discrete_time.offline.rise_operation import RiseOperation
@@ -22,6 +23,9 @@ from rtamt.operation.arithmetic.discrete_time.offline.addition_operation import 
 from rtamt.operation.arithmetic.discrete_time.offline.multiplication_operation import MultiplicationOperation
 from rtamt.operation.arithmetic.discrete_time.offline.division_operation import DivisionOperation
 from rtamt.operation.arithmetic.discrete_time.offline.abs_operation import AbsOperation
+from rtamt.operation.arithmetic.discrete_time.offline.sqrt_operation import SqrtOperation
+from rtamt.operation.arithmetic.discrete_time.offline.exp_operation import ExpOperation
+from rtamt.operation.arithmetic.discrete_time.offline.pow_operation import PowOperation
 from rtamt.operation.stl.discrete_time.offline.previous_operation import PreviousOperation
 from rtamt.operation.stl.discrete_time.offline.next_operation import NextOperation
 from rtamt.operation.stl.discrete_time.offline.until_operation import UntilOperation
@@ -86,6 +90,30 @@ class TestSTLEvaluation(unittest.TestCase):
         expected = [100, 1, 2, 5, 1]
 
         self.assertListEqual(out, expected, "abs")
+
+    def test_sqrt(self):
+        oper = SqrtOperation()
+
+        out = oper.update([1, 2.2, 0.5])
+        expected = [math.sqrt(1), math.sqrt(2.2), math.sqrt(0.5)]
+
+        self.assertListEqual(out, expected, "sqrt")
+
+    def test_exp(self):
+        oper = ExpOperation()
+
+        out = oper.update([1, 2.2, 0.5])
+        expected = [math.exp(1), math.exp(2.2), math.exp(0.5)]
+
+        self.assertListEqual(out, expected, "exp")
+
+    def test_pow(self):
+        oper = PowOperation()
+
+        out = oper.update([1, 2.2, 0.5], [2, 0.3, 2])
+        expected = [math.pow(1, 2), math.pow(2.2, 0.3), math.pow(0.5, 2)]
+
+        self.assertListEqual(out, expected, "pow")
 
     def test_previous(self):
         oper = PreviousOperation()

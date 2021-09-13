@@ -1,4 +1,5 @@
 import unittest
+import math
 from rtamt.operation.stl.discrete_time.online.constant_operation import ConstantOperation
 from rtamt.operation.stl.discrete_time.online.and_operation import AndOperation
 from rtamt.operation.stl.discrete_time.online.rise_operation import RiseOperation
@@ -23,6 +24,9 @@ from rtamt.operation.arithmetic.discrete_time.online.addition_operation import A
 from rtamt.operation.arithmetic.discrete_time.online.multiplication_operation import MultiplicationOperation
 from rtamt.operation.arithmetic.discrete_time.online.division_operation import DivisionOperation
 from rtamt.operation.arithmetic.discrete_time.online.abs_operation import AbsOperation
+from rtamt.operation.arithmetic.discrete_time.online.sqrt_operation import SqrtOperation
+from rtamt.operation.arithmetic.discrete_time.online.exp_operation import ExpOperation
+from rtamt.operation.arithmetic.discrete_time.online.pow_operation import PowOperation
 from rtamt.operation.stl.discrete_time.online.previous_operation import PreviousOperation
 from rtamt.spec.stl.discrete_time.comp_op import StlComparisonOperator
 
@@ -129,6 +133,56 @@ class TestSTLEvaluation(unittest.TestCase):
         self.assertEqual(out3, 2, "input 3")
         self.assertEqual(out4, 5, "input 4")
         self.assertEqual(out5, 1, "input 5")
+
+    def test_sqrt_without_negative(self):
+        oper = SqrtOperation()
+
+        out1 = oper.update(4)
+        out2 = oper.update(17.3)
+        out3 = oper.update(6)
+        out4 = oper.update(2)
+        out5 = oper.update(0.0001)
+
+        self.assertEqual(out1, math.sqrt(4), "input 1")
+        self.assertEqual(out2, math.sqrt(17.3), "input 2")
+        self.assertEqual(out3, math.sqrt(6), "input 3")
+        self.assertEqual(out4, math.sqrt(2), "input 4")
+        self.assertEqual(out5, math.sqrt(0.0001), "input 5")
+
+    def test_sqrt_with_negative(self):
+        oper = SqrtOperation()
+
+        self.assertRaises(Exception, oper.update, -4)
+
+    def test_exp(self):
+        oper = ExpOperation()
+
+        out1 = oper.update(4)
+        out2 = oper.update(17.3)
+        out3 = oper.update(6)
+        out4 = oper.update(2)
+        out5 = oper.update(0.0001)
+
+        self.assertEqual(out1, math.exp(4), "input 1")
+        self.assertEqual(out2, math.exp(17.3), "input 2")
+        self.assertEqual(out3, math.exp(6), "input 3")
+        self.assertEqual(out4, math.exp(2), "input 4")
+        self.assertEqual(out5, math.exp(0.0001), "input 5")
+
+    def test_pow(self):
+        oper = PowOperation()
+
+        out1 = oper.update(4, 1)
+        out2 = oper.update(17.3, 0.3)
+        out3 = oper.update(6, 1.2)
+        out4 = oper.update(2, 2)
+        out5 = oper.update(0.0001, 3)
+
+        self.assertEqual(out1, math.pow(4, 1), "input 1")
+        self.assertEqual(out2, math.pow(17.3, 0.3), "input 2")
+        self.assertEqual(out3, math.pow(6, 1.2), "input 3")
+        self.assertEqual(out4, math.pow(2, 2), "input 4")
+        self.assertEqual(out5, math.pow(0.0001, 3), "input 5")
 
     def test_previous(self):
         oper = PreviousOperation()
