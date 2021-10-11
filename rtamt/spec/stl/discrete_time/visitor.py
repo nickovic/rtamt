@@ -15,6 +15,9 @@ from rtamt.node.ltl.historically import Historically
 from rtamt.node.ltl.since import Since
 from rtamt.node.stl.timed_precedes import TimedPrecedes
 from rtamt.node.arithmetic.abs import Abs
+from rtamt.node.arithmetic.sqrt import Sqrt
+from rtamt.node.arithmetic.exp import Exp
+from rtamt.node.arithmetic.pow import Pow
 from rtamt.node.arithmetic.addition import Addition
 from rtamt.node.arithmetic.subtraction import Subtraction
 from rtamt.node.arithmetic.multiplication import Multiplication
@@ -72,6 +75,12 @@ class STLVisitor:
             out = self.visitTimedPrecedes(element, args)
         elif isinstance(element, Abs):
             out = self.visitAbs(element, args)
+        elif isinstance(element, Sqrt):
+            out = self.visitSqrt(element, args)
+        elif isinstance(element, Pow):
+            out = self.visitPow(element, args)
+        elif isinstance(element, Exp):
+            out = self.visitExp(element, args)
         elif isinstance(element, Addition):
             out = self.visitAddition(element, args)
         elif isinstance(element, Subtraction):
@@ -117,6 +126,18 @@ class STLVisitor:
 
     @abstractmethod
     def visitAbs(self, element, args):
+        raise NotImplementedError(NOT_IMPLEMENTED)
+
+    @abstractmethod
+    def visitSqrt(self, element, args):
+        raise NotImplementedError(NOT_IMPLEMENTED)
+
+    @abstractmethod
+    def visitPow(self, element, args):
+        raise NotImplementedError(NOT_IMPLEMENTED)
+
+    @abstractmethod
+    def visitExp(self, element, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod

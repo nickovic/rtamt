@@ -54,6 +54,15 @@ AT
 ABS
     : 'abs' ;
 
+SQRT
+    : 'sqrt' ;
+
+EXP
+    : 'exp' ;
+
+POW
+    : 'pow' ;
+
 SEC
     : 's' ;
 

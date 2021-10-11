@@ -13,13 +13,15 @@ from rtamt.operation.stl.discrete_time.online.iff_operation import IffOperation
 from rtamt.operation.stl.discrete_time.online.xor_operation import XorOperation
 from rtamt.operation.stl.discrete_time.online.since_operation import SinceOperation
 from rtamt.operation.arithmetic.discrete_time.online.abs_operation import AbsOperation
+from rtamt.operation.arithmetic.discrete_time.online.sqrt_operation import SqrtOperation
+from rtamt.operation.arithmetic.discrete_time.online.exp_operation import ExpOperation
+from rtamt.operation.arithmetic.discrete_time.online.pow_operation import PowOperation
 from rtamt.operation.stl.discrete_time.online.not_operation import NotOperation
 from rtamt.operation.stl.discrete_time.online.rise_operation import RiseOperation
 from rtamt.operation.stl.discrete_time.online.fall_operation import FallOperation
 from rtamt.operation.stl.discrete_time.online.once_operation import OnceOperation
 from rtamt.operation.stl.discrete_time.online.historically_operation import HistoricallyOperation
-from rtamt.operation.stl.discrete_time.online.always_operation import AlwaysOperation
-from rtamt.operation.stl.discrete_time.online.eventually_operation import EventuallyOperation
+
 from rtamt.operation.stl.discrete_time.online.previous_operation import PreviousOperation
 from rtamt.operation.stl.discrete_time.online.constant_operation import ConstantOperation
 from rtamt.operation.stl.discrete_time.online.once_bounded_operation import OnceBoundedOperation
@@ -48,7 +50,21 @@ class STLOnlineDiscreteTimePythonMonitor(STLVisitor):
     def visitAbs(self, node, args):
         monitor = AbsOperation()
         self.node_monitor_dict[node.name] = monitor
+        self.visit(node.children[0], args)
 
+    def visitSqrt(self, node, args):
+        monitor = SqrtOperation()
+        self.node_monitor_dict[node.name] = monitor
+        self.visit(node.children[0], args)
+
+    def visitExp(self, node, args):
+        monitor = ExpOperation()
+        self.node_monitor_dict[node.name] = monitor
+        self.visit(node.children[0], args)
+
+    def visitPow(self, node, args):
+        monitor = PowOperation()
+        self.node_monitor_dict[node.name] = monitor
         self.visit(node.children[0], args)
 
     def visitAddition(self, node, args):

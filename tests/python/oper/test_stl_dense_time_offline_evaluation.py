@@ -1,4 +1,5 @@
 import unittest
+import math
 from rtamt.operation.stl.dense_time.offline.constant_operation import ConstantOperation
 from rtamt.operation.stl.dense_time.offline.and_operation import AndOperation
 from rtamt.operation.stl.dense_time.offline.predicate_operation import PredicateOperation
@@ -20,6 +21,9 @@ from rtamt.operation.arithmetic.dense_time.offline.addition_operation import Add
 from rtamt.operation.arithmetic.dense_time.offline.multiplication_operation import MultiplicationOperation
 from rtamt.operation.arithmetic.dense_time.offline.division_operation import DivisionOperation
 from rtamt.operation.arithmetic.dense_time.offline.abs_operation import AbsOperation
+from rtamt.operation.arithmetic.dense_time.offline.sqrt_operation import SqrtOperation
+from rtamt.operation.arithmetic.dense_time.offline.exp_operation import ExpOperation
+from rtamt.operation.arithmetic.dense_time.offline.pow_operation import PowOperation
 from rtamt.operation.stl.dense_time.offline.until_operation import UntilOperation
 from rtamt.operation.stl.dense_time.offline.eventually_bounded_operation import EventuallyBoundedOperation
 from rtamt.operation.stl.dense_time.offline.always_bounded_operation import AlwaysBoundedOperation
@@ -261,6 +265,70 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
         expected = []
 
         self.assertListEqual(out, expected, "abs dense time offline 3")
+
+    def test_sqrt(self):
+        oper = SqrtOperation()
+
+        op = [[1.3, 4], [3.7, 2.2], [9.4, 33]]
+
+        out = oper.update(op)
+        expected = [[1.3, math.sqrt(4)], [3.7, math.sqrt(2.2)], [9.4, math.sqrt(33)]]
+
+        self.assertListEqual(out, expected, "sqrt dense time offline 1")
+
+        #################################################################
+
+        oper = SqrtOperation()
+
+        op = [[1.3, 4]]
+
+        out = oper.update(op)
+        expected = [[1.3, math.sqrt(4)]]
+
+        self.assertListEqual(out, expected, "sqrt dense time offline 2")
+
+        #################################################################
+
+        oper = SqrtOperation()
+
+        op = []
+
+        out = oper.update(op)
+        expected = []
+
+        self.assertListEqual(out, expected, "sqrt dense time offline 3")
+
+    def test_exp(self):
+        oper = ExpOperation()
+
+        op = [[1.3, 4], [3.7, 2.2], [9.4, 33]]
+
+        out = oper.update(op)
+        expected = [[1.3, math.exp(4)], [3.7, math.exp(2.2)], [9.4, math.exp(33)]]
+
+        self.assertListEqual(out, expected, "exp dense time offline 1")
+
+        #################################################################
+
+        oper = ExpOperation()
+
+        op = [[1.3, 4]]
+
+        out = oper.update(op)
+        expected = [[1.3, exp.sqrt(4)]]
+
+        self.assertListEqual(out, expected, "exp dense time offline 2")
+
+        #################################################################
+
+        oper = ExpOperation()
+
+        op = []
+
+        out = oper.update(op)
+        expected = []
+
+        self.assertListEqual(out, expected, "exp dense time offline 3")
 
     def test_and(self):
         oper = AndOperation()

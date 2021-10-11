@@ -1,4 +1,5 @@
 import unittest
+import math
 import rtamt
 
 class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
@@ -527,6 +528,22 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
 
         in_data = [[5, 3], [5.3, -1], [5.75, 2], [6.5, -5], [6.75, 6], [9, 5], [9.25, 4], [10, 2]]
         out_expected = [[5, 3], [5.3, 1], [5.75, 2], [6.5, 5], [6.75, 6], [9, 5], [9.25, 4], [10, 2]]
+        out_computed = spec.update(['req', in_data])
+
+        self.assertListEqual(out_expected, out_computed,
+                             "Problem with 1st example:\nExpected output: %s\nComputed output: %s" % (
+                                 out_expected, out_computed))
+
+    def test_sqrt(self):
+        spec = rtamt.STLDenseTimeSpecification();
+        spec.declare_var('req', 'float')
+        spec.declare_var('out', 'float')
+        spec.spec = 'out = sqrt(abs(req))'
+
+        spec.parse();
+
+        in_data = [[5, 3], [5.3, -1], [5.75, 2], [6.5, -5], [6.75, 6], [9, 5], [9.25, 4], [10, 2]]
+        out_expected = [[5, math.sqrt(3)], [5.3, math.sqrt(1)], [5.75, math.sqrt(2)], [6.5, math.sqrt(5)], [6.75, math.sqrt(6)], [9, math.sqrt(5)], [9.25, math.sqrt(4)], [10, math.sqrt(2)]]
         out_computed = spec.update(['req', in_data])
 
         self.assertListEqual(out_expected, out_computed,

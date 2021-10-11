@@ -3,6 +3,7 @@ from rtamt.spec.stl.discrete_time.pastifier import STLPastifier
 from rtamt.node.ltl.constant import Constant
 from rtamt.node.ltl.variable import Variable
 from rtamt.node.arithmetic.abs import Abs
+from rtamt.node.arithmetic.sqrt import Sqrt
 from rtamt.node.arithmetic.addition import Addition
 from rtamt.node.arithmetic.subtraction import Subtraction
 from rtamt.node.arithmetic.multiplication import Multiplication
@@ -18,8 +19,6 @@ from rtamt.node.ltl.rise import Rise
 from rtamt.node.ltl.fall import Fall
 from rtamt.node.ltl.once import Once
 from rtamt.node.ltl.historically import Historically
-from rtamt.node.ltl.eventually import Eventually
-from rtamt.node.ltl.always import Always
 from rtamt.node.ltl.since import Since
 from rtamt.node.stl.timed_precedes import TimedPrecedes
 from rtamt.node.ltl.previous import Previous
@@ -143,6 +142,28 @@ class TestSTLPastification(unittest.TestCase):
         new_node = pastifier.pastify(abs_node)
 
         self.assertEqual('abs(once[5,5](req))', new_node.name, 'Absolute Value pastification assertion')
+
+    def test_sqrt_1(self):
+        var_node = Variable('req', '', 'output')
+        sqrt_node = Sqrt(var_node)
+
+        pastifier = STLPastifier()
+        sqrt_node.accept(pastifier)
+        new_node = pastifier.pastify(sqrt_node)
+
+        self.assertEqual('sqrt(req)', new_node.name, 'Square Root pastification assertion')
+
+    def test_sqrt_2(self):
+        var_node = Variable('req', '', 'output')
+        var_node.horizon = 5
+        sqrt_node = Sqrt(var_node)
+        sqrt_node.horizon = 5
+
+        pastifier = STLPastifier()
+        sqrt_node.accept(pastifier)
+        new_node = pastifier.pastify(sqrt_node)
+
+        self.assertEqual('sqrt(once[5,5](req))', new_node.name, 'Square Root pastification assertion')
 
     def test_addition(self):
         var_node_1 = Variable('req', '', 'output')

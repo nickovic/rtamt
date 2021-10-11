@@ -1,4 +1,5 @@
 import unittest
+import math
 import rtamt
 
 class TestSTLBooleanAndTemporalOffline(unittest.TestCase):
@@ -356,6 +357,21 @@ class TestSTLBooleanAndTemporalOffline(unittest.TestCase):
         computed = spec.evaluate(['req', op])
 
         self.assertListEqual(expected, computed, "abs")
+
+    def test_sqrt(self):
+        spec = rtamt.STLDenseTimeSpecification();
+        spec.declare_var('req', 'float')
+        spec.declare_var('out', 'float')
+        spec.spec = 'out = sqrt(abs(req))'
+
+        spec.parse()
+
+        op = [[1.3, 4], [3.7, -2.2], [9.4, -33]]
+
+        expected = [[1.3, math.sqrt(4)], [3.7, math.sqrt(2.2)], [9.4, math.sqrt(33)]]
+        computed = spec.evaluate(['req', op])
+
+        self.assertListEqual(expected, computed, "sqrt")
 
 
     def test_not(self):

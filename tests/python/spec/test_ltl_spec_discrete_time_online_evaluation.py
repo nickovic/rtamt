@@ -1,4 +1,5 @@
 import unittest
+import math
 import rtamt
 
 class TestLTLSpecDiscreteTimeOnlineEvaluation(unittest.TestCase):
@@ -148,6 +149,26 @@ class TestLTLSpecDiscreteTimeOnlineEvaluation(unittest.TestCase):
         self.assertEqual(out3, 2, "input 3")
         self.assertEqual(out4, 5, "input 4")
         self.assertEqual(out5, 1, "input 5")
+
+    def test_sqrt(self):
+        spec = rtamt.LTLDiscreteTimeSpecification();
+        spec.declare_var('req', 'float')
+        spec.declare_var('out', 'float')
+        spec.spec = 'out = sqrt(abs(req))'
+
+        spec.parse();
+
+        out1 = spec.update(0, [('req', self.left1)])
+        out2 = spec.update(1, [('req', self.left2)])
+        out3 = spec.update(2, [('req', self.left3)])
+        out4 = spec.update(3, [('req', self.left4)])
+        out5 = spec.update(4, [('req', self.left5)])
+
+        self.assertEqual(out1, math.sqrt(100), "input 1")
+        self.assertEqual(out2, math.sqrt(1), "input 2")
+        self.assertEqual(out3, math.sqrt(2), "input 3")
+        self.assertEqual(out4, math.sqrt(5), "input 4")
+        self.assertEqual(out5, math.sqrt(1), "input 5")
 
     def test_previous(self):
         spec = rtamt.LTLDiscreteTimeSpecification();

@@ -1,4 +1,5 @@
 import unittest
+import math
 
 from rtamt.spec.stl.discrete_time.specification import STLDiscreteTimeSpecification
 
@@ -58,6 +59,25 @@ class TestSTLReset(unittest.TestCase):
 
         out = spec.update(0, [['req', -3.3]])
         self.assertEqual(3.3, out, 'Abs reset assertion')
+
+
+    def test_sqrt(self):
+        spec = STLDiscreteTimeSpecification()
+        spec.declare_var('req', 'float')
+        spec.declare_var('out', 'float')
+        spec.spec = 'out = sqrt(abs(req))'
+        spec.parse()
+
+        out = spec.update(0, [['req', 1.1]])
+        self.assertEqual(math.sqrt(1.1), out, 'Abs reset assertion')
+
+        out = spec.update(1, [['req', 2]])
+        self.assertEqual(math.sqrt(2), out, 'Abs reset assertion')
+
+        spec.reset()
+
+        out = spec.update(0, [['req', -3.3]])
+        self.assertEqual(math.sqrt(3.3), out, 'Abs reset assertion')
 
     def test_addition(self):
         spec = STLDiscreteTimeSpecification()

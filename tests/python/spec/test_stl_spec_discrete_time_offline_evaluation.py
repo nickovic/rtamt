@@ -1,4 +1,5 @@
 import unittest
+import math
 import rtamt
 
 class TestSTLEvaluation(unittest.TestCase):
@@ -95,6 +96,18 @@ class TestSTLEvaluation(unittest.TestCase):
         spec.parse();
         out = spec.evaluate(self.dataset)
         expected = [[0, 100], [1, 1], [2, 2], [3, 5], [4, 1]]
+
+        self.assertListEqual(out, expected, "abs")
+
+    def test_sqrt(self):
+        spec = rtamt.STLDiscreteTimeSpecification();
+        spec.declare_var('req', 'float')
+        spec.declare_var('out', 'float')
+        spec.spec = 'out = sqrt(abs(req))'
+
+        spec.parse();
+        out = spec.evaluate(self.dataset)
+        expected = [[0, math.sqrt(100)], [1, math.sqrt(1)], [2, math.sqrt(2)], [3, math.sqrt(5)], [4, math.sqrt(1)]]
 
         self.assertListEqual(out, expected, "abs")
 
