@@ -8,8 +8,8 @@
     - [Clone the repository](#clone-the-repository)
     - [Build CPP libraries](#build-cpp-libraries)
     - [Install RTAMT](#install-rtamt)
-    - [uninstall RTAMT](#uninstall-rtamt)
-  - [test RTAMT](#test-rtamt)
+    - [Uninstall RTAMT](#uninstall-rtamt)
+  - [Test RTAMT](#test-rtamt)
 - [Theory](#theory)
   - [Specification Language](#specification-language)
 - [Usage](#usage)
@@ -190,20 +190,20 @@ rho(fall(phi),w,t) = -rho(phi,w,t)                    if t=0
                      min(rho(phi,w,t-1),-rho(phi,w,t) otherwise
 
 % Past untimed temporal operators
-rho(prev phi,w,t) = inf            if t<=0
+rho(prev phi,w,t) = -inf            if t<=0
                     rho(phi,w,t-1) otherwise
 rho(once phi,w,t) = max_{t' in [0,t]} rho(phi,w,t')
 rho(historically phi,w,t) = min_{t' in [0,t]} rho(phi,w,t')
-rho(phi since psi,w,t) = max_{t' in [0,t]}(min(rho(psi,w,t'), min_{t'' in (t',t]}rho(psi,w,t') rho(phi,w,t'')))
+rho(phi since psi,w,t) = max_{t' in [0,t]}(min(rho(psi,w,t'), min_{t'' in (t',t]} rho(phi,w,t'')))
 
-% Past untimed temporal operators
+% Past timed temporal operators
 rho(once[a,b] phi,w,t) = -inf                                                            if t-a < 0
                          max_{t' in ([0,t] intersect [t-a,t-b])} rho(phi,w,t')           otherwise
 rho(historically[a,b] phi,w,t) = inf                                                     if t-a < 0
                                  min_{t' in ([0,t] intersect [t-a,t-b])} rho(phi,w,t')   otherwise
 rho(phi since[a,b] psi,w,t) = -inf                                                       if t-a < 0 
                               max_{t' in ([0,t] intersect [t-a,t-b]} (min(rho(psi,w,t'), 
-                              min_{t'' in (t',t]}rho(psi,w,t') rho(phi,w,t'')))          otherwise
+                              min_{t'' in (t',t]} rho(phi,w,t'')))          otherwise
 
 % Future untimed temporal operators
 rho(next phi,w,t) = rho(phi,w,t+1)
