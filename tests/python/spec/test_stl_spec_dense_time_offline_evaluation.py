@@ -373,6 +373,36 @@ class TestSTLBooleanAndTemporalOffline(unittest.TestCase):
 
         self.assertListEqual(expected, computed, "sqrt")
 
+    def test_exp(self):
+        spec = rtamt.STLDenseTimeSpecification();
+        spec.declare_var('req', 'float')
+        spec.declare_var('out', 'float')
+        spec.spec = 'out = exp(req)'
+
+        spec.parse()
+
+        op = [[1.3, 4], [3.7, -2.2], [9.4, -33]]
+
+        expected = [[1.3, math.exp(4)], [3.7, math.exp(-2.2)], [9.4, math.exp(-33)]]
+        computed = spec.evaluate(['req', op])
+
+        self.assertListEqual(expected, computed, "exp")
+
+    def test_pow(self):
+        spec = rtamt.STLDenseTimeSpecification();
+        spec.declare_var('req', 'float')
+        spec.declare_var('out', 'float')
+        spec.spec = 'out = pow(2,req)'
+
+        spec.parse()
+
+        op = [[1.3, 4], [3.7, -2.2], [9.4, -33]]
+
+        expected = [[1.3, math.pow(2,4)], [3.7, math.pow(2,-2.2)], [9.4, math.pow(2,-33)]]
+        computed = spec.evaluate(['req', op])
+
+        self.assertListEqual(expected, computed, "pow")
+
 
     def test_not(self):
         spec = rtamt.STLDenseTimeSpecification();

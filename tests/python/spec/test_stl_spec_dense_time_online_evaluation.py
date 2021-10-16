@@ -464,6 +464,22 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
                              "Problem with 1st example:\nExpected output: %s\nComputed output: %s" % (
                                  out_expected, out_computed))
 
+    def test_addition_2(self):
+        spec = rtamt.STLDenseTimeSpecification();
+        spec.declare_var('req', 'float')
+        spec.declare_var('gnt', 'float')
+        spec.declare_var('out', 'float')
+        spec.spec = 'out = req + 2'
+
+        spec.parse();
+        in_data_1 = [[1, 2], [4.1, 1], [5, 2]]
+        out_expected = [[1, 4], [4.1, 3]]
+        out_computed = spec.update(['req', in_data_1])
+
+        self.assertListEqual(out_expected, out_computed,
+                             "Problem with 1st example:\nExpected output: %s\nComputed output: %s" % (
+                                 out_expected, out_computed))
+
     def test_subtraction(self):
         spec = rtamt.STLDenseTimeSpecification();
         spec.declare_var('req', 'float')
@@ -499,6 +515,7 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
         self.assertListEqual(out_expected, out_computed,
                              "Problem with 1st example:\nExpected output: %s\nComputed output: %s" % (
                                  out_expected, out_computed))
+
 
     def test_division(self):
         spec = rtamt.STLDenseTimeSpecification();
@@ -544,6 +561,39 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
 
         in_data = [[5, 3], [5.3, -1], [5.75, 2], [6.5, -5], [6.75, 6], [9, 5], [9.25, 4], [10, 2]]
         out_expected = [[5, math.sqrt(3)], [5.3, math.sqrt(1)], [5.75, math.sqrt(2)], [6.5, math.sqrt(5)], [6.75, math.sqrt(6)], [9, math.sqrt(5)], [9.25, math.sqrt(4)], [10, math.sqrt(2)]]
+        out_computed = spec.update(['req', in_data])
+
+        self.assertListEqual(out_expected, out_computed,
+                             "Problem with 1st example:\nExpected output: %s\nComputed output: %s" % (
+                                 out_expected, out_computed))
+
+    def test_exp(self):
+        spec = rtamt.STLDenseTimeSpecification();
+        spec.declare_var('req', 'float')
+        spec.declare_var('out', 'float')
+        spec.spec = 'out = exp(req)'
+
+        spec.parse();
+
+        in_data = [[5, 3], [5.3, -1], [5.75, 2], [6.5, -5], [6.75, 6], [9, 5], [9.25, 4], [10, 2]]
+        out_expected = [[5, math.exp(3)], [5.3, math.exp(-1)], [5.75, math.exp(2)], [6.5, math.exp(-5)], [6.75, math.exp(6)], [9, math.exp(5)], [9.25, math.exp(4)], [10, math.exp(2)]]
+        out_computed = spec.update(['req', in_data])
+
+        self.assertListEqual(out_expected, out_computed,
+                             "Problem with 1st example:\nExpected output: %s\nComputed output: %s" % (
+                                 out_expected, out_computed))
+
+    def test_pow(self):
+        spec = rtamt.STLDenseTimeSpecification();
+        spec.declare_var('req', 'float')
+        spec.declare_var('out', 'float')
+        spec.spec = 'out = pow(3,req)'
+
+        spec.parse();
+
+        in_data = [[5, 3], [5.3, -1], [5.75, 2], [6.5, -5], [6.75, 6], [9, 5], [9.25, 4], [10, 2]]
+        out_expected = [[5, math.pow(3, 3)], [5.3, math.pow(3, -1)], [5.75, math.pow(3, 2)], [6.5, math.pow(3, -5)],
+                        [6.75, math.pow(3, 6)], [9, math.pow(3, 5)], [9.25, math.pow(3, 4)]]
         out_computed = spec.update(['req', in_data])
 
         self.assertListEqual(out_expected, out_computed,

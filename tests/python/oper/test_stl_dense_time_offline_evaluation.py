@@ -315,7 +315,7 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
         op = [[1.3, 4]]
 
         out = oper.update(op)
-        expected = [[1.3, exp.sqrt(4)]]
+        expected = [[1.3, math.exp(4)]]
 
         self.assertListEqual(out, expected, "exp dense time offline 2")
 
@@ -329,6 +329,40 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
         expected = []
 
         self.assertListEqual(out, expected, "exp dense time offline 3")
+
+    def test_pow(self):
+        oper = PowOperation()
+
+        op = [[1.3, 4], [3.7, 2.2], [9.4, 33]]
+        base = [[1.3, 2], [3.7, 2.2], [9.4, 2]]
+        out = oper.update(base, op)
+        expected = [[1.3, math.pow(2, 4)], [3.7, math.pow(2.2, 2.2)], [9.4, math.pow(2, 33)]]
+
+        self.assertListEqual(out, expected, "pow dense time offline 1")
+
+        #################################################################
+
+        oper = PowOperation()
+
+        op = [[1.3, 4]]
+        base = [[1.3, 2]]
+
+        out = oper.update(base, op)
+        expected = [[1.3, math.pow(2, 4)]]
+
+        self.assertListEqual(out, expected, "pow dense time offline 2")
+
+        #################################################################
+
+        oper = PowOperation()
+
+        op = []
+        base = []
+
+        out = oper.update(base, op)
+        expected = []
+
+        self.assertListEqual(out, expected, "pow dense time offline 3")
 
     def test_and(self):
         oper = AndOperation()

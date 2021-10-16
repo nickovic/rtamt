@@ -156,8 +156,10 @@ rho(c,w,t) = c
 % Variable
 rho(x,w,t) = w_x(t)
 
-% Absolute value
+% Absolute value, exponentials
 rho(abs(phi),w,t) = |rho(phi,w,t)|
+rho(exp(phi),w,t) = e**rho(phi,w,t)
+rho(pow(phi1, phi2),w,t) = rho(phi1,w,t)**rho(phi2,w,t)
 
 % Arithmetic operators
 rho(phi + psi,w,t) = rho(phi,w,t) + rho(psi,w,t)

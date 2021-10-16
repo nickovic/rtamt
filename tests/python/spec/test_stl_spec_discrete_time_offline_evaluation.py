@@ -111,6 +111,30 @@ class TestSTLEvaluation(unittest.TestCase):
 
         self.assertListEqual(out, expected, "abs")
 
+    def test_exp(self):
+        spec = rtamt.STLDiscreteTimeSpecification();
+        spec.declare_var('req', 'float')
+        spec.declare_var('out', 'float')
+        spec.spec = 'out = exp(req)'
+
+        spec.parse();
+        out = spec.evaluate(self.dataset)
+        expected = [[0, math.exp(100)], [1, math.exp(-1)], [2, math.exp(-2)], [3, math.exp(5)], [4, math.exp(-1)]]
+
+        self.assertListEqual(out, expected, "exp")
+
+    def test_pow(self):
+        spec = rtamt.STLDiscreteTimeSpecification();
+        spec.declare_var('req', 'float')
+        spec.declare_var('out', 'float')
+        spec.spec = 'out = pow(2.2,req)'
+
+        spec.parse();
+        out = spec.evaluate(self.dataset)
+        expected = [[0, math.pow(2.2, 100)], [1, math.pow(2.2, -1)], [2, math.pow(2.2, -2)], [3, math.pow(2.2, 5)], [4, math.pow(2.2, -1)]]
+
+        self.assertListEqual(out, expected, "pow")
+
     def test_previous(self):
         spec = rtamt.STLDiscreteTimeSpecification();
         spec.declare_var('req', 'float')

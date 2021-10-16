@@ -4,6 +4,8 @@ from rtamt.node.ltl.constant import Constant
 from rtamt.node.ltl.variable import Variable
 from rtamt.node.arithmetic.abs import Abs
 from rtamt.node.arithmetic.sqrt import Sqrt
+from rtamt.node.arithmetic.exp import Exp
+from rtamt.node.arithmetic.pow import Pow
 from rtamt.node.arithmetic.addition import Addition
 from rtamt.node.arithmetic.subtraction import Subtraction
 from rtamt.node.arithmetic.multiplication import Multiplication
@@ -164,6 +166,27 @@ class TestSTLPastification(unittest.TestCase):
         new_node = pastifier.pastify(sqrt_node)
 
         self.assertEqual('sqrt(once[5,5](req))', new_node.name, 'Square Root pastification assertion')
+
+    def test_exp(self):
+        var_node = Variable('req', '', 'output')
+        sqrt_node = Exp(var_node)
+
+        pastifier = STLPastifier()
+        sqrt_node.accept(pastifier)
+        new_node = pastifier.pastify(sqrt_node)
+
+        self.assertEqual('exp(req)', new_node.name, 'Exp pastification assertion')
+
+    def test_pow(self):
+        var_node = Variable('req', '', 'output')
+        cnt_node = Constant(2)
+        sqrt_node = Pow(cnt_node, var_node)
+
+        pastifier = STLPastifier()
+        sqrt_node.accept(pastifier)
+        new_node = pastifier.pastify(sqrt_node)
+
+        self.assertEqual('pow(2,req)', new_node.name, 'Pow pastification assertion')
 
     def test_addition(self):
         var_node_1 = Variable('req', '', 'output')
