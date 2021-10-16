@@ -1,9 +1,6 @@
 from rtamt.operation.abstract_operation import AbstractOperation
 
 class NotOperation(AbstractOperation):
-    def __init__(self):
-        self.input = []
-
     def update(self, *args, **kargs):
         out = []
         input_list = args[0]

@@ -7,6 +7,7 @@ class AlwaysOperation(AbstractOperation):
 
     def update(self, *args, **kargs):
         out = []
+        self.next = float("inf")
         input_list = args[0]
 
         next = float("nan")

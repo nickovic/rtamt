@@ -8,6 +8,7 @@ class EventuallyOperation(AbstractOperation):
     def update(self, *args, **kargs):
         out = []
         input_list = args[0]
+        self.next = -float("inf")
 
         next = float("nan")
 

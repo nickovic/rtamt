@@ -7,6 +7,7 @@ class OnceOperation(AbstractOperation):
 
     def update(self, *args, **kargs):
         out = []
+        self.prev = - float("inf")
         input_list = args[0]
 
         prev = float("nan")

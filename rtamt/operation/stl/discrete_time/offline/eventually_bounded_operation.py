@@ -5,21 +5,14 @@ class EventuallyBoundedOperation(AbstractOperation):
     def __init__(self, begin, end):
         self.begin = begin
         self.end = end
-        self.buffer = collections.deque(maxlen=(self.end + 1))
-
-        for i in range(self.end + 1):
-            val = - float("inf")
-            self.buffer.append(val)
-
-    def reset(self):
-        self.buffer = collections.deque(maxlen=(self.end + 1))
-
-        for i in range(self.end + 1):
-            val = - float("inf")
-            self.buffer.append(val)
 
     def update(self, samples):
         out = []
+        self.buffer = collections.deque(maxlen=(self.end + 1))
+
+        for i in range(self.end + 1):
+            val = - float("inf")
+            self.buffer.append(val)
 
         for i in range(len(samples)-1, -1, -1):
             self.buffer.append(samples[i])

@@ -13,6 +13,9 @@ class EventuallyBoundedOperation(AbstractOperation):
         out = []
         input_list = args[0]
         ans = []
+        self.prev = []
+        self.residual_start = -float("inf")
+        self.max = - float("inf")
 
         i = len(input_list) - 1
         begin = self.begin

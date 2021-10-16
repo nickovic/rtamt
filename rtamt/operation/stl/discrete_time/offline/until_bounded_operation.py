@@ -7,6 +7,8 @@ class UntilBoundedOperation(AbstractOperation):
         self.begin = begin
         self.end = end
 
+    def update(self, left, right):
+        out = []
         self.buffer_left = collections.deque(maxlen=(self.end + 1))
         self.buffer_right = collections.deque(maxlen=(self.end + 1))
 
@@ -15,17 +17,6 @@ class UntilBoundedOperation(AbstractOperation):
             s_right = - float("inf")
             self.buffer_left.append(s_left)
             self.buffer_right.append(s_right)
-
-    def reset(self):
-        for i in range(self.end + 1):
-            s_left = float("inf")
-            s_right = - float("inf")
-            self.buffer_left.append(s_left)
-            self.buffer_right.append(s_right)
-
-    def update(self, left, right):
-
-        out = []
         for i in range(len(left)-1, -1, -1):
             self.buffer_left.append(left[i])
             self.buffer_right.append(right[i])

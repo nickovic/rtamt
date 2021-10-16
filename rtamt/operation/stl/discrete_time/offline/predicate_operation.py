@@ -6,9 +6,6 @@ class PredicateOperation(AbstractOperation):
     def __init__(self, op):
         self.op = op
 
-    def reset(self):
-        pass
-
     def update(self, left, right):
 
         out = []

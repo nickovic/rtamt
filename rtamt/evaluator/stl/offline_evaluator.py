@@ -36,6 +36,7 @@ class STLOfflineEvaluator(STLVisitor):
             setattr(out_sample, self.spec.out_var_field, sample)
         else:
             out_sample = sample
+
         return out_sample
 
     def visitPredicate(self, node, args):
