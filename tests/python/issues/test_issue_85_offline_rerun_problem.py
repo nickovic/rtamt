@@ -8,10 +8,9 @@ class TestIssue85(unittest.TestCase):
 
     def test_issue_85(self):
         specification = rtamt.STLDiscreteTimeSpecification()
-        d = 'zzz'
 
-        specification.declare_var(d, 'float')
-        specification.spec = f'!( (eventually[2,3]( {d}) ) )'
+        specification.declare_var('zzz', 'float')
+        specification.spec = '!( (eventually[2,3]( zzz) ) )'
 
         specification.parse()
 
