@@ -5,21 +5,14 @@ class HistoricallyBoundedOperation(AbstractOperation):
     def __init__(self, begin, end):
         self.begin = begin
         self.end = end
-        self.buffer = collections.deque(maxlen=(self.end + 1))
 
-        for i in range(self.end+1):
-            val = float("inf")
-            self.buffer.append(val)
-
-    def reset(self):
+    def update(self, samples):
+        out = []
         self.buffer = collections.deque(maxlen=(self.end + 1))
 
         for i in range(self.end + 1):
             val = float("inf")
             self.buffer.append(val)
-
-    def update(self, samples):
-        out = []
 
         for sample in samples:
             self.buffer.append(sample)

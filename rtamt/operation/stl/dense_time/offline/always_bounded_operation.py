@@ -10,9 +10,14 @@ class AlwaysBoundedOperation(AbstractOperation):
         self.end = end
 
     def update(self, *args, **kargs):
+        self.prev = []
+        self.residual_start = float("inf")
+        self.max = float("inf")
+
         out = []
         input_list = args[0]
         ans = []
+
 
         #i = 1
         i = len(input_list) - 1

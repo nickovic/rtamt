@@ -3,13 +3,11 @@ from rtamt.operation.abstract_operation import AbstractOperation
 
 class FallOperation(AbstractOperation):
     def __init__(self):
-        self.prev = float("inf")
-
-    def reset(self):
-        self.prev = float("inf")
+        pass
 
     def update(self, samples):
         out = []
+        self.prev = float("inf")
         for sample in samples:
             out_sample = min(self.prev, - sample)
             self.prev = sample

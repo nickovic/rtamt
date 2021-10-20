@@ -2,13 +2,11 @@ from rtamt.operation.abstract_operation import AbstractOperation
 
 class AlwaysOperation(AbstractOperation):
     def __init__(self):
-        self.prev_out = float("inf")
-
-    def reset(self):
-        self.prev_out = float("inf")
+        pass
 
     def update(self, samples):
         out = []
+        self.prev_out = float("inf")
         for i in range(len(samples)-1, -1, -1):
             out_sample = min(samples[i], self.prev_out)
             self.prev_out = out_sample

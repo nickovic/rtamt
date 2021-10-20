@@ -10,6 +10,10 @@ class XorOperation(AbstractOperation):
     def update(self, *args, **kargs):
         left_list = args[0]
         right_list = args[1]
+        self.left = []
+        self.right = []
+        self.last = []
+
         self.left = self.left + left_list
         self.right = self.right + right_list
 
