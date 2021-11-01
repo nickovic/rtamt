@@ -9,4 +9,4 @@ spec.parse()
 req = [[0, 100], [1, -1], [2, -2], [3, 5], [4, -1]]
 gnt = [[0, 20], [1, -2], [2, 10], [3, 4], [4, -1]]
 
-rob = spec.update(['req', req], ['gnt', gnt])
+rob = spec.evaluate(['req', req], ['gnt', gnt])
