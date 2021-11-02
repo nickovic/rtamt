@@ -3,7 +3,7 @@ import rtamt
 spec = rtamt.STLDenseTimeSpecification()
 spec.declare_var('req', 'float')
 spec.declare_var('gnt', 'float')
-spec.spec = '(req >= 3) implies (gnt >= 0)'
+spec.spec = 'always((req >= 3) implies (eventually (gnt >= 0)))'
 spec.parse()
 
 req = [[0, 100], [1, -1], [2, -2], [3, 5], [4, -1]]
