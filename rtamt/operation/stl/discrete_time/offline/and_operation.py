@@ -1,5 +1,4 @@
 from rtamt.operation.abstract_operation import AbstractOperation
-import numpy as np
 
 class AndOperation(AbstractOperation):
     def __init__(self):
