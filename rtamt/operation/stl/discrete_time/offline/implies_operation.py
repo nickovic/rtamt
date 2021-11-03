@@ -6,10 +6,7 @@ class ImpliesOperation(AbstractOperation):
         pass
 
     def update(self, left, right):
-        out = []
 
-        for i in range(len(left)):
-            out_sample = max(-left[i], right[i])
-            out.append(out_sample)
+        out = [max(-l,r) for l,r in zip(left,right)]
 
         return out

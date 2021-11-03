@@ -6,10 +6,10 @@ class AlwaysOperation(AbstractOperation):
 
     def update(self, samples):
         out = []
-        self.prev_out = float("inf")
-        for i in range(len(samples)-1, -1, -1):
-            out_sample = min(samples[i], self.prev_out)
-            self.prev_out = out_sample
+        prev_out = float("inf")
+        for sample in reversed(samples):
+            out_sample = min(sample, prev_out)
+            prev_out = out_sample
             out.append(out_sample)
         out.reverse()
         return out

@@ -5,10 +5,7 @@ class OrOperation(AbstractOperation):
         pass
 
     def update(self, left, right):
-        out = []
 
-        for i in range(len(left)):
-            out_sample = max(left[i], right[i])
-            out.append(out_sample)
+        out = list(map(max, zip(left,right)))
 
         return out

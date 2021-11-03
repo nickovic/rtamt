@@ -6,11 +6,8 @@ class FallOperation(AbstractOperation):
         pass
 
     def update(self, samples):
-        out = []
-        self.prev = float("inf")
-        for sample in samples:
-            out_sample = min(self.prev, - sample)
-            self.prev = sample
-            out.append(out_sample)
+        prev = samples[:-1]
+        prev.insert(0,float("inf"))
+        out = [min(p,-s) for p,s in zip(prev,samples)]
 
         return out

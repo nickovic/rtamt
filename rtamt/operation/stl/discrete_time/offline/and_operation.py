@@ -1,15 +1,12 @@
 from rtamt.operation.abstract_operation import AbstractOperation
-
+import numpy as np
 
 class AndOperation(AbstractOperation):
     def __init__(self):
         pass
 
     def update(self, left, right):
-        out = []
 
-        for i in range(len(left)):
-            out_sample = min(left[i], right[i])
-            out.append(out_sample)
+        out = list(map(min, zip(left,right)))
 
         return out

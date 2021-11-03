@@ -5,22 +5,15 @@ class OnceBoundedOperation(AbstractOperation):
     def __init__(self, begin, end):
         self.begin = begin
         self.end = end
+        self.buffer_bak = collections.deque([-float("inf")]*(self.end+1), maxlen=(self.end + 1))
 
     def update(self, samples):
         out = []
-        self.buffer = collections.deque(maxlen=(self.end + 1))
-
-        for i in range(self.end + 1):
-            val = - float("inf")
-            self.buffer.append(val)
+        buffer = self.buffer_bak.copy()
 
         for sample in samples:
-            self.buffer.append(sample)
-            out_sample = -float("inf")
-            for i in range(self.end - self.begin + 1):
-                out_sample = max(out_sample, self.buffer[i])
+            buffer.append(sample)
+            out_sample = max(list(buffer))
             out.append(out_sample)
-
-        return out
 
         return out

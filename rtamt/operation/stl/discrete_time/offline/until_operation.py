@@ -2,16 +2,17 @@ from rtamt.operation.abstract_operation import AbstractOperation
 
 class UntilOperation(AbstractOperation):
     def __init__(self):
-        self.next_out = -float("inf")
+        # self.next_out = -float("inf")
+        pass
 
     def update(self, left, right):
         out = []
-        self.next_out = -float("inf")
+        next_out = -float("inf")
 
         for i in range(len(left)-1, -1, -1):
-            out_sample = min(left[i], self.next_out)
+            out_sample = min(left[i], next_out)
             out_sample = max(out_sample, right[i])
-            self.next_out = out_sample;
+            next_out = out_sample;
             out.append(out_sample)
         out.reverse()
 

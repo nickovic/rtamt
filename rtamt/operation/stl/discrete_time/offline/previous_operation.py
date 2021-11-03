@@ -6,10 +6,10 @@ class PreviousOperation(AbstractOperation):
 
     def update(self, samples):
         out = []
-        self.prev = float("inf")
+        prev = float("inf")
         for sample in samples:
-            out_sample = self.prev
-            self.prev = sample
+            out_sample = prev
+            prev = sample
             out.append(out_sample)
 
         return out
