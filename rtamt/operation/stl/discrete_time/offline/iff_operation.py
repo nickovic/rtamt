@@ -7,6 +7,6 @@ class IffOperation(AbstractOperation):
 
     def update(self, left, right):
 
-        out = [-abs(l,r) for l,r in zip(left,right)]
+        out = [-abs(l-r) for l,r in zip(left,right)]
 
         return out
