@@ -197,10 +197,7 @@ class STLDiscreteTimeSpecification(LTLDiscreteTimeSpecification):
         # The evaluation done wrt the discrete counter (logical time)
         out = self.offline_evaluator.evaluate(self.top, [length])
 
-        out_t = []
-        for i in range(len(ts)):
-            out_sample = [ts[i], out[i]]
-            out_t.append(out_sample)
+        out_t = [[a[0],a[1]] for a in zip(ts,out)]
         out = out_t
 
         return out

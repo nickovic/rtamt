@@ -7,11 +7,9 @@ class OnceOperation(AbstractOperation):
 
     def update(self, samples):
         out = []
-        self.prev_out = -float("inf")
+        prev_out = -float("inf")
         for sample in samples:
-            out_sample = max(sample, self.prev_out)
-            self.prev_out = out_sample
+            out_sample = max(sample, prev_out)
+            prev_out = out_sample
             out.append(out_sample)
-        return out
-
         return out

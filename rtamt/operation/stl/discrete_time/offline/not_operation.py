@@ -6,8 +6,7 @@ class NotOperation(AbstractOperation):
         pass
 
     def update(self, samples):
-        out = []
-        for sample in samples:
-            out_sample = - sample
-            out.append(out_sample)
+
+        out = [ -sample for sample in samples]
+
         return out
