@@ -1,5 +1,5 @@
 from rtamt.ast.visitor.stl.ASTVisitor import STLASTVisitor
-from rtamt.spec.ltl.discrete_time.pastifier import LTLPastifier
+from rtamt.pastifier.ltl.pastifier import LTLPastifier
 
 from rtamt.node.ltl.variable import Variable
 from rtamt.node.stl.timed_precedes import TimedPrecedes

@@ -1,9 +1,8 @@
 from rtamt.ast.visitor.stl.ASTVisitor import STLASTVisitor
 from rtamt.exception.stl.exception import STLNotImplementedException, \
     STLParseException
-from rtamt.spec.stl.discrete_time.comp_op import StlComparisonOperator as CompOp
+from rtamt.enumerations.comp_op import StlComparisonOperator as CompOp
 from rtamt.lib.rtamt_stl_library_wrapper.stl_comp_op import StlComparisonOperator
-from rtamt.lib.rtamt_stl_library_wrapper.stl_combinatorial_binary_node import CombinatorialBinaryOperation
 from rtamt.lib.rtamt_stl_library_wrapper.stl_not_node import NotOperation
 from rtamt.lib.rtamt_stl_library_wrapper.stl_addition_node import AdditionOperation
 from rtamt.lib.rtamt_stl_library_wrapper.stl_predicate_node import PredicateOperation

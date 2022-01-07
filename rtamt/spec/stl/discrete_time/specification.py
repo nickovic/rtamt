@@ -1,6 +1,3 @@
-import logging
-import importlib
-
 from antlr4 import *
 from antlr4.InputStream import InputStream
 
@@ -14,9 +11,9 @@ from rtamt.spec.stl.discrete_time.specification_parser import STLSpecificationPa
 from rtamt.parser.stl.error.parser_error_listener import STLParserErrorListener
 from rtamt.exception.stl.exception import STLParseException
 
-from rtamt.spec.stl.discrete_time.pastifier import STLPastifier
+from rtamt.pastifier.stl.pastifier import STLPastifier
 from rtamt.evaluator.stl.online_evaluator import STLOnlineEvaluator
-from rtamt.spec.stl.discrete_time.reset import STLReset
+from rtamt.reset.stl.reset import STLReset
 from rtamt.enumerations.options import *
 
 from rtamt.exception.stl.exception import STLException

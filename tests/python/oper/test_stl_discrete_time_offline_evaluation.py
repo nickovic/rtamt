@@ -32,7 +32,7 @@ from rtamt.operation.stl.discrete_time.offline.until_operation import UntilOpera
 from rtamt.operation.stl.discrete_time.offline.eventually_bounded_operation import EventuallyBoundedOperation
 from rtamt.operation.stl.discrete_time.offline.always_bounded_operation import AlwaysBoundedOperation
 from rtamt.operation.stl.discrete_time.offline.until_bounded_operation import UntilBoundedOperation
-from rtamt.spec.stl.discrete_time.comp_op import StlComparisonOperator
+from rtamt.enumerations.comp_op import StlComparisonOperator
 
 class TestSTLEvaluation(unittest.TestCase):
 

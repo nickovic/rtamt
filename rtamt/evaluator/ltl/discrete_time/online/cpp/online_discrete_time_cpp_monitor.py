@@ -1,6 +1,6 @@
 from rtamt.ast.visitor.ltl.ASTVisitor import LTLASTVisitor
 from rtamt.exception.stl.exception import STLNotImplementedException
-from rtamt.spec.stl.discrete_time.comp_op import StlComparisonOperator as CompOp
+from rtamt.enumerations.comp_op import StlComparisonOperator as CompOp
 from rtamt.lib.rtamt_stl_library_wrapper.stl_comp_op import StlComparisonOperator
 from rtamt.lib.rtamt_stl_library_wrapper.stl_predicate_node import PredicateOperation
 from rtamt.lib.rtamt_stl_library_wrapper.stl_addition_node import AdditionOperation

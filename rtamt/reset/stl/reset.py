@@ -1,4 +1,4 @@
-from rtamt.spec.ltl.discrete_time.reset import LTLReset
+from rtamt.reset.ltl.reset import LTLReset
 from rtamt.ast.visitor.stl.ASTVisitor import STLASTVisitor
 
 class STLReset(LTLReset, STLASTVisitor):

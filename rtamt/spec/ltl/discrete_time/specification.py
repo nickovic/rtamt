@@ -13,9 +13,9 @@ from rtamt.spec.ltl.discrete_time.specification_parser import LTLSpecificationPa
 from rtamt.parser.ltl.error.parser_error_listener import LTLParserErrorListener
 from rtamt.exception.stl.exception import STLParseException
 
-from rtamt.spec.ltl.discrete_time.pastifier import LTLPastifier
+from rtamt.pastifier.ltl.pastifier import LTLPastifier
 from rtamt.evaluator.ltl.online_evaluator import LTLEvaluator
-from rtamt.spec.ltl.discrete_time.reset import LTLReset
+from rtamt.reset.ltl.reset import LTLReset
 from rtamt.enumerations.options import *
 
 

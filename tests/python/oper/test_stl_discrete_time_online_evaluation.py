@@ -28,7 +28,7 @@ from rtamt.operation.arithmetic.discrete_time.online.sqrt_operation import SqrtO
 from rtamt.operation.arithmetic.discrete_time.online.exp_operation import ExpOperation
 from rtamt.operation.arithmetic.discrete_time.online.pow_operation import PowOperation
 from rtamt.operation.stl.discrete_time.online.previous_operation import PreviousOperation
-from rtamt.spec.stl.discrete_time.comp_op import StlComparisonOperator
+from rtamt.enumerations.comp_op import StlComparisonOperator
 
 class TestSTLEvaluation(unittest.TestCase):
 
