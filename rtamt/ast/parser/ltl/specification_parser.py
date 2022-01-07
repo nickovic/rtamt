@@ -1,14 +1,12 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Jul 23 21:38:29 2019
 
-@author: NickovicD
-"""
 import logging
 import operator
 
-import rtamt
+from antlr4 import *
+from antlr4.InputStream import InputStream
+
 from rtamt import Language
+from rtamt.parser.ltl.LtlLexer import LtlLexer
 from rtamt.parser.ltl.LtlParserVisitor import LtlParserVisitor
 
 from rtamt.node.ltl.variable import Variable
@@ -22,8 +20,6 @@ from rtamt.node.ltl.disjunction import Disjunction
 from rtamt.node.ltl.implies import Implies
 from rtamt.node.ltl.iff import Iff
 from rtamt.node.ltl.xor import Xor
-from rtamt.node.stl.timed_always import TimedAlways
-from rtamt.node.stl.timed_eventually import TimedEventually
 from rtamt.node.ltl.always import Always
 from rtamt.node.ltl.eventually import Eventually
 from rtamt.node.ltl.once import Once
@@ -41,14 +37,29 @@ from rtamt.node.ltl.fall import Fall
 from rtamt.node.ltl.rise import Rise
 from rtamt.node.ltl.constant import Constant
 
+from rtamt.parser.ltl.LtlParser import LtlParser
 from rtamt.exception.stl.exception import STLParseException
-from rtamt.exception.exception import RTAMTException
+from rtamt.parser.ltl.error.parser_error_listener import LTLParserErrorListener
+
 
 class LTLSpecificationParser(LtlParserVisitor):
     
     def __init__(self, spec):
         self.ops = set()
         self.spec = spec
+
+        if self.spec is None:
+            raise STLParseException('STL specification if empty')
+
+            # Parse the STL spec - ANTLR4 magic
+
+        entire_spec = self.spec.modular_spec + self.spec.spec
+        input_stream = InputStream(entire_spec)
+        lexer = LtlLexer(input_stream)
+        stream = CommonTokenStream(lexer)
+        parser = LtlParser(stream)
+        parser._listeners = [LTLParserErrorListener()]
+        self.ctx = parser.specification_file()
 
         io_type_name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_io_type'
         comp_op_name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_comp_op'
@@ -58,6 +69,10 @@ class LTLSpecificationParser(LtlParserVisitor):
 
         self.io_type_mod = __import__(io_type_name, fromlist=[''])
         self.comp_op_mod = __import__(comp_op_name, fromlist=[''])
+
+    def parse(self):
+        ast = self.visitSpecification_file(self.ctx)
+        return ast
 
     @property
     def spec(self):

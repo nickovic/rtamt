@@ -174,22 +174,9 @@ class LTLDiscreteTimeSpecification(AbstractSpecification):
     # string can be either file path containing the STL property
     # or the textual property itself
     def parse(self):
-        if self.spec is None:
-            raise STLParseException('STL specification if empty')
-
-        # Parse the STL spec - ANTLR4 magic
-
-        entire_spec = self.modular_spec + self.spec
-        input_stream = InputStream(entire_spec)
-        lexer = LtlLexer(input_stream)
-        stream = CommonTokenStream(lexer)
-        parser = LtlParser(stream)
-        parser._listeners = [LTLParserErrorListener()]
-        ctx = parser.specification_file()
-
         # Create the visitor for the actual spec nodes
         visitor = LTLSpecificationParser(self)
-        self.top = visitor.visitSpecification_file(ctx)
+        self.top = visitor.parse()
 
     def pastify(self):
         # Translate bounded future STL to past STL
