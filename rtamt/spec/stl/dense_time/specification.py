@@ -14,7 +14,7 @@ from rtamt.pastifier.stl.pastifier import STLPastifier
 from rtamt.spec.stl.discrete_time.specification import STLDiscreteTimeSpecification
 from rtamt.evaluator.stl.online_evaluator import STLOnlineEvaluator
 from rtamt.evaluator.stl.offline_evaluator import STLOfflineEvaluator
-from rtamt.spec.stl.dense_time.specification_parser import STLDenseTimeSpecificationParser
+from rtamt.ast.parser.stl.dense_time.specification_parser import STLDenseTimeSpecificationParser
 
 from rtamt.enumerations.options import *
 

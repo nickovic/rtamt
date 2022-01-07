@@ -6,7 +6,7 @@ from rtamt.spec.ltl.discrete_time.specification import LTLDiscreteTimeSpecificat
 
 from rtamt.parser.stl.StlLexer import StlLexer
 from rtamt.parser.stl.StlParser import StlParser
-from rtamt.spec.stl.discrete_time.specification_parser import STLSpecificationParser
+from rtamt.ast.parser.stl.discrete_time.specification_parser import STLSpecificationParser
 
 from rtamt.parser.stl.error.parser_error_listener import STLParserErrorListener
 from rtamt.exception.stl.exception import STLParseException

@@ -4,27 +4,16 @@ Created on Tue Jul 23 21:38:29 2019
 
 @author: NickovicD
 """
-import logging
-import operator
 
 from decimal import Decimal
 from fractions import Fraction
 
 from rtamt import Language
 from rtamt.parser.stl.StlParserVisitor import StlParserVisitor
-from rtamt.spec.ltl.discrete_time.specification_parser import LTLSpecificationParser
+from rtamt.ast.parser.ltl.specification_parser import LTLSpecificationParser
 from rtamt.interval.interval import Interval
 
-from rtamt.node.ltl.variable import Variable
-from rtamt.node.ltl.predicate import Predicate
-from rtamt.node.ltl.previous import Previous
-from rtamt.node.ltl.next import Next
-from rtamt.node.ltl.neg import Neg
-from rtamt.node.ltl.conjunction import Conjunction
 from rtamt.node.ltl.disjunction import Disjunction
-from rtamt.node.ltl.implies import Implies
-from rtamt.node.ltl.iff import Iff
-from rtamt.node.ltl.xor import Xor
 from rtamt.node.stl.timed_always import TimedAlways
 from rtamt.node.stl.timed_eventually import TimedEventually
 from rtamt.node.stl.timed_historically import TimedHistorically
@@ -37,14 +26,6 @@ from rtamt.node.ltl.once import Once
 from rtamt.node.ltl.historically import Historically
 from rtamt.node.ltl.since import Since
 from rtamt.node.ltl.until import Until
-from rtamt.node.arithmetic.abs import Abs
-from rtamt.node.arithmetic.addition import Addition
-from rtamt.node.arithmetic.subtraction import Subtraction
-from rtamt.node.arithmetic.multiplication import Multiplication
-from rtamt.node.arithmetic.division import Division
-from rtamt.node.ltl.fall import Fall
-from rtamt.node.ltl.rise import Rise
-from rtamt.node.ltl.constant import Constant
 
 from rtamt.exception.stl.exception import STLParseException
 

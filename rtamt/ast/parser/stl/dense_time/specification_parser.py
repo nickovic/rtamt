@@ -5,7 +5,7 @@ Created on Tue Jul 23 21:38:29 2019
 @author: NickovicD
 """
 
-from rtamt.spec.stl.discrete_time.specification_parser import STLSpecificationParser
+from rtamt.ast.parser.stl.discrete_time.specification_parser import STLSpecificationParser
 
 class STLDenseTimeSpecificationParser(STLSpecificationParser):
     
