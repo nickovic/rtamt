@@ -1,4 +1,4 @@
-from rtamt.spec.stl.discrete_time.visitor import STLVisitor
+from rtamt.ast.visitor.stl.ASTVisitor import STLASTVisitor
 from rtamt.spec.ltl.discrete_time.pastifier import LTLPastifier
 
 from rtamt.node.ltl.variable import Variable
@@ -9,13 +9,13 @@ from rtamt.node.stl.timed_since import TimedSince
 
 from rtamt.exception.stl.exception import STLException
 
-class STLPastifier(LTLPastifier, STLVisitor):
+class STLPastifier(LTLPastifier, STLASTVisitor):
 
     def __init__(self):
         pass 
     
     def visit(self, element, args):
-        return STLVisitor.visit(self, element, args)
+        return STLASTVisitor.visit(self, element, args)
 
 
     def visitVariable(self, element, args):

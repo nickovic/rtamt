@@ -1,4 +1,4 @@
-from rtamt.spec.stl.discrete_time.visitor import STLVisitor
+from rtamt.ast.visitor.stl.ASTVisitor import STLASTVisitor
 from rtamt.exception.stl.exception import STLNotImplementedException
 from rtamt.exception.ltl.exception import LTLNotImplementedException
 from rtamt.operation.stl.dense_time.online.predicate_operation import PredicateOperation
@@ -25,7 +25,7 @@ from rtamt.operation.stl.dense_time.online.historically_bounded_operation import
 from rtamt.operation.stl.dense_time.online.since_bounded_operation import SinceBoundedOperation
 
 
-class STLOnlineDenseTimePythonMonitor(STLVisitor):
+class STLOnlineDenseTimePythonMonitor(STLASTVisitor):
     def __init__(self):
         self.node_monitor_dict = dict()
         

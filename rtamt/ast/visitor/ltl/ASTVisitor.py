@@ -30,71 +30,69 @@ from rtamt.node.ltl.previous import Previous
 
 NOT_IMPLEMENTED = "You should implement this."
 
-class LTLVisitor:
+class LTLASTVisitor:
     __metaclass__ = ABCMeta
 
     def visit(self, element, args):
-        out = None
-
         if isinstance(element, Predicate):
-            out = self.visitPredicate(element, args)
+            ast = self.visitPredicate(element, args)
         elif isinstance(element, Variable):
-            out = self.visitVariable(element, args)
+            ast = self.visitVariable(element, args)
         elif isinstance(element, Neg):
-            out = self.visitNot(element, args)
+            ast = self.visitNot(element, args)
         elif isinstance(element, Disjunction):
-            out = self.visitOr(element, args)
+            ast = self.visitOr(element, args)
         elif isinstance(element, Conjunction):
-            out = self.visitAnd(element, args)
+            ast = self.visitAnd(element, args)
         elif isinstance(element, Implies):
-            out = self.visitImplies(element, args)
+            ast = self.visitImplies(element, args)
         elif isinstance(element, Iff):
-            out = self.visitIff(element, args)
+            ast = self.visitIff(element, args)
         elif isinstance(element, Xor):
-            out = self.visitXor(element, args)
+            ast = self.visitXor(element, args)
         elif isinstance(element, Eventually):
-            out = self.visitEventually(element, args)
+            ast = self.visitEventually(element, args)
         elif isinstance(element, Always):
-            out = self.visitAlways(element, args)
+            ast = self.visitAlways(element, args)
         elif isinstance(element, Until):
-            out = self.visitUntil(element, args)
+            ast = self.visitUntil(element, args)
         elif isinstance(element, Once):
-            out = self.visitOnce(element, args)
+            ast = self.visitOnce(element, args)
         elif isinstance(element, Historically):
-            out = self.visitHistorically(element, args)
+            ast = self.visitHistorically(element, args)
         elif isinstance(element, Since):
-            out = self.visitSince(element, args)
+            ast = self.visitSince(element, args)
         elif isinstance(element, TimedPrecedes):
-            out = self.visitTimedPrecedes(element, args)
+            ast = self.visitTimedPrecedes(element, args)
         elif isinstance(element, Abs):
-            out = self.visitAbs(element, args)
+            ast = self.visitAbs(element, args)
         elif isinstance(element, Sqrt):
-            out = self.visitSqrt(element, args)
+            ast = self.visitSqrt(element, args)
         elif isinstance(element, Exp):
-            out = self.visitExp(element, args)
+            ast = self.visitExp(element, args)
         elif isinstance(element, Pow):
-            out = self.visitPow(element, args)
+            ast = self.visitPow(element, args)
         elif isinstance(element, Addition):
-            out = self.visitAddition(element, args)
+            ast = self.visitAddition(element, args)
         elif isinstance(element, Subtraction):
-            out = self.visitSubtraction(element, args)
+            ast = self.visitSubtraction(element, args)
         elif isinstance(element, Multiplication):
-            out = self.visitMultiplication(element, args)
+            ast = self.visitMultiplication(element, args)
         elif isinstance(element, Division):
-            out = self.visitDivision(element, args)
+            ast = self.visitDivision(element, args)
         elif isinstance(element, Rise):
-            out = self.visitRise(element, args)
+            ast = self.visitRise(element, args)
         elif isinstance(element, Fall):
-            out = self.visitFall(element, args)
+            ast = self.visitFall(element, args)
         elif isinstance(element, Constant):
-            out = self.visitConstant(element, args)
+            ast = self.visitConstant(element, args)
         elif isinstance(element, Previous):
-            out = self.visitPrevious(element, args)
+            ast = self.visitPrevious(element, args)
         elif isinstance(element, Next):
-            out = self.visitNext(element, args)
+            ast = self.visitNext(element, args)
         else:
-            out = self.visitDefault(element, args)
-        return out
+            ast = self.visitDefault(element, args)
+        return ast
 
 
     @abstractmethod
@@ -196,5 +194,3 @@ class LTLVisitor:
     @abstractmethod
     def visitDefault(self, element, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
-
-    #### Comment

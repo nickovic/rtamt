@@ -1,4 +1,4 @@
-from rtamt.spec.ltl.discrete_time.visitor import LTLVisitor
+from rtamt.ast.visitor.ltl.ASTVisitor import LTLASTVisitor
 from rtamt.exception.stl.exception import STLNotImplementedException
 from rtamt.spec.stl.discrete_time.comp_op import StlComparisonOperator as CompOp
 from rtamt.lib.rtamt_stl_library_wrapper.stl_comp_op import StlComparisonOperator
@@ -24,7 +24,7 @@ from rtamt.lib.rtamt_stl_library_wrapper.stl_eventually_node import EventuallyOp
 from rtamt.lib.rtamt_stl_library_wrapper.stl_previous_node import PreviousOperation
 from rtamt.lib.rtamt_stl_library_wrapper.stl_constant_node import ConstantOperation
 
-class LTLOnlineDiscreteTimeCPPMonitor(LTLVisitor):
+class LTLOnlineDiscreteTimeCPPMonitor(LTLASTVisitor):
     def __init__(self):
         self.node_monitor_dict = dict()
         

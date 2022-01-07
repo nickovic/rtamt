@@ -1,13 +1,13 @@
 from rtamt.spec.ltl.discrete_time.reset import LTLReset
-from rtamt.spec.stl.discrete_time.visitor import STLVisitor
+from rtamt.ast.visitor.stl.ASTVisitor import STLASTVisitor
 
-class STLReset(LTLReset, STLVisitor):
+class STLReset(LTLReset, STLASTVisitor):
 
     def __init__(self, node_monitor_dict=None):
         LTLReset.__init__(self, node_monitor_dict)
 
     def visit(self, element, args):
-        STLVisitor.visit(self, element, args)
+        STLASTVisitor.visit(self, element, args)
 
     def visitTimedPrecedes(self, element, args):
         self.visit(element.children[0], args)

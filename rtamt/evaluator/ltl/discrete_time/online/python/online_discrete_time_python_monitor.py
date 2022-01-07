@@ -1,5 +1,5 @@
 from rtamt import LTLNotImplementedException
-from rtamt.spec.ltl.discrete_time.visitor import LTLVisitor
+from rtamt.ast.visitor.ltl.ASTVisitor import LTLASTVisitor
 from rtamt.operation.stl.discrete_time.online.predicate_operation import PredicateOperation
 from rtamt.operation.arithmetic.discrete_time.online.addition_operation import AdditionOperation
 from rtamt.operation.arithmetic.discrete_time.online.multiplication_operation import MultiplicationOperation
@@ -23,7 +23,7 @@ from rtamt.operation.stl.discrete_time.online.historically_operation import Hist
 from rtamt.operation.stl.discrete_time.online.previous_operation import PreviousOperation
 from rtamt.operation.stl.discrete_time.online.constant_operation import ConstantOperation
 
-class LTLOnlineDiscreteTimePythonMonitor(LTLVisitor):
+class LTLOnlineDiscreteTimePythonMonitor(LTLASTVisitor):
     def __init__(self):
         self.node_monitor_dict = dict()
         

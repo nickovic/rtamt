@@ -1,4 +1,4 @@
-from rtamt.spec.stl.discrete_time.visitor import STLVisitor
+from rtamt.ast.visitor.stl.ASTVisitor import STLASTVisitor
 from rtamt.exception.stl.exception import STLNotImplementedException, \
     STLParseException
 from rtamt.spec.stl.discrete_time.comp_op import StlComparisonOperator as CompOp
@@ -30,7 +30,7 @@ from rtamt.lib.rtamt_stl_library_wrapper.stl_historically_bounded_node import Hi
 from rtamt.lib.rtamt_stl_library_wrapper.stl_since_bounded_node import SinceBoundedOperation
 from rtamt.lib.rtamt_stl_library_wrapper.stl_precedes_bounded_node import PrecedesBoundedOperation
 
-class STLOnlineDiscreteTimeCPPMonitor(STLVisitor):
+class STLOnlineDiscreteTimeCPPMonitor(STLASTVisitor):
     def __init__(self):
         self.node_monitor_dict = dict()
         

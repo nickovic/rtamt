@@ -1,4 +1,4 @@
-from rtamt.spec.stl.discrete_time.visitor import STLVisitor
+from rtamt.ast.visitor.stl.ASTVisitor import STLASTVisitor
 from rtamt.exception.stl.exception import STLNotImplementedException
 from rtamt.operation.stl.discrete_time.offline.predicate_operation import PredicateOperation
 from rtamt.operation.arithmetic.discrete_time.offline.addition_operation import AdditionOperation
@@ -33,7 +33,7 @@ from rtamt.operation.stl.discrete_time.offline.always_bounded_operation import A
 from rtamt.operation.stl.discrete_time.offline.eventually_bounded_operation import EventuallyBoundedOperation
 from rtamt.operation.stl.discrete_time.offline.next_operation import NextOperation
 
-class STLOfflineDiscreteTimePythonMonitor(STLVisitor):
+class STLOfflineDiscreteTimePythonMonitor(STLASTVisitor):
     def __init__(self):
         self.node_monitor_dict = dict()
         

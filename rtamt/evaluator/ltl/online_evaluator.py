@@ -1,10 +1,10 @@
 import operator
 from rtamt.enumerations.options import *
 from rtamt.exception.stl.exception import STLNotImplementedException
-from rtamt.spec.ltl.discrete_time.visitor import LTLVisitor
+from rtamt.ast.visitor.ltl.ASTVisitor import LTLASTVisitor
 
 
-class LTLEvaluator(LTLVisitor):
+class LTLEvaluator(LTLASTVisitor):
     def __init__(self, spec):
         self.spec = spec
         generator = None
