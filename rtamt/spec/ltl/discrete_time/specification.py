@@ -175,8 +175,8 @@ class LTLDiscreteTimeSpecification(AbstractSpecification):
     # or the textual property itself
     def parse(self):
         # Create the visitor for the actual spec nodes
-        visitor = LTLSpecificationParser(self)
-        self.top = visitor.parse()
+        parser = LTLSpecificationParser(self)
+        self.top = parser.parse()
 
     def pastify(self):
         # Translate bounded future STL to past STL

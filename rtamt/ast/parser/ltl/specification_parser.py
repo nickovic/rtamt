@@ -51,7 +51,7 @@ class LTLSpecificationParser(LtlParserVisitor):
         if self.spec is None:
             raise STLParseException('STL specification if empty')
 
-            # Parse the STL spec - ANTLR4 magic
+        # Parse the STL spec - ANTLR4 magic
 
         entire_spec = self.spec.modular_spec + self.spec.spec
         input_stream = InputStream(entire_spec)
