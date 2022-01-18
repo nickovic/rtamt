@@ -91,9 +91,10 @@ class XAstPaser(AbstractAstPaser):
     __metaclass__ = ABCMeta
 
     def __init__(self):
-        antrlLexerType = type(XantrlLexer(None))
-        antrlParserType = type(XantrlParser(None))
-        astPaserVisitorType = type(XAstParserVisitor())
+        #TODO we may explain why we need to write like this.
+        antrlLexerType = globals()['XantrlLexer']
+        antrlParserType = globals()['XantrlParser']
+        astPaserVisitorType = globals()['XAstParserVisitor']
         super(XAstPaser, self).__init__(antrlLexerType, antrlParserType, astPaserVisitorType)
         return
 
@@ -105,5 +106,5 @@ xAstPaser.name = 'STL test'
 xAstPaser.declare_var('a', 'float') #Where should we put this? ast? or semanitcs?
 xAstPaser.spec = 'always(a>=2)'
 node = xAstPaser.parse()
-
-#NamePrintAstVistor(node)
+#namePrintNamePrintXAstVistor = NamePrintXAstVistor(node)
+#namePrintNamePrintXAstVistor.visit()
