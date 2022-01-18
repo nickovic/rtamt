@@ -20,10 +20,10 @@ class XantrlLexer:
 class XantrlParser:
     def __init__(self, input):
         # dummy
-        print('int XantrlParser')
+        print('intt XantrlParser')
         return None
 
-    def specification_file(self, input):
+    def specification_file(self):
         # dummy
         return None
 
@@ -45,28 +45,24 @@ class AbstractAstPaser:
 
     __metaclass__ = ABCMeta
 
-    def __init__(self, antrlLexer__class__, antrlParser__class__, astPaserVisitor__class__):
+    def __init__(self, antrlLexerType, antrlParserType, astPaserVisitorType):
         #TODO we need class check which inherits expected abstrauct class.
-        self.antrlLexer__class__ = antrlLexer__class__
-        self.antrlParser__class__ = antrlParser__class__
-        self.astPaserVisitor__class__ = astPaserVisitor__class__
+        self.antrlLexerType = antrlLexerType
+        self.antrlParserType = antrlParserType
+        self.astPaserVisitorType = astPaserVisitorType
         return
 
     def parse(self):
         input_stream = InputStream(self.spec)
-        lexer = self.antrlLexer__class__(input_stream)
-        if DEBUG:
-            print(isinstance(lexer, XantrlLexer))
-            lexer = XantrlLexer(input_stream)
-            print(isinstance(lexer, XantrlLexer))
+        lexer = self.antrlLexerType(input_stream)
 
         stream = CommonTokenStream(lexer)
-        parser = self.antrlParser__class__(stream)
+        parser = self.antrlParserType(stream)
         #parser._listeners = [STLParserErrorListener()]
         ctx = parser.specification_file()
 
         # Create the visitor for the actual spec nodes
-        visitor = self.astPaserVisitor__class__()
+        visitor = self.astPaserVisitorType()
         self.node = visitor.visit(ctx.specification())
 
         return self.node
@@ -95,10 +91,10 @@ class XAstPaser(AbstractAstPaser):
     __metaclass__ = ABCMeta
 
     def __init__(self):
-        antrlLexer__class__ = XantrlLexer.__class__
-        antrlParser__class__ = XantrlParser.__class__
-        astPaserVisitor__class__ = XAstParserVisitor.__class__
-        super(XAstPaser, self).__init__(antrlLexer__class__, antrlParser__class__, astPaserVisitor__class__)
+        antrlLexerType = type(XantrlLexer(None))
+        antrlParserType = type(XantrlParser(None))
+        astPaserVisitorType = type(XAstParserVisitor())
+        super(XAstPaser, self).__init__(antrlLexerType, antrlParserType, astPaserVisitorType)
         return
 
 
