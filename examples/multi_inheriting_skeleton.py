@@ -71,9 +71,11 @@ class AbstractAstPaser:
         pass
 
 
+
 #---- user define ----#
 # Instance class of X language
 # /rtamt/rtamt/ast/parser/stl/discrete_time/specification_parser.py
+#TODO we may explain why we need to write like this.
 class XAstParserVisitor(XANTRLparserVisitor):
 
     __metaclass__ = ABCMeta
@@ -84,7 +86,6 @@ class XAstParserVisitor(XANTRLparserVisitor):
         child2 = self.visit(ctx.expression(1))
         node = None
         return node
-
 
 class XAstPaser(AbstractAstPaser):
 
@@ -99,6 +100,33 @@ class XAstPaser(AbstractAstPaser):
         return
 
 
+#TODO We may discuss how much programmer need to think here.
+# /rtamt/rtamt/ast/visitor/stl/ASTVisitor.py
+class AbstructXAstVisitor:
+    __metaclass__ = ABCMeta
+
+    def visit(self, element, args):
+        # dummy
+        pass
+
+    @abstractmethod
+    def visitUntil(self, element, args):
+        raise NotImplementedError(NOT_IMPLEMENTED)
+
+
+#---- user define [Optional]----#
+# /rtamt/rtamt/evaluator/stl/dense_time/offline/python/offline_dense_time_python_monitor.py
+#TODO exchange some of semantics
+class XNamePrintAstVistor(AbstructXAstVisitor):
+
+    __metaclass__ = ABCMeta
+
+    # write AST spesific operation.
+    def visitUntil(self, node, args):
+        monitor = UntilOperation()
+        self.node_monitor_dict[node.name] = monitor
+
+        self.visit(node.children[0], args)
 
 
 xAstPaser = XAstPaser()
@@ -106,5 +134,5 @@ xAstPaser.name = 'STL test'
 xAstPaser.declare_var('a', 'float') #Where should we put this? ast? or semanitcs?
 xAstPaser.spec = 'always(a>=2)'
 node = xAstPaser.parse()
-#namePrintNamePrintXAstVistor = NamePrintXAstVistor(node)
-#namePrintNamePrintXAstVistor.visit()
+#namePrintAstVistor = XNamePrintAstVistor(node)
+#namePrintAstVistor.visit()
