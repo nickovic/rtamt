@@ -109,7 +109,7 @@ class AbstructXAstVisitor:
         # dummy
         pass
 
-    @abstractmethod
+    #@abstractmethod
     def visitUntil(self, element, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
@@ -133,6 +133,6 @@ xAstPaser = XAstPaser()
 xAstPaser.name = 'STL test'
 xAstPaser.declare_var('a', 'float') #Where should we put this? ast? or semanitcs?
 xAstPaser.spec = 'always(a>=2)'
-node = xAstPaser.parse()
+ast = xAstPaser.parse()
 #namePrintAstVistor = XNamePrintAstVistor(node)
 #namePrintAstVistor.visit()
