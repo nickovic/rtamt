@@ -116,31 +116,3 @@ class STLDenseTimeSpecification(STLDiscreteTimeSpecification):
         out = self.offline_evaluator.evaluate(self.top, [])
         self.var_object_dict = self.var_object_dict.fromkeys(self.var_object_dict, [])
         return out
-
-    def declare_var(self, var_name, var_type):
-        if var_name in self.vars:
-            logging.warning(
-                'Variable {} was already declared. It is now overriden with the new declaration.'.format(var_name))
-
-        # Associate to variable name 'var' its type 'type'
-        self.var_type_dict[var_name] = var_type
-
-        # Add variable name 'var' to the set of variables
-        self.add_var(var_name)
-        self.free_vars.add(var_name)
-        #instance = self.create_var_from_name(var_name)
-        #self.var_object_dict[var_name] = instance
-        self.var_object_dict[var_name] = []
-
-        # Add the default variable topic to var
-        self.var_topic_dict[var_name] = 'rtamt/{}'.format(var_name)
-
-        self.var_io_dict[var_name] = 'output'
-
-
-
-
-
-
-
-
