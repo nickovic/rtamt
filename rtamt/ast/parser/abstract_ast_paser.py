@@ -124,24 +124,6 @@ class AbstractAstPaser:
                 raise STLParseException('The type {} does not seem to be imported.'.format(var_type))
         return var
 
-    def create_var_from_name(self, var_name):
-        var = None
-        var_type = self.var_type_dict[var_name]
-        if var_type.encode('utf-8') == 'float'.encode('utf-8'):
-            var = float()
-        elif var_type.encode('utf-8') == 'int'.encode('utf-8'):
-            var = int()
-        elif var_type.encode('utf-8') == 'complex'.encode('utf-8'):
-            var = complex()
-        else:
-            try:
-                var_module = self.modules[var_type]
-                class_ = getattr(var_module, var_type)
-                var = class_()
-            except KeyError:
-                raise STLParseException('The type {} does not seem to be imported.'.format(var_type))
-        return var
-
     def declare_var(self, var_name, var_type):
         if var_name in self.vars:
             logging.warning(
