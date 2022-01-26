@@ -39,9 +39,10 @@ from rtamt.exception.stl.exception import STLParseException
 
 class LtlAstParserVisitor(LtlParserVisitor):
 
-    def __init__(self, const_val_dict):
+    def __init__(self, const_val_dict, var_subspec_dict):
         super(LtlAstParserVisitor, self).__init__()
         self.const_val_dict = const_val_dict
+        self.var_subspec_dict = var_subspec_dict
 
     def visitExprPredicate(self, ctx):
         child1 = self.visit(ctx.expression(0))
@@ -60,8 +61,8 @@ class LtlAstParserVisitor(LtlParserVisitor):
             val = self.const_val_dict[id]
             node = Constant(float(val))
         # Identifier is either an input variable or a sub-formula
-        elif id in self.spec.var_subspec_dict:
-                node = self.spec.var_subspec_dict[id]
+        elif id in self.var_subspec_dict:
+                node = self.var_subspec_dict[id]
                 return node
         else:
             id_tokens = id.split('.')

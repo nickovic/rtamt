@@ -29,6 +29,8 @@ class AbstractAstPaser:
         self.const_type_dict = dict()
         self.const_val_dict = dict()
 
+        self.var_subspec_dict = dict()
+
         self.var_topic_dict = dict()
 
 
@@ -62,7 +64,8 @@ class AbstractAstPaser:
         #TODO we need to consider how to mange error listner structure.
         #parser._listeners = [LTLParserErrorListener()]
         ctx = parser.specification_file()
-        visitor = self.astPaserVisitorType(self.const_val_dict)
+        visitor = self.astPaserVisitorType( self.const_val_dict,
+                                            self.var_subspec_dict)
         ast = visitor.visit(ctx.specification())
 
         return ast
