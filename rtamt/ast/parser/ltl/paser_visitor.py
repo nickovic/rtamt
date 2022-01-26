@@ -39,12 +39,14 @@ from rtamt.exception.stl.exception import STLParseException
 
 class LtlAstParserVisitor(LtlParserVisitor):
 
-    def __init__(self, const_val_dict, var_subspec_dict, var_type_dict, var_io_dict):
+    def __init__(self, const_val_dict, var_subspec_dict, var_type_dict, var_io_dict, comp_op_mod, var_object_dict):
         super(LtlAstParserVisitor, self).__init__()
         self.const_val_dict = const_val_dict
         self.var_subspec_dict = var_subspec_dict
         self.var_type_dict = var_type_dict
         self.var_io_dict = var_io_dict
+        self.comp_op_mod = comp_op_mod
+        self.var_object_dict = var_object_dict
 
     #TODO Ton is not confidence this location.
     def create_var_from_name(self, var_name):
@@ -109,7 +111,7 @@ class LtlAstParserVisitor(LtlParserVisitor):
                     raise STLParseException('{0} refers to undeclared variable {1} of unknown type'.format(id, id_head))
                 else:
                     var = float()
-                    self.spec.var_object_dict[id] = var
+                    self.var_object_dict[id] = var
                     self.spec.add_var(id)
                     logging.warning('The variable {} is not explicitely declared. It is implicitely declared as a '
                                 'variable of type float'.format(id))
@@ -352,7 +354,7 @@ class LtlAstParserVisitor(LtlParserVisitor):
         else:
             id = ctx.Identifier().getText();
 
-        self.spec.var_subspec_dict[id] = out
+        self.var_subspec_dict[id] = out
         id_tokens = id.split('.')
         id_head = id_tokens[0]
         id_tokens.pop(0)
@@ -360,7 +362,7 @@ class LtlAstParserVisitor(LtlParserVisitor):
 
         try:
             #var = self.spec.var_object_dict[id_head]
-            var = self.spec.create_var_from_name(id_head)
+            var = self.create_var_from_name(id_head)
             if (not id_tail):
                 if (not isinstance(var, (int, float))):
                     raise STLParseException('Variable {} is not of type int or float'.format(id))
@@ -377,7 +379,7 @@ class LtlAstParserVisitor(LtlParserVisitor):
                 raise STLParseException('{0} refers to undeclared variable {1} of unknown type'.format(id, id_head))
             else:
                 var = float()
-                self.spec.var_object_dict[id] = var
+                self.var_object_dict[id] = var
                 self.spec.add_var(id)
                 if not implicit:
                     logging.warning('The variable {} is not explicitly declared. It is implicitly declared as a '
@@ -394,7 +396,7 @@ class LtlAstParserVisitor(LtlParserVisitor):
     def visitSpecification(self, ctx):
         out = self.visitChildren(ctx)
         try:
-            del self.spec.var_subspec_dict[self.spec.out_var + self.spec.out_var_field]
+            del self.var_subspec_dict[self.spec.out_var + self.spec.out_var_field]
         except KeyError:
             #raise RTAMTException('Could not remove an entry from var_subspec_dict.')
             pass

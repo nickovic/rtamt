@@ -67,7 +67,9 @@ class AbstractAstPaser:
         visitor = self.astPaserVisitorType( self.const_val_dict,
                                             self.var_subspec_dict,
                                             self.var_type_dict,
-                                            self.var_io_dict)
+                                            self.var_io_dict,
+                                            self.comp_op_mod,
+                                            self.var_object_dict)
         ast = visitor.visit(ctx.specification())
 
         return ast
