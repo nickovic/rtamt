@@ -52,20 +52,6 @@ class STLDenseTimeSpecification(STLDiscreteTimeSpecification):
         self.top = visitor.visitSpecification_file(ctx)
 
 
-    def pastify(self):
-        # Translate bounded future STL to past STL
-        pastifier = STLPastifier()
-        self.top.accept(pastifier)
-        past = pastifier.pastify(self.top)
-        self.top = past
-
-        # evaluate modular sub-specs
-        for key in self.var_subspec_dict:
-            node = self.var_subspec_dict[key]
-            node.accept(pastifier)
-            node = pastifier.pastify(node)
-            self.var_subspec_dict[key] = node
-
     # Online
     def update(self, *args, **kargs):
         # list_inputs:
