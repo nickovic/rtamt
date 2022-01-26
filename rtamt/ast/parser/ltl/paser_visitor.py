@@ -39,11 +39,12 @@ from rtamt.exception.stl.exception import STLParseException
 
 class LtlAstParserVisitor(LtlParserVisitor):
 
-    def __init__(self, const_val_dict, var_subspec_dict, var_type_dict):
+    def __init__(self, const_val_dict, var_subspec_dict, var_type_dict, var_io_dict):
         super(LtlAstParserVisitor, self).__init__()
         self.const_val_dict = const_val_dict
         self.var_subspec_dict = var_subspec_dict
         self.var_type_dict = var_type_dict
+        self.var_io_dict = var_io_dict
 
     #TODO Ton is not confidence this location.
     def create_var_from_name(self, var_name):
@@ -113,7 +114,7 @@ class LtlAstParserVisitor(LtlParserVisitor):
                     logging.warning('The variable {} is not explicitely declared. It is implicitely declared as a '
                                 'variable of type float'.format(id))
 
-            var_io = self.spec.var_io_dict[id_head]
+            var_io = self.var_io_dict[id_head]
             node = Variable(id_head, id_tail, var_io)
 
         node.horizon = int(0)

@@ -66,7 +66,8 @@ class AbstractAstPaser:
         ctx = parser.specification_file()
         visitor = self.astPaserVisitorType( self.const_val_dict,
                                             self.var_subspec_dict,
-                                            self.var_type_dict)
+                                            self.var_type_dict,
+                                            self.var_io_dict)
         ast = visitor.visit(ctx.specification())
 
         return ast
