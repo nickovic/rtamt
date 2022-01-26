@@ -26,11 +26,13 @@ class AbstractAstPaser:
         self.var_type_dict = dict()
         self.var_object_dict = dict()
         self.var_io_dict = dict()
+        self.const_type_dict = dict()
+        self.const_val_dict = dict()
 
         self.var_topic_dict = dict()
 
 
-        #TODO Tom did not understand it well. 
+        #TODO Tom did not understand it well.
         # 1) Is it only stl? I don't think so
         # 2) Maybe we may consider where we may handle C++/python switch. Maybe semantics layer.
         #io_type_name = 'rtamt.lib.rtamt_stl_library_wrapper.stl_io_type'
@@ -60,7 +62,7 @@ class AbstractAstPaser:
         #TODO we need to consider how to mange error listner structure.
         #parser._listeners = [LTLParserErrorListener()]
         ctx = parser.specification_file()
-        visitor = self.astPaserVisitorType()
+        visitor = self.astPaserVisitorType(self.const_val_dict)
         ast = visitor.visit(ctx.specification())
 
         return ast
@@ -155,3 +157,11 @@ class AbstractAstPaser:
         self.var_topic_dict[var_name] = 'rtamt/{}'.format(var_name)
 
         self.var_io_dict[var_name] = 'output'
+
+    def declare_const(self, const_name, const_type, const_val):
+        if const_name in self.vars:
+            raise STLParseException('Constant {} already declared'.format(const_name))
+
+        self.const_type_dict[const_name] = const_type
+        self.const_val_dict[const_name] = const_val
+        self.vars.add(const_name)
