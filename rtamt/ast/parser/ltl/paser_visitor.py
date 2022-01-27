@@ -39,34 +39,6 @@ from rtamt.exception.stl.exception import STLParseException
 
 class LtlAstParserVisitor(LtlParserVisitor):
 
-    def __init__(self, const_val_dict, var_subspec_dict, var_type_dict, var_io_dict, comp_op_mod, var_object_dict):
-        super(LtlAstParserVisitor, self).__init__()
-        self.const_val_dict = const_val_dict
-        self.var_subspec_dict = var_subspec_dict
-        self.var_type_dict = var_type_dict
-        self.var_io_dict = var_io_dict
-        self.comp_op_mod = comp_op_mod
-        self.var_object_dict = var_object_dict
-
-    #TODO Ton is not confidence this location.
-    def create_var_from_name(self, var_name):
-        var = None
-        var_type = self.var_type_dict[var_name]
-        if var_type.encode('utf-8') == 'float'.encode('utf-8'):
-            var = float()
-        elif var_type.encode('utf-8') == 'int'.encode('utf-8'):
-            var = int()
-        elif var_type.encode('utf-8') == 'complex'.encode('utf-8'):
-            var = complex()
-        else:
-            try:
-                var_module = self.modules[var_type]
-                class_ = getattr(var_module, var_type)
-                var = class_()
-            except KeyError:
-                raise STLParseException('The type {} does not seem to be imported.'.format(var_type))
-        return var
-
     def visitExprPredicate(self, ctx):
         child1 = self.visit(ctx.expression(0))
         child2 = self.visit(ctx.expression(1))
