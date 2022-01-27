@@ -7,6 +7,36 @@ from antlr4.InputStream import InputStream
 from rtamt.exception.stl.exception import STLParseException
 
 class AbstractAstPaser:
+    """An abstract class for AST parser
+
+    Attributes:
+        name : String
+
+        modular_spec : String - specification text
+        spec : String - specification text
+
+        vars : set(String) - set of variable names
+        free_vars : set(String) - set of free variable names
+
+        var_subspec_dict : dict(String, AbstractNode) - dictionary that maps variable names to the AST
+        var_object_dict : dict(String, double) - dictionary that maps variable names to their value
+        modules : dict(String,String) - dictionary that maps module paths to module names
+        var_type_dict : dict(String, String) - dictionary that maps var names to var types
+        var_io_dict : dict(String, String) - dictionary that maps var names to var io signature
+        const_type_dict : dict(String, String) - dictionary mapping const var names to var types
+        const_val_dict : dict(String, String) - dictionary mapping const var names to var vals encoded as strings
+
+        ast : Node - pointer to the specification parse tree
+
+    Methods
+        parse - parse the specification
+
+        declare_var - declare variable in spec
+        declare_const - declare const variable in spec
+        add_sub_spec - add sub spec
+
+    """
+
 
     __metaclass__ = ABCMeta
 
@@ -26,18 +56,17 @@ class AbstractAstPaser:
         self.free_vars = set()
 
         self.var_subspec_dict = dict()
-
-
-        self.var_type_dict = dict()
         self.var_object_dict = dict()
+        self.modules = dict()
+        self.var_type_dict = dict()
         self.var_io_dict = dict()
         self.const_type_dict = dict()
         self.const_val_dict = dict()
 
-        self.var_subspec_dict = dict()
-
+        #TODO perhaps, we may omit it from AST.
         self.var_topic_dict = dict()
 
+        self.ast = None
 
         #TODO Tom did not understand it well.
         # 1) Is it only stl? I don't think so
@@ -69,9 +98,9 @@ class AbstractAstPaser:
         #TODO we need to consider how to mange error listner structure.
         #parser._listeners = [LTLParserErrorListener()]
         ctx = parser.specification_file()
-        ast = self.visit(ctx.specification())
+        self.ast = self.visit(ctx.specification())
 
-        return ast
+        return
 
     @property
     def spec(self):
@@ -82,12 +111,29 @@ class AbstractAstPaser:
         self.__spec = spec
 
     @property
-    def ops(self):
-        return self.__ops
+    def name(self):
+        return self.__name
 
-    @ops.setter
-    def ops(self, ops):
-        self.__ops = ops
+    @name.setter
+    def name(self, name):
+        self.__name = name
+
+    #TODO It is only for pastifier, we may move it to semantic layer or not AST layer..
+    @property
+    def horizon(self):
+        return self.__horizon
+
+    @horizon.setter
+    def horizon(self, horizon):
+        self.__horizon = horizon
+
+    @property
+    def free_vars(self):
+        return self.__free_vars
+
+    @free_vars.setter
+    def free_vars(self, free_vars):
+        self.__free_vars = free_vars
 
     @property
     def vars(self):
@@ -98,15 +144,18 @@ class AbstractAstPaser:
         self.__vars = vars
 
     @property
-    def free_vars(self):
-        return self.__free_vars
+    def modules(self):
+        return self.__modules
 
-    @free_vars.setter
-    def free_vars(self, free_vars):
-        self.__free_vars = free_vars
+    @modules.setter
+    def modules(self, modules):
+        self.__modules = modules
 
     def add_var(self, var):
         self.vars.add(var)
+
+    def get_value(self, var_name):
+        return self.var_object_dict[var_name]
 
     def add_sub_spec(self, sub_spec):
         self.modular_spec = self.modular_spec + sub_spec + '\n'

@@ -11,7 +11,7 @@ class TestLtlAstParsing(unittest.TestCase):
         astPaser = LtlAstParser()
         astPaser.declare_var('a', 'float')
         astPaser.spec = 'always(a>=2)'
-        ast = astPaser.parse()
+        astPaser.parse()
 
 if __name__ == '__main__':
     unittest.main()
