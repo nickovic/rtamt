@@ -1,6 +1,6 @@
 import unittest
 
-from rtamt.ast.parser.ltl.specification_parser import LtlAstParser
+from rtamt.ast.parser.ltl.specification_parser import LtlAst
 
 class TestLtlAstParsing(unittest.TestCase):
 
@@ -8,10 +8,10 @@ class TestLtlAstParsing(unittest.TestCase):
         super(TestLtlAstParsing, self).__init__(*args, **kwargs)
 
     def test_parse(self):
-        astPaser = LtlAstParser()
-        astPaser.declare_var('a', 'float')
-        astPaser.spec = 'always(a>=2)'
-        astPaser.parse()
+        ast = LtlAst()
+        ast.declare_var('a', 'float')
+        ast.spec = 'always(a>=2)'
+        ast.parse()
 
 if __name__ == '__main__':
     unittest.main()

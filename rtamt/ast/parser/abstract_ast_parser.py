@@ -4,7 +4,7 @@ import logging
 from antlr4 import *
 from antlr4.InputStream import InputStream
 
-class AbstractAstPaser:
+class AbstractAst:
     """An abstract class for AST parser
 
     Attributes:
@@ -174,6 +174,7 @@ class AbstractAstPaser:
                 class_ = getattr(var_module, var_type)
                 var = class_()
             except KeyError:
+                #TODO we need to consider exception structure.
                 raise STLParseException('The type {} does not seem to be imported.'.format(var_type))
         return var
 
@@ -199,6 +200,7 @@ class AbstractAstPaser:
 
     def declare_const(self, const_name, const_type, const_val):
         if const_name in self.vars:
+            #TODO we need to consider exception structure.
             raise STLParseException('Constant {} already declared'.format(const_name))
 
         self.const_type_dict[const_name] = const_type
