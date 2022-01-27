@@ -45,11 +45,10 @@ class AbstractAstPaser:
 
     __metaclass__ = ABCMeta
 
-    def __init__(self, antrlLexerType, antrlParserType, astPaserVisitorType):
+    def __init__(self, antrlLexerType, antrlParserType, ):
         #TODO we need class check which inherits expected abstrauct class.
         self.antrlLexerType = antrlLexerType
         self.antrlParserType = antrlParserType
-        self.astPaserVisitorType = astPaserVisitorType
         return
 
     def parse(self):
@@ -62,8 +61,7 @@ class AbstractAstPaser:
         ctx = parser.specification_file()
 
         # Create the visitor for the actual spec nodes
-        visitor = self.astPaserVisitorType()
-        self.node = visitor.visit(ctx.specification())
+        self.node = self.visit(ctx.specification())
 
         return self.node
 
@@ -87,7 +85,7 @@ class XAstParserVisitor(XANTRLparserVisitor):
         node = None
         return node
 
-class XAstPaser(AbstractAstPaser):
+class XAstPaser(AbstractAstPaser, XAstParserVisitor):
 
     __metaclass__ = ABCMeta
 
@@ -95,8 +93,7 @@ class XAstPaser(AbstractAstPaser):
         #TODO we may explain why we need to write like this.
         antrlLexerType = globals()['XantrlLexer']
         antrlParserType = globals()['XantrlParser']
-        astPaserVisitorType = globals()['XAstParserVisitor']
-        super(XAstPaser, self).__init__(antrlLexerType, antrlParserType, astPaserVisitorType)
+        super(XAstPaser, self).__init__(antrlLexerType, antrlParserType)
         return
 
 
