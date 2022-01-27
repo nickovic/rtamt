@@ -5,6 +5,11 @@ Created on Tue Jul 23 21:38:29 2019
 @author: NickovicD
 """
 
+from decimal import Decimal
+from fractions import Fraction
+
+from rtamt.exception.stl.exception import STLParseException
+
 from rtamt.ast.parser.stl.specification_parser import STLSpecificationParser
 
 class STLDenseTimeSpecificationParser(STLSpecificationParser):
