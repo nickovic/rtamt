@@ -84,7 +84,7 @@ class LtlAstParserVisitor(LtlParserVisitor):
                 else:
                     var = float()
                     self.var_object_dict[id] = var
-                    self.spec.add_var(id)
+                    self.add_var(id)
                     logging.warning('The variable {} is not explicitely declared. It is implicitely declared as a '
                                 'variable of type float'.format(id))
 
@@ -100,8 +100,8 @@ class LtlAstParserVisitor(LtlParserVisitor):
         var_name = ctx.Identifier().getText()
         var_type = ctx.domainType().getText()
 
-        self.spec.declare_var(var_name, var_type)
-        self.spec.var_io_dict[var_name] = 'output'
+        self.declare_var(var_name, var_type)
+        self.var_io_dict[var_name] = 'output'
 
         # If 'var' is input, add to the set of input vars
         # If 'var' is output, add to the set of output vars
@@ -110,7 +110,7 @@ class LtlAstParserVisitor(LtlParserVisitor):
                 var_iotype = 'input'
             elif (not ctx.ioType().Output() is None):
                 var_iotype = 'output'
-        self.spec.set_var_io_type(var_name, var_iotype)
+        self.set_var_io_type(var_name, var_iotype)
 
         self.visitChildren(ctx)
 
@@ -120,19 +120,19 @@ class LtlAstParserVisitor(LtlParserVisitor):
         const_type = ctx.domainType().getText()
         const_value = ctx.literal().getText()
 
-        self.spec.declare_const(const_name, const_type, const_value)
+        self.declare_const(const_name, const_type, const_value)
 
-        self.spec.visitChildren(ctx)
+        self.visitChildren(ctx)
 
     def visitRosTopic(self, ctx):
         var_name = ctx.Identifier(0).getText()
         topic_name = ctx.Identifier(1).getText()
-        self.spec.set_var_topic(var_name, topic_name)
+        self.set_var_topic(var_name, topic_name)
 
     def visitModImport(self, ctx):
         module_name = ctx.Identifier(0).getText()
         var_type = ctx.Identifier(1).getText()
-        self.spec.import_module(module_name, var_type)
+        self.import_module(module_name, var_type)
 
     def visitExprAddition(self, ctx):
         child1 = self.visit(ctx.real_expression(0))
@@ -333,7 +333,7 @@ class LtlAstParserVisitor(LtlParserVisitor):
         id_tail = '.'.join(id_tokens)
 
         try:
-            #var = self.spec.var_object_dict[id_head]
+            var = self.var_object_dict[id_head]
             var = self.create_var_from_name(id_head)
             if (not id_tail):
                 if (not isinstance(var, (int, float))):
@@ -379,7 +379,7 @@ class LtlAstParserVisitor(LtlParserVisitor):
         # The specification name is updated only if it is given
         # by the user
         if not ctx.Identifier() is None:
-            self.spec.name = ctx.Identifier().getText()
+            self.name = ctx.Identifier().getText()
 
     def str_to_op_type(self, input):
         if input == "<":
