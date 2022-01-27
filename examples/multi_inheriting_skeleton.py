@@ -82,7 +82,11 @@ class AbstractAst:
     def declare_var(self, name, type):
         pass
 
-
+def ast_factory(AstParserVisitor):
+    class Ast(AbstractAst, AstParserVisitor):
+        def __init__(self, antrlLexerType, antrlParserType, parserErrorListenerType=None):
+            super(Ast, self).__init__(antrlLexerType, antrlParserType, parserErrorListenerType)
+    return Ast
 
 #---- user define ----#
 # Instance class of X language
@@ -99,18 +103,16 @@ class XAstParserVisitor(XANTRLparserVisitor):
         node = None
         return node
 
-class XAst(AbstractAst, XAstParserVisitor):
+# This function is factory function to instance of Xast class.
+# The name rule is class even it is function. However the nameing will avoid user misunderstanding.
+def XAst():
 
-    __metaclass__ = ABCMeta
-
-    def __init__(self):
-        #TODO we may explain why we need to write like this.
-        antrlLexerType = globals()['XantrlLexer']
-        antrlParserType = globals()['XantrlParser']
-        parserErrorListenerType = globals()['XParserErrorListener'] # optional
-        super(XAst, self).__init__(antrlLexerType, antrlParserType, parserErrorListenerType)
-        return
-
+    #TODO we may explain why we need to write like this.
+    antrlLexerType = globals()['XantrlLexer']
+    antrlParserType = globals()['XantrlParser']
+    parserErrorListenerType = globals()['XParserErrorListener'] # optional
+    xAst = ast_factory(XAstParserVisitor)(antrlLexerType, antrlParserType, parserErrorListenerType)
+    return xAst
 
 #TODO We may discuss how much programmer need to think here.
 # /rtamt/rtamt/ast/visitor/stl/ASTVisitor.py
