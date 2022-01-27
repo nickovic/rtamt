@@ -53,7 +53,7 @@ class XParserErrorListener( ErrorListener ):
     def reportContextSensitivity(self, recognizer, dfa, startIndex, stopIndex, prediction, configs):
         raise
 
-class AbstractAstPaser:
+class AbstractAst:
 
     __metaclass__ = ABCMeta
 
@@ -99,7 +99,7 @@ class XAstParserVisitor(XANTRLparserVisitor):
         node = None
         return node
 
-class XAst(AbstractAstPaser, XAstParserVisitor):
+class XAst(AbstractAst, XAstParserVisitor):
 
     __metaclass__ = ABCMeta
 
