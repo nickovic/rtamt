@@ -1,7 +1,7 @@
 from abc import ABCMeta
 
 from antlr4 import *
-#from antlr4.InputStream import InputStream
+from antlr4.error.ErrorListener import ErrorListener
 
 DEBUG = True
 
@@ -40,15 +40,28 @@ class XANTRLparserVisitor(ParseTreeVisitor):
     def visitExprUntil(self, ctx):
         return self.visitChildren(ctx)
 
+class XParserErrorListener( ErrorListener ):
+    def syntaxError(self, recognizer, offendingSymbol, line, column, msg, e):
+        raise
+
+    def reportAmbiguity(self, recognizer, dfa, startIndex, stopIndex, exact, ambigAlts, configs):
+        raise
+
+    def reportAttemptingFullContext(self, recognizer, dfa, startIndex, stopIndex, conflictingAlts, configs):
+        raise
+
+    def reportContextSensitivity(self, recognizer, dfa, startIndex, stopIndex, prediction, configs):
+        raise
 
 class AbstractAstPaser:
 
     __metaclass__ = ABCMeta
 
-    def __init__(self, antrlLexerType, antrlParserType, ):
+    def __init__(self, antrlLexerType, antrlParserType, parserErrorListenerType = None):
         #TODO we need class check which inherits expected abstrauct class.
         self.antrlLexerType = antrlLexerType
         self.antrlParserType = antrlParserType
+        self.parserErrorListenerType = parserErrorListenerType
         return
 
     def parse(self):
@@ -57,7 +70,8 @@ class AbstractAstPaser:
 
         stream = CommonTokenStream(lexer)
         parser = self.antrlParserType(stream)
-        #parser._listeners = [STLParserErrorListener()]
+        if self.parserErrorListenerType != None:
+            parser._listeners = [self.parserErrorListenerType()]
         ctx = parser.specification_file()
 
         # Create the visitor for the actual spec nodes
@@ -93,7 +107,8 @@ class XAstPaser(AbstractAstPaser, XAstParserVisitor):
         #TODO we may explain why we need to write like this.
         antrlLexerType = globals()['XantrlLexer']
         antrlParserType = globals()['XantrlParser']
-        super(XAstPaser, self).__init__(antrlLexerType, antrlParserType)
+        parserErrorListenerType = globals()['XParserErrorListener'] # optional
+        super(XAstPaser, self).__init__(antrlLexerType, antrlParserType, parserErrorListenerType)
         return
 
 
