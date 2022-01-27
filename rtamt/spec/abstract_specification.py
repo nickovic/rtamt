@@ -189,9 +189,6 @@ class AbstractSpecification:
     def add_sub_spec(self, sub_spec):
         self.modular_spec = self.modular_spec + sub_spec + '\n'
 
-    def get_var_object(self, name):
-        return self.var_object_dict[name]
-
     def get_spec_from_file(self, path):
         """Opens a text file and returns its content as a string
         Parameters:
