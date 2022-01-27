@@ -4,6 +4,7 @@ import logging
 from antlr4 import *
 from antlr4.InputStream import InputStream
 
+
 class AbstractAst:
     """An abstract class for AST parser
 
@@ -38,13 +39,13 @@ class AbstractAst:
 
     __metaclass__ = ABCMeta
 
-    def __init__(self, antrlLexerType, antrlParserType, parserErrorListenerType = None):
+    def __init__(self, antrlLexerType, antrlParserType, parseExceptionType = None):
 
         # Class of lexser, parser, paserVisitor
         #TODO we need class check which inherits expected abstrauct class.
         self.antrlLexerType = antrlLexerType
         self.antrlParserType = antrlParserType
-        self.parserErrorListenerType = parserErrorListenerType
+        self.parseExceptionType = parseExceptionType
 
         # Attributes
         self.name = 'Abstract Specification'
@@ -94,8 +95,8 @@ class AbstractAst:
         lexer = self.antrlLexerType(input_stream)
         stream = CommonTokenStream(lexer)
         parser = self.antrlParserType(stream)
-        if self.parserErrorListenerType != None:
-            parser._listeners = [self.parserErrorListenerType()]
+        if self.parseExceptionType != None:
+            parser._listeners = [self.parseExceptionType()]
         ctx = parser.specification_file()
         self.ast = self.visit(ctx.specification())
 
@@ -206,3 +207,9 @@ class AbstractAst:
         self.const_type_dict[const_name] = const_type
         self.const_val_dict[const_name] = const_val
         self.vars.add(const_name)
+
+def ast_factory(AstParserVisitor):
+    class Ast(AbstractAst, AstParserVisitor):
+        def __init__(self, antrlLexerType, antrlParserType, parseExceptionType=None):
+            super(Ast, self).__init__(antrlLexerType, antrlParserType, parseExceptionType)
+    return Ast
