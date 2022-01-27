@@ -17,11 +17,16 @@ class AbstractAstPaser:
         self.antrlParserType = antrlParserType
 
         # Attributes
-        self.ops = set()    #TODO Do we need it?
-        #self.spec = spec
+        self.name = 'Abstract Specification'
+        self.spec = None
+        self.modular_spec = ''
 
         self.vars = set()
         self.free_vars = set()
+
+        self.var_subspec_dict = dict()
+
+
         self.var_type_dict = dict()
         self.var_object_dict = dict()
         self.var_io_dict = dict()
@@ -54,9 +59,9 @@ class AbstractAstPaser:
             #TODO we need to consider exception structure.
             raise STLParseException('STL specification if empty')
 
-        #entire_spec = self.spec.modular_spec + self.spec.spec
-        #input_stream = InputStream(entire_spec)
-        input_stream = InputStream(self.spec)
+        #TODO How to handle sub-formulas?
+        entire_spec = self.modular_spec + self.spec
+        input_stream = InputStream(entire_spec)
         lexer = self.antrlLexerType(input_stream)
         stream = CommonTokenStream(lexer)
         parser = self.antrlParserType(stream)
@@ -101,6 +106,9 @@ class AbstractAstPaser:
 
     def add_var(self, var):
         self.vars.add(var)
+
+    def add_sub_spec(self, sub_spec):
+        self.modular_spec = self.modular_spec + sub_spec + '\n'
 
     def create_var_from_name(self, var_name):
         var = None
