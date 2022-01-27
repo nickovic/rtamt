@@ -141,10 +141,10 @@ class XNamePrintAstVistor(AbstructXAstVisitor):
         self.visit(node.children[0], args)
 
 
-xAstPaser = XAst()
-xAstPaser.name = 'STL test'
-xAstPaser.declare_var('a', 'float') #Where should we put this? ast? or semanitcs?
-xAstPaser.spec = 'always(a>=2)'
-xAstPaser.parse()
-#namePrintAstVistor = XNamePrintAstVistor(node)
+xAst = XAst()
+xAst.name = 'STL test'
+xAst.declare_var('a', 'float') #Where should we put this? ast? or semanitcs?
+xAst.spec = 'always(a>=2)'
+xAst.parse()
+#namePrintAstVistor = XNamePrintAstVistor(xAst)
 #namePrintAstVistor.visit()
