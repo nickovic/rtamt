@@ -380,14 +380,14 @@ class LtlAstParserVisitor(LtlParserVisitor):
             else:
                 var = float()
                 self.var_object_dict[id] = var
-                self.spec.add_var(id)
+                self.add_var(id)
                 if not implicit:
                     logging.warning('The variable {} is not explicitly declared. It is implicitly declared as a '
                                     'variable of type float'.format(id))
 
-        self.spec.out_var = id_head;
-        self.spec.out_var_field = id_tail;
-        self.spec.free_vars.discard(id_head)
+        self.out_var = id_head
+        self.out_var_field = id_tail
+        self.free_vars.discard(id_head)
         return out
 
     def visitSpecification_file(self, ctx):
@@ -396,7 +396,7 @@ class LtlAstParserVisitor(LtlParserVisitor):
     def visitSpecification(self, ctx):
         out = self.visitChildren(ctx)
         try:
-            del self.var_subspec_dict[self.spec.out_var + self.spec.out_var_field]
+            del self.var_subspec_dict[self.out_var + self.out_var_field]
         except KeyError:
             #raise RTAMTException('Could not remove an entry from var_subspec_dict.')
             pass

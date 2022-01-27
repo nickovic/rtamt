@@ -9,13 +9,12 @@ class AbstractAstPaser:
 
     __metaclass__ = ABCMeta
 
-    def __init__(self, antrlLexerType, antrlParserType, astPaserVisitorType):
+    def __init__(self, antrlLexerType, antrlParserType):
 
         # Class of lexser, parser, paserVisitor
         #TODO we need class check which inherits expected abstrauct class.
         self.antrlLexerType = antrlLexerType
         self.antrlParserType = antrlParserType
-        self.astPaserVisitorType = astPaserVisitorType
 
         # Attributes
         self.ops = set()    #TODO Do we need it?
@@ -64,13 +63,7 @@ class AbstractAstPaser:
         #TODO we need to consider how to mange error listner structure.
         #parser._listeners = [LTLParserErrorListener()]
         ctx = parser.specification_file()
-        visitor = self.astPaserVisitorType( self.const_val_dict,
-                                            self.var_subspec_dict,
-                                            self.var_type_dict,
-                                            self.var_io_dict,
-                                            self.comp_op_mod,
-                                            self.var_object_dict)
-        ast = visitor.visit(ctx.specification())
+        ast = self.visit(ctx.specification())
 
         return ast
 
