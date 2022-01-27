@@ -4,8 +4,6 @@ import logging
 from antlr4 import *
 from antlr4.InputStream import InputStream
 
-from rtamt.exception.stl.exception import STLParseException
-
 class AbstractAstPaser:
     """An abstract class for AST parser
 
@@ -40,12 +38,13 @@ class AbstractAstPaser:
 
     __metaclass__ = ABCMeta
 
-    def __init__(self, antrlLexerType, antrlParserType):
+    def __init__(self, antrlLexerType, antrlParserType, parserErrorListenerType = None):
 
         # Class of lexser, parser, paserVisitor
         #TODO we need class check which inherits expected abstrauct class.
         self.antrlLexerType = antrlLexerType
         self.antrlParserType = antrlParserType
+        self.parserErrorListenerType = parserErrorListenerType
 
         # Attributes
         self.name = 'Abstract Specification'
@@ -95,8 +94,8 @@ class AbstractAstPaser:
         lexer = self.antrlLexerType(input_stream)
         stream = CommonTokenStream(lexer)
         parser = self.antrlParserType(stream)
-        #TODO we need to consider how to mange error listner structure.
-        #parser._listeners = [LTLParserErrorListener()]
+        if self.parserErrorListenerType != None:
+            parser._listeners = [self.parserErrorListenerType()]
         ctx = parser.specification_file()
         self.ast = self.visit(ctx.specification())
 
