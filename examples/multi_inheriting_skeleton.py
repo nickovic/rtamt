@@ -99,7 +99,7 @@ class XAstParserVisitor(XANTRLparserVisitor):
         node = None
         return node
 
-class XAstPaser(AbstractAstPaser, XAstParserVisitor):
+class XAst(AbstractAstPaser, XAstParserVisitor):
 
     __metaclass__ = ABCMeta
 
@@ -108,7 +108,7 @@ class XAstPaser(AbstractAstPaser, XAstParserVisitor):
         antrlLexerType = globals()['XantrlLexer']
         antrlParserType = globals()['XantrlParser']
         parserErrorListenerType = globals()['XParserErrorListener'] # optional
-        super(XAstPaser, self).__init__(antrlLexerType, antrlParserType, parserErrorListenerType)
+        super(XAst, self).__init__(antrlLexerType, antrlParserType, parserErrorListenerType)
         return
 
 
@@ -141,10 +141,10 @@ class XNamePrintAstVistor(AbstructXAstVisitor):
         self.visit(node.children[0], args)
 
 
-xAstPaser = XAstPaser()
+xAstPaser = XAst()
 xAstPaser.name = 'STL test'
 xAstPaser.declare_var('a', 'float') #Where should we put this? ast? or semanitcs?
 xAstPaser.spec = 'always(a>=2)'
-ast = xAstPaser.parse()
+xAstPaser.parse()
 #namePrintAstVistor = XNamePrintAstVistor(node)
 #namePrintAstVistor.visit()
