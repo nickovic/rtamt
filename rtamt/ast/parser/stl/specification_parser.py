@@ -31,7 +31,7 @@ from rtamt.exception.stl.exception import STLParseException
 
 
 class STLSpecificationParser(LTLSpecificationParser, StlParserVisitor):
-    
+
     def __init__(self, spec):
         self.ops = set()
         self.spec = spec
@@ -56,7 +56,7 @@ class STLSpecificationParser(LTLSpecificationParser, StlParserVisitor):
     @property
     def ops(self):
         return self.__ops
-    
+
     @ops.setter
     def ops(self, ops):
         self.__ops = ops
@@ -146,33 +146,15 @@ class STLSpecificationParser(LTLSpecificationParser, StlParserVisitor):
             node.horizon = max(child1.horizon, child2.horizon) + interval.end
         return node
 
+    def visitConstantTimeLiteral(self, ctx):
+        const_name = ctx.Identifier().getText()
 
-    def visitIntervalTimeLiteral(self, ctx):
-        text = ctx.literal().getText()
-        out = Fraction(Decimal(text))
+        if const_name not in self.spec.const_val_dict:
+            raise STLParseException('Bound {} not declared'.format(const_name))
 
-        if ctx.unit() == None:
-            # default time unit is seconds - conversion of the bound to ps
-            unit = self.spec.unit
-        else:
-            unit = ctx.unit().getText()
+        val = self.spec.const_val_dict[const_name]
 
-        out = out * self.spec.U[unit]
-
-        sp = Fraction(self.spec.get_sampling_period())
-
-        out = out / sp
-
-        if out.numerator % out.denominator > 0:
-            raise STLParseException('The STL operator bound must be a multiple of the sampling period')
-
-        out = int(out / self.spec.sampling_period)
-
-        return out
-
-    def visitIntervalFloatTimeLiteral(self, ctx):
-        text = ctx.literal().getText()
-        out = Fraction(Decimal(text))
+        out = Fraction(Decimal(val))
 
         if ctx.unit() == None:
             # default time unit is seconds - conversion of the bound to ps
@@ -212,7 +194,3 @@ class STLSpecificationParser(LTLSpecificationParser, StlParserVisitor):
             return self.comp_op_mod.StlComparisonOperator.EQUAL
         else:
             return self.comp_op_mod.StlComparisonOperator.NEQ
-
-
-
-

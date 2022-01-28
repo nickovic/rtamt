@@ -8,7 +8,7 @@ Created on Tue Jul 23 21:38:29 2019
 from rtamt.ast.parser.stl.specification_parser import STLSpecificationParser
 
 class STLDenseTimeSpecificationParser(STLSpecificationParser):
-    
+
     def __init__(self, spec):
         super(STLDenseTimeSpecificationParser, self).__init__(spec)
 

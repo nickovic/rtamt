@@ -4,23 +4,20 @@ Created on Tue Jul 23 21:38:29 2019
 
 @author: NickovicD
 """
+from decimal import Decimal
+from fractions import Fraction
 
 from rtamt.ast.parser.stl.specification_parser import STLSpecificationParser
+from rtamt.exception.stl.exception import STLParseException
 
 class STLDenseTimeSpecificationParser(STLSpecificationParser):
 
     def __init__(self, spec):
         super(STLDenseTimeSpecificationParser, self).__init__(spec)
 
-    def visitConstantTimeLiteral(self, ctx):
-        const_name = ctx.Identifier().getText()
-
-        if const_name not in self.spec.const_val_dict:
-            raise STLParseException('Bound {} not declared'.format(const_name))
-
-        val = self.spec.const_val_dict[const_name]
-
-        out = Fraction(Decimal(val))
+    def visitIntervalTimeLiteral(self, ctx):
+        text = ctx.literal().getText()
+        out = Fraction(Decimal(text))
 
         if ctx.unit() == None:
             # default time unit is seconds - conversion of the bound to ps
