@@ -1,9 +1,10 @@
-from abc import ABCMeta, abstractmethod
+from abc import ABCMeta
 import logging
 
 from antlr4 import *
 from antlr4.InputStream import InputStream
 
+from rtamt.exception.exception import AstParseException
 
 class AbstractAst:
     """An abstract class for AST parser
@@ -86,8 +87,7 @@ class AbstractAst:
 
     def parse(self):
         if self.spec is None:
-            #TODO we need to consider exception structure.
-            raise STLParseException('STL specification if empty')
+            raise AstParseException('STL specification if empty')
 
         #TODO How to handle sub-formulas?
         entire_spec = self.modular_spec + self.spec
@@ -175,8 +175,7 @@ class AbstractAst:
                 class_ = getattr(var_module, var_type)
                 var = class_()
             except KeyError:
-                #TODO we need to consider exception structure.
-                raise STLParseException('The type {} does not seem to be imported.'.format(var_type))
+                raise AstParseException('The type {} does not seem to be imported.'.format(var_type))
         return var
 
     def declare_var(self, var_name, var_type):
@@ -201,8 +200,7 @@ class AbstractAst:
 
     def declare_const(self, const_name, const_type, const_val):
         if const_name in self.vars:
-            #TODO we need to consider exception structure.
-            raise STLParseException('Constant {} already declared'.format(const_name))
+            raise AstParseException('Constant {} already declared'.format(const_name))
 
         self.const_type_dict[const_name] = const_type
         self.const_val_dict[const_name] = const_val
