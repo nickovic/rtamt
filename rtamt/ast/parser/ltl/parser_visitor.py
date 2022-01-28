@@ -34,7 +34,7 @@ from rtamt.node.ltl.fall import Fall
 from rtamt.node.ltl.rise import Rise
 from rtamt.node.ltl.constant import Constant
 
-from rtamt.exception.stl.exception import STLParseException
+from rtamt.exception.ltl.exception import LTLParseException
 
 
 class LtlAstParserVisitor(LtlParserVisitor):
@@ -69,18 +69,18 @@ class LtlAstParserVisitor(LtlParserVisitor):
                 var = self.create_var_from_name(id_head)
                 if (not id_tail):
                     if (not isinstance(var, (int, float))):
-                        raise STLParseException('Variable {} is not of type int or float'.format(id))
+                        raise LTLParseException('Variable {} is not of type int or float'.format(id))
                 else:
                     try:
                         value = operator.attrgetter(id_tail)(var)
                         if (not isinstance(value, (int, float))):
-                            raise STLParseException(
+                            raise LTLParseException(
                                 'The field {0} of the variable {1} is not of type int or float'.format(id, id_head))
                     except AttributeError as err:
-                        raise STLParseException(err)
+                        raise LTLParseException(err)
             except KeyError:
                 if id_tail:
-                    raise STLParseException('{0} refers to undeclared variable {1} of unknown type'.format(id, id_head))
+                    raise LTLParseException('{0} refers to undeclared variable {1} of unknown type'.format(id, id_head))
                 else:
                     var = float()
                     self.var_object_dict[id] = var
@@ -337,18 +337,18 @@ class LtlAstParserVisitor(LtlParserVisitor):
             var = self.create_var_from_name(id_head)
             if (not id_tail):
                 if (not isinstance(var, (int, float))):
-                    raise STLParseException('Variable {} is not of type int or float'.format(id))
+                    raise LTLParseException('Variable {} is not of type int or float'.format(id))
             else:
                 try:
                     value = operator.attrgetter(id_tail)(var)
                     if (not isinstance(value, (int, float))):
-                        raise STLParseException(
+                        raise LTLParseException(
                             'The field {0} of the variable {1} is not of type int or float'.format(id, id_head))
                 except AttributeError as err:
-                    raise STLParseException(err)
+                    raise LTLParseException(err)
         except KeyError:
             if id_tail:
-                raise STLParseException('{0} refers to undeclared variable {1} of unknown type'.format(id, id_head))
+                raise LTLParseException('{0} refers to undeclared variable {1} of unknown type'.format(id, id_head))
             else:
                 var = float()
                 self.var_object_dict[id] = var
