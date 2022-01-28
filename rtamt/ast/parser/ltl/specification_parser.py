@@ -1,6 +1,6 @@
 from rtamt.parser.ltl.LtlLexer import LtlLexer
 from rtamt.parser.ltl.LtlParser import LtlParser
-from rtamt.ast.parser.ltl.paser_visitor import LtlAstParserVisitor
+from rtamt.ast.parser.ltl.parser_visitor import LtlAstParserVisitor
 from rtamt.exception.ltl.exception import LTLParseException
 
 from rtamt.ast.parser.abstract_ast_parser import ast_factory
