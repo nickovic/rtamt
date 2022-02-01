@@ -3,6 +3,7 @@ import logging
 
 from antlr4 import *
 from antlr4.InputStream import InputStream
+from antlr4.error.ErrorListener import ErrorListener
 
 from rtamt.exception.exception import AstParseException
 
@@ -40,13 +41,13 @@ class AbstractAst:
 
     __metaclass__ = ABCMeta
 
-    def __init__(self, antrlLexerType, antrlParserType, parseExceptionType = None):
+    def __init__(self, antrlLexerType, antrlParserType, parserErrorListenerType = None):
 
         # Class of lexser, parser, paserVisitor
         #TODO we need class check which inherits expected abstrauct class.
         self.antrlLexerType = antrlLexerType
         self.antrlParserType = antrlParserType
-        self.parseExceptionType = parseExceptionType
+        self.parserErrorListenerType = parserErrorListenerType
 
         # Attributes
         self.name = 'Abstract Specification'
@@ -93,10 +94,16 @@ class AbstractAst:
         entire_spec = self.modular_spec + self.spec
         input_stream = InputStream(entire_spec)
         lexer = self.antrlLexerType(input_stream)
+        if not isinstance(lexer, Lexer):
+            raise AstParseException('{} is not ANTRL4 Lexer'.format(lexer.__class__.__name__))
         stream = CommonTokenStream(lexer)
         parser = self.antrlParserType(stream)
-        if self.parseExceptionType != None:
-            parser._listeners = [self.parseExceptionType()]
+        if not isinstance(parser, Parser):
+            raise AstParseException('{} is not ANTRL4 Parser'.format(parser.__class__.__name__))
+        if self.parserErrorListenerType != None:
+            parser._listeners = [self.parserErrorListenerType()]
+            if not isinstance(parser._listeners[0], ErrorListener):
+                raise AstParseException('{} is not ANTRL4 ErrorListener'.format(parser._listeners[0].__class__.__name__))
         ctx = parser.specification_file()
         self.ast = self.visit(ctx.specification())
 
@@ -208,6 +215,6 @@ class AbstractAst:
 
 def ast_factory(AstParserVisitor):
     class Ast(AbstractAst, AstParserVisitor):
-        def __init__(self, antrlLexerType, antrlParserType, parseExceptionType=None):
-            super(Ast, self).__init__(antrlLexerType, antrlParserType, parseExceptionType)
+        def __init__(self, antrlLexerType, antrlParserType, parserErrorListenerType=None):
+            super(Ast, self).__init__(antrlLexerType, antrlParserType, parserErrorListenerType)
     return Ast
