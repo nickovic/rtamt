@@ -4,7 +4,7 @@ class Variable(LeafNode):
     """A class for storing STL real-valued Variable nodes
             Inherits Node
         """
-    def __init__(self, var, field, iotype):
+    def __init__(self, var, field=None, iotype='output'):
         """Constructor for Variable node
 
         Parameters:
