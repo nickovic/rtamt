@@ -19,7 +19,7 @@ class TestAstParsing(unittest.TestCase):
         ast.parse()
 
         abstractAstVisitor = AbstractAstVisitor()
-        abstractAstVisitor.visit(ast.ast)
+        abstractAstVisitor.visit(ast)
 
     def test_stl_discrete_time_parse(self):
         ast = stlDiscreteTimeAst()
