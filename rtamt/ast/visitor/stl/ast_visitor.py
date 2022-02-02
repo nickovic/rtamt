@@ -251,7 +251,3 @@ class STLASTVisitor:
     @abstractmethod
     def visitTimedUntil(self, element, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
-
-    @abstractmethod
-    def visitDefault(self, element, args):
-        raise NotImplementedError(NOT_IMPLEMENTED)

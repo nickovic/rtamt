@@ -1,6 +1,7 @@
 from abc import ABCMeta, abstractmethod
 
 from rtamt.ast.visitor.abstract_ast_visitor import AbstractAstVisitor
+from rtamt.exception.ltl.exception import LTLAstVisitorException
 
 from rtamt.node.arithmetic.abs import Abs
 from rtamt.node.arithmetic.exp import Exp
@@ -95,7 +96,7 @@ class LtlAstVisitor(AbstractAstVisitor):
         elif isinstance(node, Next):
             sample_return = self.visitNext(node, *args, **kwargs)
         else:
-            sample_return = self.visitDefault(node, *args, **kwargs)
+            raise LTLAstVisitorException('Undefined LTL pridicate')
 
         return sample_return
 
@@ -194,8 +195,4 @@ class LtlAstVisitor(AbstractAstVisitor):
 
     @abstractmethod
     def visitNext(self, node, *args, **kwargs):
-        raise NotImplementedError(NOT_IMPLEMENTED)
-
-    @abstractmethod
-    def visitDefault(self, node, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)

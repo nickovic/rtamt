@@ -95,6 +95,3 @@ class PrintNameLtlAstVisitor(LtlAstVisitor):
 
     def visitTimedUntil(self, node, *args, **kwargs):
         print(node.name)
-
-    def visitDefault(self, node, *args, **kwargs):
-        pass
