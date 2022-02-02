@@ -30,7 +30,9 @@ class AbstractAstVisitor(object):
             raise AstVisitorException('{} is not RTAMT AST node'.format(node.__class__.__name__))
 
     def visit(self, ast, *args, **kwargs):
-        return self.visitAbstractAstChildren(ast.ast, *args, **kwargs)
+        self.ast = ast
+        sample_return = self.visitAbstractAstChildren(self.ast.ast, *args, **kwargs)
+        return sample_return, self.ast
 
     @abstractmethod
     def visitSpecific(self, node, *args, **kwargs):
