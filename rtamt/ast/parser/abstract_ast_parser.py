@@ -213,7 +213,10 @@ class AbstractAst:
         self.const_val_dict[const_name] = const_val
         self.vars.add(const_name)
 
+
 def ast_factory(AstParserVisitor):
+    if not issubclass(AstParserVisitor, ParseTreeVisitor):  # type check
+            raise AstParseException('{} is not RTAMT perser visitor'.format(AstParserVisitor.__name__))
     class Ast(AbstractAst, AstParserVisitor):
         def __init__(self, antrlLexerType, antrlParserType, parserErrorListenerType=None):
             super(Ast, self).__init__(antrlLexerType, antrlParserType, parserErrorListenerType)
