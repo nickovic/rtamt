@@ -14,19 +14,16 @@ class AbstractAstVisitor(object):
         if isinstance(node, UnaryNode):
             sample_from_child = self.visitAbstractAstChildren(node.children[0])
             sample_return = self.visitSpecific(node, sample_from_child, *args, **kwargs)
-            print(node.__class__.__name__)
             sample_return = None
             return sample_return
         elif isinstance(node, BinaryNode):
             sample_from_child_left = self.visitAbstractAstChildren(node.children[0])
             sample_from_child_right = self.visitAbstractAstChildren(node.children[1])
             sample_return = self.visitSpecific(node, sample_from_child_left, sample_from_child_right, *args, **kwargs)
-            print(node.__class__.__name__)
             sample_return = None
             return sample_return
         if isinstance(node, LeafNode):
             sample_return = self.visitSpecific(node, *args, **kwargs)
-            print(node.__class__.__name__)
             sample_return = None
             return sample_return
         else:
