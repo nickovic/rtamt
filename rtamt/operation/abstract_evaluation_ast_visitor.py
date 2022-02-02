@@ -6,19 +6,14 @@ Created on Mon Sep 23 2019
 """
 from abc import ABCMeta, abstractmethod
 
-NOT_IMPLEMENTED = "You should implement this."
+from rtamt.ast.visitor.abstract_ast_visitor import AbstractAstVisitor
 
-class AbstractOperation:
+class AbstractEvluationAstVisitor(AbstractAstVisitor):
     """
     Abstract Operation: template for any monitoring operation
     """
     __metaclass__ = ABCMeta
 
     def __init__(self):
+        #TODO we may impliment something in here, otherwise it is just inheriting AbstractAstVisitor.
         pass
-
-    @abstractmethod
-    def update(self, *args, **kargs):
-        raise NotImplementedError(NOT_IMPLEMENTED)
-
-
