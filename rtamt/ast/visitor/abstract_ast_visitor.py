@@ -13,19 +13,19 @@ class AbstractAstVisitor(object):
     def visitAbstractAstChildren(self, node, *args, **kwargs):
         if isinstance(node, UnaryNode):
             sample_from_child = self.visitAbstractAstChildren(node.children[0])
-            sample_return = self.visitSpecific(sample_from_child, *args, **kwargs)
+            sample_return = self.visitSpecific(node, sample_from_child, *args, **kwargs)
             print(node.__class__.__name__)
             sample_return = None
             return sample_return
         elif isinstance(node, BinaryNode):
             sample_from_child_left = self.visitAbstractAstChildren(node.children[0])
             sample_from_child_right = self.visitAbstractAstChildren(node.children[1])
-            sample_return = self.visitSpecific(sample_from_child_left, sample_from_child_right, *args, **kwargs)
+            sample_return = self.visitSpecific(node, sample_from_child_left, sample_from_child_right, *args, **kwargs)
             print(node.__class__.__name__)
             sample_return = None
             return sample_return
         if isinstance(node, LeafNode):
-            sample_return = self.visitSpecific(*args, **kwargs)
+            sample_return = self.visitSpecific(node, *args, **kwargs)
             print(node.__class__.__name__)
             sample_return = None
             return sample_return
@@ -35,6 +35,6 @@ class AbstractAstVisitor(object):
     def visit(self, ast, *args, **kwargs):
         return self.visitAbstractAstChildren(ast.ast, *args, **kwargs)
 
-    def visitSpecific(self, *args, **kwargs):
+    def visitSpecific(self, node, *args, **kwargs):
         sample_return = None
         return sample_return
