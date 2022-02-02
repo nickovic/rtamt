@@ -75,23 +75,3 @@ class PrintNameLtlAstVisitor(LtlAstVisitor):
     def visitNext(self, node, *args, **kwargs):
         print(node.name)
 
-    def visitTimedPrecedes(self, node, *args, **kwargs):
-        print(node.name)
-
-    def visitTimedOnce(self, node, *args, **kwargs):
-        print(node.name)
-
-    def visitTimedHistorically(self, node, *args, **kwargs):
-        print(node.name)
-
-    def visitTimedSince(self, node, *args, **kwargs):
-        print(node.name)
-
-    def visitTimedAlways(self, node, *args, **kwargs):
-        print(node.name)
-
-    def visitTimedEventually(self, node, *args, **kwargs):
-        print(node.name)
-
-    def visitTimedUntil(self, node, *args, **kwargs):
-        print(node.name)
