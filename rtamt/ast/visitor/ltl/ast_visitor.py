@@ -1,4 +1,14 @@
 from abc import ABCMeta, abstractmethod
+
+from rtamt.node.arithmetic.abs import Abs
+from rtamt.node.arithmetic.exp import Exp
+from rtamt.node.arithmetic.pow import Pow
+from rtamt.node.arithmetic.sqrt import Sqrt
+from rtamt.node.arithmetic.addition import Addition
+from rtamt.node.arithmetic.subtraction import Subtraction
+from rtamt.node.arithmetic.multiplication import Multiplication
+from rtamt.node.arithmetic.division import Division
+
 from rtamt.node.ltl.predicate import Predicate
 from rtamt.node.ltl.variable import Variable
 from rtamt.node.ltl.neg import Neg
@@ -13,30 +23,17 @@ from rtamt.node.ltl.until import Until
 from rtamt.node.ltl.once import Once
 from rtamt.node.ltl.historically import Historically
 from rtamt.node.ltl.since import Since
-from rtamt.node.stl.timed_precedes import TimedPrecedes
-from rtamt.node.arithmetic.abs import Abs
-from rtamt.node.arithmetic.sqrt import Sqrt
-from rtamt.node.arithmetic.exp import Exp
-from rtamt.node.arithmetic.pow import Pow
-from rtamt.node.arithmetic.addition import Addition
-from rtamt.node.arithmetic.subtraction import Subtraction
-from rtamt.node.arithmetic.multiplication import Multiplication
-from rtamt.node.arithmetic.division import Division
 from rtamt.node.ltl.rise import Rise
 from rtamt.node.ltl.fall import Fall
 from rtamt.node.ltl.constant import Constant
 from rtamt.node.ltl.next import Next
 from rtamt.node.ltl.previous import Previous
-from rtamt.node.stl.timed_since import TimedSince
-from rtamt.node.stl.timed_once import TimedOnce
-from rtamt.node.stl.timed_historically import TimedHistorically
-from rtamt.node.stl.timed_eventually import TimedEventually
-from rtamt.node.stl.timed_always import TimedAlways
-from rtamt.node.stl.timed_until import TimedUntil
+
+from rtamt.node.stl.timed_precedes import TimedPrecedes
 
 NOT_IMPLEMENTED = "You should implement this."
 
-class STLASTVisitor:
+class LTLASTVisitor:
     __metaclass__ = ABCMeta
 
     def visit(self, element, args):
@@ -74,10 +71,10 @@ class STLASTVisitor:
             ast = self.visitAbs(element, args)
         elif isinstance(element, Sqrt):
             ast = self.visitSqrt(element, args)
-        elif isinstance(element, Pow):
-            ast = self.visitPow(element, args)
         elif isinstance(element, Exp):
             ast = self.visitExp(element, args)
+        elif isinstance(element, Pow):
+            ast = self.visitPow(element, args)
         elif isinstance(element, Addition):
             ast = self.visitAddition(element, args)
         elif isinstance(element, Subtraction):
@@ -96,18 +93,6 @@ class STLASTVisitor:
             ast = self.visitPrevious(element, args)
         elif isinstance(element, Next):
             ast = self.visitNext(element, args)
-        elif isinstance(element, TimedUntil):
-            ast = self.visitTimedUntil(element, args)
-        elif isinstance(element, TimedAlways):
-            ast = self.visitTimedAlways(element, args)
-        elif isinstance(element, TimedEventually):
-            ast = self.visitTimedEventually(element, args)
-        elif isinstance(element, TimedSince):
-            ast = self.visitTimedSince(element, args)
-        elif isinstance(element, TimedOnce):
-            ast = self.visitTimedOnce(element, args)
-        elif isinstance(element, TimedHistorically):
-            ast = self.visitTimedHistorically(element, args)
         else:
             ast = self.visitDefault(element, args)
         return ast
@@ -123,18 +108,6 @@ class STLASTVisitor:
 
     @abstractmethod
     def visitAbs(self, element, args):
-        raise NotImplementedError(NOT_IMPLEMENTED)
-
-    @abstractmethod
-    def visitSqrt(self, element, args):
-        raise NotImplementedError(NOT_IMPLEMENTED)
-
-    @abstractmethod
-    def visitPow(self, element, args):
-        raise NotImplementedError(NOT_IMPLEMENTED)
-
-    @abstractmethod
-    def visitExp(self, element, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
@@ -219,34 +192,6 @@ class STLASTVisitor:
 
     @abstractmethod
     def visitNext(self, element, args):
-        raise NotImplementedError(NOT_IMPLEMENTED)
-
-    @abstractmethod
-    def visitTimedPrecedes(self, element, args):
-        raise NotImplementedError(NOT_IMPLEMENTED)
-
-    @abstractmethod
-    def visitTimedOnce(self, element, args):
-        raise NotImplementedError(NOT_IMPLEMENTED)
-
-    @abstractmethod
-    def visitTimedHistorically(self, element, args):
-        raise NotImplementedError(NOT_IMPLEMENTED)
-
-    @abstractmethod
-    def visitTimedSince(self, element, args):
-        raise NotImplementedError(NOT_IMPLEMENTED)
-
-    @abstractmethod
-    def visitTimedAlways(self, element, args):
-        raise NotImplementedError(NOT_IMPLEMENTED)
-
-    @abstractmethod
-    def visitTimedEventually(self, element, args):
-        raise NotImplementedError(NOT_IMPLEMENTED)
-
-    @abstractmethod
-    def visitTimedUntil(self, element, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
