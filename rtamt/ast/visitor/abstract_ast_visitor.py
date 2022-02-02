@@ -30,7 +30,7 @@ class AbstractAstVisitor(object):
             sample_return = None
             return sample_return
         else:
-            raise AstVisitorException('{} is not ANTRL4 AST node'.format(node.__class__.__name__))
+            raise AstVisitorException('{} is not RTAMT AST node'.format(node.__class__.__name__))
 
     def visit(self, ast, *args, **kwargs):
         return self.visitAbstractAstChildren(ast.ast, *args, **kwargs)
