@@ -9,7 +9,6 @@ from rtamt.node.stl.timed_eventually import TimedEventually
 from rtamt.node.stl.timed_always import TimedAlways
 from rtamt.node.stl.timed_until import TimedUntil
 
-NOT_IMPLEMENTED = "You should implement this."
 
 class StlAstVisitor(LtlAstVisitor):
 
@@ -33,28 +32,28 @@ class StlAstVisitor(LtlAstVisitor):
 
     @abstractmethod
     def visitTimedPrecedes(self, node, *args, **kwargs):
-        raise NotImplementedError(NOT_IMPLEMENTED)
+        raise NotImplementedError(self.NOT_IMPLEMENTED)
 
     @abstractmethod
     def visitTimedOnce(self, node, *args, **kwargs):
-        raise NotImplementedError(NOT_IMPLEMENTED)
+        raise NotImplementedError(self.NOT_IMPLEMENTED)
 
     @abstractmethod
     def visitTimedHistorically(self, node, *args, **kwargs):
-        raise NotImplementedError(NOT_IMPLEMENTED)
+        raise NotImplementedError(self.NOT_IMPLEMENTED)
 
     @abstractmethod
     def visitTimedSince(self, node, *args, **kwargs):
-        raise NotImplementedError(NOT_IMPLEMENTED)
+        raise NotImplementedError(self.NOT_IMPLEMENTED)
 
     @abstractmethod
     def visitTimedAlways(self, node, *args, **kwargs):
-        raise NotImplementedError(NOT_IMPLEMENTED)
+        raise NotImplementedError(self.NOT_IMPLEMENTED)
 
     @abstractmethod
     def visitTimedEventually(self, node, *args, **kwargs):
-        raise NotImplementedError(NOT_IMPLEMENTED)
+        raise NotImplementedError(self.NOT_IMPLEMENTED)
 
     @abstractmethod
     def visitTimedUntil(self, node, *args, **kwargs):
-        raise NotImplementedError(NOT_IMPLEMENTED)
+        raise NotImplementedError(self.NOT_IMPLEMENTED)

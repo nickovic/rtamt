@@ -34,7 +34,6 @@ from rtamt.node.ltl.previous import Previous
 
 from rtamt.node.stl.timed_precedes import TimedPrecedes
 
-NOT_IMPLEMENTED = "You should implement this."
 
 class LtlAstVisitor(AbstractAstVisitor):
 
@@ -103,96 +102,96 @@ class LtlAstVisitor(AbstractAstVisitor):
 
     @abstractmethod
     def visitPredicate(self, node, *args, **kwargs):
-        raise NotImplementedError(NOT_IMPLEMENTED)
+        raise NotImplementedError(self.NOT_IMPLEMENTED)
 
     @abstractmethod
     def visitVariable(self, node, *args, **kwargs):
-        raise NotImplementedError(NOT_IMPLEMENTED)
+        raise NotImplementedError(self.NOT_IMPLEMENTED)
 
     @abstractmethod
     def visitAbs(self, node, *args, **kwargs):
-        raise NotImplementedError(NOT_IMPLEMENTED)
+        raise NotImplementedError(self.NOT_IMPLEMENTED)
 
     @abstractmethod
     def visitAddition(self, node, *args, **kwargs):
-        raise NotImplementedError(NOT_IMPLEMENTED)
+        raise NotImplementedError(self.NOT_IMPLEMENTED)
 
     @abstractmethod
     def visitSubtraction(self, node, *args, **kwargs):
-        raise NotImplementedError(NOT_IMPLEMENTED)
+        raise NotImplementedError(self.NOT_IMPLEMENTED)
 
     @abstractmethod
     def visitMultiplication(self, node, *args, **kwargs):
-        raise NotImplementedError(NOT_IMPLEMENTED)
+        raise NotImplementedError(self.NOT_IMPLEMENTED)
 
     @abstractmethod
     def visitDivision(self, node, *args, **kwargs):
-        raise NotImplementedError(NOT_IMPLEMENTED)
+        raise NotImplementedError(self.NOT_IMPLEMENTED)
 
     @abstractmethod
     def visitNot(self, node, *args, **kwargs):
-        raise NotImplementedError(NOT_IMPLEMENTED)
+        raise NotImplementedError(self.NOT_IMPLEMENTED)
 
     @abstractmethod
     def visitAnd(self, node, *args, **kwargs):
-        raise NotImplementedError(NOT_IMPLEMENTED)
+        raise NotImplementedError(self.NOT_IMPLEMENTED)
 
     @abstractmethod
     def visitOr(self, node, *args, **kwargs):
-        raise NotImplementedError(NOT_IMPLEMENTED)
+        raise NotImplementedError(self.NOT_IMPLEMENTED)
 
     @abstractmethod
     def visitImplies(self, node, *args, **kwargs):
-        raise NotImplementedError(NOT_IMPLEMENTED)
+        raise NotImplementedError(self.NOT_IMPLEMENTED)
 
     @abstractmethod
     def visitIff(self, node, *args, **kwargs):
-        raise NotImplementedError(NOT_IMPLEMENTED)
+        raise NotImplementedError(self.NOT_IMPLEMENTED)
 
     @abstractmethod
     def visitXor(self, node, *args, **kwargs):
-        raise NotImplementedError(NOT_IMPLEMENTED)
+        raise NotImplementedError(self.NOT_IMPLEMENTED)
 
     @abstractmethod
     def visitEventually(self, node, *args, **kwargs):
-        raise NotImplementedError(NOT_IMPLEMENTED)
+        raise NotImplementedError(self.NOT_IMPLEMENTED)
 
     @abstractmethod
     def visitAlways(self, node, *args, **kwargs):
-        raise NotImplementedError(NOT_IMPLEMENTED)
+        raise NotImplementedError(self.NOT_IMPLEMENTED)
 
     @abstractmethod
     def visitUntil(self, node, *args, **kwargs):
-        raise NotImplementedError(NOT_IMPLEMENTED)
+        raise NotImplementedError(self.NOT_IMPLEMENTED)
 
     @abstractmethod
     def visitOnce(self, node, *args, **kwargs):
-        raise NotImplementedError(NOT_IMPLEMENTED)
+        raise NotImplementedError(self.NOT_IMPLEMENTED)
 
     @abstractmethod
     def visitHistorically(self, node, *args, **kwargs):
-        raise NotImplementedError(NOT_IMPLEMENTED)
+        raise NotImplementedError(self.NOT_IMPLEMENTED)
 
     @abstractmethod
     def visitSince(self, node, *args, **kwargs):
-        raise NotImplementedError(NOT_IMPLEMENTED)
+        raise NotImplementedError(self.NOT_IMPLEMENTED)
 
     @abstractmethod
     def visitRise(self, node, *args, **kwargs):
-        raise NotImplementedError(NOT_IMPLEMENTED)
+        raise NotImplementedError(self.NOT_IMPLEMENTED)
 
     @abstractmethod
     def visitFall(self, node, *args, **kwargs):
-        raise NotImplementedError(NOT_IMPLEMENTED)
+        raise NotImplementedError(self.NOT_IMPLEMENTED)
 
     @abstractmethod
     def visitConstant(self, node, *args, **kwargs):
-        raise NotImplementedError(NOT_IMPLEMENTED)
+        raise NotImplementedError(self.NOT_IMPLEMENTED)
 
     @abstractmethod
     def visitPrevious(self, node, *args, **kwargs):
-        raise NotImplementedError(NOT_IMPLEMENTED)
+        raise NotImplementedError(self.NOT_IMPLEMENTED)
 
     @abstractmethod
     def visitNext(self, node, *args, **kwargs):
-        raise NotImplementedError(NOT_IMPLEMENTED)
+        raise NotImplementedError(self.NOT_IMPLEMENTED)

@@ -10,6 +10,8 @@ from rtamt.exception.exception import AstVisitorException
 class AbstractAstVisitor(object):
     __metaclass__ = ABCMeta
 
+    NOT_IMPLEMENTED = "You should implement this."
+
     def visitAbstractAstChildren(self, node, *args, **kwargs):
         if isinstance(node, UnaryNode):
             sample_from_child = self.visitAbstractAstChildren(node.children[0])
