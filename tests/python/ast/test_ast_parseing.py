@@ -32,7 +32,7 @@ class TestAstParsing(unittest.TestCase):
         sample_return, ast = printNameStlAstVisitor.visit(ast)
 
 
-    def test_stl_discrete_time_parse(self):
+    def test_stl_dense_time_parse(self):
         ast = stlDenseTimeAst()
         ast.declare_var('a', 'float')
         ast.spec = 'always(a>=2)'
