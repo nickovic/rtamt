@@ -1,4 +1,4 @@
-from abc import ABCMeta, abstractmethod
+from abc import abstractmethod
 
 from rtamt.ast.visitor.abstract_ast_visitor import AbstractAstVisitor
 from rtamt.exception.ltl.exception import LTLAstVisitorException
