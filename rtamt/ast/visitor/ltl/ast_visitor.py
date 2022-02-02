@@ -1,5 +1,7 @@
 from abc import ABCMeta, abstractmethod
 
+from rtamt.ast.visitor.abstract_ast_visitor import AbstractAstVisitor
+
 from rtamt.node.arithmetic.abs import Abs
 from rtamt.node.arithmetic.exp import Exp
 from rtamt.node.arithmetic.pow import Pow
@@ -33,167 +35,167 @@ from rtamt.node.stl.timed_precedes import TimedPrecedes
 
 NOT_IMPLEMENTED = "You should implement this."
 
-class LTLASTVisitor:
-    __metaclass__ = ABCMeta
+class LtlAstVisitor(AbstractAstVisitor):
 
-    def visit(self, element, args):
-        if isinstance(element, Predicate):
-            ast = self.visitPredicate(element, args)
-        elif isinstance(element, Variable):
-            ast = self.visitVariable(element, args)
-        elif isinstance(element, Neg):
-            ast = self.visitNot(element, args)
-        elif isinstance(element, Disjunction):
-            ast = self.visitOr(element, args)
-        elif isinstance(element, Conjunction):
-            ast = self.visitAnd(element, args)
-        elif isinstance(element, Implies):
-            ast = self.visitImplies(element, args)
-        elif isinstance(element, Iff):
-            ast = self.visitIff(element, args)
-        elif isinstance(element, Xor):
-            ast = self.visitXor(element, args)
-        elif isinstance(element, Eventually):
-            ast = self.visitEventually(element, args)
-        elif isinstance(element, Always):
-            ast = self.visitAlways(element, args)
-        elif isinstance(element, Until):
-            ast = self.visitUntil(element, args)
-        elif isinstance(element, Once):
-            ast = self.visitOnce(element, args)
-        elif isinstance(element, Historically):
-            ast = self.visitHistorically(element, args)
-        elif isinstance(element, Since):
-            ast = self.visitSince(element, args)
-        elif isinstance(element, TimedPrecedes):
-            ast = self.visitTimedPrecedes(element, args)
-        elif isinstance(element, Abs):
-            ast = self.visitAbs(element, args)
-        elif isinstance(element, Sqrt):
-            ast = self.visitSqrt(element, args)
-        elif isinstance(element, Exp):
-            ast = self.visitExp(element, args)
-        elif isinstance(element, Pow):
-            ast = self.visitPow(element, args)
-        elif isinstance(element, Addition):
-            ast = self.visitAddition(element, args)
-        elif isinstance(element, Subtraction):
-            ast = self.visitSubtraction(element, args)
-        elif isinstance(element, Multiplication):
-            ast = self.visitMultiplication(element, args)
-        elif isinstance(element, Division):
-            ast = self.visitDivision(element, args)
-        elif isinstance(element, Rise):
-            ast = self.visitRise(element, args)
-        elif isinstance(element, Fall):
-            ast = self.visitFall(element, args)
-        elif isinstance(element, Constant):
-            ast = self.visitConstant(element, args)
-        elif isinstance(element, Previous):
-            ast = self.visitPrevious(element, args)
-        elif isinstance(element, Next):
-            ast = self.visitNext(element, args)
+    def visitSpecific(self, node, *args, **kwargs):
+        if isinstance(node, Predicate):
+            sample_return = self.visitPredicate(*args, **kwargs)
+        elif isinstance(node, Variable):
+            sample_return = self.visitVariable(*args, **kwargs)
+        elif isinstance(node, Neg):
+            sample_return = self.visitNot(*args, **kwargs)
+        elif isinstance(node, Disjunction):
+            sample_return = self.visitOr(*args, **kwargs)
+        elif isinstance(node, Conjunction):
+            sample_return = self.visitAnd(*args, **kwargs)
+        elif isinstance(node, Implies):
+            sample_return = self.visitImplies(*args, **kwargs)
+        elif isinstance(node, Iff):
+            sample_return = self.visitIff(*args, **kwargs)
+        elif isinstance(node, Xor):
+            sample_return = self.visitXor(*args, **kwargs)
+        elif isinstance(node, Eventually):
+            sample_return = self.visitEventually(*args, **kwargs)
+        elif isinstance(node, Always):
+            sample_return = self.visitAlways(*args, **kwargs)
+        elif isinstance(node, Until):
+            sample_return = self.visitUntil(*args, **kwargs)
+        elif isinstance(node, Once):
+            sample_return = self.visitOnce(*args, **kwargs)
+        elif isinstance(node, Historically):
+            sample_return = self.visitHistorically(*args, **kwargs)
+        elif isinstance(node, Since):
+            sample_return = self.visitSince(*args, **kwargs)
+        elif isinstance(node, TimedPrecedes):
+            sample_return = self.visitTimedPrecedes(*args, **kwargs)
+        elif isinstance(node, Abs):
+            sample_return = self.visitAbs(*args, **kwargs)
+        elif isinstance(node, Sqrt):
+            sample_return = self.visitSqrt(*args, **kwargs)
+        elif isinstance(node, Exp):
+            sample_return = self.visitExp(*args, **kwargs)
+        elif isinstance(node, Pow):
+            sample_return = self.visitPow(*args, **kwargs)
+        elif isinstance(node, Addition):
+            sample_return = self.visitAddition(*args, **kwargs)
+        elif isinstance(node, Subtraction):
+            sample_return = self.visitSubtraction(*args, **kwargs)
+        elif isinstance(node, Multiplication):
+            sample_return = self.visitMultiplication(*args, **kwargs)
+        elif isinstance(node, Division):
+            sample_return = self.visitDivision(*args, **kwargs)
+        elif isinstance(node, Rise):
+            sample_return = self.visitRise(*args, **kwargs)
+        elif isinstance(node, Fall):
+            sample_return = self.visitFall(*args, **kwargs)
+        elif isinstance(node, Constant):
+            sample_return = self.visitConstant(*args, **kwargs)
+        elif isinstance(node, Previous):
+            sample_return = self.visitPrevious(*args, **kwargs)
+        elif isinstance(node, Next):
+            sample_return = self.visitNext(*args, **kwargs)
         else:
-            ast = self.visitDefault(element, args)
-        return ast
+            sample_return = self.visitDefault(*args, **kwargs)
+
+        return sample_return
 
 
     @abstractmethod
-    def visitPredicate(self, element, args):
+    def visitPredicate(self, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitVariable(self, element, args):
+    def visitVariable(self, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitAbs(self, element, args):
+    def visitAbs(self, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitAddition(self, element, args):
+    def visitAddition(self, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitSubtraction(self, element, args):
+    def visitSubtraction(self, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitMultiplication(self, element, args):
+    def visitMultiplication(self, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitDivision(self, element, args):
+    def visitDivision(self, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitNot(self, element, args):
+    def visitNot(self, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitAnd(self, element, args):
+    def visitAnd(self, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitOr(self, element, args):
+    def visitOr(self, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitImplies(self, element, args):
+    def visitImplies(self, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitIff(self, element, args):
+    def visitIff(self, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitXor(self, element, args):
+    def visitXor(self, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitEventually(self, element, args):
+    def visitEventually(self, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitAlways(self, element, args):
+    def visitAlways(self, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitUntil(self, element, args):
+    def visitUntil(self, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitOnce(self, element, args):
+    def visitOnce(self, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitHistorically(self, element, args):
+    def visitHistorically(self, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitSince(self, element, args):
+    def visitSince(self, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitRise(self, element, args):
+    def visitRise(self, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitFall(self, element, args):
+    def visitFall(self, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitConstant(self, element, args):
+    def visitConstant(self, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitPrevious(self, element, args):
+    def visitPrevious(self, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitNext(self, element, args):
+    def visitNext(self, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitDefault(self, element, args):
+    def visitDefault(self, *args, **kwargs):
         raise NotImplementedError(NOT_IMPLEMENTED)

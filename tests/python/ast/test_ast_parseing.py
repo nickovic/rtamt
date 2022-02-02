@@ -4,7 +4,7 @@ from rtamt.ast.parser.ltl.specification_parser import LtlAst
 from rtamt.ast.parser.stl.discrete_time.specification_parser import stlDiscreteTimeAst
 from rtamt.ast.parser.stl.dense_time.specification_parser import stlDenseTimeAst
 
-from rtamt.ast.visitor.abstract_ast_visitor import AbstractAstVisitor
+from rtamt.ast.visitor.ltl.ast_visitor import LtlAstVisitor
 
 
 class TestAstParsing(unittest.TestCase):
@@ -18,8 +18,8 @@ class TestAstParsing(unittest.TestCase):
         ast.spec = 'always(a>=2)'
         ast.parse()
 
-        abstractAstVisitor = AbstractAstVisitor()
-        abstractAstVisitor.visit(ast)
+        ltlAstVisitor = LtlAstVisitor()
+        ltlAstVisitor.visit(ast)
 
     def test_stl_discrete_time_parse(self):
         ast = stlDiscreteTimeAst()
