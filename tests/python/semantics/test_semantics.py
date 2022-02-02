@@ -4,6 +4,7 @@ from rtamt.ast.parser.ltl.specification_parser import LtlAst
 from rtamt.ast.parser.stl.discrete_time.specification_parser import stlDiscreteTimeAst
 from rtamt.ast.parser.stl.dense_time.specification_parser import stlDenseTimeAst
 
+from rtamt.operation.abstract_offline_ast_visitor import offline_ast_visitor_factory
 from rtamt.operation.stl.discrete_time.offline.ast_visitor import StlOfflineAstVisitor
 
 
@@ -19,7 +20,7 @@ class TestSemantics(unittest.TestCase):
         ast.spec = 'always(a>=2)'
         ast.parse()
 
-        stlOfflineAstVisitor = StlOfflineAstVisitor()
+        stlOfflineAstVisitor = offline_ast_visitor_factory(StlOfflineAstVisitor)()
         sample_return, ast = stlOfflineAstVisitor.eval(ast)
 
 

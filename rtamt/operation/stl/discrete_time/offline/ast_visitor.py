@@ -2,7 +2,7 @@ from rtamt.ast.visitor.stl.ast_visitor import StlAstVisitor
 from rtamt.operation.abstract_offline_ast_visitor import offline_ast_visitor_factory
 
 
-class StlOfflineAstVisitorTemp(StlAstVisitor):
+class StlOfflineAstVisitor(StlAstVisitor):
 
     def visitPredicate(self, node, *args, **kwargs):
         print(node.name)
@@ -96,8 +96,3 @@ class StlOfflineAstVisitorTemp(StlAstVisitor):
 
     def visitTimedUntil(self, node, *args, **kwargs):
         print(node.name)
-
-
-def StlOfflineAstVisitor():
-    stlOfflineAstVisitor = offline_ast_visitor_factory(StlOfflineAstVisitorTemp)()
-    return stlOfflineAstVisitor
