@@ -1,10 +1,10 @@
 from rtamt.node.leaf_node import LeafNode
-
+from rtamt.enumerations.io_type import StlIOType
 class Variable(LeafNode):
     """A class for storing STL real-valued Variable nodes
             Inherits Node
         """
-    def __init__(self, var, field, iotype):
+    def __init__(self, var, field='', iotype=StlIOType.UNDEFINED):
         """Constructor for Variable node
 
         Parameters:
