@@ -1,4 +1,4 @@
-from abc import ABCMeta
+from abc import ABCMeta, abstractmethod
 
 from rtamt.node.unary_node import UnaryNode
 from rtamt.node.binary_node import BinaryNode
@@ -32,6 +32,7 @@ class AbstractAstVisitor(object):
     def visit(self, ast, *args, **kwargs):
         return self.visitAbstractAstChildren(ast.ast, *args, **kwargs)
 
+    @abstractmethod
     def visitSpecific(self, node, *args, **kwargs):
         sample_return = None
         return sample_return
