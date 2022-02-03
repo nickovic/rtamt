@@ -14,4 +14,3 @@ class DivisionOperation(AbstractOperation):
             out_sample = left[i] / right[i]
             out.append(out_sample)
         return out
-        return out
