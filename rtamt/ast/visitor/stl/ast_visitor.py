@@ -35,25 +35,25 @@ class StlAstVisitor(LtlAstVisitor):
         raise NotImplementedError(self.NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitTimedOnce(self, node, *args, **kwargs):
+    def visitTimedOnce(self, node, sample, *args, **kwargs):
         raise NotImplementedError(self.NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitTimedHistorically(self, node, *args, **kwargs):
+    def visitTimedHistorically(self, node, sample, *args, **kwargs):
         raise NotImplementedError(self.NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitTimedSince(self, node, *args, **kwargs):
+    def visitTimedSince(self, node, sample_left, sample_right, *args, **kwargs):
         raise NotImplementedError(self.NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitTimedAlways(self, node, *args, **kwargs):
+    def visitTimedAlways(self, node, sample, *args, **kwargs):
         raise NotImplementedError(self.NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitTimedEventually(self, node, *args, **kwargs):
+    def visitTimedEventually(self, node, sample, *args, **kwargs):
         raise NotImplementedError(self.NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitTimedUntil(self, node, *args, **kwargs):
+    def visitTimedUntil(self, node, sample_left, sample_right, *args, **kwargs):
         raise NotImplementedError(self.NOT_IMPLEMENTED)
