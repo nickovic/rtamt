@@ -82,7 +82,6 @@ class LTLPrintNameVisitor(LTLASTVisitor):
         op1 = self.visit(element.children[0], args)
         op2 = self.visit(element.children[1], args)
         return '(' + op1 + ')' + 'iff' + '(' + op2 + ')'
-        return node
 
     def visitXor(self, element, args):
         op1 = self.visit(element.children[0], args)

@@ -9,6 +9,7 @@ class TestAstParsing(unittest.TestCase):
     def __init__(self, *args, **kwargs):
         super(TestAstParsing, self).__init__(*args, **kwargs)
 
+
     def test_ltl_parse(self):
         ast = LtlAst()
         ast.declare_var('a', 'float')
