@@ -11,7 +11,7 @@ class StlDiscreteTimeAstParserVisitor(StlAstParserVisitor):
         out = Fraction(Decimal(text))
 
         if ctx.unit() == None:
-            # default time unit is seconds - conversion of the bound to ps
+            # default time unit is seconds - conversion of the bound to ns
             unit = self.spec.unit
         else:
             unit = ctx.unit().getText()

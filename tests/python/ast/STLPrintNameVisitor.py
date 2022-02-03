@@ -83,7 +83,6 @@ class STLPrintNameVisitor(STLASTVisitor, LTLPrintNameVisitor):
         op1 = self.visit(element.children[0], args)
         op2 = self.visit(element.children[1], args)
         return '(' + op1 + ')' + 'iff' + '(' + op2 + ')'
-        return node
 
     def visitXor(self, element, args):
         op1 = self.visit(element.children[0], args)
@@ -92,7 +91,7 @@ class STLPrintNameVisitor(STLASTVisitor, LTLPrintNameVisitor):
 
     def visitEventually(self, element, args):
         op = self.visit(element.children[0], args)
-        return 'ev(' + op + ')'
+        return 'eventually(' + op + ')'
 
     def visitAlways(self, element, args):
         op = self.visit(element.children[0], args)
@@ -117,7 +116,7 @@ class STLPrintNameVisitor(STLASTVisitor, LTLPrintNameVisitor):
 
     def visitHistorically(self, element, args):
         op = self.visit(element.children[0], args)
-        return 'hist(' + op + ')'
+        return 'historically(' + op + ')'
 
     def visitSince(self, element, args):
         op1 = self.visit(element.children[0], args)
@@ -133,11 +132,11 @@ class STLPrintNameVisitor(STLASTVisitor, LTLPrintNameVisitor):
 
     def visitTimedHistorically(self, element, args):
         op = self.visit(element.children[0], args)
-        return 'hist[' + str(element.begin) + ',' + str(element.end) +'](' + op + ')'
+        return 'historically[' + str(element.begin) + ',' + str(element.end) +'](' + op + ')'
 
     def visitTimedEventually(self, element, args):
         op = self.visit(element.children[0], args)
-        return 'ev[' + str(element.begin) + ',' + str(element.end) +'](' + op + ')'
+        return 'eventually[' + str(element.begin) + ',' + str(element.end) +'](' + op + ')'
 
     def visitTimedAlways(self, element, args):
         op = self.visit(element.children[0], args)

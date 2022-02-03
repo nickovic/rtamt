@@ -39,7 +39,7 @@ NOT_IMPLEMENTED = "You should implement this."
 class STLASTVisitor:
     __metaclass__ = ABCMeta
 
-    def visit(self, element, args):
+    def visit(self, element, args=None):
         if isinstance(element, Predicate):
             ast = self.visitPredicate(element, args)
         elif isinstance(element, Variable):

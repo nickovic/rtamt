@@ -90,7 +90,7 @@ class LTLPrintNameVisitor(LTLASTVisitor):
 
     def visitEventually(self, element, args):
         op = self.visit(element.children[0], args)
-        return 'ev(' + op + ')'
+        return 'eventually(' + op + ')'
 
     def visitAlways(self, element, args):
         op = self.visit(element.children[0], args)
@@ -115,7 +115,7 @@ class LTLPrintNameVisitor(LTLASTVisitor):
 
     def visitHistorically(self, element, args):
         op = self.visit(element.children[0], args)
-        return 'hist(' + op + ')'
+        return 'historically(' + op + ')'
 
     def visitSince(self, element, args):
         op1 = self.visit(element.children[0], args)
