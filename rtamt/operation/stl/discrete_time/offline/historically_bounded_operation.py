@@ -10,5 +10,3 @@ class HistoricallyBoundedOperation(AbstractOperation):
         samples = [float("inf") for j in range(self.end)] + samples
         out = [min(samples[j - self.end:j - self.begin + 1]) for j in range(self.end, len(samples))]
         return out
-
-        return out
