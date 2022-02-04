@@ -34,7 +34,7 @@ class StlOfflineAstVisitor(StlAstVisitor):
         return sample_return
 
 
-    def visitAbs(self, node, sample *args, **kwargs):
+    def visitAbs(self, node, sample, *args, **kwargs):
         sample_return = []
         for i in sample:
             out_sample = abs(i)
