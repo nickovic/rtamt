@@ -13,7 +13,7 @@ class AbstractOfflineAstVisitor(AbstractEvluationAstVisitor):
         pass
 
     def eval(self, ast, *args, **kwargs):
-        sample_return, self.ast = self.visit(ast, *args, **kwargs)
+        sample_return, self.ast = self.visitBottomUp(ast, *args, **kwargs)
         return sample_return, self.ast
 
 

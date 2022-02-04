@@ -26,7 +26,7 @@ class StlOfflineAstVisitor(StlAstVisitor):
 
 
     def visitVariable(self, node, *args, **kwargs):
-        var = self.spec.var_object_dict[node.var]
+        var = self.ast.var_object_dict[node.var]
         if node.field:
             sample_return = operator.attrgetter(node.field)(var)
         else:
@@ -184,7 +184,7 @@ class StlOfflineAstVisitor(StlAstVisitor):
 
 
     def visitConstant(self, node, *args, **kwargs):
-        return self.val #Maybe node.val
+        return node.val
 
 
     def visitPrevious(self, node, sample, *args, **kwargs):
