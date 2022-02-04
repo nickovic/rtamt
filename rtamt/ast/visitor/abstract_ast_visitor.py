@@ -14,12 +14,25 @@ class AbstractAstVisitor(object):
 
     def visitAbstractAstChildren(self, node, *args, **kwargs):
         if isinstance(node, UnaryNode):
-            sample = self.visitAbstractAstChildren(node.children[0])
+            next_node = node.children[0]
+            return [next_node]
+        elif isinstance(node, BinaryNode):
+            next_node_left = node.children[0]
+            next_node_right = node.children[1]
+            return [next_node_left, next_node_right]
+        if isinstance(node, LeafNode):
+            raise AstVisitorException('Do not call visitAbstractAst in LeafNode!')
+        else:
+            raise AstVisitorException('{} is not RTAMT AST node'.format(node.__class__.__name__))
+
+    def visitAbstractAstChildrenBottomUp(self, node, *args, **kwargs):
+        if isinstance(node, UnaryNode):
+            sample = self.visitAbstractAstChildrenBottomUp(node.children[0])
             sample_return = self.visitSpecific(node, sample, *args, **kwargs)
             return sample_return
         elif isinstance(node, BinaryNode):
-            sample_left = self.visitAbstractAstChildren(node.children[0])
-            sample_right = self.visitAbstractAstChildren(node.children[1])
+            sample_left = self.visitAbstractAstChildrenBottomUp(node.children[0])
+            sample_right = self.visitAbstractAstChildrenBottomUp(node.children[1])
             sample_return = self.visitSpecific(node, sample_left, sample_right, *args, **kwargs)
             return sample_return
         if isinstance(node, LeafNode):
@@ -28,10 +41,33 @@ class AbstractAstVisitor(object):
         else:
             raise AstVisitorException('{} is not RTAMT AST node'.format(node.__class__.__name__))
 
-    def visit(self, ast, *args, **kwargs):
+    def visitAbstractAstChildrenTopDown(self, node, *args, **kwargs):
+        if isinstance(node, UnaryNode):
+            self.visitSpecific(node, *args, **kwargs)
+            self.visitAbstractAstChildrenTopDown(node.children[0])
+        elif isinstance(node, BinaryNode):
+            self.visitSpecific(node, *args, **kwargs)
+            self.visitAbstractAstChildrenTopDown(node.children[0])
+            self.visitAbstractAstChildrenTopDown(node.children[1])
+        if isinstance(node, LeafNode):
+            self.visitSpecific(node, *args, **kwargs)
+        else:
+            raise AstVisitorException('{} is not RTAMT AST node'.format(node.__class__.__name__))
+
+    def visitManual(self, ast, *args, **kwargs):
         self.ast = ast
-        sample_return = self.visitAbstractAstChildren(self.ast.ast, *args, **kwargs)
+        self.visitAbstractAstChildren(self.ast.ast, *args, **kwargs)
+        return None, self.ast
+
+    def visitBottomUp(self, ast, *args, **kwargs):
+        self.ast = ast
+        sample_return = self.visitAbstractAstChildrenBottomUp(self.ast.ast, *args, **kwargs)
         return sample_return, self.ast
+
+    def visitTopDown(self, ast, *args, **kwargs):
+        self.ast = ast
+        self.visitAbstractAstChildrenTopDown(self.ast.ast, *args, **kwargs)
+        return None, self.ast
 
     @abstractmethod
     def visitSpecific(self, node, *args, **kwargs):

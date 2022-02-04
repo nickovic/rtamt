@@ -20,7 +20,7 @@ class TestAstParsing(unittest.TestCase):
         ast.parse()
 
         printNameLtlAstVisitor = PrintNameLtlAstVisitor()
-        sample_return, ast = printNameLtlAstVisitor.visit(ast)
+        sample_return, ast = printNameLtlAstVisitor.visitBottomUp(ast)
 
     def test_stl_discrete_time_parse(self):
         ast = stlDiscreteTimeAst()
@@ -29,7 +29,7 @@ class TestAstParsing(unittest.TestCase):
         ast.parse()
 
         printNameStlAstVisitor = PrintNameStlAstVisitor()
-        sample_return, ast = printNameStlAstVisitor.visit(ast)
+        sample_return, ast = printNameStlAstVisitor.visitBottomUp(ast)
 
 
     def test_stl_dense_time_parse(self):
@@ -39,7 +39,7 @@ class TestAstParsing(unittest.TestCase):
         ast.parse()
 
         printNameStlAstVisitor = PrintNameStlAstVisitor()
-        sample_return, ast = printNameStlAstVisitor.visit(ast)
+        sample_return, ast = printNameStlAstVisitor.visitBottomUp(ast)
 
 
 if __name__ == '__main__':
