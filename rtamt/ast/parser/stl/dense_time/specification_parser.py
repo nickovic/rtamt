@@ -7,7 +7,7 @@ from rtamt.ast.parser.stl.dense_time.parser_visitor import StlDenseTimeAstParser
 from rtamt.ast.parser.abstract_ast_parser import ast_factory
 
 
-def stlDenseTimeAst():
+def StlDenseTimeAst():
     antrlLexerType = globals()['StlLexer']
     antrlParserType = globals()['StlParser']
     parserErrorListenerType = globals()['STLParserErrorListener']   #optional

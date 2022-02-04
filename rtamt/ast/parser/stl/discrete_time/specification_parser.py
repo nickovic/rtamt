@@ -7,7 +7,7 @@ from rtamt.ast.parser.stl.discrete_time.parser_visitor import StlDiscreteTimeAst
 from rtamt.ast.parser.abstract_ast_parser import ast_factory
 
 
-def stlDiscreteTimeAst():
+def StlDiscreteTimeAst():
     antrlLexerType = globals()['StlLexer']
     antrlParserType = globals()['StlParser']
     parserErrorListenerType = globals()['STLParserErrorListener']   #optional
