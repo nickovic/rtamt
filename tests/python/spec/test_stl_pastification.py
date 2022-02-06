@@ -61,14 +61,6 @@ class TestSTLPastification(unittest.TestCase):
 
         self.assertEqual('myvar.req.val', new_node.name, 'Variable pastification assertion')
 
-    def test_variable_2(self):
-        old_node = Variable('req', '', 'output')
-        old_node.horizon = int(5)
-        pastifier = STLPastifier()
-        old_node.accept(pastifier)
-        new_node = pastifier.pastify(old_node)
-
-        self.assertEqual('once[5,5](req)', new_node.name, 'Variable pastification assertion')
 
     def test_previous_1(self):
         var_node = Variable('req', '', 'output')
@@ -80,48 +72,16 @@ class TestSTLPastification(unittest.TestCase):
 
         self.assertEqual('previous(req)', new_node.name, 'Previous pastification assertion')
 
-    def test_previous_2(self):
-        var_node = Variable('req', '', 'output')
-        abs_node = Previous(var_node)
-        abs_node.horizon = 5
-
-        pastifier = STLPastifier()
-        abs_node.accept(pastifier)
-        new_node = pastifier.pastify(abs_node)
-
-        self.assertEqual('previous(once[5,5](req))', new_node.name, 'Previous pastification assertion')
-
-    def test_previous_1(self):
-        var_node = Variable('req', '', 'output')
-        abs_node = Previous(var_node)
-
-        pastifier = STLPastifier()
-        abs_node.accept(pastifier)
-        new_node = pastifier.pastify(abs_node)
-
-        self.assertEqual('previous(req)', new_node.name, 'Previous pastification assertion')
 
     def test_next_1(self):
         var_node = Variable('req', '', 'output')
         abs_node = Next(var_node)
-        abs_node.horizon = 1
 
         pastifier = STLPastifier()
         abs_node.accept(pastifier)
         new_node = pastifier.pastify(abs_node)
 
         self.assertEqual('req', new_node.name, 'Next pastification assertion')
-
-    def test_next_2(self):
-        var_node = Variable('req', '', 'output')
-        abs_node = Next(var_node)
-        abs_node.horizon = 5
-
-        pastifier = STLPastifier()
-        abs_node.accept(pastifier)
-        new_node = pastifier.pastify(abs_node)
-
-        self.assertEqual('once[4,4](req)', new_node.name, 'Next pastification assertion')
 
     def test_abs_1(self):
         var_node = Variable('req', '', 'output')
@@ -133,18 +93,6 @@ class TestSTLPastification(unittest.TestCase):
 
         self.assertEqual('abs(req)', new_node.name, 'Absolute Value pastification assertion')
 
-    def test_abs_2(self):
-        var_node = Variable('req', '', 'output')
-        var_node.horizon = 5
-        abs_node = Abs(var_node)
-        abs_node.horizon = 5
-
-        pastifier = STLPastifier()
-        abs_node.accept(pastifier)
-        new_node = pastifier.pastify(abs_node)
-
-        self.assertEqual('abs(once[5,5](req))', new_node.name, 'Absolute Value pastification assertion')
-
     def test_sqrt_1(self):
         var_node = Variable('req', '', 'output')
         sqrt_node = Sqrt(var_node)
@@ -155,17 +103,6 @@ class TestSTLPastification(unittest.TestCase):
 
         self.assertEqual('sqrt(req)', new_node.name, 'Square Root pastification assertion')
 
-    def test_sqrt_2(self):
-        var_node = Variable('req', '', 'output')
-        var_node.horizon = 5
-        sqrt_node = Sqrt(var_node)
-        sqrt_node.horizon = 5
-
-        pastifier = STLPastifier()
-        sqrt_node.accept(pastifier)
-        new_node = pastifier.pastify(sqrt_node)
-
-        self.assertEqual('sqrt(once[5,5](req))', new_node.name, 'Square Root pastification assertion')
 
     def test_exp(self):
         var_node = Variable('req', '', 'output')
@@ -242,18 +179,6 @@ class TestSTLPastification(unittest.TestCase):
         new_node = pastifier.pastify(node)
 
         self.assertEqual('(req)<=(gnt)', new_node.name, 'Predicate LEQ pastification assertion')
-
-    def test_predicate_leq_2(self):
-        var_node_1 = Variable('req', '', 'output')
-        var_node_2 = Variable('gnt', '', 'output')
-        node = Predicate(var_node_1, var_node_2, StlComparisonOperator.LEQ)
-        node.horizon = 5
-
-        pastifier = STLPastifier()
-        node.accept(pastifier)
-        new_node = pastifier.pastify(node)
-
-        self.assertEqual('(once[5,5](req))<=(once[5,5](gnt))', new_node.name, 'Predicate LEQ pastification assertion')
 
     def test_predicate_less(self):
         var_node_1 = Variable('req', '', 'output')
@@ -407,14 +332,6 @@ class TestSTLPastification(unittest.TestCase):
 
         self.assertEqual('once(req)', new_node.name, 'Once pastification assertion')
 
-        node.horizon = 5
-
-        pastifier = STLPastifier()
-        node.accept(pastifier)
-        new_node = pastifier.pastify(node)
-
-        self.assertEqual('once(once[5,5](req))', new_node.name, 'Once pastification assertion')
-
 
     def test_historically(self):
         var_node = Variable('req', '', 'output')
@@ -425,42 +342,6 @@ class TestSTLPastification(unittest.TestCase):
         new_node = pastifier.pastify(node)
 
         self.assertEqual('historically(req)', new_node.name, 'Historically pastification assertion')
-
-    # def test_eventually(self):
-    #     var_node = Variable('req', '', 'output')
-    #     node = Eventually(var_node)
-    #
-    #     pastifier = STLPastifier()
-    #     node.accept(pastifier)
-    #     new_node = pastifier.pastify(node)
-    #
-    #     self.assertEqual('eventually(req)', new_node.name, 'Eventually pastification assertion')
-    #
-    #     node.horizon = 5
-    #
-    #     pastifier = STLPastifier()
-    #     node.accept(pastifier)
-    #     new_node = pastifier.pastify(node)
-    #
-    #     self.assertEqual('eventually(once[5,5](req))', new_node.name, 'Eventually pastification assertion')
-
-    # def test_always(self):
-    #     var_node = Variable('req', '', 'output')
-    #     node = Always(var_node)
-    #
-    #     pastifier = STLPastifier()
-    #     node.accept(pastifier)
-    #     new_node = pastifier.pastify(node)
-    #
-    #     self.assertEqual('always(req)', new_node.name, 'Always pastification assertion')
-    #
-    #     node.horizon = 5
-    #
-    #     pastifier = STLPastifier()
-    #     node.accept(pastifier)
-    #     new_node = pastifier.pastify(node)
-    #
-    #     self.assertEqual('always(once[5,5](req))', new_node.name, 'Always pastification assertion')
 
     def test_since(self):
         var_node_1 = Variable('req', '', 'output')
@@ -473,14 +354,6 @@ class TestSTLPastification(unittest.TestCase):
 
         self.assertEqual('(req)since(gnt)', new_node.name, 'Since pastification assertion')
 
-        add_node.horizon = 5
-        pastifier = STLPastifier()
-        add_node.accept(pastifier)
-        new_node = pastifier.pastify(add_node)
-
-        self.assertEqual('(once[5,5](req))since(once[5,5](gnt))', new_node.name, 'Since pastification assertion')
-
-
     def test_once_0_1(self):
         var_node = Variable('req', '', 'output')
         node = TimedOnce(var_node, 0, 1)
@@ -490,14 +363,6 @@ class TestSTLPastification(unittest.TestCase):
         new_node = pastifier.pastify(node)
 
         self.assertEqual('once[0,1](req)', new_node.name, 'Once pastification assertion')
-
-        node.horizon = 5
-
-        pastifier = STLPastifier()
-        node.accept(pastifier)
-        new_node = pastifier.pastify(node)
-
-        self.assertEqual('once[0,1](once[5,5](req))', new_node.name, 'Once pastification assertion')
 
     def test_historically_0_1(self):
         var_node = Variable('req', '', 'output')
@@ -509,14 +374,6 @@ class TestSTLPastification(unittest.TestCase):
 
         self.assertEqual('historically[0,1](req)', new_node.name, 'Historically pastification assertion')
 
-        node.horizon = 5
-
-        pastifier = STLPastifier()
-        node.accept(pastifier)
-        new_node = pastifier.pastify(node)
-
-        self.assertEqual('historically[0,1](once[5,5](req))', new_node.name, 'Historically pastification assertion')
-
     def test_eventually_0_1(self):
         var_node = Variable('req', '', 'output')
         node = TimedEventually(var_node, 0, 1)
@@ -527,14 +384,6 @@ class TestSTLPastification(unittest.TestCase):
 
         self.assertEqual('once[0,1](req)', new_node.name, 'Eventually pastification assertion')
 
-        node.horizon = 5
-
-        pastifier = STLPastifier()
-        node.accept(pastifier)
-        new_node = pastifier.pastify(node)
-
-        self.assertEqual('once[0,1](once[4,4](req))', new_node.name, 'Eventually pastification assertion')
-
     def test_always_0_1(self):
         var_node = Variable('req', '', 'output')
         node = TimedAlways(var_node, 0, 1)
@@ -544,14 +393,6 @@ class TestSTLPastification(unittest.TestCase):
         new_node = pastifier.pastify(node)
 
         self.assertEqual('historically[0,1](req)', new_node.name, 'Always pastification assertion')
-
-        node.horizon = 5
-
-        pastifier = STLPastifier()
-        node.accept(pastifier)
-        new_node = pastifier.pastify(node)
-
-        self.assertEqual('historically[0,1](once[4,4](req))', new_node.name, 'Always pastification assertion')
 
     def test_until_0_1(self):
         var_node_1 = Variable('req', '', 'output')
@@ -564,13 +405,6 @@ class TestSTLPastification(unittest.TestCase):
 
         self.assertEqual('(req)precedes[0,1](gnt)', new_node.name, 'Until pastification assertion')
 
-        add_node.horizon = 5
-        pastifier = STLPastifier()
-        add_node.accept(pastifier)
-        new_node = pastifier.pastify(add_node)
-
-        self.assertEqual('(once[4,4](req))precedes[0,1](once[4,4](gnt))', new_node.name, 'Until pastification assertion')
-
     def test_since_0_1(self):
         var_node_1 = Variable('req', '', 'output')
         var_node_2 = Variable('gnt', '', 'output')
@@ -581,13 +415,6 @@ class TestSTLPastification(unittest.TestCase):
         new_node = pastifier.pastify(add_node)
 
         self.assertEqual('(req)since[0,1](gnt)', new_node.name, 'Since pastification assertion')
-
-        add_node.horizon = 5
-        pastifier = STLPastifier()
-        add_node.accept(pastifier)
-        new_node = pastifier.pastify(add_node)
-
-        self.assertEqual('(once[5,5](req))since[0,1](once[5,5](gnt))', new_node.name, 'Since pastification assertion')
 
     def test_precedes_0_1(self):
         var_node_1 = Variable('req', '', 'output')
@@ -600,13 +427,6 @@ class TestSTLPastification(unittest.TestCase):
 
         self.assertEqual('(req)precedes[0,1](gnt)', new_node.name, 'Precedes pastification assertion')
 
-        add_node.horizon = 5
-        pastifier = STLPastifier()
-        add_node.accept(pastifier)
-        new_node = pastifier.pastify(add_node)
-
-        self.assertEqual('(once[5,5](req))precedes[0,1](once[5,5](gnt))', new_node.name, 'Precedes pastification assertion')
-
     def test_complex_past_1(self):
         var_node_1 = Variable('req', '', 'output')
         var_node_2 = Variable('gnt', '', 'output')
@@ -614,7 +434,6 @@ class TestSTLPastification(unittest.TestCase):
         hist_node = Historically(var_node_2)
         once_node = TimedOnce(hist_node, 1, 2)
         add_node = TimedSince(rise_node, once_node, 2, 6)
-        add_node.horizon = 0
 
         pastifier = STLPastifier()
         add_node.accept(pastifier)
@@ -629,7 +448,6 @@ class TestSTLPastification(unittest.TestCase):
         hist_node = Historically(var_node_2)
         once_node = TimedOnce(hist_node, 1, 2)
         add_node = TimedSince(rise_node, once_node, 2, 6)
-        add_node.horizon = 0
 
         pastifier = STLPastifier()
         add_node.accept(pastifier)
@@ -648,7 +466,6 @@ class TestSTLPastification(unittest.TestCase):
         hist_node = TimedAlways(pd_node_2, 3, 4)
         once_node = TimedEventually(hist_node, 1, 2)
         add_node = Implies(rise_node, once_node)
-        add_node.horizon = 6
 
         pastifier = STLPastifier()
         add_node.accept(pastifier)
@@ -664,7 +481,6 @@ class TestSTLPastification(unittest.TestCase):
         until_node = TimedUntil(var_node_1, var_node_2, 1, 2)
         ev_node = TimedEventually(var_node_3, 0, 6)
         add_node = Implies(until_node, ev_node)
-        add_node.horizon = 6
 
         pastifier = STLPastifier()
         add_node.accept(pastifier)
@@ -680,7 +496,6 @@ class TestSTLPastification(unittest.TestCase):
         once_node = TimedOnce(var_node_2, 1, 2)
         ev_once_node = TimedEventually(once_node, 3, 3)
         add_node = Implies(ev_node, ev_once_node)
-        add_node.horizon = 6
 
         pastifier = STLPastifier()
         add_node.accept(pastifier)
@@ -696,7 +511,6 @@ class TestSTLPastification(unittest.TestCase):
         once_node = TimedOnce(var_node_2, 1, 2)
         alw_node = TimedAlways(once_node, 3, 3)
         add_node = Implies(ev_node, alw_node)
-        add_node.horizon = 6
 
         pastifier = STLPastifier()
         add_node.accept(pastifier)

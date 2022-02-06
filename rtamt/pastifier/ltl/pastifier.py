@@ -25,6 +25,7 @@ from rtamt.node.ltl.constant import Constant
 from rtamt.node.ltl.previous import Previous
 
 from rtamt.exception.ltl.exception import LTLPastifyException
+from rtamt.pastifier.ltl.horizon import LTLHorizon
 
 
 class LTLPastifier(LTLASTVisitor):
@@ -33,7 +34,9 @@ class LTLPastifier(LTLASTVisitor):
         pass
 
     def pastify(self, element):
-        return self.visit(element, [element.horizon])
+        h = LTLHorizon()
+        horizon = h.visit(element, None)
+        return self.visit(element, [horizon])
 
     def visitConstant(self, element, args):
         node = Constant(element.val)

@@ -16,7 +16,6 @@ class AbstractNode:
     def __init__(self):
         self.children = list()
         self.evaluator = None
-        self.horizon = 0
         self.name = ''
         self.node = None
 
@@ -50,16 +49,6 @@ class AbstractNode:
     def name(self, name):
         """Setter for the name"""
         self.__name = name
-
-    @property
-    def horizon(self):
-        """Getter for the horizon"""
-        return self.__horizon
-
-    @horizon.setter
-    def horizon(self, horizon):
-        """Setter for the horizon"""
-        self.__horizon = horizon
 
     @property
     def node(self):
