@@ -81,7 +81,6 @@ class LTLSpecificationParser(LtlParserVisitor):
         op_type = self.str_to_op_type(ctx.comparisonOp().getText())
         node = Predicate(child1, child2, op_type)
 
-        node.horizon = int(0)
         return node
 
     def visitExprId(self, ctx):
@@ -127,7 +126,6 @@ class LTLSpecificationParser(LtlParserVisitor):
             var_io = self.spec.var_io_dict[id_head]
             node = Variable(id_head, id_tail, var_io)
 
-        node.horizon = int(0)
         return node
 
 
@@ -174,119 +172,100 @@ class LTLSpecificationParser(LtlParserVisitor):
         child1 = self.visit(ctx.real_expression(0))
         child2 = self.visit(ctx.real_expression(1))
         node = Addition(child1, child2)
-        node.horizon = max(child1.horizon, child2.horizon)
         return node
 
     def visitExprSubtraction(self, ctx):
         child1 = self.visit(ctx.real_expression(0))
         child2 = self.visit(ctx.real_expression(1))
         node = Subtraction(child1, child2)
-        node.horizon = max(child1.horizon, child2.horizon)
         return node
 
     def visitExprMultiplication(self, ctx):
         child1 = self.visit(ctx.real_expression(0))
         child2 = self.visit(ctx.real_expression(1))
         node = Multiplication(child1, child2)
-        node.horizon = max(child1.horizon, child2.horizon)
         return node
 
     def visitExprDivision(self, ctx):
         child1 = self.visit(ctx.real_expression(0))
         child2 = self.visit(ctx.real_expression(1))
         node = Division(child1, child2)
-        node.horizon = max(child1.horizon, child2.horizon)
         return node
 
     def visitExprAbs(self, ctx):
         child = self.visit(ctx.real_expression())
         node = Abs(child)
-        node.horizon = child.horizon
         return node
 
     def visitExprSqrt(self, ctx):
         child = self.visit(ctx.real_expression())
         node = Sqrt(child)
-        node.horizon = child.horizon
         return node
 
     def visitExprExp(self, ctx):
         child = self.visit(ctx.real_expression())
         node = Exp(child)
-        node.horizon = child.horizon
         return node
 
     def visitExprPow(self, ctx):
         child1 = self.visit(ctx.real_expression(0))
         child2 = self.visit(ctx.real_expression(1))
         node = Pow(child1, child2)
-        node.horizon = max(child1.horizon, child2.horizon)
         return node
 
     def visitExprNot(self, ctx):
         child = self.visit(ctx.expression())
         node = Neg(child)
-        node.horizon = child.horizon
         return node
 
     def visitExprRise(self, ctx):
         child = self.visit(ctx.expression())
         node = Rise(child)
-        node.horizon = child.horizon
         return node
 
     def visitExprLiteral(self, ctx):
         val = float(ctx.literal().getText())
         node = Constant(val)
-        node.horizon = 0
         return node
 
     def visitExprFall(self, ctx):
         child = self.visit(ctx.expression())
         node = Fall(child)
-        node.horizon = child.horizon
         return node
 
     def visitExprAnd(self, ctx):
         child1 = self.visit(ctx.expression(0))
         child2 = self.visit(ctx.expression(1))
         node = Conjunction(child1, child2)
-        node.horizon = max(child1.horizon, child2.horizon)
         return node
 
     def visitExprOr(self, ctx):
         child1 = self.visit(ctx.expression(0))
         child2 = self.visit(ctx.expression(1))
         node = Disjunction(child1, child2)
-        node.horizon = max(child1.horizon, child2.horizon)
         return node
 
     def visitExprImplies(self, ctx):
         child1 = self.visit(ctx.expression(0))
         child2 = self.visit(ctx.expression(1))
         node = Implies(child1, child2)
-        node.horizon = max(child1.horizon, child2.horizon)
         return node
 
     def visitExprIff(self, ctx):
         child1 = self.visit(ctx.expression(0))
         child2 = self.visit(ctx.expression(1))
         node = Iff(child1, child2)
-        node.horizon = max(child1.horizon, child2.horizon)
         return node
 
     def visitExprXor(self, ctx):
         child1 = self.visit(ctx.expression(0))
         child2 = self.visit(ctx.expression(1))
         node = Xor(child1, child2)
-        node.horizon = max(child1.horizon, child2.horizon)
         return node
 
     def visitExprAlways(self, ctx):
         child = self.visit(ctx.expression())
-        horizon = child.horizon
         node = Always(child)
-        node.horizon = horizon
         return node
 
     def visitExprEv(self, ctx):
@@ -297,32 +276,27 @@ class LTLSpecificationParser(LtlParserVisitor):
     def visitExprPrevious(self, ctx):
         child = self.visit(ctx.expression())
         node = Previous(child)
-        node.horizon = child.horizon
         return node
 
     def visitExprNext(self, ctx):
         child = self.visit(ctx.expression())
         node = Next(child)
-        node.horizon = child.horizon + 1
         return node
 
     def visitExpreOnce(self, ctx):
         child = self.visit(ctx.expression())
         node = Once(child)
-        node.horizon = child.horizon
         return node
 
     def visitExprHist(self, ctx):
         child = self.visit(ctx.expression())
         node = Historically(child)
-        node.horizon = child.horizon
         return node
 
     def visitExprSince(self, ctx):
         child1 = self.visit(ctx.expression(0))
         child2 = self.visit(ctx.expression(1))
         node = Since(child1, child2)
-        node.horizon = max(child1.horizon, child2.horizon)
         return node
 
     def visitExprUntil(self, ctx):
@@ -331,7 +305,6 @@ class LTLSpecificationParser(LtlParserVisitor):
         child2 = self.visit(ctx.expression(1))
 
         node = Until(child1, child2)
-        node.horizon = max(child1.horizon, child2.horizon)
         return node
 
     def visitExprUnless(self, ctx):
@@ -343,7 +316,6 @@ class LTLSpecificationParser(LtlParserVisitor):
         right = Until(child1, child2)
         node = Disjunction(left, right)
 
-        node.horizon = max(child1.horizon, child2.horizon) + interval.end
         return node
 
     def visitExprParen(self, ctx):
