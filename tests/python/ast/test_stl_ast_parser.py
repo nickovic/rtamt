@@ -328,14 +328,14 @@ class TestSTLASTParser(unittest.TestCase):
 
         self.assertEqual(out, self.ast.spec, 'Always assertion')
 
-    # def test_timed_always(self):
-    #    self.ast = stlDiscreteTimeAst()
-    #    self.ast.declare_var('a', 'float')
-    #    self.ast.spec = 'always[1,2](a)'
-    #    self.ast.parse()
-    #    out = self.printer.visit(self.ast.ast)
+    def test_timed_always(self):
+       self.ast = stlDiscreteTimeAst()
+       self.ast.declare_var('a', 'float')
+       self.ast.spec = 'always[1,2](a)'
+       self.ast.parse()
+       out = self.printer.visit(self.ast.ast)
 
-    #    self.assertEqual(out, self.ast.spec, 'Always assertion')
+       self.assertEqual(out, self.ast.spec, 'Always assertion')
 
 
 
