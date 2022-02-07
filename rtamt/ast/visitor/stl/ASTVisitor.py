@@ -1,4 +1,6 @@
 from abc import ABCMeta, abstractmethod
+
+from rtamt.ast.visitor.abstract_visitor import AbstractASTVisitor
 from rtamt.node.ltl.predicate import Predicate
 from rtamt.node.ltl.variable import Variable
 from rtamt.node.ltl.neg import Neg
@@ -36,219 +38,219 @@ from rtamt.node.stl.timed_until import TimedUntil
 
 NOT_IMPLEMENTED = "You should implement this."
 
-class STLASTVisitor:
+class STLASTVisitor(AbstractASTVisitor):
     __metaclass__ = ABCMeta
 
-    def visit(self, element, args=None):
+    def post(self, out_children, element, args=None):
         if isinstance(element, Predicate):
-            ast = self.visitPredicate(element, args)
+            ast = self.postPredicate(out_children, element, args)
         elif isinstance(element, Variable):
-            ast = self.visitVariable(element, args)
+            ast = self.postVariable(out_children, element, args)
         elif isinstance(element, Neg):
-            ast = self.visitNot(element, args)
+            ast = self.postNot(out_children, element, args)
         elif isinstance(element, Disjunction):
-            ast = self.visitOr(element, args)
+            ast = self.postOr(out_children, element, args)
         elif isinstance(element, Conjunction):
-            ast = self.visitAnd(element, args)
+            ast = self.postAnd(out_children, element, args)
         elif isinstance(element, Implies):
-            ast = self.visitImplies(element, args)
+            ast = self.postImplies(out_children, element, args)
         elif isinstance(element, Iff):
-            ast = self.visitIff(element, args)
+            ast = self.postIff(out_children, element, args)
         elif isinstance(element, Xor):
-            ast = self.visitXor(element, args)
+            ast = self.postXor(out_children, element, args)
         elif isinstance(element, Eventually):
-            ast = self.visitEventually(element, args)
+            ast = self.postEventually(out_children, element, args)
         elif isinstance(element, Always):
-            ast = self.visitAlways(element, args)
+            ast = self.postAlways(out_children, element, args)
         elif isinstance(element, Until):
-            ast = self.visitUntil(element, args)
+            ast = self.postUntil(out_children, element, args)
         elif isinstance(element, Once):
-            ast = self.visitOnce(element, args)
+            ast = self.postOnce(out_children, element, args)
         elif isinstance(element, Historically):
-            ast = self.visitHistorically(element, args)
+            ast = self.postHistorically(out_children, element, args)
         elif isinstance(element, Since):
-            ast = self.visitSince(element, args)
+            ast = self.postSince(out_children, element, args)
         elif isinstance(element, TimedPrecedes):
-            ast = self.visitTimedPrecedes(element, args)
+            ast = self.postTimedPrecedes(element, args)
         elif isinstance(element, Abs):
-            ast = self.visitAbs(element, args)
+            ast = self.postAbs(out_children, element, args)
         elif isinstance(element, Sqrt):
-            ast = self.visitSqrt(element, args)
+            ast = self.postSqrt(out_children, element, args)
         elif isinstance(element, Pow):
-            ast = self.visitPow(element, args)
+            ast = self.postPow(out_children, element, args)
         elif isinstance(element, Exp):
-            ast = self.visitExp(element, args)
+            ast = self.postExp(out_children, element, args)
         elif isinstance(element, Addition):
-            ast = self.visitAddition(element, args)
+            ast = self.postAddition(out_children, element, args)
         elif isinstance(element, Subtraction):
-            ast = self.visitSubtraction(element, args)
+            ast = self.postSubtraction(out_children, element, args)
         elif isinstance(element, Multiplication):
-            ast = self.visitMultiplication(element, args)
+            ast = self.postMultiplication(out_children, element, args)
         elif isinstance(element, Division):
-            ast = self.visitDivision(element, args)
+            ast = self.postDivision(out_children, element, args)
         elif isinstance(element, Rise):
-            ast = self.visitRise(element, args)
+            ast = self.postRise(out_children, element, args)
         elif isinstance(element, Fall):
-            ast = self.visitFall(element, args)
+            ast = self.postFall(out_children, element, args)
         elif isinstance(element, Constant):
-            ast = self.visitConstant(element, args)
+            ast = self.postConstant(out_children, element, args)
         elif isinstance(element, Previous):
-            ast = self.visitPrevious(element, args)
+            ast = self.postPrevious(out_children, element, args)
         elif isinstance(element, Next):
-            ast = self.visitNext(element, args)
+            ast = self.postNext(out_children, element, args)
         elif isinstance(element, TimedUntil):
-            ast = self.visitTimedUntil(element, args)
+            ast = self.postTimedUntil(out_children, element, args)
         elif isinstance(element, TimedAlways):
-            ast = self.visitTimedAlways(element, args)
+            ast = self.postTimedAlways(out_children, element, args)
         elif isinstance(element, TimedEventually):
-            ast = self.visitTimedEventually(element, args)
+            ast = self.postTimedEventually(out_children, element, args)
         elif isinstance(element, TimedSince):
-            ast = self.visitTimedSince(element, args)
+            ast = self.postTimedSince(out_children, element, args)
         elif isinstance(element, TimedOnce):
-            ast = self.visitTimedOnce(element, args)
+            ast = self.postTimedOnce(out_children, element, args)
         elif isinstance(element, TimedHistorically):
-            ast = self.visitTimedHistorically(element, args)
+            ast = self.postTimedHistorically(out_children, element, args)
         else:
-            ast = self.visitDefault(element, args)
+            ast = self.postDefault(out_children, element, args)
         return ast
 
 
     @abstractmethod
-    def visitPredicate(self, element, args):
+    def postPredicate(self, out_children, element, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitVariable(self, element, args):
+    def postVariable(self, out_children, element, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitAbs(self, element, args):
+    def postAbs(self, out_children, element, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitSqrt(self, element, args):
+    def postSqrt(self, out_children, element, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitPow(self, element, args):
+    def postPow(self, out_children, element, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitExp(self, element, args):
+    def postExp(self, out_children, element, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitAddition(self, element, args):
+    def postAddition(self, out_children, element, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitSubtraction(self, element, args):
+    def postSubtraction(self, out_children, element, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitMultiplication(self, element, args):
+    def postMultiplication(self, out_children, element, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitDivision(self, element, args):
+    def postDivision(self, out_children, element, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitNot(self, element, args):
+    def postNot(self, out_children, element, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitAnd(self, element, args):
+    def postAnd(self, out_children, element, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitOr(self, element, args):
+    def postOr(self, out_children, element, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitImplies(self, element, args):
+    def postImplies(self, out_children, element, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitIff(self, element, args):
+    def postIff(self, out_children, element, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitXor(self, element, args):
+    def postXor(self, out_children, element, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitEventually(self, element, args):
+    def postEventually(self, out_children, element, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitAlways(self, element, args):
+    def postAlways(self, out_children, element, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitUntil(self, element, args):
+    def postUntil(self, out_children, element, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitOnce(self, element, args):
+    def postOnce(self, out_children, element, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitHistorically(self, element, args):
+    def postHistorically(self, out_children, element, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitSince(self, element, args):
+    def postSince(self, out_children, element, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitRise(self, element, args):
+    def postRise(self, out_children, element, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitFall(self, element, args):
+    def postFall(self, out_children, element, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitConstant(self, element, args):
+    def postConstant(self, out_children, element, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitPrevious(self, element, args):
+    def postPrevious(self, out_children, element, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitNext(self, element, args):
+    def postNext(self, out_children, element, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitTimedPrecedes(self, element, args):
+    def postTimedPrecedes(self, out_children, element, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitTimedOnce(self, element, args):
+    def postTimedOnce(self, out_children, element, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitTimedHistorically(self, element, args):
+    def postTimedHistorically(self, out_children, element, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitTimedSince(self, element, args):
+    def postTimedSince(self, out_children, element, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitTimedAlways(self, element, args):
+    def postTimedAlways(self, out_children, element, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitTimedEventually(self, element, args):
+    def postTimedEventually(self, out_children, element, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitTimedUntil(self, element, args):
+    def postTimedUntil(self, out_children, element, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
 
     @abstractmethod
-    def visitDefault(self, element, args):
+    def postDefault(self, out_children, element, args):
         raise NotImplementedError(NOT_IMPLEMENTED)

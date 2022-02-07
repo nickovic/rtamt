@@ -35,147 +35,147 @@ class LTLPastifier(LTLASTVisitor):
     def pastify(self, element):
         return self.visit(element, [element.horizon])
 
-    def visitConstant(self, element, args):
+    def postConstant(self, out_children, element, args):
         node = Constant(element.val)
         return node
 
-    def visitPredicate(self, element, args):
-        child1_node = self.visit(element.children[0], args)
-        child2_node = self.visit(element.children[1], args)
+    def postPredicate(self, out_children, element, args):
+        child1_node = out_children[0]
+        child2_node = out_children[1]
         node = Predicate(child1_node, child2_node, element.operator)
         return node
 
-    def visitVariable(self, element, args):
+    def postVariable(self, out_children, element, args):
         horizon = args[0]
         node = Variable(element.var, element.field, element.io_type)
         for i in range(horizon):
             node = Previous(node)
         return node
 
-    def visitAddition(self, element, args):
-        child1_node = self.visit(element.children[0], args)
-        child2_node = self.visit(element.children[1], args)
+    def postAddition(self, out_children, element, args):
+        child1_node = out_children[0]
+        child2_node = out_children[1]
         node = Addition(child1_node, child2_node)
         return node
 
-    def visitMultiplication(self, element, args):
-        child1_node = self.visit(element.children[0], args)
-        child2_node = self.visit(element.children[1], args)
+    def postMultiplication(self, out_children, element, args):
+        child1_node = out_children[0]
+        child2_node = out_children[1]
         node = Multiplication(child1_node, child2_node)
         return node
 
-    def visitSubtraction(self, element, args):
-        child1_node = self.visit(element.children[0], args)
-        child2_node = self.visit(element.children[1], args)
+    def postSubtraction(self, out_children, element, args):
+        child1_node = out_children[0]
+        child2_node = out_children[1]
         node = Subtraction(child1_node, child2_node)
         return node
 
-    def visitDivision(self, element, args):
-        child1_node = self.visit(element.children[0], args)
-        child2_node = self.visit(element.children[1], args)
+    def postDivision(self, out_children, element, args):
+        child1_node = out_children[0]
+        child2_node = out_children[1]
         node = Division(child1_node, child2_node)
         return node
 
-    def visitAbs(self, element, args):
-        child_node = self.visit(element.children[0], args)
+    def postAbs(self, out_children, element, args):
+        child_node = out_children[0]
         node = Abs(child_node)
         return node
 
-    def visitSqrt(self, element, args):
-        child_node = self.visit(element.children[0], args)
+    def postSqrt(self, out_children, element, args):
+        child_node = out_children[0]
         node = Sqrt(child_node)
         return node
 
-    def visitExp(self, element, args):
-        child_node = self.visit(element.children[0], args)
+    def postExp(self, out_children, element, args):
+        child_node = out_children[0]
         node = Exp(child_node)
         return node
 
-    def visitPow(self, element, args):
-        child1_node = self.visit(element.children[0], args)
-        child2_node = self.visit(element.children[1], args)
+    def postPow(self, out_children, element, args):
+        child1_node = out_children[0]
+        child2_node = out_children[1]
         node = Pow(child1_node, child2_node)
         return node
 
-    def visitRise(self, element, args):
-        child_node = self.visit(element.children[0], args)
+    def postRise(self, out_children, element, args):
+        child_node = out_children[0]
         node = Rise(child_node)
         return node
 
-    def visitFall(self, element, args):
-        child_node = self.visit(element.children[0], args)
+    def postFall(self, out_children, element, args):
+        child_node = out_children[0]
         node = Fall(child_node)
         return node
 
-    def visitNot(self, element, args):
-        child_node = self.visit(element.children[0], args)
+    def postNot(self, out_children, element, args):
+        child_node = out_children[0]
         node = Neg(child_node)
         return node
 
-    def visitAnd(self, element, args):
-        child1_node = self.visit(element.children[0], args)
-        child2_node = self.visit(element.children[1], args)
+    def postAnd(self, out_children, element, args):
+        child1_node = out_children[0]
+        child2_node = out_children[1]
         node = Conjunction(child1_node, child2_node)
         return node
 
-    def visitOr(self, element, args):
-        child1_node = self.visit(element.children[0], args)
-        child2_node = self.visit(element.children[1], args)
+    def postOr(self, out_children, element, args):
+        child1_node = out_children[0]
+        child2_node = out_children[1]
         node = Disjunction(child1_node, child2_node)
         return node
 
-    def visitImplies(self, element, args):
-        child1_node = self.visit(element.children[0], args)
-        child2_node = self.visit(element.children[1], args)
+    def postImplies(self, out_children, element, args):
+        child1_node = out_children[0]
+        child2_node = out_children[1]
         node = Implies(child1_node, child2_node)
         return node
 
-    def visitIff(self, element, args):
-        child1_node = self.visit(element.children[0], args)
-        child2_node = self.visit(element.children[1], args)
+    def postIff(self, out_children, element, args):
+        child1_node = out_children[0]
+        child2_node = out_children[1]
         node = Iff(child1_node, child2_node)
         return node
 
-    def visitXor(self, element, args):
-        child1_node = self.visit(element.children[0], args)
-        child2_node = self.visit(element.children[1], args)
+    def postXor(self, out_children, element, args):
+        child1_node = out_children[0]
+        child2_node = out_children[1]
         node = Xor(child1_node, child2_node)
         return node
 
-    def visitEventually(self, element, args):
+    def postEventually(self, out_children, element, args):
         raise LTLPastifyException('Cannot pastify an unbounded eventually.')
 
-    def visitAlways(self, element, args):
+    def postAlways(self, out_children, element, args):
         raise LTLPastifyException('Cannot pastify an unbounded always.')
 
-    def visitUntil(self, element, args):
+    def postUntil(self, out_children, element, args):
         raise LTLPastifyException('Cannot pastify an unbounded until.')
 
-    def visitOnce(self, element, args):
-        child_node = self.visit(element.children[0], args)
+    def postOnce(self, out_children, element, args):
+        child_node = out_children[0]
         node = Once(child_node)
         return node
 
-    def visitPrevious(self, element, args):
-        child_node = self.visit(element.children[0], args)
+    def postPrevious(self, out_children, element, args):
+        child_node = out_children[0]
         node = Previous(child_node)
         return node
 
-    def visitNext(self, element, args):
+    def postNext(self, out_children, element, args):
         horizon = args[0] - 1
-        child_node = self.visit(element.children[0], [horizon])
+        child_node = out_children[0]
         return child_node
 
-    def visitHistorically(self, element, args):
-        child_node = self.visit(element.children[0], args)
+    def postHistorically(self, out_children, element, args):
+        child_node = out_children[0]
         node = Historically(child_node)
         return node
 
-    def visitSince(self, element, args):
-        child_node_1 = self.visit(element.children[0], args)
-        child_node_2 = self.visit(element.children[1], args)
-        node = Since(child_node_1, child_node_2)
+    def postSince(self, out_children, element, args):
+        child1_node = out_children[0]
+        child2_node = out_children[1]
+        node = Since(child1_node, child2_node)
         return node
 
-    def visitDefault(self, element):
+    def postDefault(self, out_children, element):
         raise LTLPastifyException('LTL Pastifier: encountered unexpected type of object.')

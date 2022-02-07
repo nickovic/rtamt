@@ -18,63 +18,63 @@ class STLPastifier(LTLPastifier, STLASTVisitor):
         return STLASTVisitor.visit(self, element, args)
 
 
-    def visitVariable(self, element, args):
+    def postVariable(self, out_children, element, args):
         horizon = args[0]
         node = Variable(element.var, element.field, element.io_type)
         if horizon > 0:
             node = TimedOnce(node, horizon, horizon)
         return node
 
-    def visitTimedEventually(self, element, args):
+    def postTimedEventually(self, out_children, element, args):
         horizon = args[0] - element.end
-        node = self.visit(element.children[0], [horizon])
+        child_node = out_children[0]
         begin = 0
         end = element.end - element.begin
         if end > 0:
             node = TimedOnce(node, begin, end)
         return node
 
-    def visitTimedAlways(self, element, args):
+    def postTimedAlways(self, out_children, element, args):
         horizon = args[0] - element.end
-        node = self.visit(element.children[0], [horizon])
+        child_node = out_children[0]
         begin = 0
         end = element.end - element.begin
         if end > 0:
             node = TimedHistorically(node, begin, end)
         return node
 
-    def visitTimedUntil(self, element, args):
+    def postTimedUntil(self, out_children, element, args):
         horizon = args[0] - element.end
         begin = element.begin
         end = element.end
-        child1_node = self.visit(element.children[0], [horizon])
-        child2_node = self.visit(element.children[1], [horizon])
+        child1_node = out_children[0]
+        child2_node = out_children[1]
         node = TimedPrecedes(child1_node, child2_node, begin, end)
         return node
 
-    def visitTimedOnce(self, element, args):
+    def postTimedOnce(self, out_children, element, args):
         child_node = self.visit(element.children[0], args)
         node = TimedOnce(child_node, element.begin, element.end)
         return node
 
-    def visitTimedHistorically(self, element, args):
-        child_node = self.visit(element.children[0], args)
+    def postTimedHistorically(self, out_children, element, args):
+        child_node = out_children[0]
         node = TimedHistorically(child_node, element.begin, element.end)
         return node
 
-    def visitTimedSince(self, element, args):
-        child_node_1 = self.visit(element.children[0], args)
-        child_node_2 = self.visit(element.children[1], args)
-        node = TimedSince(child_node_1, child_node_2, element.begin, element.end)
+    def postTmedSince(self, out_children, element, args):
+        child1_node = out_children[0]
+        child2_node = out_children[1]
+        node = TimedSince(child1_node, child2_node, element.begin, element.end)
         return node
 
-    def visitTimedPrecedes(self, element, args):
+    def postTimedPrecedes(self, out_children, element, args):
         end = element.end
         begin = element.begin
-        child1_node = self.visit(element.children[0], args)
-        child2_node = self.visit(element.children[1], args)
+        child1_node = out_children[0]
+        child2_node = out_children[1]
         node = TimedPrecedes(child1_node, child2_node, begin, end)
         return node
 
-    def visitDefault(self, element):
+    def postDefault(self, out_children, element):
         raise STLException('STL Pastifier: encountered unexpected type of node.')
