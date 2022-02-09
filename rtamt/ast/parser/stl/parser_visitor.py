@@ -27,12 +27,9 @@ class StlAstParserVisitor(LtlAstParserVisitor, StlParserVisitor):
         child = self.visit(ctx.expression())
         if ctx.interval() == None:
             node = Always(child)
-            horizon = child.horizon
         else:
             interval = self.visit(ctx.interval())
             node = TimedAlways(child, interval.begin, interval.end)
-            horizon = child.horizon + interval.end
-        node.horizon = horizon
         return node
 
 
@@ -40,12 +37,9 @@ class StlAstParserVisitor(LtlAstParserVisitor, StlParserVisitor):
         child = self.visit(ctx.expression())
         if ctx.interval() == None:
             node = Eventually(child)
-            horizon = child.horizon
         else:
             interval = self.visit(ctx.interval())
             node = TimedEventually(child, interval.begin, interval.end)
-            horizon = child.horizon + interval.end
-        node.horizon = horizon
         return node
 
     def visitExpreOnce(self, ctx):
@@ -55,7 +49,6 @@ class StlAstParserVisitor(LtlAstParserVisitor, StlParserVisitor):
         else:
             interval = self.visit(ctx.interval())
             node = TimedOnce(child, interval.begin, interval.end)
-        node.horizon = child.horizon
         return node
 
     def visitExprHist(self, ctx):
@@ -65,7 +58,6 @@ class StlAstParserVisitor(LtlAstParserVisitor, StlParserVisitor):
         else:
             interval = self.visit(ctx.interval())
             node = TimedHistorically(child, interval.begin, interval.end)
-        node.horizon = child.horizon
         return node
 
     def visitExprSince(self, ctx):
@@ -76,7 +68,6 @@ class StlAstParserVisitor(LtlAstParserVisitor, StlParserVisitor):
         else:
             interval = self.visit(ctx.interval())
             node = TimedSince(child1, child2, interval.begin, interval.end)
-        node.horizon = max(child1.horizon, child2.horizon)
         return node
 
     def visitExprUntil(self, ctx):
@@ -84,11 +75,9 @@ class StlAstParserVisitor(LtlAstParserVisitor, StlParserVisitor):
         child2 = self.visit(ctx.expression(1))
         if ctx.interval() == None:
             node = Until(child1, child2)
-            node.horizon = max(child1.horizon, child2.horizon)
         else:
             interval = self.visit(ctx.interval())
             node = TimedUntil(child1, child2, interval.begin, interval.end)
-            node.horizon = max(child1.horizon, child2.horizon) + interval.end
         return node
 
     def visitExprUnless(self, ctx):
@@ -99,12 +88,10 @@ class StlAstParserVisitor(LtlAstParserVisitor, StlParserVisitor):
             left = Always(child1)
             right = Until(child1, child2)
             node = Disjunction(left, right)
-            node.horizon = max(child1.horizon, child2.horizon)
         else:
             left = TimedAlways(child1, 0, interval.end)
             right = TimedUntil(child1, child2, interval.begin, interval.end)
             node = Disjunction(left, right)
-            node.horizon = max(child1.horizon, child2.horizon) + interval.end
         return node
 
     def visitConstantTimeLiteral(self, ctx):

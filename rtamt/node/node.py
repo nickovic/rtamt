@@ -15,21 +15,10 @@ class Node(AbstractNode):
 
     def __init__(self):
         """Constructor for Node"""
-        self.horizon = 0;
         self.in_vars = []
         self.out_vars = []
         self.children = list()
         self.name = ''
-
-    @property
-    def horizon(self):
-        """Getter for the horizon"""
-        return self.__horizon
-
-    @horizon.setter
-    def horizon(self, horizon):
-        """Setter for the horizon"""
-        self.__horizon = horizon
 
     @property
     def children(self):

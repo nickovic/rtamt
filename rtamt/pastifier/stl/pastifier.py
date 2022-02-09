@@ -8,15 +8,21 @@ from rtamt.node.stl.timed_once import TimedOnce
 from rtamt.node.stl.timed_since import TimedSince
 
 from rtamt.exception.stl.exception import STLException
+from rtamt.pastifier.stl.horizon import STLHorizon
+
 
 class STLPastifier(LTLPastifier, STLASTVisitor):
 
     def __init__(self):
-        pass 
-    
+        LTLPastifier.__init__(self)
+
     def visit(self, element, args):
         return STLASTVisitor.visit(self, element, args)
 
+    def pastify(self, element):
+        h = STLHorizon()
+        horizon = h.visit(element, None)
+        return self.visit(element, [horizon])
 
     def visitVariable(self, element, args):
         horizon = args[0]
