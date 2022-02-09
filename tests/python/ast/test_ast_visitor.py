@@ -18,7 +18,7 @@ class TestPrintVisitor(unittest.TestCase):
         ast.spec = 'always(a>=2)'
         ast.parse()
         out = self.visitor.visitAst(ast)
-        self.assertEqual(out, '((Variable)Predicate(Constant))', 'ltl assertion')
+        self.assertEqual(out, 'Always((Variable)Predicate(Constant))', 'ltl assertion')
 
     def test_visitor_with_discrete_time_stl(self):
         ast = stlDiscreteTimeAst()
@@ -26,7 +26,7 @@ class TestPrintVisitor(unittest.TestCase):
         ast.spec = 'always(a>=2)'
         ast.parse()
         out = self.visitor.visitAst(ast)
-        self.assertEqual(out, '((Variable)Predicate(Constant))', 'stl assertion')
+        self.assertEqual(out, 'Always((Variable)Predicate(Constant))', 'stl assertion')
 
     def test_visitor_with_dence_time_stl(self):
         ast = stlDenseTimeAst()
@@ -34,7 +34,7 @@ class TestPrintVisitor(unittest.TestCase):
         ast.spec = 'always(a>=2)'
         ast.parse()
         out = self.visitor.visitAst(ast)
-        self.assertEqual(out, '((Variable)Predicate(Constant))', 'stl assertion')
+        self.assertEqual(out, 'Always((Variable)Predicate(Constant))', 'stl assertion')
 
 
 if __name__ == '__main__':
