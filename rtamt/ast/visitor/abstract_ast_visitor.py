@@ -7,7 +7,7 @@ from rtamt.node.leaf_node import LeafNode
 from rtamt.exception.exception import AstVisitorException
 
 
-class AbstractVisitor(object):
+class AbstractAstVisitor(object):
     __metaclass__ = ABCMeta
 
     def visitChildren(self, node, *args, **kwargs):
