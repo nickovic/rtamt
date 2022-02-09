@@ -1,14 +1,10 @@
 from abc import ABCMeta
 
-class AbstractVisitor(object):
+class AbstractASTVisitor(object):
     __metaclass__ = ABCMeta
 
-    def visitChildren(self, node, *args, **kwargs):
-        children_output = list()
-        for nodeChild in node.children:
-            output = self.visit(nodeChild, *args, **kwargs)
-            children_output.append(output)
-        return children_output
-
     def visit(self, node, *args, **kwargs):
-        return self.visitChildren(node, *args, **kwargs)
+        result = None
+        for child_node in node.children:
+            result = self.visit(child_node, *args, **kwargs)
+        return result

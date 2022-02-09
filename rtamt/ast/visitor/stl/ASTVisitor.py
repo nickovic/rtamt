@@ -1,4 +1,6 @@
 from abc import ABCMeta, abstractmethod
+
+from rtamt.ast.visitor.abstract_visitor import AbstractASTVisitor
 from rtamt.node.ltl.predicate import Predicate
 from rtamt.node.ltl.variable import Variable
 from rtamt.node.ltl.neg import Neg
@@ -34,10 +36,8 @@ from rtamt.node.stl.timed_eventually import TimedEventually
 from rtamt.node.stl.timed_always import TimedAlways
 from rtamt.node.stl.timed_until import TimedUntil
 
-NOT_IMPLEMENTED = "You should implement this."
 
-class STLASTVisitor:
-    __metaclass__ = ABCMeta
+class STLASTVisitor(AbstractASTVisitor):
 
     def visit(self, element, args=None):
         if isinstance(element, Predicate):
@@ -112,143 +112,107 @@ class STLASTVisitor:
             ast = self.visitDefault(element, args)
         return ast
 
-
-    @abstractmethod
     def visitPredicate(self, element, args):
-        raise NotImplementedError(NOT_IMPLEMENTED)
-
-    @abstractmethod
+        return AbstractASTVisitor.visit(element, args)
+    
     def visitVariable(self, element, args):
-        raise NotImplementedError(NOT_IMPLEMENTED)
-
-    @abstractmethod
+        return AbstractASTVisitor.visit(element, args)
+    
     def visitAbs(self, element, args):
-        raise NotImplementedError(NOT_IMPLEMENTED)
-
-    @abstractmethod
+        return AbstractASTVisitor.visit(element, args)
+    
     def visitSqrt(self, element, args):
-        raise NotImplementedError(NOT_IMPLEMENTED)
-
-    @abstractmethod
+        return AbstractASTVisitor.visit(element, args)
+    
     def visitPow(self, element, args):
-        raise NotImplementedError(NOT_IMPLEMENTED)
-
-    @abstractmethod
+        return AbstractASTVisitor.visit(element, args)
+    
     def visitExp(self, element, args):
-        raise NotImplementedError(NOT_IMPLEMENTED)
-
-    @abstractmethod
+        return AbstractASTVisitor.visit(element, args)
+    
     def visitAddition(self, element, args):
-        raise NotImplementedError(NOT_IMPLEMENTED)
-
-    @abstractmethod
+        return AbstractASTVisitor.visit(element, args)
+    
     def visitSubtraction(self, element, args):
-        raise NotImplementedError(NOT_IMPLEMENTED)
-
-    @abstractmethod
+        return AbstractASTVisitor.visit(element, args)
+    
     def visitMultiplication(self, element, args):
-        raise NotImplementedError(NOT_IMPLEMENTED)
-
-    @abstractmethod
+        return AbstractASTVisitor.visit(element, args)
+    
     def visitDivision(self, element, args):
-        raise NotImplementedError(NOT_IMPLEMENTED)
-
-    @abstractmethod
+        return AbstractASTVisitor.visit(element, args)
+    
     def visitNot(self, element, args):
-        raise NotImplementedError(NOT_IMPLEMENTED)
-
-    @abstractmethod
+        return AbstractASTVisitor.visit(element, args)
+    
     def visitAnd(self, element, args):
-        raise NotImplementedError(NOT_IMPLEMENTED)
-
-    @abstractmethod
+        return AbstractASTVisitor.visit(element, args)
+    
     def visitOr(self, element, args):
-        raise NotImplementedError(NOT_IMPLEMENTED)
-
-    @abstractmethod
+        return AbstractASTVisitor.visit(element, args)
+    
     def visitImplies(self, element, args):
-        raise NotImplementedError(NOT_IMPLEMENTED)
-
-    @abstractmethod
+        return AbstractASTVisitor.visit(element, args)
+    
     def visitIff(self, element, args):
-        raise NotImplementedError(NOT_IMPLEMENTED)
-
-    @abstractmethod
+        return AbstractASTVisitor.visit(element, args)
+    
     def visitXor(self, element, args):
-        raise NotImplementedError(NOT_IMPLEMENTED)
-
-    @abstractmethod
+        return AbstractASTVisitor.visit(element, args)
+    
     def visitEventually(self, element, args):
-        raise NotImplementedError(NOT_IMPLEMENTED)
-
-    @abstractmethod
+        return AbstractASTVisitor.visit(element, args)
+    
     def visitAlways(self, element, args):
-        raise NotImplementedError(NOT_IMPLEMENTED)
-
-    @abstractmethod
+        return AbstractASTVisitor.visit(element, args)
+    
     def visitUntil(self, element, args):
-        raise NotImplementedError(NOT_IMPLEMENTED)
-
-    @abstractmethod
+        return AbstractASTVisitor.visit(element, args)
+    
     def visitOnce(self, element, args):
-        raise NotImplementedError(NOT_IMPLEMENTED)
-
-    @abstractmethod
+        return AbstractASTVisitor.visit(element, args)
+    
     def visitHistorically(self, element, args):
-        raise NotImplementedError(NOT_IMPLEMENTED)
-
-    @abstractmethod
+        return AbstractASTVisitor.visit(element, args)
+    
     def visitSince(self, element, args):
-        raise NotImplementedError(NOT_IMPLEMENTED)
-
-    @abstractmethod
+        return AbstractASTVisitor.visit(element, args)
+    
     def visitRise(self, element, args):
-        raise NotImplementedError(NOT_IMPLEMENTED)
-
-    @abstractmethod
+        return AbstractASTVisitor.visit(element, args)
+    
     def visitFall(self, element, args):
-        raise NotImplementedError(NOT_IMPLEMENTED)
-
-    @abstractmethod
+        return AbstractASTVisitor.visit(element, args)
+    
     def visitConstant(self, element, args):
-        raise NotImplementedError(NOT_IMPLEMENTED)
-
-    @abstractmethod
+        return AbstractASTVisitor.visit(element, args)
+    
     def visitPrevious(self, element, args):
-        raise NotImplementedError(NOT_IMPLEMENTED)
-
-    @abstractmethod
+        return AbstractASTVisitor.visit(element, args)
+    
     def visitNext(self, element, args):
-        raise NotImplementedError(NOT_IMPLEMENTED)
-
-    @abstractmethod
+        return AbstractASTVisitor.visit(element, args)
+    
     def visitTimedPrecedes(self, element, args):
-        raise NotImplementedError(NOT_IMPLEMENTED)
-
-    @abstractmethod
+        return AbstractASTVisitor.visit(element, args)
+    
     def visitTimedOnce(self, element, args):
-        raise NotImplementedError(NOT_IMPLEMENTED)
-
-    @abstractmethod
+        return AbstractASTVisitor.visit(element, args)
+    
     def visitTimedHistorically(self, element, args):
-        raise NotImplementedError(NOT_IMPLEMENTED)
-
-    @abstractmethod
+        return AbstractASTVisitor.visit(element, args)
+    
     def visitTimedSince(self, element, args):
-        raise NotImplementedError(NOT_IMPLEMENTED)
-
-    @abstractmethod
+        return AbstractASTVisitor.visit(element, args)
+    
     def visitTimedAlways(self, element, args):
-        raise NotImplementedError(NOT_IMPLEMENTED)
-
-    @abstractmethod
+        return AbstractASTVisitor.visit(element, args)
+    
     def visitTimedEventually(self, element, args):
-        raise NotImplementedError(NOT_IMPLEMENTED)
-
-    @abstractmethod
+        return AbstractASTVisitor.visit(element, args)
+    
     def visitTimedUntil(self, element, args):
-        raise NotImplementedError(NOT_IMPLEMENTED)
-
-    @abstractmethod
+        return AbstractASTVisitor.visit(element, args)
+    
     def visitDefault(self, element, args):
-        raise NotImplementedError(NOT_IMPLEMENTED)
+        return AbstractASTVisitor.visit(element, args)
