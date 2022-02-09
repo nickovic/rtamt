@@ -34,139 +34,83 @@ class LTLHorizon(LTLASTVisitor):
     def visitConstant(self, element, args):
         return 0
 
-    def visitPredicate(self, element, args):
-        op1_horizon = self.visit(element.children[0], args)
-        op2_horizon = self.visit(element.children[1], args)
-
-        return max(op1_horizon, op2_horizon)
+    def visitPredicate(self, element, result_child_left, result_child_right, args):
+        return max(result_child_left, result_child_right)
 
     def visitVariable(self, element, args):
         return 0
 
-    def visitAddition(self, element, args):
-        op1_horizon = self.visit(element.children[0], args)
-        op2_horizon = self.visit(element.children[1], args)
+    def visitAddition(self, element, result_child_left, result_child_right, args):
+        return max(result_child_left, result_child_right)
 
-        return max(op1_horizon, op2_horizon)
+    def visitMultiplication(self, element, result_child_left, result_child_right, args):
+        return max(result_child_left, result_child_right)
 
-    def visitMultiplication(self, element, args):
-        op1_horizon = self.visit(element.children[0], args)
-        op2_horizon = self.visit(element.children[1], args)
+    def visitSubtraction(self, element, result_child_left, result_child_right, args):
+        return max(result_child_left, result_child_right)
 
-        return max(op1_horizon, op2_horizon)
+    def visitDivision(self, element, result_child_left, result_child_right, args):
+        return max(result_child_left, result_child_right)
 
-    def visitSubtraction(self, element, args):
-        op1_horizon = self.visit(element.children[0], args)
-        op2_horizon = self.visit(element.children[1], args)
+    def visitAbs(self, element, result_child, args):
+        return result_child
 
-        return max(op1_horizon, op2_horizon)
+    def visitSqrt(self, element, result_child, args):
+        return result_child
 
-    def visitDivision(self, element, args):
-        op1_horizon = self.visit(element.children[0], args)
-        op2_horizon = self.visit(element.children[1], args)
+    def visitExp(self, element, result_child, args):
+        return result_child
 
-        return max(op1_horizon, op2_horizon)
+    def visitPow(self, element, result_child_left, result_child_right, args):
+        return max(result_child_left, result_child_right)
 
-    def visitAbs(self, element, args):
-        op_horizon = self.visit(element.children[0], args)
+    def visitRise(self, element, result_child, args):
+        return result_child
 
-        return op_horizon
+    def visitFall(self, element, result_child, args):
+        return result_child
 
-    def visitSqrt(self, element, args):
-        op_horizon = self.visit(element.children[0], args)
+    def visitNot(self, element, result_child, args):
+        return result_child
 
-        return op_horizon
+    def visitAnd(self, element, result_child_left, result_child_right, args):
+        return max(result_child_left, result_child_right)
 
-    def visitExp(self, element, args):
-        op_horizon = self.visit(element.children[0], args)
+    def visitOr(self, element, result_child_left, result_child_right, args):
+        return max(result_child_left, result_child_right)
 
-        return op_horizon
+    def visitImplies(self, element, result_child_left, result_child_right, args):
+        return max(result_child_left, result_child_right)
 
-    def visitPow(self, element, args):
-        op1_horizon = self.visit(element.children[0], args)
-        op2_horizon = self.visit(element.children[1], args)
+    def visitIff(self, element, result_child_left, result_child_right, args):
+        return max(result_child_left, result_child_right)
 
-        return max(op1_horizon, op2_horizon)
+    def visitXor(self, element, result_child_left, result_child_right, args):
+        return max(result_child_left, result_child_right)
 
-    def visitRise(self, element, args):
-        op_horizon = self.visit(element.children[0], args)
-
-        return op_horizon
-
-    def visitFall(self, element, args):
-        op_horizon = self.visit(element.children[0], args)
-
-        return op_horizon
-
-    def visitNot(self, element, args):
-        op_horizon = self.visit(element.children[0], args)
-
-        return op_horizon
-
-    def visitAnd(self, element, args):
-        op1_horizon = self.visit(element.children[0], args)
-        op2_horizon = self.visit(element.children[1], args)
-
-        return max(op1_horizon, op2_horizon)
-
-    def visitOr(self, element, args):
-        op1_horizon = self.visit(element.children[0], args)
-        op2_horizon = self.visit(element.children[1], args)
-
-        return max(op1_horizon, op2_horizon)
-
-    def visitImplies(self, element, args):
-        op1_horizon = self.visit(element.children[0], args)
-        op2_horizon = self.visit(element.children[1], args)
-
-        return max(op1_horizon, op2_horizon)
-
-    def visitIff(self, element, args):
-        op1_horizon = self.visit(element.children[0], args)
-        op2_horizon = self.visit(element.children[1], args)
-
-        return max(op1_horizon, op2_horizon)
-
-    def visitXor(self, element, args):
-        op1_horizon = self.visit(element.children[0], args)
-        op2_horizon = self.visit(element.children[1], args)
-
-        return max(op1_horizon, op2_horizon)
-
-    def visitEventually(self, element, args):
+    def visitEventually(self, element, result_child, args):
         raise LTLPastifyException('Cannot pastify an unbounded eventually.')
 
-    def visitAlways(self, element, args):
+    def visitAlways(self, element, result_child, args):
         raise LTLPastifyException('Cannot pastify an unbounded always.')
 
-    def visitUntil(self, element, args):
+    def visitUntil(self, element, result_child_left, result_child_right, args):
         raise LTLPastifyException('Cannot pastify an unbounded until.')
 
-    def visitOnce(self, element, args):
-        op_horizon = self.visit(element.children[0], args)
+    def visitOnce(self, element, result_child, args):
+        return result_child
 
-        return op_horizon
+    def visitPrevious(self, element, result_child, args):
+        return result_child
 
-    def visitPrevious(self, element, args):
-        op_horizon = self.visit(element.children[0], args)
+    def visitNext(self, element, result_child, args):
+        return result_child + 1
 
-        return op_horizon
+    def visitHistorically(self, element, result_child, args):
+        return result_child
 
-    def visitNext(self, element, args):
-        op_horizon = self.visit(element.children[0], args)
-
-        return op_horizon
-
-    def visitHistorically(self, element, args):
-        op_horizon = self.visit(element.children[0], args)
-
-        return op_horizon
-
-    def visitSince(self, element, args):
-        op1_horizon = self.visit(element.children[0], args)
-        op2_horizon = self.visit(element.children[1], args)
-
-        return max(op1_horizon, op2_horizon)
+    def visitSince(self, element, result_child_left, result_child_right, args):
+        return max(result_child_left, result_child_right)
 
     def visitDefault(self, element):
         raise LTLPastifyException('LTL Pastifier: encountered unexpected type of object.')
