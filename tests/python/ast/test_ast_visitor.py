@@ -7,9 +7,9 @@ from rtamt.ast.parser.stl.dense_time.specification_parser import stlDenseTimeAst
 from tests.python.ast.print_name_ast_visitor import PrintNameAstVisitor
 
 
-class TestPrintVisitor(unittest.TestCase):
+class TestPrintAstVisitor(unittest.TestCase):
     def __init__(self, *args, **kwargs):
-        super(TestPrintVisitor, self).__init__(*args, **kwargs)
+        super(TestPrintAstVisitor, self).__init__(*args, **kwargs)
         self.visitor = PrintNameAstVisitor()
 
     def test_visitor_with_ltl(self):

@@ -6,10 +6,10 @@ from rtamt.ast.parser.stl.dense_time.specification_parser import stlDenseTimeAst
 from tests.python.ast.ltl_print_name_ast_visitor import LtlPrintNameAstVisitor
 
 
-class TestLTLASTParser(unittest.TestCase):
+class TestLtlAstParser(unittest.TestCase):
 
     def __init__(self, *args, **kwargs):
-        super(TestLTLASTParser, self).__init__(*args, **kwargs)
+        super(TestLtlAstParser, self).__init__(*args, **kwargs)
         self.ast = LtlAst()
         self.printer = LtlPrintNameAstVisitor()
 

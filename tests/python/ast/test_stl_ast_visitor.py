@@ -42,9 +42,9 @@ from rtamt.node.stl.timed_once import TimedOnce
 from tests.python.ast.stl_print_name_ast_visitor import StlPrintNameAstVisitor
 
 
-class TestSTLVisitor(unittest.TestCase):
+class TestStlAstVisitor(unittest.TestCase):
     def __init__(self, *args, **kwargs):
-        super(TestSTLVisitor, self).__init__(*args, **kwargs)
+        super(TestStlAstVisitor, self).__init__(*args, **kwargs)
         self.visitor = StlPrintNameAstVisitor()
 
     def test_constant(self):

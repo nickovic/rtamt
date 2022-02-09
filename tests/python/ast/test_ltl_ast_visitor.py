@@ -33,9 +33,9 @@ from rtamt.node.ltl.variable import Variable
 
 from tests.python.ast.ltl_print_name_ast_visitor import LtlPrintNameAstVisitor
 
-class TestLTLVisitor(unittest.TestCase):
+class TestLtlAstVisitor(unittest.TestCase):
     def __init__(self, *args, **kwargs):
-        super(TestLTLVisitor, self).__init__(*args, **kwargs)
+        super(TestLtlAstVisitor, self).__init__(*args, **kwargs)
         self.visitor = LtlPrintNameAstVisitor()
 
     def test_constant(self):
