@@ -39,13 +39,13 @@ from rtamt.node.stl.timed_eventually import TimedEventually
 from rtamt.node.stl.timed_historically import TimedHistorically
 from rtamt.node.stl.timed_once import TimedOnce
 
-from tests.python.ast.stl_print_name_ast_visitor import STLPrintNameAstVisitor
+from tests.python.ast.stl_print_name_ast_visitor import StlPrintNameAstVisitor
 
 
 class TestSTLVisitor(unittest.TestCase):
     def __init__(self, *args, **kwargs):
         super(TestSTLVisitor, self).__init__(*args, **kwargs)
-        self.visitor = STLPrintNameAstVisitor()
+        self.visitor = StlPrintNameAstVisitor()
 
     def test_constant(self):
         c = Constant('2.3')

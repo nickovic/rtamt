@@ -3,7 +3,7 @@ from rtamt.ast.visitor.stl.ast_visitor import StlAstVisitor
 from tests.python.ast.ltl_print_name_ast_visitor import LtlPrintNameAstVisitor
 
 
-class STLPrintNameAstVisitor(StlAstVisitor, LtlPrintNameAstVisitor):
+class StlPrintNameAstVisitor(StlAstVisitor, LtlPrintNameAstVisitor):
     def visitConstant(self, element, *args, **kwargs):
         return str(element.val)
 
