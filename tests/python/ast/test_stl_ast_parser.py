@@ -1,7 +1,7 @@
 import unittest
 
 from rtamt.ast.parser.stl.discrete_time.specification_parser import stlDiscreteTimeAst
-from tests.python.ast.STLPrintNameVisitor import STLPrintNameVisitor
+from tests.python.ast.stl_print_name_ast_visitor import STLPrintNameAstVisitor
 
 
 class TestSTLASTParser(unittest.TestCase):
@@ -9,7 +9,7 @@ class TestSTLASTParser(unittest.TestCase):
     def __init__(self, *args, **kwargs):
         super(TestSTLASTParser, self).__init__(*args, **kwargs)
         self.ast = stlDiscreteTimeAst()
-        self.printer = STLPrintNameVisitor()
+        self.printer = STLPrintNameAstVisitor()
 
     def test_constant(self):
         self.ast = stlDiscreteTimeAst()

@@ -35,13 +35,13 @@ from rtamt.node.arithmetic.abs import Abs
 from rtamt.enumerations.comp_op import StlComparisonOperator
 from rtamt.node.ltl.constant import Constant
 from rtamt.node.ltl.variable import Variable
-from tests.python.ast.STLPrintNameVisitor import STLPrintNameVisitor
+from tests.python.ast.stl_print_name_ast_visitor import STLPrintNameAstVisitor
 
 
 class TestSTLVisitor(unittest.TestCase):
     def __init__(self, *args, **kwargs):
         super(TestSTLVisitor, self).__init__(*args, **kwargs)
-        self.visitor = STLPrintNameVisitor()
+        self.visitor = STLPrintNameAstVisitor()
 
     def test_constant(self):
         c = Constant('2.3')
