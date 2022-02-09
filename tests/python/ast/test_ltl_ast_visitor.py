@@ -246,5 +246,5 @@ class TestLTLVisitor(unittest.TestCase):
         n = self.visitor.visit(n, None)
         self.assertEqual(n, '(a)until(b)', 'until assertion')
 
-    if __name__ == '__main__':
-        unittest.main()
+if __name__ == '__main__':
+    unittest.main()

@@ -300,5 +300,5 @@ class TestSTLVisitor(unittest.TestCase):
         n = self.visitor.visit(n, None)
         self.assertEqual(n, '(a)precedes[1,2](b)', 'Timed precedes assertion')
 
-    if __name__ == '__main__':
-        unittest.main()
+if __name__ == '__main__':
+    unittest.main()
