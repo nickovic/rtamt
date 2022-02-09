@@ -1,4 +1,4 @@
-from rtamt.ast.visitor.ltl.ASTVisitor import LtlAstVisitor
+from rtamt.ast.visitor.ltl.ast_visitor import LtlAstVisitor
 
 #from rtamt.node.stl.timed_precedes import TimedPrecedes
 from rtamt.node.stl.timed_since import TimedSince
@@ -25,7 +25,7 @@ class StlAstVisitor(LtlAstVisitor):
         elif isinstance(node, TimedHistorically):
             result = self.visitTimedHistorically(node, *args, **kwargs)
         else:
-            result = super(StlAstVisitor, self).visitSpecific(node, *args, **kwargs)
+            result = super(StlAstVisitor, self).visit(node, *args, **kwargs)
 
         return result
 
