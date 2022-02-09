@@ -9,6 +9,8 @@ from rtamt.node.arithmetic.exp import Exp
 from rtamt.node.arithmetic.sqrt import Sqrt
 from rtamt.node.arithmetic.abs import Abs
 
+from rtamt.enumerations.comp_op import StlComparisonOperator
+
 from rtamt.node.ltl.always import Always
 from rtamt.node.ltl.neg import Neg
 from rtamt.node.ltl.eventually import Eventually
@@ -28,7 +30,6 @@ from rtamt.node.ltl.conjunction import Conjunction
 from rtamt.node.ltl.predicate import Predicate
 from rtamt.node.ltl.constant import Constant
 from rtamt.node.ltl.variable import Variable
-from rtamt.enumerations.comp_op import StlComparisonOperator
 
 from tests.python.ast.ltl_print_name_ast_visitor import LtlPrintNameAstVisitor
 
