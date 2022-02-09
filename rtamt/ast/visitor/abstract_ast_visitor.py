@@ -26,6 +26,9 @@ class AbstractAstVisitor(object):
             raise AstVisitorException('{} is not RTAMT AST node'.format(node.__class__.__name__))
         return result
 
+    def visitAst(self, ast, *args, **kwargs):
+        return self.visit(ast.ast, *args, **kwargs)
+
 
     def visitBinary(self, node, *args, **kwargs):
         return self.visitChildren(node, *args, **kwargs)
