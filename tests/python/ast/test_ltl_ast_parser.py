@@ -3,7 +3,7 @@ import unittest
 from rtamt.ast.parser.ltl.specification_parser import LtlAst
 from rtamt.ast.parser.stl.discrete_time.specification_parser import stlDiscreteTimeAst
 from rtamt.ast.parser.stl.dense_time.specification_parser import stlDenseTimeAst
-from tests.python.ast.LTLPrintNameVisitor import LTLPrintNameVisitor
+from tests.python.ast.ltl_print_name_ast_visitor import LtlPrintNameAstVisitor
 
 
 class TestLTLASTParser(unittest.TestCase):
@@ -11,7 +11,7 @@ class TestLTLASTParser(unittest.TestCase):
     def __init__(self, *args, **kwargs):
         super(TestLTLASTParser, self).__init__(*args, **kwargs)
         self.ast = LtlAst()
-        self.printer = LTLPrintNameVisitor()
+        self.printer = LtlPrintNameAstVisitor()
 
     def test_constant(self):
         self.ast = LtlAst()
