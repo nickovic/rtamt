@@ -1,5 +1,3 @@
-from rtamt.exception.ltl.exception import LTLPastifyException
-
 from rtamt.ast.visitor.ltl.ast_visitor import LtlAstVisitor
 
 class LtlPrintNameAstVisitor(LtlAstVisitor):
@@ -121,6 +119,3 @@ class LtlPrintNameAstVisitor(LtlAstVisitor):
         op1 = self.visit(node.children[0], *args, **kwargs)
         op2 = self.visit(node.children[1], *args, **kwargs)
         return '(' + op1 + ')' + 'since' + '(' + op2 + ')'
-
-    def visitDefault(self, node):
-        raise LTLPastifyException('LTL Print Name: encountered unexpected type of object.')
