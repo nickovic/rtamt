@@ -4,155 +4,155 @@ from tests.python.ast.ltl_print_name_ast_visitor import LtlPrintNameAstVisitor
 
 
 class StlPrintNameAstVisitor(StlAstVisitor, LtlPrintNameAstVisitor):
-    def visitConstant(self, element, *args, **kwargs):
-        return str(element.val)
+    def visitConstant(self, node, *args, **kwargs):
+        return str(node.val)
 
-    def visitPredicate(self, element, *args, **kwargs):
-        op1 = self.visit(element.children[0], *args, **kwargs)
-        op2 = self.visit(element.children[1], *args, **kwargs)
-        return '(' +  op1 + ')' + str(element.operator) + '(' + op2 + ')'
+    def visitPredicate(self, node, *args, **kwargs):
+        op1 = self.visit(node.children[0], *args, **kwargs)
+        op2 = self.visit(node.children[1], *args, **kwargs)
+        return '(' +  op1 + ')' + str(node.operator) + '(' + op2 + ')'
 
-    def visitVariable(self, element, *args, **kwargs):
-        return element.var
+    def visitVariable(self, node, *args, **kwargs):
+        return node.var
 
-    def visitAddition(self, element, *args, **kwargs):
-        op1 = self.visit(element.children[0], *args, **kwargs)
-        op2 = self.visit(element.children[1], *args, **kwargs)
+    def visitAddition(self, node, *args, **kwargs):
+        op1 = self.visit(node.children[0], *args, **kwargs)
+        op2 = self.visit(node.children[1], *args, **kwargs)
         return '(' + op1 + ')' + '+' + '(' + op2 + ')'
 
-    def visitMultiplication(self, element, *args, **kwargs):
-        op1 = self.visit(element.children[0], *args, **kwargs)
-        op2 = self.visit(element.children[1], *args, **kwargs)
+    def visitMultiplication(self, node, *args, **kwargs):
+        op1 = self.visit(node.children[0], *args, **kwargs)
+        op2 = self.visit(node.children[1], *args, **kwargs)
         return '(' + op1 + ')' + '*' + '(' + op2 + ')'
 
-    def visitSubtraction(self, element, *args, **kwargs):
-        op1 = self.visit(element.children[0], *args, **kwargs)
-        op2 = self.visit(element.children[1], *args, **kwargs)
+    def visitSubtraction(self, node, *args, **kwargs):
+        op1 = self.visit(node.children[0], *args, **kwargs)
+        op2 = self.visit(node.children[1], *args, **kwargs)
         return '(' + op1 + ')' + '-' + '(' + op2 + ')'
 
-    def visitDivision(self, element, *args, **kwargs):
-        op1 = self.visit(element.children[0], *args, **kwargs)
-        op2 = self.visit(element.children[1], *args, **kwargs)
+    def visitDivision(self, node, *args, **kwargs):
+        op1 = self.visit(node.children[0], *args, **kwargs)
+        op2 = self.visit(node.children[1], *args, **kwargs)
         return '(' + op1 + ')' + '/' + '(' + op2 + ')'
 
-    def visitAbs(self, element, *args, **kwargs):
-        op = self.visit(element.children[0], *args, **kwargs)
+    def visitAbs(self, node, *args, **kwargs):
+        op = self.visit(node.children[0], *args, **kwargs)
         return 'abs(' + op + ')'
 
-    def visitSqrt(self, element, *args, **kwargs):
-        op = self.visit(element.children[0], *args, **kwargs)
+    def visitSqrt(self, node, *args, **kwargs):
+        op = self.visit(node.children[0], *args, **kwargs)
         return 'sqrt(' + op + ')'
 
-    def visitExp(self, element, *args, **kwargs):
-        op = self.visit(element.children[0], *args, **kwargs)
+    def visitExp(self, node, *args, **kwargs):
+        op = self.visit(node.children[0], *args, **kwargs)
         return 'exp(' + op + ')'
 
-    def visitPow(self, element, *args, **kwargs):
-        op1 = self.visit(element.children[0], *args, **kwargs)
-        op2 = self.visit(element.children[1], *args, **kwargs)
+    def visitPow(self, node, *args, **kwargs):
+        op1 = self.visit(node.children[0], *args, **kwargs)
+        op2 = self.visit(node.children[1], *args, **kwargs)
         return 'pow(' + op1 + ',' + op2 + ')'
 
-    def visitRise(self, element, *args, **kwargs):
-        op = self.visit(element.children[0], *args, **kwargs)
+    def visitRise(self, node, *args, **kwargs):
+        op = self.visit(node.children[0], *args, **kwargs)
         return 'rise(' + op + ')'
 
-    def visitFall(self, element, *args, **kwargs):
-        op = self.visit(element.children[0], *args, **kwargs)
+    def visitFall(self, node, *args, **kwargs):
+        op = self.visit(node.children[0], *args, **kwargs)
         return 'fall(' + op + ')'
 
-    def visitNot(self, element, *args, **kwargs):
-        op = self.visit(element.children[0], *args, **kwargs)
+    def visitNot(self, node, *args, **kwargs):
+        op = self.visit(node.children[0], *args, **kwargs)
         return 'not(' + op + ')'
 
-    def visitAnd(self, element, *args, **kwargs):
-        op1 = self.visit(element.children[0], *args, **kwargs)
-        op2 = self.visit(element.children[1], *args, **kwargs)
+    def visitAnd(self, node, *args, **kwargs):
+        op1 = self.visit(node.children[0], *args, **kwargs)
+        op2 = self.visit(node.children[1], *args, **kwargs)
         return '(' + op1 + ')' + 'and' + '(' + op2 + ')'
 
-    def visitOr(self, element, *args, **kwargs):
-        op1 = self.visit(element.children[0], *args, **kwargs)
-        op2 = self.visit(element.children[1], *args, **kwargs)
+    def visitOr(self, node, *args, **kwargs):
+        op1 = self.visit(node.children[0], *args, **kwargs)
+        op2 = self.visit(node.children[1], *args, **kwargs)
         return '(' + op1 + ')' + 'or' + '(' + op2 + ')'
 
-    def visitImplies(self, element, *args, **kwargs):
-        op1 = self.visit(element.children[0], *args, **kwargs)
-        op2 = self.visit(element.children[1], *args, **kwargs)
+    def visitImplies(self, node, *args, **kwargs):
+        op1 = self.visit(node.children[0], *args, **kwargs)
+        op2 = self.visit(node.children[1], *args, **kwargs)
         return '(' + op1 + ')' + 'implies' + '(' + op2 + ')'
 
-    def visitIff(self, element, *args, **kwargs):
-        op1 = self.visit(element.children[0], *args, **kwargs)
-        op2 = self.visit(element.children[1], *args, **kwargs)
+    def visitIff(self, node, *args, **kwargs):
+        op1 = self.visit(node.children[0], *args, **kwargs)
+        op2 = self.visit(node.children[1], *args, **kwargs)
         return '(' + op1 + ')' + 'iff' + '(' + op2 + ')'
 
-    def visitXor(self, element, *args, **kwargs):
-        op1 = self.visit(element.children[0], *args, **kwargs)
-        op2 = self.visit(element.children[1], *args, **kwargs)
+    def visitXor(self, node, *args, **kwargs):
+        op1 = self.visit(node.children[0], *args, **kwargs)
+        op2 = self.visit(node.children[1], *args, **kwargs)
         return '(' + op1 + ')' + 'xor' + '(' + op2 + ')'
 
-    def visitEventually(self, element, *args, **kwargs):
-        op = self.visit(element.children[0], *args, **kwargs)
+    def visitEventually(self, node, *args, **kwargs):
+        op = self.visit(node.children[0], *args, **kwargs)
         return 'eventually(' + op + ')'
 
-    def visitAlways(self, element, *args, **kwargs):
-        op = self.visit(element.children[0], *args, **kwargs)
+    def visitAlways(self, node, *args, **kwargs):
+        op = self.visit(node.children[0], *args, **kwargs)
         return 'always(' + op + ')'
 
-    def visitUntil(self, element, *args, **kwargs):
-        op1 = self.visit(element.children[0], *args, **kwargs)
-        op2 = self.visit(element.children[1], *args, **kwargs)
+    def visitUntil(self, node, *args, **kwargs):
+        op1 = self.visit(node.children[0], *args, **kwargs)
+        op2 = self.visit(node.children[1], *args, **kwargs)
         return '(' + op1 + ')' + 'until' + '(' + op2 + ')'
 
-    def visitOnce(self, element, *args, **kwargs):
-        op = self.visit(element.children[0], *args, **kwargs)
+    def visitOnce(self, node, *args, **kwargs):
+        op = self.visit(node.children[0], *args, **kwargs)
         return 'once(' + op + ')'
 
-    def visitPrevious(self, element, *args, **kwargs):
-        op = self.visit(element.children[0], *args, **kwargs)
+    def visitPrevious(self, node, *args, **kwargs):
+        op = self.visit(node.children[0], *args, **kwargs)
         return 'prev(' + op + ')'
 
-    def visitNext(self, element, *args, **kwargs):
-        op = self.visit(element.children[0], *args, **kwargs)
+    def visitNext(self, node, *args, **kwargs):
+        op = self.visit(node.children[0], *args, **kwargs)
         return 'next(' + op + ')'
 
-    def visitHistorically(self, element, *args, **kwargs):
-        op = self.visit(element.children[0], *args, **kwargs)
+    def visitHistorically(self, node, *args, **kwargs):
+        op = self.visit(node.children[0], *args, **kwargs)
         return 'historically(' + op + ')'
 
-    def visitSince(self, element, *args, **kwargs):
-        op1 = self.visit(element.children[0], *args, **kwargs)
-        op2 = self.visit(element.children[1], *args, **kwargs)
+    def visitSince(self, node, *args, **kwargs):
+        op1 = self.visit(node.children[0], *args, **kwargs)
+        op2 = self.visit(node.children[1], *args, **kwargs)
         return '(' + op1 + ')' + 'since' + '(' + op2 + ')'
 
-    def visitDefault(self, element):
+    def visitDefault(self, node):
         raise LTLPastifyException('LTL Print Name: encountered unexpected type of object.')
 
-    def visitTimedOnce(self, element, *args, **kwargs):
-        op = self.visit(element.children[0], *args, **kwargs)
-        return 'once[' + str(element.begin) + ',' + str(element.end) +'](' + op + ')'
+    def visitTimedOnce(self, node, *args, **kwargs):
+        op = self.visit(node.children[0], *args, **kwargs)
+        return 'once[' + str(node.begin) + ',' + str(node.end) +'](' + op + ')'
 
-    def visitTimedHistorically(self, element, *args, **kwargs):
-        op = self.visit(element.children[0], *args, **kwargs)
-        return 'historically[' + str(element.begin) + ',' + str(element.end) +'](' + op + ')'
+    def visitTimedHistorically(self, node, *args, **kwargs):
+        op = self.visit(node.children[0], *args, **kwargs)
+        return 'historically[' + str(node.begin) + ',' + str(node.end) +'](' + op + ')'
 
-    def visitTimedEventually(self, element, *args, **kwargs):
-        op = self.visit(element.children[0], *args, **kwargs)
-        return 'eventually[' + str(element.begin) + ',' + str(element.end) +'](' + op + ')'
+    def visitTimedEventually(self, node, *args, **kwargs):
+        op = self.visit(node.children[0], *args, **kwargs)
+        return 'eventually[' + str(node.begin) + ',' + str(node.end) +'](' + op + ')'
 
-    def visitTimedAlways(self, element, *args, **kwargs):
-        op = self.visit(element.children[0], *args, **kwargs)
-        return 'always[' + str(element.begin) + ',' + str(element.end) +'](' + op + ')'
+    def visitTimedAlways(self, node, *args, **kwargs):
+        op = self.visit(node.children[0], *args, **kwargs)
+        return 'always[' + str(node.begin) + ',' + str(node.end) +'](' + op + ')'
 
-    def visitTimedSince(self, element, *args, **kwargs):
-        op1 = self.visit(element.children[0], *args, **kwargs)
-        op2 = self.visit(element.children[1], *args, **kwargs)
-        return '(' + op1 + ')' + 'since[' + str(element.begin) + ',' + str(element.end) +'](' + op2 + ')'
+    def visitTimedSince(self, node, *args, **kwargs):
+        op1 = self.visit(node.children[0], *args, **kwargs)
+        op2 = self.visit(node.children[1], *args, **kwargs)
+        return '(' + op1 + ')' + 'since[' + str(node.begin) + ',' + str(node.end) +'](' + op2 + ')'
 
-    def visitTimedUntil(self, element, *args, **kwargs):
-        op1 = self.visit(element.children[0], *args, **kwargs)
-        op2 = self.visit(element.children[1], *args, **kwargs)
-        return '(' + op1 + ')' + 'until[' + str(element.begin) + ',' + str(element.end) +'](' + op2 + ')'
+    def visitTimedUntil(self, node, *args, **kwargs):
+        op1 = self.visit(node.children[0], *args, **kwargs)
+        op2 = self.visit(node.children[1], *args, **kwargs)
+        return '(' + op1 + ')' + 'until[' + str(node.begin) + ',' + str(node.end) +'](' + op2 + ')'
 
-    def visitTimedPrecedes(self, element, *args, **kwargs):
-        op1 = self.visit(element.children[0], *args, **kwargs)
-        op2 = self.visit(element.children[1], *args, **kwargs)
-        return '(' + op1 + ')' + 'precedes[' + str(element.begin) + ',' + str(element.end) +'](' + op2 + ')'
+    def visitTimedPrecedes(self, node, *args, **kwargs):
+        op1 = self.visit(node.children[0], *args, **kwargs)
+        op2 = self.visit(node.children[1], *args, **kwargs)
+        return '(' + op1 + ')' + 'precedes[' + str(node.begin) + ',' + str(node.end) +'](' + op2 + ')'
