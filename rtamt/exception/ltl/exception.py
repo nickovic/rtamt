@@ -3,6 +3,8 @@ from rtamt.exception.exception import RTAMTException
 class LTLException(RTAMTException):
     pass
 
+class LTLVisitorException(LTLException):
+    pass
 class LTLPastifyException(LTLException):
     pass
 

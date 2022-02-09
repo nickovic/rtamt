@@ -1,4 +1,16 @@
 import unittest
+
+from rtamt.node.arithmetic.addition import Addition
+from rtamt.node.arithmetic.subtraction import Subtraction
+from rtamt.node.arithmetic.multiplication import Multiplication
+from rtamt.node.arithmetic.division import Division
+from rtamt.node.arithmetic.pow import Pow
+from rtamt.node.arithmetic.exp import Exp
+from rtamt.node.arithmetic.sqrt import Sqrt
+from rtamt.node.arithmetic.abs import Abs
+
+from rtamt.enumerations.comp_op import StlComparisonOperator
+
 from rtamt.node.ltl.always import Always
 from rtamt.node.ltl.neg import Neg
 from rtamt.node.ltl.eventually import Eventually
@@ -16,23 +28,15 @@ from rtamt.node.ltl.implies import Implies
 from rtamt.node.ltl.disjunction import Disjunction
 from rtamt.node.ltl.conjunction import Conjunction
 from rtamt.node.ltl.predicate import Predicate
-from rtamt.node.arithmetic.addition import Addition
-from rtamt.node.arithmetic.subtraction import Subtraction
-from rtamt.node.arithmetic.multiplication import Multiplication
-from rtamt.node.arithmetic.division import Division
-from rtamt.node.arithmetic.pow import Pow
-from rtamt.node.arithmetic.exp import Exp
-from rtamt.node.arithmetic.sqrt import Sqrt
-from rtamt.node.arithmetic.abs import Abs
-from rtamt.enumerations.comp_op import StlComparisonOperator
-from tests.python.ast.LTLPrintNameVisitor import LTLPrintNameVisitor
 from rtamt.node.ltl.constant import Constant
 from rtamt.node.ltl.variable import Variable
 
-class TestLTLVisitor(unittest.TestCase):
+from tests.python.ast.ltl_print_name_ast_visitor import LtlPrintNameAstVisitor
+
+class TestLtlAstVisitor(unittest.TestCase):
     def __init__(self, *args, **kwargs):
-        super(TestLTLVisitor, self).__init__(*args, **kwargs)
-        self.visitor = LTLPrintNameVisitor()
+        super(TestLtlAstVisitor, self).__init__(*args, **kwargs)
+        self.visitor = LtlPrintNameAstVisitor()
 
     def test_constant(self):
         c = Constant('2.3')
@@ -242,5 +246,5 @@ class TestLTLVisitor(unittest.TestCase):
         n = self.visitor.visit(n, None)
         self.assertEqual(n, '(a)until(b)', 'until assertion')
 
-    if __name__ == '__main__':
-        unittest.main()
+if __name__ == '__main__':
+    unittest.main()

@@ -1,12 +1,16 @@
 import unittest
 
-from rtamt.node.stl.timed_precedes import TimedPrecedes
-from rtamt.node.stl.timed_until import TimedUntil
-from rtamt.node.stl.timed_since import TimedSince
-from rtamt.node.stl.timed_always import TimedAlways
-from rtamt.node.stl.timed_eventually import TimedEventually
-from rtamt.node.stl.timed_historically import TimedHistorically
-from rtamt.node.stl.timed_once import TimedOnce
+from rtamt.node.arithmetic.addition import Addition
+from rtamt.node.arithmetic.subtraction import Subtraction
+from rtamt.node.arithmetic.multiplication import Multiplication
+from rtamt.node.arithmetic.division import Division
+from rtamt.node.arithmetic.pow import Pow
+from rtamt.node.arithmetic.exp import Exp
+from rtamt.node.arithmetic.sqrt import Sqrt
+from rtamt.node.arithmetic.abs import Abs
+
+from rtamt.enumerations.comp_op import StlComparisonOperator
+
 from rtamt.node.ltl.always import Always
 from rtamt.node.ltl.neg import Neg
 from rtamt.node.ltl.eventually import Eventually
@@ -24,24 +28,24 @@ from rtamt.node.ltl.implies import Implies
 from rtamt.node.ltl.disjunction import Disjunction
 from rtamt.node.ltl.conjunction import Conjunction
 from rtamt.node.ltl.predicate import Predicate
-from rtamt.node.arithmetic.addition import Addition
-from rtamt.node.arithmetic.subtraction import Subtraction
-from rtamt.node.arithmetic.multiplication import Multiplication
-from rtamt.node.arithmetic.division import Division
-from rtamt.node.arithmetic.pow import Pow
-from rtamt.node.arithmetic.exp import Exp
-from rtamt.node.arithmetic.sqrt import Sqrt
-from rtamt.node.arithmetic.abs import Abs
-from rtamt.enumerations.comp_op import StlComparisonOperator
 from rtamt.node.ltl.constant import Constant
 from rtamt.node.ltl.variable import Variable
-from tests.python.ast.STLPrintNameVisitor import STLPrintNameVisitor
+
+from rtamt.node.stl.timed_precedes import TimedPrecedes
+from rtamt.node.stl.timed_until import TimedUntil
+from rtamt.node.stl.timed_since import TimedSince
+from rtamt.node.stl.timed_always import TimedAlways
+from rtamt.node.stl.timed_eventually import TimedEventually
+from rtamt.node.stl.timed_historically import TimedHistorically
+from rtamt.node.stl.timed_once import TimedOnce
+
+from tests.python.ast.stl_print_name_ast_visitor import StlPrintNameAstVisitor
 
 
-class TestSTLVisitor(unittest.TestCase):
+class TestStlAstVisitor(unittest.TestCase):
     def __init__(self, *args, **kwargs):
-        super(TestSTLVisitor, self).__init__(*args, **kwargs)
-        self.visitor = STLPrintNameVisitor()
+        super(TestStlAstVisitor, self).__init__(*args, **kwargs)
+        self.visitor = StlPrintNameAstVisitor()
 
     def test_constant(self):
         c = Constant('2.3')
@@ -296,5 +300,5 @@ class TestSTLVisitor(unittest.TestCase):
         n = self.visitor.visit(n, None)
         self.assertEqual(n, '(a)precedes[1,2](b)', 'Timed precedes assertion')
 
-    if __name__ == '__main__':
-        unittest.main()
+if __name__ == '__main__':
+    unittest.main()

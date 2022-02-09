@@ -4,10 +4,10 @@ from rtamt.ast.parser.ltl.specification_parser import LtlAst
 from rtamt.ast.parser.stl.discrete_time.specification_parser import stlDiscreteTimeAst
 from rtamt.ast.parser.stl.dense_time.specification_parser import stlDenseTimeAst
 
-class TestAstParsing(unittest.TestCase):
+class TestAstParser(unittest.TestCase):
 
     def __init__(self, *args, **kwargs):
-        super(TestAstParsing, self).__init__(*args, **kwargs)
+        super(TestAstParser, self).__init__(*args, **kwargs)
 
 
     def test_ltl_parse(self):
