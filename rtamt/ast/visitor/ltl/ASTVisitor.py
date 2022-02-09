@@ -32,68 +32,68 @@ from rtamt.node.ltl.previous import Previous
 from rtamt.exception.ltl.exception import LTLVisitorException
 
 
-class LTLASTVisitor(AbstractVisitor):
+class LTLresultVisitor(AbstractVisitor):
 
     def visit(self, node, *args, **kwargs):
         if isinstance(node, Predicate):
-            ast = self.visitPredicate(node, args)
+            result = self.visitPredicate(node, args)
         elif isinstance(node, Variable):
-            ast = self.visitVariable(node, *args, **kwargs)
+            result = self.visitVariable(node, *args, **kwargs)
         elif isinstance(node, Neg):
-            ast = self.visitNot(node, *args, **kwargs)
+            result = self.visitNot(node, *args, **kwargs)
         elif isinstance(node, Disjunction):
-            ast = self.visitOr(node, *args, **kwargs)
+            result = self.visitOr(node, *args, **kwargs)
         elif isinstance(node, Conjunction):
-            ast = self.visitAnd(node, *args, **kwargs)
+            result = self.visitAnd(node, *args, **kwargs)
         elif isinstance(node, Implies):
-            ast = self.visitImplies(node, *args, **kwargs)
+            result = self.visitImplies(node, *args, **kwargs)
         elif isinstance(node, Iff):
-            ast = self.visitIff(node, *args, **kwargs)
+            result = self.visitIff(node, *args, **kwargs)
         elif isinstance(node, Xor):
-            ast = self.visitXor(node, *args, **kwargs)
+            result = self.visitXor(node, *args, **kwargs)
         elif isinstance(node, Eventually):
-            ast = self.visitEventually(node, *args, **kwargs)
+            result = self.visitEventually(node, *args, **kwargs)
         elif isinstance(node, Always):
-            ast = self.visitAlways(node, *args, **kwargs)
+            result = self.visitAlways(node, *args, **kwargs)
         elif isinstance(node, Until):
-            ast = self.visitUntil(node, *args, **kwargs)
+            result = self.visitUntil(node, *args, **kwargs)
         elif isinstance(node, Once):
-            ast = self.visitOnce(node, *args, **kwargs)
+            result = self.visitOnce(node, *args, **kwargs)
         elif isinstance(node, Historically):
-            ast = self.visitHistorically(node, *args, **kwargs)
+            result = self.visitHistorically(node, *args, **kwargs)
         elif isinstance(node, Since):
-            ast = self.visitSince(node, *args, **kwargs)
+            result = self.visitSince(node, *args, **kwargs)
         elif isinstance(node, TimedPrecedes):
-            ast = self.visitTimedPrecedes(node, *args, **kwargs)
+            result = self.visitTimedPrecedes(node, *args, **kwargs)
         elif isinstance(node, Abs):
-            ast = self.visitAbs(node, *args, **kwargs)
+            result = self.visitAbs(node, *args, **kwargs)
         elif isinstance(node, Sqrt):
-            ast = self.visitSqrt(node, *args, **kwargs)
+            result = self.visitSqrt(node, *args, **kwargs)
         elif isinstance(node, Exp):
-            ast = self.visitExp(node, *args, **kwargs)
+            result = self.visitExp(node, *args, **kwargs)
         elif isinstance(node, Pow):
-            ast = self.visitPow(node, *args, **kwargs)
+            result = self.visitPow(node, *args, **kwargs)
         elif isinstance(node, Addition):
-            ast = self.visitAddition(node, *args, **kwargs)
+            result = self.visitAddition(node, *args, **kwargs)
         elif isinstance(node, Subtraction):
-            ast = self.visitSubtraction(node, *args, **kwargs)
+            result = self.visitSubtraction(node, *args, **kwargs)
         elif isinstance(node, Multiplication):
-            ast = self.visitMultiplication(node, *args, **kwargs)
+            result = self.visitMultiplication(node, *args, **kwargs)
         elif isinstance(node, Division):
-            ast = self.visitDivision(node, *args, **kwargs)
+            result = self.visitDivision(node, *args, **kwargs)
         elif isinstance(node, Rise):
-            ast = self.visitRise(node, *args, **kwargs)
+            result = self.visitRise(node, *args, **kwargs)
         elif isinstance(node, Fall):
-            ast = self.visitFall(node, *args, **kwargs)
+            result = self.visitFall(node, *args, **kwargs)
         elif isinstance(node, Constant):
-            ast = self.visitConstant(node, *args, **kwargs)
+            result = self.visitConstant(node, *args, **kwargs)
         elif isinstance(node, Previous):
-            ast = self.visitPrevious(node, *args, **kwargs)
+            result = self.visitPrevious(node, *args, **kwargs)
         elif isinstance(node, Next):
-            ast = self.visitNext(node, *args, **kwargs)
+            result = self.visitNext(node, *args, **kwargs)
         else:
-            raise LTLVisitorException('{} is not LTL AST node'.format(node.__class__.__name__))
-        return ast
+            raise LTLVisitorException('{} is not LTL result node'.format(node.__class__.__name__))
+        return result
 
 
 
