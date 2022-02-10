@@ -27,6 +27,7 @@ class AbstractAstVisitor(object):
         return result
 
     def visitAst(self, ast, *args, **kwargs):
+        self.ast = ast
         return self.visit(ast.ast, *args, **kwargs)
 
 
