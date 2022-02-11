@@ -4,12 +4,13 @@
 - [About](#about)
 - [Installation](#installation)
   - [Install prerequisites for RTAMT installation](#install-prerequisites-for-rtamt-installation)
-  - [Build the tool](#build-the-tool)
+  - [Option 1: Install Python package version](#option-1-install-python-package-version)
+  - [Option 2: Build the tool](#option-2-build-the-tool)
     - [Clone the repository](#clone-the-repository)
     - [Build CPP libraries](#build-cpp-libraries)
     - [Install RTAMT](#install-rtamt)
-    - [Uninstall RTAMT](#uninstall-rtamt)
-  - [Test RTAMT](#test-rtamt)
+    - [uninstall RTAMT](#uninstall-rtamt)
+  - [test RTAMT](#test-rtamt)
 - [Theory](#theory)
   - [Specification Language](#specification-language)
 - [Usage](#usage)
@@ -25,8 +26,10 @@
 
 # About
 
-RTAMT is a Python (2- and 3-compatible) library for monitoring of  
-Signal Temporal Logic (STL). The library implements algorithms offline and online monitoring of discrete-time and dense-time STL. The online monitors support the bounded future fragment of STL. The online discrete-time part of the library has an optimized C++ back-end.
+RTAMT is a Python (2- and 3-compatible) library for monitoring of Signal Temporal Logic (STL).
+The library implements algorithms offline and online monitoring of discrete-time and dense-time STL.
+The online monitors support the bounded future fragment of STL.
+The online discrete-time part of the library has an optimized C++ back-end.
 
 # Installation
 
@@ -52,7 +55,23 @@ sudo apt install cmake
 
 In our experience, Ubuntu 16.04, 18.04 don't support the versions in default. You can check [our manual intallation of cmake](README_cmake.md).
 
-## Build the tool
+## Option 1: Install Python package version
+
+We provide Python package version of RTAMT.
+
+for Python 2
+
+```bash
+sudo pip2 install rtamt
+```
+
+for Python 3
+
+```bash
+sudo pip3 install rtamt
+```
+
+## Option 2: Build the tool
 
 ### Clone the repository
 
