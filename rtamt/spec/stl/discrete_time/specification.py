@@ -150,6 +150,13 @@ class STLDiscreteTimeSpecification(LTLDiscreteTimeSpecification):
         return out
 
     def evaluate(self, *args, **kargs):
+        # sample - list of [time, value] pairs
+        # inputs - list of [var name, sample] pairs
+        # Example:
+        # a = [[0, 1.3], [0.7, 3], [1.3, 0.1], [2.1, -2.2]]
+        # b = [[0, 2.5], [0.7, 4], [1.3, -1.2], [2.1, 1.7]]
+        # evaluate(['a', a], ['b', b])
+
         if len(args) != 1:
             raise STLException('evaluate: Wrong number of arguments')
 
