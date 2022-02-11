@@ -1,4 +1,4 @@
-from rtamt.ast.visitor.ltl.ASTVisitor import LTLASTVisitor
+from rtamt.ast.visitor.ltl.ast_visitor import LtlAstVisitor
 
 from rtamt.node.ltl.predicate import Predicate
 from rtamt.node.ltl.variable import Variable
@@ -26,7 +26,7 @@ from rtamt.node.ltl.previous import Previous
 
 from rtamt.exception.ltl.exception import LTLPastifyException
 
-class LTLHorizon(LTLASTVisitor):
+class LTLHorizon(LtlAstVisitor):
 
     def __init__(self):
         pass

@@ -36,7 +36,7 @@ class LtlAstVisitor(AbstractAstVisitor):
 
     def visit(self, node, *args, **kwargs):
         if isinstance(node, Predicate):
-            result = self.visitPredicate(node, args)
+            result = self.visitPredicate(node, *args, **kwargs)
         elif isinstance(node, Variable):
             result = self.visitVariable(node, *args, **kwargs)
         elif isinstance(node, Neg):

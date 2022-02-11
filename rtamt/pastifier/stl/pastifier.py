@@ -1,4 +1,4 @@
-from rtamt.ast.visitor.stl.ASTVisitor import STLASTVisitor
+from rtamt.ast.visitor.stl.ast_visitor import StlAstVisitor
 from rtamt.pastifier.ltl.pastifier import LTLPastifier
 
 from rtamt.node.ltl.variable import Variable
@@ -11,13 +11,13 @@ from rtamt.exception.stl.exception import STLException
 from rtamt.pastifier.stl.horizon import STLHorizon
 
 
-class STLPastifier(LTLPastifier, STLASTVisitor):
+class STLPastifier(LTLPastifier, StlAstVisitor):
 
     def __init__(self):
         LTLPastifier.__init__(self)
 
     def visit(self, element, args):
-        return STLASTVisitor.visit(self, element, args)
+        return StlAstVisitor.visit(self, element, args)
 
     def pastify(self, element):
         h = STLHorizon()

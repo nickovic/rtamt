@@ -11,7 +11,7 @@ from rtamt.node.stl.timed_until import TimedUntil
 
 class StlAstVisitor(LtlAstVisitor):
 
-    def vist(self, node, *args, **kwargs):
+    def visit(self, node, *args, **kwargs):
         if isinstance(node, TimedUntil):
             result = self.visitTimedUntil(node, *args, **kwargs)
         elif isinstance(node, TimedAlways):

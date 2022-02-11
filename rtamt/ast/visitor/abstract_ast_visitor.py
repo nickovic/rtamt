@@ -11,6 +11,7 @@ class AbstractAstVisitor(object):
     __metaclass__ = ABCMeta
 
     def visitChildren(self, node, *args, **kwargs):
+        result = None
         for nodeChild in node.children:
             result = self.visit(nodeChild, *args, **kwargs)
         return result   # visitChildren reterns only last result

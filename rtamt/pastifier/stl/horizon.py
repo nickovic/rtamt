@@ -1,4 +1,4 @@
-from rtamt.ast.visitor.stl.ASTVisitor import STLASTVisitor
+from rtamt.ast.visitor.stl.ast_visitor import StlAstVisitor
 from rtamt.pastifier.ltl.horizon import LTLHorizon
 from rtamt.pastifier.ltl.pastifier import LTLPastifier
 
@@ -10,13 +10,13 @@ from rtamt.node.stl.timed_since import TimedSince
 
 from rtamt.exception.stl.exception import STLException
 
-class STLHorizon(LTLHorizon, STLASTVisitor):
+class STLHorizon(LTLHorizon, StlAstVisitor):
 
     def __init__(self):
         LTLHorizon.__init__(self)
 
     def visit(self, element, args):
-        return STLASTVisitor.visit(self, element, args)
+        return StlAstVisitor.visit(self, element, args)
 
     def visitTimedEventually(self, element, args):
         op_horizon = self.visit(element.children[0], args)
