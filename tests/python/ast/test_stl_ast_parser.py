@@ -337,6 +337,53 @@ class TestStlAstParser(unittest.TestCase):
 
        self.assertEqual(out, self.ast.spec, 'Always assertion')
 
+    def test_timed_eventually(self):
+       self.ast = stlDiscreteTimeAst()
+       self.ast.declare_var('a', 'float')
+       self.ast.spec = 'eventually[1,2](a)'
+       self.ast.parse()
+       out = self.printer.visit(self.ast.ast)
+
+       self.assertEqual(out, self.ast.spec, 'Eventually assertion')
+
+    def test_timed_once(self):
+       self.ast = stlDiscreteTimeAst()
+       self.ast.declare_var('a', 'float')
+       self.ast.spec = 'once[1,2](a)'
+       self.ast.parse()
+       out = self.printer.visit(self.ast.ast)
+
+       self.assertEqual(out, self.ast.spec, 'Once assertion')
+
+    def test_timed_historically(self):
+       self.ast = stlDiscreteTimeAst()
+       self.ast.declare_var('a', 'float')
+       self.ast.spec = 'historically[1,2](a)'
+       self.ast.parse()
+       out = self.printer.visit(self.ast.ast)
+
+       self.assertEqual(out, self.ast.spec, 'Historically assertion')
+
+    def test_timed_since(self):
+       self.ast = stlDiscreteTimeAst()
+       self.ast.declare_var('a', 'float')
+       self.ast.declare_var('b', 'float')
+       self.ast.spec = '(a)since[1,2](b)'
+       self.ast.parse()
+       out = self.printer.visit(self.ast.ast)
+
+       self.assertEqual(out, self.ast.spec, 'Since assertion')
+
+    def test_timed_until(self):
+       self.ast = stlDiscreteTimeAst()
+       self.ast.declare_var('a', 'float')
+       self.ast.declare_var('b', 'float')
+       self.ast.spec = '(a)until[1,2](b)'
+       self.ast.parse()
+       out = self.printer.visit(self.ast.ast)
+
+       self.assertEqual(out, self.ast.spec, 'Since assertion')
+
 
 
 if __name__ == '__main__':

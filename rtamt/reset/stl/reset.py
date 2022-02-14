@@ -1,7 +1,8 @@
 from rtamt.reset.ltl.reset import LTLReset
-from rtamt.ast.visitor.stl.ASTVisitor import STLASTVisitor
+from rtamt.ast.visitor.stl.ast_visitor import StlAstVisitor
 
-class STLReset(LTLReset, STLASTVisitor):
+
+class STLReset(LTLReset, StlAstVisitor):
 
     def __init__(self, node_monitor_dict=None):
         LTLReset.__init__(self, node_monitor_dict)

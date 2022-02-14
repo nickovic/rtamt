@@ -216,5 +216,6 @@ class AbstractAst:
 def ast_factory(AstParserVisitor):
     class Ast(AbstractAst, AstParserVisitor):
         def __init__(self, antrlLexerType, antrlParserType, parserErrorListenerType=None):
-            super(Ast, self).__init__(antrlLexerType, antrlParserType, parserErrorListenerType)
+            AbstractAst.__init__(self, antrlLexerType, antrlParserType, parserErrorListenerType)
+            AstParserVisitor.__init__(self)
     return Ast

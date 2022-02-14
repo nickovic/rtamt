@@ -6,7 +6,7 @@ from rtamt.spec.ltl.discrete_time.specification import LTLDiscreteTimeSpecificat
 
 from rtamt.parser.stl.StlLexer import StlLexer
 from rtamt.parser.stl.StlParser import StlParser
-from rtamt.ast.parser.stl.discrete_time.specification_parser import STLSpecificationParser
+from rtamt.ast.parser.stl.discrete_time.specification_parser import StlDiscreteTimeAstParserVisitor
 
 from rtamt.parser.stl.error.parser_error_listener import STLParserErrorListener
 from rtamt.exception.stl.exception import STLParseException
@@ -84,14 +84,8 @@ class STLDiscreteTimeSpecification(LTLDiscreteTimeSpecification):
         ctx = parser.specification_file()
 
         # Create the visitor for the actual spec nodes
-        visitor = STLSpecificationParser(self)
+        visitor = StlDiscreteTimeAstParserVisitor(self)
         self.top = visitor.visitSpecification_file(ctx)
-
-        # print('Hello')
-        # print(self.unit)
-        # print('sampling period unit: ' + str(self.sampling_period_unit))
-        # print(self.U[self.unit])
-        # print(self.U[self.sampling_period_unit])
 
         self.normalize = float(self.U[self.unit]) / float(self.U[self.sampling_period_unit])
 

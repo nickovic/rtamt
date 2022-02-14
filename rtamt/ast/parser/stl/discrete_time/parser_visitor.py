@@ -12,19 +12,19 @@ class StlDiscreteTimeAstParserVisitor(StlAstParserVisitor):
 
         if ctx.unit() == None:
             # default time unit is seconds - conversion of the bound to ns
-            unit = self.spec.unit
+            unit = self.unit
         else:
             unit = ctx.unit().getText()
 
-        out = out * self.spec.U[unit]
+        out = out * self.U[unit]
 
-        sp = Fraction(self.spec.get_sampling_period())
+        sp = Fraction(self.get_sampling_period())
 
         out = out / sp
 
         if out.numerator % out.denominator > 0:
             raise STLParseException('The STL operator bound must be a multiple of the sampling period')
 
-        out = int(out / self.spec.sampling_period)
+        out = int(out / self.sampling_period)
 
         return out

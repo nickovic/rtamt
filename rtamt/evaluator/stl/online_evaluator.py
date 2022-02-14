@@ -1,10 +1,10 @@
 import operator
 from rtamt.enumerations.options import *
 from rtamt.exception.stl.exception import STLNotImplementedException
-from rtamt.ast.visitor.stl.ASTVisitor import STLASTVisitor
+from rtamt.ast.visitor.stl.ast_visitor import StlAstVisitor
 
 
-class STLOnlineEvaluator(STLASTVisitor):
+class STLOnlineEvaluator(StlAstVisitor):
     def __init__(self, spec):
         self.spec = spec
         generator = None

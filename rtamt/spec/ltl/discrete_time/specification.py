@@ -1,16 +1,9 @@
 import logging
 import importlib
 
-from antlr4 import *
-from antlr4.InputStream import InputStream
-
 from rtamt.spec.abstract_specification import AbstractSpecification
+from rtamt.ast.parser.ltl.specification_parser import LtlAstParserVisitor
 
-from rtamt.parser.ltl.LtlLexer import LtlLexer
-from rtamt.parser.ltl.LtlParser import LtlParser
-from rtamt.ast.parser.ltl.specification_parser import LTLSpecificationParser
-
-from rtamt.parser.ltl.error.parser_error_listener import LTLParserErrorListener
 from rtamt.exception.stl.exception import STLParseException
 
 from rtamt.pastifier.ltl.pastifier import LTLPastifier
@@ -175,7 +168,7 @@ class LTLDiscreteTimeSpecification(AbstractSpecification):
     # or the textual property itself
     def parse(self):
         # Create the visitor for the actual spec nodes
-        parser = LTLSpecificationParser(self)
+        parser = LtlAstParserVisitor(self)
         self.top = parser.parse()
 
     def pastify(self):

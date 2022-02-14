@@ -18,10 +18,34 @@ from rtamt.node.stl.timed_historically import TimedHistorically
 from rtamt.node.stl.timed_once import TimedOnce
 from rtamt.node.stl.timed_since import TimedSince
 from rtamt.node.stl.timed_until import TimedUntil
-
 from rtamt.exception.stl.exception import STLParseException
 
+
 class StlAstParserVisitor(LtlAstParserVisitor, StlParserVisitor):
+
+    def __init__(self):
+        self.const_val_dict = dict()
+
+        self.S_UNIT = int(1000000000)
+        self.MS_UNIT = int(1000000)
+        self.US_UNIT = int(1000)
+        self.NS_UNIT = int(1)
+
+        self.U = {
+            's': self.S_UNIT,
+            'ms': self.MS_UNIT,
+            'us': self.US_UNIT,
+            'ns': self.NS_UNIT
+        }
+
+        # Default unit
+        self.unit = 's'
+
+        self.sampling_period = int(1)
+        self.sampling_period_unit = 's'
+
+        LtlAstParserVisitor.__init__(self)
+        StlParserVisitor.__init__(self)
 
     def visitExprAlways(self, ctx):
         child = self.visit(ctx.expression())
@@ -97,29 +121,29 @@ class StlAstParserVisitor(LtlAstParserVisitor, StlParserVisitor):
     def visitConstantTimeLiteral(self, ctx):
         const_name = ctx.Identifier().getText()
 
-        if const_name not in self.spec.const_val_dict:
+        if const_name not in self.const_val_dict:
             raise STLParseException('Bound {} not declared'.format(const_name))
 
-        val = self.spec.const_val_dict[const_name]
+        val = self.const_val_dict[const_name]
 
         out = Fraction(Decimal(val))
 
         if ctx.unit() == None:
             # default time unit is seconds - conversion of the bound to ps
-            unit = self.spec.unit
+            unit = self.unit
         else:
             unit = ctx.unit().getText()
 
-        out = out * self.spec.U[unit]
+        out = out * self.U[unit]
 
-        sp = Fraction(self.spec.get_sampling_period())
+        sp = Fraction(self.get_sampling_period())
 
         out = out / sp
 
         if out.numerator % out.denominator > 0:
             raise STLParseException('The STL operator bound must be a multiple of the sampling period')
 
-        out = int(out / self.spec.sampling_period)
+        out = int(out / self.sampling_period)
 
         return out
 
@@ -128,3 +152,14 @@ class StlAstParserVisitor(LtlAstParserVisitor, StlParserVisitor):
         end = self.visit(ctx.intervalTime(1))
         interval = Interval(begin, end)
         return interval
+
+    def get_sampling_period(self):
+        return self.sampling_period * self.U[self.sampling_period_unit]
+
+    @property
+    def unit(self):
+        return self.__unit
+
+    @unit.setter
+    def unit(self, unit):
+        self.__unit = unit

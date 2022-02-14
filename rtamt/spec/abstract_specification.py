@@ -57,8 +57,6 @@ class AbstractSpecification:
 
         self.time_interpretation = TimeInterpretation.DISCRETE
 
-        self.horizon = 0
-
         self.name = 'Abstract Specification'
         self.spec = None
         self.modular_spec = ''
@@ -100,14 +98,6 @@ class AbstractSpecification:
     @name.setter
     def name(self, name):
         self.__name = name
-
-    @property
-    def horizon(self):
-        return self.__horizon
-
-    @horizon.setter
-    def horizon(self, horizon):
-        self.__horizon = horizon
 
     @property
     def top(self):
