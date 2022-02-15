@@ -58,6 +58,9 @@ class AbstractAst:
     __metaclass__ = ABCMeta
 
     def __init__(self, antrlLexerType, antrlParserType, parserErrorListenerType = None):
+        self.ast = []
+        self.ast_dict = {"req":1, "gnt":2, "rob":3}
+
         #TODO we need class check which inherits expected abstrauct class.
         self.antrlLexerType = antrlLexerType
         self.antrlParserType = antrlParserType
@@ -75,9 +78,12 @@ class AbstractAst:
         ctx = parser.specification_file()
 
         # Create the visitor for the actual spec nodes
-        self.node = self.visit(ctx.specification())
+        # self.node = self.visit(ctx.specification()) #temporally comentout
 
-        return self.node
+        return
+
+    def print_ast_dict_from_AbstractAst(self):
+        print(self.ast_dict)
 
     def declare_var(self, name, type):
         pass
@@ -103,6 +109,10 @@ class XAstParserVisitor(XANTRLparserVisitor):
         node = None
         return node
 
+    def print_ast_dict_from_XAstParserVisitor(self):
+        print(self.ast_dict)
+
+
 # This function is factory function to instance of Xast class.
 # The name rule is class even it is function. However the nameing will avoid user misunderstanding.
 def XAst():
@@ -119,13 +129,20 @@ def XAst():
 class AbstructXAstVisitor:
     __metaclass__ = ABCMeta
 
-    def visit(self, element, args):
+    def visit(self, node, args):
         # dummy
         pass
 
     #@abstractmethod
-    def visitUntil(self, element, args):
+    def visitUntil(self, node, args):
         raise NotImplementedError(NOT_IMPLEMENTED)
+
+    def visitAst(self, ast):
+        self.ast = ast
+        self.visit(self.ast, "hoge")
+
+    def print_ast_dict_from_AbstructXAstVisitor(self):
+        print(self.ast.ast_dict)
 
 
 #---- user define [Optional]----#
@@ -144,9 +161,15 @@ class XNamePrintAstVistor(AbstructXAstVisitor):
 
 
 xAst = XAst()
+xAst.print_ast_dict_from_AbstractAst() #access test
+xAst.print_ast_dict_from_XAstParserVisitor() #access test
 xAst.name = 'STL test'
 xAst.declare_var('a', 'float') #Where should we put this? ast? or semanitcs?
 xAst.spec = 'always(a>=2)'
 xAst.parse()
-#namePrintAstVistor = XNamePrintAstVistor(xAst)
+
+namePrintAstVistor = XNamePrintAstVistor()
+namePrintAstVistor.visitAst(xAst)
+namePrintAstVistor.print_ast_dict_from_AbstructXAstVisitor() #access test
+
 #namePrintAstVistor.visit()
