@@ -39,6 +39,10 @@ from rtamt.exception.ltl.exception import LTLParseException
 
 class LtlAstParserVisitor(LtlParserVisitor):
 
+    def __init__(self):
+        self.const_val_dict = dict()
+        self.var_subspec_dict = dict()
+
     def visitExprPredicate(self, ctx):
         child1 = self.visit(ctx.expression(0))
         child2 = self.visit(ctx.expression(1))

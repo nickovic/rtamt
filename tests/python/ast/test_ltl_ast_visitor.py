@@ -218,13 +218,13 @@ class TestLtlAstVisitor(unittest.TestCase):
         v = Variable('a')
         n = Historically(v)
         n = self.visitor.visit(n, None)
-        self.assertEqual(n, 'hist(a)', 'Historically assertion')
+        self.assertEqual(n, 'historically(a)', 'Historically assertion')
 
     def test_eventually(self):
         v = Variable('a')
         n = Eventually(v)
         n = self.visitor.visit(n, None)
-        self.assertEqual(n, 'ev(a)', 'Eventually assertion')
+        self.assertEqual(n, 'eventually(a)', 'Eventually assertion')
 
     def test_always(self):
         v = Variable('a')

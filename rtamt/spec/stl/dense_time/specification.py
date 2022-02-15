@@ -14,7 +14,7 @@ from rtamt.pastifier.stl.pastifier import STLPastifier
 from rtamt.spec.stl.discrete_time.specification import STLDiscreteTimeSpecification
 from rtamt.evaluator.stl.online_evaluator import STLOnlineEvaluator
 from rtamt.evaluator.stl.offline_evaluator import STLOfflineEvaluator
-from rtamt.ast.parser.stl.dense_time.specification_parser import STLDenseTimeSpecificationParser
+from rtamt.ast.parser.stl.dense_time.specification_parser import StlDenseTimeAstParserVisitor
 
 from rtamt.enumerations.options import *
 
@@ -26,10 +26,10 @@ class STLDenseTimeSpecification(STLDiscreteTimeSpecification):
     Attributes:
 
     """
-    def __init__(self,semantics=Semantics.STANDARD, language=Language.PYTHON):
+    def __init__(self, semantics=Semantics.STANDARD, language=Language.PYTHON):
         """Constructor for STL Specification"""
         super(STLDenseTimeSpecification, self).__init__(semantics, language)
-        self.visitor = STLDenseTimeSpecificationParser(self)
+        self.visitor = StlDenseTimeAstParserVisitor(self)
         self.time_interpretation = TimeInterpretation.DENSE
 
 
@@ -48,7 +48,7 @@ class STLDenseTimeSpecification(STLDiscreteTimeSpecification):
         ctx = parser.specification_file()
 
         # Create the visitor for the actual spec nodes
-        visitor = STLDenseTimeSpecificationParser(self)
+        visitor = STLDenseTimeSpecification()
         self.top = visitor.visitSpecification_file(ctx)
 
 

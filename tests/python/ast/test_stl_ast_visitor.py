@@ -227,13 +227,13 @@ class TestStlAstVisitor(unittest.TestCase):
         v = Variable('a')
         n = Historically(v)
         n = self.visitor.visit(n, None)
-        self.assertEqual(n, 'hist(a)', 'Historically assertion')
+        self.assertEqual(n, 'historically(a)', 'Historically assertion')
 
     def test_eventually(self):
         v = Variable('a')
         n = Eventually(v)
         n = self.visitor.visit(n, None)
-        self.assertEqual(n, 'ev(a)', 'Eventually assertion')
+        self.assertEqual(n, 'eventually(a)', 'Eventually assertion')
 
     def test_always(self):
         v = Variable('a')
@@ -265,13 +265,13 @@ class TestStlAstVisitor(unittest.TestCase):
         v = Variable('a')
         n = TimedHistorically(v, 1, 2)
         n = self.visitor.visit(n, None)
-        self.assertEqual(n, 'hist[1,2](a)', 'Timed hist assertion')
+        self.assertEqual(n, 'historically[1,2](a)', 'Timed hist assertion')
 
     def test_timed_eventually(self):
         v = Variable('a')
         n = TimedEventually(v, 1, 2)
         n = self.visitor.visit(n, None)
-        self.assertEqual(n, 'ev[1,2](a)', 'Timed eventually assertion')
+        self.assertEqual(n, 'eventually[1,2](a)', 'Timed eventually assertion')
 
     def test_timed_always(self):
         v = Variable('a')

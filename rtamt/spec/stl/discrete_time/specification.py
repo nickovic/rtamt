@@ -84,7 +84,7 @@ class STLDiscreteTimeSpecification(LTLDiscreteTimeSpecification):
         ctx = parser.specification_file()
 
         # Create the visitor for the actual spec nodes
-        visitor = StlDiscreteTimeAstParserVisitor(self)
+        visitor = StlDiscreteTimeAstParserVisitor()
         self.top = visitor.visitSpecification_file(ctx)
 
         self.normalize = float(self.U[self.unit]) / float(self.U[self.sampling_period_unit])

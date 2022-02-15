@@ -1,5 +1,7 @@
 import unittest
 
+from rtamt.ast.parser.abstract_ast_parser import ast_factory
+from rtamt.ast.parser.stl.discrete_time.parser_visitor import StlDiscreteTimeAstParserVisitor
 from rtamt.ast.parser.stl.discrete_time.specification_parser import stlDiscreteTimeAst
 from tests.python.ast.stl_print_name_ast_visitor import StlPrintNameAstVisitor
 
@@ -382,9 +384,7 @@ class TestStlAstParser(unittest.TestCase):
        self.ast.parse()
        out = self.printer.visit(self.ast.ast)
 
-       self.assertEqual(out, self.ast.spec, 'Since assertion')
-
-
+       self.assertEqual(out, self.ast.spec, 'Until assertion')
 
 if __name__ == '__main__':
     unittest.main()
