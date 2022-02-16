@@ -1,3 +1,5 @@
+from rtamt.node.stl.timed_precedes import TimedPrecedes
+
 from rtamt.ast.visitor.ltl.ast_visitor import LtlAstVisitor
 
 #from rtamt.node.stl.timed_precedes import TimedPrecedes
@@ -24,6 +26,8 @@ class StlAstVisitor(LtlAstVisitor):
             result = self.visitTimedOnce(node, *args, **kwargs)
         elif isinstance(node, TimedHistorically):
             result = self.visitTimedHistorically(node, *args, **kwargs)
+        elif isinstance(node, TimedPrecedes):
+            result = self.visitTimedPrecedes(node, *args, **kwargs)
         else:
             result = super(StlAstVisitor, self).visit(node, *args, **kwargs)
 
@@ -39,6 +43,9 @@ class StlAstVisitor(LtlAstVisitor):
         return self.visitChildren(node, *args, **kwargs)
 
     def visitTimedSince(self, node, *args, **kwargs):
+        return self.visitChildren(node, *args, **kwargs)
+
+    def visitTimedPrecedes(self, node, *args, **kwargs):
         return self.visitChildren(node, *args, **kwargs)
 
     def visitTimedAlways(self, node, *args, **kwargs):
