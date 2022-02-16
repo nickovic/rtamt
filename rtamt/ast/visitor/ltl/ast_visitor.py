@@ -14,7 +14,6 @@ from rtamt.node.ltl.until import Until
 from rtamt.node.ltl.once import Once
 from rtamt.node.ltl.historically import Historically
 from rtamt.node.ltl.since import Since
-from rtamt.node.stl.timed_precedes import TimedPrecedes
 from rtamt.node.arithmetic.abs import Abs
 from rtamt.node.arithmetic.exp import Exp
 from rtamt.node.arithmetic.pow import Pow
@@ -63,8 +62,6 @@ class LtlAstVisitor(AbstractAstVisitor):
             result = self.visitHistorically(node, *args, **kwargs)
         elif isinstance(node, Since):
             result = self.visitSince(node, *args, **kwargs)
-        elif isinstance(node, TimedPrecedes):
-            result = self.visitTimedPrecedes(node, *args, **kwargs)
         elif isinstance(node, Abs):
             result = self.visitAbs(node, *args, **kwargs)
         elif isinstance(node, Sqrt):
