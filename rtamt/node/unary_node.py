@@ -1,10 +1,11 @@
-from rtamt.node.node import Node
+from rtamt.node.abstract_node import AbstractNode
 
-class UnaryNode(Node):
+
+class UnaryNode(AbstractNode):
 
     def __init__(self, child):
         """Constructor for Node"""
-        super(Node, self).__init__()
+        super(UnaryNode, self).__init__()
         self.add_child(child)
 
 

@@ -1,6 +1,6 @@
-from rtamt.node.node import Node
+from rtamt.node.abstract_node import AbstractNode
 
-class LeafNode(Node):
+class LeafNode(AbstractNode):
 
     def __init__(self):
         super(LeafNode, self).__init__()

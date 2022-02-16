@@ -14,12 +14,15 @@ class AbstractNode:
     __metaclass__ = ABCMeta
 
     def __init__(self):
+        self.in_vars = []
+        self.out_vars = []
         self.children = list()
         self.evaluator = None
         self.name = ''
         self.node = None
 
-    def addChild(self, child):
+
+    def add_child(self, child):
         self.children.append(child)
 
     def accept(self, visitor):
@@ -59,6 +62,34 @@ class AbstractNode:
     def node(self, node):
         """Setter for the horizon"""
         self.__node = node
+
+    @property
+    def children(self):
+        return self.__children
+
+    @children.setter
+    def children(self, children):
+        self.__children = children
+
+    @property
+    def in_vars(self):
+        """Getter for the in_vars"""
+        return self.__in_vars
+
+    @in_vars.setter
+    def in_vars(self, in_vars):
+        """Setter for the in_vars"""
+        self.__in_vars = in_vars
+
+    @property
+    def out_vars(self):
+        """Getter for the out_vars"""
+        return self.__out_vars
+
+    @out_vars.setter
+    def out_vars(self, out_vars):
+        """Setter for the out_vars"""
+        self.__out_vars = out_vars
 
     def __repr__(self):
         '''Returns representation of the object'''

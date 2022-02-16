@@ -4,10 +4,10 @@ Created on Sun Jul 21 22:24:09 2019
 
 @author: NickovicD
 """
+from rtamt.node.binary_node import BinaryNode
 
-from rtamt.node.node import Node
 
-class Xor(Node):
+class Xor(BinaryNode):
     """A class for storing STL Xor nodes
         Inherits TemporalNode
     """
@@ -18,7 +18,7 @@ class Xor(Node):
             child1 : stl.Node
             child2 : stl.Node
         """
-        super(Xor, self).__init__()
+        super(BinaryNode, self).__init__()
         self.add_child(child1)
         self.add_child(child2)
 
