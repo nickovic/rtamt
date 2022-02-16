@@ -14,8 +14,8 @@ from rtamt.enumerations.io_type import StlIOType
 from rtamt.enumerations.options import Language, Semantics, TimeInterpretation
 #TODO: reconfigure it after refactoring
 from rtamt.spec.stl.discrete_time.specification import STLDiscreteTimeSpecification
-from rtamt.spec.stl.discrete_time.specification import STLDiscreteTimeSpecification as STLSpecification
-from rtamt.spec.stl.dense_time.specification import STLDenseTimeSpecification
-from rtamt.spec.stl.dense_time.specification import STLDenseTimeSpecification as STLCTSpecification
-from rtamt.spec.ltl.discrete_time.specification import LTLDiscreteTimeSpecification
-from rtamt.spec.ltl.discrete_time.specification import LTLDiscreteTimeSpecification as LTLSpecification
+#from rtamt.spec.stl.discrete_time.specification import STLDiscreteTimeSpecification as STLSpecification
+#from rtamt.spec.stl.dense_time.specification import STLDenseTimeSpecification
+#from rtamt.spec.stl.dense_time.specification import STLDenseTimeSpecification as STLCTSpecification
+#from rtamt.spec.ltl.discrete_time.specification import LTLDiscreteTimeSpecification
+#from rtamt.spec.ltl.discrete_time.specification import LTLDiscreteTimeSpecification as LTLSpecification

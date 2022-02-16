@@ -24,25 +24,6 @@ from rtamt.exception.stl.exception import STLParseException
 class StlAstParserVisitor(LtlAstParserVisitor, StlParserVisitor):
 
     def __init__(self):
-        self.const_val_dict = dict()
-
-        self.S_UNIT = int(1000000000)
-        self.MS_UNIT = int(1000000)
-        self.US_UNIT = int(1000)
-        self.NS_UNIT = int(1)
-
-        self.U = {
-            's': self.S_UNIT,
-            'ms': self.MS_UNIT,
-            'us': self.US_UNIT,
-            'ns': self.NS_UNIT
-        }
-
-        # Default unit
-        self.unit = 's'
-
-        self.sampling_period = int(1)
-        self.sampling_period_unit = 's'
 
         LtlAstParserVisitor.__init__(self)
         StlParserVisitor.__init__(self)
