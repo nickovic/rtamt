@@ -9,7 +9,13 @@ from rtamt.enumerations.comp_oper import StlComparisonOperator
 
 from rtamt.exception.stl.exception import STLNotImplementedException
 
-from rtamt.operation.arithmetic.dense_time.offline.subtraction_operation import SubtractionOperation
+
+def subtraction_operation(sample_left, sample_right):
+    sample_return = []
+    sample_return, last, left, right = intersect.intersection(sample_left, sample_right, intersect.subtraction)
+    if last:
+        sample_return.append(last)
+    return sample_return
 
 
 def and_operation(sample_left, sample_right):
@@ -289,8 +295,7 @@ class StlDenseTimeOfflineAstVisitor(StlAstVisitor):
         sample_right = self.visit(node.children[1], *args, **kwargs)
 
         sample_return = []
-        sub = SubtractionOperation()
-        input_list = sub.update(sample_left, sample_right)
+        input_list = subtraction_operation(sample_left, sample_right)
 
         prev = float("nan")
         for i, in_sample in enumerate(input_list):
@@ -384,10 +389,7 @@ class StlDenseTimeOfflineAstVisitor(StlAstVisitor):
         sample_left  = self.visit(node.children[0], *args, **kwargs)
         sample_right = self.visit(node.children[1], *args, **kwargs)
 
-        sample_return = []
-        sample_return, last, left, right = intersect.intersection(sample_left, sample_right, intersect.subtraction)
-        if last:
-            sample_return.append(last)
+        sample_return= subtraction_operation(sample_left, sample_right)
         return sample_return
 
 
