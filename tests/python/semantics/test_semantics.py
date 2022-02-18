@@ -21,7 +21,7 @@ class TestSemantics(unittest.TestCase):
         ast.parse()
 
         stlOfflineAstVisitor = offline_ast_visitor_factory(StlOfflineAstVisitor)()
-        sample_return, ast = stlOfflineAstVisitor.eval(ast)
+        rob = stlOfflineAstVisitor.eval(ast)
 
 
 if __name__ == '__main__':
