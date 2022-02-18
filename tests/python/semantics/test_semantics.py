@@ -3,8 +3,8 @@ import unittest
 from rtamt.ast.parser.stl.discrete_time.specification_parser import stlDiscreteTimeAst
 from rtamt.ast.parser.stl.dense_time.specification_parser import stlDenseTimeAst
 
-from rtamt.operation.abstract_discrete_time_offline_ast_visitor import discrete_time_offline_ast_visitor_factory
-from rtamt.operation.abstract_dense_time_offline_ast_visitor import dense_time_offline_ast_visitor_factory
+from rtamt.operation.abstract_discrete_time_offline_evaluator import discrete_time_offline_ast_visitor_factory
+from rtamt.operation.abstract_dense_time_offline_evaluator import dense_time_offline_ast_visitor_factory
 
 from rtamt.operation.stl.discrete_time.offline.ast_visitor import StlDiscreteTimeOfflineAstVisitor
 from rtamt.operation.stl.dense_time.offline.ast_visitor import StlDenseTimeOfflineAstVisitor
