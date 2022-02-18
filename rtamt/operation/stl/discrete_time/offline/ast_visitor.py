@@ -364,27 +364,3 @@ class StlOfflineAstVisitor(StlAstVisitor):
             sample_return.append(out_sample)
         sample_return.reverse()
         return sample_return
-
-
-    #TODO tom did not understand it.
-    def sat(self, left, right):
-        out = []
-        for i in range(len(left)):
-            if self.op.value == StlComparisonOperator.EQ.value:
-                val = left[i] == right[i]
-            elif self.op.value == StlComparisonOperator.NEQ.value:
-                val = left[i] != right[i]
-            elif self.op.value == StlComparisonOperator.GEQ.value:
-                val = left[i] >= right[i]
-            elif self.op.value == StlComparisonOperator.GREATER.value:
-                val = left[i] > right[i]
-            elif self.op.value == StlComparisonOperator.LEQ.value:
-                val = left[i] <= right[i]
-            elif self.op.value == StlComparisonOperator.LESS.value:
-                val = left[i] < right[i]
-            else:
-                raise LTLException('Unknown predicate operation')
-
-            out.append(val)
-
-        return out
