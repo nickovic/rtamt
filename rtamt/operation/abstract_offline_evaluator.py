@@ -8,5 +8,5 @@ class AbstractOfflineEvaluator(AbstractEvaluator):
         return
 
     @abstractmethod
-    def evaluate(self, *args, **kargs):
+    def evaluate(self, dataset):
         raise NotImplementedError(self.NOT_IMPLEMENTED)

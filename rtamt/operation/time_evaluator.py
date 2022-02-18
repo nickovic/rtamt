@@ -9,15 +9,9 @@ class TimeEvaluator(object):
     def __init__(self):
         pass
 
-    def evaluate_args_check(self, *args, **kargs):
-        # input format check
-        if len(args) != 1:
-            raise RTAMTException('evaluate: Wrong number of arguments')
-        return True
-
-    def get_dataset_from_args(self, *args, **kargs):
-        dataset = args[0]
-        return dataset
+    @abstractmethod
+    def dataset_check(self, data):
+        pass
 
     @abstractmethod
     def set_variable_to_ast_from_dataset(self, *args, **kargs):

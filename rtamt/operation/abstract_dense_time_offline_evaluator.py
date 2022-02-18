@@ -17,12 +17,9 @@ class AbstractDesneTimeOfflineEvaluator(AbstractOfflineEvaluator, DenseTimeEvalu
     #b = [[0, 2.5], [0.7, 4], [1.3, -1.2], [2.1, 1.7]]
     #dataset = [['a', a], ['b', b]]
     #TODO merge dense and discrete into evaluate AbstractOfflineEvaluator
-    def evaluate(self, *args, **kargs):
+    def evaluate(self, dataset):
         # input format check
-        self.evaluate_args_check(*args, **kargs)
         self.ast_check()
-
-        dataset = self.get_dataset_from_args(*args, **kargs)
 
         # update the value of every input variable
         self.ast = self.set_variable_to_ast_from_dataset(self.ast, dataset)

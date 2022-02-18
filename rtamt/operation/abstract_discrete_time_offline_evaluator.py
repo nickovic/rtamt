@@ -19,12 +19,10 @@ class AbstractDiscreteTimeOfflineEvaluator(AbstractOfflineEvaluator, DescreteTim
     #    'gnt': [20, -2, 10, 4, -1]
     #}
     #TODO merge dense and discrete into evaluate AbstractOfflineEvaluator
-    def evaluate(self, *args, **kargs):
+    def evaluate(self, dataset):
         # input format check
-        self.evaluate_args_check(*args, **kargs)
         self.ast_check()
 
-        dataset = self.get_dataset_from_args(*args, **kargs)
         length = len(dataset['time'])
 
         # Check if the difference between two consecutive timestamps is between

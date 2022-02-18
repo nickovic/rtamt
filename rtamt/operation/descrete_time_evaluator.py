@@ -28,10 +28,8 @@ class DescreteTimeEvaluator(TimeEvaluator):
     #a = [[0, 1.3], [0.7, 3], [1.3, 0.1], [2.1, -2.2]]
     #b = [[0, 2.5], [0.7, 4], [1.3, -1.2], [2.1, 1.7]]
     #dataset = [['a', a], ['b', b]]
-    def evaluate_args_check(self, *args, **kargs):
-        super(DescreteTimeEvaluator, self).evaluate_args_check(*args, **kargs)
-
-        dataset = args[0]
+    def dataset_check(self, dataset):
+        #TODO check that data fromat more.
         if not dataset['time']:
             #TODO consider appropriate exception
             raise RTAMTException('evaluate: The input does not contain the time field')
