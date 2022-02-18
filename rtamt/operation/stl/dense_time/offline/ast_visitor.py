@@ -7,7 +7,6 @@ import rtamt.operation.stl.dense_time.offline.intersection as intersect
 from rtamt.ast.visitor.stl.ast_visitor import StlAstVisitor
 from rtamt.enumerations.comp_oper import StlComparisonOperator
 
-from rtamt.exception.stl.exception import STLException
 from rtamt.exception.stl.exception import STLNotImplementedException
 
 from rtamt.operation.arithmetic.dense_time.offline.subtraction_operation import SubtractionOperation
@@ -270,7 +269,7 @@ def until_operation(sample_left, sample_right):
     return sample_return
 
 
-def until_time_operation(sample_left, sample_right, begin, end):
+def until_timed_operation(sample_left, sample_right, begin, end):
     if begin > 0:
         out1 = eventually_timed_operation(sample_right, begin, end)
         out2 = until_operation(sample_left, sample_right)
@@ -511,6 +510,8 @@ class StlDenseTimeOfflineAstVisitor(StlAstVisitor):
         sample_left  = self.visit(node.children[0], *args, **kwargs)
         sample_right = self.visit(node.children[1], *args, **kwargs)
 
+        sample_return = until_operation(sample_left, sample_right)
+        return sample_return
 
     def visitOnce(self, node, *args, **kwargs):
         sample =  self.visit(node.children[0], *args, **kwargs)
@@ -616,5 +617,5 @@ class StlDenseTimeOfflineAstVisitor(StlAstVisitor):
         sample_left  = self.visit(node.children[0], *args, **kwargs)
         sample_right = self.visit(node.children[1], *args, **kwargs)
 
-        sample_return = until_operation(sample_left, sample_right)
+        sample_return = until_timed_operation(sample_left, sample_right, node.begin, node.end)
         return sample_return
