@@ -6,8 +6,7 @@ class OnceOperation(AbstractOnlineOperation):
         self.prev_out = -float("inf")
 
     def reset(self):
-        self.prev_out = -float("inf")
-
+        self.__init__()
 
     def update(self, node, sample):
         sample_return = max(sample, self.prev_out)

@@ -6,7 +6,7 @@ class SinceOperation(AbstractOnlineOperation):
         self.prev_out = -float("inf")
 
     def reset(self):
-        self.prev_out = -float("inf")
+        self.__init__()
 
     def update(self, node, sample_left, sample_right):
         sample_return = min(sample_left, self.prev_out)

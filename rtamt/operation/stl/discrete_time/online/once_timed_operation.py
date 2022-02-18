@@ -7,13 +7,9 @@ class OnceTimedOperation(AbstractOnlineOperation):
         self.end = end
         self.buffer = collections.deque(maxlen=(self.end + 1))
 
-        for i in range(self.end + 1):
-            val = - float("inf")
-            self.buffer.append(val)
+        self.reset()
 
     def reset(self):
-        self.buffer = collections.deque(maxlen=(self.end + 1))
-
         for i in range(self.end + 1):
             val = - float("inf")
             self.buffer.append(val)

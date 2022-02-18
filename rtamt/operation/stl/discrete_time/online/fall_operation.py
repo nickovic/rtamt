@@ -6,7 +6,7 @@ class FallOperation(AbstractOnlineOperation):
         self.prev = float("inf")
 
     def reset(self):
-        self.prev = float("inf")
+        self.__init__()
 
     def update(self, node, sample):
         sample_return = min(self.prev, - sample)

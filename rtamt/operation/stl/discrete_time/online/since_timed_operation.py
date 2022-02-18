@@ -10,11 +10,7 @@ class SinceTimedOperation(AbstractOnlineOperation):
         self.buffer_sample_left = collections.deque(maxlen=(self.end + 1))
         self.buffer_sample_right = collections.deque(maxlen=(self.end + 1))
 
-        for i in range(self.end + 1):
-            s_sample_left = float("inf")
-            s_sample_right = - float("inf")
-            self.buffer_sample_left.append(s_sample_left)
-            self.buffer_sample_right.append(s_sample_right)
+        self.reset()
 
     def reset(self):
         for i in range(self.end + 1):

@@ -27,7 +27,7 @@ class AbstractOnlineEvaluator(AbstractEvaluator):
         return
 
     def set_ast(self, ast):
-        self.ast = ast
+        super(AbstractOnlineEvaluator, self).set_ast(ast)
 
         # constract online_operator_dict for sub-specs
         for key in self.ast.var_subspec_dict:

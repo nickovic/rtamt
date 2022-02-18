@@ -10,17 +10,9 @@ class PrecedesTimedOperation(AbstractOnlineOperation):
         self.buffer.append(collections.deque(maxlen=(self.end + 1)))
         self.buffer.append(collections.deque(maxlen=(self.end + 1)))
 
-        for i in range(self.end + 1):
-            s_sample_left = float("inf")
-            s_sample_right = - float("inf")
-            self.buffer[0].append(s_sample_left)
-            self.buffer[1].append(s_sample_right)
+        self.reset()
 
     def reset(self):
-        self.buffer = []
-        self.buffer.append(collections.deque(maxlen=(self.end + 1)))
-        self.buffer.append(collections.deque(maxlen=(self.end + 1)))
-
         for i in range(self.end + 1):
             s_sample_left = float("inf")
             s_sample_right = - float("inf")
