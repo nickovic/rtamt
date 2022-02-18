@@ -72,6 +72,7 @@ class TestSemantics(unittest.TestCase):
         print(rob4)
         print(rob5)
 
+        stlDiscreteTimeOnlineAstVisitor.reset()
 
 if __name__ == '__main__':
     unittest.main()

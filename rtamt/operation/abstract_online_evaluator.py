@@ -20,10 +20,10 @@ class AbstractOnlineEvaluator(AbstractEvaluator):
         # reset sub-specs
         for key in self.ast.var_subspec_dict:
             node = self.ast.var_subspec_dict[key]
-            self.resetVisitor.visitAst(node)
+            self.resetVisitor.visitAst(node, self.online_operator_dict)
 
         # reset spec
-        self.resetVisitor.visitAst(self.ast)
+        self.resetVisitor.visitAst(self.ast, self.online_operator_dict)
         return
 
     def set_ast(self, ast):
@@ -43,11 +43,21 @@ class AbstractOnlineEvaluator(AbstractEvaluator):
         raise NotImplementedError(self.NOT_IMPLEMENTED)
 
 class AbstractOnlineResetVisitor(AbstractAstVisitor):
-    def visit(self, node, *args, **kwargs):
-        self.visitChildren(node, *args, **kwargs)
-        operator = self.online_operator_dict[node.name]
+    def visitBinary(self, node, online_operator_dict):
+        self.visitChildren(node, online_operator_dict)
+        operator = online_operator_dict[node.name]
         operator.reset()
         return
+
+    def visitUnary(self, node, online_operator_dict):
+        self.visitChildren(node, online_operator_dict)
+        operator = online_operator_dict[node.name]
+        operator.reset()
+        return
+
+    def visitLeaf(self, node, online_operator_dict):
+        pass
+
 
 class AbstractOnlineUpdateVisitor(AbstractAstVisitor):
     def visitBinary(self, node, online_operator_dict):
