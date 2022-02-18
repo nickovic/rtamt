@@ -40,11 +40,11 @@ class AbstractDesneTimeOfflineEvaluator(AbstractOfflineEvaluator, DenseTimeHandl
         return out
 
 
-def dense_time_offline_ast_visitor_factory(AstVisitor):
+def dense_time_offline_evaluator_factory(AstVisitor):
     if not issubclass(AstVisitor, AbstractAstVisitor):  # type check
         raise RTAMTException('{} is not RTAMT AST visitor'.format(AstVisitor.__name__))
 
-    class DenseTimeOfflineAstVisitor(AbstractDesneTimeOfflineEvaluator, AstVisitor):
+    class DenseTimeOfflineEvaluator(AbstractDesneTimeOfflineEvaluator, AstVisitor):
         def __init__(self, *args, **kwargs):
-            super(DenseTimeOfflineAstVisitor, self).__init__(*args, **kwargs)
-    return DenseTimeOfflineAstVisitor
+            super(DenseTimeOfflineEvaluator, self).__init__(*args, **kwargs)
+    return DenseTimeOfflineEvaluator

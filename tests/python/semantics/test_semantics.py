@@ -3,8 +3,8 @@ import unittest
 from rtamt.ast.parser.stl.discrete_time.specification_parser import stlDiscreteTimeAst
 from rtamt.ast.parser.stl.dense_time.specification_parser import stlDenseTimeAst
 
-from rtamt.operation.abstract_discrete_time_offline_evaluator import discrete_time_offline_ast_visitor_factory
-from rtamt.operation.abstract_dense_time_offline_evaluator import dense_time_offline_ast_visitor_factory
+from rtamt.operation.abstract_discrete_time_offline_evaluator import discrete_time_offline_evaluator_factory
+from rtamt.operation.abstract_dense_time_offline_evaluator import dense_time_offline_evaluator_factory
 
 from rtamt.operation.stl.discrete_time.offline.ast_visitor import StlDiscreteTimeOfflineAstVisitor
 from rtamt.operation.stl.dense_time.offline.ast_visitor import StlDenseTimeOfflineAstVisitor
@@ -23,7 +23,7 @@ class TestSemantics(unittest.TestCase):
         ast.spec = 'always(a>=2)'
         ast.parse()
 
-        stlDiscreteTimeOfflineAstVisitor = discrete_time_offline_ast_visitor_factory(StlDiscreteTimeOfflineAstVisitor)()
+        stlDiscreteTimeOfflineAstVisitor = discrete_time_offline_evaluator_factory(StlDiscreteTimeOfflineAstVisitor)()
         stlDiscreteTimeOfflineAstVisitor.ast = ast
         dataset = {
             'time': [0, 1, 2, 3, 4],
@@ -38,7 +38,7 @@ class TestSemantics(unittest.TestCase):
         ast.spec = 'always(a>=2)'
         ast.parse()
 
-        stlDenseTimeOfflineAstVisitor = dense_time_offline_ast_visitor_factory(StlDenseTimeOfflineAstVisitor)()
+        stlDenseTimeOfflineAstVisitor = dense_time_offline_evaluator_factory(StlDenseTimeOfflineAstVisitor)()
         stlDenseTimeOfflineAstVisitor.ast = ast
         a = [[0, 1.3], [0.7, 3], [1.3, 0.1], [2.1, -2.2]]
         rob = stlDenseTimeOfflineAstVisitor.evaluate([['a', a]])

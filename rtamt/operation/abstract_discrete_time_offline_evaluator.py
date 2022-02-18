@@ -56,11 +56,11 @@ class AbstractDiscreteTimeOfflineEvaluator(AbstractOfflineEvaluator, DescreteTim
         return out
 
 
-def discrete_time_offline_ast_visitor_factory(AstVisitor):
+def discrete_time_offline_evaluator_factory(AstVisitor):
     if not issubclass(AstVisitor, AbstractAstVisitor):  # type check
         raise RTAMTException('{} is not RTAMT AST visitor'.format(AstVisitor.__name__))
 
-    class DiscreteTimeOfflineAstVisitor(AbstractDiscreteTimeOfflineEvaluator, AstVisitor):
+    class DiscreteTimeOfflineEvaluator(AbstractDiscreteTimeOfflineEvaluator, AstVisitor):
         def __init__(self, *args, **kwargs):
-            super(DiscreteTimeOfflineAstVisitor, self).__init__(*args, **kwargs)
-    return DiscreteTimeOfflineAstVisitor
+            super(DiscreteTimeOfflineEvaluator, self).__init__(*args, **kwargs)
+    return DiscreteTimeOfflineEvaluator
