@@ -5,10 +5,10 @@ from rtamt.operation.abstract_offline_evaluator import AbstractOfflineEvaluator
 
 from rtamt.exception.exception import RTAMTException
 
-class AbstractDesneTimeOfflineAstVisitor(AbstractOfflineEvaluator):
+class AbstractDesneTimeOfflineEvaluator(AbstractOfflineEvaluator):
 
     def __init__(self):
-        super(AbstractDesneTimeOfflineAstVisitor, self).__init__()
+        super(AbstractDesneTimeOfflineEvaluator, self).__init__()
         return
 
     #input format
@@ -42,7 +42,7 @@ def dense_time_offline_ast_visitor_factory(AstVisitor):
     if not issubclass(AstVisitor, AbstractAstVisitor):  # type check
         raise RTAMTException('{} is not RTAMT AST visitor'.format(AstVisitor.__name__))
 
-    class DenseTimeOfflineAstVisitor(AbstractDesneTimeOfflineAstVisitor, AstVisitor):
+    class DenseTimeOfflineAstVisitor(AbstractDesneTimeOfflineEvaluator, AstVisitor):
         def __init__(self, *args, **kwargs):
             super(DenseTimeOfflineAstVisitor, self).__init__(*args, **kwargs)
     return DenseTimeOfflineAstVisitor

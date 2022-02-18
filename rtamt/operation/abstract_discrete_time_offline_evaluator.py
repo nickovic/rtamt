@@ -5,10 +5,10 @@ from rtamt.operation.abstract_offline_evaluator import AbstractOfflineEvaluator
 
 from rtamt.exception.exception import RTAMTException
 
-class AbstractDiscreteTimeOfflineAstVisitor(AbstractOfflineEvaluator):
+class AbstractDiscreteTimeOfflineEvaluator(AbstractOfflineEvaluator):
 
     def __init__(self):
-        super(AbstractDiscreteTimeOfflineAstVisitor, self).__init__()
+        super(AbstractDiscreteTimeOfflineEvaluator, self).__init__()
 
         self.DEFAULT_TOLERANCE = float(0.1)
 
@@ -82,7 +82,7 @@ def discrete_time_offline_ast_visitor_factory(AstVisitor):
     if not issubclass(AstVisitor, AbstractAstVisitor):  # type check
         raise RTAMTException('{} is not RTAMT AST visitor'.format(AstVisitor.__name__))
 
-    class DiscreteTimeOfflineAstVisitor(AbstractDiscreteTimeOfflineAstVisitor, AstVisitor):
+    class DiscreteTimeOfflineAstVisitor(AbstractDiscreteTimeOfflineEvaluator, AstVisitor):
         def __init__(self, *args, **kwargs):
             super(DiscreteTimeOfflineAstVisitor, self).__init__(*args, **kwargs)
     return DiscreteTimeOfflineAstVisitor
