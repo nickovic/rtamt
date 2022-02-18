@@ -12,7 +12,7 @@ class AbstractOfflineAstVisitor(AbstractEvluationAstVisitor):
     def __init__(self):
         pass
 
-    def eval(self, ast, *args, **kwargs):
+    def evaluate(self, ast, *args, **kwargs):
         result = self.visitAst(ast, *args, **kwargs)
         return result
 
