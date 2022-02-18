@@ -259,9 +259,9 @@ class StlOfflineAstVisitor(StlAstVisitor):
         return sample_return
 
 
-    #TODO impliment here.
-#    def visitTimedPrecedes(self, node, *args, **kwargs):
-#        print(node.name)
+    def visitTimedPrecedes(self, node, *args, **kwargs):
+        #TODO consider correct exception
+        raise STLException('Offline does not need visitTimedPrecedes')
 
 
     def visitTimedOnce(self, node, *args, **kwargs):
