@@ -22,9 +22,7 @@ class AbstractDiscreteTimeOnlineEvaluator(AbstractOnlineEvaluator, DescreteTimeE
         # the accepted tolerance - if not, increase the violation counter
         if self.update_counter > 0:
             duration = (timestamp - self.previous_time) * self.normalize
-            tolerance = self.sampling_period * self.sampling_tolerance
-            if duration < self.sampling_period - tolerance or duration > self.sampling_period + tolerance:
-                self.sampling_violation_counter = self.sampling_violation_counter + 1
+            self.update_sampling_violation_counter(duration)
 
         #TODO move all vist to syntax layere
         # update the value of every input variable
