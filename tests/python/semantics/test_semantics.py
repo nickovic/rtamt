@@ -5,7 +5,7 @@ from rtamt.ast.parser.stl.discrete_time.specification_parser import stlDiscreteT
 from rtamt.ast.parser.stl.dense_time.specification_parser import stlDenseTimeAst
 
 from rtamt.operation.abstract_offline_ast_visitor import offline_ast_visitor_factory
-from rtamt.operation.stl.discrete_time.offline.ast_visitor import StlOfflineAstVisitor
+from rtamt.operation.stl.discrete_time.offline.ast_visitor import StlDiscreteTimeOfflineAstVisitor
 
 
 class TestSemantics(unittest.TestCase):
@@ -20,13 +20,13 @@ class TestSemantics(unittest.TestCase):
         ast.spec = 'always(a>=2)'
         ast.parse()
 
-        stlOfflineAstVisitor = offline_ast_visitor_factory(StlOfflineAstVisitor)()
-        stlOfflineAstVisitor.ast = ast
+        stlDiscreteTimeOfflineAstVisitor = offline_ast_visitor_factory(StlDiscreteTimeOfflineAstVisitor)()
+        stlDiscreteTimeOfflineAstVisitor.ast = ast
         dataset = {
             'time': [0, 1, 2, 3, 4],
             'a': [100, -1, -2, 5, -1],
         }
-        rob = stlOfflineAstVisitor.evaluate(dataset)
+        rob = stlDiscreteTimeOfflineAstVisitor.evaluate(dataset)
         print(rob)
 
 if __name__ == '__main__':

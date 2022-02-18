@@ -6,7 +6,7 @@ from rtamt.enumerations.comp_oper import StlComparisonOperator
 from rtamt.exception.stl.exception import STLException
 
 
-class StlOfflineAstVisitor(StlAstVisitor):
+class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
 
     def visitPredicate(self, node, *args, **kwargs):
         sample_left  = self.visit(node.children[0], *args, **kwargs)
