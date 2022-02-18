@@ -14,13 +14,13 @@ class StlOfflineAstVisitor(StlAstVisitor):
 
         sample_return = []
         for i in range(len(sample_left)):
-            if self.op.value == StlComparisonOperator.EQ.value:
+            if node.operator.value == StlComparisonOperator.EQ.value:
                 val = - abs(sample_left[i] - sample_right[i])
-            elif self.op.value == StlComparisonOperator.NEQ.value:
+            elif node.operator.value == StlComparisonOperator.NEQ.value:
                 val = abs(sample_left[i] - sample_right[i])
-            elif self.op.value == StlComparisonOperator.LEQ.value or self.op.value == StlComparisonOperator.LESS.value:
-                val = sample_left[i] - sample_right[i]
-            elif self.op.value == StlComparisonOperator.GEQ.value or self.op.value == StlComparisonOperator.GREATER.value:
+            elif node.operator.value == StlComparisonOperator.LEQ.value or node.operator.value == StlComparisonOperator.LESS.value:
+                val = sample_right[i] - sample_left[i]
+            elif node.operator.value == StlComparisonOperator.GEQ.value or node.operator.value == StlComparisonOperator.GREATER.value:
                 val = sample_left[i] - sample_right[i]
             else:
                 raise STLException('Unknown predicate operation')
@@ -236,7 +236,11 @@ class StlOfflineAstVisitor(StlAstVisitor):
 
 
     def visitConstant(self, node, *args, **kwargs):
-        return node.val
+        length = args[0]
+        length = length[0]
+        length = length[0]
+        return [node.val]*length
+        #return node.val
 
 
     def visitPrevious(self, node, *args, **kwargs):
