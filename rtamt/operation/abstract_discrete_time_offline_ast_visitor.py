@@ -25,7 +25,6 @@ class AbstractDiscreteTimeOfflineAstVisitor(AbstractOfflineEvaluator):
 
         self.normalize = float(1.0)
 
-        #self.reseter = STLReset()
 
     #input format
     #dataset = {
@@ -33,8 +32,12 @@ class AbstractDiscreteTimeOfflineAstVisitor(AbstractOfflineEvaluator):
     #   'req': [100, -1, -2, 5, -1],
     #    'gnt': [20, -2, 10, 4, -1]
     #}
-    def evaluate(self, dataset):
+    def evaluate(self, *args, **kargs):
         # input format check
+        if len(args) != 1:
+            raise RTAMTException('evaluate: Wrong number of arguments')
+        dataset = args[0]
+
         if not dataset['time']:
             #TODO consider appropriate exception
             raise RTAMTException('evaluate: The input does not contain the time field')
@@ -79,7 +82,7 @@ def discrete_time_offline_ast_visitor_factory(AstVisitor):
     if not issubclass(AstVisitor, AbstractAstVisitor):  # type check
         raise RTAMTException('{} is not RTAMT AST visitor'.format(AstVisitor.__name__))
 
-    class OfflineAstVisitor(AbstractDiscreteTimeOfflineAstVisitor, AstVisitor):
+    class DiscreteTimeOfflineAstVisitor(AbstractDiscreteTimeOfflineAstVisitor, AstVisitor):
         def __init__(self, *args, **kwargs):
-            super(OfflineAstVisitor, self).__init__(*args, **kwargs)
-    return OfflineAstVisitor
+            super(DiscreteTimeOfflineAstVisitor, self).__init__(*args, **kwargs)
+    return DiscreteTimeOfflineAstVisitor

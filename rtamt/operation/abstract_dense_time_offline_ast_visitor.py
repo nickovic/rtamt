@@ -14,12 +14,16 @@ class AbstractDesneTimeOfflineAstVisitor(AbstractOfflineEvaluator):
     #input format
     #a = [[0, 1.3], [0.7, 3], [1.3, 0.1], [2.1, -2.2]]
     #b = [[0, 2.5], [0.7, 4], [1.3, -1.2], [2.1, 1.7]]
-    #args = [['a', a], ['b', b]]
-    def evaluate(self, args):
+    #dataset = [['a', a], ['b', b]]
+    def evaluate(self, *args, **kargs):
         # input format check
-        for arg in args:
-            var_name = arg[0]
-            var_object = arg[1]
+        if len(args) != 1:
+            raise RTAMTException('evaluate: Wrong number of arguments')
+        dataset = args[0]
+
+        for data in dataset:
+            var_name = data[0]
+            var_object = data[1]
             self.ast.var_object_dict[var_name] = var_object
 
         # evaluate modular sub-specs
@@ -38,7 +42,7 @@ def dense_time_offline_ast_visitor_factory(AstVisitor):
     if not issubclass(AstVisitor, AbstractAstVisitor):  # type check
         raise RTAMTException('{} is not RTAMT AST visitor'.format(AstVisitor.__name__))
 
-    class OfflineAstVisitor(AbstractDesneTimeOfflineAstVisitor, AstVisitor):
+    class DenseTimeOfflineAstVisitor(AbstractDesneTimeOfflineAstVisitor, AstVisitor):
         def __init__(self, *args, **kwargs):
-            super(OfflineAstVisitor, self).__init__(*args, **kwargs)
-    return OfflineAstVisitor
+            super(DenseTimeOfflineAstVisitor, self).__init__(*args, **kwargs)
+    return DenseTimeOfflineAstVisitor
