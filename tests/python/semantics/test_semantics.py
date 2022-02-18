@@ -54,23 +54,14 @@ class TestSemantics(unittest.TestCase):
 
         stlDiscreteTimeOnlineAstVisitor = discrete_time_online_evaluator_factory(StlDiscreteTimeOnlineAstVisitor)()
         stlDiscreteTimeOnlineAstVisitor.set_ast(ast)
-        a1 = 100
-        a2 = -1
-        a3 = -2
-        a4 = 5
-        a5 = -1
+        a = [100, -1, -2, 5, -1]
+        robs = []
 
-        rob1 = stlDiscreteTimeOnlineAstVisitor.update(0, [('a', a1)])
-        rob2 = stlDiscreteTimeOnlineAstVisitor.update(1, [('a', a2)])
-        rob3 = stlDiscreteTimeOnlineAstVisitor.update(2, [('a', a3)])
-        rob4 = stlDiscreteTimeOnlineAstVisitor.update(3, [('a', a4)])
-        rob5 = stlDiscreteTimeOnlineAstVisitor.update(4, [('a', a5)])
+        for i in range(len(a)):
+            rob = stlDiscreteTimeOnlineAstVisitor.update(i, [('a', a[i])])
+            robs.append(rob)
 
-        print(rob1)
-        print(rob2)
-        print(rob3)
-        print(rob4)
-        print(rob5)
+        print(robs)
 
         stlDiscreteTimeOnlineAstVisitor.reset()
 
