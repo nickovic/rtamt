@@ -8,7 +8,10 @@ from rtamt.exception.stl.exception import STLException
 
 class StlOfflineAstVisitor(StlAstVisitor):
 
-    def visitPredicate(self, node, sample_left, sample_right, *args, **kwargs):
+    def visitPredicate(self, node, *args, **kwargs):
+        sample_left  = self.visit(node.children[0], *args, **kwargs)
+        sample_right = self.visit(node.children[1], *args, **kwargs)
+
         sample_return = []
         for i in range(len(sample_left)):
             if self.op.value == StlComparisonOperator.EQ.value:
@@ -34,7 +37,9 @@ class StlOfflineAstVisitor(StlAstVisitor):
         return sample_return
 
 
-    def visitAbs(self, node, sample, *args, **kwargs):
+    def visitAbs(self, node, *args, **kwargs):
+        sample = self.visit(node.children[0], *args, **kwargs)
+
         sample_return = []
         for i in sample:
             out_sample = abs(i)
@@ -42,7 +47,10 @@ class StlOfflineAstVisitor(StlAstVisitor):
         return sample_return
 
 
-    def visitAddition(self, node, sample_left, sample_right, *args, **kwargs):
+    def visitAddition(self, node, *args, **kwargs):
+        sample_left  = self.visit(node.children[0], *args, **kwargs)
+        sample_right = self.visit(node.children[1], *args, **kwargs)
+
         sample_return = []
         for i in range(len(sample_left)):
             out_sample = sample_left[i] + sample_right[i]
@@ -50,7 +58,10 @@ class StlOfflineAstVisitor(StlAstVisitor):
         return sample_return
 
 
-    def visitSubtraction(self, node, sample_left, sample_right, *args, **kwargs):
+    def visitSubtraction(self, node, *args, **kwargs):
+        sample_left  = self.visit(node.children[0], *args, **kwargs)
+        sample_right = self.visit(node.children[1], *args, **kwargs)
+
         sample_return = []
         for i in range(len(sample_left)):
             out_sample = sample_left[i] - sample_right[i]
@@ -58,7 +69,10 @@ class StlOfflineAstVisitor(StlAstVisitor):
         return sample_return
 
 
-    def visitMultiplication(self, node, sample_left, sample_right, *args, **kwargs):
+    def visitMultiplication(self, node, *args, **kwargs):
+        sample_left  = self.visit(node.children[0], *args, **kwargs)
+        sample_right = self.visit(node.children[1], *args, **kwargs)
+
         sample_return = []
         for i in range(len(sample_left)):
             out_sample = sample_left[i] * sample_right[i]
@@ -66,7 +80,10 @@ class StlOfflineAstVisitor(StlAstVisitor):
         return sample_return
 
 
-    def visitDivision(self, node, sample_left, sample_right, *args, **kwargs):
+    def visitDivision(self, node, *args, **kwargs):
+        sample_left  = self.visit(node.children[0], *args, **kwargs)
+        sample_right = self.visit(node.children[1], *args, **kwargs)
+
         sample_return = []
         for i in range(len(sample_left)):
             out_sample = sample_left[i] / sample_right[i]
@@ -74,37 +91,56 @@ class StlOfflineAstVisitor(StlAstVisitor):
         return sample_return
 
 
-    def visitNot(self, node, sample, *args, **kwargs):
+    def visitNot(self, node, *args, **kwargs):
+        sample = self.visit(node.children[0], *args, **kwargs)
+
         sample_return = [ -i for i in sample]
         return sample_return
 
 
-    def visitAnd(self, node, sample_left, sample_right, *args, **kwargs):
+    def visitAnd(self, node, *args, **kwargs):
+        sample_left  = self.visit(node.children[0], *args, **kwargs)
+        sample_right = self.visit(node.children[1], *args, **kwargs)
+
         sample_return = list(map(min, zip(sample_left, sample_right)))
         return sample_return
 
 
-    def visitOr(self, node, sample_left, sample_right, *args, **kwargs):
+    def visitOr(self, node, *args, **kwargs):
+        sample_left  = self.visit(node.children[0], *args, **kwargs)
+        sample_right = self.visit(node.children[1], *args, **kwargs)
+
         sample_return = list(map(max, zip(sample_left, sample_right)))
         return sample_return
 
 
-    def visitImplies(self, node, sample_left, sample_right, *args, **kwargs):
+    def visitImplies(self, node, *args, **kwargs):
+        sample_left  = self.visit(node.children[0], *args, **kwargs)
+        sample_right = self.visit(node.children[1], *args, **kwargs)
+
         sample_return = [max(-l,r) for l,r in zip(sample_left, sample_right)]
         return sample_return
 
 
-    def visitIff(self, node, sample_left, sample_right, *args, **kwargs):
+    def visitIff(self, node, *args, **kwargs):
+        sample_left  = self.visit(node.children[0], *args, **kwargs)
+        sample_right = self.visit(node.children[1], *args, **kwargs)
+
         sample_return = [-abs(l-r) for l,r in zip(sample_left, sample_right)]
         return sample_return
 
 
-    def visitXor(self, node, sample_left, sample_right, *args, **kwargs):
+    def visitXor(self, node, *args, **kwargs):
+        sample_left  = self.visit(node.children[0], *args, **kwargs)
+        sample_right = self.visit(node.children[1], *args, **kwargs)
+
         sample_return = [abs(l-r) for l,r in zip(sample_left, sample_right)]
         return sample_return
 
 
-    def visitEventually(self, node, sample, *args, **kwargs):
+    def visitEventually(self, node, *args, **kwargs):
+        sample = self.visit(node.children[0], *args, **kwargs)
+
         sample_return = []
         prev_out = -float("inf")
         for i in reversed(sample):
@@ -115,7 +151,9 @@ class StlOfflineAstVisitor(StlAstVisitor):
         return sample_return
 
 
-    def visitAlways(self, node, sample, *args, **kwargs):
+    def visitAlways(self, node, *args, **kwargs):
+        sample = self.visit(node.children[0], *args, **kwargs)
+
         sample_return = []
         prev_out = float("inf")
         for i in reversed(sample):
@@ -126,7 +164,10 @@ class StlOfflineAstVisitor(StlAstVisitor):
         return sample_return
 
 
-    def visitUntil(self, node, sample_left, sample_right, *args, **kwargs):
+    def visitUntil(self, node, *args, **kwargs):
+        sample_left  = self.visit(node.children[0], *args, **kwargs)
+        sample_right = self.visit(node.children[1], *args, **kwargs)
+
         sample_return = []
         next_out = -float("inf")
         for i in range(len(sample_left)-1, -1, -1):
@@ -138,7 +179,9 @@ class StlOfflineAstVisitor(StlAstVisitor):
         return sample_return
 
 
-    def visitOnce(self, node, sample, *args, **kwargs):
+    def visitOnce(self, node, *args, **kwargs):
+        sample = self.visit(node.children[0], *args, **kwargs)
+
         sample_return = []
         prev_out = -float("inf")
         for i in sample:
@@ -148,7 +191,9 @@ class StlOfflineAstVisitor(StlAstVisitor):
         return sample_return
 
 
-    def visitHistorically(self, node, sample, *args, **kwargs):
+    def visitHistorically(self, node, *args, **kwargs):
+        sample = self.visit(node.children[0], *args, **kwargs)
+
         sample_return = []
         prev_out = float("inf")
         for i in sample:
@@ -158,7 +203,10 @@ class StlOfflineAstVisitor(StlAstVisitor):
         return sample_return
 
 
-    def visitSince(self, node, sample_left, sample_right, *args, **kwargs):
+    def visitSince(self, node, *args, **kwargs):
+        sample_left  = self.visit(node.children[0], *args, **kwargs)
+        sample_right = self.visit(node.children[1], *args, **kwargs)
+
         sample_return = []
         self.prev_out = -float("inf")
         for i in range(len(sample_left)):
@@ -169,14 +217,18 @@ class StlOfflineAstVisitor(StlAstVisitor):
         return sample_return
 
 
-    def visitRise(self, node, sample, *args, **kwargs):
+    def visitRise(self, node, *args, **kwargs):
+        sample = self.visit(node.children[0], *args, **kwargs)
+
         prev = sample[:-1]
         prev.insert(0,-float("inf"))
         sample_return = [min(-p,s) for p,s in zip(prev, sample)]
         return sample_return
 
 
-    def visitFall(self, node, sample, *args, **kwargs):
+    def visitFall(self, node, *args, **kwargs):
+        sample = self.visit(node.children[0], *args, **kwargs)
+
         prev = sample[:-1]
         prev.insert(0,float("inf"))
         sample_return = [min(p,-s) for p,s in zip(prev, sample)]
@@ -187,7 +239,9 @@ class StlOfflineAstVisitor(StlAstVisitor):
         return node.val
 
 
-    def visitPrevious(self, node, sample, *args, **kwargs):
+    def visitPrevious(self, node, *args, **kwargs):
+        sample = self.visit(node.children[0], *args, **kwargs)
+
         sample_return = []
         prev = float("inf")
         for i in sample:
@@ -197,7 +251,9 @@ class StlOfflineAstVisitor(StlAstVisitor):
         return sample_return
 
 
-    def visitNext(self, node, sample, *args, **kwargs):
+    def visitNext(self, node, *args, **kwargs):
+        sample = self.visit(node.children[0], *args, **kwargs)
+
         sample_return = sample[1:]
         sample_return.append(float("inf"))
         return sample_return
@@ -208,19 +264,26 @@ class StlOfflineAstVisitor(StlAstVisitor):
         print(node.name)
 
 
-    def visitTimedOnce(self, node, sample, *args, **kwargs):
+    def visitTimedOnce(self, node, *args, **kwargs):
+        sample = self.visit(node.children[0], *args, **kwargs)
+
         sample = [-float("inf") for j in range(self.end)] + sample
         sample_return = [max(sample[j - self.end:j - self.begin+ 1]) for j in range(self.end, len(sample))]
         return sample_return
 
 
-    def visitTimedHistorically(self, node, sample, *args, **kwargs):
+    def visitTimedHistorically(self, node, *args, **kwargs):
+        sample = self.visit(node.children[0], *args, **kwargs)
+
         sample = [float("inf") for j in range(self.end)] + sample
         sample_return = [min(sample[j - self.end:j - self.begin + 1]) for j in range(self.end, len(sample))]
         return sample_return
 
 
-    def visitTimedSince(self, node, sample_left, sample_right, *args, **kwargs):
+    def visitTimedSince(self, node, *args, **kwargs):
+        sample_left  = self.visit(node.children[0], *args, **kwargs)
+        sample_right = self.visit(node.children[1], *args, **kwargs)
+
         sample_return = []
         self.buffer_left = collections.deque(maxlen=(self.end + 1))
         self.buffer_right = collections.deque(maxlen=(self.end + 1))
@@ -246,7 +309,9 @@ class StlOfflineAstVisitor(StlAstVisitor):
         return sample_return
 
 
-    def visitTimedAlways(self, node, sample, *args, **kwargs):
+    def visitTimedAlways(self, node, *args, **kwargs):
+        sample = self.visit(node.children[0], *args, **kwargs)
+
         diff = self.end - self.begin
         sample_return  = [min(sample[j:j+diff+1]) for j in range(self.begin, self.end+1)]
         tmp  = [min(sample[j:j+diff+1]) for j in range(self.end+1,len(sample))]
@@ -256,7 +321,9 @@ class StlOfflineAstVisitor(StlAstVisitor):
         return sample_return
 
 
-    def visitTimedEventually(self, node, sample, *args, **kwargs):
+    def visitTimedEventually(self, node, *args, **kwargs):
+        sample = self.visit(node.children[0], *args, **kwargs)
+
         diff = self.end - self.begin
         sample_return  = [max(sample[j:j+diff+1]) for j in range(self.begin, self.end+1)]
         tmp  = [max(sample[j:j+diff+1]) for j in range(self.end+1,len(sample))]
@@ -266,7 +333,10 @@ class StlOfflineAstVisitor(StlAstVisitor):
         return sample_return
 
 
-    def visitTimedUntil(self, node, sample_left, sample_right, *args, **kwargs):
+    def visitTimedUntil(self, node, *args, **kwargs):
+        sample_left  = self.visit(node.children[0], *args, **kwargs)
+        sample_right = self.visit(node.children[1], *args, **kwargs)
+
         sample_return = []
         self.buffer_left = collections.deque(maxlen=(self.end + 1))
         self.buffer_right = collections.deque(maxlen=(self.end + 1))
