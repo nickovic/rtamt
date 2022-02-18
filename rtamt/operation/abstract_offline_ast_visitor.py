@@ -90,7 +90,7 @@ class AbstractOfflineAstVisitor(AbstractEvluationAstVisitor):
 
 def offline_ast_visitor_factory(AstVisitor):
     if not issubclass(AstVisitor, AbstractAstVisitor):  # type check
-        raise AstVisitorException('{} is not RTAMT AST visitor'.format(AstVisitor.__name__))
+        raise RTAMTException('{} is not RTAMT AST visitor'.format(AstVisitor.__name__))
 
     class OfflineAstVisitor(AbstractOfflineAstVisitor, AstVisitor):
         def __init__(self, *args, **kwargs):
