@@ -1,6 +1,5 @@
 import math
 import operator
-import collections
 
 import rtamt.operation.stl.dense_time.offline.intersection as intersect
 
