@@ -1,5 +1,3 @@
-import operator
-
 from rtamt.ast.visitor.stl.ast_visitor import StlAstVisitor
 
 from rtamt.operation.arithmetic.discrete_time.online.addition_operation import AdditionOperation
@@ -38,14 +36,6 @@ class StlDiscreteTimeOnlineAstVisitor(StlAstVisitor):
         self.visitChildren(node, *args, **kwargs)
         self.online_operator_dict[node.name] = PredicateOperation(node)
         return
-
-    def visitVariable(self, node, *args, **kwargs):
-        var = self.ast.var_object_dict[node.var]
-        if node.field:  #TODO Tom did not understand this line.
-            sample_return = operator.attrgetter(node.field)(var)
-        else:
-            sample_return = var
-        return sample_return
 
     def visitAbs(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
@@ -150,9 +140,6 @@ class StlDiscreteTimeOnlineAstVisitor(StlAstVisitor):
         self.visitChildren(node, *args, **kwargs)
         self.online_operator_dict[node.name] = FallOperation()
         return
-
-    def visitConstant(self, node, *args, **kwargs):
-        return node.val
 
     def visitPrevious(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)

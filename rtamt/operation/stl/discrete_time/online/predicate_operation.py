@@ -11,31 +11,31 @@ class PredicateOperation(AbstractOnlineOperation):
         pass
 
     def update(self, node, sample_left, sample_right):
-        if self.op.value == StlComparisonOperator.EQ.value:
+        if node.operator.value == StlComparisonOperator.EQ.value:
             sample_return = - abs(sample_left - sample_right)
-        elif self.op.value == StlComparisonOperator.NEQ.value:
+        elif node.operator.value == StlComparisonOperator.NEQ.value:
             sample_return = abs(sample_left - sample_right)
-        elif self.op.value == StlComparisonOperator.LEQ.value or self.op.value == StlComparisonOperator.LESS.value:
+        elif node.operator.value == StlComparisonOperator.LEQ.value or node.operator.value == StlComparisonOperator.LESS.value:
             sample_return = sample_right - sample_left
-        elif self.op.value == StlComparisonOperator.GEQ.value or self.op.value == StlComparisonOperator.GREATER.value:
+        elif node.operator.value == StlComparisonOperator.GEQ.value or node.operator.value == StlComparisonOperator.GREATER.value:
             sample_return = sample_left - sample_right
         else:
             raise LTLException('Unknown predicate operation')
 
         return sample_return
 
-    def sat(self, sample_left, sample_right):
-        if self.op.value == StlComparisonOperator.EQ.value:
+    def sat(self, node, sample_left, sample_right):
+        if node.operator.value == StlComparisonOperator.EQ.value:
             sample_return = sample_left == sample_right
-        elif self.op.value == StlComparisonOperator.NEQ.value:
+        elif node.operator.value == StlComparisonOperator.NEQ.value:
             sample_return = sample_left != sample_right
-        elif self.op.value == StlComparisonOperator.GEQ.value:
+        elif node.operator.value == StlComparisonOperator.GEQ.value:
             sample_return = sample_left >= sample_right
-        elif self.op.value == StlComparisonOperator.GREATER.value:
+        elif node.operator.value == StlComparisonOperator.GREATER.value:
             sample_return = sample_left > sample_right
-        elif self.op.value == StlComparisonOperator.LEQ.value:
+        elif node.operator.value == StlComparisonOperator.LEQ.value:
             sample_return = sample_left <= sample_right
-        elif self.op.value == StlComparisonOperator.LESS.value:
+        elif node.operator.value == StlComparisonOperator.LESS.value:
             sample_return = sample_left < sample_right
         else:
             raise LTLException('Unknown predicate operation')

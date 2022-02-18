@@ -18,7 +18,6 @@ class AbstractDiscreteTimeOnlineEvaluator(AbstractOnlineEvaluator, DescreteTimeE
     # update(3.48, [['a', 2.2], ['b', 3.3]])
     #TODO merge dense and discrete into update AbstractOnlineEvaluator
     def update(self, timestamp, dataset):
-
         # Check if the difference between two consecutive timestamps is between
         # the accepted tolerance - if not, increase the violation counter
         if self.update_counter > 0:
@@ -37,11 +36,11 @@ class AbstractDiscreteTimeOnlineEvaluator(AbstractOnlineEvaluator, DescreteTimeE
         # evaluate modular sub-specs
         for key in self.ast.var_subspec_dict:
             node = self.ast.var_subspec_dict[key]
-            out = self.visitAst(node, [])
+            out = self.updateVisitor.visitAst(node, self.online_operator_dict)
             self.ast.var_object_dict[key] = out
 
         # The evaluation done wrt the discrete counter (logical time)
-        out = self.visitAst(self.ast, [])
+        out = self.updateVisitor.visitAst(self.ast, self.online_operator_dict)
 
         self.previous_time = timestamp
         self.update_counter = self.update_counter + 1

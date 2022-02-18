@@ -1,4 +1,9 @@
+import operator
+
 from abc import abstractmethod
+
+from rtamt.node.ltl.variable import Variable
+from rtamt.node.ltl.constant import Constant
 
 from rtamt.ast.visitor.abstract_ast_visitor import AbstractAstVisitor
 from rtamt.operation.abstract_evaluator import AbstractEvaluator
@@ -21,18 +26,21 @@ class AbstractOnlineEvaluator(AbstractEvaluator):
         self.resetVisitor.visitAst(self.ast)
         return
 
-    @abstractmethod
-    def reset(self, *args, **kargs):
-        raise NotImplementedError(self.NOT_IMPLEMENTED)
+    def set_ast(self, ast):
+        self.ast = ast
+
+        # constract online_operator_dict for sub-specs
+        for key in self.ast.var_subspec_dict:
+            node = self.ast.var_subspec_dict[key]
+            self.visitAst(node)
+
+        # constract online_operator_dict for spec
+        self.visitAst(self.ast)
+        return
 
     @abstractmethod
     def update(self, *args, **kargs):
         raise NotImplementedError(self.NOT_IMPLEMENTED)
-
-    def ast(self, ast):
-        print('hogehoge')
-        self.__ast = ast
-
 
 class AbstractOnlineResetVisitor(AbstractAstVisitor):
     def visit(self, node, *args, **kwargs):
@@ -41,22 +49,34 @@ class AbstractOnlineResetVisitor(AbstractAstVisitor):
         operator.reset()
         return
 
-
 class AbstractOnlineUpdateVisitor(AbstractAstVisitor):
-    def visitBinary(self, node, *args, **kwargs):
-        sample_left  = self.visit(node.children[0], *args, **kwargs)
-        sample_right = self.visit(node.children[1], *args, **kwargs)
-        operator = self.online_operator_dict[node.name]
-        sample_return = operator.update(node, sample_left, sample_right, *args, **kwargs)
+    def visitBinary(self, node, online_operator_dict):
+        sample_left  = self.visit(node.children[0], online_operator_dict)
+        sample_right = self.visit(node.children[1], online_operator_dict)
+        operator = online_operator_dict[node.name]
+        sample_return = operator.update(node, sample_left, sample_right)
         return sample_return
 
-    def visitUnary(self, node, *args, **kwargs):
-        sample = self.visit(node.children[0], *args, **kwargs)
-        operator = self.online_operator_dict[node.name]
-        sample_return = operator.update(node, sample, *args, **kwargs)
+    def visitUnary(self, node, online_operator_dict):
+        sample = self.visit(node.children[0], online_operator_dict)
+        operator = online_operator_dict[node.name]
+        sample_return = operator.update(node, sample)
         return sample_return
 
-    def visitLeaf(self, node, *args, **kwargs):
-        operator = self.online_operator_dict[node.name]
-        sample_return = operator.update(node, *args, **kwargs)
+    def visitLeaf(self, node, online_operator_dict):
+        if isinstance(node, Constant):
+            sample_return = self.visitConstant(node, online_operator_dict)
+        elif isinstance(node, Variable):
+            sample_return = self.visitVariable(node, online_operator_dict)
         return sample_return
+
+    def visitVariable(self, node, online_operator_dict):
+        var = self.ast.var_object_dict[node.var]
+        if node.field:  #TODO Tom did not understand this line.
+            sample_return = operator.attrgetter(node.field)(var)
+        else:
+            sample_return = var
+        return sample_return
+
+    def visitConstant(self, node, online_operator_dict):
+        return node.val

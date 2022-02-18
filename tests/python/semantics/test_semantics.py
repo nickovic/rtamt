@@ -53,7 +53,7 @@ class TestSemantics(unittest.TestCase):
         ast.parse()
 
         stlDiscreteTimeOnlineAstVisitor = discrete_time_online_evaluator_factory(StlDiscreteTimeOnlineAstVisitor)()
-        stlDiscreteTimeOnlineAstVisitor.ast = ast
+        stlDiscreteTimeOnlineAstVisitor.set_ast(ast)
         a1 = 100
         a2 = -1
         a3 = -2
