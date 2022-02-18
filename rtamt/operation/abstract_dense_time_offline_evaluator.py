@@ -2,11 +2,11 @@
 
 from rtamt.ast.visitor.abstract_ast_visitor import AbstractAstVisitor
 from rtamt.operation.abstract_offline_evaluator import AbstractOfflineEvaluator
-from rtamt.operation.dense_time_handler import DenseTimeHandler
+from rtamt.operation.dense_time_evaluator import DenseTimeEvaluator
 
 from rtamt.exception.exception import RTAMTException
 
-class AbstractDesneTimeOfflineEvaluator(AbstractOfflineEvaluator, DenseTimeHandler):
+class AbstractDesneTimeOfflineEvaluator(AbstractOfflineEvaluator, DenseTimeEvaluator):
 
     def __init__(self):
         super(AbstractDesneTimeOfflineEvaluator, self).__init__()

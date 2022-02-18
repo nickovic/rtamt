@@ -3,7 +3,7 @@ from abc import ABCMeta, abstractmethod
 from rtamt.exception.exception import RTAMTException
 
 
-class TimeHandler(object):
+class TimeEvaluator(object):
     __metaclass__ = ABCMeta
 
     def __init__(self):

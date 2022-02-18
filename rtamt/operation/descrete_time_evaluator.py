@@ -1,11 +1,11 @@
-from rtamt.operation.time_handler import TimeHandler
+from rtamt.operation.time_evaluator import TimeEvaluator
 
 from rtamt.exception.exception import RTAMTException
 
-class DescreteTimeHandler(TimeHandler):
+class DescreteTimeEvaluator(TimeEvaluator):
 
     def __init__(self):
-        super(DescreteTimeHandler, self).__init__()
+        super(DescreteTimeEvaluator, self).__init__()
 
         self.DEFAULT_TOLERANCE = float(0.1)
 
@@ -29,7 +29,7 @@ class DescreteTimeHandler(TimeHandler):
     #b = [[0, 2.5], [0.7, 4], [1.3, -1.2], [2.1, 1.7]]
     #dataset = [['a', a], ['b', b]]
     def evaluate_args_check(self, *args, **kargs):
-        super(DescreteTimeHandler, self).evaluate_args_check(*args, **kargs)
+        super(DescreteTimeEvaluator, self).evaluate_args_check(*args, **kargs)
 
         dataset = args[0]
         if not dataset['time']:

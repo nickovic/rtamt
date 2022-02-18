@@ -1,11 +1,9 @@
-from rtamt.operation.time_handler import TimeHandler
+from rtamt.operation.time_evaluator import TimeEvaluator
 
-from rtamt.exception.exception import RTAMTException
-
-class DenseTimeHandler(TimeHandler):
+class DenseTimeEvaluator(TimeEvaluator):
 
     def __init__(self):
-        super(DenseTimeHandler, self).__init__()
+        super(DenseTimeEvaluator, self).__init__()
         return
 
     #input format
