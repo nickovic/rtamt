@@ -24,7 +24,7 @@ class TestSemantics(unittest.TestCase):
         ast.parse()
 
         stlDiscreteTimeOfflineAstVisitor = discrete_time_offline_evaluator_factory(StlDiscreteTimeOfflineAstVisitor)()
-        stlDiscreteTimeOfflineAstVisitor.ast = ast
+        stlDiscreteTimeOfflineAstVisitor.set_ast(ast)
         dataset = {
             'time': [0, 1, 2, 3, 4],
             'a': [100, -1, -2, 5, -1]
@@ -39,7 +39,7 @@ class TestSemantics(unittest.TestCase):
         ast.parse()
 
         stlDenseTimeOfflineAstVisitor = dense_time_offline_evaluator_factory(StlDenseTimeOfflineAstVisitor)()
-        stlDenseTimeOfflineAstVisitor.ast = ast
+        stlDenseTimeOfflineAstVisitor.set_ast(ast)
         a = [[0, 1.3], [0.7, 3], [1.3, 0.1], [2.1, -2.2]]
         rob = stlDenseTimeOfflineAstVisitor.evaluate([['a', a]])
         print(rob)

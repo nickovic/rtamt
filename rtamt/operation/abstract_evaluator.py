@@ -20,10 +20,6 @@ class AbstractEvaluator(object):
             raise RTAMTException('ast is empty')
         return
 
-    @property
-    def ast(self):
-        return self.__ast
-
-    @ast.setter
-    def ast(self, ast):
-        self.__ast = ast
+    def set_ast(self, ast):
+        self.ast = ast
+        return
