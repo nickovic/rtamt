@@ -5,7 +5,7 @@ from rtamt.operation.abstract_evaluation_ast_visitor import AbstractEvluationAst
 
 from rtamt.exception.exception import RTAMTException
 
-class AbstractOfflineAstVisitor(AbstractEvluationAstVisitor):
+class AbstractDiscreteTimeOfflineAstVisitor(AbstractEvluationAstVisitor):
     """
     Abstract Operation: template for any monitoring operation
     """
@@ -88,11 +88,11 @@ class AbstractOfflineAstVisitor(AbstractEvluationAstVisitor):
         self.__ast = ast
 
 
-def offline_ast_visitor_factory(AstVisitor):
+def discrete_time_offline_ast_visitor_factory(AstVisitor):
     if not issubclass(AstVisitor, AbstractAstVisitor):  # type check
         raise RTAMTException('{} is not RTAMT AST visitor'.format(AstVisitor.__name__))
 
-    class OfflineAstVisitor(AbstractOfflineAstVisitor, AstVisitor):
+    class OfflineAstVisitor(AbstractDiscreteTimeOfflineAstVisitor, AstVisitor):
         def __init__(self, *args, **kwargs):
             super(OfflineAstVisitor, self).__init__(*args, **kwargs)
     return OfflineAstVisitor
