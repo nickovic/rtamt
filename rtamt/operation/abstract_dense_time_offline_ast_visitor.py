@@ -36,15 +36,6 @@ class AbstractDesneTimeOfflineAstVisitor(AbstractEvluationAstVisitor):
         return out
 
 
-    @property
-    def ast(self):
-        return self.__ast
-
-    @ast.setter
-    def ast(self, ast):
-        self.__ast = ast
-
-
 def dense_time_offline_ast_visitor_factory(AstVisitor):
     if not issubclass(AstVisitor, AbstractAstVisitor):  # type check
         raise RTAMTException('{} is not RTAMT AST visitor'.format(AstVisitor.__name__))

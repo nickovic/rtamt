@@ -17,3 +17,11 @@ class AbstractEvluationAstVisitor(AbstractAstVisitor):
     def __init__(self):
         #TODO we may impliment something in here, otherwise it is just inheriting AbstractAstVisitor.
         pass
+
+    @property
+    def ast(self):
+        return self.__ast
+
+    @ast.setter
+    def ast(self, ast):
+        self.__ast = ast
