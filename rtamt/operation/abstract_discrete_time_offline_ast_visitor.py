@@ -1,18 +1,14 @@
 # -*- coding: utf-8 -*-
 
 from rtamt.ast.visitor.abstract_ast_visitor import AbstractAstVisitor
-from rtamt.operation.abstract_evaluation_ast_visitor import AbstractEvluationAstVisitor
+from rtamt.operation.abstract_offline_evaluator import AbstractOfflineEvaluator
 
 from rtamt.exception.exception import RTAMTException
 
-class AbstractDiscreteTimeOfflineAstVisitor(AbstractEvluationAstVisitor):
-    """
-    Abstract Operation: template for any monitoring operation
-    """
+class AbstractDiscreteTimeOfflineAstVisitor(AbstractOfflineEvaluator):
+
     def __init__(self):
-        """Constructor for STL Specification"""
-        #super(AbstractOfflineAstVisitor, self).__init__(semantics, language)
-        self.name = 'STL Specification'
+        super(AbstractDiscreteTimeOfflineAstVisitor, self).__init__()
 
         self.DEFAULT_TOLERANCE = float(0.1)
 

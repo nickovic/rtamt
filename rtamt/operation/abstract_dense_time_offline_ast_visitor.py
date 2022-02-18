@@ -1,17 +1,15 @@
 # -*- coding: utf-8 -*-
 
 from rtamt.ast.visitor.abstract_ast_visitor import AbstractAstVisitor
-from rtamt.operation.abstract_evaluation_ast_visitor import AbstractEvluationAstVisitor
+from rtamt.operation.abstract_offline_evaluator import AbstractOfflineEvaluator
 
 from rtamt.exception.exception import RTAMTException
 
-class AbstractDesneTimeOfflineAstVisitor(AbstractEvluationAstVisitor):
-    """
-    Abstract Operation: template for any monitoring operation
-    """
+class AbstractDesneTimeOfflineAstVisitor(AbstractOfflineEvaluator):
+
     def __init__(self):
-        """Constructor for STL Specification"""
-        pass
+        super(AbstractDesneTimeOfflineAstVisitor, self).__init__()
+        return
 
     #input format
     #a = [[0, 1.3], [0.7, 3], [1.3, 0.1], [2.1, -2.2]]
