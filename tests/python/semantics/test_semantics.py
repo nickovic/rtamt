@@ -27,7 +27,7 @@ class TestSemantics(unittest.TestCase):
         stlDiscreteTimeOfflineAstVisitor.ast = ast
         dataset = {
             'time': [0, 1, 2, 3, 4],
-            'a': [100, -1, -2, 5, -1],
+            'a': [100, -1, -2, 5, -1]
         }
         rob = stlDiscreteTimeOfflineAstVisitor.evaluate(dataset)
         print(rob)
