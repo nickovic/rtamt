@@ -208,11 +208,11 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
         sample_right = self.visit(node.children[1], *args, **kwargs)
 
         sample_return = []
-        self.prev_out = -float("inf")
+        prev_out = -float("inf")
         for i in range(len(sample_left)):
-            out_sample = min(sample_left[i], self.prev_out)
+            out_sample = min(sample_left[i], prev_out)
             out_sample = max(out_sample, sample_right[i])
-            self.prev_out = out_sample
+            prev_out = out_sample
             sample_return.append(out_sample)
         return sample_return
 
@@ -271,16 +271,16 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
     def visitTimedOnce(self, node, *args, **kwargs):
         sample = self.visit(node.children[0], *args, **kwargs)
 
-        sample = [-float("inf") for j in range(self.end)] + sample
-        sample_return = [max(sample[j - self.end:j - self.begin+ 1]) for j in range(self.end, len(sample))]
+        sample = [-float("inf") for j in range(node.end)] + sample
+        sample_return = [max(sample[j - node.end:j - node.begin+ 1]) for j in range(node.end, len(sample))]
         return sample_return
 
 
     def visitTimedHistorically(self, node, *args, **kwargs):
         sample = self.visit(node.children[0], *args, **kwargs)
 
-        sample = [float("inf") for j in range(self.end)] + sample
-        sample_return = [min(sample[j - self.end:j - self.begin + 1]) for j in range(self.end, len(sample))]
+        sample = [float("inf") for j in range(node.end)] + sample
+        sample_return = [min(sample[j - node.end:j - node.begin + 1]) for j in range(node.end, len(sample))]
         return sample_return
 
 
@@ -289,25 +289,25 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
         sample_right = self.visit(node.children[1], *args, **kwargs)
 
         sample_return = []
-        self.buffer_left = collections.deque(maxlen=(self.end + 1))
-        self.buffer_right = collections.deque(maxlen=(self.end + 1))
+        buffer_left = collections.deque(maxlen=(node.end + 1))
+        buffer_right = collections.deque(maxlen=(node.end + 1))
 
-        for i in range(self.end + 1):
+        for i in range(node.end + 1):
             s_left = float("inf")
             s_right = - float("inf")
-            self.buffer_left.append(s_left)
-            self.buffer_right.append(s_right)
+            buffer_left.append(s_left)
+            buffer_right.append(s_right)
 
         for i in range(len(sample_left)):
-            self.buffer_left.append(sample_left[i])
-            self.buffer_right.append(sample_right[i])
+            buffer_left.append(sample_left[i])
+            buffer_right.append(sample_right[i])
             out_sample = - float("inf")
 
-            for j in range(self.end-self.begin+1):
+            for j in range(node.end-node.begin+1):
                 c_left = float("inf")
-                c_right = self.buffer_right[j]
-                for k in range(j+1, self.end+1):
-                    c_left = min(c_left, self.buffer_left[k])
+                c_right = buffer_right[j]
+                for k in range(j+1, node.end+1):
+                    c_left = min(c_left, buffer_left[k])
                 out_sample = max(out_sample, min(c_left, c_right))
             sample_return.append(out_sample)
         return sample_return
@@ -316,9 +316,9 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
     def visitTimedAlways(self, node, *args, **kwargs):
         sample = self.visit(node.children[0], *args, **kwargs)
 
-        diff = self.end - self.begin
-        sample_return  = [min(sample[j:j+diff+1]) for j in range(self.begin, self.end+1)]
-        tmp  = [min(sample[j:j+diff+1]) for j in range(self.end+1,len(sample))]
+        diff = node.end - node.begin
+        sample_return  = [min(sample[j:j+diff+1]) for j in range(node.begin, node.end+1)]
+        tmp  = [min(sample[j:j+diff+1]) for j in range(node.end+1,len(sample))]
         sample_return += tmp
         tmp  = [float("inf") for j in range(len(sample)-len(sample_return))]
         sample_return += tmp
@@ -328,9 +328,9 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
     def visitTimedEventually(self, node, *args, **kwargs):
         sample = self.visit(node.children[0], *args, **kwargs)
 
-        diff = self.end - self.begin
-        sample_return  = [max(sample[j:j+diff+1]) for j in range(self.begin, self.end+1)]
-        tmp  = [max(sample[j:j+diff+1]) for j in range(self.end+1,len(sample))]
+        diff = node.end - node.begin
+        sample_return  = [max(sample[j:j+diff+1]) for j in range(node.begin, node.end+1)]
+        tmp  = [max(sample[j:j+diff+1]) for j in range(node.end+1,len(sample))]
         sample_return += tmp
         tmp  = [-float("inf") for j in range(len(sample)-len(sample_return))]
         sample_return += tmp
@@ -342,24 +342,24 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
         sample_right = self.visit(node.children[1], *args, **kwargs)
 
         sample_return = []
-        self.buffer_left = collections.deque(maxlen=(self.end + 1))
-        self.buffer_right = collections.deque(maxlen=(self.end + 1))
+        buffer_left = collections.deque(maxlen=(node.end + 1))
+        buffer_right = collections.deque(maxlen=(node.end + 1))
 
-        for i in range(self.end + 1):
+        for i in range(node.end + 1):
             s_left = float("inf")
             s_right = - float("inf")
-            self.buffer_left.append(s_left)
-            self.buffer_right.append(s_right)
+            buffer_left.append(s_left)
+            buffer_right.append(s_right)
         for i in range(len(sample_left)-1, -1, -1):
-            self.buffer_left.append(sample_left[i])
-            self.buffer_right.append(sample_right[i])
+            buffer_left.append(sample_left[i])
+            buffer_right.append(sample_right[i])
             out_sample = - float("inf")
 
-            for j in range(self.end-self.begin+1):
+            for j in range(node.end-node.begin+1):
                 c_left = float("inf")
-                c_right = self.buffer_right[j]
-                for k in range(j+1, self.end+1):
-                    c_left = min(c_left, self.buffer_left[k])
+                c_right = buffer_right[j]
+                for k in range(j+1, node.end+1):
+                    c_left = min(c_left, buffer_left[k])
                 out_sample = max(out_sample, min(c_left, c_right))
             sample_return.append(out_sample)
         sample_return.reverse()
