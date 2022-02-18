@@ -1,42 +1,43 @@
-from rtamt.operation.abstract_operation import AbstractOperation
+from rtamt.operation.abstract_online_operation import AbstractOnlineOperation
 from rtamt.enumerations.comp_oper import StlComparisonOperator
 from rtamt.exception.ltl.exception import LTLException
 
-class PredicateOperation(AbstractOperation):
+
+class PredicateOperation(AbstractOnlineOperation):
     def __init__(self, op):
         self.op = op
 
     def reset(self):
         pass
 
-    def update(self, left, right):
+    def update(self, node, sample_left, sample_right):
         if self.op.value == StlComparisonOperator.EQ.value:
-            val = - abs(left - right)
+            sample_return = - abs(sample_left - sample_right)
         elif self.op.value == StlComparisonOperator.NEQ.value:
-            val = abs(left - right)
+            sample_return = abs(sample_left - sample_right)
         elif self.op.value == StlComparisonOperator.LEQ.value or self.op.value == StlComparisonOperator.LESS.value:
-            val = right - left
+            sample_return = sample_right - sample_left
         elif self.op.value == StlComparisonOperator.GEQ.value or self.op.value == StlComparisonOperator.GREATER.value:
-            val = left - right
+            sample_return = sample_left - sample_right
         else:
             raise LTLException('Unknown predicate operation')
 
-        return val
+        return sample_return
 
-    def sat(self, left, right):
+    def sat(self, sample_left, sample_right):
         if self.op.value == StlComparisonOperator.EQ.value:
-            val = left == right
+            sample_return = sample_left == sample_right
         elif self.op.value == StlComparisonOperator.NEQ.value:
-            val = left != right
+            sample_return = sample_left != sample_right
         elif self.op.value == StlComparisonOperator.GEQ.value:
-            val = left >= right
+            sample_return = sample_left >= sample_right
         elif self.op.value == StlComparisonOperator.GREATER.value:
-            val = left > right
+            sample_return = sample_left > sample_right
         elif self.op.value == StlComparisonOperator.LEQ.value:
-            val = left <= right
+            sample_return = sample_left <= sample_right
         elif self.op.value == StlComparisonOperator.LESS.value:
-            val = left < right
+            sample_return = sample_left < sample_right
         else:
             raise LTLException('Unknown predicate operation')
 
-        return val
+        return sample_return

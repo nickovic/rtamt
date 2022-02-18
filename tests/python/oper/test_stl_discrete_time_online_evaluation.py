@@ -15,10 +15,10 @@ from rtamt.operation.stl.discrete_time.online.eventually_operation import Eventu
 from rtamt.operation.stl.discrete_time.online.historically_operation import HistoricallyOperation
 from rtamt.operation.stl.discrete_time.online.once_operation import OnceOperation
 from rtamt.operation.stl.discrete_time.online.since_operation import SinceOperation
-from rtamt.operation.stl.discrete_time.online.once_bounded_operation import OnceBoundedOperation
-from rtamt.operation.stl.discrete_time.online.historically_bounded_operation import HistoricallyBoundedOperation
-from rtamt.operation.stl.discrete_time.online.since_bounded_operation import SinceBoundedOperation
-from rtamt.operation.stl.discrete_time.online.precedes_bounded_operation import PrecedesBoundedOperation
+from rtamt.operation.stl.discrete_time.online.once_timed_operation import OnceBoundedOperation
+from rtamt.operation.stl.discrete_time.online.historically_timed_operation import HistoricallyBoundedOperation
+from rtamt.operation.stl.discrete_time.online.since_timed_operation import SinceBoundedOperation
+from rtamt.operation.stl.discrete_time.online.precedes_timed_operation import PrecedesBoundedOperation
 from rtamt.operation.arithmetic.discrete_time.online.subtraction_operation import SubtractionOperation
 from rtamt.operation.arithmetic.discrete_time.online.addition_operation import AdditionOperation
 from rtamt.operation.arithmetic.discrete_time.online.multiplication_operation import MultiplicationOperation

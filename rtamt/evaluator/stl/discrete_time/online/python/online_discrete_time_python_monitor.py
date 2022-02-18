@@ -24,10 +24,10 @@ from rtamt.operation.stl.discrete_time.online.historically_operation import Hist
 
 from rtamt.operation.stl.discrete_time.online.previous_operation import PreviousOperation
 from rtamt.operation.stl.discrete_time.online.constant_operation import ConstantOperation
-from rtamt.operation.stl.discrete_time.online.once_bounded_operation import OnceBoundedOperation
-from rtamt.operation.stl.discrete_time.online.historically_bounded_operation import HistoricallyBoundedOperation
-from rtamt.operation.stl.discrete_time.online.since_bounded_operation import SinceBoundedOperation
-from rtamt.operation.stl.discrete_time.online.precedes_bounded_operation import PrecedesBoundedOperation
+from rtamt.operation.stl.discrete_time.online.once_timed_operation import OnceBoundedOperation
+from rtamt.operation.stl.discrete_time.online.historically_timed_operation import HistoricallyBoundedOperation
+from rtamt.operation.stl.discrete_time.online.since_timed_operation import SinceBoundedOperation
+from rtamt.operation.stl.discrete_time.online.precedes_timed_operation import PrecedesBoundedOperation
 
 class STLOnlineDiscreteTimePythonMonitor(STLASTVisitor):
     def __init__(self):

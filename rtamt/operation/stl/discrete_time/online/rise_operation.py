@@ -1,14 +1,15 @@
-from rtamt.operation.abstract_operation import AbstractOperation
+from rtamt.operation.abstract_online_operation import AbstractOnlineOperation
 
-class RiseOperation(AbstractOperation):
+
+class RiseOperation(AbstractOnlineOperation):
     def __init__(self):
         self.prev = -float("inf")
 
     def reset(self):
         self.prev = -float("inf")
 
-    def update(self, sample):
-        out = min(- self.prev, sample)
+    def update(self, node, sample):
+        sample_return = min(- self.prev, sample)
         self.prev = sample
 
-        return out
+        return sample_return

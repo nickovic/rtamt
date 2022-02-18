@@ -1,14 +1,15 @@
-from rtamt.operation.abstract_operation import AbstractOperation
+from rtamt.operation.abstract_online_operation import AbstractOnlineOperation
 
-class PreviousOperation(AbstractOperation):
+
+class PreviousOperation(AbstractOnlineOperation):
     def __init__(self):
         self.prev = float("inf")
 
     def reset(self):
         self.prev = float("inf")
 
-    def update(self, sample):
-        out = self.prev
+    def update(self, node, sample):
+        sample_return = self.prev
         self.prev = sample
 
-        return out
+        return sample_return
