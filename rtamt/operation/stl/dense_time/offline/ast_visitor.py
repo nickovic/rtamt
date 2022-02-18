@@ -291,8 +291,6 @@ class StlDenseTimeOfflineAstVisitor(StlAstVisitor):
 
         sample_return = []
         sub = SubtractionOperation()
-        sample_left = args[0]
-        sample_right = args[1]
         input_list = sub.update(sample_left, sample_right)
 
         prev = float("nan")
@@ -563,15 +561,8 @@ class StlDenseTimeOfflineAstVisitor(StlAstVisitor):
 
     #TODO: this code may not work.
     def visitConstant(self, node, *args, **kwargs):
-        sample_return = self.node_monitor_dict[node.name]
-        if len(args) > 0:
-            length = args[0]
-            out = []
-            for i in range(length):
-                out.append(sample_return)
-            sample_return = out
+        sample_return = [[0, node.val], [float("inf"), node.val]]
         return sample_return
-
 
     def visitPrevious(self, node, *args, **kwargs):
         raise STLNotImplementedException('Previous operator not implemented in STL dense-time monitor.')
