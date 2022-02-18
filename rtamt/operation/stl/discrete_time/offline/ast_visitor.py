@@ -260,8 +260,8 @@ class StlOfflineAstVisitor(StlAstVisitor):
 
 
     #TODO impliment here.
-    def visitTimedPrecedes(self, node, *args, **kwargs):
-        print(node.name)
+#    def visitTimedPrecedes(self, node, *args, **kwargs):
+#        print(node.name)
 
 
     def visitTimedOnce(self, node, *args, **kwargs):
