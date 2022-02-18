@@ -2,10 +2,11 @@
 
 from rtamt.ast.visitor.abstract_ast_visitor import AbstractAstVisitor
 from rtamt.operation.abstract_offline_evaluator import AbstractOfflineEvaluator
+from rtamt.operation.dense_time_handler import DenseTimeHandler
 
 from rtamt.exception.exception import RTAMTException
 
-class AbstractDesneTimeOfflineEvaluator(AbstractOfflineEvaluator):
+class AbstractDesneTimeOfflineEvaluator(AbstractOfflineEvaluator, DenseTimeHandler):
 
     def __init__(self):
         super(AbstractDesneTimeOfflineEvaluator, self).__init__()
@@ -15,17 +16,18 @@ class AbstractDesneTimeOfflineEvaluator(AbstractOfflineEvaluator):
     #a = [[0, 1.3], [0.7, 3], [1.3, 0.1], [2.1, -2.2]]
     #b = [[0, 2.5], [0.7, 4], [1.3, -1.2], [2.1, 1.7]]
     #dataset = [['a', a], ['b', b]]
+    #TODO merge dense and discrete into evaluate AbstractOfflineEvaluator
     def evaluate(self, *args, **kargs):
         # input format check
-        if len(args) != 1:
-            raise RTAMTException('evaluate: Wrong number of arguments')
-        dataset = args[0]
+        self.evaluate_args_check(*args, **kargs)
+        self.ast_check()
 
-        for data in dataset:
-            var_name = data[0]
-            var_object = data[1]
-            self.ast.var_object_dict[var_name] = var_object
+        dataset = self.get_dataset_from_args(*args, **kargs)
 
+        # update the value of every input variable
+        self.ast = self.set_variable_to_ast_from_dataset(self.ast, dataset)
+
+        #TODO move both of spec and sub-specs visit into syntax layer.
         # evaluate modular sub-specs
         for key in self.ast.var_subspec_dict:
             node = self.ast.var_subspec_dict[key]

@@ -2,29 +2,15 @@
 
 from rtamt.ast.visitor.abstract_ast_visitor import AbstractAstVisitor
 from rtamt.operation.abstract_offline_evaluator import AbstractOfflineEvaluator
+from rtamt.operation.descrete_time_handler import DescreteTimeHandler
 
 from rtamt.exception.exception import RTAMTException
 
-class AbstractDiscreteTimeOfflineEvaluator(AbstractOfflineEvaluator):
+class AbstractDiscreteTimeOfflineEvaluator(AbstractOfflineEvaluator, DescreteTimeHandler):
 
     def __init__(self):
         super(AbstractDiscreteTimeOfflineEvaluator, self).__init__()
-
-        self.DEFAULT_TOLERANCE = float(0.1)
-
-        # Default sampling period - 1s
-        self.sampling_period = int(1)
-        self.sampling_period_unit = 's'
-
-        # Default sampling tolerance
-        self.sampling_tolerance = float(0.1)
-
-        self.update_counter = int(0)
-        self.previous_time = float(0.0)
-        self.sampling_violation_counter = int(0)
-
-        self.normalize = float(1.0)
-
+        return
 
     #input format
     #dataset = {
@@ -32,25 +18,18 @@ class AbstractDiscreteTimeOfflineEvaluator(AbstractOfflineEvaluator):
     #   'req': [100, -1, -2, 5, -1],
     #    'gnt': [20, -2, 10, 4, -1]
     #}
+    #TODO merge dense and discrete into evaluate AbstractOfflineEvaluator
     def evaluate(self, *args, **kargs):
         # input format check
-        if len(args) != 1:
-            raise RTAMTException('evaluate: Wrong number of arguments')
-        dataset = args[0]
+        self.evaluate_args_check(*args, **kargs)
+        self.ast_check()
 
-        if not dataset['time']:
-            #TODO consider appropriate exception
-            raise RTAMTException('evaluate: The input does not contain the time field')
-
+        dataset = self.get_dataset_from_args(*args, **kargs)
         length = len(dataset['time'])
-
-        for key in dataset:
-            if len(dataset[key]) != length:
-                #TODO consider appropriate exception
-                raise RTAMTException('evaluate: The input ' + key + ' does not have the same number of samples as time')
 
         # Check if the difference between two consecutive timestamps is between
         # the accepted tolerance - if not, increase the violation counter
+        #TODO Tom did not understand well.
         ts = dataset['time']
         for i in range(len(ts) - 1):
             duration = (ts[i+1] - ts[i]) * self.normalize
@@ -58,15 +37,14 @@ class AbstractDiscreteTimeOfflineEvaluator(AbstractOfflineEvaluator):
         if duration < self.sampling_period - tolerance or duration > self.sampling_period + tolerance:
             self.sampling_violation_counter = self.sampling_violation_counter + 1
 
+        #TODO move both of spec and sub-specs visit into syntax layer.
         # update the value of every input variable
-        for key in dataset:
-            if key != 'time':
-                self.ast.var_object_dict[key] = dataset[key]
+        self.ast = self.set_variable_to_ast_from_dataset(self.ast, dataset)
 
         # evaluate modular sub-specs
         for key in self.ast.var_subspec_dict:
             node = self.ast.var_subspec_dict[key]
-            out = self.visitAst(node, [length])
+            out = self.visitAst(node, [length]) #TODO remove length.
             self.ast.var_object_dict[key] = out
 
         # The evaluation done wrt the discrete counter (logical time)
