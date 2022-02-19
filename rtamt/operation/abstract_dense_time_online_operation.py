@@ -9,5 +9,5 @@ class AbstractDenseTimeOnlineOperation(AbstractOnlineOperation):
     """
 
     @abstractmethod
-    def update_final(self):
+    def update_final(self, node, *args, **kargs):
         raise NotImplementedError(self.NOT_IMPLEMENTED)
