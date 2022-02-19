@@ -35,77 +35,62 @@ class StlDiscreteTimeOnlineAstVisitor(StlAstVisitor):
     def visitPredicate(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
         self.online_operator_dict[node.name] = PredicateOperation(node)
-        return
 
     def visitAbs(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
         self.online_operator_dict[node.name] = AbsOperation()
-        return
 
     def visitSqrt(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
         self.online_operator_dict[node.name] = SqrtOperation()
-        return
 
     def visitExp(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
         self.online_operator_dict[node.name] = ExpOperation()
-        return
 
     def visitPow(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
         self.online_operator_dict[node.name] = PowOperation()
-        return
 
     def visitAddition(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
         self.online_operator_dict[node.name] = AdditionOperation()
-        return
 
     def visitSubtraction(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
         self.online_operator_dict[node.name] = SubtractionOperation()
-        return
 
     def visitMultiplication(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
         self.online_operator_dict[node.name] = MultiplicationOperation()
-        return
 
     def visitDivision(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
         self.online_operator_dict[node.name] = DivisionOperation()
-        return
 
     def visitNot(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
         self.online_operator_dict[node.name] = NotOperation
-        return
 
     def visitAnd(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
         self.online_operator_dict[node.name] = AndOperation()
-        return
 
     def visitOr(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
         self.online_operator_dict[node.name] = OrOperation()
-        return
 
     def visitImplies(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
         self.online_operator_dict[node.name] = ImpliesOperation()
-        return
 
     def visitIff(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
         self.online_operator_dict[node.name] = IffOperation()
-        return
 
     def visitXor(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
         self.online_operator_dict[node.name] = XorOperation()
-        return
 
     def visitEventually(self, node, *args, **kwargs):
         raise LTLNotImplementedException('Eventually operator is not implemented in the STL online monitor.')
@@ -119,32 +104,26 @@ class StlDiscreteTimeOnlineAstVisitor(StlAstVisitor):
     def visitOnce(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
         self.online_operator_dict[node.name] = OnceOperation()
-        return
 
     def visitHistorically(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
         self.online_operator_dict[node.name] = HistoricallyOperation()
-        return
 
     def visitSince(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
         self.online_operator_dict[node.name] = SinceOperation()
-        return
 
     def visitRise(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
         self.online_operator_dict[node.name] = RiseOperation()
-        return
 
     def visitFall(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
         self.online_operator_dict[node.name] = FallOperation()
-        return
 
     def visitPrevious(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
         self.online_operator_dict[node.name] = PreviousOperation()
-        return
 
     def visitNext(self, node, *args, **kwargs):
         raise LTLNotImplementedException('Next operator not implemented in STL online monitor.')
@@ -152,22 +131,18 @@ class StlDiscreteTimeOnlineAstVisitor(StlAstVisitor):
     def visitTimedPrecedes(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
         self.online_operator_dict[node.name] = PrecedesTimedOperation(node.begin, node.end)
-        return
 
     def visitTimedOnce(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
         self.online_operator_dict[node.name] = OnceTimedOperation(node.begin, node.end)
-        return
 
     def visitTimedHistorically(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
         self.online_operator_dict[node.name] = HistoricallyTimedOperation(node.begin, node.end)
-        return
 
     def visitTimedSince(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
         self.online_operator_dict[node.name] = SinceTimedOperation(node.begin, node.end)
-        return
 
     def visitTimedAlways(self, node, *args, **kwargs):
         raise STLNotImplementedException('Bounded always operator not implemented in STL online monitor.')
