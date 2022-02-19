@@ -1,7 +1,7 @@
-from rtamt.operation.abstract_online_operation import AbstractOnlineOperation
+from rtamt.operation.abstract_discrete_time_online_operation import AbstractDiscreteTimeOnlineOperation
 
 
-class IffOperation(AbstractOnlineOperation):
+class IffOperation(AbstractDiscreteTimeOnlineOperation):
     def __init__(self):
         pass
 

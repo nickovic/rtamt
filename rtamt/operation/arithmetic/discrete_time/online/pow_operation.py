@@ -1,8 +1,8 @@
 import math
-from rtamt.operation.abstract_online_operation import AbstractOnlineOperation
+from rtamt.operation.abstract_discrete_time_online_operation import AbstractDiscreteTimeOnlineOperation
 
 
-class PowOperation(AbstractOnlineOperation):
+class PowOperation(AbstractDiscreteTimeOnlineOperation):
     def __init__(self):
         pass
 

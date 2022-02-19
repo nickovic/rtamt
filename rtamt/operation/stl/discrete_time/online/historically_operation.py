@@ -1,6 +1,6 @@
-from rtamt.operation.abstract_online_operation import AbstractOnlineOperation
+from rtamt.operation.abstract_discrete_time_online_operation import AbstractDiscreteTimeOnlineOperation
 
-class HistoricallyOperation(AbstractOnlineOperation):
+class HistoricallyOperation(AbstractDiscreteTimeOnlineOperation):
     def __init__(self):
         self.prev_out = float("inf")
 
