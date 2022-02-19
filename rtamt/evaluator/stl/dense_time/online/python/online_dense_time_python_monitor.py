@@ -20,9 +20,9 @@ from rtamt.operation.stl.dense_time.online.not_operation import NotOperation
 from rtamt.operation.stl.dense_time.online.once_operation import OnceOperation
 from rtamt.operation.stl.dense_time.online.historically_operation import HistoricallyOperation
 from rtamt.operation.stl.dense_time.online.constant_operation import ConstantOperation
-from rtamt.operation.stl.dense_time.online.once_bounded_operation import OnceBoundedOperation
-from rtamt.operation.stl.dense_time.online.historically_bounded_operation import HistoricallyBoundedOperation
-from rtamt.operation.stl.dense_time.online.since_bounded_operation import SinceBoundedOperation
+from rtamt.operation.stl.dense_time.online.once_timed_operation import OnceBoundedOperation
+from rtamt.operation.stl.dense_time.online.historically_timed_operation import HistoricallyBoundedOperation
+from rtamt.operation.stl.dense_time.online.since_timed_operation import SinceBoundedOperation
 
 
 class STLOnlineDenseTimePythonMonitor(STLASTVisitor):

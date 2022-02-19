@@ -1,25 +1,25 @@
 import math
-from rtamt.operation.abstract_operation import AbstractOperation
+from rtamt.operation.abstract_dense_time_online_operation import AbstractDenseTimeOnlineOperation
 import rtamt.operation.stl.dense_time.online.intersection as intersect
 
-class PowOperation(AbstractOperation):
+class PowOperation(AbstractDenseTimeOnlineOperation):
     def __init__(self):
-        self.left = []
-        self.right = []
+        self.sample_left_buf = []
+        self.sample_right_buf = []
 
-    def update(self, left_list, right_list):
-        out = []
-        self.left = self.left + left_list
-        self.right = self.right + right_list
+    def update(self, node, sample_left, sample_right, *args, **kargs):
+        sample_result = []
+        self.sample_left_buf = self.sample_left_buf + sample_left
+        self.sample_right_buf = self.sample_right_buf + sample_right
 
-        out, last, left, right = intersect.intersection(self.left, self.right, intersect.power)
+        sample_result, last, left, right = intersect.intersection(self.sample_left_buf, self.sample_right_buf, intersect.power)
 
-        self.left = left
-        self.right = right
-        if out:
+        self.sample_left_buf = left
+        self.sample_right_buf = right
+        if sample_result:
             self.last = last
 
-        return out
+        return sample_result
 
-    def update_final(self, *args, **kargs):
-        return self.update(args[0], args[1]) + [self.last]
+    def update_final(self, node, sample_left, sample_right, *args, **kargs):
+        return self.update(node, sample_left, sample_right, *args, **kargs) + [self.last]

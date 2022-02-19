@@ -1,21 +1,21 @@
 import math
-from rtamt.operation.abstract_operation import AbstractOperation
+from rtamt.operation.abstract_dense_time_online_operation import AbstractDenseTimeOnlineOperation
 
-class SqrtOperation(AbstractOperation):
+class SqrtOperation(AbstractDenseTimeOnlineOperation):
     def __init__(self):
-        self.input = []
+        pass
 
-    def update(self, input_list):
-        out = []
+    def update(self, node, sample):
+        sample_result = []
 
-        for in_sample in input_list:
-            if in_sample[1] < 0:
+        for i in sample:
+            if i[1] < 0:
                 raise Exception('sqrt: input is smaller than 0.')
-            out_time = in_sample[0]
-            out_value = math.sqrt(in_sample[1])
-            out.append([out_time, out_value])
+            out_time = i[0]
+            out_value = math.sqrt(i[1])
+            sample_result.append([out_time, out_value])
 
-        return out
+        return sample_result
 
-    def update_final(self, *args, **kargs):
-        return self.update(args[0])
+    def update_final(self, node, sample, *args, **kargs):
+        return self.update(node, sample, *args, **kargs)

@@ -1,19 +1,19 @@
 import math
-from rtamt.operation.abstract_operation import AbstractOperation
+from rtamt.operation.abstract_dense_time_online_operation import AbstractDenseTimeOnlineOperation
 
-class ExpOperation(AbstractOperation):
+class ExpOperation(AbstractDenseTimeOnlineOperation):
     def __init__(self):
-        self.input = []
+        pass
 
-    def update(self, input_list):
-        out = []
+    def update(self, node, sample, *args, **kargs):
+        sample_result = []
 
-        for in_sample in input_list:
-            out_time = in_sample[0]
-            out_value = math.exp(in_sample[1])
-            out.append([out_time, out_value])
+        for i in sample:
+            out_time = i[0]
+            out_value = math.exp(i[1])
+            sample_result.append([out_time, out_value])
 
-        return out
+        return sample_result
 
-    def update_final(self, *args, **kargs):
-        return self.update(args[0])
+    def update_final(self, node, sample, *args, **kargs):
+        return self.update(node, sample, *args, **kargs)
