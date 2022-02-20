@@ -15,7 +15,7 @@ class AbstractEvaluator(object):
     __metaclass__ = ABCMeta
     NOT_IMPLEMENTED = "You should implement this."
 
-    def ast_check(self):
+    def exist_ast(self):
         if self.ast is None:
             raise RTAMTException('ast is empty')
         return

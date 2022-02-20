@@ -21,6 +21,9 @@ class AbstractDiscreteTimeOnlineEvaluator(AbstractOnlineEvaluator, DescreteTimeE
     # update(3.48, [['a', 2.2], ['b', 3.3]])
     #TODO merge dense and discrete into update AbstractOnlineEvaluator
     def update(self, timestamp, dataset):
+        # check ast exists
+        self.exist_ast()
+
         # Check if the difference between two consecutive timestamps is between
         # the accepted tolerance - if not, increase the violation counter
         if self.update_counter > 0:

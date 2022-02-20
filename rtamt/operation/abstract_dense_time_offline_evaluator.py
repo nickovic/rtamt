@@ -18,8 +18,8 @@ class AbstractDesneTimeOfflineEvaluator(AbstractOfflineEvaluator, DenseTimeEvalu
     #dataset = [['a', a], ['b', b]]
     #TODO merge dense and discrete into evaluate AbstractOfflineEvaluator
     def evaluate(self, dataset):
-        # input format check
-        self.ast_check()
+        # check ast exists
+        self.exist_ast()
 
         # update the value of every input variable
         self.ast = self.set_variable_to_ast_from_dataset(self.ast, dataset)

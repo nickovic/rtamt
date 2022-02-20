@@ -20,8 +20,8 @@ class AbstractDiscreteTimeOfflineEvaluator(AbstractOfflineEvaluator, DescreteTim
     #}
     #TODO merge dense and discrete into evaluate AbstractOfflineEvaluator
     def evaluate(self, dataset):
-        # input format check
-        self.ast_check()
+        # check ast exists
+        self.exist_ast()
 
         length = len(dataset['time'])
 
