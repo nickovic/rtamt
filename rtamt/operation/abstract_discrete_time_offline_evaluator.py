@@ -41,16 +41,16 @@ class AbstractDiscreteTimeOfflineEvaluator(AbstractOfflineEvaluator, DescreteTim
         # evaluate modular sub-specs
         for key in self.ast.var_subspec_dict:
             node = self.ast.var_subspec_dict[key]
-            out = self.visitAst(node, [length]) #TODO remove length.
-            self.ast.var_object_dict[key] = out
+            rob = self.visitAst(node, [length]) #TODO remove length.
+            self.ast.var_object_dict[key] = rob
 
-        # The evaluation done wrt the discrete counter (logical time)
-        out = self.visitAst(self.ast, [length])
+        # evaluate spec
+        rob = self.visitAst(self.ast, [length])
 
-        out_t = [[a[0],a[1]] for a in zip(ts,out)]
-        out = out_t
+        out_t = [[a[0],a[1]] for a in zip(ts,rob)]
+        rob = out_t
 
-        return out
+        return rob
 
 
 def discrete_time_offline_evaluator_factory(AstVisitor):

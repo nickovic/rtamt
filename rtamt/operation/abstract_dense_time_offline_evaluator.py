@@ -28,13 +28,14 @@ class AbstractDesneTimeOfflineEvaluator(AbstractOfflineEvaluator, DenseTimeEvalu
         # evaluate modular sub-specs
         for key in self.ast.var_subspec_dict:
             node = self.ast.var_subspec_dict[key]
-            out = self.visitAst(node)
-            self.ast.var_object_dict[key] = out
+            rob = self.visitAst(node)
+            self.ast.var_object_dict[key] = rob
 
         # evaluate modular spec
-        out = self.visitAst(self.ast)
+        rob = self.visitAst(self.ast)
+
         self.ast.var_object_dict = self.ast.var_object_dict.fromkeys(self.ast.var_object_dict, [])  #TODO I did not understant it.
-        return out
+        return rob
 
 
 def dense_time_offline_evaluator_factory(AstVisitor):

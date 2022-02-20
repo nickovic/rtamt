@@ -35,6 +35,7 @@ class AbstractDenseTimeOnlineEvaluator(AbstractOnlineEvaluator, DenseTimeEvaluat
 
         # evaluate spec
         rob = self.updateVisitor.visitAst(self.ast, self.online_operator_dict)
+
         self.ast.var_object_dict = self.ast.var_object_dict.fromkeys(self.ast.var_object_dict, [])  #TODO I did not understant it.
 
         return rob

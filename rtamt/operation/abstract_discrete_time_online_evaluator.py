@@ -40,16 +40,16 @@ class AbstractDiscreteTimeOnlineEvaluator(AbstractOnlineEvaluator, DescreteTimeE
         # evaluate modular sub-specs
         for key in self.ast.var_subspec_dict:
             node = self.ast.var_subspec_dict[key]
-            out = self.updateVisitor.visitAst(node, self.online_operator_dict)
-            self.ast.var_object_dict[key] = out
+            rob = self.updateVisitor.visitAst(node, self.online_operator_dict)
+            self.ast.var_object_dict[key] = rob
 
-        # The evaluation done wrt the discrete counter (logical time)
-        out = self.updateVisitor.visitAst(self.ast, self.online_operator_dict)
+        # evaluate spec
+        rob = self.updateVisitor.visitAst(self.ast, self.online_operator_dict)
 
         self.previous_time = timestamp
         self.update_counter = self.update_counter + 1
 
-        return out
+        return rob
 
 
     def reset(self):
