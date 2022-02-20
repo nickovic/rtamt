@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
+import operator
 
 from rtamt.ast.visitor.abstract_ast_visitor import AbstractAstVisitor
-from rtamt.operation.abstract_online_evaluator import AbstractOnlineEvaluator
+from rtamt.operation.abstract_online_evaluator import AbstractOnlineEvaluator, AbstractOnlineUpdateVisitor, AbstractOnlineResetVisitor
 from rtamt.operation.descrete_time_evaluator import DescreteTimeEvaluator
 
 from rtamt.exception.exception import RTAMTException
@@ -10,6 +11,8 @@ class AbstractDiscreteTimeOnlineEvaluator(AbstractOnlineEvaluator, DescreteTimeE
 
     def __init__(self):
         super(AbstractDiscreteTimeOnlineEvaluator, self).__init__()
+        self.updateVisitor = DiscreteTimeOnlineUpdateVisitor()
+        self.resetVisitor = AbstractOnlineResetVisitor()
         return
 
     # timestamp - float
@@ -53,6 +56,18 @@ class AbstractDiscreteTimeOnlineEvaluator(AbstractOnlineEvaluator, DescreteTimeE
         self.previous_time = float(0.0)
         self.sampling_violation_counter = int(0)
         return
+
+class DiscreteTimeOnlineUpdateVisitor(AbstractOnlineUpdateVisitor):
+    def visitVariable(self, node, online_operator_dict):
+        var = self.ast.var_object_dict[node.var]
+        if node.field:  #TODO Tom did not understand this line.
+            sample_return = operator.attrgetter(node.field)(var)
+        else:
+            sample_return = var
+        return sample_return
+
+    def visitConstant(self, node, online_operator_dict):
+        return node.val
 
 
 def discrete_time_online_evaluator_factory(AstVisitor):

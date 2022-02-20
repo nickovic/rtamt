@@ -30,63 +30,63 @@ class StlDenseTimeOnlineAstVisitor(StlAstVisitor):
 
     def visitPredicate(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
-        self.node_monitor_dict[node.name] = PredicateOperation(node)
+        self.online_operator_dict[node.name] = PredicateOperation()
 
     def visitAbs(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
-        self.node_monitor_dict[node.name] = AbsOperation()
+        self.online_operator_dict[node.name] = AbsOperation()
 
     def visitSqrt(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
-        self.node_monitor_dict[node.name] = SqrtOperation()
+        self.online_operator_dict[node.name] = SqrtOperation()
 
     def visitExp(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
-        self.node_monitor_dict[node.name] = ExpOperation()
+        self.online_operator_dict[node.name] = ExpOperation()
 
     def visitPow(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
-        self.node_monitor_dict[node.name] = PowOperation()
+        self.online_operator_dict[node.name] = PowOperation()
 
     def visitAddition(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
-        self.node_monitor_dict[node.name] = AdditionOperation()
+        self.online_operator_dict[node.name] = AdditionOperation()
 
     def visitSubtraction(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
-        self.node_monitor_dict[node.name] = SubtractionOperation()
+        self.online_operator_dict[node.name] = SubtractionOperation()
 
     def visitMultiplication(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
-        self.node_monitor_dict[node.name] = MultiplicationOperation()
+        self.online_operator_dict[node.name] = MultiplicationOperation()
 
     def visitDivision(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
-        self.node_monitor_dict[node.name] = DivisionOperation()
+        self.online_operator_dict[node.name] = DivisionOperation()
 
     def visitNot(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
-        self.node_monitor_dict[node.name] = NotOperation()
+        self.online_operator_dict[node.name] = NotOperation()
 
     def visitAnd(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
-        self.node_monitor_dict[node.name] = AndOperation()
+        self.online_operator_dict[node.name] = AndOperation()
 
     def visitOr(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
-        self.node_monitor_dict[node.name] = OrOperation()
+        self.online_operator_dict[node.name] = OrOperation()
 
     def visitImplies(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
-        self.node_monitor_dict[node.name] = ImpliesOperation()
+        self.online_operator_dict[node.name] = ImpliesOperation()
 
     def visitIff(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
-        self.node_monitor_dict[node.name] = IffOperation()
+        self.online_operator_dict[node.name] = IffOperation()
 
     def visitXor(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
-        self.node_monitor_dict[node.name] = XorOperation()
+        self.online_operator_dict[node.name] = XorOperation()
 
     def visitEventually(self, node, *args, **kwargs):
         raise LTLNotImplementedException('Eventually operator is not implemented in the STL online monitor.')
@@ -99,15 +99,15 @@ class StlDenseTimeOnlineAstVisitor(StlAstVisitor):
 
     def visitOnce(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
-        self.node_monitor_dict[node.name] = OnceOperation()
+        self.online_operator_dict[node.name] = OnceOperation()
 
     def visitHistorically(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
-        self.node_monitor_dict[node.name] = HistoricallyOperation()
+        self.online_operator_dict[node.name] = HistoricallyOperation()
 
     def visitSince(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
-        self.node_monitor_dict[node.name] = SinceOperation()
+        self.online_operator_dict[node.name] = SinceOperation()
 
     def visitRise(self, node, *args, **kwargs):
         raise LTLNotImplementedException('Rise operator not implemented in STL dense monitor.')
@@ -126,15 +126,15 @@ class StlDenseTimeOnlineAstVisitor(StlAstVisitor):
 
     def visitTimedOnce(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
-        self.node_monitor_dict[node.name] = OnceTimedOperation(node.begin, node.end)
+        self.online_operator_dict[node.name] = OnceTimedOperation(node.begin, node.end)
 
     def visitTimedHistorically(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
-        self.node_monitor_dict[node.name] = HistoricallyTimedOperation(node.begin, node.end)
+        self.online_operator_dict[node.name] = HistoricallyTimedOperation(node.begin, node.end)
 
     def visitTimedSince(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
-        self.node_monitor_dict[node.name] = SinceTimedOperation(node.begin, node.end)
+        self.online_operator_dict[node.name] = SinceTimedOperation(node.begin, node.end)
 
     def visitTimedAlways(self, node, *args, **kwargs):
         raise STLNotImplementedException('Bounded always operator not implemented in STL dense-time monitor.')

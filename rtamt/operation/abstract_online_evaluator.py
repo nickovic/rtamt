@@ -1,5 +1,3 @@
-import operator
-
 from abc import abstractmethod
 
 from rtamt.node.ltl.variable import Variable
@@ -11,8 +9,6 @@ from rtamt.operation.abstract_evaluator import AbstractEvaluator
 class AbstractOnlineEvaluator(AbstractEvaluator):
     def __init__(self):
         super(AbstractOnlineEvaluator, self).__init__()
-        self.resetVisitor = AbstractOnlineResetVisitor()
-        self.updateVisitor = AbstractOnlineUpdateVisitor()
         self.online_operator_dict = dict()
         return
 
@@ -79,14 +75,3 @@ class AbstractOnlineUpdateVisitor(AbstractAstVisitor):
         elif isinstance(node, Variable):
             sample_return = self.visitVariable(node, online_operator_dict)
         return sample_return
-
-    def visitVariable(self, node, online_operator_dict):
-        var = self.ast.var_object_dict[node.var]
-        if node.field:  #TODO Tom did not understand this line.
-            sample_return = operator.attrgetter(node.field)(var)
-        else:
-            sample_return = var
-        return sample_return
-
-    def visitConstant(self, node, online_operator_dict):
-        return node.val

@@ -10,9 +10,9 @@ class PredicateOperation(AbstractDenseTimeOnlineOperation):
 
     def update(self, node, sample_left, sample_right, *args, **kargs):
         sample_result = []
-        input_list = self.sub.update(sample_left, sample_right)
+        input_list = self.sub.update(node, sample_left, sample_right, *args, **kargs)
 
-        prev = float("nan")
+        prev = float('nan')
         for i in input_list:
             if node.operator.value == StlComparisonOperator.EQ.value:
                 out_val = - abs(i[1])
@@ -35,7 +35,7 @@ class PredicateOperation(AbstractDenseTimeOnlineOperation):
         sample_result = []
         input_list = self.sub.update_final(sample_left, sample_right)
 
-        prev = float("nan")
+        prev = float('nan')
         for i in input_list:
             if node.operator.value == StlComparisonOperator.EQ.value:
                 out_val = - abs(i[1])
@@ -58,7 +58,7 @@ class PredicateOperation(AbstractDenseTimeOnlineOperation):
         sample_result = []
         input_list = self.sub.update(sample_left, sample_right)
 
-        prev = float("nan")
+        prev = float('nan')
         for i, in_sample in enumerate(input_list):
             if node.operator.value == StlComparisonOperator.EQ.value:
                 out_val = True if in_sample[1] == 0 else False

@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
+import operator
 
 from rtamt.ast.visitor.abstract_ast_visitor import AbstractAstVisitor
-from rtamt.operation.abstract_online_evaluator import AbstractOnlineEvaluator
+from rtamt.operation.abstract_online_evaluator import AbstractOnlineEvaluator, AbstractOnlineUpdateVisitor
 from rtamt.operation.dense_time_evaluator import DenseTimeEvaluator
 
 from rtamt.exception.exception import RTAMTException
@@ -10,50 +11,47 @@ class AbstractDenseTimeOnlineEvaluator(AbstractOnlineEvaluator, DenseTimeEvaluat
 
     def __init__(self):
         super(AbstractDenseTimeOnlineEvaluator, self).__init__()
+        self.updateVisitor = DenseTimeOnlineUpdateVisitor()
         return
 
-    # timestamp - float
-    # inputs - list of [var name, var value] pairs
-    # Example:
-    # update(3.48, [['a', 2.2], ['b', 3.3]])
+    #input format
+    #a = [[0, 1.3], [0.7, 3], [1.3, 0.1], [2.1, -2.2]]
+    #b = [[0, 2.5], [0.7, 4], [1.3, -1.2], [2.1, 1.7]]
+    #dataset = [['a', a], ['b', b]]
     #TODO merge dense and discrete into update AbstractOnlineEvaluator
-    def update(self, timestamp, dataset):
-        # Check if the difference between two consecutive timestamps is between
-        # the accepted tolerance - if not, increase the violation counter
-        if self.update_counter > 0:
-            duration = (timestamp - self.previous_time) * self.normalize
-            self.update_sampling_violation_counter(duration)
+    def update(self, dataset):
+        # self.ast check
+        self.ast_check()
 
-        #TODO move all vist to syntax layere
         # update the value of every input variable
-        for data in dataset:
-            var_name = data[0]
-            var_value = data[1]
-            self.ast.var_object_dict[var_name] = var_value
+        self.ast = self.set_variable_to_ast_from_dataset(self.ast, dataset)
 
+        #TODO move both of spec and sub-specs visit into syntax layer.
         # evaluate modular sub-specs
         for key in self.ast.var_subspec_dict:
             node = self.ast.var_subspec_dict[key]
-            out = self.updateVisitor.visitAst(node, self.online_operator_dict)
-            self.ast.var_object_dict[key] = out
+            rob = self.updateVisitor.visitAst(node, self.online_operator_dict)
+            self.ast.var_object_dict[key] = rob
 
-        # The evaluation done wrt the discrete counter (logical time)
-        out = self.updateVisitor.visitAst(self.ast, self.online_operator_dict)
+        # evaluate spec
+        rob = self.updateVisitor.visitAst(self.ast, self.online_operator_dict)
+        self.ast.var_object_dict = self.ast.var_object_dict.fromkeys(self.ast.var_object_dict, [])  #TODO I did not understant it.
 
-        self.previous_time = timestamp
-        self.update_counter = self.update_counter + 1
-
-        return out
+        return rob
 
 
-    def reset(self):
-        super(AbstractDenseTimeOnlineEvaluator, self).reset()
+class DenseTimeOnlineUpdateVisitor(AbstractOnlineUpdateVisitor):
+    def visitVariable(self, node, online_operator_dict):
+        var = self.ast.var_object_dict[node.var]
+        if node.field:  #TODO Tom did not understand this line.
+            sample_return = operator.attrgetter(node.field)(var)
+        else:
+            sample_return = var
+        return sample_return
 
-        self.update_counter = int(0)
-        self.previous_time = float(0.0)
-        self.sampling_violation_counter = int(0)
-        return
-
+    def visitConstant(self, node, online_operator_dict):
+        sample_return = [[0, node.val], [float("inf"), node.val]]
+        return sample_return
 
 def dense_time_online_evaluator_factory(AstVisitor):
     if not issubclass(AstVisitor, AbstractAstVisitor):  # type check
