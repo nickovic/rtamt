@@ -25,160 +25,160 @@ from rtamt.node.ltl.constant import Constant
 from rtamt.node.ltl.previous import Previous
 
 from rtamt.exception.ltl.exception import LTLPastifyException
-from rtamt.pastifier.ltl.horizon import LTLHorizon
+from rtamt.pastifier.ltl.horizon import LtlHorizon
 
 
-class LTLPastifier(LtlAstVisitor):
+class LtlPastifier(LtlAstVisitor):
 
     def __init__(self):
         pass
 
-    def pastify(self, element):
-        h = LTLHorizon()
-        horizon = h.visit(element, None)
-        return self.visit(element, [horizon])
+    def pastify(self, node):
+        h = LtlHorizon()
+        horizon = h.visit(node, None)
+        return self.visit(node, [horizon])
 
-    def visitConstant(self, element, args):
-        node = Constant(element.val)
+    def visitConstant(self, node, *args, **kwargs):
+        node = Constant(node.val)
         return node
 
-    def visitPredicate(self, element, args):
-        child1_node = self.visit(element.children[0], args)
-        child2_node = self.visit(element.children[1], args)
-        node = Predicate(child1_node, child2_node, element.operator)
+    def visitPredicate(self, node, *args, **kwargs):
+        child1_node = self.visit(node.children[0], *args, **kwargs)
+        child2_node = self.visit(node.children[1], *args, **kwargs)
+        node = Predicate(child1_node, child2_node, node.operator)
         return node
 
-    def visitVariable(self, element, args):
+    def visitVariable(self, node, *args, **kwargs):
         horizon = args[0]
-        node = Variable(element.var, element.field, element.io_type)
+        node = Variable(node.var, node.field, node.io_type)
         for i in range(horizon):
             node = Previous(node)
         return node
 
-    def visitAddition(self, element, args):
-        child1_node = self.visit(element.children[0], args)
-        child2_node = self.visit(element.children[1], args)
+    def visitAddition(self, node, *args, **kwargs):
+        child1_node = self.visit(node.children[0], *args, **kwargs)
+        child2_node = self.visit(node.children[1], *args, **kwargs)
         node = Addition(child1_node, child2_node)
         return node
 
-    def visitMultiplication(self, element, args):
-        child1_node = self.visit(element.children[0], args)
-        child2_node = self.visit(element.children[1], args)
+    def visitMultiplication(self, node, *args, **kwargs):
+        child1_node = self.visit(node.children[0], *args, **kwargs)
+        child2_node = self.visit(node.children[1], *args, **kwargs)
         node = Multiplication(child1_node, child2_node)
         return node
 
-    def visitSubtraction(self, element, args):
-        child1_node = self.visit(element.children[0], args)
-        child2_node = self.visit(element.children[1], args)
+    def visitSubtraction(self, node, *args, **kwargs):
+        child1_node = self.visit(node.children[0], *args, **kwargs)
+        child2_node = self.visit(node.children[1], *args, **kwargs)
         node = Subtraction(child1_node, child2_node)
         return node
 
-    def visitDivision(self, element, args):
-        child1_node = self.visit(element.children[0], args)
-        child2_node = self.visit(element.children[1], args)
+    def visitDivision(self, node, *args, **kwargs):
+        child1_node = self.visit(node.children[0], *args, **kwargs)
+        child2_node = self.visit(node.children[1], *args, **kwargs)
         node = Division(child1_node, child2_node)
         return node
 
-    def visitAbs(self, element, args):
-        child_node = self.visit(element.children[0], args)
+    def visitAbs(self, node, *args, **kwargs):
+        child_node = self.visit(node.children[0], *args, **kwargs)
         node = Abs(child_node)
         return node
 
-    def visitSqrt(self, element, args):
-        child_node = self.visit(element.children[0], args)
+    def visitSqrt(self, node, *args, **kwargs):
+        child_node = self.visit(node.children[0], *args, **kwargs)
         node = Sqrt(child_node)
         return node
 
-    def visitExp(self, element, args):
-        child_node = self.visit(element.children[0], args)
+    def visitExp(self, node, *args, **kwargs):
+        child_node = self.visit(node.children[0], *args, **kwargs)
         node = Exp(child_node)
         return node
 
-    def visitPow(self, element, args):
-        child1_node = self.visit(element.children[0], args)
-        child2_node = self.visit(element.children[1], args)
+    def visitPow(self, node, *args, **kwargs):
+        child1_node = self.visit(node.children[0], *args, **kwargs)
+        child2_node = self.visit(node.children[1], *args, **kwargs)
         node = Pow(child1_node, child2_node)
         return node
 
-    def visitRise(self, element, args):
-        child_node = self.visit(element.children[0], args)
+    def visitRise(self, node, *args, **kwargs):
+        child_node = self.visit(node.children[0], *args, **kwargs)
         node = Rise(child_node)
         return node
 
-    def visitFall(self, element, args):
-        child_node = self.visit(element.children[0], args)
+    def visitFall(self, node, *args, **kwargs):
+        child_node = self.visit(node.children[0], *args, **kwargs)
         node = Fall(child_node)
         return node
 
-    def visitNot(self, element, args):
-        child_node = self.visit(element.children[0], args)
+    def visitNot(self, node, *args, **kwargs):
+        child_node = self.visit(node.children[0], *args, **kwargs)
         node = Neg(child_node)
         return node
 
-    def visitAnd(self, element, args):
-        child1_node = self.visit(element.children[0], args)
-        child2_node = self.visit(element.children[1], args)
+    def visitAnd(self, node, *args, **kwargs):
+        child1_node = self.visit(node.children[0], *args, **kwargs)
+        child2_node = self.visit(node.children[1], *args, **kwargs)
         node = Conjunction(child1_node, child2_node)
         return node
 
-    def visitOr(self, element, args):
-        child1_node = self.visit(element.children[0], args)
-        child2_node = self.visit(element.children[1], args)
+    def visitOr(self, node, *args, **kwargs):
+        child1_node = self.visit(node.children[0], *args, **kwargs)
+        child2_node = self.visit(node.children[1], *args, **kwargs)
         node = Disjunction(child1_node, child2_node)
         return node
 
-    def visitImplies(self, element, args):
-        child1_node = self.visit(element.children[0], args)
-        child2_node = self.visit(element.children[1], args)
+    def visitImplies(self, node, *args, **kwargs):
+        child1_node = self.visit(node.children[0], *args, **kwargs)
+        child2_node = self.visit(node.children[1], *args, **kwargs)
         node = Implies(child1_node, child2_node)
         return node
 
-    def visitIff(self, element, args):
-        child1_node = self.visit(element.children[0], args)
-        child2_node = self.visit(element.children[1], args)
+    def visitIff(self, node, *args, **kwargs):
+        child1_node = self.visit(node.children[0], *args, **kwargs)
+        child2_node = self.visit(node.children[1], *args, **kwargs)
         node = Iff(child1_node, child2_node)
         return node
 
-    def visitXor(self, element, args):
-        child1_node = self.visit(element.children[0], args)
-        child2_node = self.visit(element.children[1], args)
+    def visitXor(self, node, *args, **kwargs):
+        child1_node = self.visit(node.children[0], *args, **kwargs)
+        child2_node = self.visit(node.children[1], *args, **kwargs)
         node = Xor(child1_node, child2_node)
         return node
 
-    def visitEventually(self, element, args):
+    def visitEventually(self, node, *args, **kwargs):
         raise LTLPastifyException('Cannot pastify an unbounded eventually.')
 
-    def visitAlways(self, element, args):
+    def visitAlways(self, node, *args, **kwargs):
         raise LTLPastifyException('Cannot pastify an unbounded always.')
 
-    def visitUntil(self, element, args):
+    def visitUntil(self, node, *args, **kwargs):
         raise LTLPastifyException('Cannot pastify an unbounded until.')
 
-    def visitOnce(self, element, args):
-        child_node = self.visit(element.children[0], args)
+    def visitOnce(self, node, *args, **kwargs):
+        child_node = self.visit(node.children[0], *args, **kwargs)
         node = Once(child_node)
         return node
 
-    def visitPrevious(self, element, args):
-        child_node = self.visit(element.children[0], args)
+    def visitPrevious(self, node, *args, **kwargs):
+        child_node = self.visit(node.children[0], *args, **kwargs)
         node = Previous(child_node)
         return node
 
-    def visitNext(self, element, args):
+    def visitNext(self, node, *args, **kwargs):
         horizon = args[0] - 1
-        child_node = self.visit(element.children[0], [horizon])
+        child_node = self.visit(node.children[0], [horizon])
         return child_node
 
-    def visitHistorically(self, element, args):
-        child_node = self.visit(element.children[0], args)
+    def visitHistorically(self, node, *args, **kwargs):
+        child_node = self.visit(node.children[0], *args, **kwargs)
         node = Historically(child_node)
         return node
 
-    def visitSince(self, element, args):
-        child_node_1 = self.visit(element.children[0], args)
-        child_node_2 = self.visit(element.children[1], args)
+    def visitSince(self, node, *args, **kwargs):
+        child_node_1 = self.visit(node.children[0], *args, **kwargs)
+        child_node_2 = self.visit(node.children[1], *args, **kwargs)
         node = Since(child_node_1, child_node_2)
         return node
 
-    def visitDefault(self, element):
+    def visitDefault(self, node):
         raise LTLPastifyException('LTL Pastifier: encountered unexpected type of object.')

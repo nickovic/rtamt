@@ -1,60 +1,53 @@
 from rtamt.ast.visitor.stl.ast_visitor import StlAstVisitor
-from rtamt.pastifier.ltl.horizon import LTLHorizon
-from rtamt.pastifier.ltl.pastifier import LTLPastifier
-
-from rtamt.node.ltl.variable import Variable
-from rtamt.node.stl.timed_precedes import TimedPrecedes
-from rtamt.node.stl.timed_historically import TimedHistorically
-from rtamt.node.stl.timed_once import TimedOnce
-from rtamt.node.stl.timed_since import TimedSince
+from rtamt.pastifier.ltl.horizon import LtlHorizon
 
 from rtamt.exception.stl.exception import STLException
 
-class STLHorizon(LTLHorizon, StlAstVisitor):
+class StlHorizon(LtlHorizon, StlAstVisitor):
 
     def __init__(self):
-        LTLHorizon.__init__(self)
+        LtlHorizon.__init__(self)
 
-    def visit(self, element, args):
-        return StlAstVisitor.visit(self, element, args)
+    def visit(self, node, *args, **kwargs):
+        return StlAstVisitor.visit(self, node, *args, **kwargs)
 
-    def visitTimedEventually(self, element, args):
-        op_horizon = self.visit(element.children[0], args)
+    def visitTimedEventually(self, node, *args, **kwargs):
+        op_horizon = self.visit(node.children[0], *args, **kwargs)
 
-        return op_horizon + element.end
+        return op_horizon + node.end
 
-    def visitTimedAlways(self, element, args):
-        op_horizon = self.visit(element.children[0], args)
+    def visitTimedAlways(self, node, *args, **kwargs):
+        op_horizon = self.visit(node.children[0], *args, **kwargs)
 
-        return op_horizon + element.end
+        return op_horizon + node.end
 
-    def visitTimedUntil(self, element, args):
-        op1_horizon = self.visit(element.children[0], args)
-        op2_horizon = self.visit(element.children[1], args)
+    def visitTimedUntil(self, node, *args, **kwargs):
+        op1_horizon = self.visit(node.children[0], *args, **kwargs)
+        op2_horizon = self.visit(node.children[1], *args, **kwargs)
 
-        return max(op1_horizon, op2_horizon) + element.end
+        return max(op1_horizon, op2_horizon) + node.end
 
-    def visitTimedOnce(self, element, args):
-        op_horizon = self.visit(element.children[0], args)
-
-        return op_horizon
-
-    def visitTimedHistorically(self, element, args):
-        op_horizon = self.visit(element.children[0], args)
+    def visitTimedOnce(self, node, *args, **kwargs):
+        op_horizon = self.visit(node.children[0], *args, **kwargs)
 
         return op_horizon
 
-    def visitTimedSince(self, element, args):
-        op1_horizon = self.visit(element.children[0], args)
-        op2_horizon = self.visit(element.children[1], args)
+    def visitTimedHistorically(self, node, *args, **kwargs):
+        op_horizon = self.visit(node.children[0], *args, **kwargs)
+
+        return op_horizon
+
+    def visitTimedSince(self, node, *args, **kwargs):
+        op1_horizon = self.visit(node.children[0], *args, **kwargs)
+        op2_horizon = self.visit(node.children[1], *args, **kwargs)
 
         return max(op1_horizon, op2_horizon)
 
-    def visitTimedPrecedes(self, element, args):
-        op1_horizon = self.visit(element.children[0], args)
-        op2_horizon = self.visit(element.children[1], args)
+    def visitTimedPrecedes(self, node, *args, **kwargs):
+        op1_horizon = self.visit(node.children[0], *args, **kwargs)
+        op2_horizon = self.visit(node.children[1], *args, **kwargs)
 
         return max(op1_horizon, op2_horizon)
 
-    def visitDefault(self, element):
+    def visitDefault(self, node):
         raise STLException('STL Pastifier: encountered unexpected type of node.')
