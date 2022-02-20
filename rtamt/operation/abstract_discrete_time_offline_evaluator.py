@@ -31,9 +31,8 @@ class AbstractDiscreteTimeOfflineEvaluator(AbstractOfflineEvaluator, DescreteTim
         ts = dataset['time']
         for i in range(len(ts) - 1):
             duration = (ts[i+1] - ts[i]) * self.normalize
-        tolerance = self.sampling_period * self.sampling_tolerance
-        if duration < self.sampling_period - tolerance or duration > self.sampling_period + tolerance:
-            self.sampling_violation_counter = self.sampling_violation_counter + 1
+        self.update_sampling_violation_counter(duration)
+
 
         #TODO move both of spec and sub-specs visit into syntax layer.
         # update the value of every input variable

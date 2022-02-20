@@ -1,15 +1,14 @@
-from rtamt.operation.abstract_operation import AbstractOperation
+from rtamt.operation.abstract_discrete_time_online_operation import AbstractDiscreteTimeOnlineOperation
 
 
-class EventuallyOperation(AbstractOperation):
+class EventuallyOperation(AbstractDiscreteTimeOnlineOperation):
     def __init__(self):
         self.prev_out = -float("inf")
 
     def reset(self):
-        self.prev_out = -float("inf")
+        self.__init__()
 
-    def update(self, sample):
-        out = max(sample, self.prev_out)
-        self.prev_out = out
-
-        return out
+    def update(self, node, sample):
+        sample_return = max(sample, self.prev_out)
+        self.prev_out = sample_return
+        return sample_return

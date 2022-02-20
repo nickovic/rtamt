@@ -1,36 +1,24 @@
-from rtamt.operation.abstract_operation import AbstractOperation
+from rtamt.operation.abstract_dense_time_online_operation import AbstractDenseTimeOnlineOperation
 import rtamt.operation.stl.dense_time.online.intersection as intersect
 
-class AndOperation(AbstractOperation):
+
+class AndOperation(AbstractDenseTimeOnlineOperation):
     def __init__(self):
-        self.left = []
-        self.right = []
-        self.last = []
+        self.sample_left_buf = []
+        self.sample_right_buf = []
+        self.sample_last_buf = []
 
-    def update(self, *args, **kargs):
-        out = []
-        left_list = self.left + args[0]
-        right_list = self.right + args[1]
+    def update(self, node, sample_reft, sample_right, *args, **kargs):
+        sample_result = []
 
-        out, last, left, right = intersect.intersection(left_list, right_list, intersect.conjunction)
+        sample_result, last, left, right = intersect.intersection(sample_reft, sample_right, intersect.conjunction)
 
-        self.left = left
-        self.right = right
-        if out:
-            self.last = last
+        self.sample_left_buf = left
+        self.sample_right_buf = right
+        if sample_result:
+            self.sample_last_buf = last
 
-        return out
+        return sample_result
 
-    def update_final(self, *args, **kargs):
-        return self.update(args[0], args[1]) + [self.last]
-    #
-    # def offline(self, *args, **kargs):
-    #     out = []
-    #     left_list = args[0]
-    #     right_list = args[1]
-    #
-    #     out, last, a, b = intersect.intersection(left_list, right_list, intersect.conjunction)
-    #     if last:
-    #         out.append(last)
-    #
-    #     return out
+    def update_final(self, node, sample_reft, sample_right, *args, **kargs):
+        return self.update(node, sample_reft, sample_right, *args, **kargs) + [self.sample_last_buf]

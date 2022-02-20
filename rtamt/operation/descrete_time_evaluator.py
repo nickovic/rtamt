@@ -41,3 +41,8 @@ class DescreteTimeEvaluator(TimeEvaluator):
             if key != 'time':
                 ast.var_object_dict[key] = dataset[key]
         return ast
+
+    def update_sampling_violation_counter(self, duration):
+        tolerance = self.sampling_period * self.sampling_tolerance
+        if duration < self.sampling_period - tolerance or duration > self.sampling_period + tolerance:
+            self.sampling_violation_counter = self.sampling_violation_counter + 1
