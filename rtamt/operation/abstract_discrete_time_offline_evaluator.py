@@ -16,7 +16,7 @@ class AbstractDiscreteTimeOfflineEvaluator(AbstractOfflineEvaluator, DescreteTim
     #dataset = {
     #   'time': [0, 1, 2, 3, 4],
     #   'req': [100, -1, -2, 5, -1],
-    #    'gnt': [20, -2, 10, 4, -1]
+    #   'gnt': [20, -2, 10, 4, -1]
     #}
     #TODO merge dense and discrete into evaluate AbstractOfflineEvaluator
     def evaluate(self, dataset):
@@ -39,11 +39,11 @@ class AbstractDiscreteTimeOfflineEvaluator(AbstractOfflineEvaluator, DescreteTim
         length = len(dataset['time'])
         for key in self.ast.var_subspec_dict:
             node = self.ast.var_subspec_dict[key]
-            rob = self.visitAst(node, [length]) #TODO remove length.
+            rob = self.visitAst(node, length) #TODO remove length.
             self.ast.var_object_dict[key] = rob
 
         # evaluate spec
-        rob = self.visitAst(self.ast, [length])
+        rob = self.visitAst(self.ast, length)
 
         # convert format
         out_t = [[a[0],a[1]] for a in zip(ts,rob)]

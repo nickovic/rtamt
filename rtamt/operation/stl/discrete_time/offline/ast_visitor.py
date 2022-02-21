@@ -237,7 +237,6 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
 
     def visitConstant(self, node, *args, **kwargs):
         length = args[0]
-        length = length[0]
         return [node.val]*length
         #return node.val
 
