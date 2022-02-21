@@ -3,9 +3,6 @@ import rtamt.operation.stl.dense_time.online.intersection as intersect
 
 class EventuallyBoundedOperation(AbstractOperation):
     def __init__(self, begin, end):
-        self.prev = []
-        self.residual_start = -float("inf")
-        self.max = - float("inf")
         self.begin = begin
         self.end = end
 
@@ -13,9 +10,6 @@ class EventuallyBoundedOperation(AbstractOperation):
         out = []
         input_list = args[0]
         ans = []
-        self.prev = []
-        self.residual_start = -float("inf")
-        self.max = - float("inf")
 
         i = len(input_list) - 1
         begin = self.begin

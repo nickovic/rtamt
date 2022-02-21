@@ -2,7 +2,6 @@ from rtamt.operation.abstract_operation import AbstractOperation
 
 class UntilOperation(AbstractOperation):
     def __init__(self):
-        # self.next_out = -float("inf")
         pass
 
     def update(self, left, right):

@@ -3,20 +3,13 @@ import rtamt.operation.stl.dense_time.offline.intersection as intersect
 
 class IffOperation(AbstractOperation):
     def __init__(self):
-        self.left = []
-        self.right = []
-        self.last = []
+        pass
 
     def update(self, *args, **kargs):
-        self.left = []
-        self.right = []
-        self.last = []
         left_list = args[0]
         right_list = args[1]
-        self.left = self.left + left_list
-        self.right = self.right + right_list
 
-        out, last, left, right = intersect.intersection(self.left, self.right, intersect.iff)
+        out, last, left, right = intersect.intersection(left_list, right_list, intersect.iff)
 
         if last:
             out.append(last)

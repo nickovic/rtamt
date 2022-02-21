@@ -6,7 +6,7 @@ from rtamt.ast.parser.ltl.specification_parser import LtlAstParserVisitor
 
 from rtamt.exception.stl.exception import STLParseException
 
-from rtamt.pastifier.ltl.pastifier import LTLPastifier
+from rtamt.pastifier.ltl.pastifier import LtlPastifier
 from rtamt.evaluator.ltl.online_evaluator import LTLEvaluator
 from rtamt.reset.ltl.reset import LTLReset
 from rtamt.enumerations.options import *

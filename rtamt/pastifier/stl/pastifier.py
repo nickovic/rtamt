@@ -1,5 +1,5 @@
 from rtamt.ast.visitor.stl.ast_visitor import StlAstVisitor
-from rtamt.pastifier.ltl.pastifier import LTLPastifier
+from rtamt.pastifier.ltl.pastifier import LtlPastifier
 
 from rtamt.node.ltl.variable import Variable
 from rtamt.node.stl.timed_precedes import TimedPrecedes
@@ -8,13 +8,13 @@ from rtamt.node.stl.timed_once import TimedOnce
 from rtamt.node.stl.timed_since import TimedSince
 
 from rtamt.exception.stl.exception import STLException
-from rtamt.pastifier.stl.horizon import STLHorizon
+from rtamt.pastifier.stl.horizon import StlHorizon
 
 
-class STLPastifier(LTLPastifier, StlAstVisitor):
+class STLPastifier(LtlPastifier, StlAstVisitor):
 
     def __init__(self):
-        LTLPastifier.__init__(self)
+        LtlPastifier.__init__(self)
 
     def visit(self, node, *args, **kwargs):
         return StlAstVisitor.visit(self, node, *args, **kwargs)
