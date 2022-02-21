@@ -24,12 +24,6 @@ class AbstractDiscreteTimeOnlineEvaluator(AbstractOnlineEvaluator, DescreteTimeE
         # check ast exists
         self.exist_ast()
 
-        # Check if the difference between two consecutive timestamps is between
-        # the accepted tolerance - if not, increase the violation counter
-        if self.update_counter > 0:
-            duration = (timestamp - self.previous_time) * self.normalize
-            self.update_sampling_violation_counter(duration)
-
         # update the value of every input variable
         self.set_variable_to_ast_from_dataset(dataset)
 
@@ -43,6 +37,13 @@ class AbstractDiscreteTimeOnlineEvaluator(AbstractOnlineEvaluator, DescreteTimeE
         # evaluate spec
         rob = self.updateVisitor.visitAst(self.ast, self.online_operator_dict)
 
+        # Check if the difference between two consecutive timestamps is between
+        # the accepted tolerance - if not, increase the violation counter
+        if self.update_counter > 0:
+            duration = (timestamp - self.previous_time) * self.normalize
+            self.update_sampling_violation_counter(duration)
+
+        # update time stamp and update counter
         self.previous_time = timestamp
         self.update_counter = self.update_counter + 1
 

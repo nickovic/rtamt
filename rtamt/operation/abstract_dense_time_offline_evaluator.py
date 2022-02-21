@@ -35,6 +35,7 @@ class AbstractDesneTimeOfflineEvaluator(AbstractOfflineEvaluator, DenseTimeEvalu
         rob = self.visitAst(self.ast)
 
         self.ast.var_object_dict = self.ast.var_object_dict.fromkeys(self.ast.var_object_dict, [])  #TODO I did not understant it.
+
         return rob
 
 

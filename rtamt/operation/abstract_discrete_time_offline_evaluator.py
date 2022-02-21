@@ -23,14 +23,6 @@ class AbstractDiscreteTimeOfflineEvaluator(AbstractOfflineEvaluator, DescreteTim
         # check ast exists
         self.exist_ast()
 
-        # Check if the difference between two consecutive timestamps is between
-        # the accepted tolerance - if not, increase the violation counter
-        ts = dataset['time']
-        for i in range(len(ts) - 1):
-            duration = (ts[i+1] - ts[i]) * self.normalize
-        self.update_sampling_violation_counter(duration)
-
-
         #TODO move both of spec and sub-specs visit into syntax layer.
         # update the value of every input variable
         self.set_variable_to_ast_from_dataset(dataset)
@@ -44,6 +36,13 @@ class AbstractDiscreteTimeOfflineEvaluator(AbstractOfflineEvaluator, DescreteTim
 
         # evaluate spec
         rob = self.visitAst(self.ast, length)
+
+        # Check if the difference between two consecutive timestamps is between
+        # the accepted tolerance - if not, increase the violation counter
+        ts = dataset['time']
+        for i in range(len(ts) - 1):
+            duration = (ts[i+1] - ts[i]) * self.normalize
+        self.update_sampling_violation_counter(duration)
 
         # convert format
         out_t = [[a[0],a[1]] for a in zip(ts,rob)]
