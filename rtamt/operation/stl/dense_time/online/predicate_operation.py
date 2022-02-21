@@ -8,6 +8,9 @@ class PredicateOperation(AbstractDenseTimeOnlineOperation):
     def __init__(self):
         self.sub = SubtractionOperation()
 
+    def reset(self):
+        pass
+
     def update(self, node, sample_left, sample_right, *args, **kargs):
         sample_result = []
         input_list = self.sub.update(node, sample_left, sample_right, *args, **kargs)

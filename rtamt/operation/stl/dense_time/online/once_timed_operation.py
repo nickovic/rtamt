@@ -10,6 +10,9 @@ class OnceTimedOperation(AbstractDenseTimeOnlineOperation):
         self.begin = begin
         self.end = end
 
+    def reset(self):
+        pass
+
     def update(self, node, sample, *args, **kargs):
         # get inputs
         sample_result = []

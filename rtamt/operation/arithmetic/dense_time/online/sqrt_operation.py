@@ -5,6 +5,9 @@ class SqrtOperation(AbstractDenseTimeOnlineOperation):
     def __init__(self):
         pass
 
+    def reset(self):
+        pass
+
     def update(self, node, sample):
         sample_result = []
 

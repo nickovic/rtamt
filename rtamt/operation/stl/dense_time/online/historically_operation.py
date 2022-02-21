@@ -5,6 +5,9 @@ class HistoricallyOperation(AbstractDenseTimeOnlineOperation):
     def __init__(self):
         self.prev = float("inf")
 
+    def reset(self):
+        pass
+
     def update(self, node, sample, *args, **kargs):
         result_sample = []
 

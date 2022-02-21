@@ -1,8 +1,7 @@
 import collections
-from rtamt.operation.abstract_discrete_time_online_operation import AbstractDiscreteTimeOnlineOperation
+from rtamt.operation.abstract_online_operation import AbstractOnlineOperation
 
-
-class SinceTimedOperation(AbstractDiscreteTimeOnlineOperation):
+class SinceTimedOperation(AbstractOnlineOperation):
     def __init__(self, begin, end):
         self.begin = begin
         self.end = end

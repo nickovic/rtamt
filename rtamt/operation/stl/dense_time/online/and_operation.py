@@ -8,6 +8,9 @@ class AndOperation(AbstractDenseTimeOnlineOperation):
         self.sample_right_buf = []
         self.sample_last_buf = []
 
+    def reset(self):
+        pass
+
     def update(self, node, sample_reft, sample_right, *args, **kargs):
         sample_result = []
 

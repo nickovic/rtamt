@@ -5,6 +5,9 @@ class AbsOperation(AbstractDenseTimeOnlineOperation):
     def __init__(self):
         pass
 
+    def reset(self):
+        pass
+
     def update(self, node, sample, *args, **kargs):
         sample_result = []
 

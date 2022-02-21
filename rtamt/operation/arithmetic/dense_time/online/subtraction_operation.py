@@ -6,6 +6,9 @@ class SubtractionOperation(AbstractDenseTimeOnlineOperation):
         self.sample_left = []
         self.sample_right = []
 
+    def reset(self):
+        pass
+
     def update(self, node, sample_left, sample_right, *args, **kargs):
         sample_result = []
         self.sample_left = self.sample_left + sample_left

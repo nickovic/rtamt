@@ -7,6 +7,9 @@ class SinceOperation(AbstractDenseTimeOnlineOperation):
         self.prev = -float("inf")
         self.last = []
 
+    def reset(self):
+        pass
+
     def update(self, node, sample_left, sample_right, *args, **kargs):
         sample_result = []
         a = self.sample_left_buf + sample_left

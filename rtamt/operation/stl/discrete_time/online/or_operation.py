@@ -1,6 +1,5 @@
-from rtamt.operation.abstract_discrete_time_online_operation import AbstractDiscreteTimeOnlineOperation
-
-class OrOperation(AbstractDiscreteTimeOnlineOperation):
+from rtamt.operation.abstract_online_operation import AbstractOnlineOperation
+class OrOperation(AbstractOnlineOperation):
     def __init__(self):
         pass
 

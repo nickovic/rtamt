@@ -16,6 +16,9 @@ class SinceTimedOperation(AbstractDenseTimeOnlineOperation):
         self.once = OnceTimedOperation(self.begin, self.end)
         self.andop = AndOperation()
 
+    def reset(self):
+        pass
+
     def update(self, node, sample_left, sample_right, *args, **kargs):
         sample_result = []
         self.sample_left_buf = self.sample_left_buf + sample_left

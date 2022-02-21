@@ -1,7 +1,6 @@
 import collections
-from rtamt.operation.abstract_discrete_time_online_operation import AbstractDiscreteTimeOnlineOperation
-
-class HistoricallyTimedOperation(AbstractDiscreteTimeOnlineOperation):
+from rtamt.operation.abstract_online_operation import AbstractOnlineOperation
+class HistoricallyTimedOperation(AbstractOnlineOperation):
     def __init__(self, begin, end):
         self.begin = begin
         self.end = end

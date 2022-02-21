@@ -1,7 +1,6 @@
-from rtamt.operation.abstract_discrete_time_online_operation import AbstractDiscreteTimeOnlineOperation
+from rtamt.operation.abstract_online_operation import AbstractOnlineOperation
 
-
-class SinceOperation(AbstractDiscreteTimeOnlineOperation):
+class SinceOperation(AbstractOnlineOperation):
     def __init__(self):
         self.prev_out = -float("inf")
 

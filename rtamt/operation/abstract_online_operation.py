@@ -17,3 +17,7 @@ class AbstractOnlineOperation:
     @abstractmethod
     def update(self, node, *args, **kargs):
         raise NotImplementedError(self.NOT_IMPLEMENTED)
+
+    @abstractmethod
+    def reset(self):
+        raise NotImplementedError(self.NOT_IMPLEMENTED)

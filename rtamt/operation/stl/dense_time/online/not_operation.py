@@ -4,6 +4,9 @@ class NotOperation(AbstractDenseTimeOnlineOperation):
     def __init__(self):
         self.input = []
 
+    def reset(self):
+        pass
+
     def update(self, node, sample, *args, **kargs):
         sample_result = []
 

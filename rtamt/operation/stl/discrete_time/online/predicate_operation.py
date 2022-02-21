@@ -1,9 +1,9 @@
-from rtamt.operation.abstract_discrete_time_online_operation import AbstractDiscreteTimeOnlineOperation
+from rtamt.operation.abstract_online_operation import AbstractOnlineOperation
 from rtamt.enumerations.comp_oper import StlComparisonOperator
 from rtamt.exception.ltl.exception import LTLException
 
 
-class PredicateOperation(AbstractDiscreteTimeOnlineOperation):
+class PredicateOperation(AbstractOnlineOperation):
     def __init__(self, op):
         self.op = op
 
