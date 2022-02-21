@@ -15,9 +15,8 @@ class DenseTimeEvaluator(TimeEvaluator):
         #TODO chage to dict format
         pass
 
-    def set_variable_to_ast_from_dataset(self, ast, dataset):
+    def set_variable_to_ast_from_dataset(self, dataset):
         for data in dataset:
             var_name = data[0]
             var_object = data[1]
-            ast.var_object_dict[var_name] = var_object
-        return ast
+            self.ast.var_object_dict[var_name] = var_object

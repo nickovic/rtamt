@@ -22,7 +22,7 @@ class AbstractDesneTimeOfflineEvaluator(AbstractOfflineEvaluator, DenseTimeEvalu
         self.exist_ast()
 
         # update the value of every input variable
-        self.ast = self.set_variable_to_ast_from_dataset(self.ast, dataset)
+        self.set_variable_to_ast_from_dataset(dataset)
 
         #TODO move both of spec and sub-specs visit into syntax layer.
         # evaluate modular sub-specs

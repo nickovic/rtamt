@@ -35,13 +35,6 @@ class DescreteTimeEvaluator(TimeEvaluator):
             raise RTAMTException('evaluate: The input does not contain the time field')
         return
 
-
-    def set_variable_to_ast_from_dataset(self, ast, dataset):
-        for key in dataset:
-            if key != 'time':
-                ast.var_object_dict[key] = dataset[key]
-        return ast
-
     def update_sampling_violation_counter(self, duration):
         tolerance = self.sampling_period * self.sampling_tolerance
         if duration < self.sampling_period - tolerance or duration > self.sampling_period + tolerance:

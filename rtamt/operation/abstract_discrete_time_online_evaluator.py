@@ -18,7 +18,7 @@ class AbstractDiscreteTimeOnlineEvaluator(AbstractOnlineEvaluator, DescreteTimeE
     # timestamp - float
     # inputs - list of [var name, var value] pairs
     # Example:
-    # update(3.48, [['a', 2.2], ['b', 3.3]])
+    # update(1, [['a', 2.2], ['b', 3.3]])
     #TODO merge dense and discrete into update AbstractOnlineEvaluator
     def update(self, timestamp, dataset):
         # check ast exists
@@ -30,13 +30,10 @@ class AbstractDiscreteTimeOnlineEvaluator(AbstractOnlineEvaluator, DescreteTimeE
             duration = (timestamp - self.previous_time) * self.normalize
             self.update_sampling_violation_counter(duration)
 
-        #TODO move all vist to syntax layere
         # update the value of every input variable
-        for data in dataset:
-            var_name = data[0]
-            var_value = data[1]
-            self.ast.var_object_dict[var_name] = var_value
+        self.set_variable_to_ast_from_dataset(dataset)
 
+        #TODO move all vist to syntax layer
         # evaluate modular sub-specs
         for key in self.ast.var_subspec_dict:
             node = self.ast.var_subspec_dict[key]
@@ -51,7 +48,6 @@ class AbstractDiscreteTimeOnlineEvaluator(AbstractOnlineEvaluator, DescreteTimeE
 
         return rob
 
-
     def reset(self):
         super(AbstractDiscreteTimeOnlineEvaluator, self).reset()
 
@@ -59,6 +55,12 @@ class AbstractDiscreteTimeOnlineEvaluator(AbstractOnlineEvaluator, DescreteTimeE
         self.previous_time = float(0.0)
         self.sampling_violation_counter = int(0)
         return
+
+    def set_variable_to_ast_from_dataset(self, dataset):
+        for data in dataset:
+            var_name = data[0]
+            var_value = data[1]
+            self.ast.var_object_dict[var_name] = var_value
 
 class DiscreteTimeOnlineUpdateVisitor(AbstractOnlineUpdateVisitor):
     def visitVariable(self, node, online_operator_dict):
