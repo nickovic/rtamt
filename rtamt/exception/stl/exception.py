@@ -14,3 +14,6 @@ class STLSpecificationException(STLException):
 
 class STLNotImplementedException(STLException):
     pass
+
+class STLVisitorException(RTAMTException):
+    pass

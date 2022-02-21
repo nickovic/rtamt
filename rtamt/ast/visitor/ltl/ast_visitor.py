@@ -89,10 +89,11 @@ class LtlAstVisitor(AbstractAstVisitor):
         elif isinstance(node, Next):
             result = self.visitNext(node, *args, **kwargs)
         else:
-            raise LTLVisitorException('{} is not LTL result node'.format(node.__class__.__name__))
+            self.raise_exception('{} is not a TL operator'.format(node.__class__.__name__))
         return result
 
-
+    def raise_exception(self, text):
+        raise LTLVisitorException(text)
 
     def visitPredicate(self, node, *args, **kwargs):
         return self.visitChildren(node, *args, **kwargs)

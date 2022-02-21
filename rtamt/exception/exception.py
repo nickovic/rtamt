@@ -3,5 +3,6 @@ class RTAMTException(Exception):
 
 class AstVisitorException(RTAMTException):
     pass
+
 class AstParseException(RTAMTException):
     pass

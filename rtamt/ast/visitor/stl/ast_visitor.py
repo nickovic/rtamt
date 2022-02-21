@@ -1,3 +1,4 @@
+from rtamt.exception.stl.exception import STLVisitorException
 from rtamt.node.stl.timed_precedes import TimedPrecedes
 
 from rtamt.ast.visitor.ltl.ast_visitor import LtlAstVisitor
@@ -56,3 +57,6 @@ class StlAstVisitor(LtlAstVisitor):
 
     def visitTimedUntil(self, node, *args, **kwargs):
         return self.visitChildren(node, *args, **kwargs)
+
+    def raise_exception(self, text):
+        raise STLVisitorException(text)
