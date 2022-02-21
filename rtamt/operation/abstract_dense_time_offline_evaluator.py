@@ -34,6 +34,7 @@ class AbstractDesneTimeOfflineEvaluator(AbstractOfflineEvaluator, DenseTimeEvalu
         # evaluate modular spec
         rob = self.visitAst(self.ast)
 
+        # reset var_object_dict()
         self.ast.var_object_dict = self.ast.var_object_dict.fromkeys(self.ast.var_object_dict, [])  #TODO I did not understant it.
 
         return rob
