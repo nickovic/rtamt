@@ -9,7 +9,6 @@ from rtamt.operation.abstract_evaluator import AbstractEvaluator
 class AbstractOnlineEvaluator(AbstractEvaluator):
     def __init__(self):
         super(AbstractOnlineEvaluator, self).__init__()
-        self.online_operator_dict = dict()
         return
 
     def reset(self):
@@ -24,6 +23,9 @@ class AbstractOnlineEvaluator(AbstractEvaluator):
 
     def set_ast(self, ast):
         super(AbstractOnlineEvaluator, self).set_ast(ast)
+
+        # init dict of online operators
+        self.online_operator_dict = dict()
 
         # constract online_operator_dict for sub-specs
         for key in self.ast.var_subspec_dict:
