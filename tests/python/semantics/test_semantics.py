@@ -26,13 +26,13 @@ class TestSemantics(unittest.TestCase):
         ast.spec = 'always(a>=2)'
         ast.parse()
 
-        stlDiscreteTimeOfflineAstVisitor = discrete_time_offline_evaluator_factory(StlDiscreteTimeOfflineAstVisitor)()
-        stlDiscreteTimeOfflineAstVisitor.set_ast(ast)
+        stlDiscreteTimeOfflineEvaluator = discrete_time_offline_evaluator_factory(StlDiscreteTimeOfflineAstVisitor)()
+        stlDiscreteTimeOfflineEvaluator.set_ast(ast)
         dataset = {
             'time': [0, 1, 2, 3, 4],
             'a': [100, -1, -2, 5, -1]
         }
-        rob = stlDiscreteTimeOfflineAstVisitor.evaluate(dataset)
+        rob = stlDiscreteTimeOfflineEvaluator.evaluate(dataset)
         print(rob)
 
     def test_stl_dense_time_offline(self):
@@ -41,10 +41,10 @@ class TestSemantics(unittest.TestCase):
         ast.spec = 'always(a>=2)'
         ast.parse()
 
-        stlDenseTimeOfflineAstVisitor = dense_time_offline_evaluator_factory(StlDenseTimeOfflineAstVisitor)()
-        stlDenseTimeOfflineAstVisitor.set_ast(ast)
+        stlDenseTimeOfflineEvaluator = dense_time_offline_evaluator_factory(StlDenseTimeOfflineAstVisitor)()
+        stlDenseTimeOfflineEvaluator.set_ast(ast)
         a = [[0, 1.3], [0.7, 3], [1.3, 0.1], [2.1, -2.2]]
-        rob = stlDenseTimeOfflineAstVisitor.evaluate([['a', a]])
+        rob = stlDenseTimeOfflineEvaluator.evaluate([['a', a]])
         print(rob)
 
     def test_stl_discrete_time_online(self):
@@ -53,18 +53,18 @@ class TestSemantics(unittest.TestCase):
         ast.spec = 'historically[0,1](a>=2)'
         ast.parse()
 
-        stlDiscreteTimeOnlineAstVisitor = discrete_time_online_evaluator_factory(StlDiscreteTimeOnlineAstVisitor)()
-        stlDiscreteTimeOnlineAstVisitor.set_ast(ast)
+        stlDiscreteTimeOnlineEvaluator = discrete_time_online_evaluator_factory(StlDiscreteTimeOnlineAstVisitor)()
+        stlDiscreteTimeOnlineEvaluator.set_ast(ast)
         a = [100, -1, -2, 5, -1]
         robs = []
 
         for i in range(len(a)):
-            rob = stlDiscreteTimeOnlineAstVisitor.update(i, [('a', a[i])])
+            rob = stlDiscreteTimeOnlineEvaluator.update(i, [('a', a[i])])
             robs.append(rob)
 
         print(robs)
 
-        stlDiscreteTimeOnlineAstVisitor.reset()
+        stlDiscreteTimeOnlineEvaluator.reset()
 
     def test_stl_dense_time_online(self):
         ast = stlDenseTimeAst()  #TODO use same stlAst
@@ -72,8 +72,8 @@ class TestSemantics(unittest.TestCase):
         ast.spec = 'historically[0,1](a>=2)'
         ast.parse()
 
-        stlDenseTimeOnlineAstVisitor = dense_time_online_evaluator_factory(StlDenseTimeOnlineAstVisitor)()
-        stlDenseTimeOnlineAstVisitor.set_ast(ast)
+        stlDenseTimeOnlineEvaluator = dense_time_online_evaluator_factory(StlDenseTimeOnlineAstVisitor)()
+        stlDenseTimeOnlineEvaluator.set_ast(ast)
         a = []
         a.append([[5, 3], [5.3, 1]])
         a.append([[5.75, 2], [6.5, 5], [6.75, 6], [9, 5], [9.25, 4]])
@@ -81,11 +81,11 @@ class TestSemantics(unittest.TestCase):
 
         robs = []
         for i in range(len(a)):
-            rob = stlDenseTimeOnlineAstVisitor.update([['a', a[i]]])
+            rob = stlDenseTimeOnlineEvaluator.update([['a', a[i]]])
             robs.append(rob)
         print(robs)
 
-        # stlDiscreteTimeOnlineAstVisitor.reset()
+        # stlDenseTimeOnlineEvaluator.reset()
 
 if __name__ == '__main__':
     unittest.main()
