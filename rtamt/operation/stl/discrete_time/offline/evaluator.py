@@ -1,0 +1,6 @@
+from rtamt.operation.stl.discrete_time.offline.ast_visitor import StlDiscreteTimeOfflineAstVisitor
+from rtamt.operation.abstract_discrete_time_offline_evaluator import discrete_time_offline_evaluator_factory
+
+def StlDiscreteTimeOfflineEvaluator():
+    stlDiscreteTimeOfflineEvaluator = discrete_time_offline_evaluator_factory(StlDiscreteTimeOfflineAstVisitor)()
+    return stlDiscreteTimeOfflineEvaluator
