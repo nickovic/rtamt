@@ -1,8 +1,8 @@
 import unittest
 
 from rtamt.ast.parser.ltl.specification_parser import LtlAst
-from rtamt.ast.parser.stl.discrete_time.specification_parser import stlDiscreteTimeAst
-from rtamt.ast.parser.stl.dense_time.specification_parser import stlDenseTimeAst
+from rtamt.ast.parser.stl.specification_parser import stlAst
+
 
 class TestAstParser(unittest.TestCase):
 
@@ -17,13 +17,13 @@ class TestAstParser(unittest.TestCase):
         ast.parse()
 
     def test_stl_discrete_time_parse(self):
-        ast = stlDiscreteTimeAst()
+        ast = stlAst()
         ast.declare_var('a', 'float')
         ast.spec = 'always(a>=2)'
         ast.parse()
 
     def test_stl_discrete_time_parse(self):
-        ast = stlDenseTimeAst()
+        ast = stlAst()
         ast.declare_var('a', 'float')
         ast.spec = 'always(a>=2)'
         ast.parse()

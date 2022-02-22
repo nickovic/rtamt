@@ -34,7 +34,7 @@ class StlAstParserVisitor(LtlAstParserVisitor, StlParserVisitor):
             node = Always(child)
         else:
             interval = self.visit(ctx.interval())
-            node = TimedAlways(child, interval.begin, interval.end)
+            node = TimedAlways(child, interval)
         return node
 
 
@@ -44,7 +44,7 @@ class StlAstParserVisitor(LtlAstParserVisitor, StlParserVisitor):
             node = Eventually(child)
         else:
             interval = self.visit(ctx.interval())
-            node = TimedEventually(child, interval.begin, interval.end)
+            node = TimedEventually(child, interval)
         return node
 
     def visitExpreOnce(self, ctx):
@@ -53,7 +53,7 @@ class StlAstParserVisitor(LtlAstParserVisitor, StlParserVisitor):
             node = Once(child)
         else:
             interval = self.visit(ctx.interval())
-            node = TimedOnce(child, interval.begin, interval.end)
+            node = TimedOnce(child, interval)
         return node
 
     def visitExprHist(self, ctx):
@@ -62,7 +62,7 @@ class StlAstParserVisitor(LtlAstParserVisitor, StlParserVisitor):
             node = Historically(child)
         else:
             interval = self.visit(ctx.interval())
-            node = TimedHistorically(child, interval.begin, interval.end)
+            node = TimedHistorically(child, interval)
         return node
 
     def visitExprSince(self, ctx):
@@ -72,7 +72,7 @@ class StlAstParserVisitor(LtlAstParserVisitor, StlParserVisitor):
             node = Since(child1, child2)
         else:
             interval = self.visit(ctx.interval())
-            node = TimedSince(child1, child2, interval.begin, interval.end)
+            node = TimedSince(child1, child2, interval)
         return node
 
     def visitExprUntil(self, ctx):
@@ -82,7 +82,7 @@ class StlAstParserVisitor(LtlAstParserVisitor, StlParserVisitor):
             node = Until(child1, child2)
         else:
             interval = self.visit(ctx.interval())
-            node = TimedUntil(child1, child2, interval.begin, interval.end)
+            node = TimedUntil(child1, child2, interval)
         return node
 
     def visitExprUnless(self, ctx):
@@ -94,8 +94,9 @@ class StlAstParserVisitor(LtlAstParserVisitor, StlParserVisitor):
             right = Until(child1, child2)
             node = Disjunction(left, right)
         else:
-            left = TimedAlways(child1, 0, interval.end)
-            right = TimedUntil(child1, child2, interval.begin, interval.end)
+            interval_left = Interval(0, interval.end, interval.begin_unit, interval.end_unit)
+            left = TimedAlways(child1, interval_left)
+            right = TimedUntil(child1, child2, interval)
             node = Disjunction(left, right)
         return node
 
@@ -109,29 +110,86 @@ class StlAstParserVisitor(LtlAstParserVisitor, StlParserVisitor):
 
         out = Fraction(Decimal(val))
 
-        if ctx.unit() == None:
-            # default time unit is seconds - conversion of the bound to ps
-            unit = self.unit
+        if ctx.unit() is None:
+            unit = 'default'
         else:
             unit = ctx.unit().getText()
 
-        out = out * self.U[unit]
+        return out, unit
 
-        sp = Fraction(self.get_sampling_period())
+        #if ctx.unit() == None:
+            # default time unit is seconds - conversion of the bound to ps
+        #    unit = self.unit
+        #else:
+        #    unit = ctx.unit().getText()
 
-        out = out / sp
+        #out = out * self.U[unit]
 
-        if out.numerator % out.denominator > 0:
-            raise STLParseException('The STL operator bound must be a multiple of the sampling period')
+        #sp = Fraction(self.get_sampling_period())
 
-        out = int(out / self.sampling_period)
+        #out = out / sp
+
+        #if out.numerator % out.denominator > 0:
+        #    raise STLParseException('The STL operator bound must be a multiple of the sampling period')
+
+        #out = int(out / self.sampling_period)
 
         return out
 
+    def visitIntervalTimeLiteral(self, ctx):
+        time_bound = Fraction(Decimal(ctx.literal().getText()))
+        if ctx.unit() is None:
+            unit = ''
+        else:
+            unit = ctx.unit().getText()
+
+        return time_bound, unit
+
+        #text = ctx.literal().getText()
+        #out = Fraction(Decimal(text))
+
+        #if ctx.unit() == None:
+            # default time unit is seconds - conversion of the bound to ns
+        #    unit = self.unit
+        #else:
+        #    unit = ctx.unit().getText()
+
+        #out = out * self.U[unit]
+
+        #sp = Fraction(self.get_sampling_period())
+
+        #out = out / sp
+
+        #if out.numerator % out.denominator > 0:
+        #    raise STLParseException('The STL operator bound must be a multiple of the sampling period')
+
+        #out = int(out / self.sampling_period)
+
+        #return out
+
+    #def visitIntervalTimeLiteral(self, ctx):
+        #text = ctx.literal().getText()
+        #out = float(text)
+
+        #if ctx.unit() != None:
+        #    unit = ctx.unit().getText()
+        #    if (unit == 'ps'):
+        #        out = out * 1e-12
+        #    elif (unit == 'ms'):
+        #        out = out * 1e-3
+        #    elif (unit == 'us'):
+        #        out = out * 1e-6
+        #    elif (unit == 'ns'):
+        #        out = out * 1e-9
+        #    else:
+        #        pass
+
+        #return out
+
     def visitInterval(self, ctx):
-        begin = self.visit(ctx.intervalTime(0))
-        end = self.visit(ctx.intervalTime(1))
-        interval = Interval(begin, end)
+        begin, begin_unit = self.visit(ctx.intervalTime(0))
+        end, end_unit = self.visit(ctx.intervalTime(1))
+        interval = Interval(begin, end, begin_unit, end_unit)
         return interval
 
     def get_sampling_period(self):
