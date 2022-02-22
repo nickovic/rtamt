@@ -67,10 +67,6 @@ class AbstractSpecification(object):
     def unit(self, unit): # send semantics layer
         self.__unit = unit
 
-    # forwarding pastify
-    def pastify(self):
-        pass
-
     #TODO we need to move it to RTAMT4ROS as wrapper
     @property
     def publish_var(self):
@@ -151,23 +147,57 @@ class AbstractOfflineSpecification(AbstractSpecification):
 
 class AbstractOnlineSpecification(AbstractSpecification):
     def __init__(self, ast, onlineEvaluator, pastifier=None):
-        super(AbstractOnlineSpecification, self).__init__(ast)
+        #super(AbstractOnlineSpecification, self).__init__(ast)
+        AbstractSpecification.__init__(self, ast)
         self.name = 'Abstract Online Specification'
         self.onlineEvaluator = onlineEvaluator
         self.onlineEvaluator = pastifier
 
+    # forwarding pastify
+    def pastify(self):
+        pass
+
     # forwarding to evaluator
     def update(self, *args, **kwargs):
-        pass
+        if self.set_ast_flag != True:
+            self.onlineEvaluator.set_ast(self.ast)
+            self.set_ast_flag = True
+
+        #TODO we may make it consistent with evaluator class.
+        if len(args) == 0:
+            raise Exception()
+        elif len(args) == 1:
+            dataset = [args[0]]
+        else:
+            dataset = []
+            for i in args:
+                dataset.append(i)
+
+        return self.onlineEvaluator.update(dataset)
 
     def final_update(self, *args, **kwargs):
-        pass
+        if self.set_ast_flag != True:
+            self.onlineEvaluator.set_ast(self.ast)
+            self.set_ast_flag = True
+
+        #TODO we may make it consistent with evaluator class.
+        if len(args) == 0:
+            raise Exception()
+        elif len(args) == 1:
+            dataset = [args[0]]
+        else:
+            dataset = []
+            for i in args:
+                dataset.append(i)
+
+        return self.onlineEvaluator.final_update(dataset)
 
     def reset(self):
-        pass
+        self.onlineEvaluator.reset()
 
 
 # we would not recomend to use it
+# Please note that. Even the class have both evaluate and update, calling both with same istance is not expected.
 class AbstractOfflineOnlineSpecification(AbstractOfflineSpecification, AbstractOnlineSpecification):
     def __init__(self, ast, offlineEvaluator, onlineEvaluator, pastifier=None):
         AbstractOfflineSpecification.__init__(self, ast, offlineEvaluator)
