@@ -1,98 +1,19 @@
-import os
-import sys
-from abc import ABCMeta, abstractmethod
-from rtamt.enumerations.options import TimeInterpretation
+from abc import ABCMeta
+
 from rtamt.exception.exception import RTAMTException
 
 
-class AbstractSpecification:
-    """A class used as a container for specifications
-
-    Attributes:
-        name : String
-
-
-        modular_spec : String - specification text
-        spec : String - specification text
-
-        vars : set(String) - set of variable names
-        free_vars : set(String) - set of free variable names
-        publish_var : String - variable name to be published
-        publish_var_field : String - variable field to be published
-
-        var_subspec_dict : dict(String, AbstractNode) - dictionary that maps variable names to the AST
-        var_object_dict : dict(String, double) - dictionary that maps variable names to their value
-        modules : dict(String,String) - dictionary that maps module paths to module names
-        var_type_dict : dict(String, String) - dictionary that maps var names to var types
-        var_io_dict : dict(String, String) - dictionary that maps var names to var io signature
-        var_topic_dict : dict(String,String) - dictionaty that mapts var names to ROS topic names
-        const_type_dict : dict(String, String) - dictionary mapping const var names to var types
-        const_val_dict : dict(String, String) - dictionary mapping const var names to var vals encoded as strings
-
-        top : Node - pointer to the specification parse tree
-
-        online_evaluator : OnlineEvaluator - pointer to the object that implements the monitoring algorithm
-        offline_evaluator : OfflineEvaluator - pointer to the object that implements the monitoring algorithm
-
-    Methods
-        get_spec_from_file - create and populate specification object from the text file
-        parse - parse the specification
-        update - update the specification online
-        evaluate - evaluate the specification offline
-    """
+class AbstractSpecification(object):
     __metaclass__ = ABCMeta
 
-    def __init__(self):
-        self.S_UNIT = int(1000000000)
-        self.MS_UNIT = int(1000000)
-        self.US_UNIT = int(1000)
-        self.NS_UNIT = int(1)
-
-        self.U = {
-            's': self.S_UNIT,
-            'ms': self.MS_UNIT,
-            'us': self.US_UNIT,
-            'ns': self.NS_UNIT
-        }
-
-        self.time_interpretation = TimeInterpretation.DISCRETE
-
-        self.horizon = 0
-
+    def __init__(self, astPaser, offlineEvaluator, onlineEvaluator=None, pastifier=None):
         self.name = 'Abstract Specification'
-        self.spec = None
-        self.modular_spec = ''
+        self.astPaser = astPaser
+        self.offlineEvaluator = offlineEvaluator
+        self.onlineEvaluator = onlineEvaluator
+        self.onlineEvaluator = pastifier
 
-        self.vars = set()
-        self.free_vars = set()
-        self.publish_var = ''
-        self.publish_var_field = ''
-
-        # Default unit
-        self.unit = 's'
-
-        self.var_subspec_dict = dict()
-        self.var_object_dict = dict()
-        self.modules = dict()
-        self.var_type_dict = dict()
-        self.var_io_dict = dict()
-        self.var_topic_dict = dict()
-        self.const_type_dict = dict()
-        self.const_val_dict = dict()
-
-        self.top = None
-
-        self.online_evaluator = None
-        self.offline_evaluator = None
-
-    @property
-    def spec(self):
-        return self.__spec
-
-    @spec.setter
-    def spec(self, spec):
-        self.__spec = spec
-
+    #TODO Do we need name?
     @property
     def name(self):
         return self.__name
@@ -101,22 +22,37 @@ class AbstractSpecification:
     def name(self, name):
         self.__name = name
 
-    @property
-    def horizon(self):
-        return self.__horizon
+    # forwarding to AstPaser
+    def add_sub_spec(self, sub_spec):
+        self.astPaser.add_sub_spec(self, sub_spec)
 
-    @horizon.setter
-    def horizon(self, horizon):
-        self.__horizon = horizon
+    def parse(self):
+        self.astPaser.parse()
 
-    @property
-    def top(self):
-        return self.__top
+    #TODO forward AstPaser?
+    def free_vars(self, free_vars):
+        self.astPaser.free_vars(self, free_vars)
 
-    @top.setter
-    def top(self, top):
-        self.__top = top
+    def vars(self, vars):
+        self.astPaser.vars(vars)
 
+    def modules(self, modules):
+        self.astPaser.modules(modules)
+
+    # forwarding to evaluator
+    def evaluate(self, args):
+        pass
+
+    def update(self, args):
+        pass
+
+    def final_update(self, args):
+        pass
+
+    def reset(self):
+        pass
+
+    #TODO is that here?
     @property
     def unit(self):
         return self.__unit
@@ -125,6 +61,11 @@ class AbstractSpecification:
     def unit(self, unit):
         self.__unit = unit
 
+    # forwarding pastify
+    def pastify(self):
+        pass
+
+    #TODO we need to discuss how to handle ROS. Maybe add wrapper in RTAMT4ROS
     @property
     def publish_var(self):
         return self.__publish_var
@@ -134,14 +75,6 @@ class AbstractSpecification:
         self.__publish_var = publish_var
 
     @property
-    def free_vars(self):
-        return self.__free_vars
-
-    @free_vars.setter
-    def free_vars(self, free_vars):
-        self.__free_vars = free_vars
-
-    @property
     def publish_var_field(self):
         return self.__publish_var_field
 
@@ -149,22 +82,7 @@ class AbstractSpecification:
     def publish_var_field(self, publish_var_field):
         self.__publish_var_field = publish_var_field
 
-    @property
-    def vars(self):
-        return self.__vars
-
-    @vars.setter
-    def vars(self, vars):
-        self.__vars = vars
-
-    @property
-    def modules(self):
-        return self.__modules
-
-    @modules.setter
-    def modules(self, modules):
-        self.__modules = modules
-
+    #TODO Tom did not understand those
     def add_input_var(self, input_var):
         self.in_vars.add(input_var)
 
@@ -186,9 +104,7 @@ class AbstractSpecification:
     def get_value(self, var_name):
         return self.var_object_dict[var_name]
 
-    def add_sub_spec(self, sub_spec):
-        self.modular_spec = self.modular_spec + sub_spec + '\n'
-
+    #TODO we need to discuss where we put it.
     def get_spec_from_file(self, path):
         """Opens a text file and returns its content as a string
         Parameters:
@@ -205,19 +121,3 @@ class AbstractSpecification:
             raise RTAMTException('The file {} does not exist.'.format(path))
             sys.exit()
         return out
-
-    @abstractmethod
-    def parse(self):
-        pass
-
-    @abstractmethod
-    def update(self, args):
-        pass
-
-    @abstractmethod
-    def evaluate(self, args):
-        pass
-
-    @abstractmethod
-    def reset(self):
-        pass
