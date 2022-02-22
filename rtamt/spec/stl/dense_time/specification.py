@@ -1,4 +1,4 @@
-from rtamt.spec.abstract_specification import AbstractSpecification
+from rtamt.spec.abstract_specification import AbstractOfflineSpecification, AbstractOnlineSpecification, AbstractOfflineOnlineSpecification
 
 from rtamt.ast.parser.stl.dense_time.specification_parser import stlDenseTimeAst
 
@@ -16,12 +16,16 @@ def STLDenseTimeSpecification(semantics=Semantics.STANDARD, language=Language.PY
     Attributes:
     """
     if semantics == Semantics.STANDARD and language == Language.PYTHON:
-        spec = AbstractSpecification(stlDenseTimeAst(), StlDenseTimeOfflineEvaluator(), StlDenseTimeOnlineEvaluator(), None)
+        spec = AbstractOfflineOnlineSpecification(stlDenseTimeAst(), StlDenseTimeOfflineEvaluator(), StlDenseTimeOnlineEvaluator(), None)
     else:
         raise Exception()
 
     return spec
 
 def StlDenseTimeOfflineSpecification():
-    spec = AbstractSpecification(stlDenseTimeAst(), StlDenseTimeOfflineEvaluator())
+    spec = AbstractOfflineSpecification(stlDenseTimeAst(), StlDenseTimeOfflineEvaluator())
+    return spec
+
+def StlDenseTimeOnlineSpecification():
+    spec = AbstractOnlineSpecification(stlDenseTimeAst(), StlDenseTimeOnlineEvaluator())
     return spec
