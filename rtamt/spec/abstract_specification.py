@@ -11,6 +11,7 @@ class AbstractSpecification(object):
     def __init__(self, ast):
         self.name = 'Abstract Specification'
         self.ast = ast
+        self.set_ast_flag = False # It is for evaluator is set ast or not.
 
     @property
     def name(self):
@@ -44,18 +45,17 @@ class AbstractSpecification(object):
     def declare_const(self, const_name, const_type, const_val):
         self.ast.declare_const(const_name, const_type, const_val)
 
-    def parse(self):
-        self.ast.parse()
-
-    #TODO forward ast?
     def free_vars(self, free_vars): # we do not need
-        self.ast.free_vars(self, free_vars)
+        self.ast.free_vars(free_vars)
 
     def vars(self, vars): # we do not need
         self.ast.vars(vars)
 
     def modules(self, modules): # send synitax layer (ast)?
         self.ast.modules(modules)
+
+    def parse(self):
+        self.ast.parse()
 
 
     #TODO is that here?
@@ -71,7 +71,7 @@ class AbstractSpecification(object):
     def pastify(self):
         pass
 
-    #TODO we need to discuss how to handle ROS. Maybe add wrapper in RTAMT4ROS
+    #TODO we need to move it to RTAMT4ROS as wrapper
     @property
     def publish_var(self):
         return self.__publish_var
@@ -120,7 +120,6 @@ class AbstractSpecification(object):
             f.close()
         else:
             raise RTAMTException('The file {} does not exist.'.format(path))
-            sys.exit()
         return out
 
 
@@ -133,8 +132,11 @@ class AbstractOfflineSpecification(AbstractSpecification):
 
     # forwarding to evaluator
     def evaluate(self, *args, **kwargs):
-        self.offlineEvaluator.set_ast(self.ast)
+        if self.set_ast_flag != True:
+            self.offlineEvaluator.set_ast(self.ast)
+            self.set_ast_flag = True
 
+        #TODO we may make it consistent with evaluator class.
         if len(args) == 0:
             raise Exception()
         elif len(args) == 1:
