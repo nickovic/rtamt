@@ -1,7 +1,9 @@
 from rtamt.operation.abstract_operation import AbstractOperation
 import rtamt.operation.stl.dense_time.offline.intersection as intersect
 
+
 class AndOperation(AbstractOperation):
+
     def update(self, *args, **kargs):
         left_list = args[0]
         right_list = args[1]
