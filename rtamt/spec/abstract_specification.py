@@ -13,7 +13,6 @@ class AbstractSpecification(object):
         self.onlineEvaluator = onlineEvaluator
         self.onlineEvaluator = pastifier
 
-    #TODO Do we need name?
     @property
     def name(self):
         return self.__name
@@ -30,13 +29,13 @@ class AbstractSpecification(object):
         self.astPaser.parse()
 
     #TODO forward AstPaser?
-    def free_vars(self, free_vars):
+    def free_vars(self, free_vars): # we do not need
         self.astPaser.free_vars(self, free_vars)
 
-    def vars(self, vars):
+    def vars(self, vars): # we do not need
         self.astPaser.vars(vars)
 
-    def modules(self, modules):
+    def modules(self, modules): # send synitax layer (AstPaser)?
         self.astPaser.modules(modules)
 
     # forwarding to evaluator
@@ -54,11 +53,11 @@ class AbstractSpecification(object):
 
     #TODO is that here?
     @property
-    def unit(self):
+    def unit(self):  # send semantics layer
         return self.__unit
 
     @unit.setter
-    def unit(self, unit):
+    def unit(self, unit): # send semantics layer
         self.__unit = unit
 
     # forwarding pastify
@@ -82,7 +81,7 @@ class AbstractSpecification(object):
     def publish_var_field(self, publish_var_field):
         self.__publish_var_field = publish_var_field
 
-    #TODO Tom did not understand those
+    #TODO Tom did not understand those (we are wondering. put add it to issue comment)
     def add_input_var(self, input_var):
         self.in_vars.add(input_var)
 
@@ -104,7 +103,7 @@ class AbstractSpecification(object):
     def get_value(self, var_name):
         return self.var_object_dict[var_name]
 
-    #TODO we need to discuss where we put it.
+    #TODO goto Syntax while keeping in Spec too.
     def get_spec_from_file(self, path):
         """Opens a text file and returns its content as a string
         Parameters:
