@@ -2,6 +2,11 @@ import os, sys
 
 from abc import ABCMeta
 
+from rtamt.operation.abstract_discrete_time_online_evaluator import AbstractDiscreteTimeOnlineEvaluator
+from rtamt.operation.abstract_dense_time_online_evaluator import AbstractDenseTimeOnlineEvaluator
+from rtamt.operation.abstract_discrete_time_offline_evaluator import AbstractDiscreteTimeOfflineEvaluator
+from rtamt.operation.abstract_dense_time_offline_evaluator import AbstractDesneTimeOfflineEvaluator
+
 from rtamt.exception.exception import RTAMTException
 
 
@@ -121,8 +126,8 @@ class AbstractSpecification(object):
 
 class AbstractOfflineSpecification(AbstractSpecification):
     def __init__(self, ast, offlineEvaluator):
-        #super(AbstractOfflineSpecification, self).__init__(ast)
-        AbstractSpecification.__init__(self, ast)
+        super(AbstractOfflineSpecification, self).__init__(ast)
+        #AbstractSpecification.__init__(self, ast)
         self.name = 'Abstract Offline Specification'
         self.offlineEvaluator = offlineEvaluator
 
@@ -133,22 +138,27 @@ class AbstractOfflineSpecification(AbstractSpecification):
             self.set_ast_flag = True
 
         #TODO we may make it consistent with evaluator class.
-        if len(args) == 0:
-            raise Exception()
-        elif len(args) == 1:
-            dataset = [args[0]]
+        if isinstance(self.offlineEvaluator, AbstractDesneTimeOfflineEvaluator):
+            if len(args) == 0:
+                raise Exception()
+            elif len(args) == 1:
+                dataset = [args[0]]
+            else:
+                dataset = []
+                for i in args:
+                    dataset.append(i)
+            return self.offlineEvaluator.evaluate(dataset)
+        elif isinstance(self.offlineEvaluator, AbstractDiscreteTimeOfflineEvaluator):
+            dataset = args[0]
+            return self.offlineEvaluator.evaluate(dataset)
         else:
-            dataset = []
-            for i in args:
-                dataset.append(i)
-
-        return self.offlineEvaluator.evaluate(dataset)
+            pass
 
 
 class AbstractOnlineSpecification(AbstractSpecification):
     def __init__(self, ast, onlineEvaluator, pastifier=None):
-        #super(AbstractOnlineSpecification, self).__init__(ast)
-        AbstractSpecification.__init__(self, ast)
+        super(AbstractOnlineSpecification, self).__init__(ast)
+        #AbstractSpecification.__init__(self, ast)
         self.name = 'Abstract Online Specification'
         self.onlineEvaluator = onlineEvaluator
         self.pastifier = pastifier
@@ -164,16 +174,22 @@ class AbstractOnlineSpecification(AbstractSpecification):
             self.set_ast_flag = True
 
         #TODO we may make it consistent with evaluator class.
-        if len(args) == 0:
-            raise Exception()
-        elif len(args) == 1:
-            dataset = [args[0]]
+        if isinstance(self.onlineEvaluator, AbstractDenseTimeOnlineEvaluator):
+            if len(args) == 0:
+                raise Exception()
+            elif len(args) == 1:
+                dataset = [args[0]]
+            else:
+                dataset = []
+                for i in args:
+                    dataset.append(i)
+            return self.onlineEvaluator.update(dataset)
+        elif isinstance(self.onlineEvaluator, AbstractDiscreteTimeOnlineEvaluator):
+            i = args[0]
+            dataset = args[1]
+            return self.onlineEvaluator.update(i, dataset)
         else:
-            dataset = []
-            for i in args:
-                dataset.append(i)
-
-        return self.onlineEvaluator.update(dataset)
+            pass
 
     def final_update(self, *args, **kwargs):
         if self.set_ast_flag != True:
