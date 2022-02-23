@@ -126,8 +126,8 @@ class AbstractSpecification(object):
 
 class AbstractOfflineSpecification(AbstractSpecification):
     def __init__(self, ast, offlineEvaluator):
-        super(AbstractOfflineSpecification, self).__init__(ast)
-        #AbstractSpecification.__init__(self, ast)
+        #super(AbstractOfflineSpecification, self).__init__(ast)
+        AbstractSpecification.__init__(self, ast)
         self.name = 'Abstract Offline Specification'
         self.offlineEvaluator = offlineEvaluator
 
@@ -157,8 +157,8 @@ class AbstractOfflineSpecification(AbstractSpecification):
 
 class AbstractOnlineSpecification(AbstractSpecification):
     def __init__(self, ast, onlineEvaluator, pastifier=None):
-        super(AbstractOnlineSpecification, self).__init__(ast)
-        #AbstractSpecification.__init__(self, ast)
+        #super(AbstractOnlineSpecification, self).__init__(ast)
+        AbstractSpecification.__init__(self, ast)
         self.name = 'Abstract Online Specification'
         self.onlineEvaluator = onlineEvaluator
         self.pastifier = pastifier
