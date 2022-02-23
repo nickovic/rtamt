@@ -151,7 +151,7 @@ class AbstractOnlineSpecification(AbstractSpecification):
         AbstractSpecification.__init__(self, ast)
         self.name = 'Abstract Online Specification'
         self.onlineEvaluator = onlineEvaluator
-        self.onlineEvaluator = pastifier
+        self.pastifier = pastifier
 
     # forwarding pastify
     def pastify(self):
