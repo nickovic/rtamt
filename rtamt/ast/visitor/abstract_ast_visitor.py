@@ -29,8 +29,10 @@ class AbstractAstVisitor(object):
 
     def visitAst(self, ast, *args, **kwargs):
         self.ast = ast
-        return self.visit(ast.ast, *args, **kwargs)
-
+        out = []
+        for spec in ast.specs:
+            out.append(self.visit(spec, *args, **kwargs))
+        return out
 
     def visitBinary(self, node, *args, **kwargs):
         return self.visitChildren(node, *args, **kwargs)

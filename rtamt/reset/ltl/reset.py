@@ -5,8 +5,8 @@ class LTLReset(LtlAstVisitor):
     def __init__(self, node_monitor_dict=None):
         self.node_monitor_dict = node_monitor_dict
 
-    def reset(self, element):
-        return self.visit(element, [])
+    def reset(self, ast):
+        self.visitAst(ast)
 
     def visitConstant(self, element, args):
         monitor = self.node_monitor_dict[element.name]

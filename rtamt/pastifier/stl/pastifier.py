@@ -19,11 +19,6 @@ class STLPastifier(LtlPastifier, StlAstVisitor):
     def visit(self, node, *args, **kwargs):
         return StlAstVisitor.visit(self, node, *args, **kwargs)
 
-    def pastify(self, node):
-        h = STLHorizon()
-        horizon = h.visit(node, None)
-        return self.visit(node, [horizon])
-
     def visitVariable(self, node, *args, **kwargs):
         horizon = args[0]
         node = Variable(node.var, node.field, node.io_type)

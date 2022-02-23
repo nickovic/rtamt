@@ -89,6 +89,8 @@ class AbstractAst:
 
         self.ast = None
 
+        self.specs = []
+
         #TODO Tom did not understand it well.
         # 1) Is it only stl? I don't think so
         # 2) Maybe we may consider where we may handle C++/python switch. Maybe semantics layer.
@@ -124,8 +126,7 @@ class AbstractAst:
             if not isinstance(parser._listeners[0], ErrorListener):
                 raise AstParseException('{} is not ANTRL4 ErrorListener'.format(parser._listeners[0].__class__.__name__))
         ctx = parser.specification_file()
-        self.ast = self.visit(ctx.specification())
-
+        self.visit(ctx.specification())
         return
 
     @property
@@ -137,21 +138,20 @@ class AbstractAst:
         self.__spec = spec
 
     @property
+    def specs(self):
+        return self.__specs
+
+    @specs.setter
+    def specs(self, specs):
+        self.__specs = specs
+
+    @property
     def name(self):
         return self.__name
 
     @name.setter
     def name(self, name):
         self.__name = name
-
-    #TODO It is only for pastifier, we may move it to semantic layer or not AST layer..
-    @property
-    def horizon(self):
-        return self.__horizon
-
-    @horizon.setter
-    def horizon(self, horizon):
-        self.__horizon = horizon
 
     @property
     def free_vars(self):

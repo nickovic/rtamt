@@ -332,19 +332,20 @@ class LtlAstParserVisitor(LtlParserVisitor):
         self.out_var = id_head
         self.out_var_field = id_tail
         self.free_vars.discard(id_head)
-        return out
+        self.specs.append(out)
+        return
 
     def visitSpecification_file(self, ctx):
-        return self.visit(ctx.specification())
+        self.visit(ctx.specification())
+        return
 
     def visitSpecification(self, ctx):
-        out = self.visitChildren(ctx)
+        self.visitChildren(ctx)
         try:
             del self.var_subspec_dict[self.out_var + self.out_var_field]
         except KeyError:
-            #raise RTAMTException('Could not remove an entry from var_subspec_dict.')
             pass
-        return out
+        return
 
     def visitSpecificationId(self, ctx):
         self.visitChildren(ctx)

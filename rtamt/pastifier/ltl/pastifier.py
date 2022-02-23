@@ -33,10 +33,18 @@ class LtlPastifier(LtlAstVisitor):
     def __init__(self):
         pass
 
-    def pastify(self, node):
+    def pastify(self, specs):
         h = LtlHorizon()
-        horizon = h.visit(node, None)
-        return self.visit(node, [horizon])
+        horizons = dict()
+        for spec in specs:
+            horizon = h.visit(spec, None)
+            horizons[spec] = horizon
+        pastified_specs = []
+        for spec in specs:
+            horizon = horizons[spec]
+            pastified_spec = self.visit(spec, [horizon])
+            pastified_specs.append(pastified_spec)
+        return pastified_specs
 
     def visitConstant(self, node, *args, **kwargs):
         node = Constant(node.val)

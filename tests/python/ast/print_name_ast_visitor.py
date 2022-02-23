@@ -1,6 +1,13 @@
 from rtamt.ast.visitor.abstract_ast_visitor import AbstractAstVisitor
 
 class PrintNameAstVisitor(AbstractAstVisitor):
+    def print(self, specs):
+        outs = ''
+        for spec in specs:
+            out = self.visit(spec, None)
+            outs = out
+        return outs
+
     def visitUnary(self, node, *args, **kwargs):
         op = self.visit(node.children[0], *args, **kwargs)
         return node.__class__.__name__ + '(' + op + ')'
