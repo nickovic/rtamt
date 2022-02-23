@@ -1,0 +1,6 @@
+from rtamt.operation.stl.discrete_time.online.cpp.ast_visitor import StlDiscreteTimeOnlineAstVisitorCpp
+from rtamt.operation.abstract_discrete_time_online_evaluator import discrete_time_online_evaluator_factory
+
+def StlDiscreteTimeOnlineEvaluatorCpp():
+    stlDiscreteTimeOnlineEvaluatorCpp = discrete_time_online_evaluator_factory(StlDiscreteTimeOnlineAstVisitorCpp)()
+    return stlDiscreteTimeOnlineEvaluatorCpp
