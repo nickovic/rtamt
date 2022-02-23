@@ -22,11 +22,11 @@ def STLDiscreteTimeSpecification(semantics=Semantics.STANDARD, language=Language
 
     return spec
 
-def StlDenseTimeOfflineSpecification():
+def StlDiscreteTimeOfflineSpecification():
     spec = AbstractOfflineSpecification(stlDiscreteTimeAst(), StlDiscreteTimeOfflineEvaluator())
     return spec
 
-def StlDenseTimeOnlineSpecification():
+def StlDiscreteTimeOnlineSpecification():
     spec = AbstractOnlineSpecification(stlDiscreteTimeAst(), StlDiscreteTimeOnlineEvaluator())
     return spec
 
