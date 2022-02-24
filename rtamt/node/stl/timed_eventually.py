@@ -1,11 +1,11 @@
+from rtamt.interval.interval import Interval
 from rtamt.node.unary_node import UnaryNode
-from rtamt.node.stl.time_bound import TimeBound
 
-class TimedEventually(UnaryNode, TimeBound):
+class TimedEventually(UnaryNode, Interval):
     """A class for storing STL Eventually nodes
             Inherits TemporalNode
     """
-    def __init__(self, child, begin, end, is_pure_python=True):
+    def __init__(self, child, interval, is_pure_python=True):
         """Constructor for Eventually node
 
         Parameters:
@@ -13,7 +13,7 @@ class TimedEventually(UnaryNode, TimeBound):
             bound : Interval
         """
         UnaryNode.__init__(self, child)
-        TimeBound.__init__(self, begin, end)
+        Interval.__init__(self, interval.begin, interval.end, interval.begin_unit, interval.end_unit)
         self.in_vars = child.in_vars
         self.out_vars = child.out_vars
-        self.name = 'eventually[' + str(self.begin) + ',' + str(self.end) + '](' + child.name + ')'
+        self.name = 'eventually[' + str(self.begin) + str(self.begin_unit) + ',' + str(self.end) + str(self.end_unit) + '](' + child.name + ')'

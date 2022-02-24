@@ -1,8 +1,7 @@
 import unittest
 
 from rtamt.ast.parser.ltl.specification_parser import LtlAst
-from rtamt.ast.parser.stl.discrete_time.specification_parser import stlDiscreteTimeAst
-from rtamt.ast.parser.stl.dense_time.specification_parser import stlDenseTimeAst
+from rtamt.ast.parser.stl.specification_parser import stlAst
 
 from tests.python.ast.print_name_ast_visitor import PrintNameAstVisitor
 
@@ -21,7 +20,7 @@ class TestPrintAstVisitor(unittest.TestCase):
         self.assertEqual(out, 'Always((Variable)Predicate(Constant))', 'ltl assertion')
 
     def test_visitor_with_discrete_time_stl(self):
-        ast = stlDiscreteTimeAst()
+        ast = stlAst()
         ast.declare_var('a', 'float')
         ast.spec = 'always(a>=2)'
         ast.parse()
@@ -29,7 +28,7 @@ class TestPrintAstVisitor(unittest.TestCase):
         self.assertEqual(out, 'Always((Variable)Predicate(Constant))', 'stl assertion')
 
     def test_visitor_with_dence_time_stl(self):
-        ast = stlDenseTimeAst()
+        ast = stlAst()
         ast.declare_var('a', 'float')
         ast.spec = 'always(a>=2)'
         ast.parse()

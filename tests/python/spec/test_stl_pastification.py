@@ -1,4 +1,6 @@
 import unittest
+
+from rtamt.interval.interval import Interval
 from rtamt.pastifier.stl.pastifier import STLPastifier
 from rtamt.node.ltl.constant import Constant
 from rtamt.node.ltl.variable import Variable
@@ -60,7 +62,6 @@ class TestSTLPastification(unittest.TestCase):
         new_node = pastifier.pastify(old_node)
 
         self.assertEqual('myvar.req.val', new_node.name, 'Variable pastification assertion')
-
 
     def test_previous_1(self):
         var_node = Variable('req', '', 'output')
@@ -356,7 +357,7 @@ class TestSTLPastification(unittest.TestCase):
 
     def test_once_0_1(self):
         var_node = Variable('req', '', 'output')
-        node = TimedOnce(var_node, 0, 1)
+        node = TimedOnce(var_node, Interval(0, 1))
 
         pastifier = STLPastifier()
         node.accept(pastifier)
@@ -366,7 +367,7 @@ class TestSTLPastification(unittest.TestCase):
 
     def test_historically_0_1(self):
         var_node = Variable('req', '', 'output')
-        node = TimedHistorically(var_node, 0, 1)
+        node = TimedHistorically(var_node, Interval(0, 1))
 
         pastifier = STLPastifier()
         node.accept(pastifier)
@@ -376,7 +377,7 @@ class TestSTLPastification(unittest.TestCase):
 
     def test_eventually_0_1(self):
         var_node = Variable('req', '', 'output')
-        node = TimedEventually(var_node, 0, 1)
+        node = TimedEventually(var_node, Interval(0, 1))
 
         pastifier = STLPastifier()
         node.accept(pastifier)
@@ -386,7 +387,7 @@ class TestSTLPastification(unittest.TestCase):
 
     def test_always_0_1(self):
         var_node = Variable('req', '', 'output')
-        node = TimedAlways(var_node, 0, 1)
+        node = TimedAlways(var_node, Interval(0, 1))
 
         pastifier = STLPastifier()
         node.accept(pastifier)
@@ -397,7 +398,7 @@ class TestSTLPastification(unittest.TestCase):
     def test_until_0_1(self):
         var_node_1 = Variable('req', '', 'output')
         var_node_2 = Variable('gnt', '', 'output')
-        add_node = TimedUntil(var_node_1, var_node_2, 0, 1)
+        add_node = TimedUntil(var_node_1, var_node_2, Interval(0, 1))
 
         pastifier = STLPastifier()
         add_node.accept(pastifier)
@@ -408,7 +409,7 @@ class TestSTLPastification(unittest.TestCase):
     def test_since_0_1(self):
         var_node_1 = Variable('req', '', 'output')
         var_node_2 = Variable('gnt', '', 'output')
-        add_node = TimedSince(var_node_1, var_node_2, 0, 1)
+        add_node = TimedSince(var_node_1, var_node_2, Interval(0, 1))
 
         pastifier = STLPastifier()
         add_node.accept(pastifier)
@@ -419,7 +420,7 @@ class TestSTLPastification(unittest.TestCase):
     def test_precedes_0_1(self):
         var_node_1 = Variable('req', '', 'output')
         var_node_2 = Variable('gnt', '', 'output')
-        add_node = TimedPrecedes(var_node_1, var_node_2, 0, 1)
+        add_node = TimedPrecedes(var_node_1, var_node_2, Interval(0, 1))
 
         pastifier = STLPastifier()
         add_node.accept(pastifier)
@@ -432,8 +433,8 @@ class TestSTLPastification(unittest.TestCase):
         var_node_2 = Variable('gnt', '', 'output')
         rise_node = Rise(var_node_1)
         hist_node = Historically(var_node_2)
-        once_node = TimedOnce(hist_node, 1, 2)
-        add_node = TimedSince(rise_node, once_node, 2, 6)
+        once_node = TimedOnce(hist_node, Interval(1, 2))
+        add_node = TimedSince(rise_node, once_node, Interval(2, 6))
 
         pastifier = STLPastifier()
         add_node.accept(pastifier)
@@ -446,8 +447,8 @@ class TestSTLPastification(unittest.TestCase):
         var_node_2 = Variable('gnt', '', 'output')
         rise_node = Rise(var_node_1)
         hist_node = Historically(var_node_2)
-        once_node = TimedOnce(hist_node, 1, 2)
-        add_node = TimedSince(rise_node, once_node, 2, 6)
+        once_node = TimedOnce(hist_node, Interval(1, 2))
+        add_node = TimedSince(rise_node, once_node, Interval(2, 6))
 
         pastifier = STLPastifier()
         add_node.accept(pastifier)
@@ -463,8 +464,8 @@ class TestSTLPastification(unittest.TestCase):
         pd_node_1 = Predicate(var_node_1, cnt_node_1, StlComparisonOperator.GEQ)
         pd_node_2 = Predicate(var_node_2, cnt_node_2, StlComparisonOperator.GEQ)
         rise_node = Rise(pd_node_1)
-        hist_node = TimedAlways(pd_node_2, 3, 4)
-        once_node = TimedEventually(hist_node, 1, 2)
+        hist_node = TimedAlways(pd_node_2, Interval(3, 4))
+        once_node = TimedEventually(hist_node, Interval(1, 2))
         add_node = Implies(rise_node, once_node)
 
         pastifier = STLPastifier()
@@ -478,8 +479,8 @@ class TestSTLPastification(unittest.TestCase):
         var_node_2 = Variable('gnt', '', 'output')
         var_node_3 = Variable('ack', '', 'output')
 
-        until_node = TimedUntil(var_node_1, var_node_2, 1, 2)
-        ev_node = TimedEventually(var_node_3, 0, 6)
+        until_node = TimedUntil(var_node_1, var_node_2, Interval(1, 2))
+        ev_node = TimedEventually(var_node_3, Interval(0, 6))
         add_node = Implies(until_node, ev_node)
 
         pastifier = STLPastifier()
@@ -492,9 +493,9 @@ class TestSTLPastification(unittest.TestCase):
         var_node_1 = Variable('req', '', 'output')
         var_node_2 = Variable('gnt', '', 'output')
 
-        ev_node = TimedEventually(var_node_1, 5, 6)
-        once_node = TimedOnce(var_node_2, 1, 2)
-        ev_once_node = TimedEventually(once_node, 3, 3)
+        ev_node = TimedEventually(var_node_1, Interval(5, 6))
+        once_node = TimedOnce(var_node_2, Interval(1, 2))
+        ev_once_node = TimedEventually(once_node, Interval(3, 3))
         add_node = Implies(ev_node, ev_once_node)
 
         pastifier = STLPastifier()
@@ -507,9 +508,9 @@ class TestSTLPastification(unittest.TestCase):
         var_node_1 = Variable('req', '', 'output')
         var_node_2 = Variable('gnt', '', 'output')
 
-        ev_node = TimedEventually(var_node_1, 5, 6)
-        once_node = TimedOnce(var_node_2, 1, 2)
-        alw_node = TimedAlways(once_node, 3, 3)
+        ev_node = TimedEventually(var_node_1, Interval(5, 6))
+        once_node = TimedOnce(var_node_2, Interval(1, 2))
+        alw_node = TimedAlways(once_node, Interval(3, 3))
         add_node = Implies(ev_node, alw_node)
 
         pastifier = STLPastifier()

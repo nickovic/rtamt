@@ -28,9 +28,7 @@ class AbstractAstVisitor(object):
         return result
 
     def visitAst(self, ast, *args, **kwargs):
-        self.ast = ast
         return self.visit(ast.ast, *args, **kwargs)
-
 
     def visitBinary(self, node, *args, **kwargs):
         return self.visitChildren(node, *args, **kwargs)

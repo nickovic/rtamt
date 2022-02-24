@@ -1,8 +1,6 @@
 import unittest
 
 from rtamt.ast.parser.ltl.specification_parser import LtlAst
-from rtamt.ast.parser.stl.discrete_time.specification_parser import stlDiscreteTimeAst
-from rtamt.ast.parser.stl.dense_time.specification_parser import stlDenseTimeAst
 from tests.python.ast.ltl_print_name_ast_visitor import LtlPrintNameAstVisitor
 
 

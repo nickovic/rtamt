@@ -1,5 +1,6 @@
 import unittest
 
+from rtamt.interval.interval import Interval
 from rtamt.node.arithmetic.addition import Addition
 from rtamt.node.arithmetic.subtraction import Subtraction
 from rtamt.node.arithmetic.multiplication import Multiplication
@@ -257,46 +258,46 @@ class TestStlAstVisitor(unittest.TestCase):
 
     def test_timed_once(self):
         v = Variable('a')
-        n = TimedOnce(v, 1, 2)
+        n = TimedOnce(v, Interval(1, 2))
         n = self.visitor.visit(n, None)
         self.assertEqual(n, 'once[1,2](a)', 'Timed once assertion')
 
     def test_timed_historically(self):
         v = Variable('a')
-        n = TimedHistorically(v, 1, 2)
+        n = TimedHistorically(v, Interval(1, 2))
         n = self.visitor.visit(n, None)
         self.assertEqual(n, 'historically[1,2](a)', 'Timed hist assertion')
 
     def test_timed_eventually(self):
         v = Variable('a')
-        n = TimedEventually(v, 1, 2)
+        n = TimedEventually(v, Interval(1, 2))
         n = self.visitor.visit(n, None)
         self.assertEqual(n, 'eventually[1,2](a)', 'Timed eventually assertion')
 
     def test_timed_always(self):
         v = Variable('a')
-        n = TimedAlways(v, 1, 2)
+        n = TimedAlways(v, Interval(1, 2))
         n = self.visitor.visit(n, None)
         self.assertEqual(n, 'always[1,2](a)', 'Timed always assertion')
 
     def test_timed_since(self):
         v1 = Variable('a')
         v2 = Variable('b')
-        n = TimedSince(v1, v2, 1, 2)
+        n = TimedSince(v1, v2, Interval(1, 2))
         n = self.visitor.visit(n, None)
         self.assertEqual(n, '(a)since[1,2](b)', 'Timed since assertion')
 
     def test_timed_until(self):
         v1 = Variable('a')
         v2 = Variable('b')
-        n = TimedUntil(v1, v2, 1, 2)
+        n = TimedUntil(v1, v2, Interval(1, 2))
         n = self.visitor.visit(n, None)
         self.assertEqual(n, '(a)until[1,2](b)', 'Timed until assertion')
 
     def test_timed_precedes(self):
         v1 = Variable('a')
         v2 = Variable('b')
-        n = TimedPrecedes(v1, v2, 1, 2)
+        n = TimedPrecedes(v1, v2, Interval(1, 2))
         n = self.visitor.visit(n, None)
         self.assertEqual(n, '(a)precedes[1,2](b)', 'Timed precedes assertion')
 
