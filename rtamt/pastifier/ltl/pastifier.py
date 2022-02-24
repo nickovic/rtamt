@@ -36,7 +36,7 @@ class LtlPastifier(LtlAstVisitor):
     def pastify(self, node):
         h = LtlHorizon()
         horizon = h.visit(node, None)
-        return self.visit(node, [horizon])
+        return self.visit(node, horizon)
 
     def visitConstant(self, node, *args, **kwargs):
         node = Constant(node.val)
@@ -166,7 +166,7 @@ class LtlPastifier(LtlAstVisitor):
 
     def visitNext(self, node, *args, **kwargs):
         horizon = args[0] - 1
-        child_node = self.visit(node.children[0], [horizon])
+        child_node = self.visit(node.children[0], horizon)
         return child_node
 
     def visitHistorically(self, node, *args, **kwargs):
