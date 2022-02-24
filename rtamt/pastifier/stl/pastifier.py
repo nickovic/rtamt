@@ -17,13 +17,21 @@ class STLPastifier(LtlPastifier, StlAstVisitor):
     def __init__(self):
         LtlPastifier.__init__(self)
 
+    def pastify(self, ast):
+        h = StlHorizon()
+        horizons = dict()
+        for spec in ast.specs:
+            horizon = h.visit(spec, None)
+            horizons[spec] = horizon
+        pastified_specs = []
+        for spec in ast.specs:
+            horizon = horizons[spec]
+            pastified_spec = self.visit(spec, [horizon])
+            pastified_specs.append(pastified_spec)
+        return pastified_specs
+
     def visit(self, node, *args, **kwargs):
         return StlAstVisitor.visit(self, node, *args, **kwargs)
-
-    def pastify(self, node):
-        h = StlHorizon()
-        horizon = h.visit(node, None)
-        return self.visit(node, horizon)
 
     def visitVariable(self, node, *args, **kwargs):
         horizon = args[0]

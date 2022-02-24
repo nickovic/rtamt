@@ -80,6 +80,8 @@ class AbstractSpecification:
 
         self.top = None
 
+        self.specs = []
+
         self.online_evaluator = None
         self.offline_evaluator = None
 
@@ -90,6 +92,14 @@ class AbstractSpecification:
     @spec.setter
     def spec(self, spec):
         self.__spec = spec
+
+    @property
+    def specs(self):
+        return self.__specs
+
+    @specs.setter
+    def specs(self, specs):
+        self.__specs = specs
 
     @property
     def name(self):

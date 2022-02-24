@@ -1,6 +1,13 @@
 from rtamt.ast.visitor.ltl.ast_visitor import LtlAstVisitor
 
 class LtlPrintNameAstVisitor(LtlAstVisitor):
+    def print(self, specs):
+        outs = ''
+        for spec in specs:
+            out = self.visit(spec, None)
+            outs = out
+        return outs
+
     def visitConstant(self, node, *args, **kwargs):
         return str(node.val)
 

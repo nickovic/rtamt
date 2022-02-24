@@ -16,7 +16,7 @@ class TestStlAstParser(unittest.TestCase):
         self.ast.declare_var('a', 'float')
         self.ast.spec = '5.0'
         self.ast.parse()
-        out = self.printer.visit(self.ast.ast)
+        out = self.printer.print(self.ast.specs)
 
         self.assertEqual(out, self.ast.spec, 'Const assertion')
 
@@ -25,7 +25,7 @@ class TestStlAstParser(unittest.TestCase):
         self.ast.declare_var('a', 'float')
         self.ast.spec = 'a'
         self.ast.parse()
-        out = self.printer.visit(self.ast.ast)
+        out = self.printer.print(self.ast.specs)
 
         self.assertEqual(out, self.ast.spec, 'Var assertion')
 
@@ -34,7 +34,7 @@ class TestStlAstParser(unittest.TestCase):
         self.ast.declare_var('a', 'float')
         self.ast.spec = 'abs(a)'
         self.ast.parse()
-        out = self.printer.visit(self.ast.ast)
+        out = self.printer.print(self.ast.specs)
 
         self.assertEqual(out, self.ast.spec, 'Abs assertion')
 
@@ -43,7 +43,7 @@ class TestStlAstParser(unittest.TestCase):
         self.ast.declare_var('a', 'float')
         self.ast.spec = 'sqrt(a)'
         self.ast.parse()
-        out = self.printer.visit(self.ast.ast)
+        out = self.printer.print(self.ast.specs)
 
         self.assertEqual(out, self.ast.spec, 'Sqrt assertion')
 
@@ -52,7 +52,7 @@ class TestStlAstParser(unittest.TestCase):
         self.ast.declare_var('a', 'float')
         self.ast.spec = 'exp(a)'
         self.ast.parse()
-        out = self.printer.visit(self.ast.ast)
+        out = self.printer.print(self.ast.specs)
 
         self.assertEqual(out, self.ast.spec, 'Exp assertion')
 
@@ -62,7 +62,7 @@ class TestStlAstParser(unittest.TestCase):
         self.ast.declare_var('b', 'float')
         self.ast.spec = 'pow(a,b)'
         self.ast.parse()
-        out = self.printer.visit(self.ast.ast)
+        out = self.printer.print(self.ast.specs)
 
         self.assertEqual(out, self.ast.spec, 'Pow assertion')
 
@@ -72,7 +72,7 @@ class TestStlAstParser(unittest.TestCase):
         self.ast.declare_var('b', 'float')
         self.ast.spec = 'a+b'
         self.ast.parse()
-        out = self.printer.visit(self.ast.ast)
+        out = self.printer.print(self.ast.specs)
 
         self.assertEqual(out, '(a)+(b)', 'Add assertion')
 
@@ -82,7 +82,7 @@ class TestStlAstParser(unittest.TestCase):
         self.ast.declare_var('b', 'float')
         self.ast.spec = 'a-b'
         self.ast.parse()
-        out = self.printer.visit(self.ast.ast)
+        out = self.printer.print(self.ast.specs)
 
         # self.assertEqual(out, self.ast.spec, 'Sub assertion')
         # TODO: check syntax error
@@ -94,7 +94,7 @@ class TestStlAstParser(unittest.TestCase):
         self.ast.declare_var('b', 'float')
         self.ast.spec = 'a*b'
         self.ast.parse()
-        out = self.printer.visit(self.ast.ast)
+        out = self.printer.print(self.ast.specs)
 
         self.assertEqual(out, '(a)*(b)', 'Mult assertion')
 
@@ -104,7 +104,7 @@ class TestStlAstParser(unittest.TestCase):
         self.ast.declare_var('b', 'float')
         self.ast.spec = 'a / b'
         self.ast.parse()
-        out = self.printer.visit(self.ast.ast)
+        out = self.printer.print(self.ast.specs)
 
         self.assertEqual(out, '(a)/(b)', 'Div assertion')
 
@@ -114,7 +114,7 @@ class TestStlAstParser(unittest.TestCase):
         self.ast.declare_var('b', 'float')
         self.ast.spec = '(a)<=(b)'
         self.ast.parse()
-        out = self.printer.visit(self.ast.ast)
+        out = self.printer.print(self.ast.specs)
 
         self.assertEqual(out, self.ast.spec, 'Pred <= assertion')
 
@@ -124,7 +124,7 @@ class TestStlAstParser(unittest.TestCase):
         self.ast.declare_var('b', 'float')
         self.ast.spec = '(a)<(b)'
         self.ast.parse()
-        out = self.printer.visit(self.ast.ast)
+        out = self.printer.print(self.ast.specs)
 
         self.assertEqual(out, self.ast.spec, 'Pred < assertion')
 
@@ -134,7 +134,7 @@ class TestStlAstParser(unittest.TestCase):
         self.ast.declare_var('b', 'float')
         self.ast.spec = '(a)>=(b)'
         self.ast.parse()
-        out = self.printer.visit(self.ast.ast)
+        out = self.printer.print(self.ast.specs)
 
         self.assertEqual(out, self.ast.spec, 'Pred >= assertion')
 
@@ -144,7 +144,7 @@ class TestStlAstParser(unittest.TestCase):
         self.ast.declare_var('b', 'float')
         self.ast.spec = '(a)>(b)'
         self.ast.parse()
-        out = self.printer.visit(self.ast.ast)
+        out = self.printer.print(self.ast.specs)
 
         self.assertEqual(out, self.ast.spec, 'Pred > assertion')
 
@@ -154,7 +154,7 @@ class TestStlAstParser(unittest.TestCase):
         self.ast.declare_var('b', 'float')
         self.ast.spec = '(a)==(b)'
         self.ast.parse()
-        out = self.printer.visit(self.ast.ast)
+        out = self.printer.print(self.ast.specs)
 
         self.assertEqual(out, self.ast.spec, 'Pred eq assertion')
 
@@ -164,7 +164,7 @@ class TestStlAstParser(unittest.TestCase):
         self.ast.declare_var('b', 'float')
         self.ast.spec = '(a)!==(b)'
         self.ast.parse()
-        out = self.printer.visit(self.ast.ast)
+        out = self.printer.print(self.ast.specs)
 
         self.assertEqual(out, '(a)!=(b)', 'Pred neq assertion')
 
@@ -173,7 +173,7 @@ class TestStlAstParser(unittest.TestCase):
         self.ast.declare_var('a', 'float')
         self.ast.spec = 'not(a)'
         self.ast.parse()
-        out = self.printer.visit(self.ast.ast)
+        out = self.printer.print(self.ast.specs)
 
         self.assertEqual(out, self.ast.spec, 'Not assertion')
 
@@ -183,7 +183,7 @@ class TestStlAstParser(unittest.TestCase):
         self.ast.declare_var('b', 'float')
         self.ast.spec = '(a)and(b)'
         self.ast.parse()
-        out = self.printer.visit(self.ast.ast)
+        out = self.printer.print(self.ast.specs)
 
         self.assertEqual(out, self.ast.spec, 'And assertion')
 
@@ -193,7 +193,7 @@ class TestStlAstParser(unittest.TestCase):
         self.ast.declare_var('b', 'float')
         self.ast.spec = '(a)or(b)'
         self.ast.parse()
-        out = self.printer.visit(self.ast.ast)
+        out = self.printer.print(self.ast.specs)
 
         self.assertEqual(out, self.ast.spec, 'Or assertion')
 
@@ -203,7 +203,7 @@ class TestStlAstParser(unittest.TestCase):
         self.ast.declare_var('b', 'float')
         self.ast.spec = '(a)implies(b)'
         self.ast.parse()
-        out = self.printer.visit(self.ast.ast)
+        out = self.printer.print(self.ast.specs)
 
         self.assertEqual(out, self.ast.spec, 'Implies assertion')
 
@@ -213,7 +213,7 @@ class TestStlAstParser(unittest.TestCase):
         self.ast.declare_var('b', 'float')
         self.ast.spec = '(a)iff(b)'
         self.ast.parse()
-        out = self.printer.visit(self.ast.ast)
+        out = self.printer.print(self.ast.specs)
 
         self.assertEqual(out, self.ast.spec, 'Iff assertion')
 
@@ -223,7 +223,7 @@ class TestStlAstParser(unittest.TestCase):
         self.ast.declare_var('b', 'float')
         self.ast.spec = '(a)xor(b)'
         self.ast.parse()
-        out = self.printer.visit(self.ast.ast)
+        out = self.printer.print(self.ast.specs)
 
         self.assertEqual(out, self.ast.spec, 'Xor assertion')
 
@@ -232,7 +232,7 @@ class TestStlAstParser(unittest.TestCase):
         self.ast.declare_var('a', 'float')
         self.ast.spec = 'rise(a)'
         self.ast.parse()
-        out = self.printer.visit(self.ast.ast)
+        out = self.printer.print(self.ast.specs)
 
         self.assertEqual(out, self.ast.spec, 'Rise assertion')
 
@@ -241,7 +241,7 @@ class TestStlAstParser(unittest.TestCase):
         self.ast.declare_var('a', 'float')
         self.ast.spec = 'fall(a)'
         self.ast.parse()
-        out = self.printer.visit(self.ast.ast)
+        out = self.printer.print(self.ast.specs)
 
         self.assertEqual(out, self.ast.spec, 'Fall assertion')
 
@@ -250,7 +250,7 @@ class TestStlAstParser(unittest.TestCase):
         self.ast.declare_var('a', 'float')
         self.ast.spec = 'prev(a)'
         self.ast.parse()
-        out = self.printer.visit(self.ast.ast)
+        out = self.printer.print(self.ast.specs)
 
         self.assertEqual(out, self.ast.spec, 'Prev assertion')
 
@@ -259,7 +259,7 @@ class TestStlAstParser(unittest.TestCase):
         self.ast.declare_var('a', 'float')
         self.ast.spec = 'next(a)'
         self.ast.parse()
-        out = self.printer.visit(self.ast.ast)
+        out = self.printer.print(self.ast.specs)
 
         self.assertEqual(out, self.ast.spec, 'Next assertion')
 
@@ -268,7 +268,7 @@ class TestStlAstParser(unittest.TestCase):
         self.ast.declare_var('a', 'float')
         self.ast.spec = 'once(a)'
         self.ast.parse()
-        out = self.printer.visit(self.ast.ast)
+        out = self.printer.print(self.ast.specs)
 
         self.assertEqual(out, self.ast.spec, 'Once assertion')
 
@@ -277,7 +277,7 @@ class TestStlAstParser(unittest.TestCase):
         self.ast.declare_var('a', 'float')
         self.ast.spec = 'historically(a)'
         self.ast.parse()
-        out = self.printer.visit(self.ast.ast)
+        out = self.printer.print(self.ast.specs)
 
         self.assertEqual(out, self.ast.spec, 'Historically assertion')
 
@@ -286,7 +286,7 @@ class TestStlAstParser(unittest.TestCase):
         self.ast.declare_var('a', 'float')
         self.ast.spec = 'eventually(a)'
         self.ast.parse()
-        out = self.printer.visit(self.ast.ast)
+        out = self.printer.print(self.ast.specs)
 
         self.assertEqual(out, self.ast.spec, 'Eventually assertion')
 
@@ -295,7 +295,7 @@ class TestStlAstParser(unittest.TestCase):
         self.ast.declare_var('a', 'float')
         self.ast.spec = 'always(a)'
         self.ast.parse()
-        out = self.printer.visit(self.ast.ast)
+        out = self.printer.print(self.ast.specs)
 
         self.assertEqual(out, self.ast.spec, 'Always assertion')
 
@@ -305,7 +305,7 @@ class TestStlAstParser(unittest.TestCase):
         self.ast.declare_var('b', 'float')
         self.ast.spec = '(a)since(b)'
         self.ast.parse()
-        out = self.printer.visit(self.ast.ast)
+        out = self.printer.print(self.ast.specs)
 
         self.assertEqual(out, self.ast.spec, 'Since assertion')
 
@@ -315,7 +315,7 @@ class TestStlAstParser(unittest.TestCase):
         self.ast.declare_var('b', 'float')
         self.ast.spec = '(a)until(b)'
         self.ast.parse()
-        out = self.printer.visit(self.ast.ast)
+        out = self.printer.print(self.ast.specs)
 
         self.assertEqual(out, self.ast.spec, 'Until assertion')
 
@@ -324,7 +324,7 @@ class TestStlAstParser(unittest.TestCase):
         self.ast.declare_var('a', 'float')
         self.ast.spec = 'always(a)'
         self.ast.parse()
-        out = self.printer.visit(self.ast.ast)
+        out = self.printer.print(self.ast.specs)
 
         self.assertEqual(out, self.ast.spec, 'Always assertion')
 
@@ -333,7 +333,7 @@ class TestStlAstParser(unittest.TestCase):
        self.ast.declare_var('a', 'float')
        self.ast.spec = 'always[1,2](a)'
        self.ast.parse()
-       out = self.printer.visit(self.ast.ast)
+       out = self.printer.print(self.ast.specs)
 
        self.assertEqual(out, self.ast.spec, 'Always assertion')
 
@@ -342,7 +342,7 @@ class TestStlAstParser(unittest.TestCase):
        self.ast.declare_var('a', 'float')
        self.ast.spec = 'eventually[1,2](a)'
        self.ast.parse()
-       out = self.printer.visit(self.ast.ast)
+       out = self.printer.print(self.ast.specs)
 
        self.assertEqual(out, self.ast.spec, 'Eventually assertion')
 
@@ -351,7 +351,7 @@ class TestStlAstParser(unittest.TestCase):
        self.ast.declare_var('a', 'float')
        self.ast.spec = 'once[1,2](a)'
        self.ast.parse()
-       out = self.printer.visit(self.ast.ast)
+       out = self.printer.print(self.ast.specs)
 
        self.assertEqual(out, self.ast.spec, 'Once assertion')
 
@@ -376,7 +376,7 @@ class TestStlAstParser(unittest.TestCase):
        self.ast.declare_var('a', 'float')
        self.ast.spec = 'historically[1,2](a)'
        self.ast.parse()
-       out = self.printer.visit(self.ast.ast)
+       out = self.printer.print(self.ast.specs)
 
        self.assertEqual(out, self.ast.spec, 'Historically assertion')
 
@@ -386,7 +386,7 @@ class TestStlAstParser(unittest.TestCase):
        self.ast.declare_var('b', 'float')
        self.ast.spec = '(a)since[1,2](b)'
        self.ast.parse()
-       out = self.printer.visit(self.ast.ast)
+       out = self.printer.print(self.ast.specs)
 
        self.assertEqual(out, self.ast.spec, 'Since assertion')
 
@@ -396,7 +396,7 @@ class TestStlAstParser(unittest.TestCase):
        self.ast.declare_var('b', 'float')
        self.ast.spec = '(a)until[1,2](b)'
        self.ast.parse()
-       out = self.printer.visit(self.ast.ast)
+       out = self.printer.print(self.ast.specs)
 
        self.assertEqual(out, self.ast.spec, 'Until assertion')
 
