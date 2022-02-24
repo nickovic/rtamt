@@ -63,46 +63,6 @@ class AbstractDiscreteTimeOnlineEvaluator(AbstractOnlineEvaluator, DescreteTimeE
             var_value = data[1]
             self.ast.var_object_dict[var_name] = var_value
 
-    #TODO move from spec. Check how to merge it in semantics layer
-    @property
-    def sampling_period(self):
-        return self.__sampling_period
-
-    @sampling_period.setter
-    def sampling_period(self, sampling_period):
-        self.__sampling_period = sampling_period
-
-    @property
-    def sampling_period_unit(self):
-        return self.__sampling_period_unit
-
-    @sampling_period_unit.setter
-    def sampling_period_unit(self, sampling_period_unit):
-        self.__sampling_period_unit = sampling_period_unit
-
-    @property
-    def sampling_violation_counter(self):
-        return self.__sampling_violation_counter
-
-    @sampling_violation_counter.setter
-    def sampling_violation_counter(self, sampling_violation_counter):
-        self.__sampling_violation_counter = sampling_violation_counter
-
-    def set_sampling_period(self, sampling_period=int(1), unit='s', tolerance=float(0.1)):
-        self.sampling_period = sampling_period
-        self.sampling_period_unit = unit
-
-        if tolerance < 0.0 or tolerance > 1.0:
-            raise STLException('Tolerance must be in [0,1]')
-
-        self.sampling_tolerance = tolerance
-
-    def get_sampling_period(self):
-        return self.sampling_period * self.U[self.sampling_period_unit]
-
-    def get_sampling_frequency(self):
-        return 1e12 * 1/self.sampling_period
-
     @property
     def update_counter(self):
         return self.__update_counter
