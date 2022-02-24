@@ -28,7 +28,6 @@ class AbstractAstVisitor(object):
         return result
 
     def visitAst(self, ast, *args, **kwargs):
-        self.ast = ast
         out = []
         for spec in ast.specs:
             out.append(self.visit(spec, *args, **kwargs))

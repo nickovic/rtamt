@@ -87,8 +87,6 @@ class AbstractAst:
         self.sampling_period = int(1)
         self.sampling_period_unit = 's'
 
-        self.ast = None
-
         self.specs = []
 
         #TODO Tom did not understand it well.
