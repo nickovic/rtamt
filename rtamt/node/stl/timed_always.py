@@ -7,6 +7,7 @@ Created on Sun Jul 21 22:24:09 2019
 from rtamt.interval.interval import Interval
 from rtamt.node.unary_node import UnaryNode
 
+
 class TimedAlways(UnaryNode, Interval):
     """A class for storing STL Always nodes
         Inherits TemporalNode

@@ -134,7 +134,7 @@ class StlAstParserVisitor(LtlAstParserVisitor, StlParserVisitor):
 
         #out = int(out / self.sampling_period)
 
-        return out
+        #return out
 
     def visitIntervalTimeLiteral(self, ctx):
         time_bound = Fraction(Decimal(ctx.literal().getText()))
