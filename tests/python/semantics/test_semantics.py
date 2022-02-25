@@ -1,7 +1,6 @@
 import unittest
 
-from rtamt.ast.parser.stl.discrete_time.specification_parser import stlDiscreteTimeAst
-from rtamt.ast.parser.stl.dense_time.specification_parser import stlDenseTimeAst
+from rtamt.ast.parser.stl.specification_parser import StlAst
 
 from rtamt.operation.stl.discrete_time.offline.evaluator import StlDiscreteTimeOfflineEvaluator
 from rtamt.operation.stl.dense_time.offline.evaluator import StlDenseTimeOfflineEvaluator
@@ -16,7 +15,7 @@ class TestSemantics(unittest.TestCase):
 
 
     def test_stl_discrete_time_offline(self):
-        ast = stlDiscreteTimeAst()  #TODO use same stlAst
+        ast = StlAst()
         ast.declare_var('a', 'float')
         ast.spec = 'always(a>=2)'
         ast.parse()
@@ -31,7 +30,7 @@ class TestSemantics(unittest.TestCase):
         print(rob)
 
     def test_stl_dense_time_offline(self):
-        ast = stlDenseTimeAst()  #TODO use same stlAst
+        ast = StlAst()
         ast.declare_var('a', 'float')
         ast.spec = 'always(a>=2)'
         ast.parse()
@@ -43,7 +42,7 @@ class TestSemantics(unittest.TestCase):
         print(rob)
 
     def test_stl_discrete_time_online(self):
-        ast = stlDiscreteTimeAst()  #TODO use same stlAst
+        ast = StlAst()
         ast.declare_var('a', 'float')
         ast.spec = 'historically[0,1](a>=2)'
         ast.parse()
@@ -62,7 +61,7 @@ class TestSemantics(unittest.TestCase):
         stlDiscreteTimeOnlineEvaluator.reset()
 
     def test_stl_dense_time_online(self):
-        ast = stlDenseTimeAst()  #TODO use same stlAst
+        ast = StlAst()
         ast.declare_var('a', 'float')
         ast.spec = 'historically[0,1](a>=2)'
         ast.parse()

@@ -1,6 +1,6 @@
 import unittest
 
-from rtamt.ast.parser.stl.specification_parser import stlAst
+from rtamt.ast.parser.stl.specification_parser import StlAst
 from tests.python.ast.stl_print_name_ast_visitor import StlPrintNameAstVisitor
 
 

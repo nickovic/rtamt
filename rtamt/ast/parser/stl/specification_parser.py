@@ -6,7 +6,7 @@ from rtamt.ast.parser.abstract_ast_parser import ast_factory
 from rtamt.parser.stl.error.parser_error_listener import STLParserErrorListener
 
 
-def stlAst():
+def StlAst():
     antrlLexerType = globals()['StlLexer']
     antrlParserType = globals()['StlParser']
     parserErrorListenerType = globals()['STLParserErrorListener']   #optional
