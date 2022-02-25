@@ -1,15 +1,14 @@
 import math
-from rtamt.operation.abstract_operation import AbstractOperation
+from rtamt.operation.abstract_online_operation import AbstractOnlineOperation
 
 
-class ExpOperation(AbstractOperation):
+class ExpOperation(AbstractOnlineOperation):
     def __init__(self):
         pass
 
     def reset(self):
         pass
 
-    def update(self, sample):
-        out = math.exp(sample)
-
-        return out
+    def update(self, node, sample):
+        sample_result = math.exp(sample)
+        return sample_result

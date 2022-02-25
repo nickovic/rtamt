@@ -9,8 +9,8 @@ from rtamt.operation.stl.dense_time.online.always_operation import AlwaysOperati
 from rtamt.operation.stl.dense_time.online.historically_operation import HistoricallyOperation
 from rtamt.operation.stl.dense_time.online.once_operation import OnceOperation
 from rtamt.operation.stl.dense_time.online.since_operation import SinceOperation
-from rtamt.operation.stl.dense_time.online.once_bounded_operation import OnceBoundedOperation
-from rtamt.operation.stl.dense_time.online.historically_bounded_operation import HistoricallyBoundedOperation
+from rtamt.operation.stl.dense_time.online.once_timed_operation import OnceBoundedOperation
+from rtamt.operation.stl.dense_time.online.historically_timed_operation import HistoricallyBoundedOperation
 
 
 class TestSTLBooleanAndTemporalOnline(unittest.TestCase):

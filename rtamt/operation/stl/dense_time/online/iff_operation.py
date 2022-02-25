@@ -1,39 +1,29 @@
-from rtamt.operation.abstract_operation import AbstractOperation
+from rtamt.operation.abstract_dense_time_online_operation import AbstractDenseTimeOnlineOperation
 import rtamt.operation.stl.dense_time.online.intersection as intersect
 
-class IffOperation(AbstractOperation):
+
+class IffOperation(AbstractDenseTimeOnlineOperation):
     def __init__(self):
-        self.left = []
-        self.right = []
+        self.sample_left_buf = []
+        self.sample_right_buf = []
         self.last = []
 
-    def update(self, *args, **kargs):
-        out = []
-        left_list = self.left + args[0]
-        right_list = self.right + args[1]
+    def reset(self):
+        pass
 
-        out, last, left, right = intersect.intersection(left_list, right_list, intersect.iff)
+    def update(self, node, sample_left, sample_right, *args, **kargs):
+        sample_result = []
+        self.sample_left_buf = self.sample_left_buf + sample_left
+        self.sample_right_buf = self.sample_right_buf + sample_right
 
-        self.left = left
-        self.right = right
-        if out:
+        sample_result, last, left, right = intersect.intersection(self.sample_left_buf, self.sample_right_buf, intersect.iff)
+
+        self.sample_left_buf = left
+        self.sample_right_buf = right
+        if sample_result:
             self.last = last
 
-        return out
+        return sample_result
 
-    def update_final(self, *args, **kargs):
-        return self.update(args[0], args[1]) + [self.last]
-
-    # def offline(self, *args, **kargs):
-    #     out = []
-    #     left_list = args[0]
-    #     right_list = args[1]
-    #     self.left = self.left + left_list
-    #     self.right = self.right + right_list
-    #
-    #     out, last, left, right = intersect.intersection(self.left, self.right, intersect.iff)
-    #
-    #     if last:
-    #         out.append(last)
-    #
-    #     return out
+    def update_final(self, node, sample_left, sample_right, *args, **kargs):
+        return self.update(node, sample_left, sample_right, *args, **kargs) + [self.last]

@@ -1,14 +1,12 @@
-from rtamt.operation.abstract_operation import AbstractOperation
-
-class HistoricallyOperation(AbstractOperation):
+from rtamt.operation.abstract_online_operation import AbstractOnlineOperation
+class HistoricallyOperation(AbstractOnlineOperation):
     def __init__(self):
         self.prev_out = float("inf")
 
     def reset(self):
-        self.prev_out = float("inf")
+        self.__init__()
 
-    def update(self, sample):
-        out = min(sample, self.prev_out)
-        self.prev_out = out
-
-        return out
+    def update(self, node, sample):
+        sample_return = min(sample, self.prev_out)
+        self.prev_out = sample_return
+        return sample_return

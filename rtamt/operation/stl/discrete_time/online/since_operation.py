@@ -1,15 +1,14 @@
-from rtamt.operation.abstract_operation import AbstractOperation
+from rtamt.operation.abstract_online_operation import AbstractOnlineOperation
 
-class SinceOperation(AbstractOperation):
+class SinceOperation(AbstractOnlineOperation):
     def __init__(self):
         self.prev_out = -float("inf")
 
     def reset(self):
-        self.prev_out = -float("inf")
+        self.__init__()
 
-    def update(self, left, right):
-        out = min(left, self.prev_out)
-        out = max(out, right)
-
-        self.prev_out = out;
-        return out
+    def update(self, node, sample_left, sample_right):
+        sample_return = min(sample_left, self.prev_out)
+        sample_return = max(sample_return, sample_right)
+        self.prev_out = sample_return
+        return sample_return
