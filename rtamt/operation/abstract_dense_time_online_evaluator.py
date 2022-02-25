@@ -30,11 +30,11 @@ class AbstractDenseTimeOnlineEvaluator(AbstractOnlineEvaluator, DenseTimeEvaluat
         # evaluate modular sub-specs
         for key in self.ast.var_subspec_dict:
             node = self.ast.var_subspec_dict[key]
-            rob = self.updateVisitor.visitAst(node, self.online_operator_dict)
+            rob = self.updateVisitor.visitAst(node, self.online_operator_dict, self.ast.var_object_dict)
             self.ast.var_object_dict[key] = rob
 
         # evaluate spec
-        rob = self.updateVisitor.visitAst(self.ast, self.online_operator_dict)
+        rob = self.updateVisitor.visitAst(self.ast, self.online_operator_dict, self.ast.var_object_dict)
 
         self.ast.var_object_dict = self.ast.var_object_dict.fromkeys(self.ast.var_object_dict, [])  #TODO I did not understant it.
 
@@ -42,15 +42,15 @@ class AbstractDenseTimeOnlineEvaluator(AbstractOnlineEvaluator, DenseTimeEvaluat
 
 
 class DenseTimeOnlineUpdateVisitor(AbstractOnlineUpdateVisitor):
-    def visitVariable(self, node, online_operator_dict):
-        var = self.ast.var_object_dict[node.var]
+    def visitVariable(self, node, online_operator_dict, var_object_dict):
+        var = var_object_dict[node.var]
         if node.field:  #TODO Tom did not understand this line.
             sample_return = operator.attrgetter(node.field)(var)
         else:
             sample_return = var
         return sample_return
 
-    def visitConstant(self, node, online_operator_dict):
+    def visitConstant(self, node, online_operator_dict, var_object_dict):
         sample_return = [[0, node.val], [float("inf"), node.val]]
         return sample_return
 
