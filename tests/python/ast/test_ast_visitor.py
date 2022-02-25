@@ -20,7 +20,7 @@ class TestPrintAstVisitor(unittest.TestCase):
         self.assertEqual(out, '[\'Always((Variable)Predicate(Constant))\']', 'ltl assertion')
 
     def test_visitor_with_discrete_time_stl(self):
-        ast = stlAst()
+        ast = StlAst()
         ast.declare_var('a', 'float')
         ast.spec = 'always(a>=2)'
         ast.parse()
@@ -28,7 +28,7 @@ class TestPrintAstVisitor(unittest.TestCase):
         self.assertEqual(out, '[\'Always((Variable)Predicate(Constant))\']', 'stl assertion')
 
     def test_visitor_with_dence_time_stl(self):
-        ast = stlAst()
+        ast = StlAst()
         ast.declare_var('a', 'float')
         ast.spec = 'always(a>=2)'
         ast.parse()

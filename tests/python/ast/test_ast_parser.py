@@ -17,13 +17,13 @@ class TestAstParser(unittest.TestCase):
         ast.parse()
 
     def test_stl_discrete_time_parse(self):
-        ast = stlAst()
+        ast = StlAst()
         ast.declare_var('a', 'float')
         ast.spec = 'always(a>=2)'
         ast.parse()
 
     def test_stl_discrete_time_parse(self):
-        ast = stlAst()
+        ast = StlAst()
         ast.declare_var('a', 'float')
         ast.spec = 'always(a>=2)'
         ast.parse()

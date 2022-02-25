@@ -1,7 +1,8 @@
 from rtamt.ast.visitor.abstract_ast_visitor import AbstractAstVisitor
 
 class PrintNameAstVisitor(AbstractAstVisitor):
-    def print(self, specs):
+
+    def print_specs(self, specs):
         outs = ''
         for spec in specs:
             out = self.visit(spec, None)
