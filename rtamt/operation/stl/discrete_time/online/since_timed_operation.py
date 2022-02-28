@@ -18,7 +18,7 @@ class SinceTimedOperation(AbstractOnlineOperation):
             self.buffer_sample_left.append(s_sample_left)
             self.buffer_sample_right.append(s_sample_right)
 
-    def update(self, node, sample_left, sample_right):
+    def update(self, sample_left, sample_right):
         self.buffer_sample_left.append(sample_left)
         self.buffer_sample_right.append(sample_right)
         sample_return = - float("inf")

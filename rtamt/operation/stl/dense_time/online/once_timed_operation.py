@@ -13,7 +13,7 @@ class OnceTimedOperation(AbstractDenseTimeOnlineOperation):
     def reset(self):
         pass
 
-    def update(self, node, sample, *args, **kargs):
+    def update(self, sample, *args, **kargs):
         # get inputs
         sample_result = []
         out = self.prev
@@ -74,8 +74,8 @@ class OnceTimedOperation(AbstractDenseTimeOnlineOperation):
 
         return sample_result
 
-    def update_final(self, node, sample, *args, **kargs):
-        sample_result = self.update(node, sample, *args, **kargs)
+    def update_final(self, sample, *args, **kargs):
+        sample_result = self.update(sample, *args, **kargs)
 
         out = self.prev
 

@@ -30,7 +30,7 @@ class StlDenseTimeOnlineAstVisitor(StlAstVisitor):
 
     def visitPredicate(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
-        self.online_operator_dict[node.name] = PredicateOperation()
+        self.online_operator_dict[node.name] = PredicateOperation(node.operator)
 
     def visitAbs(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)

@@ -7,6 +7,6 @@ class NotOperation(AbstractOnlineOperation):
     def reset(self):
         pass
 
-    def update(self, node, sample):
+    def update(self, sample):
         sample_return = - sample
         return sample_return

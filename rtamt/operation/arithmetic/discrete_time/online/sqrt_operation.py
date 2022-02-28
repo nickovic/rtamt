@@ -9,7 +9,7 @@ class SqrtOperation(AbstractOnlineOperation):
     def reset(self):
         pass
 
-    def update(self, node, sample):
+    def update(self, sample):
         if sample < 0:
             raise Exception('sqrt: input is smaller than 0.')
         sample_result = math.sqrt(sample)

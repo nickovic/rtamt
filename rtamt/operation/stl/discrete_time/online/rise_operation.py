@@ -7,7 +7,7 @@ class RiseOperation(AbstractOnlineOperation):
     def reset(self):
         self.__init__()
 
-    def update(self, node, sample):
+    def update(self, sample):
         sample_return = min(- self.prev, sample)
         self.prev = sample
 

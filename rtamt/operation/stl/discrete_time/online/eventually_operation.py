@@ -7,7 +7,7 @@ class EventuallyOperation(AbstractOnlineOperation):
     def reset(self):
         self.__init__()
 
-    def update(self, node, sample):
+    def update(self, sample):
         sample_return = max(sample, self.prev_out)
         self.prev_out = sample_return
         return sample_return

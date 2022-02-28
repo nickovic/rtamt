@@ -6,6 +6,6 @@ class OrOperation(AbstractOnlineOperation):
     def reset(self):
         pass
 
-    def update(self, node, sample_left, sample_right):
+    def update(self, sample_left, sample_right):
         sample_return = max(sample_left, sample_right)
         return sample_return

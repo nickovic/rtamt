@@ -13,7 +13,7 @@ class HistoricallyTimedOperation(AbstractOnlineOperation):
             val = float("inf")
             self.buffer.append(val)
 
-    def update(self, node, sample):
+    def update(self, sample):
         self.buffer.append(sample)
         sample_return = float("inf")
         for i in range(self.end-self.begin+1):

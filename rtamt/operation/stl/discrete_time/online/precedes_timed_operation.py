@@ -18,7 +18,7 @@ class PrecedesTimedOperation(AbstractOnlineOperation):
             self.buffer[0].append(s_sample_left)
             self.buffer[1].append(s_sample_right)
 
-    def update(self, node, sample_left, sample_right):
+    def update(self, sample_left, sample_right):
         self.buffer[0].append(sample_left)
         self.buffer[1].append(sample_right)
         sample_return = - float("inf")

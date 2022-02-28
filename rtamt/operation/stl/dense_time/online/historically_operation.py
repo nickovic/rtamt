@@ -8,7 +8,7 @@ class HistoricallyOperation(AbstractDenseTimeOnlineOperation):
     def reset(self):
         pass
 
-    def update(self, node, sample, *args, **kargs):
+    def update(self, sample, *args, **kargs):
         result_sample = []
 
         for i in sample:
@@ -20,5 +20,5 @@ class HistoricallyOperation(AbstractDenseTimeOnlineOperation):
 
         return result_sample
 
-    def update_final(self, node, sample, *args, **kargs):
-        return self.update(node, sample, *args, **kargs)
+    def update_final(self, sample, *args, **kargs):
+        return self.update(sample, *args, **kargs)

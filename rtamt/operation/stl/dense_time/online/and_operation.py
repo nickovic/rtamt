@@ -11,10 +11,9 @@ class AndOperation(AbstractDenseTimeOnlineOperation):
     def reset(self):
         pass
 
-    def update(self, node, sample_reft, sample_right, *args, **kargs):
-        sample_result = []
+    def update(self, sample_left, sample_right, *args, **kargs):
 
-        sample_result, last, left, right = intersect.intersection(sample_reft, sample_right, intersect.conjunction)
+        sample_result, last, left, right = intersect.intersection(sample_left, sample_right, intersect.conjunction)
 
         self.sample_left_buf = left
         self.sample_right_buf = right
@@ -23,5 +22,5 @@ class AndOperation(AbstractDenseTimeOnlineOperation):
 
         return sample_result
 
-    def update_final(self, node, sample_reft, sample_right, *args, **kargs):
-        return self.update(node, sample_reft, sample_right, *args, **kargs) + [self.sample_last_buf]
+    def update_final(self, sample_left, sample_right, *args, **kargs):
+        return self.update(sample_left, sample_right, *args, **kargs) + [self.sample_last_buf]

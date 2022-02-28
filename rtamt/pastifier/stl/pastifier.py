@@ -26,9 +26,10 @@ class STLPastifier(LtlPastifier, StlAstVisitor):
         pastified_specs = []
         for spec in ast.specs:
             horizon = horizons[spec]
-            pastified_spec = self.visit(spec, [horizon])
+            pastified_spec = self.visit(spec, horizon)
             pastified_specs.append(pastified_spec)
-        return pastified_specs
+        ast.specs = pastified_specs
+        return ast
 
     def visit(self, node, *args, **kwargs):
         return StlAstVisitor.visit(self, node, *args, **kwargs)

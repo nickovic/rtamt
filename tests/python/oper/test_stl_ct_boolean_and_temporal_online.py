@@ -9,8 +9,8 @@ from rtamt.operation.stl.dense_time.online.always_operation import AlwaysOperati
 from rtamt.operation.stl.dense_time.online.historically_operation import HistoricallyOperation
 from rtamt.operation.stl.dense_time.online.once_operation import OnceOperation
 from rtamt.operation.stl.dense_time.online.since_operation import SinceOperation
-from rtamt.operation.stl.dense_time.online.once_timed_operation import OnceBoundedOperation
-from rtamt.operation.stl.dense_time.online.historically_timed_operation import HistoricallyBoundedOperation
+from rtamt.operation.stl.dense_time.online.once_timed_operation import OnceTimedOperation
+from rtamt.operation.stl.dense_time.online.historically_timed_operation import HistoricallyTimedOperation
 
 
 class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
@@ -275,7 +275,7 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
                                  out_expected, out_computed))
 
     def test_once_0_1(self):
-        oper = OnceBoundedOperation(0, 1)
+        oper = OnceTimedOperation(0, 1)
         in_data_1 = [[5, 3], [5.3, 2], [5.75, 1]]
         out_expected_1 = [[5, 3]]
         out_computed_1 = oper.update(in_data_1)
@@ -308,7 +308,7 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
                                  out_expected_final, out_computed_final))
 
     def test_once_1_3(self):
-        oper = OnceBoundedOperation(1, 3)
+        oper = OnceTimedOperation(1, 3)
         in_data_1 = [[5, 3], [5.3, 2], [5.75, 1]]
         out_expected_1 = [[6, 3]]
         out_computed_1 = oper.update(in_data_1)
@@ -396,7 +396,7 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
                                  out_expected, out_computed))
 
     def test_historically_1_2(self):
-        oper = HistoricallyBoundedOperation(1, 2)
+        oper = HistoricallyTimedOperation(1, 2)
         in_data = [[5, 3], [5.3, 1], [5.75, 2], [6.5, 5], [6.75, 6], [9, 5], [9.25, 4], [10, 2]]
         out_expected = [[6, 3], [6.3, 1], [7.75, 2], [8.5, 5], [8.75, 6], [10, 5], [10.25, 4]]
         out_computed = oper.update(in_data)
@@ -412,7 +412,7 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
                              "Problem with 1st example:\nExpected output: %s\nComputed output: %s" % (
                                  out_expected, out_computed))
 
-        oper = HistoricallyBoundedOperation(1, 2)
+        oper = HistoricallyTimedOperation(1, 2)
         in_data_1 = [[5, 3], [5.3, 2], [5.75, 1]]
         out_expected_1 = [[6, 3], [6.3, 2]]
         out_computed_1 = oper.update(in_data_1)

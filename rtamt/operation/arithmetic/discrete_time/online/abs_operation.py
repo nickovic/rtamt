@@ -8,6 +8,6 @@ class AbsOperation(AbstractOnlineOperation):
     def reset(self):
         pass
 
-    def update(self, node, sample):
+    def update(self, sample):
         sample_result = abs(sample)
         return sample_result

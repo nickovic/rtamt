@@ -9,6 +9,6 @@ class PowOperation(AbstractOnlineOperation):
     def reset(self):
         pass
 
-    def update(self, node, sample_left, sample_right):
+    def update(self, sample_left, sample_right):
         sample_result = math.pow(sample_left, sample_right)
         return sample_result

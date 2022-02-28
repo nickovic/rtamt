@@ -9,6 +9,6 @@ class ExpOperation(AbstractOnlineOperation):
     def reset(self):
         pass
 
-    def update(self, node, sample):
+    def update(self, sample):
         sample_result = math.exp(sample)
         return sample_result

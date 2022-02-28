@@ -355,21 +355,6 @@ class TestStlAstParser(unittest.TestCase):
 
        self.assertEqual(out, self.ast.spec, 'Once assertion')
 
-    def test_timed_once_2(self):
-       self.ast = StlAst()
-       self.ast.declare_var('a', 'float')
-       self.ast.spec = 'once[1ms,2ms](a)'
-       self.ast.parse()
-
-       self.assertEqual(self.ast.ast.name, self.ast.spec, 'Once assertion')
-
-    def test_timed_once_3(self):
-       self.ast = StlAst()
-       self.ast.declare_var('a', 'float')
-       self.ast.spec = 'once[1,2ms](a)'
-       self.ast.parse()
-
-       self.assertEqual(self.ast.ast.name, self.ast.spec, 'Once assertion')
 
     def test_timed_historically(self):
        self.ast = StlAst()

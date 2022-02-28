@@ -11,7 +11,7 @@ class IffOperation(AbstractDenseTimeOnlineOperation):
     def reset(self):
         pass
 
-    def update(self, node, sample_left, sample_right, *args, **kargs):
+    def update(self, sample_left, sample_right, *args, **kargs):
         sample_result = []
         self.sample_left_buf = self.sample_left_buf + sample_left
         self.sample_right_buf = self.sample_right_buf + sample_right
@@ -25,5 +25,5 @@ class IffOperation(AbstractDenseTimeOnlineOperation):
 
         return sample_result
 
-    def update_final(self, node, sample_left, sample_right, *args, **kargs):
-        return self.update(node, sample_left, sample_right, *args, **kargs) + [self.last]
+    def update_final(self, sample_left, sample_right, *args, **kargs):
+        return self.update(sample_left, sample_right, *args, **kargs) + [self.last]

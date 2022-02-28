@@ -15,10 +15,10 @@ from rtamt.operation.stl.discrete_time.online.eventually_operation import Eventu
 from rtamt.operation.stl.discrete_time.online.historically_operation import HistoricallyOperation
 from rtamt.operation.stl.discrete_time.online.once_operation import OnceOperation
 from rtamt.operation.stl.discrete_time.online.since_operation import SinceOperation
-from rtamt.operation.stl.discrete_time.online.once_timed_operation import OnceBoundedOperation
-from rtamt.operation.stl.discrete_time.online.historically_timed_operation import HistoricallyBoundedOperation
-from rtamt.operation.stl.discrete_time.online.since_timed_operation import SinceBoundedOperation
-from rtamt.operation.stl.discrete_time.online.precedes_timed_operation import PrecedesBoundedOperation
+from rtamt.operation.stl.discrete_time.online.once_timed_operation import OnceTimedOperation
+from rtamt.operation.stl.discrete_time.online.historically_timed_operation import HistoricallyTimedOperation
+from rtamt.operation.stl.discrete_time.online.since_timed_operation import SinceTimedOperation
+from rtamt.operation.stl.discrete_time.online.precedes_timed_operation import PrecedesTimedOperation
 from rtamt.operation.arithmetic.discrete_time.online.subtraction_operation import SubtractionOperation
 from rtamt.operation.arithmetic.discrete_time.online.addition_operation import AdditionOperation
 from rtamt.operation.arithmetic.discrete_time.online.multiplication_operation import MultiplicationOperation
@@ -350,7 +350,7 @@ class TestSTLEvaluation(unittest.TestCase):
         self.assertEqual(out5, -1, "input 5")
 
     def test_once_0_1(self):
-        oper = OnceBoundedOperation(0,1)
+        oper = OnceTimedOperation(0,1)
 
         out1 = oper.update(self.left1)
         out2 = oper.update(self.left2)
@@ -365,7 +365,7 @@ class TestSTLEvaluation(unittest.TestCase):
         self.assertEqual(out5, 5, "input 5")
 
     def test_once_1_2(self):
-        oper = OnceBoundedOperation(1,2)
+        oper = OnceTimedOperation(1,2)
 
         out1 = oper.update(self.left1)
         out2 = oper.update(self.left2)
@@ -380,7 +380,7 @@ class TestSTLEvaluation(unittest.TestCase):
         self.assertEqual(out5, 5, "input 5")
 
     def test_historically_0_1(self):
-        oper = HistoricallyBoundedOperation(0,1)
+        oper = HistoricallyTimedOperation(0,1)
 
         out1 = oper.update(self.left1)
         out2 = oper.update(self.left2)
@@ -395,7 +395,7 @@ class TestSTLEvaluation(unittest.TestCase):
         self.assertEqual(out5, -1, "input 5")
 
     def test_historically_1_2(self):
-        oper = HistoricallyBoundedOperation(1,2)
+        oper = HistoricallyTimedOperation(1,2)
 
         out1 = oper.update(self.left1)
         out2 = oper.update(self.left2)
@@ -410,7 +410,7 @@ class TestSTLEvaluation(unittest.TestCase):
         self.assertEqual(out5, -2, "input 5")
 
     def test_since_0_1(self):
-        oper = SinceBoundedOperation(0,1)
+        oper = SinceTimedOperation(0,1)
 
         out1 = oper.update(self.left1, self.right1)
         out2 = oper.update(self.left2, self.right2)
@@ -425,7 +425,7 @@ class TestSTLEvaluation(unittest.TestCase):
         self.assertEqual(out5, -1, "input 5")
 
     def test_precedes_1_2(self):
-        oper = PrecedesBoundedOperation(1, 2)
+        oper = PrecedesTimedOperation(1, 2)
 
         out1 = oper.update(self.left1, self.right1)
         out2 = oper.update(self.left2, self.right2)

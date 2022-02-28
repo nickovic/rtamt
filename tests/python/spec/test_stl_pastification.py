@@ -1,39 +1,8 @@
 import unittest
 
-from rtamt.interval.interval import Interval
+from rtamt.ast.parser.ltl.specification_parser import LtlAst
+from rtamt.ast.parser.stl.specification_parser import StlAst
 from rtamt.pastifier.stl.pastifier import STLPastifier
-from rtamt.node.ltl.constant import Constant
-from rtamt.node.ltl.variable import Variable
-from rtamt.node.arithmetic.abs import Abs
-from rtamt.node.arithmetic.sqrt import Sqrt
-from rtamt.node.arithmetic.exp import Exp
-from rtamt.node.arithmetic.pow import Pow
-from rtamt.node.arithmetic.addition import Addition
-from rtamt.node.arithmetic.subtraction import Subtraction
-from rtamt.node.arithmetic.multiplication import Multiplication
-from rtamt.node.arithmetic.division import Division
-from rtamt.node.ltl.predicate import Predicate
-from rtamt.node.ltl.neg import Neg
-from rtamt.node.ltl.conjunction import Conjunction
-from rtamt.node.ltl.disjunction import Disjunction
-from rtamt.node.ltl.implies import Implies
-from rtamt.node.ltl.iff import Iff
-from rtamt.node.ltl.xor import Xor
-from rtamt.node.ltl.rise import Rise
-from rtamt.node.ltl.fall import Fall
-from rtamt.node.ltl.once import Once
-from rtamt.node.ltl.historically import Historically
-from rtamt.node.ltl.since import Since
-from rtamt.node.stl.timed_precedes import TimedPrecedes
-from rtamt.node.ltl.previous import Previous
-from rtamt.node.ltl.next import Next
-from rtamt.enumerations.comp_op import StlComparisonOperator
-from rtamt.node.stl.timed_always import TimedAlways
-from rtamt.node.stl.timed_eventually import TimedEventually
-from rtamt.node.stl.timed_historically import TimedHistorically
-from rtamt.node.stl.timed_once import TimedOnce
-from rtamt.node.stl.timed_since import TimedSince
-from rtamt.node.stl.timed_until import TimedUntil
 
 
 class TestSTLPastification(unittest.TestCase):
@@ -41,484 +10,459 @@ class TestSTLPastification(unittest.TestCase):
         super(TestSTLPastification, self).__init__(*args, **kwargs)
 
     def test_constant(self):
-        old_node = Constant(2)
-        pastifier = STLPastifier()
-        old_node.accept(pastifier)
-        new_node = pastifier.pastify([old_node])
+        ast = StlAst()
+        ast.spec = '2'
+        ast.parse()
 
-        self.assertEqual(str(2), new_node[0].name, 'Constant pastification assertion')
+        pastifier = STLPastifier()
+        ast = pastifier.pastify(ast)
+
+        self.assertEqual(str(2.0), ast.specs[0].name, 'Const pastification assertion')
 
     def test_variable_1(self):
-        old_node = Variable('req', '', 'output')
+        ast = StlAst()
+        ast.declare_var('req', 'float')
+        ast.spec = 'req'
+        ast.parse()
+
         pastifier = STLPastifier()
-        old_node.accept(pastifier)
-        new_node = pastifier.pastify([old_node])
+        ast = pastifier.pastify(ast)
 
-        self.assertEqual('req', [new_node.name], 'Variable pastification assertion')
+        self.assertEqual('req', ast.specs[0].name, 'Var pastification assertion')
 
-        old_node = Variable('myvar.req', 'val', 'output')
-        pastifier = STLPastifier()
-        old_node.accept(pastifier)
-        new_node = pastifier.pastify([old_node])
+        # ast = StlAst()
+        # ast.declare_var('myvar.req.val', 'float')
+        # ast.spec = 'myvar.req.val'
+        # ast.parse()
 
-        self.assertEqual('myvar.req.val', [new_node.name], 'Variable pastification assertion')
+        # pastifier = STLPastifier()
+        # ast = pastifier.pastify(ast)
+
+        # self.assertEqual('myvar.req.val', ast.specs[0].name, 'Var pastification assertion')
 
     def test_previous_1(self):
-        var_node = Variable('req', '', 'output')
-        abs_node = Previous(var_node)
+        ast = StlAst()
+        ast.declare_var('req', 'float')
+        ast.spec = 'prev req'
+        ast.parse()
 
         pastifier = STLPastifier()
-        abs_node.accept(pastifier)
-        new_node = pastifier.pastify([abs_node])
+        ast = pastifier.pastify(ast)
 
-        self.assertEqual('previous(req)', [new_node.name], 'Previous pastification assertion')
+        self.assertEqual('previous(req)', ast.specs[0].name, 'Prev pastification assertion')
 
 
     def test_next_1(self):
-        var_node = Variable('req', '', 'output')
-        abs_node = Next(var_node)
+        ast = StlAst()
+        ast.declare_var('req', 'float')
+        ast.spec = 'X req'
+        ast.parse()
 
         pastifier = STLPastifier()
-        abs_node.accept(pastifier)
-        new_node = pastifier.pastify([abs_node])
+        ast = pastifier.pastify(ast)
 
-        self.assertEqual('req', [new_node.name], 'Next pastification assertion')
+        self.assertEqual('req', ast.specs[0].name, 'Next pastification assertion')
 
     def test_abs_1(self):
-        var_node = Variable('req', '', 'output')
-        abs_node = Abs(var_node)
+        ast = StlAst()
+        ast.declare_var('req', 'float')
+        ast.spec = 'abs(req)'
+        ast.parse()
 
         pastifier = STLPastifier()
-        abs_node.accept(pastifier)
-        new_node = pastifier.pastify([abs_node])
+        ast = pastifier.pastify(ast)
 
-        self.assertEqual('abs(req)', [new_node.name], 'Absolute Value pastification assertion')
+        self.assertEqual('abs(req)', ast.specs[0].name, 'Abs pastification assertion')
 
     def test_sqrt_1(self):
-        var_node = Variable('req', '', 'output')
-        sqrt_node = Sqrt(var_node)
+        ast = StlAst()
+        ast.declare_var('req', 'float')
+        ast.spec = 'sqrt(req)'
+        ast.parse()
 
         pastifier = STLPastifier()
-        sqrt_node.accept(pastifier)
-        new_node = pastifier.pastify([sqrt_node])
+        ast = pastifier.pastify(ast)
 
-        self.assertEqual('sqrt(req)', [new_node.name], 'Square Root pastification assertion')
+        self.assertEqual('sqrt(req)', ast.specs[0].name, 'Sqrt pastification assertion')
 
 
     def test_exp(self):
-        var_node = Variable('req', '', 'output')
-        sqrt_node = Exp(var_node)
+        ast = LtlAst()
+        ast.declare_var('req', 'float')
+        ast.spec = 'exp(req)'
+        ast.parse()
 
         pastifier = STLPastifier()
-        sqrt_node.accept(pastifier)
-        new_node = pastifier.pastify([sqrt_node])
+        ast = pastifier.pastify(ast)
 
-        self.assertEqual('exp(req)', [new_node.name], 'Exp pastification assertion')
+        self.assertEqual('exp(req)', ast.specs[0].name, 'Exp pastification assertion')
 
     def test_pow(self):
-        var_node = Variable('req', '', 'output')
-        cnt_node = Constant(2)
-        sqrt_node = Pow(cnt_node, var_node)
+        ast = LtlAst()
+        ast.declare_var('req', 'float')
+        ast.declare_var('gnt', 'float')
+        ast.spec = 'pow(req, gnt)'
+        ast.parse()
 
         pastifier = STLPastifier()
-        sqrt_node.accept(pastifier)
-        new_node = pastifier.pastify([sqrt_node])
+        ast = pastifier.pastify(ast)
 
-        self.assertEqual('pow(2,req)', [new_node.name], 'Pow pastification assertion')
+        self.assertEqual('pow(req,gnt)', ast.specs[0].name, 'Pow pastification assertion')
 
     def test_addition(self):
-        var_node_1 = Variable('req', '', 'output')
-        var_node_2 = Variable('gnt', '', 'output')
-        add_node = Addition(var_node_1, var_node_2)
+        ast = LtlAst()
+        ast.declare_var('req', 'float')
+        ast.declare_var('gnt', 'float')
+        ast.spec = 'req + gnt'
+        ast.parse()
 
         pastifier = STLPastifier()
-        add_node.accept(pastifier)
-        new_node = pastifier.pastify([add_node])
+        ast = pastifier.pastify(ast)
 
-        self.assertEqual('(req)+(gnt)', [new_node.name], 'Addition pastification assertion')
+        self.assertEqual('(req)+(gnt)', ast.specs[0].name, 'Addition pastification assertion')
 
     def test_subtraction(self):
-        var_node_1 = Variable('req', '', 'output')
-        var_node_2 = Variable('gnt', '', 'output')
-        sub_node = Subtraction(var_node_1, var_node_2)
+        ast = LtlAst()
+        ast.declare_var('req', 'float')
+        ast.declare_var('gnt', 'float')
+        ast.spec = 'req - gnt'
+        ast.parse()
 
         pastifier = STLPastifier()
-        sub_node.accept(pastifier)
-        new_node = pastifier.pastify([sub_node])
+        ast = pastifier.pastify(ast)
 
-        self.assertEqual('(req)-(gnt)', [new_node.name], 'Subtraction pastification assertion')
+        self.assertEqual('(req)-(gnt)', ast.specs[0].name, 'Subtraction pastification assertion')
 
     def test_multiplication(self):
-        var_node_1 = Variable('req', '', 'output')
-        var_node_2 = Variable('gnt', '', 'output')
-        node = Multiplication(var_node_1, var_node_2)
+        ast = LtlAst()
+        ast.declare_var('req', 'float')
+        ast.declare_var('gnt', 'float')
+        ast.spec = 'req * gnt'
+        ast.parse()
 
         pastifier = STLPastifier()
-        node.accept(pastifier)
-        new_node = pastifier.pastify([node])
+        ast = pastifier.pastify(ast)
 
-        self.assertEqual('(req)*(gnt)', [new_node.name], 'Multiplication pastification assertion')
+        self.assertEqual('(req)*(gnt)', ast.specs[0].name, 'Multiplication pastification assertion')
 
     def test_division(self):
-        var_node_1 = Variable('req', '', 'output')
-        var_node_2 = Variable('gnt', '', 'output')
-        node = Division(var_node_1, var_node_2)
+        ast = LtlAst()
+        ast.declare_var('req', 'float')
+        ast.declare_var('gnt', 'float')
+        ast.spec = 'req / gnt'
+        ast.parse()
 
         pastifier = STLPastifier()
-        node.accept(pastifier)
-        new_node = pastifier.pastify([node])
+        ast = pastifier.pastify(ast)
 
-        self.assertEqual('(req)/(gnt)', [new_node.name], 'Division pastification assertion')
+        self.assertEqual('(req)/(gnt)', ast.specs[0].name, 'Div pastification assertion')
 
     def test_predicate_leq_1(self):
-        var_node_1 = Variable('req', '', 'output')
-        var_node_2 = Variable('gnt', '', 'output')
-        node = Predicate(var_node_1, var_node_2, StlComparisonOperator.LEQ)
+        ast = LtlAst()
+        ast.declare_var('req', 'float')
+        ast.declare_var('gnt', 'float')
+        ast.spec = 'req <= gnt'
+        ast.parse()
 
         pastifier = STLPastifier()
-        node.accept(pastifier)
-        new_node = pastifier.pastify([node])
+        ast = pastifier.pastify(ast)
 
-        self.assertEqual('(req)<=(gnt)', [new_node.name], 'Predicate LEQ pastification assertion')
+        self.assertEqual('(req)<=(gnt)', ast.specs[0].name, 'LEQ pastification assertion')
 
     def test_predicate_less(self):
-        var_node_1 = Variable('req', '', 'output')
-        var_node_2 = Variable('gnt', '', 'output')
-        node = Predicate(var_node_1, var_node_2, StlComparisonOperator.LESS)
+        ast = LtlAst()
+        ast.declare_var('req', 'float')
+        ast.declare_var('gnt', 'float')
+        ast.spec = 'req < gnt'
+        ast.parse()
 
         pastifier = STLPastifier()
-        node.accept(pastifier)
-        new_node = pastifier.pastify([node])
+        ast = pastifier.pastify(ast)
 
-        self.assertEqual('(req)<(gnt)', [new_node.name], 'Predicate LESS pastification assertion')
+        self.assertEqual('(req)<(gnt)', ast.specs[0].name, 'LESS pastification assertion')
 
     def test_predicate_geq(self):
-        var_node_1 = Variable('req', '', 'output')
-        var_node_2 = Variable('gnt', '', 'output')
-        node = Predicate(var_node_1, var_node_2, StlComparisonOperator.GEQ)
+        ast = LtlAst()
+        ast.declare_var('req', 'float')
+        ast.declare_var('gnt', 'float')
+        ast.spec = 'req >= gnt'
+        ast.parse()
 
         pastifier = STLPastifier()
-        node.accept(pastifier)
-        new_node = pastifier.pastify([node])
+        ast = pastifier.pastify(ast)
 
-        self.assertEqual('(req)>=(gnt)', [new_node.name], 'Predicate GEQ pastification assertion')
+        self.assertEqual('(req)>=(gnt)', ast.specs[0].name, 'GEQ pastification assertion')
 
     def test_predicate_greater(self):
-        var_node_1 = Variable('req', '', 'output')
-        var_node_2 = Variable('gnt', '', 'output')
-        node = Predicate(var_node_1, var_node_2, StlComparisonOperator.GREATER)
+        ast = LtlAst()
+        ast.declare_var('req', 'float')
+        ast.declare_var('gnt', 'float')
+        ast.spec = 'req > gnt'
+        ast.parse()
 
         pastifier = STLPastifier()
-        node.accept(pastifier)
-        new_node = pastifier.pastify([node])
+        ast = pastifier.pastify(ast)
 
-        self.assertEqual('(req)>(gnt)', [new_node.name], 'Predicate GREATER pastification assertion')
+        self.assertEqual('(req)>(gnt)', ast.specs[0].name, 'GREATER pastification assertion')
 
     def test_predicate_eq(self):
-        var_node_1 = Variable('req', '', 'output')
-        var_node_2 = Variable('gnt', '', 'output')
-        node = Predicate(var_node_1, var_node_2, StlComparisonOperator.EQUAL)
+        ast = LtlAst()
+        ast.declare_var('req', 'float')
+        ast.declare_var('gnt', 'float')
+        ast.spec = 'req == gnt'
+        ast.parse()
 
         pastifier = STLPastifier()
-        node.accept(pastifier)
-        new_node = pastifier.pastify([node])
+        ast = pastifier.pastify(ast)
 
-        self.assertEqual('(req)==(gnt)', [new_node.name], 'Predicate EQ pastification assertion')
+        self.assertEqual('(req)==(gnt)', ast.specs[0].name, 'EQ pastification assertion')
 
     def test_predicate_neq(self):
-        var_node_1 = Variable('req', '', 'output')
-        var_node_2 = Variable('gnt', '', 'output')
-        node = Predicate(var_node_1, var_node_2, StlComparisonOperator.NEQ)
+        ast = LtlAst()
+        ast.declare_var('req', 'float')
+        ast.declare_var('gnt', 'float')
+        ast.spec = 'req !== gnt'
+        ast.parse()
 
         pastifier = STLPastifier()
-        node.accept(pastifier)
-        new_node = pastifier.pastify([node])
+        ast = pastifier.pastify(ast)
 
-        self.assertEqual('(req)!=(gnt)', [new_node.name], 'Predicate NEQ pastification assertion')
+        self.assertEqual('(req)!=(gnt)', ast.specs[0].name, 'NEQ pastification assertion')
 
 
     def test_not(self):
-        var_node = Variable('req', '', 'output')
-        node = Neg(var_node)
+        ast = StlAst()
+        ast.declare_var('req', 'float')
+        ast.spec = 'not req'
+        ast.parse()
 
         pastifier = STLPastifier()
-        node.accept(pastifier)
-        new_node = pastifier.pastify([node])
+        ast = pastifier.pastify(ast)
 
-        self.assertEqual('not(req)', [new_node.name], 'Negation pastification assertion')
+        self.assertEqual('not(req)', ast.specs[0].name, 'Not pastification assertion')
 
 
     def test_conjunction(self):
-        var_node_1 = Variable('req', '', 'output')
-        var_node_2 = Variable('gnt', '', 'output')
-        add_node = Conjunction(var_node_1, var_node_2)
+        ast = LtlAst()
+        ast.declare_var('req', 'float')
+        ast.declare_var('gnt', 'float')
+        ast.spec = 'req and gnt'
+        ast.parse()
 
         pastifier = STLPastifier()
-        add_node.accept(pastifier)
-        new_node = pastifier.pastify(add_node)
+        ast = pastifier.pastify(ast)
 
-        self.assertEqual('(req)and(gnt)', [new_node.name], 'Conjunction pastification assertion')
+        self.assertEqual('(req)and(gnt)', ast.specs[0].name, 'Conjunction pastification assertion')
 
     def test_disjunction(self):
-        var_node_1 = Variable('req', '', 'output')
-        var_node_2 = Variable('gnt', '', 'output')
-        add_node = Disjunction(var_node_1, var_node_2)
+        ast = LtlAst()
+        ast.declare_var('req', 'float')
+        ast.declare_var('gnt', 'float')
+        ast.spec = 'req or gnt'
+        ast.parse()
 
         pastifier = STLPastifier()
-        add_node.accept(pastifier)
-        new_node = pastifier.pastify(add_node)
+        ast = pastifier.pastify(ast)
 
-        self.assertEqual('(req)or(gnt)', [new_node.name], 'Disjunction pastification assertion')
+        self.assertEqual('(req)or(gnt)', ast.specs[0].name, 'Disjunction pastification assertion')
 
     def test_implication(self):
-        var_node_1 = Variable('req', '', 'output')
-        var_node_2 = Variable('gnt', '', 'output')
-        add_node = Implies(var_node_1, var_node_2)
+        ast = LtlAst()
+        ast.declare_var('req', 'float')
+        ast.declare_var('gnt', 'float')
+        ast.spec = 'req implies gnt'
+        ast.parse()
 
         pastifier = STLPastifier()
-        add_node.accept(pastifier)
-        new_node = pastifier.pastify(add_node)
+        ast = pastifier.pastify(ast)
 
-        self.assertEqual('(req)->(gnt)', [new_node.name], 'Implication pastification assertion')
+        self.assertEqual('(req)->(gnt)', ast.specs[0].name, '-> pastification assertion')
 
     def test_iff(self):
-        var_node_1 = Variable('req', '', 'output')
-        var_node_2 = Variable('gnt', '', 'output')
-        add_node = Iff(var_node_1, var_node_2)
+        ast = LtlAst()
+        ast.declare_var('req', 'float')
+        ast.declare_var('gnt', 'float')
+        ast.spec = 'req iff gnt'
+        ast.parse()
 
         pastifier = STLPastifier()
-        add_node.accept(pastifier)
-        new_node = pastifier.pastify(add_node)
+        ast = pastifier.pastify(ast)
 
-        self.assertEqual('(req)<->(gnt)', [new_node.name], 'Iff pastification assertion')
+        self.assertEqual('(req)<->(gnt)', ast.specs[0].name, 'Iff pastification assertion')
 
     def test_xor(self):
-        var_node_1 = Variable('req', '', 'output')
-        var_node_2 = Variable('gnt', '', 'output')
-        add_node = Xor(var_node_1, var_node_2)
+        ast = LtlAst()
+        ast.declare_var('req', 'float')
+        ast.declare_var('gnt', 'float')
+        ast.spec = 'req xor gnt'
+        ast.parse()
 
         pastifier = STLPastifier()
-        add_node.accept(pastifier)
-        new_node = pastifier.pastify([add_node])
+        ast = pastifier.pastify(ast)
 
-        self.assertEqual('(req)xor(gnt)', [new_node.name], 'Xor pastification assertion')
+        self.assertEqual('(req)xor(gnt)', ast.specs[0].name, 'Xor pastification assertion')
 
     def test_rise(self):
-        var_node = Variable('req', '', 'output')
-        node = Rise(var_node)
+        ast = StlAst()
+        ast.declare_var('req', 'float')
+        ast.spec = 'rise(req)'
+        ast.parse()
 
         pastifier = STLPastifier()
-        node.accept(pastifier)
-        new_node = pastifier.pastify([node])
+        ast = pastifier.pastify(ast)
 
-        self.assertEqual('rise(req)', [new_node.name], 'Rise pastification assertion')
+        self.assertEqual('rise(req)', ast.specs[0].name, 'Rise pastification assertion')
 
     def test_fall(self):
-        var_node = Variable('req', '', 'output')
-        node = Fall(var_node)
+        ast = StlAst()
+        ast.declare_var('req', 'float')
+        ast.spec = 'fall(req)'
+        ast.parse()
 
         pastifier = STLPastifier()
-        node.accept(pastifier)
-        new_node = pastifier.pastify([node])
+        ast = pastifier.pastify(ast)
 
-        self.assertEqual('fall(req)', [new_node.name], 'Fall pastification assertion')
+        self.assertEqual('fall(req)', ast.specs[0].name, 'Fall pastification assertion')
 
     def test_once(self):
-        var_node = Variable('req', '', 'output')
-        node = Once(var_node)
+        ast = StlAst()
+        ast.declare_var('req', 'float')
+        ast.spec = 'O req'
+        ast.parse()
 
         pastifier = STLPastifier()
-        node.accept(pastifier)
-        new_node = pastifier.pastify([node])
+        ast = pastifier.pastify(ast)
 
-        self.assertEqual('once(req)', [new_node.name], 'Once pastification assertion')
+        self.assertEqual('once(req)', ast.specs[0].name, 'Once pastification assertion')
 
 
     def test_historically(self):
-        var_node = Variable('req', '', 'output')
-        node = Historically(var_node)
+        ast = StlAst()
+        ast.declare_var('req', 'float')
+        ast.spec = 'H req'
+        ast.parse()
 
         pastifier = STLPastifier()
-        node.accept(pastifier)
-        new_node = pastifier.pastify([node])
+        ast = pastifier.pastify(ast)
 
-        self.assertEqual('historically(req)', [new_node.name], 'Historically pastification assertion')
+        self.assertEqual('historically(req)', ast.specs[0].name, 'Historically pastification assertion')
 
     def test_since(self):
-        var_node_1 = Variable('req', '', 'output')
-        var_node_2 = Variable('gnt', '', 'output')
-        add_node = Since(var_node_1, var_node_2)
+        ast = LtlAst()
+        ast.declare_var('req', 'float')
+        ast.declare_var('gnt', 'float')
+        ast.spec = 'req since gnt'
+        ast.parse()
 
         pastifier = STLPastifier()
-        add_node.accept(pastifier)
-        new_node = pastifier.pastify(add_node)
+        ast = pastifier.pastify(ast)
 
-        self.assertEqual('(req)since(gnt)', [new_node.name], 'Since pastification assertion')
+        self.assertEqual('(req)since(gnt)', ast.specs[0].name, 'Since pastification assertion')
 
     def test_once_0_1(self):
-        var_node = Variable('req', '', 'output')
-        node = TimedOnce(var_node, Interval(0, 1))
+        ast = StlAst()
+        ast.declare_var('req', 'float')
+        ast.spec = 'O[0,1] req'
+        ast.parse()
 
         pastifier = STLPastifier()
-        node.accept(pastifier)
-        new_node = pastifier.pastify([node])
+        ast = pastifier.pastify(ast)
 
-        self.assertEqual('once[0,1](req)', [new_node.name], 'Once pastification assertion')
+        self.assertEqual('once[0,1](req)', ast.specs[0].name, 'Once pastification assertion')
 
     def test_historically_0_1(self):
-        var_node = Variable('req', '', 'output')
-        node = TimedHistorically(var_node, Interval(0, 1))
+        ast = StlAst()
+        ast.declare_var('req', 'float')
+        ast.spec = 'H[0,1] req'
+        ast.parse()
 
         pastifier = STLPastifier()
-        node.accept(pastifier)
-        new_node = pastifier.pastify([node])
+        ast = pastifier.pastify(ast)
 
-        self.assertEqual('historically[0,1](req)', [new_node.name], 'Historically pastification assertion')
+        self.assertEqual('historically[0,1](req)', ast.specs[0].name, 'Historically pastification assertion')
 
     def test_eventually_0_1(self):
-        var_node = Variable('req', '', 'output')
-        node = TimedEventually(var_node, Interval(0, 1))
+        ast = StlAst()
+        ast.declare_var('req', 'float')
+        ast.spec = 'F[0,1] req'
+        ast.parse()
 
         pastifier = STLPastifier()
-        node.accept(pastifier)
-        new_node = pastifier.pastify([node])
+        ast = pastifier.pastify(ast)
 
-        self.assertEqual('once[0,1](req)', [new_node.name], 'Eventually pastification assertion')
+        self.assertEqual('once[0,1](req)', ast.specs[0].name, 'Eventually pastification assertion')
 
     def test_always_0_1(self):
-        var_node = Variable('req', '', 'output')
-        node = TimedAlways(var_node, Interval(0, 1))
+        ast = StlAst()
+        ast.declare_var('req', 'float')
+        ast.spec = 'always[0,1] req'
+        ast.parse()
 
         pastifier = STLPastifier()
-        node.accept(pastifier)
-        new_node = pastifier.pastify([node])
+        ast = pastifier.pastify(ast)
 
-        self.assertEqual('historically[0,1](req)', [new_node.name], 'Always pastification assertion')
+        self.assertEqual('historically[0,1](req)', ast.specs[0].name, 'Always pastification assertion')
 
     def test_until_0_1(self):
-        var_node_1 = Variable('req', '', 'output')
-        var_node_2 = Variable('gnt', '', 'output')
-        add_node = TimedUntil(var_node_1, var_node_2, Interval(0, 1))
+        ast = StlAst()
+        ast.declare_var('req', 'float')
+        ast.declare_var('gnt', 'float')
+        ast.spec = 'req until[0,1] gnt'
+        ast.parse()
 
         pastifier = STLPastifier()
-        add_node.accept(pastifier)
-        new_node = pastifier.pastify(add_node)
+        ast = pastifier.pastify(ast)
 
-        self.assertEqual('(req)precedes[0,1](gnt)', [new_node.name], 'Until pastification assertion')
+        self.assertEqual('(req)precedes[0,1](gnt)', ast.specs[0].name, 'Until pastification assertion')
 
     def test_since_0_1(self):
-        var_node_1 = Variable('req', '', 'output')
-        var_node_2 = Variable('gnt', '', 'output')
-        add_node = TimedSince(var_node_1, var_node_2, Interval(0, 1))
+        ast = StlAst()
+        ast.declare_var('req', 'float')
+        ast.declare_var('gnt', 'float')
+        ast.spec = 'req since[0,1] gnt'
+        ast.parse()
 
         pastifier = STLPastifier()
-        add_node.accept(pastifier)
-        new_node = pastifier.pastify(add_node)
+        ast = pastifier.pastify(ast)
 
-        self.assertEqual('(req)since[0,1](gnt)', [new_node.name], 'Since pastification assertion')
-
-    def test_precedes_0_1(self):
-        var_node_1 = Variable('req', '', 'output')
-        var_node_2 = Variable('gnt', '', 'output')
-        add_node = TimedPrecedes(var_node_1, var_node_2, Interval(0, 1))
-
-        pastifier = STLPastifier()
-        add_node.accept(pastifier)
-        new_node = pastifier.pastify(add_node)
-
-        self.assertEqual('(req)precedes[0,1](gnt)', [new_node.name], 'Precedes pastification assertion')
+        self.assertEqual('(req)since[0,1](gnt)', ast.specs[0].name, 'Since pastification assertion')
 
     def test_complex_past_1(self):
-        var_node_1 = Variable('req', '', 'output')
-        var_node_2 = Variable('gnt', '', 'output')
-        rise_node = Rise(var_node_1)
-        hist_node = Historically(var_node_2)
-        once_node = TimedOnce(hist_node, Interval(1, 2))
-        add_node = TimedSince(rise_node, once_node, Interval(2, 6))
+        ast = StlAst()
+        ast.declare_var('req', 'float')
+        ast.declare_var('gnt', 'float')
+        ast.spec = 'rise(req) since[2,6] (once[1,2]historically(gnt))'
+        ast.parse()
 
         pastifier = STLPastifier()
-        add_node.accept(pastifier)
-        new_node = pastifier.pastify(add_node)
+        ast = pastifier.pastify(ast)
 
-        self.assertEqual('(rise(req))since[2,6](once[1,2](historically(gnt)))', [new_node.name], 'Complex pastification assertion')
-
-    def test_complex_past_2(self):
-        var_node_1 = Variable('req', '', 'output')
-        var_node_2 = Variable('gnt', '', 'output')
-        rise_node = Rise(var_node_1)
-        hist_node = Historically(var_node_2)
-        once_node = TimedOnce(hist_node, Interval(1, 2))
-        add_node = TimedSince(rise_node, once_node, Interval(2, 6))
-
-        pastifier = STLPastifier()
-        add_node.accept(pastifier)
-        new_node = pastifier.pastify(add_node)
-
-        self.assertEqual('(rise(req))since[2,6](once[1,2](historically(gnt)))', [new_node.name], 'Complex pastification assertion')
-
-    def test_complex_bounded_future_1(self):
-        var_node_1 = Variable('req', '', 'output')
-        var_node_2 = Variable('gnt', '', 'output')
-        cnt_node_1 = Constant(3)
-        cnt_node_2 = Constant(3)
-        pd_node_1 = Predicate(var_node_1, cnt_node_1, StlComparisonOperator.GEQ)
-        pd_node_2 = Predicate(var_node_2, cnt_node_2, StlComparisonOperator.GEQ)
-        rise_node = Rise(pd_node_1)
-        hist_node = TimedAlways(pd_node_2, Interval(3, 4))
-        once_node = TimedEventually(hist_node, Interval(1, 2))
-        add_node = Implies(rise_node, once_node)
-
-        pastifier = STLPastifier()
-        add_node.accept(pastifier)
-        new_node = pastifier.pastify(add_node)
-
-        self.assertEqual('(rise((once[6,6](req))>=(3)))->(once[0,1](historically[0,1]((gnt)>=(3))))', [new_node.name], 'Complex pastification assertion')
+        self.assertEqual('(rise(req))since[2,6](once[1,2](historically(gnt)))', ast.specs[0].name, 'Complex pastification assertion')
 
     def test_complex_bounded_future_2(self):
-        var_node_1 = Variable('req', '', 'output')
-        var_node_2 = Variable('gnt', '', 'output')
-        var_node_3 = Variable('ack', '', 'output')
-
-        until_node = TimedUntil(var_node_1, var_node_2, Interval(1, 2))
-        ev_node = TimedEventually(var_node_3, Interval(0, 6))
-        add_node = Implies(until_node, ev_node)
+        ast = StlAst()
+        ast.declare_var('req', 'float')
+        ast.declare_var('gnt', 'float')
+        ast.declare_var('ack', 'float')
+        ast.spec = '(req until[1,2] gnt) -> (eventually[0,6] ack)'
+        ast.parse()
 
         pastifier = STLPastifier()
-        add_node.accept(pastifier)
-        new_node = pastifier.pastify(add_node)
+        ast = pastifier.pastify(ast)
 
-        self.assertEqual('((once[4,4](req))precedes[1,2](once[4,4](gnt)))->(once[0,6](ack))', [new_node.name], 'Complex pastification assertion')
+        self.assertEqual('((once[4,4](req))precedes[1,2](once[4,4](gnt)))->(once[0,6](ack))', ast.specs[0].name, 'Complex pastification assertion')
 
     def test_complex_mixed_1(self):
-        var_node_1 = Variable('req', '', 'output')
-        var_node_2 = Variable('gnt', '', 'output')
-
-        ev_node = TimedEventually(var_node_1, Interval(5, 6))
-        once_node = TimedOnce(var_node_2, Interval(1, 2))
-        ev_once_node = TimedEventually(once_node, Interval(3, 3))
-        add_node = Implies(ev_node, ev_once_node)
+        ast = StlAst()
+        ast.declare_var('req', 'float')
+        ast.declare_var('gnt', 'float')
+        ast.spec = '(eventually[5,6](req)) -> (eventually[3,3] once[1,2](gnt))'
+        ast.parse()
 
         pastifier = STLPastifier()
-        add_node.accept(pastifier)
-        new_node = pastifier.pastify(add_node)
+        ast = pastifier.pastify(ast)
 
-        self.assertEqual('(once[0,1](req))->(once[1,2](once[3,3](gnt)))', [new_node.name], 'Complex pastification assertion')
-
-    def test_complex_mixed_2(self):
-        var_node_1 = Variable('req', '', 'output')
-        var_node_2 = Variable('gnt', '', 'output')
-
-        ev_node = TimedEventually(var_node_1, Interval(5, 6))
-        once_node = TimedOnce(var_node_2, Interval(1, 2))
-        alw_node = TimedAlways(once_node, Interval(3, 3))
-        add_node = Implies(ev_node, alw_node)
-
-        pastifier = STLPastifier()
-        add_node.accept(pastifier)
-        new_node = pastifier.pastify(add_node)
-
-        self.assertEqual('(once[0,1](req))->(once[1,2](once[3,3](gnt)))', [new_node.name], 'Complex pastification assertion')
-
+        self.assertEqual('(once[0,1](req))->(once[1,2](once[3,3](gnt)))', ast.specs[0].name, 'Complex pastification assertion')
 
     if __name__ == '__main__':
         unittest.main()

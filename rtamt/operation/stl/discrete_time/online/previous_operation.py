@@ -7,7 +7,7 @@ class PreviousOperation(AbstractOnlineOperation):
     def reset(self):
         self.__init__()
 
-    def update(self, node, sample):
+    def update(self, sample):
         sample_return = self.prev
         self.prev = sample
 
