@@ -53,7 +53,7 @@ class DescreteTimeEvaluator(TimeEvaluator):
         self.sampling_period_unit = unit
 
         if tolerance < 0.0 or tolerance > 1.0:
-            raise STLException('Tolerance must be in [0,1]')
+            raise Exception('Tolerance must be in [0,1]')
 
         self.sampling_tolerance = tolerance
 

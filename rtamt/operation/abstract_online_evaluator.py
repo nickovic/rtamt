@@ -27,12 +27,12 @@ class AbstractOnlineEvaluator(AbstractEvaluator):
         # init dict of online operators
         self.online_operator_dict = dict()
 
-        # constract online_operator_dict for sub-specs
+        # construct online_operator_dict for sub-specs
         for key in self.ast.var_subspec_dict:
             node = self.ast.var_subspec_dict[key]
             self.visitAst(node)
 
-        # constract online_operator_dict for spec
+        # construct online_operator_dict for spec
         self.visitAst(self.ast)
         return
 
