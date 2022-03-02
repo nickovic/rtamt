@@ -31,11 +31,11 @@ class AbstractDiscreteTimeOnlineEvaluator(AbstractOnlineEvaluator, DescreteTimeE
         # evaluate modular sub-specs
         for key in self.ast.var_subspec_dict:
             node = self.ast.var_subspec_dict[key]
-            rob = self.updateVisitor.visitAst(node, self.online_operator_dict)
+            rob = self.updateVisitor.visitAst(node, self.online_operator_dict, self.ast.var_object_dict)
             self.ast.var_object_dict[key] = rob
 
         # evaluate spec
-        rob = self.updateVisitor.visitAst(self.ast, self.online_operator_dict)
+        rob = self.updateVisitor.visitAst(self.ast, self.online_operator_dict, self.ast.var_object_dict)
 
         # Check if the difference between two consecutive timestamps is between
         # the accepted tolerance - if not, increase the violation counter
@@ -73,15 +73,15 @@ class AbstractDiscreteTimeOnlineEvaluator(AbstractOnlineEvaluator, DescreteTimeE
 
 
 class DiscreteTimeOnlineUpdateVisitor(AbstractOnlineUpdateVisitor):
-    def visitVariable(self, node, online_operator_dict):
-        var = self.ast.var_object_dict[node.var]
+    def visitVariable(self, node, online_operator_dict, var_object_dict):
+        var = var_object_dict[node.var]
         if node.field:  #TODO Tom did not understand this line.
             sample_return = operator.attrgetter(node.field)(var)
         else:
             sample_return = var
         return sample_return
 
-    def visitConstant(self, node, online_operator_dict):
+    def visitConstant(self, node, online_operator_dict, var_object_dict):
         return node.val
 
 
