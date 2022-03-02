@@ -24,15 +24,8 @@ class AbstractDesneTimeOfflineEvaluator(AbstractOfflineEvaluator, DenseTimeEvalu
         # update the value of every input variable
         self.set_variable_to_ast_from_dataset(dataset)
 
-        #TODO move both of spec and sub-specs visit into syntax layer.
-        # evaluate modular sub-specs
-        for key in self.ast.var_subspec_dict:
-            node = self.ast.var_subspec_dict[key]
-            rob = self.visitAst(node)
-            self.ast.var_object_dict[key] = rob
-
-        # evaluate modular spec
-        rob = self.visitAst(self.ast)
+        # evaluate spec forest
+        rob = self.visitAst(self.ast)[0]
 
         # reset var_object_dict()
         self.ast.var_object_dict = self.ast.var_object_dict.fromkeys(self.ast.var_object_dict, [])  #TODO I did not understant it.

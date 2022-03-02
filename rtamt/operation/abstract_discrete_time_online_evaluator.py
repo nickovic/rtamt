@@ -27,15 +27,8 @@ class AbstractDiscreteTimeOnlineEvaluator(AbstractOnlineEvaluator, DescreteTimeE
         # update the value of every input variable
         self.set_variable_to_ast_from_dataset(dataset)
 
-        #TODO move all vist to syntax layer
-        # evaluate modular sub-specs
-        for key in self.ast.var_subspec_dict:
-            node = self.ast.var_subspec_dict[key]
-            rob = self.updateVisitor.visitAst(node, self.online_operator_dict, self.ast.var_object_dict)
-            self.ast.var_object_dict[key] = rob
-
-        # evaluate spec
-        rob = self.updateVisitor.visitAst(self.ast, self.online_operator_dict, self.ast.var_object_dict)
+        # evaluate spec forest
+        rob = self.updateVisitor.visitAst(self.ast, self.online_operator_dict, self.ast.var_object_dict)[0]
 
         # Check if the difference between two consecutive timestamps is between
         # the accepted tolerance - if not, increase the violation counter

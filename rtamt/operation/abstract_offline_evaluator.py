@@ -10,3 +10,8 @@ class AbstractOfflineEvaluator(AbstractEvaluator):
     @abstractmethod
     def evaluate(self, dataset):
         raise NotImplementedError(self.NOT_IMPLEMENTED)
+
+    def visitSpec(self, node, *args, **kwargs):
+        sample_return = self.visitChildren(node, *args, **kwargs)
+        self.ast.var_object_dict[node] = sample_return  #TODO subspec name is necessary as a key for var_object_dict.
+        return sample_return
