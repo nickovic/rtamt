@@ -1,105 +1,22 @@
-import os
-import sys
-from abc import ABCMeta, abstractmethod
-from rtamt.enumerations.options import TimeInterpretation
+import os, sys
+
+from abc import ABCMeta
+
+from rtamt.operation.abstract_discrete_time_online_evaluator import AbstractDiscreteTimeOnlineEvaluator
+from rtamt.operation.abstract_dense_time_online_evaluator import AbstractDenseTimeOnlineEvaluator
+from rtamt.operation.abstract_discrete_time_offline_evaluator import AbstractDiscreteTimeOfflineEvaluator
+from rtamt.operation.abstract_dense_time_offline_evaluator import AbstractDesneTimeOfflineEvaluator
+
 from rtamt.exception.exception import RTAMTException
 
 
-class AbstractSpecification:
-    """A class used as a container for specifications
-
-    Attributes:
-        name : String
-
-
-        modular_spec : String - specification text
-        spec : String - specification text
-
-        vars : set(String) - set of variable names
-        free_vars : set(String) - set of free variable names
-        publish_var : String - variable name to be published
-        publish_var_field : String - variable field to be published
-
-        var_subspec_dict : dict(String, AbstractNode) - dictionary that maps variable names to the AST
-        var_object_dict : dict(String, double) - dictionary that maps variable names to their value
-        modules : dict(String,String) - dictionary that maps module paths to module names
-        var_type_dict : dict(String, String) - dictionary that maps var names to var types
-        var_io_dict : dict(String, String) - dictionary that maps var names to var io signature
-        var_topic_dict : dict(String,String) - dictionaty that mapts var names to ROS topic names
-        const_type_dict : dict(String, String) - dictionary mapping const var names to var types
-        const_val_dict : dict(String, String) - dictionary mapping const var names to var vals encoded as strings
-
-        top : Node - pointer to the specification parse tree
-
-        online_evaluator : OnlineEvaluator - pointer to the object that implements the monitoring algorithm
-        offline_evaluator : OfflineEvaluator - pointer to the object that implements the monitoring algorithm
-
-    Methods
-        get_spec_from_file - create and populate specification object from the text file
-        parse - parse the specification
-        update - update the specification online
-        evaluate - evaluate the specification offline
-    """
+class AbstractSpecification(object):
     __metaclass__ = ABCMeta
 
-    def __init__(self):
-        self.S_UNIT = int(1000000000)
-        self.MS_UNIT = int(1000000)
-        self.US_UNIT = int(1000)
-        self.NS_UNIT = int(1)
-
-        self.U = {
-            's': self.S_UNIT,
-            'ms': self.MS_UNIT,
-            'us': self.US_UNIT,
-            'ns': self.NS_UNIT
-        }
-
-        self.time_interpretation = TimeInterpretation.DISCRETE
-
+    def __init__(self, ast):
         self.name = 'Abstract Specification'
-        self.spec = None
-        self.modular_spec = ''
-
-        self.vars = set()
-        self.free_vars = set()
-        self.publish_var = ''
-        self.publish_var_field = ''
-
-        # Default unit
-        self.unit = 's'
-
-        self.var_subspec_dict = dict()
-        self.var_object_dict = dict()
-        self.modules = dict()
-        self.var_type_dict = dict()
-        self.var_io_dict = dict()
-        self.var_topic_dict = dict()
-        self.const_type_dict = dict()
-        self.const_val_dict = dict()
-
-        self.top = None
-
-        self.specs = []
-
-        self.online_evaluator = None
-        self.offline_evaluator = None
-
-    @property
-    def spec(self):
-        return self.__spec
-
-    @spec.setter
-    def spec(self, spec):
-        self.__spec = spec
-
-    @property
-    def specs(self):
-        return self.__specs
-
-    @specs.setter
-    def specs(self, specs):
-        self.__specs = specs
+        self.ast = ast
+        self.set_ast_flag = False # It is for evaluator is set ast or not.
 
     @property
     def name(self):
@@ -109,22 +26,35 @@ class AbstractSpecification:
     def name(self, name):
         self.__name = name
 
-    @property
-    def top(self):
-        return self.__top
+    # forwarding to ast
+    def add_var(self, var):
+        self.ast.vars.add(var)
 
-    @top.setter
-    def top(self, top):
-        self.__top = top
+    def get_value(self, var_name):
+        return self.ast.get_value(var_name)
 
-    @property
-    def unit(self):
-        return self.__unit
+    def add_sub_spec(self, sub_spec):
+        self.ast.add_sub_spec(sub_spec)
 
-    @unit.setter
-    def unit(self, unit):
-        self.__unit = unit
+    def declare_var(self, var_name, var_type):
+        self.ast.declare_var(var_name, var_type)
 
+    def declare_const(self, const_name, const_type, const_val):
+        self.ast.declare_const(const_name, const_type, const_val)
+
+    def free_vars(self, free_vars): # we do not need
+        self.ast.free_vars(free_vars)
+
+    def vars(self, vars): # we do not need
+        self.ast.vars(vars)
+
+    def modules(self, modules): # send synitax layer (ast)?
+        self.ast.modules(modules)
+
+    def parse(self):
+        self.ast.parse()
+
+    #TODO we need to move it to RTAMT4ROS as wrapper
     @property
     def publish_var(self):
         return self.__publish_var
@@ -134,14 +64,6 @@ class AbstractSpecification:
         self.__publish_var = publish_var
 
     @property
-    def free_vars(self):
-        return self.__free_vars
-
-    @free_vars.setter
-    def free_vars(self, free_vars):
-        self.__free_vars = free_vars
-
-    @property
     def publish_var_field(self):
         return self.__publish_var_field
 
@@ -149,22 +71,7 @@ class AbstractSpecification:
     def publish_var_field(self, publish_var_field):
         self.__publish_var_field = publish_var_field
 
-    @property
-    def vars(self):
-        return self.__vars
-
-    @vars.setter
-    def vars(self, vars):
-        self.__vars = vars
-
-    @property
-    def modules(self):
-        return self.__modules
-
-    @modules.setter
-    def modules(self, modules):
-        self.__modules = modules
-
+    #TODO we are wondering. put add it to issue comment
     def add_input_var(self, input_var):
         self.in_vars.add(input_var)
 
@@ -177,18 +84,11 @@ class AbstractSpecification:
     def remove_output_var(self, var):
         self.out_vars.discard(var)
 
-    def add_var(self, var):
-        self.vars.add(var)
-
     def add_op(self, op):
         self.ops.add(op)
 
-    def get_value(self, var_name):
-        return self.var_object_dict[var_name]
 
-    def add_sub_spec(self, sub_spec):
-        self.modular_spec = self.modular_spec + sub_spec + '\n'
-
+    #TODO goto Syntax while keeping in Spec too.
     def get_spec_from_file(self, path):
         """Opens a text file and returns its content as a string
         Parameters:
@@ -203,21 +103,100 @@ class AbstractSpecification:
             f.close()
         else:
             raise RTAMTException('The file {} does not exist.'.format(path))
-            sys.exit()
         return out
 
-    @abstractmethod
-    def parse(self):
+
+class AbstractOfflineSpecification(AbstractSpecification):
+    def __init__(self, ast, offlineEvaluator):
+        AbstractSpecification.__init__(self, ast)
+        self.name = 'Abstract Offline Specification'
+        self.offlineEvaluator = offlineEvaluator
+
+    # forwarding to evaluator
+    def evaluate(self, *args, **kwargs):
+        if self.set_ast_flag != True:
+            self.offlineEvaluator.set_ast(self.ast)
+            self.set_ast_flag = True
+
+        #TODO we may make it consistent with evaluator class.
+        if isinstance(self.offlineEvaluator, AbstractDesneTimeOfflineEvaluator):
+            if len(args) == 0:
+                raise Exception()
+            elif len(args) == 1:
+                dataset = [args[0]]
+            else:
+                dataset = []
+                for i in args:
+                    dataset.append(i)
+            return self.offlineEvaluator.evaluate(dataset)
+        elif isinstance(self.offlineEvaluator, AbstractDiscreteTimeOfflineEvaluator):
+            dataset = args[0]
+            return self.offlineEvaluator.evaluate(dataset)
+        else:
+            pass
+
+
+class AbstractOnlineSpecification(AbstractSpecification):
+    def __init__(self, ast, onlineEvaluator, pastifier=None):
+        #super(AbstractOnlineSpecification, self).__init__(ast)
+        AbstractSpecification.__init__(self, ast)
+        self.name = 'Abstract Online Specification'
+        self.onlineEvaluator = onlineEvaluator
+        self.pastifier = pastifier
+
+    # forwarding pastify
+    def pastify(self):
         pass
 
-    @abstractmethod
-    def update(self, args):
-        pass
+    # forwarding to evaluator
+    def update(self, *args, **kwargs):
+        if self.set_ast_flag != True:
+            self.onlineEvaluator.set_ast(self.ast)
+            self.set_ast_flag = True
 
-    @abstractmethod
-    def evaluate(self, args):
-        pass
+        #TODO we may make it consistent with evaluator class.
+        if isinstance(self.onlineEvaluator, AbstractDenseTimeOnlineEvaluator):
+            if len(args) == 0:
+                raise Exception()
+            elif len(args) == 1:
+                dataset = [args[0]]
+            else:
+                dataset = []
+                for i in args:
+                    dataset.append(i)
+            return self.onlineEvaluator.update(dataset)
+        elif isinstance(self.onlineEvaluator, AbstractDiscreteTimeOnlineEvaluator):
+            i = args[0]
+            dataset = args[1]
+            return self.onlineEvaluator.update(i, dataset)
+        else:
+            pass
 
-    @abstractmethod
+    def final_update(self, *args, **kwargs):
+        if self.set_ast_flag != True:
+            self.onlineEvaluator.set_ast(self.ast)
+            self.set_ast_flag = True
+
+        #TODO we may make it consistent with evaluator class.
+        if len(args) == 0:
+            raise Exception()
+        elif len(args) == 1:
+            dataset = [args[0]]
+        else:
+            dataset = []
+            for i in args:
+                dataset.append(i)
+
+        return self.onlineEvaluator.final_update(dataset)
+
     def reset(self):
-        pass
+        self.onlineEvaluator.reset()
+
+
+# we would not recomend to use it
+# Please note that. Even the class have both evaluate and update, calling both with same istance is not expected.
+class AbstractOfflineOnlineSpecification(AbstractOfflineSpecification, AbstractOnlineSpecification):
+    def __init__(self, ast, offlineEvaluator, onlineEvaluator, pastifier=None):
+        AbstractOfflineSpecification.__init__(self, ast, offlineEvaluator)
+        AbstractOnlineSpecification.__init__(self, ast, onlineEvaluator, pastifier)
+        self.name = 'Abstract Offline Online Specification'
