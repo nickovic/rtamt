@@ -51,6 +51,7 @@ class LtlDiscreteTimeTransformer(LtlAstVisitor):
         self.ast = ast
         self.sampling_period = sampling_period
         self.ast.specs = self.visitAst()
+        return self.ast
 
     def visitConstant(self, node, *args, **kwargs):
         node = Constant(node.val)

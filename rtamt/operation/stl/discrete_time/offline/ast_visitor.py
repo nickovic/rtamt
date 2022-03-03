@@ -281,7 +281,6 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
         sample_return = [min(sample[j - node.end:j - node.begin + 1]) for j in range(node.end, len(sample))]
         return sample_return
 
-
     def visitTimedSince(self, node, *args, **kwargs):
         sample_left  = self.visit(node.children[0], *args, **kwargs)
         sample_right = self.visit(node.children[1], *args, **kwargs)
