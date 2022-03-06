@@ -560,7 +560,6 @@ class StlDenseTimeOfflineAstVisitor(StlAstVisitor):
     def visitFall(self, node, *args, **kwargs):
         raise STLNotImplementedException('Fall operator not implemented in STL dense monitor.')
 
-
     #TODO: this code may not work.
     def visitConstant(self, node, *args, **kwargs):
         sample_return = [[0, node.val], [float("inf"), node.val]]

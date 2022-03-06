@@ -1,34 +1,10 @@
 import unittest
 import math
-from rtamt.operation.stl.dense_time.offline.constant_operation import ConstantOperation
-from rtamt.operation.stl.dense_time.offline.and_operation import AndOperation
-from rtamt.operation.stl.dense_time.offline.predicate_operation import PredicateOperation
-from rtamt.operation.stl.dense_time.offline.not_operation import NotOperation
-from rtamt.operation.stl.dense_time.offline.or_operation import OrOperation
-from rtamt.operation.stl.dense_time.offline.implies_operation import ImpliesOperation
-from rtamt.operation.stl.dense_time.offline.iff_operation import IffOperation
-from rtamt.operation.stl.dense_time.offline.xor_operation import XorOperation
-from rtamt.operation.stl.dense_time.offline.always_operation import AlwaysOperation
-from rtamt.operation.stl.dense_time.offline.eventually_operation import EventuallyOperation
-from rtamt.operation.stl.dense_time.offline.historically_operation import HistoricallyOperation
-from rtamt.operation.stl.dense_time.offline.once_operation import OnceOperation
-from rtamt.operation.stl.dense_time.offline.since_operation import SinceOperation
-from rtamt.operation.stl.dense_time.offline.once_bounded_operation import OnceBoundedOperation
-from rtamt.operation.stl.dense_time.offline.historically_bounded_operation import HistoricallyBoundedOperation
-from rtamt.operation.stl.dense_time.offline.since_bounded_operation import SinceBoundedOperation
-from rtamt.operation.arithmetic.dense_time.offline.subtraction_operation import SubtractionOperation
-from rtamt.operation.arithmetic.dense_time.offline.addition_operation import AdditionOperation
-from rtamt.operation.arithmetic.dense_time.offline.multiplication_operation import MultiplicationOperation
-from rtamt.operation.arithmetic.dense_time.offline.division_operation import DivisionOperation
-from rtamt.operation.arithmetic.dense_time.offline.abs_operation import AbsOperation
-from rtamt.operation.arithmetic.dense_time.offline.sqrt_operation import SqrtOperation
-from rtamt.operation.arithmetic.dense_time.offline.exp_operation import ExpOperation
-from rtamt.operation.arithmetic.dense_time.offline.pow_operation import PowOperation
-from rtamt.operation.stl.dense_time.offline.until_operation import UntilOperation
-from rtamt.operation.stl.dense_time.offline.eventually_bounded_operation import EventuallyBoundedOperation
-from rtamt.operation.stl.dense_time.offline.always_bounded_operation import AlwaysBoundedOperation
-from rtamt.operation.stl.dense_time.offline.until_bounded_operation import UntilBoundedOperation
+
+from rtamt.ast.parser.stl.specification_parser import StlAst
 from rtamt.enumerations.comp_op import StlComparisonOperator
+from rtamt.operation.stl.dense_time.offline.evaluator import StlDenseTimeOfflineEvaluator
+
 
 class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
 
@@ -36,11 +12,16 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
         super(TestSTLDenseTimeOfflineEvaluation, self).__init__(*args, **kwargs)
 
     def test_constant(self):
-        oper = ConstantOperation(5)
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.spec = '5.0'
+        ast.parse()
+        op = StlDenseTimeOfflineEvaluator()
+        op.set_ast(ast)
 
-        out = oper.update()
+        out = op.evaluate(dict())
 
-        self.assertEqual([[0, 5], [float('inf'), 5]], out, "constant dense time offline")
+        self.assertEqual([[0, 5.0], [float('inf'), 5.0]], out, "constant dense time offline")
 
 
     def test_addition(self):
