@@ -58,6 +58,11 @@ class AbstractOnlineResetVisitor(AbstractAstVisitor):
 
 
 class AbstractOnlineUpdateVisitor(AbstractAstVisitor):
+    def visitSpec(self, node, online_operator_dict, var_object_dict):
+        sample_return = self.visitChildren(node, online_operator_dict, var_object_dict)
+        var_object_dict[node] = sample_return  #TODO subspec name is necessary as a key for var_object_dict.
+        return sample_return
+
     def visitBinary(self, node, online_operator_dict, var_object_dict):
         sample_left  = self.visit(node.children[0], online_operator_dict, var_object_dict)
         sample_right = self.visit(node.children[1], online_operator_dict, var_object_dict)

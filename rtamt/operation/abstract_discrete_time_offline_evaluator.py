@@ -27,15 +27,9 @@ class AbstractDiscreteTimeOfflineEvaluator(AbstractOfflineEvaluator, DescreteTim
         # update the value of every input variable
         self.set_variable_to_ast_from_dataset(dataset)
 
-        # evaluate modular sub-specs
+        # evaluate spec forest
         length = len(dataset['time'])
-        for key in self.ast.var_subspec_dict:
-            node = self.ast.var_subspec_dict[key]
-            rob = self.visitAst(node, length) #TODO remove length.
-            self.ast.var_object_dict[key] = rob
-
-        # evaluate spec
-        rob = self.visitAst(self.ast, length)
+        rob = self.visitAst(self.ast, length)[0]
 
         # Check if the difference between two consecutive timestamps is between
         # the accepted tolerance - if not, increase the violation counter

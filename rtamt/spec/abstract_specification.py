@@ -5,7 +5,7 @@ from abc import ABCMeta
 from rtamt.operation.abstract_discrete_time_online_evaluator import AbstractDiscreteTimeOnlineEvaluator
 from rtamt.operation.abstract_dense_time_online_evaluator import AbstractDenseTimeOnlineEvaluator
 from rtamt.operation.abstract_discrete_time_offline_evaluator import AbstractDiscreteTimeOfflineEvaluator
-from rtamt.operation.abstract_dense_time_offline_evaluator import AbstractDesneTimeOfflineEvaluator
+from rtamt.operation.abstract_dense_time_offline_evaluator import AbstractDenseTimeOfflineEvaluator
 
 from rtamt.exception.exception import RTAMTException
 
@@ -119,7 +119,7 @@ class AbstractOfflineSpecification(AbstractSpecification):
             self.set_ast_flag = True
 
         #TODO we may make it consistent with evaluator class.
-        if isinstance(self.offlineEvaluator, AbstractDesneTimeOfflineEvaluator):
+        if isinstance(self.offlineEvaluator, AbstractDenseTimeOfflineEvaluator):
             if len(args) == 0:
                 raise Exception()
             elif len(args) == 1:
