@@ -1,38 +1,10 @@
 import unittest
 import math
-from rtamt.operation.stl.discrete_time.offline.constant_operation import ConstantOperation
-from rtamt.operation.stl.discrete_time.offline.and_operation import AndOperation
-from rtamt.operation.stl.discrete_time.offline.rise_operation import RiseOperation
-from rtamt.operation.stl.discrete_time.offline.fall_operation import FallOperation
-from rtamt.operation.stl.discrete_time.offline.predicate_operation import PredicateOperation
-from rtamt.operation.stl.discrete_time.offline.not_operation import NotOperation
-from rtamt.operation.stl.discrete_time.offline.or_operation import OrOperation
-from rtamt.operation.stl.discrete_time.offline.implies_operation import ImpliesOperation
-from rtamt.operation.stl.discrete_time.offline.iff_operation import IffOperation
-from rtamt.operation.stl.discrete_time.offline.xor_operation import XorOperation
-from rtamt.operation.stl.discrete_time.offline.always_operation import AlwaysOperation
-from rtamt.operation.stl.discrete_time.offline.eventually_operation import EventuallyOperation
-from rtamt.operation.stl.discrete_time.offline.historically_operation import HistoricallyOperation
-from rtamt.operation.stl.discrete_time.offline.once_operation import OnceOperation
-from rtamt.operation.stl.discrete_time.offline.since_operation import SinceOperation
-from rtamt.operation.stl.discrete_time.offline.once_bounded_operation import OnceBoundedOperation
-from rtamt.operation.stl.discrete_time.offline.historically_bounded_operation import HistoricallyBoundedOperation
-from rtamt.operation.stl.discrete_time.offline.since_bounded_operation import SinceBoundedOperation
-from rtamt.operation.arithmetic.discrete_time.offline.subtraction_operation import SubtractionOperation
-from rtamt.operation.arithmetic.discrete_time.offline.addition_operation import AdditionOperation
-from rtamt.operation.arithmetic.discrete_time.offline.multiplication_operation import MultiplicationOperation
-from rtamt.operation.arithmetic.discrete_time.offline.division_operation import DivisionOperation
-from rtamt.operation.arithmetic.discrete_time.offline.abs_operation import AbsOperation
-from rtamt.operation.arithmetic.discrete_time.offline.sqrt_operation import SqrtOperation
-from rtamt.operation.arithmetic.discrete_time.offline.exp_operation import ExpOperation
-from rtamt.operation.arithmetic.discrete_time.offline.pow_operation import PowOperation
-from rtamt.operation.stl.discrete_time.offline.previous_operation import PreviousOperation
-from rtamt.operation.stl.discrete_time.offline.next_operation import NextOperation
-from rtamt.operation.stl.discrete_time.offline.until_operation import UntilOperation
-from rtamt.operation.stl.discrete_time.offline.eventually_bounded_operation import EventuallyBoundedOperation
-from rtamt.operation.stl.discrete_time.offline.always_bounded_operation import AlwaysBoundedOperation
-from rtamt.operation.stl.discrete_time.offline.until_bounded_operation import UntilBoundedOperation
+
+from rtamt.ast.parser.stl.specification_parser import StlAst
 from rtamt.enumerations.comp_op import StlComparisonOperator
+from rtamt.operation.stl.discrete_time.offline.evaluator import StlDiscreteTimeOfflineEvaluator
+
 
 class TestSTLEvaluation(unittest.TestCase):
 
@@ -42,20 +14,40 @@ class TestSTLEvaluation(unittest.TestCase):
         self.right = [20, -2, 10, 4, -1]
 
     def test_constant(self):
-        oper = ConstantOperation(5)
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.spec = '5.0'
+        ast.parse()
+        op = StlDiscreteTimeOfflineEvaluator()
+        op.set_ast(ast)
 
-        out1 = oper.update()
-        out2 = oper.update()
+        dataset = {'time': [0, 1, 2, 3, 4]}
 
-        self.assertEqual(out1, 5, "input 1")
-        self.assertEqual(out2, 5, "input 2")
+        out = op.evaluate(dataset)
+
+        expected = [[0, 5.0], [1, 5.0], [2, 5.0], [3, 5.0], [4, 5.0]]
+
+        self.assertEqual(expected, out, "constant dense time offline")
 
 
     def test_addition(self):
-        oper = AdditionOperation()
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.declare_var('b', 'float')
+        ast.spec = 'a + b'
+        ast.parse()
+        op = StlDiscreteTimeOfflineEvaluator()
+        op.set_ast(ast)
 
-        out = oper.update(self.left, self.right)
-        expected = [120, -3, 8, 9, -2]
+        a = [100, -1, -2, 5, -1]
+        b = [20, -2, 10, 4, -1]
+        t = [0, 1, 2, 3, 4]
+
+        dataset = {'time': t, 'a': a, 'b': b}
+
+        out = op.evaluate(dataset)
+
+        expected = [[0, 120], [1, -3], [2, 8], [3, 9], [4, -2]]
 
         self.assertListEqual(out, expected, "addition")
 

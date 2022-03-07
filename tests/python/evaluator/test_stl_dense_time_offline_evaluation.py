@@ -291,66 +291,102 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
         self.assertListEqual(expected, out, "division dense time offline 1")
 
     def test_abs(self):
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.spec = 'abs(a)'
+        ast.parse()
+        op = StlDenseTimeOfflineEvaluator()
+        op.set_ast(ast)
 
-        oper = AbsOperation()
+        a = ['a', [[1.3, 4], [3.7, -2.2], [9.4, -33]]]
+        dataset = [a]
+        out = op.evaluate(dataset)
 
-        op = [[1.3, 4], [3.7, -2.2], [9.4, -33]]
-
-        out = oper.update(op)
         expected = [[1.3, 4], [3.7, 2.2], [9.4, 33]]
 
         self.assertListEqual(out, expected, "abs dense time offline 1")
 
         #################################################################
 
-        oper = AbsOperation()
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.spec = 'abs(a)'
+        ast.parse()
+        op = StlDenseTimeOfflineEvaluator()
+        op.set_ast(ast)
 
-        op = [[1.3, -4]]
+        a = ['a', [[1.3, 4]]]
+        dataset = [a]
+        out = op.evaluate(dataset)
 
-        out = oper.update(op)
         expected = [[1.3, 4]]
 
         self.assertListEqual(out, expected, "abs dense time offline 2")
 
         #################################################################
 
-        oper = AbsOperation()
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.spec = 'abs(a)'
+        ast.parse()
+        op = StlDenseTimeOfflineEvaluator()
+        op.set_ast(ast)
 
-        op = []
-
-        out = oper.update(op)
+        a = ['a', []]
+        dataset = [a]
+        out = op.evaluate(dataset)
         expected = []
 
         self.assertListEqual(out, expected, "abs dense time offline 3")
 
     def test_sqrt(self):
-        oper = SqrtOperation()
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.spec = 'sqrt(a)'
+        ast.parse()
+        op = StlDenseTimeOfflineEvaluator()
+        op.set_ast(ast)
 
-        op = [[1.3, 4], [3.7, 2.2], [9.4, 33]]
+        a = ['a', [[1.3, 4], [3.7, -2.2], [9.4, -33]]]
+        dataset = [a]
+        out = op.evaluate(dataset)
 
-        out = oper.update(op)
         expected = [[1.3, math.sqrt(4)], [3.7, math.sqrt(2.2)], [9.4, math.sqrt(33)]]
 
         self.assertListEqual(out, expected, "sqrt dense time offline 1")
 
         #################################################################
 
-        oper = SqrtOperation()
 
-        op = [[1.3, 4]]
+        #################################################################
 
-        out = oper.update(op)
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.spec = 'sqrt(a)'
+        ast.parse()
+        op = StlDenseTimeOfflineEvaluator()
+        op.set_ast(ast)
+
+        a = ['a', [[1.3, 4]]]
+        dataset = [a]
+        out = op.evaluate(dataset)
+
         expected = [[1.3, math.sqrt(4)]]
 
         self.assertListEqual(out, expected, "sqrt dense time offline 2")
 
         #################################################################
 
-        oper = SqrtOperation()
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.spec = 'sqrt(a)'
+        ast.parse()
+        op = StlDenseTimeOfflineEvaluator()
+        op.set_ast(ast)
 
-        op = []
-
-        out = oper.update(op)
+        a = ['a', []]
+        dataset = [a]
+        out = op.evaluate(dataset)
         expected = []
 
         self.assertListEqual(out, expected, "sqrt dense time offline 3")
@@ -1255,11 +1291,21 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
         self.assertListEqual(expected, out, "until dense time offline 6")
 
     def test_until_0_1(self):
-        oper = UntilBoundedOperation(0, 1)
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.declare_var('b', 'float')
+        ast.spec = 'a until[0,1] b'
+        ast.parse()
+        op = StlDenseTimeOfflineEvaluator()
+        op.set_ast(ast)
 
-        out = oper.update(self.left, self.right)
-        expected = [20, -1, 10, 4, -1]
+        a = ['a', [[1, 1], [3.5, 7], [4.7, 3], [5.3, 5], [6.2, 1]]]
+        b = ['b', [[4, 2], [6, 3]]]
+        dataset = [a, b]
+        out = op.evaluate(dataset)
 
+
+        expected = [[4, 2], [6, 2]]
         self.assertListEqual(out, expected, "until")
 
     def test_once_bounded(self):
@@ -1463,105 +1509,137 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
         #######################################################################
 
     def test_since_0_1(self):
-        oper = SinceBoundedOperation(0,1)
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.declare_var('b', 'float')
+        ast.spec = 'a since[0,1] b'
+        ast.parse()
+        op = StlDenseTimeOfflineEvaluator()
+        op.set_ast(ast)
 
-        op1 = [[0, 2], [10, 2]]
-        op2 = [[0, 4], [10, 4]]
-
-        out = oper.update(op1, op2)
+        a = ['a', [[0, 2], [10, 2]]]
+        b = ['b', [[0, 4], [10, 4]]]
+        dataset = [a, b]
+        out = op.evaluate(dataset)
         expected = [[0, 2], [10, 2]]
 
         self.assertListEqual(out, expected, "since[0,1]")
 
         ########################################################################
 
-        oper = SinceBoundedOperation(1, 2)
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.declare_var('b', 'float')
+        ast.spec = 'a since[1,2] b'
+        ast.parse()
+        op = StlDenseTimeOfflineEvaluator()
+        op.set_ast(ast)
 
-        op1 = [[0, 2], [10, 2]]
-        op2 = [[0, 4], [10, 4]]
-
-        out = oper.update(op1, op2)
+        a = ['a', [[0, 2], [10, 2]]]
+        b = ['b', [[0, 4], [10, 4]]]
+        dataset = [a, b]
+        out = op.evaluate(dataset)
         expected = [[0, -float('inf')], [1, 2], [10, 2]]
 
         self.assertListEqual(out, expected, "since[0,1]")
 
         ########################################################################
 
-    def test_until_0_1(self):
-        oper = UntilBoundedOperation(0,1)
+    def test_until_1_2(self):
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.declare_var('b', 'float')
+        ast.spec = 'a until[1,2] b'
+        ast.parse()
+        op = StlDenseTimeOfflineEvaluator()
+        op.set_ast(ast)
 
-        op1 = [[0, 2], [10, 2]]
-        op2 = [[0, 4], [10, 4]]
-
-        out = oper.update(op1, op2)
-        expected = [[0, 2], [10, 2]]
-
-        self.assertListEqual(out, expected, "until[0,1]")
-
-        ###############################################################
-
-        oper = UntilBoundedOperation(1, 2)
-
-        op1 = [[0, 2], [10, 2]]
-        op2 = [[0, 4], [10, 4]]
-
-        out = oper.update(op1, op2)
+        a = ['a', [[0, 2], [10, 2]]]
+        b = ['b', [[0, 4], [10, 4]]]
+        dataset = [a, b]
+        out = op.evaluate(dataset)
         expected = [[0, 2], [9, 2]]
 
         self.assertListEqual(out, expected, "until[0,1]")
 
     def test_not(self):
-        oper = NotOperation()
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.spec = 'not a'
+        ast.parse()
+        op = StlDenseTimeOfflineEvaluator()
+        op.set_ast(ast)
 
-        op = [[1.3, 4], [3.7, -2.2], [9.4, -33]]
-
-        out = oper.update(op)
+        a = ['a', [[1.3, 4], [3.7, -2.2], [9.4, -33]]]
+        dataset = [a]
+        out = op.evaluate(dataset)
         expected = [[1.3, -4], [3.7, 2.2], [9.4, 33]]
 
         self.assertListEqual(out, expected, "not dense time offline 1")
 
         #################################################################
 
-        oper = NotOperation()
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.spec = 'not a'
+        ast.parse()
+        op = StlDenseTimeOfflineEvaluator()
+        op.set_ast(ast)
 
-        op = [[1.3, -4]]
-
-        out = oper.update(op)
+        a = ['a', [[1.3, -4]]]
+        dataset = [a]
+        out = op.evaluate(dataset)
         expected = [[1.3, 4]]
 
         self.assertListEqual(out, expected, "not dense time offline 2")
 
         #################################################################
 
-        oper = NotOperation()
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.spec = 'not a'
+        ast.parse()
+        op = StlDenseTimeOfflineEvaluator()
+        op.set_ast(ast)
 
-        op = []
-
-        out = oper.update(op)
+        a = ['a', []]
+        dataset = [a]
+        out = op.evaluate(dataset)
         expected = []
 
         self.assertListEqual(out, expected, "not dense time offline 3")
 
     def test_predicate_leq(self):
-        oper = PredicateOperation(StlComparisonOperator.LEQ)
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.declare_var('b', 'float')
+        ast.spec = 'a <= b'
+        ast.parse()
+        op = StlDenseTimeOfflineEvaluator()
+        op.set_ast(ast)
 
-        left = [[0, 1.3], [0.7, 3], [1.3, 0.1], [2.1, -2.2]]
-        right = [[0, 2.5], [0.7, 4], [1.3, -1.2], [2.1, 1.7]]
-
-        out = oper.update(left, right)
-
+        a = ['a', [[0, 1.3], [0.7, 3], [1.3, 0.1], [2.1, -2.2]]]
+        b = ['b', [[0, 2.5], [0.7, 4], [1.3, -1.2], [2.1, 1.7]]]
+        dataset = [a, b]
+        out = op.evaluate(dataset)
         expected = [[0, 2.5 - 1.3], [0.7, 4 - 3], [1.3, -1.2-0.1], [2.1, 1.7+2.2]]
 
         self.assertListEqual(expected, out, "leq dense time offline 1")
 
         #################################################################################
 
-        oper = PredicateOperation(StlComparisonOperator.LEQ)
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.declare_var('b', 'float')
+        ast.spec = 'a <= b'
+        ast.parse()
+        op = StlDenseTimeOfflineEvaluator()
+        op.set_ast(ast)
 
-        left = [[0, 1.3], [0.7, 3], [1.3, 4], [2.1, 3]]
-        right = [[0, 2.5], [0.7, 4], [1.3, 5], [2.1, 4]]
-
-        out = oper.update(left, right)
+        a = ['a', [[0, 1.3], [0.7, 3], [1.3, 4], [2.1, 3]]]
+        b = ['b', [[0, 2.5], [0.7, 4], [1.3, 5], [2.1, 4]]]
+        dataset = [a, b]
+        out = op.evaluate(dataset)
 
         expected = [[0, 2.5-1.3], [0.7, 4-3], [2.1, 4-3]]
 
@@ -1569,151 +1647,212 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
 
         #################################################################################
 
-        oper = PredicateOperation(StlComparisonOperator.LEQ)
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.declare_var('b', 'float')
+        ast.spec = 'a <= b'
+        ast.parse()
+        op = StlDenseTimeOfflineEvaluator()
+        op.set_ast(ast)
 
-        left = [[1, 1], [3.5, 7], [4.7, 3], [5.3, 5], [6.2, 1]]
-        right = [[0, 2], [7, 3]]
-
-        out = oper.update(left, right)
-
+        a = ['a', [[1, 1], [3.5, 7], [4.7, 3], [5.3, 5], [6.2, 1]]]
+        b = ['b', [[0, 2], [7, 3]]]
+        dataset = [a, b]
+        out = op.evaluate(dataset)
         expected = [[1, 2-1], [3.5, 2-7], [4.7, 2-3], [5.3, 2-5], [6.2, 2-1]]
 
         self.assertListEqual(expected, out, "leq dense time offline 3")
 
         #################################################################################
 
-        oper = PredicateOperation(StlComparisonOperator.LEQ)
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.declare_var('b', 'float')
+        ast.spec = 'a <= b'
+        ast.parse()
+        op = StlDenseTimeOfflineEvaluator()
+        op.set_ast(ast)
 
-        left = [[1, 1], [3.5, 7], [4.7, 3], [5.3, 5], [6.2, 1]]
-        right = [[4, 2], [6, 3]]
-
-        out = oper.update(left, right)
-
+        a = ['a', [[1, 1], [3.5, 7], [4.7, 3], [5.3, 5], [6.2, 1]]]
+        b = ['b', [[4, 2], [6, 3]]]
+        dataset = [a, b]
+        out = op.evaluate(dataset)
         expected = [[4, 2-7], [4.7, 2-3], [5.3, 2-5], [6, 3-5]]
 
         self.assertListEqual(expected, out, "leq dense time offline 4")
 
         #################################################################################
 
-        oper = PredicateOperation(StlComparisonOperator.LEQ)
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.declare_var('b', 'float')
+        ast.spec = 'a <= b'
+        ast.parse()
+        op = StlDenseTimeOfflineEvaluator()
+        op.set_ast(ast)
 
-        left = [[1, 1], [2, 8], [3, 4], [4.5, 7]]
-        right = [[1.5, 1], [1.7, 2], [2.7, 3], [3, 5], [4, 1]]
-
-        out = oper.update(left, right)
-
+        a = ['a', [[1, 1], [2, 8], [3, 4], [4.5, 7]]]
+        b = ['b', [[1.5, 1], [1.7, 2], [2.7, 3], [3, 5], [4, 1]]]
+        dataset = [a, b]
+        out = op.evaluate(dataset)
         expected = [[1.5, 1-1], [1.7, 2-1], [2, 2-8], [2.7, 3-8], [3, 5-4], [4, 1-4]]
 
         self.assertListEqual(expected, out, "leq dense time offline 5")
 
         #################################################################################
 
-        oper = PredicateOperation(StlComparisonOperator.LEQ)
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.declare_var('b', 'float')
+        ast.spec = 'a <= b'
+        ast.parse()
+        op = StlDenseTimeOfflineEvaluator()
+        op.set_ast(ast)
 
-        left = [[1, 1], [2, 8], [3, 4], [4.5, 7]]
-        right = [[5, 1], [6, 2], [7, 3], [8, 5], [9, 1]]
-
-        out = oper.update(left, right)
-
+        a = ['a', [[1, 1], [2, 8], [3, 4], [4.5, 7]]]
+        b = ['b', [[5, 1], [6, 2], [7, 3], [8, 5], [9, 1]]]
+        dataset = [a, b]
+        out = op.evaluate(dataset)
         expected = []
 
         self.assertListEqual(expected, out, "leq dense time offline 6")
 
         #################################################################################
 
-        oper = PredicateOperation(StlComparisonOperator.LEQ)
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.declare_var('b', 'float')
+        ast.spec = 'a <= b'
+        ast.parse()
+        op = StlDenseTimeOfflineEvaluator()
+        op.set_ast(ast)
 
-        left = []
-        right = [[5, 1], [6, 2], [7, 3], [8, 5], [9, 1]]
-
-        out = oper.update(left, right)
-
+        a = ['a', []]
+        b = ['b', [[5, 1], [6, 2], [7, 3], [8, 5], [9, 1]]]
+        dataset = [a, b]
+        out = op.evaluate(dataset)
         expected = []
 
         self.assertListEqual(expected, out, "leq dense time offline 7")
 
         #################################################################################
 
-        oper = PredicateOperation(StlComparisonOperator.LEQ)
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.declare_var('b', 'float')
+        ast.spec = 'a <= b'
+        ast.parse()
+        op = StlDenseTimeOfflineEvaluator()
+        op.set_ast(ast)
 
-        left = [[1, 1], [2, 8], [3, 4], [4.5, 7]]
-        right = []
-
-        out = oper.update(left, right)
-
+        a = ['a', [[1, 1], [2, 8], [3, 4], [4.5, 7]]]
+        b = ['b', []]
+        dataset = [a, b]
+        out = op.evaluate(dataset)
         expected = []
 
         self.assertListEqual(expected, out, "leq dense time offline 8")
 
         #################################################################################
 
-        oper = PredicateOperation(StlComparisonOperator.LEQ)
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.declare_var('b', 'float')
+        ast.spec = 'a <= b'
+        ast.parse()
+        op = StlDenseTimeOfflineEvaluator()
+        op.set_ast(ast)
 
-        left = []
-        right = []
-
-        out = oper.update(left, right)
-
+        a = ['a', []]
+        b = ['b', []]
+        dataset = [a, b]
+        out = op.evaluate(dataset)
         expected = []
 
         self.assertListEqual(expected, out, "leq dense time offline 9")
 
     def test_predicate_less(self):
-        oper = PredicateOperation(StlComparisonOperator.LESS)
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.declare_var('b', 'float')
+        ast.spec = 'a < b'
+        ast.parse()
+        op = StlDenseTimeOfflineEvaluator()
+        op.set_ast(ast)
 
-        left = [[0, 1.3], [0.7, 3], [1.3, 0.1], [2.1, -2.2]]
-        right = [[0, 2.5], [0.7, 4], [1.3, -1.2], [2.1, 1.7]]
-
-        out = oper.update(left, right)
-
+        a = ['a', [[0, 1.3], [0.7, 3], [1.3, 0.1], [2.1, -2.2]]]
+        b = ['b', [[0, 2.5], [0.7, 4], [1.3, -1.2], [2.1, 1.7]]]
+        dataset = [a, b]
+        out = op.evaluate(dataset)
         expected = [[0, 2.5 - 1.3], [0.7, 4 - 3], [1.3, -1.2 - 0.1], [2.1, 1.7 + 2.2]]
 
         self.assertListEqual(expected, out, "less dense time offline 1")
 
     def test_predicate_geq(self):
-        oper = PredicateOperation(StlComparisonOperator.GEQ)
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.declare_var('b', 'float')
+        ast.spec = 'a >= b'
+        ast.parse()
+        op = StlDenseTimeOfflineEvaluator()
+        op.set_ast(ast)
 
-        left = [[0, 1.3], [0.7, 3], [1.3, 0.1], [2.1, -2.2]]
-        right = [[0, 2.5], [0.7, 4], [1.3, -1.2], [2.1, 1.7]]
-
-        out = oper.update(left, right)
-
+        a = ['a', [[0, 1.3], [0.7, 3], [1.3, 0.1], [2.1, -2.2]]]
+        b = ['b', [[0, 2.5], [0.7, 4], [1.3, -1.2], [2.1, 1.7]]]
+        dataset = [a, b]
+        out = op.evaluate(dataset)
         expected = [[0, 1.3-2.5], [0.7, 3-4], [1.3, 0.1+1.2], [2.1, -2.2-1.7]]
 
         self.assertListEqual(expected, out, "geq dense time offline 1")
 
     def test_predicate_greater(self):
-        oper = PredicateOperation(StlComparisonOperator.GREATER)
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.declare_var('b', 'float')
+        ast.spec = 'a > b'
+        ast.parse()
+        op = StlDenseTimeOfflineEvaluator()
+        op.set_ast(ast)
 
-        left = [[0, 1.3], [0.7, 3], [1.3, 0.1], [2.1, -2.2]]
-        right = [[0, 2.5], [0.7, 4], [1.3, -1.2], [2.1, 1.7]]
-
-        out = oper.update(left, right)
-
+        a = ['a', [[0, 1.3], [0.7, 3], [1.3, 0.1], [2.1, -2.2]]]
+        b = ['b', [[0, 2.5], [0.7, 4], [1.3, -1.2], [2.1, 1.7]]]
+        dataset = [a, b]
+        out = op.evaluate(dataset)
         expected = [[0, 1.3 - 2.5], [0.7, 3 - 4], [1.3, 0.1 + 1.2], [2.1, -2.2 - 1.7]]
 
         self.assertListEqual(expected, out, "greater dense time offline 1")
 
     def test_predicate_eq(self):
-        oper = PredicateOperation(StlComparisonOperator.EQUAL)
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.declare_var('b', 'float')
+        ast.spec = 'a == b'
+        ast.parse()
+        op = StlDenseTimeOfflineEvaluator()
+        op.set_ast(ast)
 
-        left = [[0, 1.3], [0.7, 3], [1.3, 0.1], [2.1, -2.2]]
-        right = [[0, 2.5], [0.7, 4], [1.3, -1.2], [2.1, 1.7]]
-
-        out = oper.update(left, right)
+        a = ['a', [[0, 1.3], [0.7, 3], [1.3, 0.1], [2.1, -2.2]]]
+        b = ['b', [[0, 2.5], [0.7, 4], [1.3, -1.2], [2.1, 1.7]]]
+        dataset = [a, b]
+        out = op.evaluate(dataset)
 
         expected = [[0, 1.3 - 2.5], [0.7, 3 - 4], [1.3, -0.1 - 1.2], [2.1, -2.2 - 1.7]]
 
         self.assertListEqual(expected, out, "eq dense time offline 1")
 
     def test_predicate_neq(self):
-        oper = PredicateOperation(StlComparisonOperator.NEQ)
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.declare_var('b', 'float')
+        ast.spec = 'a !== b'
+        ast.parse()
+        op = StlDenseTimeOfflineEvaluator()
+        op.set_ast(ast)
 
-        left = [[0, 1.3], [0.7, 3], [1.3, 0.1], [2.1, -2.2]]
-        right = [[0, 2.5], [0.7, 4], [1.3, -1.2], [2.1, 1.7]]
-
-        out = oper.update(left, right)
-
+        a = ['a', [[0, 1.3], [0.7, 3], [1.3, 0.1], [2.1, -2.2]]]
+        b = ['b', [[0, 2.5], [0.7, 4], [1.3, -1.2], [2.1, 1.7]]]
+        dataset = [a, b]
+        out = op.evaluate(dataset)
         expected = [[0, 2.5-1.3], [0.7, 4-3], [1.3, 0.1 + 1.2], [2.1, 2.2+1.7]]
 
         self.assertListEqual(expected, out, "neq dense time offline 1")
