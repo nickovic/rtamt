@@ -59,15 +59,4 @@ def dense_time_online_evaluator_factory(AstVisitor):
             AbstractDenseTimeOnlineEvaluator.__init__(self, *args, **kwargs)
             AstVisitor.__init__(self)
 
-        #def set_ast(self, ast):
-        #    AbstractDenseTimeOnlineEvaluator.set_ast(self, ast)
-
-        #    # init dict of online operators
-        #    self.online_operator_dict = dict()
-
-        #    AstVisitor.visitAst(self, self.ast)
-
-        #    return
-
-
     return DenseTimeOnlineEvaluator
