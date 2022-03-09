@@ -27,7 +27,6 @@ from rtamt.exception.stl.exception import STLNotImplementedException
 from rtamt.exception.ltl.exception import LTLNotImplementedException
 
 class StlDenseTimeOnlineAstVisitor(StlAstVisitor):
-
     def visitPredicate(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
         self.online_operator_dict[node.name] = PredicateOperation(node.operator)

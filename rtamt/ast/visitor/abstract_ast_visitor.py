@@ -30,7 +30,7 @@ class AbstractAstVisitor(object):
     def visitAst(self, ast, *args, **kwargs):
         out = []
         for spec in ast.specs:
-            out.append(self.visitSpec(spec, *args, **kwargs))
+            out.append(self.visit(spec, *args, **kwargs))
         return out
 
     def visitSpec(self, node, *args, **kwargs):

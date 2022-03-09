@@ -27,13 +27,15 @@ class AbstractOnlineEvaluator(AbstractEvaluator):
         # init dict of online operators
         self.online_operator_dict = dict()
 
+        self.visitAst(self.ast)
+
         # construct online_operator_dict for sub-specs
-        for key in self.ast.var_subspec_dict:
-            node = self.ast.var_subspec_dict[key]
-            self.visitAst(node)
+        #for key in self.ast.var_subspec_dict:
+        #    node = self.ast.var_subspec_dict[key]
+        #    self.visitAst(node)
 
         # construct online_operator_dict for spec
-        self.visitAst(self.ast)
+        #self.visitAst(self.ast)
         return
 
     @abstractmethod
@@ -59,7 +61,7 @@ class AbstractOnlineResetVisitor(AbstractAstVisitor):
 
 class AbstractOnlineUpdateVisitor(AbstractAstVisitor):
     def visitSpec(self, node, online_operator_dict, var_object_dict):
-        sample_return = self.visitChildren(node, online_operator_dict, var_object_dict)
+        sample_return = self.visit(node, online_operator_dict, var_object_dict)
         var_object_dict[node] = sample_return  #TODO subspec name is necessary as a key for var_object_dict.
         return sample_return
 
@@ -67,13 +69,13 @@ class AbstractOnlineUpdateVisitor(AbstractAstVisitor):
         sample_left  = self.visit(node.children[0], online_operator_dict, var_object_dict)
         sample_right = self.visit(node.children[1], online_operator_dict, var_object_dict)
         operator = online_operator_dict[node.name]
-        sample_return = operator.update(node, sample_left, sample_right)
+        sample_return = operator.update(sample_left, sample_right)
         return sample_return
 
     def visitUnary(self, node, online_operator_dict, var_object_dict):
         sample = self.visit(node.children[0], online_operator_dict, var_object_dict)
         operator = online_operator_dict[node.name]
-        sample_return = operator.update(node, sample)
+        sample_return = operator.update(sample)
         return sample_return
 
     def visitLeaf(self, node, online_operator_dict, var_object_dict):

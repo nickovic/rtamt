@@ -52,9 +52,22 @@ class TestSTLEvaluation(unittest.TestCase):
         self.assertListEqual(out, expected, "addition")
 
     def test_subtraction(self):
-        oper = SubtractionOperation()
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.declare_var('b', 'float')
+        ast.spec = 'a - b'
+        ast.parse()
+        op = StlDiscreteTimeOfflineEvaluator()
+        op.set_ast(ast)
 
-        out = oper.update(self.left, self.right)
+        a = [100, -1, -2, 5, -1]
+        b = [20, -2, 10, 4, -1]
+        t = [0, 1, 2, 3, 4]
+
+        dataset = {'time': t, 'a': a, 'b': b}
+
+        out = op.evaluate(dataset)
+
         expected = [80, 1, -12, 1, 0]
 
         self.assertListEqual(out, expected, "subtraction")

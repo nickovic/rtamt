@@ -10,7 +10,8 @@ from rtamt.exception.exception import RTAMTException
 class AbstractDenseTimeOnlineEvaluator(AbstractOnlineEvaluator, DenseTimeEvaluator):
 
     def __init__(self):
-        super(AbstractDenseTimeOnlineEvaluator, self).__init__()
+        AbstractOnlineEvaluator.__init__(self)
+        DenseTimeEvaluator.__init__(self)
         self.updateVisitor = DenseTimeOnlineUpdateVisitor()
         return
 
@@ -34,6 +35,8 @@ class AbstractDenseTimeOnlineEvaluator(AbstractOnlineEvaluator, DenseTimeEvaluat
         return rob
 
 
+
+
 class DenseTimeOnlineUpdateVisitor(AbstractOnlineUpdateVisitor):
     def visitVariable(self, node, online_operator_dict, var_object_dict):
         var = var_object_dict[node.var]
@@ -53,5 +56,18 @@ def dense_time_online_evaluator_factory(AstVisitor):
 
     class DenseTimeOnlineEvaluator(AbstractDenseTimeOnlineEvaluator, AstVisitor):
         def __init__(self, *args, **kwargs):
-            super(DenseTimeOnlineEvaluator, self).__init__(*args, **kwargs)
+            AbstractDenseTimeOnlineEvaluator.__init__(self, *args, **kwargs)
+            AstVisitor.__init__(self)
+
+        #def set_ast(self, ast):
+        #    AbstractDenseTimeOnlineEvaluator.set_ast(self, ast)
+
+        #    # init dict of online operators
+        #    self.online_operator_dict = dict()
+
+        #    AstVisitor.visitAst(self, self.ast)
+
+        #    return
+
+
     return DenseTimeOnlineEvaluator
