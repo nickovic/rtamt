@@ -602,7 +602,7 @@ class StlDenseTimeOfflineAstVisitor(StlAstVisitor):
     def visitTimedAlways(self, node, *args, **kwargs):
         sample = self.visit(node.children[0], *args, **kwargs)
 
-        sample_return = since_timed_operation(sample, node.begin, node.end)
+        sample_return = always_timed_operation(sample, node.begin, node.end)
         return sample_return
 
 

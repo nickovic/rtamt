@@ -199,6 +199,9 @@ class AbstractOnlineSpecification(AbstractSpecification):
     def reset(self):
         self.onlineEvaluator.reset()
 
+    def set_sampling_period(self, sampling_period=int(1), unit='s', tolerance=float(0.1)):
+        self.onlineEvaluator.set_sampling_period(sampling_period, unit, tolerance)
+
 
 # we would not recomend to use it
 # Please note that. Even the class have both evaluate and update, calling both with same instance is not expected.
