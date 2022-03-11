@@ -1,11 +1,12 @@
 from abc import ABCMeta
 import logging
-
+from fractions import Fraction
 from antlr4 import *
 from antlr4.InputStream import InputStream
 from antlr4.error.ErrorListener import ErrorListener
 
 from rtamt.exception.exception import AstParseException
+from rtamt.exception.stl.exception import STLException
 
 class AbstractAst:
     """An abstract class for AST parser
@@ -126,6 +127,8 @@ class AbstractAst:
         ctx = parser.specification_file()
         self.visit(ctx.specification())
         return
+
+
 
     @property
     def spec(self):

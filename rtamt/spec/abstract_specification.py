@@ -26,6 +26,14 @@ class AbstractSpecification(object):
     def name(self, name):
         self.__name = name
 
+    @property
+    def spec(self):
+        return self.ast.spec
+
+    @spec.setter
+    def spec(self, spec):
+        self.ast.spec = spec
+
     # forwarding to ast
     def add_var(self, var):
         self.ast.vars.add(var)
@@ -138,7 +146,6 @@ class AbstractOfflineSpecification(AbstractSpecification):
 
 class AbstractOnlineSpecification(AbstractSpecification):
     def __init__(self, ast, onlineEvaluator, pastifier=None):
-        #super(AbstractOnlineSpecification, self).__init__(ast)
         AbstractSpecification.__init__(self, ast)
         self.name = 'Abstract Online Specification'
         self.onlineEvaluator = onlineEvaluator
@@ -146,7 +153,7 @@ class AbstractOnlineSpecification(AbstractSpecification):
 
     # forwarding pastify
     def pastify(self):
-        pass
+        self.ast = self.pastifier.pastify(self.ast)
 
     # forwarding to evaluator
     def update(self, *args, **kwargs):
@@ -194,7 +201,7 @@ class AbstractOnlineSpecification(AbstractSpecification):
 
 
 # we would not recomend to use it
-# Please note that. Even the class have both evaluate and update, calling both with same istance is not expected.
+# Please note that. Even the class have both evaluate and update, calling both with same instance is not expected.
 class AbstractOfflineOnlineSpecification(AbstractOfflineSpecification, AbstractOnlineSpecification):
     def __init__(self, ast, offlineEvaluator, onlineEvaluator, pastifier=None):
         AbstractOfflineSpecification.__init__(self, ast, offlineEvaluator)

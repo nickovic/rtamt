@@ -74,8 +74,8 @@ class AbstractOnlineUpdateVisitor(AbstractAstVisitor):
 
     def visitUnary(self, node, online_operator_dict, var_object_dict):
         sample = self.visit(node.children[0], online_operator_dict, var_object_dict)
-        operator = online_operator_dict[node.name]
-        sample_return = operator.update(sample)
+        op = online_operator_dict[node.name]
+        sample_return = op.update(sample)
         return sample_return
 
     def visitLeaf(self, node, online_operator_dict, var_object_dict):

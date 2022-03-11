@@ -1,11 +1,12 @@
-# -*- coding: utf-8 -*-
 import operator
+from fractions import Fraction
 
 from rtamt.ast.visitor.abstract_ast_visitor import AbstractAstVisitor
 from rtamt.operation.abstract_online_evaluator import AbstractOnlineEvaluator, AbstractOnlineUpdateVisitor, AbstractOnlineResetVisitor
 from rtamt.operation.descrete_time_evaluator import DescreteTimeEvaluator
 
 from rtamt.exception.exception import RTAMTException
+from rtamt.exception.stl.exception import STLException
 
 class AbstractDiscreteTimeOnlineEvaluator(AbstractOnlineEvaluator, DescreteTimeEvaluator):
 
@@ -56,6 +57,36 @@ class AbstractDiscreteTimeOnlineEvaluator(AbstractOnlineEvaluator, DescreteTimeE
             var_value = data[1]
             self.ast.var_object_dict[var_name] = var_value
 
+    def time_unit_transformer(self, node):
+        b = node.begin
+        e = node.end
+        b_unit = node.begin_unit
+        e_unit = node.end_unit
+        if len(node.begin_unit) == 0:
+            if len(node.end_unit) > 0:
+                b_unit = node.end_unit
+            else:
+                b_unit = self.ast.unit
+                e_unit = self.ast.unit
+
+        b = b * self.ast.U[b_unit]
+        e = e * self.ast.U[e_unit]
+
+        sp = Fraction(self.sampling_period * self.ast.U[self.sampling_period_unit])
+        b = b / sp
+        e = e / sp
+
+        if b.numerator % b.denominator > 0:
+            raise STLException('The STL operator bound must be a multiple of the sampling period')
+
+        if e.numerator % e.denominator > 0:
+            raise STLException('The STL operator bound must be a multiple of the sampling period')
+
+        b = int(b)
+        e = int(e)
+
+        return b, e
+
     @property
     def update_counter(self):
         return self.__update_counter
@@ -85,4 +116,5 @@ def discrete_time_online_evaluator_factory(AstVisitor):
     class DiscreteTimeOnlineEvaluator(AbstractDiscreteTimeOnlineEvaluator, AstVisitor):
         def __init__(self, *args, **kwargs):
             super(DiscreteTimeOnlineEvaluator, self).__init__(*args, **kwargs)
+
     return DiscreteTimeOnlineEvaluator

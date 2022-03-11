@@ -125,15 +125,18 @@ class StlDenseTimeOnlineAstVisitor(StlAstVisitor):
 
     def visitTimedOnce(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
-        self.online_operator_dict[node.name] = OnceTimedOperation(node.begin, node.end)
+        begin, end = self.time_unit_transformer(node)
+        self.online_operator_dict[node.name] = OnceTimedOperation(begin, end)
 
     def visitTimedHistorically(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
-        self.online_operator_dict[node.name] = HistoricallyTimedOperation(node.begin, node.end)
+        begin, end = self.time_unit_transformer(node)
+        self.online_operator_dict[node.name] = HistoricallyTimedOperation(begin, end)
 
     def visitTimedSince(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
-        self.online_operator_dict[node.name] = SinceTimedOperation(node.begin, node.end)
+        begin, end = self.time_unit_transformer(node)
+        self.online_operator_dict[node.name] = SinceTimedOperation(begin, end)
 
     def visitTimedAlways(self, node, *args, **kwargs):
         raise STLNotImplementedException('Bounded always operator not implemented in STL dense-time monitor.')

@@ -34,7 +34,22 @@ class AbstractDenseTimeOnlineEvaluator(AbstractOnlineEvaluator, DenseTimeEvaluat
 
         return rob
 
+    def time_unit_transformer(self, node):
+        b = node.begin
+        e = node.end
+        b_unit = node.begin_unit
+        e_unit = node.end_unit
+        if len(node.begin_unit) == 0:
+            if len(node.end_unit) > 0:
+                b_unit = node.end_unit
+            else:
+                b_unit = self.ast.unit
+                e_unit = self.ast.unit
 
+        b = b * (self.ast.U[self.ast.unit] / self.ast.U[b_unit])
+        e = e * (self.ast.U[self.ast.unit] / self.ast.U[e_unit])
+
+        return b, e
 
 
 class DenseTimeOnlineUpdateVisitor(AbstractOnlineUpdateVisitor):

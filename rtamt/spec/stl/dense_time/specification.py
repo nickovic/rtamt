@@ -23,9 +23,9 @@ def STLDenseTimeSpecification(semantics=Semantics.STANDARD, language=Language.PY
     return spec
 
 def StlDenseTimeOfflineSpecification():
-    spec = AbstractOfflineSpecification(stlDenseTimeAst(), StlDenseTimeOfflineEvaluator())
+    spec = AbstractOfflineSpecification(StlAst(), StlDenseTimeOfflineEvaluator())
     return spec
 
 def StlDenseTimeOnlineSpecification():
-    spec = AbstractOnlineSpecification(stlDenseTimeAst(), StlDenseTimeOnlineEvaluator())
+    spec = AbstractOnlineSpecification(StlAst(), StlDenseTimeOnlineEvaluator())
     return spec
