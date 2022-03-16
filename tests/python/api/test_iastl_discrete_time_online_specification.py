@@ -1,10 +1,10 @@
 import unittest
 import rtamt
 
-class TestIASTLSpecDiscreteTimeOnlineEvaluation(unittest.TestCase):
+class TestIastlDiscreteTimeOnlineSpecification(unittest.TestCase):
 
     def __init__(self, *args, **kwargs):
-        super(TestIASTLSpecDiscreteTimeOnlineEvaluation, self).__init__(*args, **kwargs)
+        super(TestIastlDiscreteTimeOnlineSpecification, self).__init__(*args, **kwargs)
         self.left1 = 100
         self.right1 = 20
 

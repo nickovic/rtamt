@@ -5,9 +5,9 @@ from rtamt.ast.parser.stl.specification_parser import StlAst
 from rtamt.pastifier.stl.pastifier import StlPastifier
 
 
-class TestSTLPastification(unittest.TestCase):
+class TestStlPastification(unittest.TestCase):
     def __init__(self, *args, **kwargs):
-        super(TestSTLPastification, self).__init__(*args, **kwargs)
+        super(TestStlPastification, self).__init__(*args, **kwargs)
 
     def test_constant(self):
         ast = StlAst()

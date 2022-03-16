@@ -1,9 +1,9 @@
 import unittest
 import rtamt
 
-class TestSTLIntervalStyle(unittest.TestCase):
+class TestStlIntervalStyle(unittest.TestCase):
     def __init__(self, *args, **kwargs):
-        super(TestSTLIntervalStyle, self).__init__(*args, **kwargs)
+        super(TestStlIntervalStyle, self).__init__(*args, **kwargs)
 
     def test_interval_style(self):
         spec_comma = rtamt.STLDiscreteTimeSpecification()

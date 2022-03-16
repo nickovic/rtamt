@@ -3,9 +3,9 @@ import math
 
 from rtamt.spec.stl.discrete_time.specification import STLDiscreteTimeSpecification
 
-class TestSTLReset(unittest.TestCase):
+class TestStlReset(unittest.TestCase):
     def __init__(self, *args, **kwargs):
-        super(TestSTLReset, self).__init__(*args, **kwargs)
+        super(TestStlReset, self).__init__(*args, **kwargs)
 
     def test_constant(self):
         spec = STLDiscreteTimeSpecification()

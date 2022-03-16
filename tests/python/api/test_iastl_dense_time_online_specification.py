@@ -1,10 +1,10 @@
 import unittest
 import rtamt
 
-class TestIASTLSpecDenseTimeOnlineEvaluation(unittest.TestCase):
+class TestIastlDenseTimeOnlineSpecification(unittest.TestCase):
 
     def __init__(self, *args, **kwargs):
-        super(TestIASTLSpecDenseTimeOnlineEvaluation, self).__init__(*args, **kwargs)
+        super(TestIastlDenseTimeOnlineSpecification, self).__init__(*args, **kwargs)
 
     def test_output_robustness(self):
         spec = rtamt.STLDenseTimeSpecification(semantics=rtamt.Semantics.OUTPUT_ROBUSTNESS)

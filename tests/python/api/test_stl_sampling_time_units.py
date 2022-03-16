@@ -2,9 +2,9 @@ import unittest
 import rtamt
 
 
-class TestSTLSamplingTimeUnits(unittest.TestCase):
+class TestStlSamplingTimeUnits(unittest.TestCase):
     def __init__(self, *args, **kwargs):
-        super(TestSTLSamplingTimeUnits, self).__init__(*args, **kwargs)
+        super(TestStlSamplingTimeUnits, self).__init__(*args, **kwargs)
 
     def test_example(self):
         spec = rtamt.STLDiscreteTimeSpecification()

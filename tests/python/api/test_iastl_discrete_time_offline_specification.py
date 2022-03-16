@@ -1,10 +1,10 @@
 import unittest
 import rtamt
 
-class TestIASTLSpecDiscreteTimeOfflineEvaluation(unittest.TestCase):
+class TestIastlDiscreteTimeOfflineSpecification(unittest.TestCase):
 
     def __init__(self, *args, **kwargs):
-        super(TestIASTLSpecDiscreteTimeOfflineEvaluation, self).__init__(*args, **kwargs)
+        super(TestIastlDiscreteTimeOfflineSpecification, self).__init__(*args, **kwargs)
         self.dataset = {
             'time': [0, 1, 2, 3, 4],
             'req': [100, -1, -2, 5, -1],

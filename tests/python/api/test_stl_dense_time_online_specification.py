@@ -2,10 +2,10 @@ import unittest
 import math
 import rtamt
 
-class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
+class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
 
     def __init__(self, *args, **kwargs):
-        super(TestSTLBooleanAndTemporalOnline, self).__init__(*args, **kwargs)
+        super(TestStlDenseTimeOnlineSpecification, self).__init__(*args, **kwargs)
 
     def test_and_1(self):
         spec = rtamt.STLDenseTimeSpecification()

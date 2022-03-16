@@ -2,10 +2,10 @@ import unittest
 import math
 import rtamt
 
-class TestSTLEvaluation(unittest.TestCase):
+class TestStlDiscreteTimeOfflineSpecification(unittest.TestCase):
 
     def __init__(self, *args, **kwargs):
-        super(TestSTLEvaluation, self).__init__(*args, **kwargs)
+        super(TestStlDiscreteTimeOfflineSpecification, self).__init__(*args, **kwargs)
         self.dataset = {
             'time': [0, 1, 2, 3, 4],
             'req': [100, -1, -2, 5, -1],
