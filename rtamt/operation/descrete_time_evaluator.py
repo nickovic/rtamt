@@ -1,5 +1,5 @@
+from fractions import Fraction
 from rtamt.operation.time_evaluator import TimeEvaluator
-
 from rtamt.exception.exception import RTAMTException
 
 class DescreteTimeEvaluator(TimeEvaluator):
@@ -79,3 +79,33 @@ class DescreteTimeEvaluator(TimeEvaluator):
         tolerance = self.sampling_period * self.sampling_tolerance
         if duration < self.sampling_period - tolerance or duration > self.sampling_period + tolerance:
             self.sampling_violation_counter = self.sampling_violation_counter + 1
+
+    def time_unit_transformer(self, node):
+        b = node.begin
+        e = node.end
+        b_unit = node.begin_unit
+        e_unit = node.end_unit
+        if len(node.begin_unit) == 0:
+            if len(node.end_unit) > 0:
+                b_unit = node.end_unit
+            else:
+                b_unit = self.ast.unit
+                e_unit = self.ast.unit
+
+        b = b * self.ast.U[b_unit]
+        e = e * self.ast.U[e_unit]
+
+        sp = Fraction(self.sampling_period * self.ast.U[self.sampling_period_unit])
+        b = b / sp
+        e = e / sp
+
+        if b.numerator % b.denominator > 0:
+            raise RTAMTException('The operator bound must be a multiple of the sampling period')
+
+        if e.numerator % e.denominator > 0:
+            raise RTAMTException('The operator bound must be a multiple of the sampling period')
+
+        b = int(b)
+        e = int(e)
+
+        return b, e

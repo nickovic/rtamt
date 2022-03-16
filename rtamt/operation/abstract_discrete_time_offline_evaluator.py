@@ -39,7 +39,7 @@ class AbstractDiscreteTimeOfflineEvaluator(AbstractOfflineEvaluator, DescreteTim
         self.update_sampling_violation_counter(duration)
 
         # convert format
-        out_t = [[a[0],a[1]] for a in zip(ts,rob)]
+        out_t = [[a[0], a[1]] for a in zip(ts, rob)]
         rob = out_t
 
         return rob

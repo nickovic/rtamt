@@ -1,3 +1,4 @@
+import math
 import operator
 import collections
 
@@ -43,6 +44,34 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
         sample_return = []
         for i in sample:
             out_sample = abs(i)
+            sample_return.append(out_sample)
+        return sample_return
+
+    def visitSqrt(self, node, *args, **kwargs):
+        sample = self.visit(node.children[0], *args, **kwargs)
+
+        sample_return = []
+        for i in sample:
+            out_sample = math.sqrt(i)
+            sample_return.append(out_sample)
+        return sample_return
+
+    def visitExp(self, node, *args, **kwargs):
+        sample = self.visit(node.children[0], *args, **kwargs)
+
+        sample_return = []
+        for i in sample:
+            out_sample = math.exp(i)
+            sample_return.append(out_sample)
+        return sample_return
+
+    def visitPow(self, node, *args, **kwargs):
+        sample_1 = self.visit(node.children[0], *args, **kwargs)
+        sample_2 = self.visit(node.children[1], *args, **kwargs)
+
+        sample_return = []
+        for i in range(len(sample_1)):
+            out_sample = math.pow(sample_1[i], sample_2[i])
             sample_return.append(out_sample)
         return sample_return
 
@@ -268,28 +297,31 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
 
     def visitTimedOnce(self, node, *args, **kwargs):
         sample = self.visit(node.children[0], *args, **kwargs)
+        begin, end = self.time_unit_transformer(node)
 
-        sample = [-float("inf") for j in range(node.end)] + sample
-        sample_return = [max(sample[j - node.end:j - node.begin+ 1]) for j in range(node.end, len(sample))]
+        sample = [-float("inf") for j in range(end)] + sample
+        sample_return = [max(sample[j - end:j - begin+ 1]) for j in range(end, len(sample))]
         return sample_return
 
 
     def visitTimedHistorically(self, node, *args, **kwargs):
         sample = self.visit(node.children[0], *args, **kwargs)
+        begin, end = self.time_unit_transformer(node)
 
-        sample = [float("inf") for j in range(node.end)] + sample
-        sample_return = [min(sample[j - node.end:j - node.begin + 1]) for j in range(node.end, len(sample))]
+        sample = [float("inf") for j in range(end)] + sample
+        sample_return = [min(sample[j - end:j - begin + 1]) for j in range(end, len(sample))]
         return sample_return
 
     def visitTimedSince(self, node, *args, **kwargs):
         sample_left  = self.visit(node.children[0], *args, **kwargs)
         sample_right = self.visit(node.children[1], *args, **kwargs)
+        begin, end = self.time_unit_transformer(node)
 
         sample_return = []
-        buffer_left = collections.deque(maxlen=(node.end + 1))
-        buffer_right = collections.deque(maxlen=(node.end + 1))
+        buffer_left = collections.deque(maxlen=(end + 1))
+        buffer_right = collections.deque(maxlen=(end + 1))
 
-        for i in range(node.end + 1):
+        for i in range(end + 1):
             s_left = float("inf")
             s_right = - float("inf")
             buffer_left.append(s_left)
@@ -299,11 +331,12 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
             buffer_left.append(sample_left[i])
             buffer_right.append(sample_right[i])
             out_sample = - float("inf")
+            
 
-            for j in range(node.end-node.begin+1):
+            for j in range(end-begin+1):
                 c_left = float("inf")
                 c_right = buffer_right[j]
-                for k in range(j+1, node.end+1):
+                for k in range(j+1, end+1):
                     c_left = min(c_left, buffer_left[k])
                 out_sample = max(out_sample, min(c_left, c_right))
             sample_return.append(out_sample)
@@ -312,10 +345,11 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
 
     def visitTimedAlways(self, node, *args, **kwargs):
         sample = self.visit(node.children[0], *args, **kwargs)
+        begin, end = self.time_unit_transformer(node)
 
-        diff = node.end - node.begin
-        sample_return  = [min(sample[j:j+diff+1]) for j in range(node.begin, node.end+1)]
-        tmp  = [min(sample[j:j+diff+1]) for j in range(node.end+1,len(sample))]
+        diff = end - begin
+        sample_return  = [min(sample[j:j+diff+1]) for j in range(begin, end+1)]
+        tmp  = [min(sample[j:j+diff+1]) for j in range(end+1,len(sample))]
         sample_return += tmp
         tmp  = [float("inf") for j in range(len(sample)-len(sample_return))]
         sample_return += tmp
@@ -324,10 +358,11 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
 
     def visitTimedEventually(self, node, *args, **kwargs):
         sample = self.visit(node.children[0], *args, **kwargs)
+        begin, end = self.time_unit_transformer(node)
 
-        diff = node.end - node.begin
-        sample_return  = [max(sample[j:j+diff+1]) for j in range(node.begin, node.end+1)]
-        tmp  = [max(sample[j:j+diff+1]) for j in range(node.end+1,len(sample))]
+        diff = end - begin
+        sample_return  = [max(sample[j:j+diff+1]) for j in range(begin, end+1)]
+        tmp  = [max(sample[j:j+diff+1]) for j in range(end+1,len(sample))]
         sample_return += tmp
         tmp  = [-float("inf") for j in range(len(sample)-len(sample_return))]
         sample_return += tmp
@@ -337,12 +372,13 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
     def visitTimedUntil(self, node, *args, **kwargs):
         sample_left  = self.visit(node.children[0], *args, **kwargs)
         sample_right = self.visit(node.children[1], *args, **kwargs)
+        begin, end = self.time_unit_transformer(node)
 
         sample_return = []
-        buffer_left = collections.deque(maxlen=(node.end + 1))
-        buffer_right = collections.deque(maxlen=(node.end + 1))
+        buffer_left = collections.deque(maxlen=(end + 1))
+        buffer_right = collections.deque(maxlen=(end + 1))
 
-        for i in range(node.end + 1):
+        for i in range(end + 1):
             s_left = float("inf")
             s_right = - float("inf")
             buffer_left.append(s_left)
@@ -352,10 +388,10 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
             buffer_right.append(sample_right[i])
             out_sample = - float("inf")
 
-            for j in range(node.end-node.begin+1):
+            for j in range(end-begin+1):
                 c_left = float("inf")
                 c_right = buffer_right[j]
-                for k in range(j+1, node.end+1):
+                for k in range(j+1, end+1):
                     c_left = min(c_left, buffer_left[k])
                 out_sample = max(out_sample, min(c_left, c_right))
             sample_return.append(out_sample)

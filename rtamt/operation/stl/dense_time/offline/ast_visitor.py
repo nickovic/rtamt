@@ -579,43 +579,44 @@ class StlDenseTimeOfflineAstVisitor(StlAstVisitor):
 
     def visitTimedOnce(self, node, *args, **kwargs):
         sample = self.visit(node.children[0], *args, **kwargs)
-
-        sample_return = once_timed_operation(sample, node.begin, node.end)
+        begin, end = self.time_unit_transformer(node)
+        sample_return = once_timed_operation(sample, begin, end)
         return sample_return
 
 
     def visitTimedHistorically(self, node, *args, **kwargs):
         sample =  self.visit(node.children[0], *args, **kwargs)
-
-        sample_return = historically_timed_operation(sample, node.begin, node.end)
+        begin, end = self.time_unit_transformer(node)
+        sample_return = historically_timed_operation(sample, begin, end)
         return sample_return
 
 
     def visitTimedSince(self, node, *args, **kwargs):
         sample_left  = self.visit(node.children[0], *args, **kwargs)
         sample_right = self.visit(node.children[1], *args, **kwargs)
+        begin, end = self.time_unit_transformer(node)
 
-        sample_return = since_timed_operation(sample_left, sample_right, node.begin, node.end)
+        sample_return = since_timed_operation(sample_left, sample_right, begin, end)
         return sample_return
 
 
     def visitTimedAlways(self, node, *args, **kwargs):
         sample = self.visit(node.children[0], *args, **kwargs)
-
-        sample_return = always_timed_operation(sample, node.begin, node.end)
+        begin, end = self.time_unit_transformer(node)
+        sample_return = always_timed_operation(sample, begin, end)
         return sample_return
 
 
     def visitTimedEventually(self, node, *args, **kwargs):
         sample =  self.visit(node.children[0], *args, **kwargs)
-
-        sample_return = eventually_timed_operation(sample, node.begin, node.end)
+        begin, end = self.time_unit_transformer(node)
+        sample_return = eventually_timed_operation(sample, begin, end)
         return sample_return
 
 
     def visitTimedUntil(self, node, *args, **kwargs):
         sample_left  = self.visit(node.children[0], *args, **kwargs)
         sample_right = self.visit(node.children[1], *args, **kwargs)
-
-        sample_return = until_timed_operation(sample_left, sample_right, node.begin, node.end)
+        begin, end = self.time_unit_transformer(node)
+        sample_return = until_timed_operation(sample_left, sample_right, begin, end)
         return sample_return

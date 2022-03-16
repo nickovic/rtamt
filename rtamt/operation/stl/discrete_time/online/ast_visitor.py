@@ -70,7 +70,7 @@ class StlDiscreteTimeOnlineAstVisitor(StlAstVisitor):
 
     def visitNot(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
-        self.online_operator_dict[node.name] = NotOperation
+        self.online_operator_dict[node.name] = NotOperation()
 
     def visitAnd(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)

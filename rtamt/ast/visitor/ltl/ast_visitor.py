@@ -104,6 +104,15 @@ class LtlAstVisitor(AbstractAstVisitor):
     def visitAbs(self, node, *args, **kwargs):
         return self.visitChildren(node, *args, **kwargs)
 
+    def visitSqrt(self, node, *args, **kwargs):
+        return self.visitChildren(node, *args, **kwargs)
+
+    def visitPow(self, node, *args, **kwargs):
+        return self.visitChildren(node, *args, **kwargs)
+
+    def visitExp(self, node, *args, **kwargs):
+        return self.visitChildren(node, *args, **kwargs)
+
     def visitAddition(self, node, *args, **kwargs):
         return self.visitChildren(node, *args, **kwargs)
 
