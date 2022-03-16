@@ -2,7 +2,7 @@ import unittest
 
 from rtamt.ast.parser.ltl.specification_parser import LtlAst
 from rtamt.ast.parser.stl.specification_parser import StlAst
-from rtamt.pastifier.stl.pastifier import STLPastifier
+from rtamt.pastifier.stl.pastifier import StlPastifier
 
 
 class TestSTLPastification(unittest.TestCase):
@@ -14,7 +14,7 @@ class TestSTLPastification(unittest.TestCase):
         ast.spec = '2'
         ast.parse()
 
-        pastifier = STLPastifier()
+        pastifier = StlPastifier()
         ast = pastifier.pastify(ast)
 
         self.assertEqual(str(2.0), ast.specs[0].name, 'Const pastification assertion')
@@ -25,7 +25,7 @@ class TestSTLPastification(unittest.TestCase):
         ast.spec = 'req'
         ast.parse()
 
-        pastifier = STLPastifier()
+        pastifier = StlPastifier()
         ast = pastifier.pastify(ast)
 
         self.assertEqual('req', ast.specs[0].name, 'Var pastification assertion')
@@ -35,7 +35,7 @@ class TestSTLPastification(unittest.TestCase):
         # ast.spec = 'myvar.req.val'
         # ast.parse()
 
-        # pastifier = STLPastifier()
+        # pastifier = StlPastifier()
         # ast = pastifier.pastify(ast)
 
         # self.assertEqual('myvar.req.val', ast.specs[0].name, 'Var pastification assertion')
@@ -46,7 +46,7 @@ class TestSTLPastification(unittest.TestCase):
         ast.spec = 'prev req'
         ast.parse()
 
-        pastifier = STLPastifier()
+        pastifier = StlPastifier()
         ast = pastifier.pastify(ast)
 
         self.assertEqual('previous(req)', ast.specs[0].name, 'Prev pastification assertion')
@@ -58,7 +58,7 @@ class TestSTLPastification(unittest.TestCase):
         ast.spec = 'X req'
         ast.parse()
 
-        pastifier = STLPastifier()
+        pastifier = StlPastifier()
         ast = pastifier.pastify(ast)
 
         self.assertEqual('req', ast.specs[0].name, 'Next pastification assertion')
@@ -69,7 +69,7 @@ class TestSTLPastification(unittest.TestCase):
         ast.spec = 'abs(req)'
         ast.parse()
 
-        pastifier = STLPastifier()
+        pastifier = StlPastifier()
         ast = pastifier.pastify(ast)
 
         self.assertEqual('abs(req)', ast.specs[0].name, 'Abs pastification assertion')
@@ -80,7 +80,7 @@ class TestSTLPastification(unittest.TestCase):
         ast.spec = 'sqrt(req)'
         ast.parse()
 
-        pastifier = STLPastifier()
+        pastifier = StlPastifier()
         ast = pastifier.pastify(ast)
 
         self.assertEqual('sqrt(req)', ast.specs[0].name, 'Sqrt pastification assertion')
@@ -92,7 +92,7 @@ class TestSTLPastification(unittest.TestCase):
         ast.spec = 'exp(req)'
         ast.parse()
 
-        pastifier = STLPastifier()
+        pastifier = StlPastifier()
         ast = pastifier.pastify(ast)
 
         self.assertEqual('exp(req)', ast.specs[0].name, 'Exp pastification assertion')
@@ -104,7 +104,7 @@ class TestSTLPastification(unittest.TestCase):
         ast.spec = 'pow(req, gnt)'
         ast.parse()
 
-        pastifier = STLPastifier()
+        pastifier = StlPastifier()
         ast = pastifier.pastify(ast)
 
         self.assertEqual('pow(req,gnt)', ast.specs[0].name, 'Pow pastification assertion')
@@ -116,7 +116,7 @@ class TestSTLPastification(unittest.TestCase):
         ast.spec = 'req + gnt'
         ast.parse()
 
-        pastifier = STLPastifier()
+        pastifier = StlPastifier()
         ast = pastifier.pastify(ast)
 
         self.assertEqual('(req)+(gnt)', ast.specs[0].name, 'Addition pastification assertion')
@@ -128,7 +128,7 @@ class TestSTLPastification(unittest.TestCase):
         ast.spec = 'req - gnt'
         ast.parse()
 
-        pastifier = STLPastifier()
+        pastifier = StlPastifier()
         ast = pastifier.pastify(ast)
 
         self.assertEqual('(req)-(gnt)', ast.specs[0].name, 'Subtraction pastification assertion')
@@ -140,7 +140,7 @@ class TestSTLPastification(unittest.TestCase):
         ast.spec = 'req * gnt'
         ast.parse()
 
-        pastifier = STLPastifier()
+        pastifier = StlPastifier()
         ast = pastifier.pastify(ast)
 
         self.assertEqual('(req)*(gnt)', ast.specs[0].name, 'Multiplication pastification assertion')
@@ -152,7 +152,7 @@ class TestSTLPastification(unittest.TestCase):
         ast.spec = 'req / gnt'
         ast.parse()
 
-        pastifier = STLPastifier()
+        pastifier = StlPastifier()
         ast = pastifier.pastify(ast)
 
         self.assertEqual('(req)/(gnt)', ast.specs[0].name, 'Div pastification assertion')
@@ -164,7 +164,7 @@ class TestSTLPastification(unittest.TestCase):
         ast.spec = 'req <= gnt'
         ast.parse()
 
-        pastifier = STLPastifier()
+        pastifier = StlPastifier()
         ast = pastifier.pastify(ast)
 
         self.assertEqual('(req)<=(gnt)', ast.specs[0].name, 'LEQ pastification assertion')
@@ -176,7 +176,7 @@ class TestSTLPastification(unittest.TestCase):
         ast.spec = 'req < gnt'
         ast.parse()
 
-        pastifier = STLPastifier()
+        pastifier = StlPastifier()
         ast = pastifier.pastify(ast)
 
         self.assertEqual('(req)<(gnt)', ast.specs[0].name, 'LESS pastification assertion')
@@ -188,7 +188,7 @@ class TestSTLPastification(unittest.TestCase):
         ast.spec = 'req >= gnt'
         ast.parse()
 
-        pastifier = STLPastifier()
+        pastifier = StlPastifier()
         ast = pastifier.pastify(ast)
 
         self.assertEqual('(req)>=(gnt)', ast.specs[0].name, 'GEQ pastification assertion')
@@ -200,7 +200,7 @@ class TestSTLPastification(unittest.TestCase):
         ast.spec = 'req > gnt'
         ast.parse()
 
-        pastifier = STLPastifier()
+        pastifier = StlPastifier()
         ast = pastifier.pastify(ast)
 
         self.assertEqual('(req)>(gnt)', ast.specs[0].name, 'GREATER pastification assertion')
@@ -212,7 +212,7 @@ class TestSTLPastification(unittest.TestCase):
         ast.spec = 'req == gnt'
         ast.parse()
 
-        pastifier = STLPastifier()
+        pastifier = StlPastifier()
         ast = pastifier.pastify(ast)
 
         self.assertEqual('(req)==(gnt)', ast.specs[0].name, 'EQ pastification assertion')
@@ -224,7 +224,7 @@ class TestSTLPastification(unittest.TestCase):
         ast.spec = 'req !== gnt'
         ast.parse()
 
-        pastifier = STLPastifier()
+        pastifier = StlPastifier()
         ast = pastifier.pastify(ast)
 
         self.assertEqual('(req)!=(gnt)', ast.specs[0].name, 'NEQ pastification assertion')
@@ -236,7 +236,7 @@ class TestSTLPastification(unittest.TestCase):
         ast.spec = 'not req'
         ast.parse()
 
-        pastifier = STLPastifier()
+        pastifier = StlPastifier()
         ast = pastifier.pastify(ast)
 
         self.assertEqual('not(req)', ast.specs[0].name, 'Not pastification assertion')
@@ -249,7 +249,7 @@ class TestSTLPastification(unittest.TestCase):
         ast.spec = 'req and gnt'
         ast.parse()
 
-        pastifier = STLPastifier()
+        pastifier = StlPastifier()
         ast = pastifier.pastify(ast)
 
         self.assertEqual('(req)and(gnt)', ast.specs[0].name, 'Conjunction pastification assertion')
@@ -261,7 +261,7 @@ class TestSTLPastification(unittest.TestCase):
         ast.spec = 'req or gnt'
         ast.parse()
 
-        pastifier = STLPastifier()
+        pastifier = StlPastifier()
         ast = pastifier.pastify(ast)
 
         self.assertEqual('(req)or(gnt)', ast.specs[0].name, 'Disjunction pastification assertion')
@@ -273,7 +273,7 @@ class TestSTLPastification(unittest.TestCase):
         ast.spec = 'req implies gnt'
         ast.parse()
 
-        pastifier = STLPastifier()
+        pastifier = StlPastifier()
         ast = pastifier.pastify(ast)
 
         self.assertEqual('(req)->(gnt)', ast.specs[0].name, '-> pastification assertion')
@@ -285,7 +285,7 @@ class TestSTLPastification(unittest.TestCase):
         ast.spec = 'req iff gnt'
         ast.parse()
 
-        pastifier = STLPastifier()
+        pastifier = StlPastifier()
         ast = pastifier.pastify(ast)
 
         self.assertEqual('(req)<->(gnt)', ast.specs[0].name, 'Iff pastification assertion')
@@ -297,7 +297,7 @@ class TestSTLPastification(unittest.TestCase):
         ast.spec = 'req xor gnt'
         ast.parse()
 
-        pastifier = STLPastifier()
+        pastifier = StlPastifier()
         ast = pastifier.pastify(ast)
 
         self.assertEqual('(req)xor(gnt)', ast.specs[0].name, 'Xor pastification assertion')
@@ -308,7 +308,7 @@ class TestSTLPastification(unittest.TestCase):
         ast.spec = 'rise(req)'
         ast.parse()
 
-        pastifier = STLPastifier()
+        pastifier = StlPastifier()
         ast = pastifier.pastify(ast)
 
         self.assertEqual('rise(req)', ast.specs[0].name, 'Rise pastification assertion')
@@ -319,7 +319,7 @@ class TestSTLPastification(unittest.TestCase):
         ast.spec = 'fall(req)'
         ast.parse()
 
-        pastifier = STLPastifier()
+        pastifier = StlPastifier()
         ast = pastifier.pastify(ast)
 
         self.assertEqual('fall(req)', ast.specs[0].name, 'Fall pastification assertion')
@@ -330,7 +330,7 @@ class TestSTLPastification(unittest.TestCase):
         ast.spec = 'O req'
         ast.parse()
 
-        pastifier = STLPastifier()
+        pastifier = StlPastifier()
         ast = pastifier.pastify(ast)
 
         self.assertEqual('once(req)', ast.specs[0].name, 'Once pastification assertion')
@@ -342,7 +342,7 @@ class TestSTLPastification(unittest.TestCase):
         ast.spec = 'H req'
         ast.parse()
 
-        pastifier = STLPastifier()
+        pastifier = StlPastifier()
         ast = pastifier.pastify(ast)
 
         self.assertEqual('historically(req)', ast.specs[0].name, 'Historically pastification assertion')
@@ -354,7 +354,7 @@ class TestSTLPastification(unittest.TestCase):
         ast.spec = 'req since gnt'
         ast.parse()
 
-        pastifier = STLPastifier()
+        pastifier = StlPastifier()
         ast = pastifier.pastify(ast)
 
         self.assertEqual('(req)since(gnt)', ast.specs[0].name, 'Since pastification assertion')
@@ -365,7 +365,7 @@ class TestSTLPastification(unittest.TestCase):
         ast.spec = 'O[0,1] req'
         ast.parse()
 
-        pastifier = STLPastifier()
+        pastifier = StlPastifier()
         ast = pastifier.pastify(ast)
 
         self.assertEqual('once[0,1](req)', ast.specs[0].name, 'Once pastification assertion')
@@ -376,7 +376,7 @@ class TestSTLPastification(unittest.TestCase):
         ast.spec = 'H[0,1] req'
         ast.parse()
 
-        pastifier = STLPastifier()
+        pastifier = StlPastifier()
         ast = pastifier.pastify(ast)
 
         self.assertEqual('historically[0,1](req)', ast.specs[0].name, 'Historically pastification assertion')
@@ -387,7 +387,7 @@ class TestSTLPastification(unittest.TestCase):
         ast.spec = 'F[0,1] req'
         ast.parse()
 
-        pastifier = STLPastifier()
+        pastifier = StlPastifier()
         ast = pastifier.pastify(ast)
 
         self.assertEqual('once[0,1](req)', ast.specs[0].name, 'Eventually pastification assertion')
@@ -398,7 +398,7 @@ class TestSTLPastification(unittest.TestCase):
         ast.spec = 'always[0,1] req'
         ast.parse()
 
-        pastifier = STLPastifier()
+        pastifier = StlPastifier()
         ast = pastifier.pastify(ast)
 
         self.assertEqual('historically[0,1](req)', ast.specs[0].name, 'Always pastification assertion')
@@ -410,7 +410,7 @@ class TestSTLPastification(unittest.TestCase):
         ast.spec = 'req until[0,1] gnt'
         ast.parse()
 
-        pastifier = STLPastifier()
+        pastifier = StlPastifier()
         ast = pastifier.pastify(ast)
 
         self.assertEqual('(req)precedes[0,1](gnt)', ast.specs[0].name, 'Until pastification assertion')
@@ -422,7 +422,7 @@ class TestSTLPastification(unittest.TestCase):
         ast.spec = 'req since[0,1] gnt'
         ast.parse()
 
-        pastifier = STLPastifier()
+        pastifier = StlPastifier()
         ast = pastifier.pastify(ast)
 
         self.assertEqual('(req)since[0,1](gnt)', ast.specs[0].name, 'Since pastification assertion')
@@ -434,7 +434,7 @@ class TestSTLPastification(unittest.TestCase):
         ast.spec = 'rise(req) since[2,6] (once[1,2]historically(gnt))'
         ast.parse()
 
-        pastifier = STLPastifier()
+        pastifier = StlPastifier()
         ast = pastifier.pastify(ast)
 
         self.assertEqual('(rise(req))since[2,6](once[1,2](historically(gnt)))', ast.specs[0].name, 'Complex pastification assertion')
@@ -447,7 +447,7 @@ class TestSTLPastification(unittest.TestCase):
         ast.spec = '(req until[1,2] gnt) -> (eventually[0,6] ack)'
         ast.parse()
 
-        pastifier = STLPastifier()
+        pastifier = StlPastifier()
         ast = pastifier.pastify(ast)
 
         self.assertEqual('((once[4,4](req))precedes[1,2](once[4,4](gnt)))->(once[0,6](ack))', ast.specs[0].name, 'Complex pastification assertion')
@@ -459,7 +459,7 @@ class TestSTLPastification(unittest.TestCase):
         ast.spec = '(eventually[5,6](req)) -> (eventually[3,3] once[1,2](gnt))'
         ast.parse()
 
-        pastifier = STLPastifier()
+        pastifier = StlPastifier()
         ast = pastifier.pastify(ast)
 
         self.assertEqual('(once[0,1](req))->(once[1,2](once[3,3](gnt)))', ast.specs[0].name, 'Complex pastification assertion')

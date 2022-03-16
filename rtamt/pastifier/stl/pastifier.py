@@ -12,7 +12,7 @@ from rtamt.exception.stl.exception import STLException
 from rtamt.pastifier.stl.horizon import StlHorizon
 
 
-class STLPastifier(LtlPastifier, StlAstVisitor):
+class StlPastifier(LtlPastifier, StlAstVisitor):
 
     def __init__(self):
         LtlPastifier.__init__(self)

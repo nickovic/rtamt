@@ -1,4 +1,4 @@
-from rtamt.pastifier.stl.pastifier import STLPastifier
+from rtamt.pastifier.stl.pastifier import StlPastifier
 from rtamt.spec.abstract_specification import AbstractOfflineSpecification, AbstractOnlineSpecification, AbstractOfflineOnlineSpecification
 
 from rtamt.ast.parser.stl.specification_parser import StlAst
@@ -17,7 +17,7 @@ def STLDenseTimeSpecification(semantics=Semantics.STANDARD, language=Language.PY
     Attributes:
     """
     if semantics == Semantics.STANDARD and language == Language.PYTHON:
-        spec = AbstractOfflineOnlineSpecification(StlAst(), StlDenseTimeOfflineEvaluator(), StlDenseTimeOnlineEvaluator(), pastifier=STLPastifier())
+        spec = AbstractOfflineOnlineSpecification(StlAst(), StlDenseTimeOfflineEvaluator(), StlDenseTimeOnlineEvaluator(), pastifier=StlPastifier())
     else:
         raise Exception()
 
@@ -28,5 +28,5 @@ def StlDenseTimeOfflineSpecification():
     return spec
 
 def StlDenseTimeOnlineSpecification():
-    spec = AbstractOnlineSpecification(StlAst(), StlDenseTimeOnlineEvaluator(), pastifier=STLPastifier())
+    spec = AbstractOnlineSpecification(StlAst(), StlDenseTimeOnlineEvaluator(), pastifier=StlPastifier())
     return spec

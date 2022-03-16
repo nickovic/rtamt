@@ -5,7 +5,7 @@ from rtamt.ast.parser.stl.specification_parser import StlAst
 from rtamt.operation.stl.discrete_time.offline.evaluator import StlDiscreteTimeOfflineEvaluator
 from rtamt.operation.stl.discrete_time.online.evaluator import StlDiscreteTimeOnlineEvaluator
 from rtamt.enumerations.options import *
-from rtamt.pastifier.stl.pastifier import STLPastifier
+from rtamt.pastifier.stl.pastifier import StlPastifier
 
 
 def STLDiscreteTimeSpecification(semantics=Semantics.STANDARD, language=Language.PYTHON):
@@ -16,7 +16,7 @@ def STLDiscreteTimeSpecification(semantics=Semantics.STANDARD, language=Language
     Attributes:
     """
     if semantics == Semantics.STANDARD and language == Language.PYTHON:
-        spec = AbstractOfflineOnlineSpecification(StlAst(), StlDiscreteTimeOfflineEvaluator(), StlDiscreteTimeOnlineEvaluator(), pastifier=STLPastifier())
+        spec = AbstractOfflineOnlineSpecification(StlAst(), StlDiscreteTimeOfflineEvaluator(), StlDiscreteTimeOnlineEvaluator(), pastifier=StlPastifier())
     else:
         raise Exception()
     return spec
@@ -27,6 +27,6 @@ def StlDiscreteTimeOfflineSpecification():
     return spec
 
 def StlDiscreteTimeOnlineSpecification():
-    spec = AbstractOnlineSpecification(StlAst(), StlDiscreteTimeOnlineEvaluator(), pastifier=STLPastifier())
+    spec = AbstractOnlineSpecification(StlAst(), StlDiscreteTimeOnlineEvaluator(), pastifier=StlPastifier())
     return spec
 
