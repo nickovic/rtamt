@@ -162,12 +162,15 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
                              "Problem with 6th example:\nExpected output: %s\nComputed output: %s" % (
                                  out_expected_3, out))
 
-        #out_expected_final = [[8.1, 6]]
-        #out_computed_final = op.update_final([], [])
+        out_expected_final = [[8.1, 6]]
+        a = ['a', []]
+        b = ['b', []]
+        dataset = [a, b]
+        out_computed_final = op.update_final(dataset)
 
-        #self.assertListEqual(out_expected_final, out_computed_final,
-        #                     "Problem with 6th example:\nExpected output: %s\nComputed output: %s" % (
-        #                         out_expected_final, out_computed_final))
+        self.assertListEqual(out_expected_final, out_computed_final,
+                             "Problem with 6th example:\nExpected output: %s\nComputed output: %s" % (
+                                 out_expected_final, out_computed_final))
 
 
     def test_iff(self):

@@ -3,12 +3,12 @@ from fractions import Fraction
 
 from rtamt.ast.visitor.abstract_ast_visitor import AbstractAstVisitor
 from rtamt.operation.abstract_online_evaluator import AbstractOnlineEvaluator, AbstractOnlineUpdateVisitor, AbstractOnlineResetVisitor
-from rtamt.operation.descrete_time_evaluator import DescreteTimeEvaluator
+from rtamt.operation.discrete_time_evaluator import DiscreteTimeEvaluator
 
 from rtamt.exception.exception import RTAMTException
 from rtamt.exception.stl.exception import STLException
 
-class AbstractDiscreteTimeOnlineEvaluator(AbstractOnlineEvaluator, DescreteTimeEvaluator):
+class AbstractDiscreteTimeOnlineEvaluator(AbstractOnlineEvaluator, DiscreteTimeEvaluator):
 
     def __init__(self):
         super(AbstractDiscreteTimeOnlineEvaluator, self).__init__()

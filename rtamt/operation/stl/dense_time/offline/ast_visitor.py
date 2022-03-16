@@ -344,7 +344,7 @@ class StlDenseTimeOfflineAstVisitor(StlAstVisitor):
 
         sample_return = []
         for i in sample:
-            if i[0] < 0:
+            if i[1] < 0:
                 raise Exception('sqrt: the input is smaller than 0.')
             out_time = i[0]
             out_value = math.sqrt(i[1])

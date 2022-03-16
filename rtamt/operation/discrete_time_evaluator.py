@@ -2,10 +2,10 @@ from fractions import Fraction
 from rtamt.operation.time_evaluator import TimeEvaluator
 from rtamt.exception.exception import RTAMTException
 
-class DescreteTimeEvaluator(TimeEvaluator):
+class DiscreteTimeEvaluator(TimeEvaluator):
 
     def __init__(self):
-        super(DescreteTimeEvaluator, self).__init__()
+        super(DiscreteTimeEvaluator, self).__init__()
 
         self.DEFAULT_TOLERANCE = float(0.1)
 
@@ -31,6 +31,14 @@ class DescreteTimeEvaluator(TimeEvaluator):
     @sampling_period.setter
     def sampling_period(self, sampling_period):
         self.__sampling_period = sampling_period
+
+    @property
+    def sampling_tolerance(self):
+        return self.__sampling_tolerance
+
+    @sampling_tolerance.setter
+    def sampling_tolerance(self, sampling_tolerance):
+        self.__sampling_tolerance = sampling_tolerance
 
     @property
     def sampling_period_unit(self):
