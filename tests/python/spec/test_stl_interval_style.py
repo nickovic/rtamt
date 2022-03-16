@@ -24,9 +24,9 @@ class TestSTLIntervalStyle(unittest.TestCase):
         spec_column.spec = 'out = once[0:2] (req<=2 and gnt>=3)'
 
         try:
-            spec_comma.parse();
-            spec_column.parse();
-            
+            spec_comma.parse()
+            spec_column.parse()
+
             computed_comma = spec_comma.update(0, [['req', 2.2], ['gnt', 1]])
             computed_column = spec_column.update(0, [['req', 2.2], ['gnt', 1]])
             self.assertEqual(computed_comma, computed_column, 'First computation')

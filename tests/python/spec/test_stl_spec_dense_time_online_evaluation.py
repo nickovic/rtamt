@@ -8,13 +8,13 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
         super(TestSTLBooleanAndTemporalOnline, self).__init__(*args, **kwargs)
 
     def test_and_1(self):
-        spec = rtamt.STLDenseTimeSpecification();
+        spec = rtamt.STLDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = req and gnt'
 
-        spec.parse();
+        spec.parse()
 
         in_data_1_1 = [[2, 2], [3.3, 3], [5.7, 4]]
         in_data_2_1 = [[2.5, 5], [4.7, 6]]
@@ -37,13 +37,13 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
                                   out_expected_2, out_computed_2))
 
     def test_and_2(self):
-        spec = rtamt.STLDenseTimeSpecification();
+        spec = rtamt.STLDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = req and gnt'
 
-        spec.parse();
+        spec.parse()
 
         in_data_1_1 = [[2, 2]]
         in_data_2_1 = [[2, 1]]
@@ -76,13 +76,13 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
                                   out_expected_3, out_computed_3))
 
     def test_and_3(self):
-        spec = rtamt.STLDenseTimeSpecification();
+        spec = rtamt.STLDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = req and gnt'
 
-        spec.parse();
+        spec.parse()
 
         in_data_1_1 = [[1, 2], [4.1, 1], [5, 2], [6.1, 1]]
         in_data_2_1 = [[1.2, 1]]
@@ -113,13 +113,13 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
                                   out_expected_3, out_computed_3))
 
     def test_or(self):
-        spec = rtamt.STLDenseTimeSpecification();
+        spec = rtamt.STLDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = req or gnt'
 
-        spec.parse();
+        spec.parse()
 
         in_data_1_1 = [[1, 2], [4.1, 1], [5, 2], [6.1, 1]]
         in_data_2_1 = [[1.2, 1]]
@@ -150,13 +150,13 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
 
 
     def test_iff(self):
-        spec = rtamt.STLDenseTimeSpecification();
+        spec = rtamt.STLDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = req iff gnt'
 
-        spec.parse();
+        spec.parse()
 
         in_data_1 = [[1, 2], [4.1, 1], [5, 2], [6.1, 1], [6.7, 4], [9.9, 5]]
         in_data_2 = [[1.2, 1], [3.7, 3], [7.5, 2], [8.1, 6]]
@@ -168,13 +168,13 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
                                  out_expected, out_computed))
 
     def test_xor(self):
-        spec = rtamt.STLDenseTimeSpecification();
+        spec = rtamt.STLDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = req xor gnt'
 
-        spec.parse();
+        spec.parse()
 
         in_data_1 = [[1, 2], [4.1, 1], [5, 2], [6.1, 1], [6.7, 4], [9.9, 5]]
         in_data_2 = [[1.2, 1], [3.7, 3], [7.5, 2], [8.1, 6]]
@@ -187,13 +187,13 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
 
 
     def test_implies(self):
-        spec = rtamt.STLDenseTimeSpecification();
+        spec = rtamt.STLDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = req -> gnt'
 
-        spec.parse();
+        spec.parse()
 
         in_data_1 = [[1, 2], [4.1, 1], [5, 2], [6.1, 1], [6.7, 4], [9.9, 5]]
         in_data_2 = [[1.2, 1], [3.7, 3], [7.5, 2], [8.1, 6]]
@@ -205,7 +205,7 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
                                  out_expected, out_computed))
 
     def test_always_without_pastify(self):
-        spec = rtamt.STLDenseTimeSpecification();
+        spec = rtamt.STLDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = always(req)'
@@ -215,7 +215,7 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
         self.assertRaises(rtamt.LTLNotImplementedException, spec.update, [])
 
     def test_always_with_pastify(self):
-        spec = rtamt.STLDenseTimeSpecification();
+        spec = rtamt.STLDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = always(req)'
@@ -226,12 +226,12 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
 
 
     def test_historically(self):
-        spec = rtamt.STLDenseTimeSpecification();
+        spec = rtamt.STLDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = historically req'
 
-        spec.parse();
+        spec.parse()
         in_data = [[5, 3], [5.3, 1], [5.75, 2]]
         out_expected = [[5, 3], [5.3, 1], [5.75, 1]]
         out_computed = spec.update(['req', in_data])
@@ -249,12 +249,12 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
                                  out_expected, out_computed))
 
     def test_once(self):
-        spec = rtamt.STLDenseTimeSpecification();
+        spec = rtamt.STLDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = once req'
 
-        spec.parse();
+        spec.parse()
 
         in_data = [[5, 3], [5.3, 1], [5.75, 2]]
         out_expected = [[5, 3], [5.3, 3], [5.75, 3]]
@@ -281,12 +281,12 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
                                  out_expected, out_computed))
 
     def test_once_0_1(self):
-        spec = rtamt.STLDenseTimeSpecification();
+        spec = rtamt.STLDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = once[0,1] req'
 
-        spec.parse();
+        spec.parse()
 
         in_data_1 = [[5, 3], [5.3, 2], [5.75, 1]]
         out_expected_1 = [[5, 3]]
@@ -313,12 +313,12 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
                                  out_expected_3, out_computed_3))
 
     def test_once_1_3(self):
-        spec = rtamt.STLDenseTimeSpecification();
+        spec = rtamt.STLDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = once[1,3] req'
 
-        spec.parse();
+        spec.parse()
 
         in_data_1 = [[5, 3], [5.3, 2], [5.75, 1]]
         out_expected_1 = [[6, 3]]
@@ -346,13 +346,13 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
 
 
     def test_since_1(self):
-        spec = rtamt.STLDenseTimeSpecification();
+        spec = rtamt.STLDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = req since gnt'
 
-        spec.parse();
+        spec.parse()
         in_data_1 = [[1, 2], [4.1, 1], [5, 2], [6.1, 1], [6.7, 4], [9.9, 5]]
         in_data_2 = [[1.2, 1], [3.7, 3], [7.5, 2], [8.1, 6]]
         out_expected = [[1.2, 1], [3.7, 2], [4.1, 1], [5, 2], [6.1, 1], [6.7, 3], [7.5, 3]]
@@ -363,13 +363,13 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
                                  out_expected, out_computed))
 
     def test_since_2(self):
-        spec = rtamt.STLDenseTimeSpecification();
+        spec = rtamt.STLDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = req since gnt'
 
-        spec.parse();
+        spec.parse()
 
         in_data_1 = [[1, 2], [4.1, 1]]
         in_data_2 = [[1.2, 1], [3.7, 3], [7.5, 2]]
@@ -400,12 +400,12 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
 
 
     def test_historically_1_2_1(self):
-        spec = rtamt.STLDenseTimeSpecification();
+        spec = rtamt.STLDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = historically[1,2] req'
 
-        spec.parse();
+        spec.parse()
 
         in_data = [[5, 3], [5.3, 1], [5.75, 2], [6.5, 5], [6.75, 6], [9, 5], [9.25, 4], [10, 2]]
         out_expected = [[6, 3], [6.3, 1], [7.75, 2], [8.5, 5], [8.75, 6], [10, 5], [10.25, 4]]
@@ -416,12 +416,12 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
                              out_expected, out_computed))
 
     def test_historically_1_2_2(self):
-        spec = rtamt.STLDenseTimeSpecification();
+        spec = rtamt.STLDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = historically[1,2] req'
 
-        spec.parse();
+        spec.parse()
 
         in_data_1 = [[5, 3], [5.3, 2], [5.75, 1]]
         out_expected_1 = [[6, 3], [6.3, 2]]
@@ -448,13 +448,13 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
                                  out_expected_3, out_computed_3))
 
     def test_addition(self):
-        spec = rtamt.STLDenseTimeSpecification();
+        spec = rtamt.STLDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = req + gnt'
 
-        spec.parse();
+        spec.parse()
         in_data_1 = [[1, 2], [4.1, 1], [5, 2], [6.1, 1], [6.7, 4], [9.9, 5]]
         in_data_2 = [[1.2, 1], [3.7, 3], [7.5, 2], [8.1, 6]]
         out_expected = [[1.2, 3], [3.7, 5], [4.1, 4], [5, 5], [6.1, 4], [6.7, 7], [7.5, 6]]
@@ -465,13 +465,13 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
                                  out_expected, out_computed))
 
     def test_addition_2(self):
-        spec = rtamt.STLDenseTimeSpecification();
+        spec = rtamt.STLDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = req + 2'
 
-        spec.parse();
+        spec.parse()
         in_data_1 = [[1, 2], [4.1, 1], [5, 2]]
         out_expected = [[1, 4], [4.1, 3]]
         out_computed = spec.update(['req', in_data_1])
@@ -481,13 +481,13 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
                                  out_expected, out_computed))
 
     def test_subtraction(self):
-        spec = rtamt.STLDenseTimeSpecification();
+        spec = rtamt.STLDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = req - gnt'
 
-        spec.parse();
+        spec.parse()
 
         in_data_1 = [[1, 2], [4.1, 1], [5, 2], [6.1, 1], [6.7, 4], [9.9, 5]]
         in_data_2 = [[1.2, 1], [3.7, 3], [7.5, 2], [8.1, 6]]
@@ -499,13 +499,13 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
                                  out_expected, out_computed))
 
     def test_multiplication(self):
-        spec = rtamt.STLDenseTimeSpecification();
+        spec = rtamt.STLDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = req * gnt'
 
-        spec.parse();
+        spec.parse()
 
         in_data_1 = [[1, 2], [4.1, 1], [5, 2], [6.1, 1], [6.7, 4], [9.9, 5]]
         in_data_2 = [[1.2, 1], [3.7, 3], [7.5, 2], [8.1, 6]]
@@ -518,13 +518,13 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
 
 
     def test_division(self):
-        spec = rtamt.STLDenseTimeSpecification();
+        spec = rtamt.STLDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = req / gnt'
 
-        spec.parse();
+        spec.parse()
         in_data_1 = [[1, 2], [4.1, 1], [5, 2], [6.1, 1], [6.7, 4], [9.9, 5]]
         in_data_2 = [[1.2, 1], [3.7, 3], [7.5, 2], [8.1, 6]]
         out_expected = [[1.2, 2], [3.7, 2. / 3.], [4.1, 1. / 3.], [5, 2. / 3.], [6.1, 1. / 3.], [6.7, 4. / 3.],
@@ -536,12 +536,12 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
                                  out_expected, out_computed))
 
     def test_abs(self):
-        spec = rtamt.STLDenseTimeSpecification();
+        spec = rtamt.STLDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = abs(req)'
 
-        spec.parse();
+        spec.parse()
 
         in_data = [[5, 3], [5.3, -1], [5.75, 2], [6.5, -5], [6.75, 6], [9, 5], [9.25, 4], [10, 2]]
         out_expected = [[5, 3], [5.3, 1], [5.75, 2], [6.5, 5], [6.75, 6], [9, 5], [9.25, 4], [10, 2]]
@@ -552,12 +552,12 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
                                  out_expected, out_computed))
 
     def test_sqrt(self):
-        spec = rtamt.STLDenseTimeSpecification();
+        spec = rtamt.STLDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = sqrt(abs(req))'
 
-        spec.parse();
+        spec.parse()
 
         in_data = [[5, 3], [5.3, -1], [5.75, 2], [6.5, -5], [6.75, 6], [9, 5], [9.25, 4], [10, 2]]
         out_expected = [[5, math.sqrt(3)], [5.3, math.sqrt(1)], [5.75, math.sqrt(2)], [6.5, math.sqrt(5)], [6.75, math.sqrt(6)], [9, math.sqrt(5)], [9.25, math.sqrt(4)], [10, math.sqrt(2)]]
@@ -568,12 +568,12 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
                                  out_expected, out_computed))
 
     def test_exp(self):
-        spec = rtamt.STLDenseTimeSpecification();
+        spec = rtamt.STLDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = exp(req)'
 
-        spec.parse();
+        spec.parse()
 
         in_data = [[5, 3], [5.3, -1], [5.75, 2], [6.5, -5], [6.75, 6], [9, 5], [9.25, 4], [10, 2]]
         out_expected = [[5, math.exp(3)], [5.3, math.exp(-1)], [5.75, math.exp(2)], [6.5, math.exp(-5)], [6.75, math.exp(6)], [9, math.exp(5)], [9.25, math.exp(4)], [10, math.exp(2)]]
@@ -584,12 +584,12 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
                                  out_expected, out_computed))
 
     def test_pow(self):
-        spec = rtamt.STLDenseTimeSpecification();
+        spec = rtamt.STLDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = pow(3,req)'
 
-        spec.parse();
+        spec.parse()
 
         in_data = [[5, 3], [5.3, -1], [5.75, 2], [6.5, -5], [6.75, 6], [9, 5], [9.25, 4], [10, 2]]
         out_expected = [[5, math.pow(3, 3)], [5.3, math.pow(3, -1)], [5.75, math.pow(3, 2)], [6.5, math.pow(3, -5)],
@@ -602,12 +602,12 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
 
 
     def test_not(self):
-        spec = rtamt.STLDenseTimeSpecification();
+        spec = rtamt.STLDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = not req'
 
-        spec.parse();
+        spec.parse()
 
         in_data_1 = [[5, 3], [5.3, 1]]
         in_data_2 = [[5.75, 2], [6.5, 5], [6.75, 6], [9, 5], [9.25, 4]]
@@ -646,7 +646,7 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
         self.assertRaises(rtamt.LTLNotImplementedException, spec.update, [])
 
     def test_until_with_pastify(self):
-        spec = rtamt.STLDenseTimeSpecification();
+        spec = rtamt.STLDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
@@ -668,7 +668,7 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
         self.assertRaises(rtamt.LTLNotImplementedException, spec.update, [])
 
     def test_until_0_1_with_pastify(self):
-        spec = rtamt.STLDenseTimeSpecification();
+        spec = rtamt.STLDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
@@ -739,7 +739,7 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
         self.assertRaises(rtamt.STLNotImplementedException, spec.update, ['req', [0.0, 3.0]])
 
     def test_eventually_0_1_with_pastify(self):
-        spec = rtamt.STLDenseTimeSpecification();
+        spec = rtamt.STLDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = eventually[0,1] req'
@@ -772,12 +772,12 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
                                  out_expected_3, out_computed_3))
 
     def test_always_0_1_with_pastify(self):
-        spec = rtamt.STLDenseTimeSpecification();
+        spec = rtamt.STLDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = always[0,1] req'
 
-        spec.parse();
+        spec.parse()
         spec.pastify()
 
         in_data = [[5, 3], [5.3, 1], [5.75, 2], [6.5, 5], [6.75, 6], [9, 5], [9.25, 4], [10, 2]]
@@ -790,12 +790,12 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
 
 
     def test_predicate_leq(self):
-        spec = rtamt.STLDenseTimeSpecification();
+        spec = rtamt.STLDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = req <= 2'
 
-        spec.parse();
+        spec.parse()
 
         in_data_1 = [[5, 3], [5.3, 1]]
         in_data_2 = [[5.75, 2], [6.5, 5], [6.75, 6], [9, 5], [9.25, 4]]
@@ -823,12 +823,12 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
                                   out_expected_3, out_computed_3))
 
     def test_predicate_less(self):
-        spec = rtamt.STLDenseTimeSpecification();
+        spec = rtamt.STLDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = req < 2'
 
-        spec.parse();
+        spec.parse()
 
         in_data_1 = [[5, 3], [5.3, 1]]
         in_data_2 = [[5.75, 2], [6.5, 5], [6.75, 6], [9, 5], [9.25, 4]]
@@ -856,12 +856,12 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
                                   out_expected_3, out_computed_3))
 
     def test_predicate_geq(self):
-        spec = rtamt.STLDenseTimeSpecification();
+        spec = rtamt.STLDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = req >= 2'
 
-        spec.parse();
+        spec.parse()
 
         in_data_1 = [[5, 3], [5.3, 1]]
         in_data_2 = [[5.75, 2], [6.5, 5], [6.75, 6], [9, 5], [9.25, 4]]
@@ -889,12 +889,12 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
                                   out_expected_3, out_computed_3))
 
     def test_predicate_greater(self):
-        spec = rtamt.STLDenseTimeSpecification();
+        spec = rtamt.STLDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = req > 2'
 
-        spec.parse();
+        spec.parse()
 
         in_data_1 = [[5, 3], [5.3, 1]]
         in_data_2 = [[5.75, 2], [6.5, 5], [6.75, 6], [9, 5], [9.25, 4]]
@@ -922,12 +922,12 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
                                   out_expected_3, out_computed_3))
 
     def test_predicate_eq(self):
-        spec = rtamt.STLDenseTimeSpecification();
+        spec = rtamt.STLDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = req == 2'
 
-        spec.parse();
+        spec.parse()
 
         in_data_1 = [[5, 3], [5.3, 1]]
         in_data_2 = [[5.75, 2], [6.5, 5], [6.75, 6], [9, 5], [9.25, 4]]
@@ -955,12 +955,12 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
                                   out_expected_3, out_computed_3))
 
     def test_predicate_neq(self):
-        spec = rtamt.STLDenseTimeSpecification();
+        spec = rtamt.STLDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = req !== 2'
 
-        spec.parse();
+        spec.parse()
 
         in_data_1 = [[5, 3], [5.3, 1]]
         in_data_2 = [[5.75, 2], [6.5, 5], [6.75, 6], [9, 5], [9.25, 4]]

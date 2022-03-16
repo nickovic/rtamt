@@ -22,11 +22,11 @@ class TestSTLSpecDiscreteTimeOnlineEvaluation(unittest.TestCase):
         self.right5 = -1
 
     def test_constant(self):
-        spec = rtamt.STLDiscreteTimeSpecification();
+        spec = rtamt.STLDiscreteTimeSpecification()
         spec.declare_var('out', 'float')
         spec.spec = 'out = 5'
 
-        spec.parse();
+        spec.parse()
         out1 = spec.update(0, [])
         out2 = spec.update(1, [])
 
@@ -34,12 +34,12 @@ class TestSTLSpecDiscreteTimeOnlineEvaluation(unittest.TestCase):
         self.assertEqual(out2, 5, "input 2")
 
     def test_constant_2(self):
-        spec = rtamt.STLDiscreteTimeSpecification();
+        spec = rtamt.STLDiscreteTimeSpecification()
         spec.declare_const('c', 'int', 5)
         spec.declare_var('out', 'float')
         spec.spec = 'out = c'
 
-        spec.parse();
+        spec.parse()
         out1 = spec.update(0, [])
         out2 = spec.update(1, [])
 
@@ -47,13 +47,13 @@ class TestSTLSpecDiscreteTimeOnlineEvaluation(unittest.TestCase):
         self.assertEqual(out2, 5, "input 2")
 
     def test_addition(self):
-        spec = rtamt.STLDiscreteTimeSpecification();
+        spec = rtamt.STLDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = req + gnt'
 
-        spec.parse();
+        spec.parse()
 
         out1 = spec.update(0, [('req', self.left1), ('gnt', self.right1)])
         out2 = spec.update(1, [('req', self.left2), ('gnt', self.right2)])
@@ -68,13 +68,13 @@ class TestSTLSpecDiscreteTimeOnlineEvaluation(unittest.TestCase):
         self.assertEqual(out5, -2, "input 5")
 
     def test_subtraction(self):
-        spec = rtamt.STLDiscreteTimeSpecification();
+        spec = rtamt.STLDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = req - gnt'
 
-        spec.parse();
+        spec.parse()
 
         out1 = spec.update(0, [('req', self.left1), ('gnt', self.right1)])
         out2 = spec.update(1, [('req', self.left2), ('gnt', self.right2)])
@@ -89,13 +89,13 @@ class TestSTLSpecDiscreteTimeOnlineEvaluation(unittest.TestCase):
         self.assertEqual(out5, 0, "input 5")
 
     def test_multiplication(self):
-        spec = rtamt.STLDiscreteTimeSpecification();
+        spec = rtamt.STLDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = req * gnt'
 
-        spec.parse();
+        spec.parse()
 
         out1 = spec.update(0, [('req', self.left1), ('gnt', self.right1)])
         out2 = spec.update(1, [('req', self.left2), ('gnt', self.right2)])
@@ -110,13 +110,13 @@ class TestSTLSpecDiscreteTimeOnlineEvaluation(unittest.TestCase):
         self.assertEqual(out5, 1, "input 5")
 
     def test_division(self):
-        spec = rtamt.STLDiscreteTimeSpecification();
+        spec = rtamt.STLDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = req / gnt'
 
-        spec.parse();
+        spec.parse()
 
         out1 = spec.update(0, [('req', self.left1), ('gnt', self.right1)])
         out2 = spec.update(1, [('req', self.left2), ('gnt', self.right2)])
@@ -131,12 +131,12 @@ class TestSTLSpecDiscreteTimeOnlineEvaluation(unittest.TestCase):
         self.assertEqual(out5, -1 / -1, "input 5")
 
     def test_abs(self):
-        spec = rtamt.STLDiscreteTimeSpecification();
+        spec = rtamt.STLDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = abs(req)'
 
-        spec.parse();
+        spec.parse()
 
         out1 = spec.update(0, [('req', self.left1)])
         out2 = spec.update(1, [('req', self.left2)])
@@ -151,12 +151,12 @@ class TestSTLSpecDiscreteTimeOnlineEvaluation(unittest.TestCase):
         self.assertEqual(out5, 1, "input 5")
 
     def test_sqrt(self):
-        spec = rtamt.STLDiscreteTimeSpecification();
+        spec = rtamt.STLDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = sqrt(req)'
 
-        spec.parse();
+        spec.parse()
 
         out1 = spec.update(0, [('req', 2)])
         out2 = spec.update(1, [('req', 3.3)])
@@ -171,12 +171,12 @@ class TestSTLSpecDiscreteTimeOnlineEvaluation(unittest.TestCase):
         self.assertEqual(out5, math.sqrt(1), "input 5")
 
     def test_previous(self):
-        spec = rtamt.STLDiscreteTimeSpecification();
+        spec = rtamt.STLDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = prev(req)'
 
-        spec.parse();
+        spec.parse()
 
         out1 = spec.update(0, [('req', self.left1)])
         out2 = spec.update(1, [('req', self.left2)])
@@ -191,7 +191,7 @@ class TestSTLSpecDiscreteTimeOnlineEvaluation(unittest.TestCase):
         self.assertEqual(out5, 5, "input 5")
 
     def test_next_without_pastify(self):
-        spec = rtamt.STLDiscreteTimeSpecification();
+        spec = rtamt.STLDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = next(req)'
@@ -201,7 +201,7 @@ class TestSTLSpecDiscreteTimeOnlineEvaluation(unittest.TestCase):
         self.assertRaises(rtamt.LTLNotImplementedException, spec.update, 0, [('req', self.left1)])
 
     def test_next_with_pastify(self):
-        spec = rtamt.STLDiscreteTimeSpecification();
+        spec = rtamt.STLDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = next(req)'
@@ -222,13 +222,13 @@ class TestSTLSpecDiscreteTimeOnlineEvaluation(unittest.TestCase):
         self.assertEqual(out5, -1, "input 5")
 
     def test_and(self):
-        spec = rtamt.STLDiscreteTimeSpecification();
+        spec = rtamt.STLDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = req and gnt'
 
-        spec.parse();
+        spec.parse()
 
         out1 = spec.update(0, [('req', self.left1), ('gnt', self.right1)])
         out2 = spec.update(1, [('req', self.left2), ('gnt', self.right2)])
@@ -243,13 +243,13 @@ class TestSTLSpecDiscreteTimeOnlineEvaluation(unittest.TestCase):
         self.assertEqual(out5, -1, "input 5")
 
     def test_or(self):
-        spec = rtamt.STLDiscreteTimeSpecification();
+        spec = rtamt.STLDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = req or gnt'
 
-        spec.parse();
+        spec.parse()
 
         out1 = spec.update(0, [('req', self.left1), ('gnt', self.right1)])
         out2 = spec.update(1, [('req', self.left2), ('gnt', self.right2)])
@@ -264,13 +264,13 @@ class TestSTLSpecDiscreteTimeOnlineEvaluation(unittest.TestCase):
         self.assertEqual(out5, -1, "input 5")
 
     def test_iff(self):
-        spec = rtamt.STLDiscreteTimeSpecification();
+        spec = rtamt.STLDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = req iff gnt'
 
-        spec.parse();
+        spec.parse()
 
         out1 = spec.update(0, [('req', self.left1), ('gnt', self.right1)])
         out2 = spec.update(1, [('req', self.left2), ('gnt', self.right2)])
@@ -285,13 +285,13 @@ class TestSTLSpecDiscreteTimeOnlineEvaluation(unittest.TestCase):
         self.assertEqual(out5, 0, "input 5")
 
     def test_xor(self):
-        spec = rtamt.STLDiscreteTimeSpecification();
+        spec = rtamt.STLDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = req xor gnt'
 
-        spec.parse();
+        spec.parse()
 
         out1 = spec.update(0, [('req', self.left1), ('gnt', self.right1)])
         out2 = spec.update(1, [('req', self.left2), ('gnt', self.right2)])
@@ -306,13 +306,13 @@ class TestSTLSpecDiscreteTimeOnlineEvaluation(unittest.TestCase):
         self.assertEqual(out5, 0, "input 5")
 
     def test_implies(self):
-        spec = rtamt.STLDiscreteTimeSpecification();
+        spec = rtamt.STLDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = req -> gnt'
 
-        spec.parse();
+        spec.parse()
 
         out1 = spec.update(0, [('req', self.left1), ('gnt', self.right1)])
         out2 = spec.update(1, [('req', self.left2), ('gnt', self.right2)])
@@ -327,7 +327,7 @@ class TestSTLSpecDiscreteTimeOnlineEvaluation(unittest.TestCase):
         self.assertEqual(out5, 1, "input 5")
 
     def test_always_without_pastify(self):
-        spec = rtamt.STLDiscreteTimeSpecification();
+        spec = rtamt.STLDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = always(req)'
@@ -337,7 +337,7 @@ class TestSTLSpecDiscreteTimeOnlineEvaluation(unittest.TestCase):
         self.assertRaises(rtamt.LTLNotImplementedException, spec.update, 0, [('req', self.left1)])
 
     def test_always_with_pastify(self):
-        spec = rtamt.STLDiscreteTimeSpecification();
+        spec = rtamt.STLDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = always(req)'
@@ -347,7 +347,7 @@ class TestSTLSpecDiscreteTimeOnlineEvaluation(unittest.TestCase):
         self.assertRaises(rtamt.LTLPastifyException, spec.pastify)
 
     def test_eventually_without_pastify(self):
-        spec = rtamt.STLDiscreteTimeSpecification();
+        spec = rtamt.STLDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = eventually(req)'
@@ -357,7 +357,7 @@ class TestSTLSpecDiscreteTimeOnlineEvaluation(unittest.TestCase):
         self.assertRaises(rtamt.LTLNotImplementedException, spec.update, 0, [('req', self.left1)])
 
     def test_eventually_with_pastify(self):
-        spec = rtamt.STLDiscreteTimeSpecification();
+        spec = rtamt.STLDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = eventually(req)'
@@ -367,12 +367,12 @@ class TestSTLSpecDiscreteTimeOnlineEvaluation(unittest.TestCase):
         self.assertRaises(rtamt.LTLPastifyException, spec.pastify)
 
     def test_historically(self):
-        spec = rtamt.STLDiscreteTimeSpecification();
+        spec = rtamt.STLDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = historically(req)'
 
-        spec.parse();
+        spec.parse()
 
         out1 = spec.update(0, [('req', self.left1)])
         out2 = spec.update(1, [('req', self.left2)])
@@ -387,12 +387,12 @@ class TestSTLSpecDiscreteTimeOnlineEvaluation(unittest.TestCase):
         self.assertEqual(out5, -2, "input 5")
 
     def test_once(self):
-        spec = rtamt.STLDiscreteTimeSpecification();
+        spec = rtamt.STLDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = once(req)'
 
-        spec.parse();
+        spec.parse()
 
         out1 = spec.update(0, [('req', self.left1)])
         out2 = spec.update(1, [('req', self.left2)])
@@ -407,13 +407,13 @@ class TestSTLSpecDiscreteTimeOnlineEvaluation(unittest.TestCase):
         self.assertEqual(out5, 100, "input 5")
 
     def test_since(self):
-        spec = rtamt.STLDiscreteTimeSpecification();
+        spec = rtamt.STLDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = req since gnt'
 
-        spec.parse();
+        spec.parse()
 
         out1 = spec.update(0, [('req', self.left1), ('gnt', self.right1)])
         out2 = spec.update(1, [('req', self.left2), ('gnt', self.right2)])
@@ -450,7 +450,7 @@ class TestSTLSpecDiscreteTimeOnlineEvaluation(unittest.TestCase):
         self.assertRaises(rtamt.LTLPastifyException, spec.pastify)
 
     def test_eventually_0_1_without_pastify(self):
-        spec = rtamt.STLDiscreteTimeSpecification();
+        spec = rtamt.STLDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = eventually[0,1](req)'
@@ -460,7 +460,7 @@ class TestSTLSpecDiscreteTimeOnlineEvaluation(unittest.TestCase):
         self.assertRaises(rtamt.STLNotImplementedException, spec.update, 0, [('req', self.left1)])
 
     def test_eventually_0_1_with_pastify(self):
-        spec = rtamt.STLDiscreteTimeSpecification();
+        spec = rtamt.STLDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = eventually[0,1](req)'
@@ -481,12 +481,12 @@ class TestSTLSpecDiscreteTimeOnlineEvaluation(unittest.TestCase):
         self.assertEqual(out5, 5, "input 5")
 
     def test_once_0_1(self):
-        spec = rtamt.STLDiscreteTimeSpecification();
+        spec = rtamt.STLDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = once[0,1](req)'
 
-        spec.parse();
+        spec.parse()
 
         out1 = spec.update(0, [('req', self.left1)])
         out2 = spec.update(1, [('req', self.left2)])
@@ -501,12 +501,12 @@ class TestSTLSpecDiscreteTimeOnlineEvaluation(unittest.TestCase):
         self.assertEqual(out5, 5, "input 5")
 
     def test_once_1_2(self):
-        spec = rtamt.STLDiscreteTimeSpecification();
+        spec = rtamt.STLDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = once[1,2](req)'
 
-        spec.parse();
+        spec.parse()
 
         out1 = spec.update(0, [('req', self.left1)])
         out2 = spec.update(1, [('req', self.left2)])
@@ -521,7 +521,7 @@ class TestSTLSpecDiscreteTimeOnlineEvaluation(unittest.TestCase):
         self.assertEqual(out5, 5, "input 5")
 
     def test_always_0_1_without_pastify(self):
-        spec = rtamt.STLDiscreteTimeSpecification();
+        spec = rtamt.STLDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = always[0,1](req)'
@@ -531,12 +531,12 @@ class TestSTLSpecDiscreteTimeOnlineEvaluation(unittest.TestCase):
         self.assertRaises(rtamt.STLNotImplementedException, spec.update, 0, [('req', self.left1)])
 
     def test_always_0_1_with_pastify(self):
-        spec = rtamt.STLDiscreteTimeSpecification();
+        spec = rtamt.STLDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = always[0,1](req)'
 
-        spec.parse();
+        spec.parse()
         spec.pastify()
 
         out1 = spec.update(0, [('req', self.left1)])
@@ -552,12 +552,12 @@ class TestSTLSpecDiscreteTimeOnlineEvaluation(unittest.TestCase):
         self.assertEqual(out5, -1, "input 5")
 
     def test_historically_0_1(self):
-        spec = rtamt.STLDiscreteTimeSpecification();
+        spec = rtamt.STLDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = historically[0,1](req)'
 
-        spec.parse();
+        spec.parse()
 
         out1 = spec.update(0, [('req', self.left1)])
         out2 = spec.update(1, [('req', self.left2)])
@@ -572,12 +572,12 @@ class TestSTLSpecDiscreteTimeOnlineEvaluation(unittest.TestCase):
         self.assertEqual(out5, -1, "input 5")
 
     def test_historically_1_2(self):
-        spec = rtamt.STLDiscreteTimeSpecification();
+        spec = rtamt.STLDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = historically[1,2](req)'
 
-        spec.parse();
+        spec.parse()
 
         out1 = spec.update(0, [('req', self.left1)])
         out2 = spec.update(1, [('req', self.left2)])
@@ -592,7 +592,7 @@ class TestSTLSpecDiscreteTimeOnlineEvaluation(unittest.TestCase):
         self.assertEqual(out5, -2, "input 5")
 
     def test_until_0_1_without_pastify(self):
-        spec = rtamt.STLDiscreteTimeSpecification();
+        spec = rtamt.STLDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
@@ -603,14 +603,14 @@ class TestSTLSpecDiscreteTimeOnlineEvaluation(unittest.TestCase):
         self.assertRaises(rtamt.STLNotImplementedException, spec.update, 0, [('req', self.left1), ('gnt', self.right1)])
 
     def test_until_1_2_with_pastify(self):
-        spec = rtamt.STLDiscreteTimeSpecification();
+        spec = rtamt.STLDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = req until[1,2] gnt'
 
-        spec.parse();
-        spec.pastify();
+        spec.parse()
+        spec.pastify()
 
         out1 = spec.update(0, [('req', self.left1), ('gnt', self.right1)])
         out2 = spec.update(1, [('req', self.left2), ('gnt', self.right2)])
@@ -625,13 +625,13 @@ class TestSTLSpecDiscreteTimeOnlineEvaluation(unittest.TestCase):
         self.assertEqual(out5, -2, "input 5")
 
     def test_since_0_1(self):
-        spec = rtamt.STLDiscreteTimeSpecification();
+        spec = rtamt.STLDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = req since[0,1] gnt'
 
-        spec.parse();
+        spec.parse()
 
         out1 = spec.update(0, [('req', self.left1), ('gnt', self.right1)])
         out2 = spec.update(1, [('req', self.left2), ('gnt', self.right2)])
@@ -646,12 +646,12 @@ class TestSTLSpecDiscreteTimeOnlineEvaluation(unittest.TestCase):
         self.assertEqual(out5, -1, "input 5")
 
     def test_not(self):
-        spec = rtamt.STLDiscreteTimeSpecification();
+        spec = rtamt.STLDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = not(req)'
 
-        spec.parse();
+        spec.parse()
 
         out1 = spec.update(0, [('req', self.left1)])
         out2 = spec.update(1, [('req', self.left2)])
@@ -666,12 +666,12 @@ class TestSTLSpecDiscreteTimeOnlineEvaluation(unittest.TestCase):
         self.assertEqual(out5, 1, "input 5")
 
     def test_rise(self):
-        spec = rtamt.STLDiscreteTimeSpecification();
+        spec = rtamt.STLDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = rise(req)'
 
-        spec.parse();
+        spec.parse()
 
         out1 = spec.update(0, [('req', self.left1)])
         out2 = spec.update(1, [('req', self.left2)])
@@ -686,12 +686,12 @@ class TestSTLSpecDiscreteTimeOnlineEvaluation(unittest.TestCase):
         self.assertEqual(out5, -5, "input 5")
 
     def test_fall(self):
-        spec = rtamt.STLDiscreteTimeSpecification();
+        spec = rtamt.STLDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = fall(req)'
 
-        spec.parse();
+        spec.parse()
 
         out1 = spec.update(0, [('req', self.left1)])
         out2 = spec.update(1, [('req', self.left2)])
@@ -707,13 +707,13 @@ class TestSTLSpecDiscreteTimeOnlineEvaluation(unittest.TestCase):
 
 
     def test_predicate_leq(self):
-        spec = rtamt.STLDiscreteTimeSpecification();
+        spec = rtamt.STLDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = req <= gnt'
 
-        spec.parse();
+        spec.parse()
 
         out1 = spec.update(0, [('req', self.left1), ('gnt', self.right1)])
         out2 = spec.update(1, [('req', self.left2), ('gnt', self.right2)])
@@ -728,13 +728,13 @@ class TestSTLSpecDiscreteTimeOnlineEvaluation(unittest.TestCase):
         self.assertEqual(out5, 0, "input 5")
 
     def test_predicate_less(self):
-        spec = rtamt.STLDiscreteTimeSpecification();
+        spec = rtamt.STLDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = req < gnt'
 
-        spec.parse();
+        spec.parse()
 
         out1 = spec.update(0, [('req', self.left1), ('gnt', self.right1)])
         out2 = spec.update(1, [('req', self.left2), ('gnt', self.right2)])
@@ -749,13 +749,13 @@ class TestSTLSpecDiscreteTimeOnlineEvaluation(unittest.TestCase):
         self.assertEqual(out5, 0, "input 5")
 
     def test_predicate_geq(self):
-        spec = rtamt.STLDiscreteTimeSpecification();
+        spec = rtamt.STLDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = req >= gnt'
 
-        spec.parse();
+        spec.parse()
 
         out1 = spec.update(0, [('req', self.left1), ('gnt', self.right1)])
         out2 = spec.update(1, [('req', self.left2), ('gnt', self.right2)])
@@ -770,13 +770,13 @@ class TestSTLSpecDiscreteTimeOnlineEvaluation(unittest.TestCase):
         self.assertEqual(out5, 0, "input 5")
 
     def test_predicate_greater(self):
-        spec = rtamt.STLDiscreteTimeSpecification();
+        spec = rtamt.STLDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = req > gnt'
 
-        spec.parse();
+        spec.parse()
 
         out1 = spec.update(0, [('req', self.left1), ('gnt', self.right1)])
         out2 = spec.update(1, [('req', self.left2), ('gnt', self.right2)])
@@ -791,13 +791,13 @@ class TestSTLSpecDiscreteTimeOnlineEvaluation(unittest.TestCase):
         self.assertEqual(out5, 0, "input 5")
 
     def test_predicate_eq(self):
-        spec = rtamt.STLDiscreteTimeSpecification();
+        spec = rtamt.STLDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = req == gnt'
 
-        spec.parse();
+        spec.parse()
 
         out1 = spec.update(0, [('req', self.left1), ('gnt', self.right1)])
         out2 = spec.update(1, [('req', self.left2), ('gnt', self.right2)])
@@ -812,13 +812,13 @@ class TestSTLSpecDiscreteTimeOnlineEvaluation(unittest.TestCase):
         self.assertEqual(out5, 0, "input 5")
 
     def test_predicate_neq(self):
-        spec = rtamt.STLDiscreteTimeSpecification();
+        spec = rtamt.STLDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = req !== gnt'
 
-        spec.parse();
+        spec.parse()
 
         out1 = spec.update(0, [('req', self.left1), ('gnt', self.right1)])
         out2 = spec.update(1, [('req', self.left2), ('gnt', self.right2)])

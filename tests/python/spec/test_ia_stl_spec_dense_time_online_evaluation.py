@@ -7,7 +7,7 @@ class TestIASTLSpecDenseTimeOnlineEvaluation(unittest.TestCase):
         super(TestIASTLSpecDenseTimeOnlineEvaluation, self).__init__(*args, **kwargs)
 
     def test_output_robustness(self):
-        spec = rtamt.STLDenseTimeSpecification(semantics=rtamt.Semantics.OUTPUT_ROBUSTNESS);
+        spec = rtamt.STLDenseTimeSpecification(semantics=rtamt.Semantics.OUTPUT_ROBUSTNESS)
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
@@ -15,7 +15,7 @@ class TestIASTLSpecDenseTimeOnlineEvaluation(unittest.TestCase):
         spec.set_var_io_type('gnt', 'output')
         spec.spec = 'out = (req >= 3) implies (gnt >= 0)'
 
-        spec.parse();
+        spec.parse()
 
         left = [[0, 100], [1, -1], [2, -2], [3, 5], [4, -1]]
         right = [[0, 20], [1, -2], [2, 10], [3, 4], [4, -1]]
@@ -26,7 +26,7 @@ class TestIASTLSpecDenseTimeOnlineEvaluation(unittest.TestCase):
         self.assertEqual(out, expected, "output robustness")
 
     def test_input_vacuity(self):
-        spec = rtamt.STLDenseTimeSpecification(semantics=rtamt.Semantics.INPUT_VACUITY);
+        spec = rtamt.STLDenseTimeSpecification(semantics=rtamt.Semantics.INPUT_VACUITY)
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
@@ -34,7 +34,7 @@ class TestIASTLSpecDenseTimeOnlineEvaluation(unittest.TestCase):
         spec.set_var_io_type('gnt', 'output')
         spec.spec = 'out = (req >= 3) implies (gnt >= 0)'
 
-        spec.parse();
+        spec.parse()
 
         left = [[0, 100], [1, -1], [2, -2], [3, 5], [4, -1]]
         right = [[0, 20], [1, -2], [2, 10], [3, 4], [4, -1]]
@@ -45,7 +45,7 @@ class TestIASTLSpecDenseTimeOnlineEvaluation(unittest.TestCase):
         self.assertEqual(out, expected, "input vacuity")
 
     def test_input_robustness(self):
-        spec = rtamt.STLDenseTimeSpecification(semantics=rtamt.Semantics.INPUT_ROBUSTNESS);
+        spec = rtamt.STLDenseTimeSpecification(semantics=rtamt.Semantics.INPUT_ROBUSTNESS)
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
@@ -53,7 +53,7 @@ class TestIASTLSpecDenseTimeOnlineEvaluation(unittest.TestCase):
         spec.set_var_io_type('gnt', 'input')
         spec.spec = 'out = (req >= 3) implies (gnt >= 0)'
 
-        spec.parse();
+        spec.parse()
 
         left = [[0, 100], [1, -1], [2, -2], [3, 5], [4, -1]]
         right = [[0, 20], [1, -2], [2, 10], [3, 4], [4, -1]]
@@ -64,7 +64,7 @@ class TestIASTLSpecDenseTimeOnlineEvaluation(unittest.TestCase):
         self.assertEqual(out, expected, "input robustness")
 
     def test_output_vacuity(self):
-        spec = rtamt.STLDenseTimeSpecification(semantics=rtamt.Semantics.OUTPUT_VACUITY);
+        spec = rtamt.STLDenseTimeSpecification(semantics=rtamt.Semantics.OUTPUT_VACUITY)
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
@@ -72,7 +72,7 @@ class TestIASTLSpecDenseTimeOnlineEvaluation(unittest.TestCase):
         spec.set_var_io_type('gnt', 'input')
         spec.spec = 'out = (req >= 3) implies (gnt >= 0)'
 
-        spec.parse();
+        spec.parse()
 
         left = [[0, 100], [1, -1], [2, -2], [3, 5], [4, -1]]
         right = [[0, 20], [1, -2], [2, 10], [3, 4], [4, -1]]

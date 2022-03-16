@@ -22,7 +22,7 @@ class TestSTLSamplingTimeUnits(unittest.TestCase):
         self.assertEqual(spec.sampling_tolerance, 0.1, 'Spec sampling tolerance assertion')
 
         try:
-            spec.parse();
+            spec.parse()
             computed = spec.update(0, [['req', 2.2], ['gnt', 1]])
             self.assertEqual(-2.0, computed, 'First computation')
 
@@ -52,7 +52,7 @@ class TestSTLSamplingTimeUnits(unittest.TestCase):
         spec.spec = 'out = rise(req)'
 
         try:
-            spec.parse();
+            spec.parse()
             spec.update(0, [['req', 2.2], ['gnt', 1]])
             spec.update(1.11, [['req', 2.2], ['gnt', 1]])
             spec.update(1.99, [['req', 2.2], ['gnt', 1]])
