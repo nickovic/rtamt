@@ -18,12 +18,12 @@ class TestSTLEvaluation(unittest.TestCase):
         ast.declare_var('a', 'float')
         ast.spec = '5.0'
         ast.parse()
-        op = StlDiscreteTimeOfflineEvaluator()
-        op.set_ast(ast)
+        evaluator = StlDiscreteTimeOfflineEvaluator()
+        evaluator.set_ast(ast)
 
         dataset = {'time': [0, 1, 2, 3, 4]}
 
-        out = op.evaluate(dataset)
+        out = evaluator.evaluate(dataset)
 
         expected = [[0, 5.0], [1, 5.0], [2, 5.0], [3, 5.0], [4, 5.0]]
 
@@ -36,8 +36,8 @@ class TestSTLEvaluation(unittest.TestCase):
         ast.declare_var('b', 'float')
         ast.spec = 'a + b'
         ast.parse()
-        op = StlDiscreteTimeOfflineEvaluator()
-        op.set_ast(ast)
+        evaluator = StlDiscreteTimeOfflineEvaluator()
+        evaluator.set_ast(ast)
 
         a = [100, -1, -2, 5, -1]
         b = [20, -2, 10, 4, -1]
@@ -45,7 +45,7 @@ class TestSTLEvaluation(unittest.TestCase):
 
         dataset = {'time': t, 'a': a, 'b': b}
 
-        out = op.evaluate(dataset)
+        out = evaluator.evaluate(dataset)
 
         expected = [[0, 120], [1, -3], [2, 8], [3, 9], [4, -2]]
 
@@ -57,8 +57,8 @@ class TestSTLEvaluation(unittest.TestCase):
         ast.declare_var('b', 'float')
         ast.spec = 'a - b'
         ast.parse()
-        op = StlDiscreteTimeOfflineEvaluator()
-        op.set_ast(ast)
+        evaluator = StlDiscreteTimeOfflineEvaluator()
+        evaluator.set_ast(ast)
 
         a = [100, -1, -2, 5, -1]
         b = [20, -2, 10, 4, -1]
@@ -66,7 +66,7 @@ class TestSTLEvaluation(unittest.TestCase):
 
         dataset = {'time': t, 'a': a, 'b': b}
 
-        out = op.evaluate(dataset)
+        out = evaluator.evaluate(dataset)
 
         expected = [80, 1, -12, 1, 0]
 

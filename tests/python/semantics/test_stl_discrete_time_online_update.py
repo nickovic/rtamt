@@ -68,8 +68,8 @@ class TestSTLEvaluation(unittest.TestCase):
         ast.declare_var('b', 'float')
         ast.spec = 'a + b'
         ast.parse()
-        op = StlDiscreteTimeOnlineEvaluator()
-        op.set_ast(ast)
+        evaluator = StlDiscreteTimeOnlineEvaluator()
+        evaluator.set_ast(ast)
 
         in1 = [['a', self.left1], ['b', self.right1]]
         in2 = [['a', self.left2], ['b', self.right2]]
@@ -77,11 +77,11 @@ class TestSTLEvaluation(unittest.TestCase):
         in4 = [['a', self.left4], ['b', self.right4]]
         in5 = [['a', self.left5], ['b', self.right5]]
 
-        out1 = op.update(0, in1)
-        out2 = op.update(1, in2)
-        out3 = op.update(2, in3)
-        out4 = op.update(3, in4)
-        out5 = op.update(4, in5)
+        out1 = evaluator.update(0, in1)
+        out2 = evaluator.update(1, in2)
+        out3 = evaluator.update(2, in3)
+        out4 = evaluator.update(3, in4)
+        out5 = evaluator.update(4, in5)
 
         self.assertEqual(out1, 120, "input 1")
         self.assertEqual(out2, -3, "input 2")
@@ -95,8 +95,8 @@ class TestSTLEvaluation(unittest.TestCase):
         ast.declare_var('b', 'float')
         ast.spec = 'a - b'
         ast.parse()
-        op = StlDiscreteTimeOnlineEvaluator()
-        op.set_ast(ast)
+        evaluator = StlDiscreteTimeOnlineEvaluator()
+        evaluator.set_ast(ast)
 
         in1 = [['a', self.left1], ['b', self.right1]]
         in2 = [['a', self.left2], ['b', self.right2]]
@@ -104,11 +104,11 @@ class TestSTLEvaluation(unittest.TestCase):
         in4 = [['a', self.left4], ['b', self.right4]]
         in5 = [['a', self.left5], ['b', self.right5]]
 
-        out1 = op.update(0, in1)
-        out2 = op.update(1, in2)
-        out3 = op.update(2, in3)
-        out4 = op.update(3, in4)
-        out5 = op.update(4, in5)
+        out1 = evaluator.update(0, in1)
+        out2 = evaluator.update(1, in2)
+        out3 = evaluator.update(2, in3)
+        out4 = evaluator.update(3, in4)
+        out5 = evaluator.update(4, in5)
 
         self.assertEqual(out1, 80, "input 1")
         self.assertEqual(out2, 1, "input 2")
