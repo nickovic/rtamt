@@ -1,7 +1,7 @@
 import unittest
 
 from rtamt.ast.parser.ltl.specification_parser import LtlAst
-from tests.python.ast.ltl_print_name_ast_visitor import LtlPrintNameAstVisitor
+from tests.python.syntax.ltl_print_name_ast_visitor import LtlPrintNameAstVisitor
 
 
 class TestLtlAstParser(unittest.TestCase):
