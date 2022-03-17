@@ -72,6 +72,20 @@ class AbstractSpecification(object):
         else:
             RTAMTException('time_unit_transformer() allowed only discrete time')
 
+    @property
+    def sampling_violation_counter(self):
+        if isinstance(self.evaluator, DiscreteTimeEvaluator):
+            return self.evaluator.sampling_violation_counter
+        else:
+            RTAMTException('only discrete time has sampling_violation_counter')
+
+    @property
+    def sampling_tolerance(self):
+        if isinstance(self.evaluator, DiscreteTimeEvaluator):
+            return self.evaluator.sampling_tolerance
+        else:
+            RTAMTException('only discrete time has sampling_tolerance')
+
     #TODO we need to move it to RTAMT4ROS as wrapper
     @property
     def publish_var(self):
