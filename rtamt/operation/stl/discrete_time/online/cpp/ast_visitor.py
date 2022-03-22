@@ -1,6 +1,7 @@
 from rtamt.ast.visitor.stl.ast_visitor import StlAstVisitor
 
 from rtamt.enumerations.comp_op import StlComparisonOperator as CompOp
+from rtamt.lib.rtamt_stl_library_wrapper.stl_combinatorial_binary_node import CombinatorialBinaryOperation
 from rtamt.lib.rtamt_stl_library_wrapper.stl_comp_op import StlComparisonOperator
 from rtamt.lib.rtamt_stl_library_wrapper.stl_not_node import NotOperation
 from rtamt.lib.rtamt_stl_library_wrapper.stl_addition_node import AdditionOperation
