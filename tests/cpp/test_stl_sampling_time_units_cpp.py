@@ -6,7 +6,7 @@ class TestSTLSamplingTimeUnits(unittest.TestCase):
         super(TestSTLSamplingTimeUnits, self).__init__(*args, **kwargs)
 
     def test_example(self):
-        spec = rtamt.STLDiscreteTimeSpecification(0)
+        spec = rtamt.StlDiscreteTimeOnlineSpecificationCpp()
         spec.name = 'STL Example specification'
 
         self.assertEqual(spec.name, 'STL Example specification', 'Spec name assertion')
@@ -21,7 +21,7 @@ class TestSTLSamplingTimeUnits(unittest.TestCase):
         self.assertEqual(spec.sampling_tolerance, 0.1, 'Spec sampling tolerance assertion')
 
         try:
-            spec.parse();
+            spec.parse()
             computed = spec.update(0, [['req', 2.2], ['gnt', 1]])
             self.assertEqual(2.2, computed, 'First computation')
 
