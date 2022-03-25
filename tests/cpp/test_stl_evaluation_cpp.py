@@ -108,11 +108,11 @@ class TestSTLEvaluationCPP(unittest.TestCase):
         out4 = oper.update(self.left4, self.right4)
         out5 = oper.update(self.left5, self.right5)
 
-        self.assertEqual(out1, 100 / 20, "input 1")
-        self.assertEqual(out2, -1 / -2, "input 2")
-        self.assertEqual(out3, -2 / 10, "input 3")
-        self.assertEqual(out4, 5 / 4, "input 4")
-        self.assertEqual(out5, -1 / -1, "input 5")
+        self.assertEqual(out1, 100.0 / 20.0, "input 1")
+        self.assertEqual(out2, -1.0 / -2.0, "input 2")
+        self.assertEqual(out3, -2.0 / 10.0, "input 3")
+        self.assertEqual(out4, 5.0 / 4.0, "input 4")
+        self.assertEqual(out5, -1.0 / -1.0, "input 5")
 
     def test_abs(self):
         oper = AbsOperation()
