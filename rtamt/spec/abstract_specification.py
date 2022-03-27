@@ -1,5 +1,4 @@
 import os, sys
-import importlib
 from abc import ABCMeta
 
 from rtamt.operation.abstract_discrete_time_online_evaluator import AbstractDiscreteTimeOnlineEvaluator
@@ -65,6 +64,9 @@ class AbstractSpecification(object):
     def modules(self, modules): # send synitax layer (ast)?
         self.ast.modules(modules)
 
+    def import_module(self, from_name, module_name): # send synitax layer (ast)?
+        self.ast.import_module(from_name, module_name)
+
     def parse(self):
         self.ast.parse()
 
@@ -111,13 +113,6 @@ class AbstractSpecification(object):
     @publish_var_field.setter
     def publish_var_field(self, publish_var_field):
         self.__publish_var_field = publish_var_field
-
-    def import_module(self, from_name, module_name):
-        try:
-            module = importlib.import_module(from_name)
-            self.modules[module_name] = module
-        except ImportError:
-            raise RTAMTException('The module {} cannot be loaded'.format(from_name))
 
     #TODO we are wondering. put add it to issue comment
     def add_input_var(self, input_var):
