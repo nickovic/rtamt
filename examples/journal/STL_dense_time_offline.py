@@ -2,11 +2,11 @@ import rtamt
 
 spec = rtamt.StlDenseTimeOfflineSpecification()
 spec.declare_var('req', 'float')
-spec.declare_var('event', 'float')
-spec.spec = 'G((req >= 3) -> (F[0, 2] (event >= 0)))'
+spec.declare_var('gnt', 'float')
+spec.spec = 'G((req >= 3) -> (F[0, 5] (gnt >= 3)))'
 spec.parse()
 
-req   = [[0, 100], [1, -1], [2, -2], [3, 5], [4, -1]]
-event = [[0,  20], [1, -2], [2, 10], [3, 4], [4, -1]]
+req = [[0.0, 0.0], [2.0, 6.0], [4.0, 0.0]]
+gnt = [[0.0, 0.0], [5.0, 6.0], [8.0, 0.0]]
 
-rob = spec.evaluate(['req', req], ['event', event])
+rob = spec.evaluate(['req', req], ['gnt', gnt])
