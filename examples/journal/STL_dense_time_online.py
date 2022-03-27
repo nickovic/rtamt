@@ -3,7 +3,7 @@ import rtamt
 spec = rtamt.StlDenseTimeOnlineSpecification()
 spec.declare_var('req', 'float')
 spec.declare_var('gnt', 'float')
-spec.spec = 'H[0, 10]((req >= 3) -> (O[0, 5] (gnt >= 3)))'
+spec.spec = 'H[0, 10]((O[5, 5](req >= 3)) -> (O[0, 5] (gnt >= 3)))'
 spec.parse()
 
 req_0 = [[0.0, 0.0], [2.0, 6.0]]
