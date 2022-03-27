@@ -241,6 +241,14 @@ class AbstractAst:
         except ImportError:
             raise AstParseException('The module {} cannot be loaded'.format(from_name))
 
+    def set_var_topic(self, var_name, var_topic):
+        if not var_name in self.vars:
+            logging.warning(
+                'The variable {0} is not declared. Setting its topic name to {1} is ignored.'.format(var_name,
+                                                                                                     var_topic))
+        else:
+            topic = self.var_topic_dict[var_name]
+            self.var_topic_dict[var_name] = var_topic
 
 def ast_factory(AstParserVisitor):
     class Ast(AbstractAst, AstParserVisitor):

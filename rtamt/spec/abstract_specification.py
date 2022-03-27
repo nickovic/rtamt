@@ -61,11 +61,14 @@ class AbstractSpecification(object):
     def vars(self, vars): # we do not need
         self.ast.vars(vars)
 
-    def modules(self, modules): # send synitax layer (ast)?
+    def modules(self, modules): #TODO: send syntax layer (ast)?
         self.ast.modules(modules)
 
-    def import_module(self, from_name, module_name): # send synitax layer (ast)?
+    def import_module(self, from_name, module_name): #TODO: send syntax layer (ast)?
         self.ast.import_module(from_name, module_name)
+
+    def set_var_topic(self, var_name, var_topic):
+        self.ast.set_var_topic(var_name, var_topic)
 
     def parse(self):
         self.ast.parse()
