@@ -72,6 +72,12 @@ class AbstractSpecification(object):
         else:
             RTAMTException('time_unit_transformer() allowed only discrete time')
 
+    def get_sampling_frequency(self):
+        if isinstance(self.evaluator, DiscreteTimeEvaluator):
+            self.evaluator.get_sampling_frequency()
+        else:
+            RTAMTException('time_unit_transformer() allowed only discrete time')
+
     @property
     def sampling_violation_counter(self):
         if isinstance(self.evaluator, DiscreteTimeEvaluator):
