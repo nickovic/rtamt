@@ -1,5 +1,6 @@
 from abc import ABCMeta
 import logging
+import importlib
 from fractions import Fraction
 from antlr4 import *
 from antlr4.InputStream import InputStream
@@ -45,7 +46,7 @@ class AbstractAst:
     def __init__(self, antrlLexerType, antrlParserType, parserErrorListenerType = None):
 
         # Class of lexser, parser, paserVisitor
-        #TODO we need class check which inherits expected abstrauct class.
+        #TODO we need class check which inherits expected abstract class.
         self.antrlLexerType = antrlLexerType
         self.antrlParserType = antrlParserType
         self.parserErrorListenerType = parserErrorListenerType
@@ -60,11 +61,12 @@ class AbstractAst:
 
         self.var_subspec_dict = dict()
         self.var_object_dict = dict()
-        self.modules = dict()
         self.var_type_dict = dict()
         self.var_io_dict = dict()
         self.const_type_dict = dict()
         self.const_val_dict = dict()
+
+        self.modules = dict()
 
 
         #TODO perhaps, we may omit it from AST.
@@ -127,7 +129,6 @@ class AbstractAst:
         ctx = parser.specification_file()
         self.visit(ctx.specification())
         return
-
 
 
     @property
@@ -232,6 +233,14 @@ class AbstractAst:
         self.const_type_dict[const_name] = const_type
         self.const_val_dict[const_name] = const_val
         self.vars.add(const_name)
+
+    def import_module(self, from_name, module_name):
+        try:
+            module = importlib.import_module(from_name)
+            self.modules[module_name] = module
+        except ImportError:
+            raise AstParseException('The module {} cannot be loaded'.format(from_name))
+
 
 def ast_factory(AstParserVisitor):
     class Ast(AbstractAst, AstParserVisitor):
