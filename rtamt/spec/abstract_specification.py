@@ -21,6 +21,9 @@ class AbstractSpecification(object):
         self.evaluator = None
         self.set_ast_flag = False # It is for evaluator is set ast or not.
 
+        #TODO we need to move it to RTAMT4ROS as wrapper
+        self.modules = dict()
+
     @property
     def name(self):
         return self.__name
