@@ -1,11 +1,12 @@
 import os, sys
-
 from abc import ABCMeta
 
 from rtamt.operation.abstract_discrete_time_online_evaluator import AbstractDiscreteTimeOnlineEvaluator
 from rtamt.operation.abstract_dense_time_online_evaluator import AbstractDenseTimeOnlineEvaluator
 from rtamt.operation.abstract_discrete_time_offline_evaluator import AbstractDiscreteTimeOfflineEvaluator
 from rtamt.operation.abstract_dense_time_offline_evaluator import AbstractDenseTimeOfflineEvaluator
+
+from rtamt.operation.discrete_time_evaluator import DiscreteTimeEvaluator
 
 from rtamt.exception.exception import RTAMTException
 
@@ -16,7 +17,11 @@ class AbstractSpecification(object):
     def __init__(self, ast):
         self.name = 'Abstract Specification'
         self.ast = ast
+        self.evaluator = None
         self.set_ast_flag = False # It is for evaluator is set ast or not.
+
+        #TODO we need to move it to RTAMT4ROS as wrapper
+        self.modules = dict()
 
     @property
     def name(self):
@@ -56,11 +61,44 @@ class AbstractSpecification(object):
     def vars(self, vars): # we do not need
         self.ast.vars(vars)
 
-    def modules(self, modules): # send synitax layer (ast)?
+    def modules(self, modules): #TODO: send syntax layer (ast)?
         self.ast.modules(modules)
+
+    def import_module(self, from_name, module_name): #TODO: send syntax layer (ast)?
+        self.ast.import_module(from_name, module_name)
+
+    def set_var_topic(self, var_name, var_topic):
+        self.ast.set_var_topic(var_name, var_topic)
 
     def parse(self):
         self.ast.parse()
+
+    # forwarding to evaluator
+    def set_sampling_period(self, sampling_period=int(1), unit='s', tolerance=float(0.1)):
+        if isinstance(self.evaluator, DiscreteTimeEvaluator):
+            self.evaluator.set_sampling_period(sampling_period, unit, tolerance)
+        else:
+            RTAMTException('time_unit_transformer() allowed only discrete time')
+
+    def get_sampling_frequency(self):
+        if isinstance(self.evaluator, DiscreteTimeEvaluator):
+            self.evaluator.get_sampling_frequency()
+        else:
+            RTAMTException('time_unit_transformer() allowed only discrete time')
+
+    @property
+    def sampling_violation_counter(self):
+        if isinstance(self.evaluator, DiscreteTimeEvaluator):
+            return self.evaluator.sampling_violation_counter
+        else:
+            RTAMTException('only discrete time has sampling_violation_counter')
+
+    @property
+    def sampling_tolerance(self):
+        if isinstance(self.evaluator, DiscreteTimeEvaluator):
+            return self.evaluator.sampling_tolerance
+        else:
+            RTAMTException('only discrete time has sampling_tolerance')
 
     #TODO we need to move it to RTAMT4ROS as wrapper
     @property
@@ -118,16 +156,16 @@ class AbstractOfflineSpecification(AbstractSpecification):
     def __init__(self, ast, offlineEvaluator):
         AbstractSpecification.__init__(self, ast)
         self.name = 'Abstract Offline Specification'
-        self.offlineEvaluator = offlineEvaluator
+        self.evaluator = offlineEvaluator
 
     # forwarding to evaluator
     def evaluate(self, *args, **kwargs):
         if self.set_ast_flag != True:
-            self.offlineEvaluator.set_ast(self.ast)
+            self.evaluator.set_ast(self.ast)
             self.set_ast_flag = True
 
         #TODO we may make it consistent with evaluator class.
-        if isinstance(self.offlineEvaluator, AbstractDenseTimeOfflineEvaluator):
+        if isinstance(self.evaluator, AbstractDenseTimeOfflineEvaluator):
             if len(args) == 0:
                 raise Exception()
             elif len(args) == 1:
@@ -136,10 +174,10 @@ class AbstractOfflineSpecification(AbstractSpecification):
                 dataset = []
                 for i in args:
                     dataset.append(i)
-            return self.offlineEvaluator.evaluate(dataset)
-        elif isinstance(self.offlineEvaluator, AbstractDiscreteTimeOfflineEvaluator):
+            return self.evaluator.evaluate(dataset)
+        elif isinstance(self.evaluator, AbstractDiscreteTimeOfflineEvaluator):
             dataset = args[0]
-            return self.offlineEvaluator.evaluate(dataset)
+            return self.evaluator.evaluate(dataset)
         else:
             pass
 
@@ -148,7 +186,7 @@ class AbstractOnlineSpecification(AbstractSpecification):
     def __init__(self, ast, onlineEvaluator, pastifier=None):
         AbstractSpecification.__init__(self, ast)
         self.name = 'Abstract Online Specification'
-        self.onlineEvaluator = onlineEvaluator
+        self.evaluator = onlineEvaluator
         self.pastifier = pastifier
 
     # forwarding pastify
@@ -158,11 +196,11 @@ class AbstractOnlineSpecification(AbstractSpecification):
     # forwarding to evaluator
     def update(self, *args, **kwargs):
         if self.set_ast_flag != True:
-            self.onlineEvaluator.set_ast(self.ast)
+            self.evaluator.set_ast(self.ast)
             self.set_ast_flag = True
 
         #TODO we may make it consistent with evaluator class.
-        if isinstance(self.onlineEvaluator, AbstractDenseTimeOnlineEvaluator):
+        if isinstance(self.evaluator, AbstractDenseTimeOnlineEvaluator):
             if len(args) == 0:
                 raise Exception()
             elif len(args) == 1:
@@ -171,17 +209,17 @@ class AbstractOnlineSpecification(AbstractSpecification):
                 dataset = []
                 for i in args:
                     dataset.append(i)
-            return self.onlineEvaluator.update(dataset)
-        elif isinstance(self.onlineEvaluator, AbstractDiscreteTimeOnlineEvaluator):
+            return self.evaluator.update(dataset)
+        elif isinstance(self.evaluator, AbstractDiscreteTimeOnlineEvaluator):
             i = args[0]
             dataset = args[1]
-            return self.onlineEvaluator.update(i, dataset)
+            return self.evaluator.update(i, dataset)
         else:
             pass
 
     def final_update(self, *args, **kwargs):
         if self.set_ast_flag != True:
-            self.onlineEvaluator.set_ast(self.ast)
+            self.evaluator.set_ast(self.ast)
             self.set_ast_flag = True
 
         #TODO we may make it consistent with evaluator class.
@@ -194,13 +232,10 @@ class AbstractOnlineSpecification(AbstractSpecification):
             for i in args:
                 dataset.append(i)
 
-        return self.onlineEvaluator.final_update(dataset)
+        return self.evaluator.final_update(dataset)
 
     def reset(self):
-        self.onlineEvaluator.reset()
-
-    def set_sampling_period(self, sampling_period=int(1), unit='s', tolerance=float(0.1)):
-        self.onlineEvaluator.set_sampling_period(sampling_period, unit, tolerance)
+        self.evaluator.reset()
 
 
 # we would not recomend to use it
