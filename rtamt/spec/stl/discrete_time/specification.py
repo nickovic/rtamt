@@ -4,6 +4,7 @@ from rtamt.ast.parser.stl.specification_parser import StlAst
 
 from rtamt.operation.stl.discrete_time.offline.evaluator import StlDiscreteTimeOfflineEvaluator
 from rtamt.operation.stl.discrete_time.online.evaluator import StlDiscreteTimeOnlineEvaluator
+from rtamt.operation.stl.discrete_time.online.cpp.evaluator import StlDiscreteTimeOnlineEvaluatorCpp
 from rtamt.enumerations.options import *
 from rtamt.pastifier.stl.pastifier import StlPastifier
 
@@ -30,3 +31,6 @@ def StlDiscreteTimeOnlineSpecification():
     spec = AbstractOnlineSpecification(StlAst(), StlDiscreteTimeOnlineEvaluator(), pastifier=StlPastifier())
     return spec
 
+def StlDiscreteTimeOnlineSpecificationCpp():
+    spec = AbstractOnlineSpecification(StlAst(), StlDiscreteTimeOnlineEvaluatorCpp(), pastifier=StlPastifier())
+    return spec
