@@ -198,7 +198,7 @@ class TestStlDenseTimeOnlineSpecificationCpp(unittest.TestCase):
 
         spec.parse()
 
-        self.assertRaises(rtamt.LTLNotImplementedException, spec.update, 0, [('req', self.left1)])
+        self.assertRaises(rtamt.STLNotImplementedException, spec.update, 0, [('req', self.left1)])
 
     def test_next_with_pastify(self):
         spec = rtamt.StlDiscreteTimeOnlineSpecificationCpp()
@@ -354,7 +354,7 @@ class TestStlDenseTimeOnlineSpecificationCpp(unittest.TestCase):
 
         spec.parse()
 
-        self.assertRaises(rtamt.LTLNotImplementedException, spec.update, 0, [('req', self.left1)])
+        self.assertRaises(rtamt.STLNotImplementedException, spec.update, 0, [('req', self.left1)])
 
     def test_eventually_with_pastify(self):
         spec = rtamt.StlDiscreteTimeOnlineSpecificationCpp()
@@ -436,7 +436,7 @@ class TestStlDenseTimeOnlineSpecificationCpp(unittest.TestCase):
 
         spec.parse()
 
-        self.assertRaises(rtamt.LTLNotImplementedException, spec.update, 0, [('req', self.left1), ('gnt', self.right1)])
+        self.assertRaises(rtamt.STLNotImplementedException, spec.update, 0, [('req', self.left1), ('gnt', self.right1)])
 
     def test_always_with_pastify(self):
         spec = rtamt.StlDiscreteTimeOnlineSpecificationCpp()
@@ -447,7 +447,7 @@ class TestStlDenseTimeOnlineSpecificationCpp(unittest.TestCase):
 
         spec.parse()
 
-        self.assertRaises(rtamt.LTLPastifyException, spec.pastify)
+        self.assertRaises(rtamt.STLPastifyException, spec.pastify)
 
     def test_eventually_0_1_without_pastify(self):
         spec = rtamt.StlDiscreteTimeOnlineSpecificationCpp()
