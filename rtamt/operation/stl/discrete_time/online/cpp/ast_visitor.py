@@ -83,12 +83,14 @@ class StlDiscreteTimeOnlineAstVisitorCpp(StlAstVisitor):
         self.online_operator_dict[node.name] = XorOperation()
 
     def visitEventually(self, node, *args, **kwargs):
-        self.visitChildren(node, *args, **kwargs)
-        self.online_operator_dict[node.name] = EventuallyOperation()
+        #self.visitChildren(node, *args, **kwargs)
+        #self.online_operator_dict[node.name] = EventuallyOperation()
+        raise STLNotImplementedException('Eventually operator is not implemented in the STL online monitor.')
 
     def visitAlways(self, node, *args, **kwargs):
-        self.visitChildren(node, *args, **kwargs)
-        self.online_operator_dict[node.name] = AlwaysOperation()
+        #self.visitChildren(node, *args, **kwargs)
+        #self.online_operator_dict[node.name] = AlwaysOperation()
+        raise STLNotImplementedException('Always operator is not implemented in the STL online monitor.')
 
     def visitUntil(self, node, *args, **kwargs):
         raise STLNotImplementedException('Until operator is not implemented in the STL online monitor.')
