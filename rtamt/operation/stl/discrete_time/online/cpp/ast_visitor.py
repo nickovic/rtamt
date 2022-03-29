@@ -16,6 +16,9 @@ from rtamt.lib.rtamt_stl_library_wrapper.stl_iff_node import IffOperation
 from rtamt.lib.rtamt_stl_library_wrapper.stl_xor_node import XorOperation
 from rtamt.lib.rtamt_stl_library_wrapper.stl_since_node import SinceOperation
 from rtamt.lib.rtamt_stl_library_wrapper.stl_abs_node import AbsOperation
+from rtamt.lib.rtamt_stl_library_wrapper.stl_exp_node import ExpOperation
+from rtamt.lib.rtamt_stl_library_wrapper.stl_pow_node import PowOperation
+from rtamt.lib.rtamt_stl_library_wrapper.stl_sqrt_node import SqrtOperation
 from rtamt.lib.rtamt_stl_library_wrapper.stl_rise_node import RiseOperation
 from rtamt.lib.rtamt_stl_library_wrapper.stl_fall_node import FallOperation
 from rtamt.lib.rtamt_stl_library_wrapper.stl_once_node import OnceOperation
@@ -36,11 +39,23 @@ class StlDiscreteTimeOnlineAstVisitorCpp(StlAstVisitor):
 
     def visitPredicate(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
-        self.online_operator_dict[node.name] = PredicateOperation(node.operator)
+        self.online_operator_dict[node.name] = PredicateOperation(self.op_cpp(node.operator))
 
     def visitAbs(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
         self.online_operator_dict[node.name] = AbsOperation()
+
+    def visitPow(self, node, *args, **kwargs):
+        self.visitChildren(node, *args, **kwargs)
+        self.online_operator_dict[node.name] = PowOperation()
+
+    def visitExp(self, node, *args, **kwargs):
+        self.visitChildren(node, *args, **kwargs)
+        self.online_operator_dict[node.name] = ExpOperation()
+
+    def visitSqrt(self, node, *args, **kwargs):
+        self.visitChildren(node, *args, **kwargs)
+        self.online_operator_dict[node.name] = SqrtOperation()
 
     def visitAddition(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
