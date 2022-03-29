@@ -5,8 +5,7 @@ import matplotlib.pyplot as plt
 
 def init_plt(fontsize=12):
     #plt.rcParams.update({'font.size': 12})
-    #fig = plt.figure(figsize=(4, 3.5))
-    fig = plt.figure()
+    fig = plt.figure(figsize=(6, 4))
     # Sience+IEEE plot
     # https://github.com/garrettj403/SciencePlots/blob/master/styles/journals/ieee.mplstyle
     plt.rcParams['axes.prop_cycle'] = cycler('color', ['k', 'r', 'b', 'g']) + cycler('ls', ['-', '--', ':', '-.'])
@@ -33,7 +32,7 @@ def traj2timesValues(traj):
     return times, values
 
 # params
-fontsize = 16
+fontsize = 24
 linewidth = 3
 
 # STL
