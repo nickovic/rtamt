@@ -124,19 +124,23 @@ class StlDiscreteTimeOnlineAstVisitorCpp(StlAstVisitor):
 
     def visitTimedPrecedes(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
-        self.online_operator_dict[node.name] = PrecedesBoundedOperation(node.begin, node.end)
+        begin, end = self.time_unit_transformer(node)
+        self.online_operator_dict[node.name] = PrecedesBoundedOperation(begin, end)
 
     def visitTimedOnce(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
-        self.online_operator_dict[node.name] = OnceBoundedOperation(node.begin, node.end)
+        begin, end = self.time_unit_transformer(node)
+        self.online_operator_dict[node.name] = OnceBoundedOperation(begin, end)
 
     def visitTimedHistorically(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
-        self.online_operator_dict[node.name] = HistoricallyBoundedOperation(node.begin, node.end)
+        begin, end = self.time_unit_transformer(node)
+        self.online_operator_dict[node.name] = HistoricallyBoundedOperation(begin, end)
 
     def visitTimedSince(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
-        self.online_operator_dict[node.name] = SinceBoundedOperation(node.begin, node.end)
+        begin, end = self.time_unit_transformer(node)
+        self.online_operator_dict[node.name] = SinceBoundedOperation(begin, end)
 
     def visitTimedAlways(self, node, *args, **kwargs):
         raise STLNotImplementedException('Bounded always operator not implemented in STL online monitor.')
