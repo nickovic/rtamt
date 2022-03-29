@@ -447,7 +447,7 @@ class TestStlDenseTimeOnlineSpecificationCpp(unittest.TestCase):
 
         spec.parse()
 
-        self.assertRaises(rtamt.STLPastifyException, spec.pastify)
+        self.assertRaises(rtamt.LTLPastifyException, spec.pastify)
 
     def test_eventually_0_1_without_pastify(self):
         spec = rtamt.StlDiscreteTimeOnlineSpecificationCpp()
