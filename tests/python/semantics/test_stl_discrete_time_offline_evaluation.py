@@ -100,8 +100,8 @@ class TestSTLEvaluation(unittest.TestCase):
         evaluator = StlDiscreteTimeOfflineEvaluator()
         evaluator.set_ast(ast)
 
-        a = [100, -1, -2, 5, -1]
-        b = [20, -2, 10, 4, -1]
+        a = [100.0, -1.0, -2.0, 5.0, -1.0]
+        b = [20.0, -2.0, 10.0, 4.0, -1.0]
         t = [0, 1, 2, 3, 4]
 
         dataset = {'time': t, 'a': a, 'b': b}
