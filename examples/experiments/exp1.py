@@ -2,6 +2,7 @@ import rtamt
 import sys
 import random
 import time
+from cycler import cycler
 import matplotlib.pyplot as plt
 
 t1 = list(range(10))
@@ -209,14 +210,27 @@ spec4.evaluate(dataset)
 e_t = time.time()
 s4_times.append(e_t-s_t)
 
-x = [10, 100, 1000, 10000, 100000, 1000000]
-fig, ax = plt.subplots()
-line1 = ax.plot(x, s1_times)
-line2 = ax.plot(x, s2_times)
-line3 = ax.plot(x, s3_times)
-line4 = ax.plot(x, s4_times)
-plt.title('Offline monitors - Computation time vs. |Formula| and |Input|')
-plt.xlabel('# of samples per signal')
-plt.ylabel('Time (s)')
-plt.legend([line1, line2, line3, line4], [r'\varphi_1', r'\varphi_2', r'\varphi_3', r'\varphi_4'])
+
+# plot
+fontsize = 16
+fig = plt.figure()
+# Sience+IEEE plot
+# https://github.com/garrettj403/SciencePlots/blob/master/styles/journals/ieee.mplstyle
+plt.rcParams['axes.prop_cycle'] = cycler('color', ['k', 'r', 'b', 'g']) + cycler('ls', ['-', '--', ':', '-.'])
+plt.rcParams['text.usetex'] = True
+#plt.title('Offline monitors - Computation time vs. |Formula| and |Input|')
+x      = [10,   100,   1000, 10000, 100000, 1000000]
+locs   = [0,   500000, 1000000]
+xticks = ['0', '500K', '1M']
+plt.xticks(locs, xticks, fontsize=fontsize)
+plt.yticks(fontsize=fontsize)
+plt.xlabel('\# of samples per signal', fontsize=fontsize)
+plt.ylabel('Time [s]', fontsize=fontsize)
+plt.plot(x, s1_times, label=r'$\varphi_1$')
+plt.plot(x, s2_times, label=r'$\varphi_2$')
+plt.plot(x, s3_times, label=r'$\varphi_3$')
+plt.plot(x, s4_times, label=r'$\varphi_4$')
+plt.legend(fontsize=fontsize, loc='upper left')
+plt.savefig('exp1.pdf', bbox_inches='tight')
+
 plt.show()
