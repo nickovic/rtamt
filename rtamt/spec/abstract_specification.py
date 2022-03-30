@@ -49,6 +49,9 @@ class AbstractSpecification(object):
     def add_sub_spec(self, sub_spec):
         self.ast.add_sub_spec(sub_spec)
 
+    def set_var_io_type(self, var, io_type):
+        self.ast.set_var_io_type(var, io_type)
+
     def declare_var(self, var_name, var_type):
         self.ast.declare_var(var_name, var_type)
 
@@ -152,20 +155,24 @@ class AbstractSpecification(object):
         return out
 
 
+class DiscreteTimeOfflineEvaluator(object):
+    pass
+
+
 class AbstractOfflineSpecification(AbstractSpecification):
     def __init__(self, ast, offlineEvaluator):
         AbstractSpecification.__init__(self, ast)
         self.name = 'Abstract Offline Specification'
-        self.evaluator = offlineEvaluator
+        self.offline_evaluator = offlineEvaluator
 
     # forwarding to evaluator
     def evaluate(self, *args, **kwargs):
         if self.set_ast_flag != True:
-            self.evaluator.set_ast(self.ast)
+            self.offline_evaluator.set_ast(self.ast)
             self.set_ast_flag = True
 
         #TODO we may make it consistent with evaluator class.
-        if isinstance(self.evaluator, AbstractDenseTimeOfflineEvaluator):
+        if isinstance(self.offline_evaluator, AbstractDenseTimeOfflineEvaluator):
             if len(args) == 0:
                 raise Exception()
             elif len(args) == 1:
@@ -174,19 +181,19 @@ class AbstractOfflineSpecification(AbstractSpecification):
                 dataset = []
                 for i in args:
                     dataset.append(i)
-            return self.evaluator.evaluate(dataset)
-        elif isinstance(self.evaluator, AbstractDiscreteTimeOfflineEvaluator):
+            return self.offline_evaluator.evaluate(dataset)
+        elif isinstance(self.offline_evaluator, AbstractDiscreteTimeOfflineEvaluator):
             dataset = args[0]
-            return self.evaluator.evaluate(dataset)
+            return self.offline_evaluator.evaluate(dataset)
         else:
-            pass
+            raise Exception('Wrong evaluator!')
 
 
 class AbstractOnlineSpecification(AbstractSpecification):
     def __init__(self, ast, onlineEvaluator, pastifier=None):
         AbstractSpecification.__init__(self, ast)
         self.name = 'Abstract Online Specification'
-        self.evaluator = onlineEvaluator
+        self.online_evaluator = onlineEvaluator
         self.pastifier = pastifier
 
     # forwarding pastify
@@ -196,11 +203,11 @@ class AbstractOnlineSpecification(AbstractSpecification):
     # forwarding to evaluator
     def update(self, *args, **kwargs):
         if self.set_ast_flag != True:
-            self.evaluator.set_ast(self.ast)
+            self.online_evaluator.set_ast(self.ast)
             self.set_ast_flag = True
 
         #TODO we may make it consistent with evaluator class.
-        if isinstance(self.evaluator, AbstractDenseTimeOnlineEvaluator):
+        if isinstance(self.online_evaluator, AbstractDenseTimeOnlineEvaluator):
             if len(args) == 0:
                 raise Exception()
             elif len(args) == 1:
@@ -209,17 +216,17 @@ class AbstractOnlineSpecification(AbstractSpecification):
                 dataset = []
                 for i in args:
                     dataset.append(i)
-            return self.evaluator.update(dataset)
-        elif isinstance(self.evaluator, AbstractDiscreteTimeOnlineEvaluator):
+            return self.online_evaluator.update(dataset)
+        elif isinstance(self.online_evaluator, AbstractDiscreteTimeOnlineEvaluator):
             i = args[0]
             dataset = args[1]
-            return self.evaluator.update(i, dataset)
+            return self.online_evaluator.update(i, dataset)
         else:
             pass
 
     def final_update(self, *args, **kwargs):
         if self.set_ast_flag != True:
-            self.evaluator.set_ast(self.ast)
+            self.online_evaluator.set_ast(self.ast)
             self.set_ast_flag = True
 
         #TODO we may make it consistent with evaluator class.
@@ -232,10 +239,10 @@ class AbstractOnlineSpecification(AbstractSpecification):
             for i in args:
                 dataset.append(i)
 
-        return self.evaluator.final_update(dataset)
+        return self.online_evaluator.final_update(dataset)
 
     def reset(self):
-        self.evaluator.reset()
+        self.online_evaluator.reset()
 
 
 # we would not recomend to use it

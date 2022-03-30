@@ -172,6 +172,24 @@ def multiplication(a, b):
 def division(a, b):
     return float(a) / float(b)
 
+def eq(a, b):
+    return a == b
+
+def neq(a, b):
+    return not a == b
+
+def geq(a, b):
+    return a >= b
+
+def greater(a, b):
+    return a > b
+
+def leq(a, b):
+    return a <= b
+
+def less(a, b):
+    return a < b
+
 def power(a, b):
     return math.pow(a, b)
 

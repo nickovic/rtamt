@@ -90,3 +90,36 @@ class PredicateOperation(AbstractDenseTimeOnlineOperation):
             prev = out_val
 
         return sample_result
+
+    def sat_final(self, sample_left, sample_right, *args, **kargs):
+        sample_result = []
+        input_list = self.sub.update_final(sample_left, sample_right)
+
+        prev = float('nan')
+        for i, in_sample in enumerate(input_list):
+            if self.comparison_op.value == StlComparisonOperator.EQ.value:
+                out_val = True if in_sample[1] == 0 else False
+                rval = -abs(in_sample[1])
+            elif self.comparison_op.value == StlComparisonOperator.NEQ.value:
+                out_val = False if in_sample[1] == 0 else True
+                rval = abs(in_sample[1])
+            elif self.comparison_op.value == StlComparisonOperator.LEQ.value:
+                out_val = True if in_sample[1] <= 0 else False
+                rval = - in_sample[1]
+            elif self.comparison_op.value == StlComparisonOperator.LESS.value:
+                out_val = True if in_sample[1] < 0 else False
+                rval = - in_sample[1]
+            elif self.comparison_op.value == StlComparisonOperator.GEQ.value:
+                out_val = True if in_sample[1] >= 0 else False
+                rval = in_sample[1]
+            elif self.comparison_op.value == StlComparisonOperator.GREATER.value:
+                out_val = True if in_sample[1] > 0 else False
+                rval = in_sample[1]
+            else:
+                raise LTLException('Unknown predicate operation')
+
+            if rval != prev or i == len(input_list) - 1:
+                sample_result.append([in_sample[0], out_val])
+            prev = out_val
+
+        return sample_result
