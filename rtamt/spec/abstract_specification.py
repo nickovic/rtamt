@@ -78,30 +78,55 @@ class AbstractSpecification(object):
 
     # forwarding to evaluator
     def set_sampling_period(self, sampling_period=int(1), unit='s', tolerance=float(0.1)):
-        if isinstance(self.evaluator, DiscreteTimeEvaluator):
-            self.evaluator.set_sampling_period(sampling_period, unit, tolerance)
-        else:
-            RTAMTException('time_unit_transformer() allowed only discrete time')
+        if self.online_evaluator:
+            if isinstance(self.online_evaluator, DiscreteTimeEvaluator):
+                self.online_evaluator.set_sampling_period(sampling_period, unit, tolerance)
+            else:
+                RTAMTException('time_unit_transformer() allowed only discrete time')
+
+        if self.offline_evaluator:
+            if isinstance(self.offline_evaluator, DiscreteTimeEvaluator):
+                self.offline_evaluator.set_sampling_period(sampling_period, unit, tolerance)
+            else:
+                RTAMTException('time_unit_transformer() allowed only discrete time')
 
     def get_sampling_frequency(self):
-        if isinstance(self.evaluator, DiscreteTimeEvaluator):
-            self.evaluator.get_sampling_frequency()
-        else:
-            RTAMTException('time_unit_transformer() allowed only discrete time')
+        if self.online_evaluator:
+            if isinstance(self.online_evaluator, DiscreteTimeEvaluator):
+                self.online_evaluator.get_sampling_frequency()
+            else:
+                RTAMTException('time_unit_transformer() allowed only discrete time')
+        if self.offline_evaluator:
+            if isinstance(self.offline_evaluator, DiscreteTimeEvaluator):
+                self.offline_evaluator.get_sampling_frequency()
+            else:
+                RTAMTException('time_unit_transformer() allowed only discrete time')
 
     @property
     def sampling_violation_counter(self):
-        if isinstance(self.evaluator, DiscreteTimeEvaluator):
-            return self.evaluator.sampling_violation_counter
-        else:
-            RTAMTException('only discrete time has sampling_violation_counter')
+        if self.online_evaluator:
+            if isinstance(self.online_evaluator, DiscreteTimeEvaluator):
+                return self.online_evaluator.sampling_violation_counter
+            else:
+                RTAMTException('only discrete time has sampling_violation_counter')
+        if self.offline_evaluator:
+            if isinstance(self.offline_evaluator, DiscreteTimeEvaluator):
+                return self.offline_evaluator.sampling_violation_counter
+            else:
+                RTAMTException('only discrete time has sampling_violation_counter')
 
     @property
     def sampling_tolerance(self):
-        if isinstance(self.evaluator, DiscreteTimeEvaluator):
-            return self.evaluator.sampling_tolerance
-        else:
-            RTAMTException('only discrete time has sampling_tolerance')
+        if self.online_evaluator:
+            if isinstance(self.online_evaluator, DiscreteTimeEvaluator):
+                return self.online_evaluator.sampling_tolerance
+            else:
+                RTAMTException('only discrete time has sampling_tolerance')
+        if self.offline_evaluator:
+            if isinstance(self.offline_evaluator, DiscreteTimeEvaluator):
+                return self.offline_evaluator.sampling_tolerance
+            else:
+                RTAMTException('only discrete time has sampling_tolerance')
 
     #TODO we need to move it to RTAMT4ROS as wrapper
     @property
