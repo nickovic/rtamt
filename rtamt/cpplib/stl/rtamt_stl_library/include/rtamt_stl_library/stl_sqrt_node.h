@@ -1,12 +1,12 @@
-#ifndef STL_ABS_NODE_H
-#define STL_ABS_NODE_H
+#ifndef STL_SQRT_NODE_H
+#define STL_SQRT_NODE_H
 
 
 namespace stl_library {
 
-class StlAbsNode {
+class StlSqrtNode {
     public:
-        StlAbsNode();
+        StlSqrtNode();
         double update(double sample);
         void reset();
        
@@ -14,5 +14,5 @@ class StlAbsNode {
 
 } // namespace stl_library
 
-#endif /* STL_ABS_NODE_H */
+#endif /* STL_SQRT_NODE_H */
 

@@ -1,4 +1,4 @@
-#include <rtamt_stl_library/stl_abs_node.h>
+#include <rtamt_stl_library/stl_exp_node.h>
 #include <algorithm>
 #include <limits>
 #include <cmath>
@@ -7,16 +7,16 @@ using namespace std;
 using namespace stl_library;
 
 // Initialize previous and current value
-StlAbsNode::StlAbsNode() {
+StlExpNode::StlExpNode() {
 }
 
-void StlAbsNode::reset() {
+void StlExpNode::reset() {
 }
 
-double StlAbsNode::update(double sample) {
+double StlExpNode::update(double sample) {
     double out;
     
-    out = abs(sample);
+    out = exp(sample);
 
     return out;
 }

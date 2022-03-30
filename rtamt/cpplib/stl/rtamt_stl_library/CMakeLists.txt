@@ -21,6 +21,9 @@ add_library(${PROJECT_NAME}
         src/stl_multiplication_node.cpp
         src/stl_division_node.cpp
         src/stl_abs_node.cpp
+        src/stl_exp_node.cpp
+        src/stl_pow_node.cpp
+        src/stl_sqrt_node.cpp
         src/stl_rise_node.cpp
         src/stl_fall_node.cpp
         src/stl_constant_node.cpp

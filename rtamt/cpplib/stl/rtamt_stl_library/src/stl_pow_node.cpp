@@ -1,4 +1,4 @@
-#include <rtamt_stl_library/stl_abs_node.h>
+#include <rtamt_stl_library/stl_pow_node.h>
 #include <algorithm>
 #include <limits>
 #include <cmath>
@@ -7,16 +7,16 @@ using namespace std;
 using namespace stl_library;
 
 // Initialize previous and current value
-StlAbsNode::StlAbsNode() {
+StlPowNode::StlPowNode() {
 }
 
-void StlAbsNode::reset() {
+void StlPowNode::reset() {
 }
 
-double StlAbsNode::update(double sample) {
+double StlPowNode::update(double base, double exponent) {
     double out;
     
-    out = abs(sample);
+    out = pow(base, exponent);
 
     return out;
 }

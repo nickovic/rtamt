@@ -1,18 +1,18 @@
-#ifndef STL_ABS_NODE_H
-#define STL_ABS_NODE_H
+#ifndef STL_POW_NODE_H
+#define STL_POW_NODE_H
 
 
 namespace stl_library {
 
-class StlAbsNode {
+class StlPowNode {
     public:
-        StlAbsNode();
-        double update(double sample);
+        StlPowNode();
+        double update(double base, double exponent);
         void reset();
        
 };
 
 } // namespace stl_library
 
-#endif /* STL_ABS_NODE_H */
+#endif /* STL_Pow_NODE_H */
 
