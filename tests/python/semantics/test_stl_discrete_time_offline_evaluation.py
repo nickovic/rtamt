@@ -148,259 +148,607 @@ class TestSTLEvaluation(unittest.TestCase):
         self.assertListEqual(out, expected, "sqrt")
 
     def test_exp(self):
-        oper = ExpOperation()
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.spec = 'exp(a)'
+        ast.parse()
+        evaluator = StlDiscreteTimeOfflineEvaluator()
+        evaluator.set_ast(ast)
 
-        out = oper.update([1, 2.2, 0.5])
-        expected = [math.exp(1), math.exp(2.2), math.exp(0.5)]
+        a = [1, 2.2, 0.5]
+        t = [0, 1, 2]
+
+        dataset = {'time': t, 'a': a}
+
+        out = evaluator.evaluate(dataset)
+        expected = [[0, math.exp(1)], [1, math.exp(2.2)], [2, math.exp(0.5)]]
 
         self.assertListEqual(out, expected, "exp")
 
     def test_pow(self):
-        oper = PowOperation()
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.declare_var('b', 'float')
+        ast.spec = 'pow(a, b)'
+        ast.parse()
+        evaluator = StlDiscreteTimeOfflineEvaluator()
+        evaluator.set_ast(ast)
 
-        out = oper.update([1, 2.2, 0.5], [2, 0.3, 2])
-        expected = [math.pow(1, 2), math.pow(2.2, 0.3), math.pow(0.5, 2)]
+        a = [1, 2.2, 0.5]
+        b = [2, 0.3, 2]
+        t = [0, 1, 2]
+
+        dataset = {'time': t, 'a': a, 'b': b}
+
+        out = evaluator.evaluate(dataset)
+        expected = [[0, math.pow(1, 2)], [1, math.pow(2.2, 0.3)], [2, math.pow(0.5, 2)]]
 
         self.assertListEqual(out, expected, "pow")
 
     def test_previous(self):
-        oper = PreviousOperation()
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.spec = 'prev(a)'
+        ast.parse()
+        evaluator = StlDiscreteTimeOfflineEvaluator()
+        evaluator.set_ast(ast)
 
-        out = oper.update(self.left)
-        expected = [float("inf"), 100, -1, -2, 5]
+        a = [100, -1, -2, 5, -1]
+        t = [0, 1, 2, 3, 4]
+
+        dataset = {'time': t, 'a': a}
+
+        out = evaluator.evaluate(dataset)
+        expected = [[0, float("inf")], [1, 100], [2, -1], [3, -2], [4, 5]]
 
         self.assertListEqual(out, expected, "previous")
 
     def test_next(self):
-        oper = NextOperation()
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.spec = 'next(a)'
+        ast.parse()
+        evaluator = StlDiscreteTimeOfflineEvaluator()
+        evaluator.set_ast(ast)
 
-        out = oper.update(self.left)
-        expected = [-1, -2, 5, -1, float("inf")]
+        a = [100, -1, -2, 5, -1]
+        t = [0, 1, 2, 3, 4]
+
+        dataset = {'time': t, 'a': a}
+
+        out = evaluator.evaluate(dataset)
+        expected = [[0, -1], [1, -2], [2, 5], [3, -1], [4, float("inf")]]
 
         self.assertListEqual(out, expected, "next")
 
     def test_and(self):
-        oper = AndOperation()
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.declare_var('b', 'float')
+        ast.spec = 'a and b'
+        ast.parse()
+        evaluator = StlDiscreteTimeOfflineEvaluator()
+        evaluator.set_ast(ast)
 
-        out = oper.update(self.left, self.right)
-        expected = [20, -2, -2, 4, -1]
+        a = [100, -1, -2, 5, -1]
+        b = [20, -2, 10, 4, -1]
+        t = [0, 1, 2, 3, 4]
 
+        dataset = {'time': t, 'a': a, 'b': b}
+
+        out = evaluator.evaluate(dataset)
+        expected = [[0, 20], [1, -2], [2, -2], [3, 4], [4, -1]]
         self.assertListEqual(out, expected, "and")
 
     def test_or(self):
-        oper = OrOperation()
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.declare_var('b', 'float')
+        ast.spec = 'a or b'
+        ast.parse()
+        evaluator = StlDiscreteTimeOfflineEvaluator()
+        evaluator.set_ast(ast)
 
-        out = oper.update(self.left, self.right)
-        expected = [100, -1, 10, 5, -1]
+        a = [100, -1, -2, 5, -1]
+        b = [20, -2, 10, 4, -1]
+        t = [0, 1, 2, 3, 4]
+
+        dataset = {'time': t, 'a': a, 'b': b}
+
+        out = evaluator.evaluate(dataset)
+        expected = [[0, 100], [1, -1], [2, 10], [3, 5], [4, -1]]
 
         self.assertListEqual(out, expected, "or")
 
     def test_iff(self):
-        oper = IffOperation()
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.declare_var('b', 'float')
+        ast.spec = 'a iff b'
+        ast.parse()
+        evaluator = StlDiscreteTimeOfflineEvaluator()
+        evaluator.set_ast(ast)
 
-        out = oper.update(self.left, self.right)
-        expected = [-80, -1, -12, -1, 0]
+        a = [100, -1, -2, 5, -1]
+        b = [20, -2, 10, 4, -1]
+        t = [0, 1, 2, 3, 4]
 
+        dataset = {'time': t, 'a': a, 'b': b}
+
+        out = evaluator.evaluate(dataset)
+        expected = [[0, -80], [1, -1], [2, -12], [3, -1], [4, 0]]
         self.assertListEqual(out, expected, "iff")
 
     def test_xor(self):
-        oper = XorOperation()
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.declare_var('b', 'float')
+        ast.spec = 'a xor b'
+        ast.parse()
+        evaluator = StlDiscreteTimeOfflineEvaluator()
+        evaluator.set_ast(ast)
 
-        out = oper.update(self.left, self.right)
-        expected = [80, 1, 12, 1, 0]
+        a = [100, -1, -2, 5, -1]
+        b = [20, -2, 10, 4, -1]
+        t = [0, 1, 2, 3, 4]
+
+        dataset = {'time': t, 'a': a, 'b': b}
+
+        out = evaluator.evaluate(dataset)
+        expected = [[0, 80], [1, 1], [2, 12], [3, 1], [4, 0]]
 
         self.assertListEqual(out, expected, "xor")
 
 
     def test_implies(self):
-        oper = ImpliesOperation()
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.declare_var('b', 'float')
+        ast.spec = 'a -> b'
+        ast.parse()
+        evaluator = StlDiscreteTimeOfflineEvaluator()
+        evaluator.set_ast(ast)
 
-        out = oper.update(self.left, self.right)
-        expected = [20, 1, 10, 4, 1]
+        a = [100, -1, -2, 5, -1]
+        b = [20, -2, 10, 4, -1]
+        t = [0, 1, 2, 3, 4]
+
+        dataset = {'time': t, 'a': a, 'b': b}
+
+        out = evaluator.evaluate(dataset)
+        expected = [[0, 20], [1, 1], [2, 10], [3, 4], [4, 1]]
 
         self.assertListEqual(out, expected, "implies")
 
     def test_always(self):
-        oper = AlwaysOperation()
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.spec = 'always(a)'
+        ast.parse()
+        evaluator = StlDiscreteTimeOfflineEvaluator()
+        evaluator.set_ast(ast)
 
-        out = oper.update(self.left)
-        expected = [-2, -2, -2, -1, -1]
+        a = [100, -1, -2, 5, -1]
+        t = [0, 1, 2, 3, 4]
+
+        dataset = {'time': t, 'a': a}
+
+        out = evaluator.evaluate(dataset)
+        expected = [[0, -2], [1, -2], [2, -2], [3, -1], [4, -1]]
 
         self.assertListEqual(out, expected, "always")
 
     def test_always_0_1(self):
-        oper = AlwaysBoundedOperation(0, 1)
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.spec = 'always[0,1](a)'
+        ast.parse()
+        evaluator = StlDiscreteTimeOfflineEvaluator()
+        evaluator.set_ast(ast)
 
-        out = oper.update(self.left)
-        expected = [-1, -2, -2, -1, -1]
+        a = [100, -1, -2, 5, -1]
+        t = [0, 1, 2, 3, 4]
+
+        dataset = {'time': t, 'a': a}
+
+        out = evaluator.evaluate(dataset)
+        expected = [[0, -1], [1, -2], [2, -2], [3, -1], [4, -1]]
 
         self.assertListEqual(out, expected, "always[0,1]")
 
     def test_historically(self):
-        oper = HistoricallyOperation()
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.spec = 'historically(a)'
+        ast.parse()
+        evaluator = StlDiscreteTimeOfflineEvaluator()
+        evaluator.set_ast(ast)
 
-        out = oper.update(self.left)
-        expected = [100, -1, -2, -2, -2]
+        a = [100, -1, -2, 5, -1]
+        t = [0, 1, 2, 3, 4]
+
+        dataset = {'time': t, 'a': a}
+
+        out = evaluator.evaluate(dataset)
+        expected = [[0, 100], [1, -1], [2, -2], [3, -2], [4, -2]]
 
         self.assertListEqual(out, expected, "historically")
 
     def test_once(self):
-        oper = OnceOperation()
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.spec = 'once(a)'
+        ast.parse()
+        evaluator = StlDiscreteTimeOfflineEvaluator()
+        evaluator.set_ast(ast)
 
-        out = oper.update(self.left)
-        expected = [100, 100, 100, 100, 100]
+        a = [100, -1, -2, 5, -1]
+        t = [0, 1, 2, 3, 4]
+
+        dataset = {'time': t, 'a': a}
+
+        out = evaluator.evaluate(dataset)
+        expected = [[0, 100], [1, 100], [2, 100], [3, 100], [4, 100]]
 
         self.assertListEqual(out, expected, "once")
 
     def test_eventually(self):
-        oper = EventuallyOperation()
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.spec = 'eventually(a)'
+        ast.parse()
+        evaluator = StlDiscreteTimeOfflineEvaluator()
+        evaluator.set_ast(ast)
 
-        out = oper.update(self.left)
-        expected = [100, 5, 5, 5, -1]
+        a = [100, -1, -2, 5, -1]
+        t = [0, 1, 2, 3, 4]
+
+        dataset = {'time': t, 'a': a}
+
+        out = evaluator.evaluate(dataset)
+        expected = [[0, 100], [1, 5], [2, 5], [3, 5], [4, -1]]
 
         self.assertListEqual(out, expected, "eventually")
 
     def test_eventually_0_1(self):
-        oper = EventuallyBoundedOperation(0, 1)
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.spec = 'eventually[0,1](a)'
+        ast.parse()
+        evaluator = StlDiscreteTimeOfflineEvaluator()
+        evaluator.set_ast(ast)
 
-        out = oper.update(self.left)
-        expected = [100, -1, 5, 5, -1]
+        a = [100, -1, -2, 5, -1]
+        t = [0, 1, 2, 3, 4]
+
+        dataset = {'time': t, 'a': a}
+
+        out = evaluator.evaluate(dataset)
+        expected = [[0, 100], [1, -1], [2, 5], [3, 5], [4, -1]]
 
         self.assertListEqual(out, expected, "eventually[0,1]")
 
     def test_since(self):
-        oper = SinceOperation()
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.declare_var('b', 'float')
+        ast.spec = 'a since b'
+        ast.parse()
+        evaluator = StlDiscreteTimeOfflineEvaluator()
+        evaluator.set_ast(ast)
 
-        out = oper.update(self.left, self.right)
-        expected = [20, -1, 10, 5, -1]
+        a = [100, -1, -2, 5, -1]
+        b = [20, -2, 10, 4, -1]
+        t = [0, 1, 2, 3, 4]
 
+        dataset = {'time': t, 'a': a, 'b': b}
+
+        out = evaluator.evaluate(dataset)
+        expected = [[0, 20], [1, -1], [2, 10], [3, 5], [4, -1]]
         self.assertListEqual(out, expected, "since")
 
     def test_until(self):
-        oper = UntilOperation()
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.declare_var('b', 'float')
+        ast.spec = 'a until b'
+        ast.parse()
+        evaluator = StlDiscreteTimeOfflineEvaluator()
+        evaluator.set_ast(ast)
 
-        out = oper.update(self.left, self.right)
-        expected = [20, -1, 10, 4, -1]
+        a = [100, -1, -2, 5, -1]
+        b = [20, -2, 10, 4, -1]
+        t = [0, 1, 2, 3, 4]
 
+        dataset = {'time': t, 'a': a, 'b': b}
+
+        out = evaluator.evaluate(dataset)
+        expected = [[0, 20], [1, -1], [2, 10], [3, 4], [4, -1]]
         self.assertListEqual(out, expected, "until")
 
     def test_until_0_1(self):
-        oper = UntilBoundedOperation(0, 1)
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.declare_var('b', 'float')
+        ast.spec = 'a until[0,1] b'
+        ast.parse()
+        evaluator = StlDiscreteTimeOfflineEvaluator()
+        evaluator.set_ast(ast)
 
-        out = oper.update(self.left, self.right)
-        expected = [20, -1, 10, 4, -1]
+        a = [100, -1, -2, 5, -1]
+        b = [20, -2, 10, 4, -1]
+        t = [0, 1, 2, 3, 4]
+
+        dataset = {'time': t, 'a': a, 'b': b}
+
+        out = evaluator.evaluate(dataset)
+        expected = [[0, 20], [1, -1], [2, 10], [3, 4], [4, -1]]
 
         self.assertListEqual(out, expected, "until")
 
     def test_once_0_1(self):
-        oper = OnceBoundedOperation(0,1)
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.spec = 'once[0,1](a)'
+        ast.parse()
+        evaluator = StlDiscreteTimeOfflineEvaluator()
+        evaluator.set_ast(ast)
 
-        out = oper.update(self.left)
-        expected = [100, 100, -1, 5, 5]
+        a = [100, -1, -2, 5, -1]
+        t = [0, 1, 2, 3, 4]
 
+        dataset = {'time': t, 'a': a}
+
+        out = evaluator.evaluate(dataset)
+        expected = [[0, 100], [1, 100], [2, -1], [3, 5], [4, 5]]
         self.assertListEqual(out, expected, "once[0,1]")
 
     def test_once_1_2(self):
-        oper = OnceBoundedOperation(1,2)
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.spec = 'once[1,2](a)'
+        ast.parse()
+        evaluator = StlDiscreteTimeOfflineEvaluator()
+        evaluator.set_ast(ast)
 
-        out = oper.update(self.left)
-        expected = [-float("inf"), 100, 100, -1, 5]
+        a = [100, -1, -2, 5, -1]
+        t = [0, 1, 2, 3, 4]
+
+        dataset = {'time': t, 'a': a}
+
+        out = evaluator.evaluate(dataset)
+        expected = [[0, -float("inf")], [1, 100], [2, 100], [3, -1], [4, 5]]
 
         self.assertListEqual(out, expected, "once[1,2]")
 
     def test_historically_0_1(self):
-        oper = HistoricallyBoundedOperation(0,1)
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.spec = 'historically[0,1](a)'
+        ast.parse()
+        evaluator = StlDiscreteTimeOfflineEvaluator()
+        evaluator.set_ast(ast)
 
-        out = oper.update(self.left)
-        expected = [100, -1, -2, -2, -1]
+        a = [100, -1, -2, 5, -1]
+        t = [0, 1, 2, 3, 4]
+
+        dataset = {'time': t, 'a': a}
+
+        out = evaluator.evaluate(dataset)
+        expected = [[0, 100], [1, -1], [2, -2], [3, -2], [4, -1]]
 
         self.assertListEqual(out, expected, "historically[0,1]")
 
     def test_historically_1_2(self):
-        oper = HistoricallyBoundedOperation(1,2)
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.spec = 'historically[1,2](a)'
+        ast.parse()
+        evaluator = StlDiscreteTimeOfflineEvaluator()
+        evaluator.set_ast(ast)
 
-        out = oper.update(self.left)
-        expected = [float("inf"), 100, -1, -2, -2]
+        a = [100, -1, -2, 5, -1]
+        t = [0, 1, 2, 3, 4]
+
+        dataset = {'time': t, 'a': a}
+
+        out = evaluator.evaluate(dataset)
+        expected = [[0, float("inf")], [1, 100], [2, -1], [3, -2], [4, -2]]
 
         self.assertListEqual(out, expected, "historically[1,2]")
 
     def test_since_0_1(self):
-        oper = SinceBoundedOperation(0,1)
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.declare_var('b', 'float')
+        ast.spec = 'a since[0,1] b'
+        ast.parse()
+        evaluator = StlDiscreteTimeOfflineEvaluator()
+        evaluator.set_ast(ast)
 
-        out = oper.update(self.left, self.right)
-        expected = [20, -1, 10, 5, -1]
+        a = [100, -1, -2, 5, -1]
+        b = [20, -2, 10, 4, -1]
+        t = [0, 1, 2, 3, 4]
+
+        dataset = {'time': t, 'a': a, 'b': b}
+
+        out = evaluator.evaluate(dataset)
+        expected = [[0, 20], [1, -1], [2, 10], [3, 5], [4, -1]]
 
         self.assertListEqual(out, expected, "since[0,1]")
 
     def test_not(self):
-        oper = NotOperation()
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.spec = 'not(a)'
+        ast.parse()
+        evaluator = StlDiscreteTimeOfflineEvaluator()
+        evaluator.set_ast(ast)
 
-        out = oper.update(self.left)
-        expected = [-100, 1, 2, -5, 1]
+        a = [100, -1, -2, 5, -1]
+        t = [0, 1, 2, 3, 4]
+
+        dataset = {'time': t, 'a': a}
+
+        out = evaluator.evaluate(dataset)
+        expected = [[0, -100], [1, 1], [2, 2], [3, -5], [4, 1]]
 
         self.assertListEqual(out, expected, "not")
 
     def test_rise(self):
-        oper = RiseOperation()
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.spec = 'rise(a)'
+        ast.parse()
+        evaluator = StlDiscreteTimeOfflineEvaluator()
+        evaluator.set_ast(ast)
 
-        out = oper.update(self.left)
-        expected = [100, -100, -2, 2, -5]
+        a = [100, -1, -2, 5, -1]
+        t = [0, 1, 2, 3, 4]
+
+        dataset = {'time': t, 'a': a}
+
+        out = evaluator.evaluate(dataset)
+        expected = [[0, 100], [1, -100], [2, -2], [3, 2], [4, -5]]
 
         self.assertListEqual(out, expected, "rise")
 
     def test_fall(self):
-        oper = FallOperation()
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.spec = 'fall(a)'
+        ast.parse()
+        evaluator = StlDiscreteTimeOfflineEvaluator()
+        evaluator.set_ast(ast)
 
-        out = oper.update(self.left)
-        expected = [-100, 1, -1, -5, 1]
+        a = [100, -1, -2, 5, -1]
+        t = [0, 1, 2, 3, 4]
+
+        dataset = {'time': t, 'a': a}
+
+        out = evaluator.evaluate(dataset)
+        expected = [[0, -100], [1, 1], [2, -1], [3, -5], [4, 1]]
 
         self.assertListEqual(out, expected, "fall")
 
     def test_predicate_leq(self):
-        oper = PredicateOperation(StlComparisonOperator.LEQ)
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.declare_var('b', 'float')
+        ast.spec = 'a <= b'
+        ast.parse()
+        evaluator = StlDiscreteTimeOfflineEvaluator()
+        evaluator.set_ast(ast)
 
-        out = oper.update(self.left, self.right)
-        expected = [-80, -1, 12, -1, 0]
+        a = [100, -1, -2, 5, -1]
+        b = [20, -2, 10, 4, -1]
+        t = [0, 1, 2, 3, 4]
+
+        dataset = {'time': t, 'a': a, 'b': b}
+
+        out = evaluator.evaluate(dataset)
+        expected = [[0, -80], [1, -1], [2, 12], [3, -1], [4, 0]]
 
         self.assertListEqual(out, expected, "leq")
 
     def test_predicate_less(self):
-        oper = PredicateOperation(StlComparisonOperator.LESS)
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.declare_var('b', 'float')
+        ast.spec = 'a < b'
+        ast.parse()
+        evaluator = StlDiscreteTimeOfflineEvaluator()
+        evaluator.set_ast(ast)
 
-        out = oper.update(self.left, self.right)
-        expected = [-80, -1, 12, -1, 0]
+        a = [100, -1, -2, 5, -1]
+        b = [20, -2, 10, 4, -1]
+        t = [0, 1, 2, 3, 4]
 
-        self.assertListEqual(out, expected, "less")
+        dataset = {'time': t, 'a': a, 'b': b}
+
+        out = evaluator.evaluate(dataset)
+        expected = [[0, -80], [1, -1], [2, 12], [3, -1], [4, 0]]
+
+        self.assertListEqual(out, expected, "leq")
 
     def test_predicate_geq(self):
-        oper = PredicateOperation(StlComparisonOperator.GEQ)
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.declare_var('b', 'float')
+        ast.spec = 'a >= b'
+        ast.parse()
+        evaluator = StlDiscreteTimeOfflineEvaluator()
+        evaluator.set_ast(ast)
 
-        out = oper.update(self.left, self.right)
-        expected = [80, 1, -12, 1, 0]
+        a = [100, -1, -2, 5, -1]
+        b = [20, -2, 10, 4, -1]
+        t = [0, 1, 2, 3, 4]
+
+        dataset = {'time': t, 'a': a, 'b': b}
+
+        out = evaluator.evaluate(dataset)
+        expected = [[0, 80], [1, 1], [2, -12], [3, 1], [4, 0]]
+
 
         self.assertListEqual(out, expected, "geq")
 
     def test_predicate_greater(self):
-        oper = PredicateOperation(StlComparisonOperator.GREATER)
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.declare_var('b', 'float')
+        ast.spec = 'a > b'
+        ast.parse()
+        evaluator = StlDiscreteTimeOfflineEvaluator()
+        evaluator.set_ast(ast)
 
-        out = oper.update(self.left, self.right)
-        expected = [80, 1, -12, 1, 0]
+        a = [100, -1, -2, 5, -1]
+        b = [20, -2, 10, 4, -1]
+        t = [0, 1, 2, 3, 4]
+
+        dataset = {'time': t, 'a': a, 'b': b}
+
+        out = evaluator.evaluate(dataset)
+        expected = [[0, 80], [1, 1], [2, -12], [3, 1], [4, 0]]
 
         self.assertListEqual(out, expected, "greater")
 
     def test_predicate_eq(self):
-        oper = PredicateOperation(StlComparisonOperator.EQUAL)
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.declare_var('b', 'float')
+        ast.spec = 'a == b'
+        ast.parse()
+        evaluator = StlDiscreteTimeOfflineEvaluator()
+        evaluator.set_ast(ast)
 
-        out = oper.update(self.left, self.right)
-        expected = [-80, -1, -12, -1, 0]
+        a = [100, -1, -2, 5, -1]
+        b = [20, -2, 10, 4, -1]
+        t = [0, 1, 2, 3, 4]
+
+        dataset = {'time': t, 'a': a, 'b': b}
+
+        out = evaluator.evaluate(dataset)
+        expected = [[0, -80], [1, -1], [2, -12], [3, -1], [4, 0]]
 
         self.assertListEqual(out, expected, "eq")
 
     def test_predicate_neq(self):
-        oper = PredicateOperation(StlComparisonOperator.NEQ)
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.declare_var('b', 'float')
+        ast.spec = 'a !== b'
+        ast.parse()
+        evaluator = StlDiscreteTimeOfflineEvaluator()
+        evaluator.set_ast(ast)
 
-        out = oper.update(self.left, self.right)
-        expected = [80, 1, 12, 1, 0]
+        a = [100, -1, -2, 5, -1]
+        b = [20, -2, 10, 4, -1]
+        t = [0, 1, 2, 3, 4]
+
+        dataset = {'time': t, 'a': a, 'b': b}
+
+        out = evaluator.evaluate(dataset)
+        expected = [[0, 80], [1, 1], [2, 12], [3, 1], [4, 0]]
 
         self.assertListEqual(out, expected, "neq")
 
