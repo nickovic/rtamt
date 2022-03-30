@@ -57,6 +57,8 @@ class AbstractAst:
         self.modular_spec = ''
 
         self.vars = set()
+        self.in_vars = set()
+        self.out_vars = set()
         self.free_vars = set()
 
         self.var_subspec_dict = dict()
@@ -249,6 +251,35 @@ class AbstractAst:
         else:
             topic = self.var_topic_dict[var_name]
             self.var_topic_dict[var_name] = var_topic
+
+    def set_var_io_type(self, var_name, var_iotype):
+        if not var_name in self.vars:
+            logging.warning('The variable {} does not exist'.format(var_name))
+        else:
+            if var_iotype == 'input':
+                self.add_input_var(var_name)
+                self.remove_output_var(var_name)
+                self.var_io_dict[var_name] = 'input'
+            elif var_iotype == 'output':
+                self.add_output_var(var_name)
+                self.remove_input_var(var_name)
+                self.var_io_dict[var_name] = 'output'
+            else:
+                self.remove_input_var(var_name)
+                self.remove_output_var(var_name)
+                self.var_io_dict[var_name] = 'undefined'
+
+    def add_input_var(self, input_var):
+        self.in_vars.add(input_var)
+
+    def remove_input_var(self, var):
+        self.in_vars.discard(var)
+
+    def add_output_var(self, output_var):
+        self.out_vars.add(output_var)
+
+    def remove_output_var(self, var):
+        self.out_vars.discard(var)
 
 def ast_factory(AstParserVisitor):
     class Ast(AbstractAst, AstParserVisitor):

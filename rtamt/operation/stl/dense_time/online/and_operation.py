@@ -12,15 +12,18 @@ class AndOperation(AbstractDenseTimeOnlineOperation):
         pass
 
     def update(self, sample_left, sample_right, *args, **kargs):
+        self.sample_left_buf = self.sample_left_buf + sample_left
+        self.sample_right_buf = self.sample_right_buf + sample_right
 
-        sample_result, last, left, right = intersect.intersection(sample_left, sample_right, intersect.conjunction)
+        sample_result, last, left, right = intersect.intersection(self.sample_left_buf, self.sample_right_buf,
+                                                                  intersect.conjunction)
 
         self.sample_left_buf = left
         self.sample_right_buf = right
         if sample_result:
-            self.sample_last_buf = last
+            self.last = last
 
         return sample_result
 
     def update_final(self, sample_left, sample_right, *args, **kargs):
-        return self.update(sample_left, sample_right, *args, **kargs) + [self.sample_last_buf]
+        return self.update(sample_left, sample_right, *args, **kargs) + [self.last]

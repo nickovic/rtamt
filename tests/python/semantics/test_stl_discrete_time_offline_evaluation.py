@@ -67,40 +67,83 @@ class TestSTLEvaluation(unittest.TestCase):
         dataset = {'time': t, 'a': a, 'b': b}
 
         out = evaluator.evaluate(dataset)
-
-        expected = [80, 1, -12, 1, 0]
+        expected = [[0, 80], [1, 1], [2, -12], [3, 1], [4, 0]]
 
         self.assertListEqual(out, expected, "subtraction")
 
     def test_multiplication(self):
-        oper = MultiplicationOperation()
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.declare_var('b', 'float')
+        ast.spec = 'a * b'
+        ast.parse()
+        evaluator = StlDiscreteTimeOfflineEvaluator()
+        evaluator.set_ast(ast)
 
-        out = oper.update(self.left, self.right)
-        expected = [2000, 2, -20, 20, 1]
+        a = [100, -1, -2, 5, -1]
+        b = [20, -2, 10, 4, -1]
+        t = [0, 1, 2, 3, 4]
+
+        dataset = {'time': t, 'a': a, 'b': b}
+
+        out = evaluator.evaluate(dataset)
+        expected = [[0, 2000], [1, 2], [2, -20], [3, 20], [4, 1]]
 
         self.assertListEqual(out, expected, "multiplication")
 
     def test_division(self):
-        oper = DivisionOperation()
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.declare_var('b', 'float')
+        ast.spec = 'a / b'
+        ast.parse()
+        evaluator = StlDiscreteTimeOfflineEvaluator()
+        evaluator.set_ast(ast)
 
-        out = oper.update(self.left, self.right)
-        expected = [100/20, -1/-2, -2/10, 5/4, -1/-1]
+        a = [100, -1, -2, 5, -1]
+        b = [20, -2, 10, 4, -1]
+        t = [0, 1, 2, 3, 4]
+
+        dataset = {'time': t, 'a': a, 'b': b}
+
+        out = evaluator.evaluate(dataset)
+        expected = [[0, 100.0/20.0], [1, -1.0/-2.0], [2, -2.0/10.0], [3, 5.0/4.0], [4, -1.0/-1.0]]
 
         self.assertListEqual(out, expected, "division")
 
     def test_abs(self):
-        oper = AbsOperation()
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.spec = 'abs(a)'
+        ast.parse()
+        evaluator = StlDiscreteTimeOfflineEvaluator()
+        evaluator.set_ast(ast)
 
-        out = oper.update(self.left)
-        expected = [100, 1, 2, 5, 1]
+        a = [100, -1, -2, 5, -1]
+        t = [0, 1, 2, 3, 4]
+
+        dataset = {'time': t, 'a': a}
+
+        out = evaluator.evaluate(dataset)
+        expected = [[0, 100], [1, 1], [2, 2], [3, 5], [4, 1]]
 
         self.assertListEqual(out, expected, "abs")
 
     def test_sqrt(self):
-        oper = SqrtOperation()
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.spec = 'sqrt(a)'
+        ast.parse()
+        evaluator = StlDiscreteTimeOfflineEvaluator()
+        evaluator.set_ast(ast)
 
-        out = oper.update([1, 2.2, 0.5])
-        expected = [math.sqrt(1), math.sqrt(2.2), math.sqrt(0.5)]
+        a = [1, 2.2, 0.5]
+        t = [0, 1, 2]
+
+        dataset = {'time': t, 'a': a}
+
+        out = evaluator.evaluate(dataset)
+        expected = [[0, math.sqrt(1)], [1, math.sqrt(2.2)], [2, math.sqrt(0.5)]]
 
         self.assertListEqual(out, expected, "sqrt")
 

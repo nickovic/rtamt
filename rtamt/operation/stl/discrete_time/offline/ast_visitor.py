@@ -16,7 +16,7 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
         sample_return = []
         for i in range(len(sample_left)):
             if node.operator.value == StlComparisonOperator.EQ.value:
-                val = - abs(sample_left[i] - sample_right[i])
+                val = -abs(sample_left[i] - sample_right[i])
             elif node.operator.value == StlComparisonOperator.NEQ.value:
                 val = abs(sample_left[i] - sample_right[i])
             elif node.operator.value == StlComparisonOperator.LEQ.value or node.operator.value == StlComparisonOperator.LESS.value:
@@ -267,7 +267,6 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
     def visitConstant(self, node, *args, **kwargs):
         length = args[0]
         return [node.val]*length
-        #return node.val
 
 
     def visitPrevious(self, node, *args, **kwargs):
