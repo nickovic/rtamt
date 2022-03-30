@@ -35,7 +35,7 @@ class PredicateOperation(StlPredicateOperation):
         out_sample = []
 
         if (self.semantics == Semantics.OUTPUT_ROBUSTNESS and not self.out_vars) or (
-                self.semantics == Semantics.INPUT_ROBUSTNESS and not delf.in_vars):
+                self.semantics == Semantics.INPUT_ROBUSTNESS and not self.in_vars):
             for i in range(len(sat_sample)):
                 sample = float('inf') if sat_sample[i][1] == True else -float("inf")
                 out_sample.append([sat_sample[i][0], sample])
