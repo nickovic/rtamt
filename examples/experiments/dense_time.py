@@ -2,6 +2,7 @@ import rtamt
 import sys
 import random
 import time
+from cycler import cycler
 import matplotlib.pyplot as plt
 
 t1 = list(range(10))
@@ -45,7 +46,7 @@ s3_times = []
 s4_times = []
 
 
-spec1 = rtamt.STLDiscreteTimeSpecification(semantics=rtamt.Semantics.STANDARD)
+spec1 = rtamt.STLDenseTimeSpecification(semantics=rtamt.Semantics.STANDARD)
 spec1.name = 'Example 1'
 spec1.declare_var('req', 'float')
 spec1.declare_var('gnt', 'float')
@@ -59,7 +60,7 @@ except rtamt.STLParseException as err:
     print('STL Parse Exception: {}'.format(err))
     sys.exit()
 
-spec2 = rtamt.STLDiscreteTimeSpecification(semantics=rtamt.Semantics.STANDARD)
+spec2 = rtamt.STLDenseTimeSpecification(semantics=rtamt.Semantics.STANDARD)
 spec2.name = 'Example 1'
 spec2.declare_var('req', 'float')
 spec2.declare_var('gnt', 'float')
@@ -73,7 +74,7 @@ except rtamt.STLParseException as err:
     print('STL Parse Exception: {}'.format(err))
     sys.exit()
 
-spec3 = rtamt.STLDiscreteTimeSpecification(semantics=rtamt.Semantics.STANDARD)
+spec3 = rtamt.STLDenseTimeSpecification(semantics=rtamt.Semantics.STANDARD)
 spec3.name = 'Example 1'
 spec3.declare_var('req', 'float')
 spec3.declare_var('gnt', 'float')
@@ -87,7 +88,7 @@ except rtamt.STLParseException as err:
     print('STL Parse Exception: {}'.format(err))
     sys.exit()
 
-spec4 = rtamt.STLDiscreteTimeSpecification(semantics=rtamt.Semantics.STANDARD)
+spec4 = rtamt.STLDenseTimeSpecification(semantics=rtamt.Semantics.STANDARD)
 spec4.name = 'Example 1'
 spec4.declare_var('req', 'float')
 spec4.declare_var('gnt', 'float')
@@ -101,122 +102,140 @@ except rtamt.STLParseException as err:
     print('STL Parse Exception: {}'.format(err))
     sys.exit()
 
-dataset = {'time': t1, 'req': v1, 'gnt': w1}
+req = zip(t1, v1)
+gnt = zip(t1, w1)
 s_t = time.time()
-spec1.evaluate(dataset)
+spec1.evaluate(['req', req], ['gnt', gnt])
 e_t = time.time()
 s1_times.append(e_t-s_t)
 s_t = time.time()
-spec2.evaluate(dataset)
+spec2.evaluate(['req', req], ['gnt', gnt])
 e_t = time.time()
 s2_times.append(e_t-s_t)
 s_t = time.time()
-spec3.evaluate(dataset)
+spec3.evaluate(['req', req], ['gnt', gnt])
 e_t = time.time()
 s3_times.append(e_t-s_t)
 s_t = time.time()
-spec4.evaluate(dataset)
+spec4.evaluate(['req', req], ['gnt', gnt])
 e_t = time.time()
 s4_times.append(e_t-s_t)
 
-dataset = {'time': t2, 'req': v2, 'gnt': w2}
+req = zip(t2, v2)
+gnt = zip(t2, w2)
 s_t = time.time()
-spec1.evaluate(dataset)
+spec1.evaluate(['req', req], ['gnt', gnt])
 e_t = time.time()
 s1_times.append(e_t-s_t)
 s_t = time.time()
-spec2.evaluate(dataset)
+spec2.evaluate(['req', req], ['gnt', gnt])
 e_t = time.time()
 s2_times.append(e_t-s_t)
 s_t = time.time()
-spec3.evaluate(dataset)
+spec3.evaluate(['req', req], ['gnt', gnt])
 e_t = time.time()
 s3_times.append(e_t-s_t)
 s_t = time.time()
-spec4.evaluate(dataset)
+spec4.evaluate(['req', req], ['gnt', gnt])
 e_t = time.time()
 s4_times.append(e_t-s_t)
 
-dataset = {'time': t3, 'req': v3, 'gnt': w3}
+req = zip(t3, v3)
+gnt = zip(t3, w3)
 s_t = time.time()
-spec1.evaluate(dataset)
+spec1.evaluate(['req', req], ['gnt', gnt])
 e_t = time.time()
 s1_times.append(e_t-s_t)
 s_t = time.time()
-spec2.evaluate(dataset)
+spec2.evaluate(['req', req], ['gnt', gnt])
 e_t = time.time()
 s2_times.append(e_t-s_t)
 s_t = time.time()
-spec3.evaluate(dataset)
+spec3.evaluate(['req', req], ['gnt', gnt])
 e_t = time.time()
 s3_times.append(e_t-s_t)
 s_t = time.time()
-spec4.evaluate(dataset)
+spec4.evaluate(['req', req], ['gnt', gnt])
 e_t = time.time()
 s4_times.append(e_t-s_t)
 
-dataset = {'time': t4, 'req': v4, 'gnt': w4}
+req = zip(t4, v4)
+gnt = zip(t4, w4)
 s_t = time.time()
-spec1.evaluate(dataset)
+spec1.evaluate(['req', req], ['gnt', gnt])
 e_t = time.time()
 s1_times.append(e_t-s_t)
 s_t = time.time()
-spec2.evaluate(dataset)
+spec2.evaluate(['req', req], ['gnt', gnt])
 e_t = time.time()
 s2_times.append(e_t-s_t)
 s_t = time.time()
-spec3.evaluate(dataset)
+spec3.evaluate(['req', req], ['gnt', gnt])
 e_t = time.time()
 s3_times.append(e_t-s_t)
 s_t = time.time()
-spec4.evaluate(dataset)
+spec4.evaluate(['req', req], ['gnt', gnt])
 e_t = time.time()
 s4_times.append(e_t-s_t)
 
-dataset = {'time': t5, 'req': v5, 'gnt': w5}
+req = zip(t5, v5)
+gnt = zip(t5, w5)
 s_t = time.time()
-spec1.evaluate(dataset)
+spec1.evaluate(['req', req], ['gnt', gnt])
 e_t = time.time()
 s1_times.append(e_t-s_t)
 s_t = time.time()
-spec2.evaluate(dataset)
+spec2.evaluate(['req', req], ['gnt', gnt])
 e_t = time.time()
 s2_times.append(e_t-s_t)
 s_t = time.time()
-spec3.evaluate(dataset)
+spec3.evaluate(['req', req], ['gnt', gnt])
 e_t = time.time()
 s3_times.append(e_t-s_t)
 s_t = time.time()
-spec4.evaluate(dataset)
+spec4.evaluate(['req', req], ['gnt', gnt])
 e_t = time.time()
 s4_times.append(e_t-s_t)
 
-dataset = {'time': t6, 'req': v6, 'gnt': w6}
+req = zip(t6, v6)
+gnt = zip(t6, w6)
 s_t = time.time()
-spec1.evaluate(dataset)
+spec1.evaluate(['req', req], ['gnt', gnt])
 e_t = time.time()
 s1_times.append(e_t-s_t)
 s_t = time.time()
-spec2.evaluate(dataset)
+spec2.evaluate(['req', req], ['gnt', gnt])
 e_t = time.time()
 s2_times.append(e_t-s_t)
 s_t = time.time()
-spec3.evaluate(dataset)
+spec3.evaluate(['req', req], ['gnt', gnt])
 e_t = time.time()
 s3_times.append(e_t-s_t)
 s_t = time.time()
-spec4.evaluate(dataset)
+spec4.evaluate(['req', req], ['gnt', gnt])
 e_t = time.time()
 s4_times.append(e_t-s_t)
 
-x = [10, 100, 1000, 10000, 100000, 1000000]
-fig, ax = plt.subplots()
-line1 = ax.plot(x, s1_times)
-line2 = ax.plot(x, s2_times)
-line3 = ax.plot(x, s3_times)
-line4 = ax.plot(x, s4_times)
-plt.title('Offline monitors - Computation time vs. |Formula| and |Input|')
-plt.xlabel('# of samples per signal')
-plt.ylabel('Time (s)')
-plt.legend([line1, line2, line3, line4], [r'\varphi_1', r'\varphi_2', r'\varphi_3', r'\varphi_4'])
+# plot
+fontsize = 16
+fig = plt.figure()
+# Sience+IEEE plot
+# https://github.com/garrettj403/SciencePlots/blob/master/styles/journals/ieee.mplstyle
+plt.rcParams['axes.prop_cycle'] = cycler('color', ['k', 'r', 'b', 'g']) + cycler('ls', ['-', '--', ':', '-.'])
+plt.rcParams['text.usetex'] = True
+#plt.title('Offline monitors - Computation time vs. |Formula| and |Input|')
+x      = [10, 100, 1000, 10000, 100000, 1000000]
+locs   = [0,   500000, 1000000]
+xticks = ['0', '500K', '1M']
+plt.xticks(locs, xticks, fontsize=fontsize)
+plt.yticks(fontsize=fontsize)
+plt.xlabel('\# of samples per signal', fontsize=fontsize)
+plt.ylabel('Time [s]', fontsize=fontsize)
+plt.plot(x, s1_times, label=r'$\varphi_1$')
+plt.plot(x, s2_times, label=r'$\varphi_2$')
+plt.plot(x, s3_times, label=r'$\varphi_3$')
+plt.plot(x, s4_times, label=r'$\varphi_4$')
+plt.legend(fontsize=fontsize, loc='upper left')
+plt.savefig('experimentDenseTime.pdf', bbox_inches='tight')
+
 plt.show()
