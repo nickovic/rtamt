@@ -219,7 +219,7 @@ fig = plt.figure()
 plt.rcParams['axes.prop_cycle'] = cycler('color', ['k', 'r', 'b', 'g']) + cycler('ls', ['-', '--', ':', '-.'])
 plt.rcParams['text.usetex'] = True
 #plt.title('Offline monitors - Computation time vs. |Formula| and |Input|')
-x      = [10,   100,   1000, 10000, 100000, 1000000]
+x      = [10, 100, 1000, 10000, 100000, 1000000]
 locs   = [0,   500000, 1000000]
 xticks = ['0', '500K', '1M']
 plt.xticks(locs, xticks, fontsize=fontsize)
@@ -231,6 +231,6 @@ plt.plot(x, s2_times, label=r'$\varphi_2$')
 plt.plot(x, s3_times, label=r'$\varphi_3$')
 plt.plot(x, s4_times, label=r'$\varphi_4$')
 plt.legend(fontsize=fontsize, loc='upper left')
-plt.savefig('exp1.pdf', bbox_inches='tight')
+plt.savefig('experimentDiscreteTime.pdf', bbox_inches='tight')
 
 plt.show()
