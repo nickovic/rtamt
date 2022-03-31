@@ -2,9 +2,9 @@ import rtamt
 import sys
 import random
 import time
+from cycler import cycler
 import matplotlib.pyplot as plt
-from rtamt.spec.stl.discrete_time.specification import StlDiscreteTimeOnlineSpecification
-from rtamt.spec.stl.discrete_time.specification import StlDiscreteTimeOnlineSpecificationCpp
+
 
 t = list(range(10000))
 
@@ -16,7 +16,7 @@ s1_times = []
 s2_times = []
 
 
-spec1 = StlDiscreteTimeOnlineSpecification()
+spec1 = rtamt.StlDiscreteTimeOnlineSpecification()
 spec1.name = 'Example 1'
 spec1.declare_var('req', 'float')
 spec1.declare_var('gnt', 'float')
@@ -30,7 +30,7 @@ except rtamt.STLParseException as err:
     print('STL Parse Exception: {}'.format(err))
     sys.exit()
 
-spec2 = StlDiscreteTimeOnlineSpecification()
+spec2 = rtamt.StlDiscreteTimeOnlineSpecification()
 spec2.name = 'Example 1'
 spec2.declare_var('req', 'float')
 spec2.declare_var('gnt', 'float')
@@ -44,7 +44,7 @@ except rtamt.STLParseException as err:
     print('STL Parse Exception: {}'.format(err))
     sys.exit()
 
-spec3 = StlDiscreteTimeOnlineSpecification()
+spec3 = rtamt.StlDiscreteTimeOnlineSpecification()
 spec3.name = 'Example 1'
 spec3.declare_var('req', 'float')
 spec3.declare_var('gnt', 'float')
@@ -58,7 +58,7 @@ except rtamt.STLParseException as err:
     print('STL Parse Exception: {}'.format(err))
     sys.exit()
 
-spec4 = StlDiscreteTimeOnlineSpecification()
+spec4 = rtamt.StlDiscreteTimeOnlineSpecification()
 spec4.name = 'Example 1'
 spec4.declare_var('req', 'float')
 spec4.declare_var('gnt', 'float')
@@ -92,7 +92,7 @@ s_t = time.time()
 e_t = time.time()
 s1_times.append(e_t-s_t)
 
-spec1 = StlDiscreteTimeOnlineSpecificationCpp()
+spec1 = rtamt.StlDiscreteTimeOnlineSpecificationCpp()
 spec1.name = 'Example 1'
 spec1.declare_var('req', 'float')
 spec1.declare_var('gnt', 'float')
@@ -106,7 +106,7 @@ except rtamt.STLParseException as err:
     print('STL Parse Exception: {}'.format(err))
     sys.exit()
 
-spec2 = StlDiscreteTimeOnlineSpecificationCpp()
+spec2 = rtamt.StlDiscreteTimeOnlineSpecificationCpp()
 spec2.name = 'Example 1'
 spec2.declare_var('req', 'float')
 spec2.declare_var('gnt', 'float')
@@ -120,7 +120,7 @@ except rtamt.STLParseException as err:
     print('STL Parse Exception: {}'.format(err))
     sys.exit()
 
-spec3 = StlDiscreteTimeOnlineSpecificationCpp()
+spec3 = rtamt.StlDiscreteTimeOnlineSpecificationCpp()
 spec3.name = 'Example 1'
 spec3.declare_var('req', 'float')
 spec3.declare_var('gnt', 'float')
@@ -134,7 +134,7 @@ except rtamt.STLParseException as err:
     print('STL Parse Exception: {}'.format(err))
     sys.exit()
 
-spec4 = StlDiscreteTimeOnlineSpecificationCpp()
+spec4 = rtamt.StlDiscreteTimeOnlineSpecificationCpp()
 spec4.name = 'Example 1'
 spec4.declare_var('req', 'float')
 spec4.declare_var('gnt', 'float')
@@ -168,11 +168,25 @@ s_t = time.time()
 e_t = time.time()
 s2_times.append(e_t-s_t)
 
-x = [10, 100, 1000, 10000]
-fig, ax = plt.subplots()
-line1 = ax.plot(x, s1_times)
-line2 = ax.plot(x, s2_times)
-plt.title('Online monitors - Python vs. C++')
-plt.xlabel('Upper bound in the temporal modality')
-plt.ylabel('Time (s)')
+
+# plot
+fontsize = 16
+fig = plt.figure()
+# Sience+IEEE plot
+# https://github.com/garrettj403/SciencePlots/blob/master/styles/journals/ieee.mplstyle
+plt.rcParams['axes.prop_cycle'] = cycler('color', ['k', 'r', 'b', 'g']) + cycler('ls', ['-', '--', ':', '-.'])
+plt.rcParams['text.usetex'] = True
+#plt.title('Online monitors - Python vs. C++')
+x      = [10, 100, 1000, 10000]
+locs   = [0,   5000, 10000]
+xticks = ['0', '5K', '10K']
+plt.xticks(locs, xticks, fontsize=fontsize)
+plt.yticks(fontsize=fontsize)
+plt.xlabel('Upper bound in the temporal modality', fontsize=fontsize)
+plt.ylabel('Time [s]', fontsize=fontsize)
+plt.plot(x, s1_times, label='Python')
+plt.plot(x, s2_times, label='C++')
+plt.legend(fontsize=fontsize, loc='upper left')
+plt.savefig('experimentPythonCpp.pdf', bbox_inches='tight')
+
 plt.show()
