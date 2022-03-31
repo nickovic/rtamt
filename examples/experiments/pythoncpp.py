@@ -183,7 +183,7 @@ xticks = ['0', '5K', '10K']
 plt.xticks(locs, xticks, fontsize=fontsize)
 plt.yticks(fontsize=fontsize)
 plt.xlabel('Upper bound in the temporal modality', fontsize=fontsize)
-plt.ylabel('Time [s]', fontsize=fontsize)
+plt.ylabel('Time [sec]', fontsize=fontsize)
 plt.plot(x, s1_times, label='Python')
 plt.plot(x, s2_times, label='C++')
 plt.legend(fontsize=fontsize, loc='upper left')
