@@ -202,7 +202,7 @@ class TestStlDenseTimeOfflineSpecification(unittest.TestCase):
 
         op = [[0, 4], [5, 2], [10, 5], [15, 3]]
 
-        expected = [[0, 4], [6, 2], [10, 5], [15, 5]]
+        expected = [[0, 4], [6, 2], [10, 5], [15, 3]]
         computed = spec.evaluate(['req', op])
 
         self.assertListEqual(expected, computed, "once[0,1]")
@@ -232,7 +232,7 @@ class TestStlDenseTimeOfflineSpecification(unittest.TestCase):
 
         op = [[0, 4], [5, 2], [10, 5], [15, 3]]
 
-        expected = [[0, 4], [4, 2], [10, 5], [15, 5]]
+        expected = [[0, 4], [4, 2], [10, 5], [15, 3]]
         computed = spec.evaluate(['req', op])
 
         self.assertListEqual(expected, computed, "alw[0,1]")
@@ -247,10 +247,55 @@ class TestStlDenseTimeOfflineSpecification(unittest.TestCase):
 
         op = [[0, 4], [5, 2], [10, 5], [15, 3]]
 
-        expected = [[0, 4], [5, 2], [9, 5], [15, 5]]
+        expected = [[0, 4], [5, 2], [9, 5], [15, 3]]
         computed = spec.evaluate(['req', op])
 
         self.assertListEqual(expected, computed, "ev[0,1]")
+
+    def test_eventually_0_5_1(self):
+        spec = rtamt.STLDenseTimeSpecification()
+        spec.declare_var('req', 'float')
+        spec.declare_var('out', 'float')
+        spec.spec = 'out = eventually[0:5](req)'
+
+        spec.parse()
+
+        op = [[0, 1], [6, 2], [7, 3], [8, 4], [9, 5], [15, 6]]
+
+        expected = [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [10, 6]]
+        computed = spec.evaluate(['req', op])
+
+        self.assertListEqual(expected, computed, "ev[0,5]")
+
+    def test_eventually_0_5_2(self):
+        spec = rtamt.STLDenseTimeSpecification()
+        spec.declare_var('req', 'float')
+        spec.declare_var('out', 'float')
+        spec.spec = 'out = eventually[0:5](req)'
+
+        spec.parse()
+
+        op = [[0, 1], [6, 2], [7, 3], [8, 4], [9, 5], [15, 3]]
+
+        expected = [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [15, 3]]
+        computed = spec.evaluate(['req', op])
+
+        self.assertListEqual(expected, computed, "ev[0,5]")
+
+    def test_eventually_0_5_3(self):
+        spec = rtamt.STLDenseTimeSpecification()
+        spec.declare_var('req', 'float')
+        spec.declare_var('out', 'float')
+        spec.spec = 'out = eventually[0:5](req)'
+
+        spec.parse()
+
+        op = [[0, 5], [6, 1], [7, 4], [9, 5], [15, 3]]
+
+        expected = [[0, 5], [15, 3]]
+        computed = spec.evaluate(['req', op])
+
+        self.assertListEqual(expected, computed, "ev[0,5]")
 
     def test_since_0_1(self):
         spec = rtamt.STLDenseTimeSpecification()
