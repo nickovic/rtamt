@@ -1,5 +1,6 @@
 import math
 import operator
+from collections import deque
 
 import rtamt.operation.stl.dense_time.offline.intersection as intersect
 
@@ -7,6 +8,79 @@ from rtamt.ast.visitor.stl.ast_visitor import StlAstVisitor
 from rtamt.enumerations.comp_oper import StlComparisonOperator
 
 from rtamt.exception.stl.exception import STLNotImplementedException
+
+def eventually_timed_operation(samples, begin, end):
+    out = []
+    if not samples:
+        return out
+
+    restricted, ti = restrict(samples, begin, end)
+    m = max_list(restricted)
+    out.append([samples[0][0], m[0][1]])
+    prev_max = m[0][1]
+    s = samples[0][0]
+
+    while ti < len(samples)-1:
+        if not m:
+            if samples[ti+1][1] > prev_max:
+                t = samples[ti+1][0] - end
+            else:
+                t = samples[ti+1][0] - begin
+        else:
+            t = min(m[0][0] - begin, samples[ti+1][0] - end)
+
+        if m and t == m[0][0] - begin:
+            m.popleft()
+            s = t
+            if m:
+                out.append([s, m[0][1]])
+
+        if t == samples[ti+1][0] - end:
+            val = samples[ti+1][1]
+            while m and val >= m[-1][1]:
+                m.pop()
+            m.append(samples[ti+1])
+            if m[0][1] > prev_max:
+                out.append([samples[ti+1][0] - end, m[0][1]])
+                prev_max = m[0][1]
+            ti = ti + 1
+        elif t == samples[ti+1][0] - begin:
+            m.append(samples[ti + 1])
+            out.append([samples[ti + 1][0] - begin, m[0][1]])
+            prev_max = m[0][1]
+            ti = ti + 1
+    return out
+
+def max_list(samples):
+    prev = -float('inf')
+    m = deque()
+    for sample in reversed(samples):
+        if sample[1] > prev:
+            m.appendleft(sample)
+            prev = sample[1]
+    return m
+
+def restrict(samples, a, b):
+    out = []
+
+    if not samples:
+        return out
+
+    if len(samples) == 1 and a <= samples[0][0] < b:
+        out.append(samples[0])
+        return out
+
+    for i in range(len(samples) - 1):
+        if samples[i][0] <= a and samples[i+1][0] > a:
+            out.append([a, samples[i][1]])
+
+        if a <= samples[i+1][0] < b:
+            out.append(samples[i+1])
+
+        if samples[i][0] < b and samples[i+1][0] >= b:
+            out.append([b, samples[i][1]])
+            break
+    return out, i
 
 
 def subtraction_operation(sample_left, sample_right):
@@ -213,7 +287,10 @@ def always_timed_operation(sample, begin, end):
     return sample_return
 
 
-def eventually_timed_operation(sample, begin, end):
+
+
+
+def eventually_timed_operation_old(sample, begin, end):
     out = []
     sample_return = []
 
@@ -585,14 +662,14 @@ class StlDenseTimeOfflineAstVisitor(StlAstVisitor):
 
 
     def visitTimedHistorically(self, node, *args, **kwargs):
-        sample =  self.visit(node.children[0], *args, **kwargs)
+        sample = self.visit(node.children[0], *args, **kwargs)
         begin, end = self.time_unit_transformer(node)
         sample_return = historically_timed_operation(sample, begin, end)
         return sample_return
 
 
     def visitTimedSince(self, node, *args, **kwargs):
-        sample_left  = self.visit(node.children[0], *args, **kwargs)
+        sample_left = self.visit(node.children[0], *args, **kwargs)
         sample_right = self.visit(node.children[1], *args, **kwargs)
         begin, end = self.time_unit_transformer(node)
 
