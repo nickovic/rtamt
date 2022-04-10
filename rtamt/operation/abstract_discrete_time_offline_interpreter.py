@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 
 from rtamt.ast.visitor.abstract_ast_visitor import AbstractAstVisitor
-from rtamt.operation.abstract_offline_evaluator import AbstractOfflineEvaluator
-from rtamt.operation.discrete_time_evaluator import DiscreteTimeEvaluator
+from rtamt.operation.abstract_offline_interpreter import AbstractOfflineInterpreter
+from rtamt.operation.discrete_time_interpreter import DiscreteTimeInterpreter
 
 from rtamt.exception.exception import RTAMTException
 
-class AbstractDiscreteTimeOfflineEvaluator(AbstractOfflineEvaluator, DiscreteTimeEvaluator):
+class AbstractDiscreteTimeOfflineInterpreter(AbstractOfflineInterpreter, DiscreteTimeInterpreter):
 
     def __init__(self):
-        super(AbstractDiscreteTimeOfflineEvaluator, self).__init__()
+        super(AbstractDiscreteTimeOfflineInterpreter, self).__init__()
         return
 
     #input format
@@ -18,7 +18,7 @@ class AbstractDiscreteTimeOfflineEvaluator(AbstractOfflineEvaluator, DiscreteTim
     #   'req': [100, -1, -2, 5, -1],
     #   'gnt': [20, -2, 10, 4, -1]
     #}
-    #TODO merge dense and discrete into evaluate AbstractOfflineEvaluator
+    #TODO merge dense and discrete into evaluate AbstractOfflineInterpreter
     def evaluate(self, dataset):
         # check ast exists
         self.exist_ast()
@@ -50,11 +50,11 @@ class AbstractDiscreteTimeOfflineEvaluator(AbstractOfflineEvaluator, DiscreteTim
                 self.ast.var_object_dict[key] = dataset[key]
 
 
-def discrete_time_offline_evaluator_factory(AstVisitor):
+def discrete_time_offline_interpreter_factory(AstVisitor):
     if not issubclass(AstVisitor, AbstractAstVisitor):  # type check
         raise RTAMTException('{} is not RTAMT AST visitor'.format(AstVisitor.__name__))
 
-    class DiscreteTimeOfflineEvaluator(AbstractDiscreteTimeOfflineEvaluator, AstVisitor):
+    class DiscreteTimeOfflineInterpreter(AbstractDiscreteTimeOfflineInterpreter, AstVisitor):
         def __init__(self, *args, **kwargs):
-            super(DiscreteTimeOfflineEvaluator, self).__init__(*args, **kwargs)
-    return DiscreteTimeOfflineEvaluator
+            super(DiscreteTimeOfflineInterpreter, self).__init__(*args, **kwargs)
+    return DiscreteTimeOfflineInterpreter

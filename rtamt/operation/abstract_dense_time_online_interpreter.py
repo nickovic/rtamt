@@ -5,16 +5,16 @@ from rtamt.node.ltl.variable import Variable
 from rtamt.node.ltl.constant import Constant
 
 from rtamt.ast.visitor.abstract_ast_visitor import AbstractAstVisitor
-from rtamt.operation.abstract_online_evaluator import AbstractOnlineEvaluator, AbstractOnlineUpdateVisitor
-from rtamt.operation.dense_time_evaluator import DenseTimeEvaluator
+from rtamt.operation.abstract_online_interpreter import AbstractOnlineInterpreter, AbstractOnlineUpdateVisitor
+from rtamt.operation.dense_time_interpreter import DenseTimeInterpreter
 
 from rtamt.exception.exception import RTAMTException
 
-class AbstractDenseTimeOnlineEvaluator(AbstractOnlineEvaluator, DenseTimeEvaluator):
+class AbstractDenseTimeOnlineInterpreter(AbstractOnlineInterpreter, DenseTimeInterpreter):
 
     def __init__(self):
-        AbstractOnlineEvaluator.__init__(self)
-        DenseTimeEvaluator.__init__(self)
+        AbstractOnlineInterpreter.__init__(self)
+        DenseTimeInterpreter.__init__(self)
         self.updateVisitor = DenseTimeOnlineUpdateVisitor()
         self.updateFinalVisitor = DenseTimeOnlineUpdateFinalVisitor()
         return
@@ -23,7 +23,7 @@ class AbstractDenseTimeOnlineEvaluator(AbstractOnlineEvaluator, DenseTimeEvaluat
     #a = [[0, 1.3], [0.7, 3], [1.3, 0.1], [2.1, -2.2]]
     #b = [[0, 2.5], [0.7, 4], [1.3, -1.2], [2.1, 1.7]]
     #dataset = [['a', a], ['b', b]]
-    #TODO merge dense and discrete into update AbstractOnlineEvaluator
+    #TODO merge dense and discrete into update AbstractOnlineInterpreter
     def update(self, dataset):
         # check ast exists
         self.exist_ast()
@@ -106,13 +106,13 @@ class DenseTimeOnlineUpdateFinalVisitor(AbstractAstVisitor):
         return sample_return
 
 
-def dense_time_online_evaluator_factory(AstVisitor):
+def dense_time_online_interpreter_factory(AstVisitor):
     if not issubclass(AstVisitor, AbstractAstVisitor):  # type check
         raise RTAMTException('{} is not RTAMT AST visitor'.format(AstVisitor.__name__))
 
-    class DenseTimeOnlineEvaluator(AbstractDenseTimeOnlineEvaluator, AstVisitor):
+    class DenseTimeOnlineInterpreter(AbstractDenseTimeOnlineInterpreter, AstVisitor):
         def __init__(self, *args, **kwargs):
-            AbstractDenseTimeOnlineEvaluator.__init__(self, *args, **kwargs)
+            AbstractDenseTimeOnlineInterpreter.__init__(self, *args, **kwargs)
             AstVisitor.__init__(self)
 
-    return DenseTimeOnlineEvaluator
+    return DenseTimeOnlineInterpreter

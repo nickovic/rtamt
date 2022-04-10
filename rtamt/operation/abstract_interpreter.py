@@ -8,7 +8,7 @@ from abc import ABCMeta
 
 from rtamt.exception.exception import RTAMTException
 
-class AbstractEvaluator(object):
+class AbstractInterpreter(object):
     """
     Abstract Operation: template for any monitoring operation
     """

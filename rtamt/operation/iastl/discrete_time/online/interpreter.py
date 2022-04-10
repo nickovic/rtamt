@@ -1,0 +1,24 @@
+from rtamt.operation.iastl.discrete_time.online.ast_visitor import IAStlOutputRobustnessDiscreteTimeOnlineAstVisitor, \
+    IAStlOutputVacuityDiscreteTimeOnlineAstVisitor, IAStlInputVacuityDiscreteTimeOnlineAstVisitor, \
+    IAStlInputRobustnessDiscreteTimeOnlineAstVisitor
+from rtamt.operation.abstract_discrete_time_online_interpreter import discrete_time_online_interpreter_factory
+
+
+def IAStlOutputRobustnessDiscreteTimeOnlineInterpreter():
+    iastlDiscreteTimeOnlineInterpreter = discrete_time_online_interpreter_factory(IAStlOutputRobustnessDiscreteTimeOnlineAstVisitor)()
+    return iastlDiscreteTimeOnlineInterpreter
+
+
+def IAStlOutputVacuityDiscreteTimeOnlineInterpreter():
+    iastlDiscreteTimeOnlineInterpreter = discrete_time_online_interpreter_factory(IAStlOutputVacuityDiscreteTimeOnlineAstVisitor)()
+    return iastlDiscreteTimeOnlineInterpreter
+
+
+def IAStlInputRobustnessDiscreteTimeOnlineInterpreter():
+    iastlDiscreteTimeOnlineInterpreter = discrete_time_online_interpreter_factory(IAStlInputRobustnessDiscreteTimeOnlineAstVisitor)()
+    return iastlDiscreteTimeOnlineInterpreter
+
+
+def IAStlInputVacuityDiscreteTimeOnlineInterpreter():
+    iastlDiscreteTimeOnlineInterpreter = discrete_time_online_interpreter_factory(IAStlInputVacuityDiscreteTimeOnlineAstVisitor)()
+    return iastlDiscreteTimeOnlineInterpreter

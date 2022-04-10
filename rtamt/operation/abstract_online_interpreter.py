@@ -4,11 +4,11 @@ from rtamt.node.ltl.variable import Variable
 from rtamt.node.ltl.constant import Constant
 
 from rtamt.ast.visitor.abstract_ast_visitor import AbstractAstVisitor
-from rtamt.operation.abstract_evaluator import AbstractEvaluator
+from rtamt.operation.abstract_interpreter import AbstractInterpreter
 
-class AbstractOnlineEvaluator(AbstractEvaluator):
+class AbstractOnlineInterpreter(AbstractInterpreter):
     def __init__(self):
-        super(AbstractOnlineEvaluator, self).__init__()
+        super(AbstractOnlineInterpreter, self).__init__()
         return
 
     def reset(self):
@@ -22,7 +22,7 @@ class AbstractOnlineEvaluator(AbstractEvaluator):
         return
 
     def set_ast(self, ast):
-        super(AbstractOnlineEvaluator, self).set_ast(ast)
+        super(AbstractOnlineInterpreter, self).set_ast(ast)
 
         # init dict of online operators
         self.online_operator_dict = dict()

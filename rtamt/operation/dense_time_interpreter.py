@@ -1,9 +1,9 @@
-from rtamt.operation.time_evaluator import TimeEvaluator
+from rtamt.operation.time_interpreter import TimeInterpreter
 
-class DenseTimeEvaluator(TimeEvaluator):
+class DenseTimeInterpreter(TimeInterpreter):
 
     def __init__(self):
-        super(DenseTimeEvaluator, self).__init__()
+        super(DenseTimeInterpreter, self).__init__()
         return
 
     #input format

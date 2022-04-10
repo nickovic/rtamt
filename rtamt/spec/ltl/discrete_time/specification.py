@@ -7,7 +7,7 @@ from rtamt.ast.parser.ltl.specification_parser import LtlAstParserVisitor
 from rtamt.exception.stl.exception import STLParseException
 
 from rtamt.pastifier.ltl.pastifier import LtlPastifier
-from rtamt.evaluator.ltl.online_evaluator import LTLEvaluator
+from rtamt.interpreter.ltl.online_interpreter import LTLInterpreter
 from rtamt.reset.ltl.reset import LTLReset
 from rtamt.enumerations.options import *
 
@@ -29,7 +29,7 @@ class LTLDiscreteTimeSpecification(AbstractSpecification):
 
         top : AbstractNode - pointer to the specification parse tree
 
-        online_evaluator : AbstractEvaluator - pointer to the object that implements the monitoring algorithm
+        online_interpreter : AbstractInterpreter - pointer to the object that implements the monitoring algorithm
 
         update_counter : int
         previous_time : float
@@ -192,9 +192,9 @@ class LTLDiscreteTimeSpecification(AbstractSpecification):
         # Example:
         # update(3.48, [['a', 2.2], ['b', 3.3]])
 
-        if self.online_evaluator == None:
-            self.online_evaluator = LTLEvaluator(self)
-            self.top.accept(self.online_evaluator)
+        if self.online_interpreter == None:
+            self.online_interpreter = LTLInterpreter(self)
+            self.top.accept(self.online_interpreter)
 
         # update the value of every input variable
         for inp in list_inputs:
@@ -205,11 +205,11 @@ class LTLDiscreteTimeSpecification(AbstractSpecification):
         # evaluate modular sub-specs
         for key in self.var_subspec_dict:
             node = self.var_subspec_dict[key]
-            out = self.online_evaluator.evaluate(node, [])
+            out = self.online_interpreter.evaluate(node, [])
             self.var_object_dict[key] = out
 
         # The evaluation done wrt the discrete counter (logical time)
-        out = self.online_evaluator.evaluate(self.top, [])
+        out = self.online_interpreter.evaluate(self.top, [])
 
         return out
 
@@ -217,8 +217,8 @@ class LTLDiscreteTimeSpecification(AbstractSpecification):
         pass
 
     def reset(self):
-        if self.online_evaluator is not None:
-            self.reseter.node_monitor_dict = self.online_evaluator.node_monitor_dict
+        if self.online_interpreter is not None:
+            self.reseter.node_monitor_dict = self.online_interpreter.node_monitor_dict
             self.top.accept(self.reseter)
             self.reseter.reset(self.top)
             self.update_counter = int(0);

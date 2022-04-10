@@ -3,7 +3,7 @@ import math
 
 from rtamt.ast.parser.stl.specification_parser import StlAst
 from rtamt.enumerations.comp_op import StlComparisonOperator
-from rtamt.operation.stl.discrete_time.offline.evaluator import StlDiscreteTimeOfflineEvaluator
+from rtamt.operation.stl.discrete_time.offline.interpreter import StlDiscreteTimeOfflineInterpreter
 
 
 class TestSTLEvaluation(unittest.TestCase):
@@ -18,12 +18,12 @@ class TestSTLEvaluation(unittest.TestCase):
         ast.declare_var('a', 'float')
         ast.spec = '5.0'
         ast.parse()
-        evaluator = StlDiscreteTimeOfflineEvaluator()
-        evaluator.set_ast(ast)
+        interpreter = StlDiscreteTimeOfflineInterpreter()
+        interpreter.set_ast(ast)
 
         dataset = {'time': [0, 1, 2, 3, 4]}
 
-        out = evaluator.evaluate(dataset)
+        out = interpreter.evaluate(dataset)
 
         expected = [[0, 5.0], [1, 5.0], [2, 5.0], [3, 5.0], [4, 5.0]]
 
@@ -36,8 +36,8 @@ class TestSTLEvaluation(unittest.TestCase):
         ast.declare_var('b', 'float')
         ast.spec = 'a + b'
         ast.parse()
-        evaluator = StlDiscreteTimeOfflineEvaluator()
-        evaluator.set_ast(ast)
+        interpreter = StlDiscreteTimeOfflineInterpreter()
+        interpreter.set_ast(ast)
 
         a = [100, -1, -2, 5, -1]
         b = [20, -2, 10, 4, -1]
@@ -45,7 +45,7 @@ class TestSTLEvaluation(unittest.TestCase):
 
         dataset = {'time': t, 'a': a, 'b': b}
 
-        out = evaluator.evaluate(dataset)
+        out = interpreter.evaluate(dataset)
 
         expected = [[0, 120], [1, -3], [2, 8], [3, 9], [4, -2]]
 
@@ -57,8 +57,8 @@ class TestSTLEvaluation(unittest.TestCase):
         ast.declare_var('b', 'float')
         ast.spec = 'a - b'
         ast.parse()
-        evaluator = StlDiscreteTimeOfflineEvaluator()
-        evaluator.set_ast(ast)
+        interpreter = StlDiscreteTimeOfflineInterpreter()
+        interpreter.set_ast(ast)
 
         a = [100, -1, -2, 5, -1]
         b = [20, -2, 10, 4, -1]
@@ -66,7 +66,7 @@ class TestSTLEvaluation(unittest.TestCase):
 
         dataset = {'time': t, 'a': a, 'b': b}
 
-        out = evaluator.evaluate(dataset)
+        out = interpreter.evaluate(dataset)
         expected = [[0, 80], [1, 1], [2, -12], [3, 1], [4, 0]]
 
         self.assertListEqual(out, expected, "subtraction")
@@ -77,8 +77,8 @@ class TestSTLEvaluation(unittest.TestCase):
         ast.declare_var('b', 'float')
         ast.spec = 'a * b'
         ast.parse()
-        evaluator = StlDiscreteTimeOfflineEvaluator()
-        evaluator.set_ast(ast)
+        interpreter = StlDiscreteTimeOfflineInterpreter()
+        interpreter.set_ast(ast)
 
         a = [100, -1, -2, 5, -1]
         b = [20, -2, 10, 4, -1]
@@ -86,7 +86,7 @@ class TestSTLEvaluation(unittest.TestCase):
 
         dataset = {'time': t, 'a': a, 'b': b}
 
-        out = evaluator.evaluate(dataset)
+        out = interpreter.evaluate(dataset)
         expected = [[0, 2000], [1, 2], [2, -20], [3, 20], [4, 1]]
 
         self.assertListEqual(out, expected, "multiplication")
@@ -97,8 +97,8 @@ class TestSTLEvaluation(unittest.TestCase):
         ast.declare_var('b', 'float')
         ast.spec = 'a / b'
         ast.parse()
-        evaluator = StlDiscreteTimeOfflineEvaluator()
-        evaluator.set_ast(ast)
+        interpreter = StlDiscreteTimeOfflineInterpreter()
+        interpreter.set_ast(ast)
 
         a = [100.0, -1.0, -2.0, 5.0, -1.0]
         b = [20.0, -2.0, 10.0, 4.0, -1.0]
@@ -106,7 +106,7 @@ class TestSTLEvaluation(unittest.TestCase):
 
         dataset = {'time': t, 'a': a, 'b': b}
 
-        out = evaluator.evaluate(dataset)
+        out = interpreter.evaluate(dataset)
         expected = [[0, 100.0/20.0], [1, -1.0/-2.0], [2, -2.0/10.0], [3, 5.0/4.0], [4, -1.0/-1.0]]
 
         self.assertListEqual(out, expected, "division")
@@ -116,15 +116,15 @@ class TestSTLEvaluation(unittest.TestCase):
         ast.declare_var('a', 'float')
         ast.spec = 'abs(a)'
         ast.parse()
-        evaluator = StlDiscreteTimeOfflineEvaluator()
-        evaluator.set_ast(ast)
+        interpreter = StlDiscreteTimeOfflineInterpreter()
+        interpreter.set_ast(ast)
 
         a = [100, -1, -2, 5, -1]
         t = [0, 1, 2, 3, 4]
 
         dataset = {'time': t, 'a': a}
 
-        out = evaluator.evaluate(dataset)
+        out = interpreter.evaluate(dataset)
         expected = [[0, 100], [1, 1], [2, 2], [3, 5], [4, 1]]
 
         self.assertListEqual(out, expected, "abs")
@@ -134,15 +134,15 @@ class TestSTLEvaluation(unittest.TestCase):
         ast.declare_var('a', 'float')
         ast.spec = 'sqrt(a)'
         ast.parse()
-        evaluator = StlDiscreteTimeOfflineEvaluator()
-        evaluator.set_ast(ast)
+        interpreter = StlDiscreteTimeOfflineInterpreter()
+        interpreter.set_ast(ast)
 
         a = [1, 2.2, 0.5]
         t = [0, 1, 2]
 
         dataset = {'time': t, 'a': a}
 
-        out = evaluator.evaluate(dataset)
+        out = interpreter.evaluate(dataset)
         expected = [[0, math.sqrt(1)], [1, math.sqrt(2.2)], [2, math.sqrt(0.5)]]
 
         self.assertListEqual(out, expected, "sqrt")
@@ -152,15 +152,15 @@ class TestSTLEvaluation(unittest.TestCase):
         ast.declare_var('a', 'float')
         ast.spec = 'exp(a)'
         ast.parse()
-        evaluator = StlDiscreteTimeOfflineEvaluator()
-        evaluator.set_ast(ast)
+        interpreter = StlDiscreteTimeOfflineInterpreter()
+        interpreter.set_ast(ast)
 
         a = [1, 2.2, 0.5]
         t = [0, 1, 2]
 
         dataset = {'time': t, 'a': a}
 
-        out = evaluator.evaluate(dataset)
+        out = interpreter.evaluate(dataset)
         expected = [[0, math.exp(1)], [1, math.exp(2.2)], [2, math.exp(0.5)]]
 
         self.assertListEqual(out, expected, "exp")
@@ -171,8 +171,8 @@ class TestSTLEvaluation(unittest.TestCase):
         ast.declare_var('b', 'float')
         ast.spec = 'pow(a, b)'
         ast.parse()
-        evaluator = StlDiscreteTimeOfflineEvaluator()
-        evaluator.set_ast(ast)
+        interpreter = StlDiscreteTimeOfflineInterpreter()
+        interpreter.set_ast(ast)
 
         a = [1, 2.2, 0.5]
         b = [2, 0.3, 2]
@@ -180,7 +180,7 @@ class TestSTLEvaluation(unittest.TestCase):
 
         dataset = {'time': t, 'a': a, 'b': b}
 
-        out = evaluator.evaluate(dataset)
+        out = interpreter.evaluate(dataset)
         expected = [[0, math.pow(1, 2)], [1, math.pow(2.2, 0.3)], [2, math.pow(0.5, 2)]]
 
         self.assertListEqual(out, expected, "pow")
@@ -190,15 +190,15 @@ class TestSTLEvaluation(unittest.TestCase):
         ast.declare_var('a', 'float')
         ast.spec = 'prev(a)'
         ast.parse()
-        evaluator = StlDiscreteTimeOfflineEvaluator()
-        evaluator.set_ast(ast)
+        interpreter = StlDiscreteTimeOfflineInterpreter()
+        interpreter.set_ast(ast)
 
         a = [100, -1, -2, 5, -1]
         t = [0, 1, 2, 3, 4]
 
         dataset = {'time': t, 'a': a}
 
-        out = evaluator.evaluate(dataset)
+        out = interpreter.evaluate(dataset)
         expected = [[0, float("inf")], [1, 100], [2, -1], [3, -2], [4, 5]]
 
         self.assertListEqual(out, expected, "previous")
@@ -208,15 +208,15 @@ class TestSTLEvaluation(unittest.TestCase):
         ast.declare_var('a', 'float')
         ast.spec = 'next(a)'
         ast.parse()
-        evaluator = StlDiscreteTimeOfflineEvaluator()
-        evaluator.set_ast(ast)
+        interpreter = StlDiscreteTimeOfflineInterpreter()
+        interpreter.set_ast(ast)
 
         a = [100, -1, -2, 5, -1]
         t = [0, 1, 2, 3, 4]
 
         dataset = {'time': t, 'a': a}
 
-        out = evaluator.evaluate(dataset)
+        out = interpreter.evaluate(dataset)
         expected = [[0, -1], [1, -2], [2, 5], [3, -1], [4, float("inf")]]
 
         self.assertListEqual(out, expected, "next")
@@ -227,8 +227,8 @@ class TestSTLEvaluation(unittest.TestCase):
         ast.declare_var('b', 'float')
         ast.spec = 'a and b'
         ast.parse()
-        evaluator = StlDiscreteTimeOfflineEvaluator()
-        evaluator.set_ast(ast)
+        interpreter = StlDiscreteTimeOfflineInterpreter()
+        interpreter.set_ast(ast)
 
         a = [100, -1, -2, 5, -1]
         b = [20, -2, 10, 4, -1]
@@ -236,7 +236,7 @@ class TestSTLEvaluation(unittest.TestCase):
 
         dataset = {'time': t, 'a': a, 'b': b}
 
-        out = evaluator.evaluate(dataset)
+        out = interpreter.evaluate(dataset)
         expected = [[0, 20], [1, -2], [2, -2], [3, 4], [4, -1]]
         self.assertListEqual(out, expected, "and")
 
@@ -246,8 +246,8 @@ class TestSTLEvaluation(unittest.TestCase):
         ast.declare_var('b', 'float')
         ast.spec = 'a or b'
         ast.parse()
-        evaluator = StlDiscreteTimeOfflineEvaluator()
-        evaluator.set_ast(ast)
+        interpreter = StlDiscreteTimeOfflineInterpreter()
+        interpreter.set_ast(ast)
 
         a = [100, -1, -2, 5, -1]
         b = [20, -2, 10, 4, -1]
@@ -255,7 +255,7 @@ class TestSTLEvaluation(unittest.TestCase):
 
         dataset = {'time': t, 'a': a, 'b': b}
 
-        out = evaluator.evaluate(dataset)
+        out = interpreter.evaluate(dataset)
         expected = [[0, 100], [1, -1], [2, 10], [3, 5], [4, -1]]
 
         self.assertListEqual(out, expected, "or")
@@ -266,8 +266,8 @@ class TestSTLEvaluation(unittest.TestCase):
         ast.declare_var('b', 'float')
         ast.spec = 'a iff b'
         ast.parse()
-        evaluator = StlDiscreteTimeOfflineEvaluator()
-        evaluator.set_ast(ast)
+        interpreter = StlDiscreteTimeOfflineInterpreter()
+        interpreter.set_ast(ast)
 
         a = [100, -1, -2, 5, -1]
         b = [20, -2, 10, 4, -1]
@@ -275,7 +275,7 @@ class TestSTLEvaluation(unittest.TestCase):
 
         dataset = {'time': t, 'a': a, 'b': b}
 
-        out = evaluator.evaluate(dataset)
+        out = interpreter.evaluate(dataset)
         expected = [[0, -80], [1, -1], [2, -12], [3, -1], [4, 0]]
         self.assertListEqual(out, expected, "iff")
 
@@ -285,8 +285,8 @@ class TestSTLEvaluation(unittest.TestCase):
         ast.declare_var('b', 'float')
         ast.spec = 'a xor b'
         ast.parse()
-        evaluator = StlDiscreteTimeOfflineEvaluator()
-        evaluator.set_ast(ast)
+        interpreter = StlDiscreteTimeOfflineInterpreter()
+        interpreter.set_ast(ast)
 
         a = [100, -1, -2, 5, -1]
         b = [20, -2, 10, 4, -1]
@@ -294,7 +294,7 @@ class TestSTLEvaluation(unittest.TestCase):
 
         dataset = {'time': t, 'a': a, 'b': b}
 
-        out = evaluator.evaluate(dataset)
+        out = interpreter.evaluate(dataset)
         expected = [[0, 80], [1, 1], [2, 12], [3, 1], [4, 0]]
 
         self.assertListEqual(out, expected, "xor")
@@ -306,8 +306,8 @@ class TestSTLEvaluation(unittest.TestCase):
         ast.declare_var('b', 'float')
         ast.spec = 'a -> b'
         ast.parse()
-        evaluator = StlDiscreteTimeOfflineEvaluator()
-        evaluator.set_ast(ast)
+        interpreter = StlDiscreteTimeOfflineInterpreter()
+        interpreter.set_ast(ast)
 
         a = [100, -1, -2, 5, -1]
         b = [20, -2, 10, 4, -1]
@@ -315,7 +315,7 @@ class TestSTLEvaluation(unittest.TestCase):
 
         dataset = {'time': t, 'a': a, 'b': b}
 
-        out = evaluator.evaluate(dataset)
+        out = interpreter.evaluate(dataset)
         expected = [[0, 20], [1, 1], [2, 10], [3, 4], [4, 1]]
 
         self.assertListEqual(out, expected, "implies")
@@ -325,15 +325,15 @@ class TestSTLEvaluation(unittest.TestCase):
         ast.declare_var('a', 'float')
         ast.spec = 'always(a)'
         ast.parse()
-        evaluator = StlDiscreteTimeOfflineEvaluator()
-        evaluator.set_ast(ast)
+        interpreter = StlDiscreteTimeOfflineInterpreter()
+        interpreter.set_ast(ast)
 
         a = [100, -1, -2, 5, -1]
         t = [0, 1, 2, 3, 4]
 
         dataset = {'time': t, 'a': a}
 
-        out = evaluator.evaluate(dataset)
+        out = interpreter.evaluate(dataset)
         expected = [[0, -2], [1, -2], [2, -2], [3, -1], [4, -1]]
 
         self.assertListEqual(out, expected, "always")
@@ -343,15 +343,15 @@ class TestSTLEvaluation(unittest.TestCase):
         ast.declare_var('a', 'float')
         ast.spec = 'always[0,1](a)'
         ast.parse()
-        evaluator = StlDiscreteTimeOfflineEvaluator()
-        evaluator.set_ast(ast)
+        interpreter = StlDiscreteTimeOfflineInterpreter()
+        interpreter.set_ast(ast)
 
         a = [100, -1, -2, 5, -1]
         t = [0, 1, 2, 3, 4]
 
         dataset = {'time': t, 'a': a}
 
-        out = evaluator.evaluate(dataset)
+        out = interpreter.evaluate(dataset)
         expected = [[0, -1], [1, -2], [2, -2], [3, -1], [4, -1]]
 
         self.assertListEqual(out, expected, "always[0,1]")
@@ -361,15 +361,15 @@ class TestSTLEvaluation(unittest.TestCase):
         ast.declare_var('a', 'float')
         ast.spec = 'historically(a)'
         ast.parse()
-        evaluator = StlDiscreteTimeOfflineEvaluator()
-        evaluator.set_ast(ast)
+        interpreter = StlDiscreteTimeOfflineInterpreter()
+        interpreter.set_ast(ast)
 
         a = [100, -1, -2, 5, -1]
         t = [0, 1, 2, 3, 4]
 
         dataset = {'time': t, 'a': a}
 
-        out = evaluator.evaluate(dataset)
+        out = interpreter.evaluate(dataset)
         expected = [[0, 100], [1, -1], [2, -2], [3, -2], [4, -2]]
 
         self.assertListEqual(out, expected, "historically")
@@ -379,15 +379,15 @@ class TestSTLEvaluation(unittest.TestCase):
         ast.declare_var('a', 'float')
         ast.spec = 'once(a)'
         ast.parse()
-        evaluator = StlDiscreteTimeOfflineEvaluator()
-        evaluator.set_ast(ast)
+        interpreter = StlDiscreteTimeOfflineInterpreter()
+        interpreter.set_ast(ast)
 
         a = [100, -1, -2, 5, -1]
         t = [0, 1, 2, 3, 4]
 
         dataset = {'time': t, 'a': a}
 
-        out = evaluator.evaluate(dataset)
+        out = interpreter.evaluate(dataset)
         expected = [[0, 100], [1, 100], [2, 100], [3, 100], [4, 100]]
 
         self.assertListEqual(out, expected, "once")
@@ -397,15 +397,15 @@ class TestSTLEvaluation(unittest.TestCase):
         ast.declare_var('a', 'float')
         ast.spec = 'eventually(a)'
         ast.parse()
-        evaluator = StlDiscreteTimeOfflineEvaluator()
-        evaluator.set_ast(ast)
+        interpreter = StlDiscreteTimeOfflineInterpreter()
+        interpreter.set_ast(ast)
 
         a = [100, -1, -2, 5, -1]
         t = [0, 1, 2, 3, 4]
 
         dataset = {'time': t, 'a': a}
 
-        out = evaluator.evaluate(dataset)
+        out = interpreter.evaluate(dataset)
         expected = [[0, 100], [1, 5], [2, 5], [3, 5], [4, -1]]
 
         self.assertListEqual(out, expected, "eventually")
@@ -415,15 +415,15 @@ class TestSTLEvaluation(unittest.TestCase):
         ast.declare_var('a', 'float')
         ast.spec = 'eventually[0,1](a)'
         ast.parse()
-        evaluator = StlDiscreteTimeOfflineEvaluator()
-        evaluator.set_ast(ast)
+        interpreter = StlDiscreteTimeOfflineInterpreter()
+        interpreter.set_ast(ast)
 
         a = [100, -1, -2, 5, -1]
         t = [0, 1, 2, 3, 4]
 
         dataset = {'time': t, 'a': a}
 
-        out = evaluator.evaluate(dataset)
+        out = interpreter.evaluate(dataset)
         expected = [[0, 100], [1, -1], [2, 5], [3, 5], [4, -1]]
 
         self.assertListEqual(out, expected, "eventually[0,1]")
@@ -434,8 +434,8 @@ class TestSTLEvaluation(unittest.TestCase):
         ast.declare_var('b', 'float')
         ast.spec = 'a since b'
         ast.parse()
-        evaluator = StlDiscreteTimeOfflineEvaluator()
-        evaluator.set_ast(ast)
+        interpreter = StlDiscreteTimeOfflineInterpreter()
+        interpreter.set_ast(ast)
 
         a = [100, -1, -2, 5, -1]
         b = [20, -2, 10, 4, -1]
@@ -443,7 +443,7 @@ class TestSTLEvaluation(unittest.TestCase):
 
         dataset = {'time': t, 'a': a, 'b': b}
 
-        out = evaluator.evaluate(dataset)
+        out = interpreter.evaluate(dataset)
         expected = [[0, 20], [1, -1], [2, 10], [3, 5], [4, -1]]
         self.assertListEqual(out, expected, "since")
 
@@ -453,8 +453,8 @@ class TestSTLEvaluation(unittest.TestCase):
         ast.declare_var('b', 'float')
         ast.spec = 'a until b'
         ast.parse()
-        evaluator = StlDiscreteTimeOfflineEvaluator()
-        evaluator.set_ast(ast)
+        interpreter = StlDiscreteTimeOfflineInterpreter()
+        interpreter.set_ast(ast)
 
         a = [100, -1, -2, 5, -1]
         b = [20, -2, 10, 4, -1]
@@ -462,7 +462,7 @@ class TestSTLEvaluation(unittest.TestCase):
 
         dataset = {'time': t, 'a': a, 'b': b}
 
-        out = evaluator.evaluate(dataset)
+        out = interpreter.evaluate(dataset)
         expected = [[0, 20], [1, -1], [2, 10], [3, 4], [4, -1]]
         self.assertListEqual(out, expected, "until")
 
@@ -472,8 +472,8 @@ class TestSTLEvaluation(unittest.TestCase):
         ast.declare_var('b', 'float')
         ast.spec = 'a until[0,1] b'
         ast.parse()
-        evaluator = StlDiscreteTimeOfflineEvaluator()
-        evaluator.set_ast(ast)
+        interpreter = StlDiscreteTimeOfflineInterpreter()
+        interpreter.set_ast(ast)
 
         a = [100, -1, -2, 5, -1]
         b = [20, -2, 10, 4, -1]
@@ -481,7 +481,7 @@ class TestSTLEvaluation(unittest.TestCase):
 
         dataset = {'time': t, 'a': a, 'b': b}
 
-        out = evaluator.evaluate(dataset)
+        out = interpreter.evaluate(dataset)
         expected = [[0, 20], [1, -1], [2, 10], [3, 4], [4, -1]]
 
         self.assertListEqual(out, expected, "until")
@@ -491,15 +491,15 @@ class TestSTLEvaluation(unittest.TestCase):
         ast.declare_var('a', 'float')
         ast.spec = 'once[0,1](a)'
         ast.parse()
-        evaluator = StlDiscreteTimeOfflineEvaluator()
-        evaluator.set_ast(ast)
+        interpreter = StlDiscreteTimeOfflineInterpreter()
+        interpreter.set_ast(ast)
 
         a = [100, -1, -2, 5, -1]
         t = [0, 1, 2, 3, 4]
 
         dataset = {'time': t, 'a': a}
 
-        out = evaluator.evaluate(dataset)
+        out = interpreter.evaluate(dataset)
         expected = [[0, 100], [1, 100], [2, -1], [3, 5], [4, 5]]
         self.assertListEqual(out, expected, "once[0,1]")
 
@@ -508,15 +508,15 @@ class TestSTLEvaluation(unittest.TestCase):
         ast.declare_var('a', 'float')
         ast.spec = 'once[1,2](a)'
         ast.parse()
-        evaluator = StlDiscreteTimeOfflineEvaluator()
-        evaluator.set_ast(ast)
+        interpreter = StlDiscreteTimeOfflineInterpreter()
+        interpreter.set_ast(ast)
 
         a = [100, -1, -2, 5, -1]
         t = [0, 1, 2, 3, 4]
 
         dataset = {'time': t, 'a': a}
 
-        out = evaluator.evaluate(dataset)
+        out = interpreter.evaluate(dataset)
         expected = [[0, -float("inf")], [1, 100], [2, 100], [3, -1], [4, 5]]
 
         self.assertListEqual(out, expected, "once[1,2]")
@@ -526,15 +526,15 @@ class TestSTLEvaluation(unittest.TestCase):
         ast.declare_var('a', 'float')
         ast.spec = 'historically[0,1](a)'
         ast.parse()
-        evaluator = StlDiscreteTimeOfflineEvaluator()
-        evaluator.set_ast(ast)
+        interpreter = StlDiscreteTimeOfflineInterpreter()
+        interpreter.set_ast(ast)
 
         a = [100, -1, -2, 5, -1]
         t = [0, 1, 2, 3, 4]
 
         dataset = {'time': t, 'a': a}
 
-        out = evaluator.evaluate(dataset)
+        out = interpreter.evaluate(dataset)
         expected = [[0, 100], [1, -1], [2, -2], [3, -2], [4, -1]]
 
         self.assertListEqual(out, expected, "historically[0,1]")
@@ -544,15 +544,15 @@ class TestSTLEvaluation(unittest.TestCase):
         ast.declare_var('a', 'float')
         ast.spec = 'historically[1,2](a)'
         ast.parse()
-        evaluator = StlDiscreteTimeOfflineEvaluator()
-        evaluator.set_ast(ast)
+        interpreter = StlDiscreteTimeOfflineInterpreter()
+        interpreter.set_ast(ast)
 
         a = [100, -1, -2, 5, -1]
         t = [0, 1, 2, 3, 4]
 
         dataset = {'time': t, 'a': a}
 
-        out = evaluator.evaluate(dataset)
+        out = interpreter.evaluate(dataset)
         expected = [[0, float("inf")], [1, 100], [2, -1], [3, -2], [4, -2]]
 
         self.assertListEqual(out, expected, "historically[1,2]")
@@ -563,8 +563,8 @@ class TestSTLEvaluation(unittest.TestCase):
         ast.declare_var('b', 'float')
         ast.spec = 'a since[0,1] b'
         ast.parse()
-        evaluator = StlDiscreteTimeOfflineEvaluator()
-        evaluator.set_ast(ast)
+        interpreter = StlDiscreteTimeOfflineInterpreter()
+        interpreter.set_ast(ast)
 
         a = [100, -1, -2, 5, -1]
         b = [20, -2, 10, 4, -1]
@@ -572,7 +572,7 @@ class TestSTLEvaluation(unittest.TestCase):
 
         dataset = {'time': t, 'a': a, 'b': b}
 
-        out = evaluator.evaluate(dataset)
+        out = interpreter.evaluate(dataset)
         expected = [[0, 20], [1, -1], [2, 10], [3, 5], [4, -1]]
 
         self.assertListEqual(out, expected, "since[0,1]")
@@ -582,15 +582,15 @@ class TestSTLEvaluation(unittest.TestCase):
         ast.declare_var('a', 'float')
         ast.spec = 'not(a)'
         ast.parse()
-        evaluator = StlDiscreteTimeOfflineEvaluator()
-        evaluator.set_ast(ast)
+        interpreter = StlDiscreteTimeOfflineInterpreter()
+        interpreter.set_ast(ast)
 
         a = [100, -1, -2, 5, -1]
         t = [0, 1, 2, 3, 4]
 
         dataset = {'time': t, 'a': a}
 
-        out = evaluator.evaluate(dataset)
+        out = interpreter.evaluate(dataset)
         expected = [[0, -100], [1, 1], [2, 2], [3, -5], [4, 1]]
 
         self.assertListEqual(out, expected, "not")
@@ -600,15 +600,15 @@ class TestSTLEvaluation(unittest.TestCase):
         ast.declare_var('a', 'float')
         ast.spec = 'rise(a)'
         ast.parse()
-        evaluator = StlDiscreteTimeOfflineEvaluator()
-        evaluator.set_ast(ast)
+        interpreter = StlDiscreteTimeOfflineInterpreter()
+        interpreter.set_ast(ast)
 
         a = [100, -1, -2, 5, -1]
         t = [0, 1, 2, 3, 4]
 
         dataset = {'time': t, 'a': a}
 
-        out = evaluator.evaluate(dataset)
+        out = interpreter.evaluate(dataset)
         expected = [[0, 100], [1, -100], [2, -2], [3, 2], [4, -5]]
 
         self.assertListEqual(out, expected, "rise")
@@ -618,15 +618,15 @@ class TestSTLEvaluation(unittest.TestCase):
         ast.declare_var('a', 'float')
         ast.spec = 'fall(a)'
         ast.parse()
-        evaluator = StlDiscreteTimeOfflineEvaluator()
-        evaluator.set_ast(ast)
+        interpreter = StlDiscreteTimeOfflineInterpreter()
+        interpreter.set_ast(ast)
 
         a = [100, -1, -2, 5, -1]
         t = [0, 1, 2, 3, 4]
 
         dataset = {'time': t, 'a': a}
 
-        out = evaluator.evaluate(dataset)
+        out = interpreter.evaluate(dataset)
         expected = [[0, -100], [1, 1], [2, -1], [3, -5], [4, 1]]
 
         self.assertListEqual(out, expected, "fall")
@@ -637,8 +637,8 @@ class TestSTLEvaluation(unittest.TestCase):
         ast.declare_var('b', 'float')
         ast.spec = 'a <= b'
         ast.parse()
-        evaluator = StlDiscreteTimeOfflineEvaluator()
-        evaluator.set_ast(ast)
+        interpreter = StlDiscreteTimeOfflineInterpreter()
+        interpreter.set_ast(ast)
 
         a = [100, -1, -2, 5, -1]
         b = [20, -2, 10, 4, -1]
@@ -646,7 +646,7 @@ class TestSTLEvaluation(unittest.TestCase):
 
         dataset = {'time': t, 'a': a, 'b': b}
 
-        out = evaluator.evaluate(dataset)
+        out = interpreter.evaluate(dataset)
         expected = [[0, -80], [1, -1], [2, 12], [3, -1], [4, 0]]
 
         self.assertListEqual(out, expected, "leq")
@@ -657,8 +657,8 @@ class TestSTLEvaluation(unittest.TestCase):
         ast.declare_var('b', 'float')
         ast.spec = 'a < b'
         ast.parse()
-        evaluator = StlDiscreteTimeOfflineEvaluator()
-        evaluator.set_ast(ast)
+        interpreter = StlDiscreteTimeOfflineInterpreter()
+        interpreter.set_ast(ast)
 
         a = [100, -1, -2, 5, -1]
         b = [20, -2, 10, 4, -1]
@@ -666,7 +666,7 @@ class TestSTLEvaluation(unittest.TestCase):
 
         dataset = {'time': t, 'a': a, 'b': b}
 
-        out = evaluator.evaluate(dataset)
+        out = interpreter.evaluate(dataset)
         expected = [[0, -80], [1, -1], [2, 12], [3, -1], [4, 0]]
 
         self.assertListEqual(out, expected, "leq")
@@ -677,8 +677,8 @@ class TestSTLEvaluation(unittest.TestCase):
         ast.declare_var('b', 'float')
         ast.spec = 'a >= b'
         ast.parse()
-        evaluator = StlDiscreteTimeOfflineEvaluator()
-        evaluator.set_ast(ast)
+        interpreter = StlDiscreteTimeOfflineInterpreter()
+        interpreter.set_ast(ast)
 
         a = [100, -1, -2, 5, -1]
         b = [20, -2, 10, 4, -1]
@@ -686,7 +686,7 @@ class TestSTLEvaluation(unittest.TestCase):
 
         dataset = {'time': t, 'a': a, 'b': b}
 
-        out = evaluator.evaluate(dataset)
+        out = interpreter.evaluate(dataset)
         expected = [[0, 80], [1, 1], [2, -12], [3, 1], [4, 0]]
 
 
@@ -698,8 +698,8 @@ class TestSTLEvaluation(unittest.TestCase):
         ast.declare_var('b', 'float')
         ast.spec = 'a > b'
         ast.parse()
-        evaluator = StlDiscreteTimeOfflineEvaluator()
-        evaluator.set_ast(ast)
+        interpreter = StlDiscreteTimeOfflineInterpreter()
+        interpreter.set_ast(ast)
 
         a = [100, -1, -2, 5, -1]
         b = [20, -2, 10, 4, -1]
@@ -707,7 +707,7 @@ class TestSTLEvaluation(unittest.TestCase):
 
         dataset = {'time': t, 'a': a, 'b': b}
 
-        out = evaluator.evaluate(dataset)
+        out = interpreter.evaluate(dataset)
         expected = [[0, 80], [1, 1], [2, -12], [3, 1], [4, 0]]
 
         self.assertListEqual(out, expected, "greater")
@@ -718,8 +718,8 @@ class TestSTLEvaluation(unittest.TestCase):
         ast.declare_var('b', 'float')
         ast.spec = 'a == b'
         ast.parse()
-        evaluator = StlDiscreteTimeOfflineEvaluator()
-        evaluator.set_ast(ast)
+        interpreter = StlDiscreteTimeOfflineInterpreter()
+        interpreter.set_ast(ast)
 
         a = [100, -1, -2, 5, -1]
         b = [20, -2, 10, 4, -1]
@@ -727,7 +727,7 @@ class TestSTLEvaluation(unittest.TestCase):
 
         dataset = {'time': t, 'a': a, 'b': b}
 
-        out = evaluator.evaluate(dataset)
+        out = interpreter.evaluate(dataset)
         expected = [[0, -80], [1, -1], [2, -12], [3, -1], [4, 0]]
 
         self.assertListEqual(out, expected, "eq")
@@ -738,8 +738,8 @@ class TestSTLEvaluation(unittest.TestCase):
         ast.declare_var('b', 'float')
         ast.spec = 'a !== b'
         ast.parse()
-        evaluator = StlDiscreteTimeOfflineEvaluator()
-        evaluator.set_ast(ast)
+        interpreter = StlDiscreteTimeOfflineInterpreter()
+        interpreter.set_ast(ast)
 
         a = [100, -1, -2, 5, -1]
         b = [20, -2, 10, 4, -1]
@@ -747,7 +747,7 @@ class TestSTLEvaluation(unittest.TestCase):
 
         dataset = {'time': t, 'a': a, 'b': b}
 
-        out = evaluator.evaluate(dataset)
+        out = interpreter.evaluate(dataset)
         expected = [[0, 80], [1, 1], [2, 12], [3, 1], [4, 0]]
 
         self.assertListEqual(out, expected, "neq")

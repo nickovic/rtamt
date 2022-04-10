@@ -4,22 +4,22 @@ from rtamt.exception.stl.exception import STLNotImplementedException
 from rtamt.ast.visitor.stl.ast_visitor import StlAstVisitor
 
 
-class STLOnlineEvaluator(StlAstVisitor):
+class STLOnlineInterpreter(StlAstVisitor):
     def __init__(self, spec):
         self.spec = spec
         generator = None
 
         if self.spec.language == Language.PYTHON:
             if self.spec.time_interpretation == TimeInterpretation.DISCRETE:
-                from rtamt.evaluator.stl.discrete_time.online.python.online_discrete_time_python_monitor import \
+                from rtamt.interpreter.stl.discrete_time.online.python.online_discrete_time_python_monitor import \
                     STLOnlineDiscreteTimePythonMonitor
                 generator = STLOnlineDiscreteTimePythonMonitor()
             elif self.spec.time_interpretation == TimeInterpretation.DENSE:
-                from rtamt.evaluator.stl.dense_time.online.python.online_dense_time_python_monitor import \
+                from rtamt.interpreter.stl.dense_time.online.python.online_dense_time_python_monitor import \
                     STLOnlineDenseTimePythonMonitor
                 generator = STLOnlineDenseTimePythonMonitor()
         elif self.spec.language == Language.CPP:
-            from rtamt.evaluator.stl.discrete_time.online.cpp.online_discrete_time_cpp_monitor import \
+            from rtamt.interpreter.stl.discrete_time.online.cpp.online_discrete_time_cpp_monitor import \
                 STLOnlineDiscreteTimeCPPMonitor
             generator = STLOnlineDiscreteTimeCPPMonitor()
 

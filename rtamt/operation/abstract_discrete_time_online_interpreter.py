@@ -2,16 +2,16 @@ import operator
 from fractions import Fraction
 
 from rtamt.ast.visitor.abstract_ast_visitor import AbstractAstVisitor
-from rtamt.operation.abstract_online_evaluator import AbstractOnlineEvaluator, AbstractOnlineUpdateVisitor, AbstractOnlineResetVisitor
-from rtamt.operation.discrete_time_evaluator import DiscreteTimeEvaluator
+from rtamt.operation.abstract_online_interpreter import AbstractOnlineInterpreter, AbstractOnlineUpdateVisitor, AbstractOnlineResetVisitor
+from rtamt.operation.discrete_time_interpreter import DiscreteTimeInterpreter
 
 from rtamt.exception.exception import RTAMTException
 from rtamt.exception.stl.exception import STLException
 
-class AbstractDiscreteTimeOnlineEvaluator(AbstractOnlineEvaluator, DiscreteTimeEvaluator):
+class AbstractDiscreteTimeOnlineInterpreter(AbstractOnlineInterpreter, DiscreteTimeInterpreter):
 
     def __init__(self):
-        super(AbstractDiscreteTimeOnlineEvaluator, self).__init__()
+        super(AbstractDiscreteTimeOnlineInterpreter, self).__init__()
         self.updateVisitor = DiscreteTimeOnlineUpdateVisitor()
         self.resetVisitor = AbstractOnlineResetVisitor()
         return
@@ -20,7 +20,7 @@ class AbstractDiscreteTimeOnlineEvaluator(AbstractOnlineEvaluator, DiscreteTimeE
     # inputs - list of [var name, var value] pairs
     # Example:
     # update(1, [['a', 2.2], ['b', 3.3]])
-    #TODO merge dense and discrete into update AbstractOnlineEvaluator
+    #TODO merge dense and discrete into update AbstractOnlineInterpreter
     def update(self, timestamp, dataset):
         # check ast exists
         self.exist_ast()
@@ -44,7 +44,7 @@ class AbstractDiscreteTimeOnlineEvaluator(AbstractOnlineEvaluator, DiscreteTimeE
         return rob
 
     def reset(self):
-        super(AbstractDiscreteTimeOnlineEvaluator, self).reset()
+        super(AbstractDiscreteTimeOnlineInterpreter, self).reset()
 
         self.update_counter = int(0)
         self.previous_time = float(0.0)
@@ -79,12 +79,12 @@ class DiscreteTimeOnlineUpdateVisitor(AbstractOnlineUpdateVisitor):
         return node.val
 
 
-def discrete_time_online_evaluator_factory(AstVisitor):
+def discrete_time_online_interpreter_factory(AstVisitor):
     if not issubclass(AstVisitor, AbstractAstVisitor):  # type check
         raise RTAMTException('{} is not RTAMT AST visitor'.format(AstVisitor.__name__))
 
-    class DiscreteTimeOnlineEvaluator(AbstractDiscreteTimeOnlineEvaluator, AstVisitor):
+    class DiscreteTimeOnlineInterpreter(AbstractDiscreteTimeOnlineInterpreter, AstVisitor):
         def __init__(self, *args, **kwargs):
-            super(DiscreteTimeOnlineEvaluator, self).__init__(*args, **kwargs)
+            super(DiscreteTimeOnlineInterpreter, self).__init__(*args, **kwargs)
 
-    return DiscreteTimeOnlineEvaluator
+    return DiscreteTimeOnlineInterpreter

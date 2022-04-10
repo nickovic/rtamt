@@ -4,18 +4,18 @@ from rtamt.exception.stl.exception import STLNotImplementedException
 from rtamt.ast.visitor.ltl.ast_visitor import LtlAstVisitor
 
 
-class LTLEvaluator(LtlAstVisitor):
+class LTLInterpreter(LtlAstVisitor):
     def __init__(self, spec):
         self.spec = spec
         generator = None
 
         if self.spec.language == Language.PYTHON:
             if self.spec.time_interpretation == TimeInterpretation.DISCRETE:
-                from rtamt.evaluator.ltl.discrete_time.online.python.online_discrete_time_python_monitor import \
+                from rtamt.interpreter.ltl.discrete_time.online.python.online_discrete_time_python_monitor import \
                     LTLOnlineDiscreteTimePythonMonitor
                 generator = LTLOnlineDiscreteTimePythonMonitor()
         elif self.spec.language == Language.CPP:
-            from rtamt.evaluator.ltl.discrete_time.online.cpp.online_discrete_time_cpp_monitor import \
+            from rtamt.interpreter.ltl.discrete_time.online.cpp.online_discrete_time_cpp_monitor import \
                 LTLOnlineDiscreteTimeCPPMonitor
             generator = LTLOnlineDiscreteTimeCPPMonitor()
 

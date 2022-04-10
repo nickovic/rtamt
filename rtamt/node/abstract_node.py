@@ -17,7 +17,7 @@ class AbstractNode:
         self.in_vars = []
         self.out_vars = []
         self.children = list()
-        self.evaluator = None
+        self.interpreter = None
         self.name = ''
         self.node = None
 
@@ -34,14 +34,14 @@ class AbstractNode:
             child.accept(visitor)
 
     @property
-    def evaluator(self):
-        """Getter for the online_evaluator"""
-        return self.__evaluator
+    def interpreter(self):
+        """Getter for the online_interpreter"""
+        return self.__interpreter
 
-    @evaluator.setter
-    def evaluator(self, evaluator):
-        """Setter for the online_evaluator"""
-        self.__evaluator = evaluator
+    @interpreter.setter
+    def interpreter(self, interpreter):
+        """Setter for the online_interpreter"""
+        self.__interpreter = interpreter
 
     @property
     def name(self):

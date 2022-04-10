@@ -1,16 +1,16 @@
-from rtamt.operation.iastl.dense_time.offline.evaluator import IAStlOutputRobustnessDenseTimeOfflineEvaluator, \
-    IAStlInputRobustnessDenseTimeOfflineEvaluator, IAStlInputVacuityDenseTimeOfflineEvaluator, \
-    IAStlOutputVacuityDenseTimeOfflineEvaluator
-from rtamt.operation.iastl.dense_time.online.evaluator import IAStlOutputRobustnessDenseTimeOnlineEvaluator, \
-    IAStlInputRobustnessDenseTimeOnlineEvaluator, IAStlOutputVacuityDenseTimeOnlineEvaluator, \
-    IAStlInputVacuityDenseTimeOnlineEvaluator
+from rtamt.operation.iastl.dense_time.offline.interpreter import IAStlOutputRobustnessDenseTimeOfflineInterpreter, \
+    IAStlInputRobustnessDenseTimeOfflineInterpreter, IAStlInputVacuityDenseTimeOfflineInterpreter, \
+    IAStlOutputVacuityDenseTimeOfflineInterpreter
+from rtamt.operation.iastl.dense_time.online.interpreter import IAStlOutputRobustnessDenseTimeOnlineInterpreter, \
+    IAStlInputRobustnessDenseTimeOnlineInterpreter, IAStlOutputVacuityDenseTimeOnlineInterpreter, \
+    IAStlInputVacuityDenseTimeOnlineInterpreter
 from rtamt.pastifier.stl.pastifier import StlPastifier
 from rtamt.spec.abstract_specification import AbstractOfflineSpecification, AbstractOnlineSpecification, AbstractOfflineOnlineSpecification
 
 from rtamt.ast.parser.stl.specification_parser import StlAst
 
-from rtamt.operation.stl.dense_time.offline.evaluator import StlDenseTimeOfflineEvaluator
-from rtamt.operation.stl.dense_time.online.evaluator import StlDenseTimeOnlineEvaluator
+from rtamt.operation.stl.dense_time.offline.interpreter import StlDenseTimeOfflineInterpreter
+from rtamt.operation.stl.dense_time.online.interpreter import StlDenseTimeOnlineInterpreter
 
 from rtamt.enumerations.options import *
 
@@ -23,28 +23,28 @@ def STLDenseTimeSpecification(semantics=Semantics.STANDARD, language=Language.PY
     Attributes:
     """
     if semantics == Semantics.STANDARD and language == Language.PYTHON:
-        spec = AbstractOfflineOnlineSpecification(StlAst(), StlDenseTimeOfflineEvaluator(), StlDenseTimeOnlineEvaluator(), pastifier=StlPastifier())
+        spec = AbstractOfflineOnlineSpecification(StlAst(), StlDenseTimeOfflineInterpreter(), StlDenseTimeOnlineInterpreter(), pastifier=StlPastifier())
     elif semantics == Semantics.OUTPUT_ROBUSTNESS and language == Language.PYTHON:
-        spec = AbstractOfflineOnlineSpecification(StlAst(), IAStlOutputRobustnessDenseTimeOfflineEvaluator(),
-                                                  IAStlOutputRobustnessDenseTimeOnlineEvaluator(), pastifier=StlPastifier())
+        spec = AbstractOfflineOnlineSpecification(StlAst(), IAStlOutputRobustnessDenseTimeOfflineInterpreter(),
+                                                  IAStlOutputRobustnessDenseTimeOnlineInterpreter(), pastifier=StlPastifier())
     elif semantics == Semantics.INPUT_ROBUSTNESS and language == Language.PYTHON:
-        spec = AbstractOfflineOnlineSpecification(StlAst(), IAStlInputRobustnessDenseTimeOfflineEvaluator(),
-                                                  IAStlInputRobustnessDenseTimeOnlineEvaluator(), pastifier=StlPastifier())
+        spec = AbstractOfflineOnlineSpecification(StlAst(), IAStlInputRobustnessDenseTimeOfflineInterpreter(),
+                                                  IAStlInputRobustnessDenseTimeOnlineInterpreter(), pastifier=StlPastifier())
     elif semantics == Semantics.INPUT_VACUITY and language == Language.PYTHON:
-        spec = AbstractOfflineOnlineSpecification(StlAst(), IAStlInputVacuityDenseTimeOfflineEvaluator(),
-                                                  IAStlInputVacuityDenseTimeOnlineEvaluator(), pastifier=StlPastifier())
+        spec = AbstractOfflineOnlineSpecification(StlAst(), IAStlInputVacuityDenseTimeOfflineInterpreter(),
+                                                  IAStlInputVacuityDenseTimeOnlineInterpreter(), pastifier=StlPastifier())
     elif semantics == Semantics.OUTPUT_VACUITY and language == Language.PYTHON:
-        spec = AbstractOfflineOnlineSpecification(StlAst(), IAStlOutputVacuityDenseTimeOfflineEvaluator(),
-                                                  IAStlOutputVacuityDenseTimeOnlineEvaluator(), pastifier=StlPastifier())
+        spec = AbstractOfflineOnlineSpecification(StlAst(), IAStlOutputVacuityDenseTimeOfflineInterpreter(),
+                                                  IAStlOutputVacuityDenseTimeOnlineInterpreter(), pastifier=StlPastifier())
     else:
         raise Exception()
 
     return spec
 
 def StlDenseTimeOfflineSpecification():
-    spec = AbstractOfflineSpecification(StlAst(), StlDenseTimeOfflineEvaluator())
+    spec = AbstractOfflineSpecification(StlAst(), StlDenseTimeOfflineInterpreter())
     return spec
 
 def StlDenseTimeOnlineSpecification():
-    spec = AbstractOnlineSpecification(StlAst(), StlDenseTimeOnlineEvaluator(), pastifier=StlPastifier())
+    spec = AbstractOnlineSpecification(StlAst(), StlDenseTimeOnlineInterpreter(), pastifier=StlPastifier())
     return spec

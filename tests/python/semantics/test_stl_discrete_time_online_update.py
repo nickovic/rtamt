@@ -4,7 +4,7 @@ import math
 from rtamt.ast.parser.stl.specification_parser import StlAst
 from rtamt.operation.stl.discrete_time.online.constant_operation import ConstantOperation
 from rtamt.operation.stl.discrete_time.online.and_operation import AndOperation
-from rtamt.operation.stl.discrete_time.online.evaluator import StlDiscreteTimeOnlineEvaluator
+from rtamt.operation.stl.discrete_time.online.interpreter import StlDiscreteTimeOnlineInterpreter
 from rtamt.operation.stl.discrete_time.online.rise_operation import RiseOperation
 from rtamt.operation.stl.discrete_time.online.fall_operation import FallOperation
 from rtamt.operation.stl.discrete_time.online.predicate_operation import PredicateOperation
@@ -68,8 +68,8 @@ class TestSTLEvaluation(unittest.TestCase):
         ast.declare_var('b', 'float')
         ast.spec = 'a + b'
         ast.parse()
-        evaluator = StlDiscreteTimeOnlineEvaluator()
-        evaluator.set_ast(ast)
+        interpreter = StlDiscreteTimeOnlineInterpreter()
+        interpreter.set_ast(ast)
 
         in1 = [['a', self.left1], ['b', self.right1]]
         in2 = [['a', self.left2], ['b', self.right2]]
@@ -77,11 +77,11 @@ class TestSTLEvaluation(unittest.TestCase):
         in4 = [['a', self.left4], ['b', self.right4]]
         in5 = [['a', self.left5], ['b', self.right5]]
 
-        out1 = evaluator.update(0, in1)
-        out2 = evaluator.update(1, in2)
-        out3 = evaluator.update(2, in3)
-        out4 = evaluator.update(3, in4)
-        out5 = evaluator.update(4, in5)
+        out1 = interpreter.update(0, in1)
+        out2 = interpreter.update(1, in2)
+        out3 = interpreter.update(2, in3)
+        out4 = interpreter.update(3, in4)
+        out5 = interpreter.update(4, in5)
 
         self.assertEqual(out1, 120, "input 1")
         self.assertEqual(out2, -3, "input 2")
@@ -95,8 +95,8 @@ class TestSTLEvaluation(unittest.TestCase):
         ast.declare_var('b', 'float')
         ast.spec = 'a - b'
         ast.parse()
-        evaluator = StlDiscreteTimeOnlineEvaluator()
-        evaluator.set_ast(ast)
+        interpreter = StlDiscreteTimeOnlineInterpreter()
+        interpreter.set_ast(ast)
 
         in1 = [['a', self.left1], ['b', self.right1]]
         in2 = [['a', self.left2], ['b', self.right2]]
@@ -104,11 +104,11 @@ class TestSTLEvaluation(unittest.TestCase):
         in4 = [['a', self.left4], ['b', self.right4]]
         in5 = [['a', self.left5], ['b', self.right5]]
 
-        out1 = evaluator.update(0, in1)
-        out2 = evaluator.update(1, in2)
-        out3 = evaluator.update(2, in3)
-        out4 = evaluator.update(3, in4)
-        out5 = evaluator.update(4, in5)
+        out1 = interpreter.update(0, in1)
+        out2 = interpreter.update(1, in2)
+        out3 = interpreter.update(2, in3)
+        out4 = interpreter.update(3, in4)
+        out5 = interpreter.update(4, in5)
 
         self.assertEqual(out1, 80, "input 1")
         self.assertEqual(out2, 1, "input 2")

@@ -1,11 +1,11 @@
 from fractions import Fraction
-from rtamt.operation.time_evaluator import TimeEvaluator
+from rtamt.operation.time_interpreter import TimeInterpreter
 from rtamt.exception.exception import RTAMTException
 
-class DiscreteTimeEvaluator(TimeEvaluator):
+class DiscreteTimeInterpreter(TimeInterpreter):
 
     def __init__(self):
-        super(DiscreteTimeEvaluator, self).__init__()
+        super(DiscreteTimeInterpreter, self).__init__()
 
         self.DEFAULT_TOLERANCE = float(0.1)
 

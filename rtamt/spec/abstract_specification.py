@@ -1,12 +1,12 @@
 import os, sys
 from abc import ABCMeta
 
-from rtamt.operation.abstract_discrete_time_online_evaluator import AbstractDiscreteTimeOnlineEvaluator
-from rtamt.operation.abstract_dense_time_online_evaluator import AbstractDenseTimeOnlineEvaluator
-from rtamt.operation.abstract_discrete_time_offline_evaluator import AbstractDiscreteTimeOfflineEvaluator
-from rtamt.operation.abstract_dense_time_offline_evaluator import AbstractDenseTimeOfflineEvaluator
+from rtamt.operation.abstract_discrete_time_online_interpreter import AbstractDiscreteTimeOnlineInterpreter
+from rtamt.operation.abstract_dense_time_online_interpreter import AbstractDenseTimeOnlineInterpreter
+from rtamt.operation.abstract_discrete_time_offline_interpreter import AbstractDiscreteTimeOfflineInterpreter
+from rtamt.operation.abstract_dense_time_offline_interpreter import AbstractDenseTimeOfflineInterpreter
 
-from rtamt.operation.discrete_time_evaluator import DiscreteTimeEvaluator
+from rtamt.operation.discrete_time_interpreter import DiscreteTimeInterpreter
 
 from rtamt.exception.exception import RTAMTException
 
@@ -17,8 +17,8 @@ class AbstractSpecification(object):
     def __init__(self, ast):
         self.name = 'Abstract Specification'
         self.ast = ast
-        self.evaluator = None
-        self.set_ast_flag = False # It is for evaluator is set ast or not.
+        self.interpreter = None
+        self.set_ast_flag = False # It is for interpreter is set ast or not.
 
         #TODO we need to move it to RTAMT4ROS as wrapper
         self.modules = dict()
@@ -76,55 +76,55 @@ class AbstractSpecification(object):
     def parse(self):
         self.ast.parse()
 
-    # forwarding to evaluator
+    # forwarding to interpreter
     def set_sampling_period(self, sampling_period=int(1), unit='s', tolerance=float(0.1)):
-        if self.online_evaluator:
-            if isinstance(self.online_evaluator, DiscreteTimeEvaluator):
-                self.online_evaluator.set_sampling_period(sampling_period, unit, tolerance)
+        if self.online_interpreter:
+            if isinstance(self.online_interpreter, DiscreteTimeInterpreter):
+                self.online_interpreter.set_sampling_period(sampling_period, unit, tolerance)
             else:
                 RTAMTException('time_unit_transformer() allowed only discrete time')
 
-        if self.offline_evaluator:
-            if isinstance(self.offline_evaluator, DiscreteTimeEvaluator):
-                self.offline_evaluator.set_sampling_period(sampling_period, unit, tolerance)
+        if self.offline_interpreter:
+            if isinstance(self.offline_interpreter, DiscreteTimeInterpreter):
+                self.offline_interpreter.set_sampling_period(sampling_period, unit, tolerance)
             else:
                 RTAMTException('time_unit_transformer() allowed only discrete time')
 
     def get_sampling_frequency(self):
-        if self.online_evaluator:
-            if isinstance(self.online_evaluator, DiscreteTimeEvaluator):
-                self.online_evaluator.get_sampling_frequency()
+        if self.online_interpreter:
+            if isinstance(self.online_interpreter, DiscreteTimeInterpreter):
+                self.online_interpreter.get_sampling_frequency()
             else:
                 RTAMTException('time_unit_transformer() allowed only discrete time')
-        if self.offline_evaluator:
-            if isinstance(self.offline_evaluator, DiscreteTimeEvaluator):
-                self.offline_evaluator.get_sampling_frequency()
+        if self.offline_interpreter:
+            if isinstance(self.offline_interpreter, DiscreteTimeInterpreter):
+                self.offline_interpreter.get_sampling_frequency()
             else:
                 RTAMTException('time_unit_transformer() allowed only discrete time')
 
     @property
     def sampling_violation_counter(self):
-        if self.online_evaluator:
-            if isinstance(self.online_evaluator, DiscreteTimeEvaluator):
-                return self.online_evaluator.sampling_violation_counter
+        if self.online_interpreter:
+            if isinstance(self.online_interpreter, DiscreteTimeInterpreter):
+                return self.online_interpreter.sampling_violation_counter
             else:
                 RTAMTException('only discrete time has sampling_violation_counter')
-        if self.offline_evaluator:
-            if isinstance(self.offline_evaluator, DiscreteTimeEvaluator):
-                return self.offline_evaluator.sampling_violation_counter
+        if self.offline_interpreter:
+            if isinstance(self.offline_interpreter, DiscreteTimeInterpreter):
+                return self.offline_interpreter.sampling_violation_counter
             else:
                 RTAMTException('only discrete time has sampling_violation_counter')
 
     @property
     def sampling_tolerance(self):
-        if self.online_evaluator:
-            if isinstance(self.online_evaluator, DiscreteTimeEvaluator):
-                return self.online_evaluator.sampling_tolerance
+        if self.online_interpreter:
+            if isinstance(self.online_interpreter, DiscreteTimeInterpreter):
+                return self.online_interpreter.sampling_tolerance
             else:
                 RTAMTException('only discrete time has sampling_tolerance')
-        if self.offline_evaluator:
-            if isinstance(self.offline_evaluator, DiscreteTimeEvaluator):
-                return self.offline_evaluator.sampling_tolerance
+        if self.offline_interpreter:
+            if isinstance(self.offline_interpreter, DiscreteTimeInterpreter):
+                return self.offline_interpreter.sampling_tolerance
             else:
                 RTAMTException('only discrete time has sampling_tolerance')
 
@@ -180,24 +180,24 @@ class AbstractSpecification(object):
         return out
 
 
-class DiscreteTimeOfflineEvaluator(object):
+class DiscreteTimeOfflineInterpreter(object):
     pass
 
 
 class AbstractOfflineSpecification(AbstractSpecification):
-    def __init__(self, ast, offlineEvaluator):
+    def __init__(self, ast, offlineInterpreter):
         AbstractSpecification.__init__(self, ast)
         self.name = 'Abstract Offline Specification'
-        self.offline_evaluator = offlineEvaluator
+        self.offline_interpreter = offlineInterpreter
 
-    # forwarding to evaluator
+    # forwarding to interpreter
     def evaluate(self, *args, **kwargs):
         if self.set_ast_flag != True:
-            self.offline_evaluator.set_ast(self.ast)
+            self.offline_interpreter.set_ast(self.ast)
             self.set_ast_flag = True
 
-        #TODO we may make it consistent with evaluator class.
-        if isinstance(self.offline_evaluator, AbstractDenseTimeOfflineEvaluator):
+        #TODO we may make it consistent with interpreter class.
+        if isinstance(self.offline_interpreter, AbstractDenseTimeOfflineInterpreter):
             if len(args) == 0:
                 raise Exception()
             elif len(args) == 1:
@@ -206,33 +206,33 @@ class AbstractOfflineSpecification(AbstractSpecification):
                 dataset = []
                 for i in args:
                     dataset.append(i)
-            return self.offline_evaluator.evaluate(dataset)
-        elif isinstance(self.offline_evaluator, AbstractDiscreteTimeOfflineEvaluator):
+            return self.offline_interpreter.evaluate(dataset)
+        elif isinstance(self.offline_interpreter, AbstractDiscreteTimeOfflineInterpreter):
             dataset = args[0]
-            return self.offline_evaluator.evaluate(dataset)
+            return self.offline_interpreter.evaluate(dataset)
         else:
-            raise Exception('Wrong evaluator!')
+            raise Exception('Wrong interpreter!')
 
 
 class AbstractOnlineSpecification(AbstractSpecification):
-    def __init__(self, ast, onlineEvaluator, pastifier=None):
+    def __init__(self, ast, onlineInterpreter, pastifier=None):
         AbstractSpecification.__init__(self, ast)
         self.name = 'Abstract Online Specification'
-        self.online_evaluator = onlineEvaluator
+        self.online_interpreter = onlineInterpreter
         self.pastifier = pastifier
 
     # forwarding pastify
     def pastify(self):
         self.ast = self.pastifier.pastify(self.ast)
 
-    # forwarding to evaluator
+    # forwarding to interpreter
     def update(self, *args, **kwargs):
         if self.set_ast_flag != True:
-            self.online_evaluator.set_ast(self.ast)
+            self.online_interpreter.set_ast(self.ast)
             self.set_ast_flag = True
 
-        #TODO we may make it consistent with evaluator class.
-        if isinstance(self.online_evaluator, AbstractDenseTimeOnlineEvaluator):
+        #TODO we may make it consistent with interpreter class.
+        if isinstance(self.online_interpreter, AbstractDenseTimeOnlineInterpreter):
             if len(args) == 0:
                 raise Exception()
             elif len(args) == 1:
@@ -241,20 +241,20 @@ class AbstractOnlineSpecification(AbstractSpecification):
                 dataset = []
                 for i in args:
                     dataset.append(i)
-            return self.online_evaluator.update(dataset)
-        elif isinstance(self.online_evaluator, AbstractDiscreteTimeOnlineEvaluator):
+            return self.online_interpreter.update(dataset)
+        elif isinstance(self.online_interpreter, AbstractDiscreteTimeOnlineInterpreter):
             i = args[0]
             dataset = args[1]
-            return self.online_evaluator.update(i, dataset)
+            return self.online_interpreter.update(i, dataset)
         else:
             pass
 
     def final_update(self, *args, **kwargs):
         if self.set_ast_flag != True:
-            self.online_evaluator.set_ast(self.ast)
+            self.online_interpreter.set_ast(self.ast)
             self.set_ast_flag = True
 
-        #TODO we may make it consistent with evaluator class.
+        #TODO we may make it consistent with interpreter class.
         if len(args) == 0:
             raise Exception()
         elif len(args) == 1:
@@ -264,16 +264,16 @@ class AbstractOnlineSpecification(AbstractSpecification):
             for i in args:
                 dataset.append(i)
 
-        return self.online_evaluator.final_update(dataset)
+        return self.online_interpreter.final_update(dataset)
 
     def reset(self):
-        self.online_evaluator.reset()
+        self.online_interpreter.reset()
 
 
 # we would not recomend to use it
 # Please note that. Even the class have both evaluate and update, calling both with same instance is not expected.
 class AbstractOfflineOnlineSpecification(AbstractOfflineSpecification, AbstractOnlineSpecification):
-    def __init__(self, ast, offlineEvaluator, onlineEvaluator, pastifier=None):
-        AbstractOfflineSpecification.__init__(self, ast, offlineEvaluator)
-        AbstractOnlineSpecification.__init__(self, ast, onlineEvaluator, pastifier)
+    def __init__(self, ast, offlineInterpreter, onlineInterpreter, pastifier=None):
+        AbstractOfflineSpecification.__init__(self, ast, offlineInterpreter)
+        AbstractOnlineSpecification.__init__(self, ast, onlineInterpreter, pastifier)
         self.name = 'Abstract Offline Online Specification'

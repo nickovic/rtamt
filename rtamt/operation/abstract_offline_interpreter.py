@@ -1,10 +1,10 @@
 from abc import abstractmethod
 
-from rtamt.operation.abstract_evaluator import AbstractEvaluator
+from rtamt.operation.abstract_interpreter import AbstractInterpreter
 
-class AbstractOfflineEvaluator(AbstractEvaluator):
+class AbstractOfflineInterpreter(AbstractInterpreter):
     def __init__(self):
-        super(AbstractOfflineEvaluator, self).__init__()
+        super(AbstractOfflineInterpreter, self).__init__()
         return
 
     @abstractmethod

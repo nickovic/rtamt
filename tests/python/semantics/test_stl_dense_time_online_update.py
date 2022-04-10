@@ -2,7 +2,7 @@ import unittest
 
 from rtamt.ast.parser.stl.specification_parser import StlAst
 from rtamt.operation.stl.dense_time.online.and_operation import AndOperation
-from rtamt.operation.stl.dense_time.online.evaluator import StlDenseTimeOnlineEvaluator
+from rtamt.operation.stl.dense_time.online.interpreter import StlDenseTimeOnlineInterpreter
 from rtamt.operation.stl.dense_time.online.not_operation import NotOperation
 from rtamt.operation.stl.dense_time.online.or_operation import OrOperation
 from rtamt.operation.stl.dense_time.online.implies_operation import ImpliesOperation
@@ -129,7 +129,7 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
         ast.declare_var('b', 'float')
         ast.spec = 'a or b'
         ast.parse()
-        op = StlDenseTimeOnlineEvaluator()
+        op = StlDenseTimeOnlineInterpreter()
         op.set_ast(ast)
 
         a = ['a', [[1, 2], [4.1, 1], [5, 2], [6.1, 1]]]
