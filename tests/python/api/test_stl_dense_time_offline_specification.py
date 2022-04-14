@@ -202,7 +202,7 @@ class TestStlDenseTimeOfflineSpecification(unittest.TestCase):
 
         op = [[0, 4], [5, 2], [10, 5], [15, 3]]
 
-        expected = [[0, 4], [6, 2], [10, 5], [15, 3]]
+        expected = [[0, 4], [6, 2], [10, 5], [16, 3]]
         computed = spec.evaluate(['req', op])
 
         self.assertListEqual(expected, computed, "once[0,1]")
@@ -232,7 +232,7 @@ class TestStlDenseTimeOfflineSpecification(unittest.TestCase):
 
         op = [[0, 4], [5, 2], [10, 5], [15, 3]]
 
-        expected = [[0, 4], [4, 2], [10, 5], [15, 3]]
+        expected = [[0, 4], [4, 2], [10, 5], [14, 3]]
         computed = spec.evaluate(['req', op])
 
         self.assertListEqual(expected, computed, "alw[0,1]")
