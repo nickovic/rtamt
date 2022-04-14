@@ -51,11 +51,62 @@ def eventually_timed_operation(samples, begin, end):
             ti = ti + 1
     return out
 
+def always_timed_operation(samples, begin, end):
+    out = []
+    if not samples:
+        return out
+
+    restricted, ti = restrict(samples, begin, end)
+    m = min_list(restricted)
+    out.append([samples[0][0], m[0][1]])
+    prev_min = m[0][1]
+    s = samples[0][0]
+
+    while ti < len(samples)-1:
+        if not m:
+            if samples[ti+1][1] < prev_min:
+                t = samples[ti+1][0] - end
+            else:
+                t = samples[ti+1][0] - begin
+        else:
+            t = min(m[0][0] - begin, samples[ti+1][0] - end)
+
+        if m and t == m[0][0] - begin:
+            m.popleft()
+            s = t
+            if m:
+                out.append([s, m[0][1]])
+
+        if t == samples[ti+1][0] - end:
+            val = samples[ti+1][1]
+            while m and val <= m[-1][1]:
+                m.pop()
+            m.append(samples[ti+1])
+            if m[0][1] < prev_min:
+                out.append([samples[ti+1][0] - end, m[0][1]])
+                prev_min = m[0][1]
+            ti = ti + 1
+        elif t == samples[ti+1][0] - begin:
+            m.append(samples[ti + 1])
+            out.append([samples[ti + 1][0] - begin, m[0][1]])
+            prev_min = m[0][1]
+            ti = ti + 1
+    return out
+
 def max_list(samples):
     prev = -float('inf')
     m = deque()
     for sample in reversed(samples):
         if sample[1] > prev:
+            m.appendleft(sample)
+            prev = sample[1]
+    return m
+
+def min_list(samples):
+    prev = float('inf')
+    m = deque()
+    for sample in reversed(samples):
+        if sample[1] < prev:
             m.appendleft(sample)
             prev = sample[1]
     return m
@@ -242,7 +293,7 @@ def since_timed_operation(sample_left, sample_right, begin, end):
     return sample_return
 
 
-def always_timed_operation(sample, begin, end):
+def always_timed_operation_old(sample, begin, end):
     out = []
     sample_return = []
 
