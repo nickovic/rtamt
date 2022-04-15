@@ -9,7 +9,7 @@ from rtamt.enumerations.comp_oper import StlComparisonOperator
 
 from rtamt.exception.stl.exception import STLNotImplementedException
 
-def eventually_timed_operation(samples, begin, end):
+def eventually_timed_operation_new(samples, begin, end):
     out = []
     if not samples:
         return out
@@ -51,7 +51,7 @@ def eventually_timed_operation(samples, begin, end):
             ti = ti + 1
     return out
 
-def once_timed_operation(samples, begin, end):
+def once_timed_operation_new(samples, begin, end):
     out = []
     if not samples:
         return out
@@ -102,7 +102,7 @@ def once_timed_operation(samples, begin, end):
             ti = ti + 1
     return out
 
-def historically_timed_operation(samples, begin, end):
+def historically_timed_operation_new(samples, begin, end):
     out = []
     if not samples:
         return out
@@ -149,7 +149,7 @@ def historically_timed_operation(samples, begin, end):
             ti = ti + 1
     return out
 
-def always_timed_operation(samples, begin, end):
+def always_timed_operation_new(samples, begin, end):
     out = []
     if not samples:
         return out
@@ -264,7 +264,7 @@ def since_operation(sample_left, sample_right):
     return sample_return
 
 
-def once_timed_operation_old(sample, begin, end):
+def once_timed_operation(sample, begin, end):
     out = []
     sample_return = []
 
@@ -321,7 +321,7 @@ def once_timed_operation_old(sample, begin, end):
     return sample_return
 
 
-def historically_timed_operation_old(sample, begin, end):
+def historically_timed_operation(sample, begin, end):
     out = []
     sample_return = []
 
@@ -391,7 +391,7 @@ def since_timed_operation(sample_left, sample_right, begin, end):
     return sample_return
 
 
-def always_timed_operation_old(sample, begin, end):
+def always_timed_operation(sample, begin, end):
     out = []
     sample_return = []
 
@@ -439,7 +439,7 @@ def always_timed_operation_old(sample, begin, end):
 
 
 
-def eventually_timed_operation_old(sample, begin, end):
+def eventually_timed_operation(sample, begin, end):
     out = []
     sample_return = []
 
