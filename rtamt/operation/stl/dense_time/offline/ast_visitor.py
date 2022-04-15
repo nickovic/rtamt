@@ -9,227 +9,227 @@ from rtamt.enumerations.comp_oper import StlComparisonOperator
 
 from rtamt.exception.stl.exception import STLNotImplementedException
 
-def eventually_timed_operation_new(samples, begin, end):
-    out = []
-    if not samples:
-        return out
-
-    restricted, ti = restrict(samples, begin, end)
-    m = max_list(restricted)
-    out.append([samples[0][0], m[0][1]])
-    prev_max = m[0][1]
-    s = samples[0][0]
-
-    while ti < len(samples)-1:
-        if not m:
-            if samples[ti+1][1] > prev_max:
-                t = samples[ti+1][0] - end
-            else:
-                t = samples[ti+1][0] - begin
-        else:
-            t = min(m[0][0] - begin, samples[ti+1][0] - end)
-
-        if m and t == m[0][0] - begin:
-            m.popleft()
-            s = t
-            if m:
-                out.append([s, m[0][1]])
-
-        if t == samples[ti+1][0] - end:
-            val = samples[ti+1][1]
-            while m and val >= m[-1][1]:
-                m.pop()
-            m.append(samples[ti+1])
-            if m[0][1] > prev_max:
-                out.append([samples[ti+1][0] - end, m[0][1]])
-                prev_max = m[0][1]
-            ti = ti + 1
-        elif t == samples[ti+1][0] - begin:
-            m.append(samples[ti + 1])
-            out.append([samples[ti + 1][0] - begin, m[0][1]])
-            prev_max = m[0][1]
-            ti = ti + 1
-    return out
-
-def once_timed_operation_new(samples, begin, end):
-    out = []
-    if not samples:
-        return out
-
-    #restricted, ti = restrict(samples, begin, end)
-    #m = max_list(restricted)
-
-    ti=0
-    m = deque()
-    if begin == 0:
-        out.append(samples[0])
-        m.appendleft(samples[0])
-    else:
-        out.append([0, -float("inf")])
-
-
-    prev_max = m[0][1]
-    s = samples[0][0]
-
-    while ti < len(samples)-1:
-        if not m:
-            if samples[ti+1][1] > prev_max:
-                t = samples[ti+1][0] + begin
-            else:
-                t = samples[ti+1][0] + end
-        else:
-            t = min(m[0][0] + begin, samples[ti+1][0] + end)
-
-        if m and t == m[0][0] + begin:
-            m.popleft()
-            s = t
-            if m:
-                out.append([s, m[0][1]])
-
-        if t == samples[ti+1][0] + begin:
-            val = samples[ti+1][1]
-            while m and val >= m[-1][1]:
-                m.pop()
-            m.append(samples[ti+1])
-            if m[0][1] > prev_max:
-                out.append([samples[ti+1][0] + begin, m[0][1]])
-                prev_max = m[0][1]
-            ti = ti + 1
-        elif t == samples[ti+1][0] + end:
-            m.append(samples[ti + 1])
-            out.append([samples[ti + 1][0] + end, m[0][1]])
-            prev_max = m[0][1]
-            ti = ti + 1
-    return out
-
-def historically_timed_operation_new(samples, begin, end):
-    out = []
-    if not samples:
-        return out
-
-    ti = 0
-    m = deque()
-    if begin == 0:
-        out.append(samples[0])
-        m.appendleft(samples[0])
-    else:
-        out.append([0, float("inf")])
-
-    prev_min = m[0][1]
-    s = samples[0][0]
-
-    while ti < len(samples)-1:
-        if not m:
-            if samples[ti+1][1] < prev_min:
-                t = samples[ti+1][0] + begin
-            else:
-                t = samples[ti+1][0] + end
-        else:
-            t = min(m[0][0] + begin, samples[ti+1][0] + end)
-
-        if m and t == m[0][0] + begin:
-            m.popleft()
-            s = t
-            if m:
-                out.append([s, m[0][1]])
-
-        if t == samples[ti+1][0] + begin:
-            val = samples[ti+1][1]
-            while m and val <= m[-1][1]:
-                m.pop()
-            m.append(samples[ti+1])
-            if m[0][1] < prev_min:
-                out.append([samples[ti+1][0] + begin, m[0][1]])
-                prev_min = m[0][1]
-            ti = ti + 1
-        elif t == samples[ti+1][0] + end:
-            m.append(samples[ti + 1])
-            out.append([samples[ti + 1][0] + end, m[0][1]])
-            prev_min = m[0][1]
-            ti = ti + 1
-    return out
-
-def always_timed_operation_new(samples, begin, end):
-    out = []
-    if not samples:
-        return out
-
-    restricted, ti = restrict(samples, begin, end)
-    m = min_list(restricted)
-    out.append([samples[0][0], m[0][1]])
-    prev_min = m[0][1]
-    s = samples[0][0]
-
-    while ti < len(samples)-1:
-        if not m:
-            if samples[ti+1][1] < prev_min:
-                t = samples[ti+1][0] - end
-            else:
-                t = samples[ti+1][0] - begin
-        else:
-            t = min(m[0][0] - begin, samples[ti+1][0] - end)
-
-        if m and t == m[0][0] - begin:
-            m.popleft()
-            s = t
-            if m:
-                out.append([s, m[0][1]])
-
-        if t == samples[ti+1][0] - end:
-            val = samples[ti+1][1]
-            while m and val <= m[-1][1]:
-                m.pop()
-            m.append(samples[ti+1])
-            if m[0][1] < prev_min:
-                out.append([samples[ti+1][0] - end, m[0][1]])
-                prev_min = m[0][1]
-            ti = ti + 1
-        elif t == samples[ti+1][0] - begin:
-            m.append(samples[ti + 1])
-            out.append([samples[ti + 1][0] - begin, m[0][1]])
-            prev_min = m[0][1]
-            ti = ti + 1
-    return out
-
-def max_list(samples):
-    prev = -float('inf')
-    m = deque()
-    for sample in reversed(samples):
-        if sample[1] > prev:
-            m.appendleft(sample)
-            prev = sample[1]
-    return m
-
-def min_list(samples):
-    prev = float('inf')
-    m = deque()
-    for sample in reversed(samples):
-        if sample[1] < prev:
-            m.appendleft(sample)
-            prev = sample[1]
-    return m
-
-def restrict(samples, a, b):
-    out = []
-
-    if not samples:
-        return out, -1
-
-    if len(samples) == 1 and a <= samples[0][0] < b:
-        out.append(samples[0])
-        return out, 0
-
-    for i in range(len(samples) - 1):
-        if samples[i][0] <= a and samples[i+1][0] > a:
-            out.append([a, samples[i][1]])
-
-        if a <= samples[i+1][0] < b:
-            out.append(samples[i+1])
-
-        if samples[i][0] < b and samples[i+1][0] >= b:
-            out.append([b, samples[i][1]])
-            break
-    return out, i
+# def eventually_timed_operation_new(samples, begin, end):
+#     out = []
+#     if not samples:
+#         return out
+#
+#     restricted, ti = restrict(samples, begin, end)
+#     m = max_list(restricted)
+#     out.append([samples[0][0], m[0][1]])
+#     prev_max = m[0][1]
+#     s = samples[0][0]
+#
+#     while ti < len(samples)-1:
+#         if not m:
+#             if samples[ti+1][1] > prev_max:
+#                 t = samples[ti+1][0] - end
+#             else:
+#                 t = samples[ti+1][0] - begin
+#         else:
+#             t = min(m[0][0] - begin, samples[ti+1][0] - end)
+#
+#         if m and t == m[0][0] - begin:
+#             m.popleft()
+#             s = t
+#             if m:
+#                 out.append([s, m[0][1]])
+#
+#         if t == samples[ti+1][0] - end:
+#             val = samples[ti+1][1]
+#             while m and val >= m[-1][1]:
+#                 m.pop()
+#             m.append(samples[ti+1])
+#             if m[0][1] > prev_max:
+#                 out.append([samples[ti+1][0] - end, m[0][1]])
+#                 prev_max = m[0][1]
+#             ti = ti + 1
+#         elif t == samples[ti+1][0] - begin:
+#             m.append(samples[ti + 1])
+#             out.append([samples[ti + 1][0] - begin, m[0][1]])
+#             prev_max = m[0][1]
+#             ti = ti + 1
+#     return out
+#
+# def once_timed_operation_new(samples, begin, end):
+#     out = []
+#     if not samples:
+#         return out
+#
+#     #restricted, ti = restrict(samples, begin, end)
+#     #m = max_list(restricted)
+#
+#     ti=0
+#     m = deque()
+#     if begin == 0:
+#         out.append(samples[0])
+#         m.appendleft(samples[0])
+#     else:
+#         out.append([0, -float("inf")])
+#
+#
+#     prev_max = m[0][1]
+#     s = samples[0][0]
+#
+#     while ti < len(samples)-1:
+#         if not m:
+#             if samples[ti+1][1] > prev_max:
+#                 t = samples[ti+1][0] + begin
+#             else:
+#                 t = samples[ti+1][0] + end
+#         else:
+#             t = min(m[0][0] + begin, samples[ti+1][0] + end)
+#
+#         if m and t == m[0][0] + begin:
+#             m.popleft()
+#             s = t
+#             if m:
+#                 out.append([s, m[0][1]])
+#
+#         if t == samples[ti+1][0] + begin:
+#             val = samples[ti+1][1]
+#             while m and val >= m[-1][1]:
+#                 m.pop()
+#             m.append(samples[ti+1])
+#             if m[0][1] > prev_max:
+#                 out.append([samples[ti+1][0] + begin, m[0][1]])
+#                 prev_max = m[0][1]
+#             ti = ti + 1
+#         elif t == samples[ti+1][0] + end:
+#             m.append(samples[ti + 1])
+#             out.append([samples[ti + 1][0] + end, m[0][1]])
+#             prev_max = m[0][1]
+#             ti = ti + 1
+#     return out
+#
+# def historically_timed_operation_new(samples, begin, end):
+#     out = []
+#     if not samples:
+#         return out
+#
+#     ti = 0
+#     m = deque()
+#     if begin == 0:
+#         out.append(samples[0])
+#         m.appendleft(samples[0])
+#     else:
+#         out.append([0, float("inf")])
+#
+#     prev_min = m[0][1]
+#     s = samples[0][0]
+#
+#     while ti < len(samples)-1:
+#         if not m:
+#             if samples[ti+1][1] < prev_min:
+#                 t = samples[ti+1][0] + begin
+#             else:
+#                 t = samples[ti+1][0] + end
+#         else:
+#             t = min(m[0][0] + begin, samples[ti+1][0] + end)
+#
+#         if m and t == m[0][0] + begin:
+#             m.popleft()
+#             s = t
+#             if m:
+#                 out.append([s, m[0][1]])
+#
+#         if t == samples[ti+1][0] + begin:
+#             val = samples[ti+1][1]
+#             while m and val <= m[-1][1]:
+#                 m.pop()
+#             m.append(samples[ti+1])
+#             if m[0][1] < prev_min:
+#                 out.append([samples[ti+1][0] + begin, m[0][1]])
+#                 prev_min = m[0][1]
+#             ti = ti + 1
+#         elif t == samples[ti+1][0] + end:
+#             m.append(samples[ti + 1])
+#             out.append([samples[ti + 1][0] + end, m[0][1]])
+#             prev_min = m[0][1]
+#             ti = ti + 1
+#     return out
+#
+# def always_timed_operation_new(samples, begin, end):
+#     out = []
+#     if not samples:
+#         return out
+#
+#     restricted, ti = restrict(samples, begin, end)
+#     m = min_list(restricted)
+#     out.append([samples[0][0], m[0][1]])
+#     prev_min = m[0][1]
+#     s = samples[0][0]
+#
+#     while ti < len(samples)-1:
+#         if not m:
+#             if samples[ti+1][1] < prev_min:
+#                 t = samples[ti+1][0] - end
+#             else:
+#                 t = samples[ti+1][0] - begin
+#         else:
+#             t = min(m[0][0] - begin, samples[ti+1][0] - end)
+#
+#         if m and t == m[0][0] - begin:
+#             m.popleft()
+#             s = t
+#             if m:
+#                 out.append([s, m[0][1]])
+#
+#         if t == samples[ti+1][0] - end:
+#             val = samples[ti+1][1]
+#             while m and val <= m[-1][1]:
+#                 m.pop()
+#             m.append(samples[ti+1])
+#             if m[0][1] < prev_min:
+#                 out.append([samples[ti+1][0] - end, m[0][1]])
+#                 prev_min = m[0][1]
+#             ti = ti + 1
+#         elif t == samples[ti+1][0] - begin:
+#             m.append(samples[ti + 1])
+#             out.append([samples[ti + 1][0] - begin, m[0][1]])
+#             prev_min = m[0][1]
+#             ti = ti + 1
+#     return out
+#
+# def max_list(samples):
+#     prev = -float('inf')
+#     m = deque()
+#     for sample in reversed(samples):
+#         if sample[1] > prev:
+#             m.appendleft(sample)
+#             prev = sample[1]
+#     return m
+#
+# def min_list(samples):
+#     prev = float('inf')
+#     m = deque()
+#     for sample in reversed(samples):
+#         if sample[1] < prev:
+#             m.appendleft(sample)
+#             prev = sample[1]
+#     return m
+#
+# def restrict(samples, a, b):
+#     out = []
+#
+#     if not samples:
+#         return out, -1
+#
+#     if len(samples) == 1 and a <= samples[0][0] < b:
+#         out.append(samples[0])
+#         return out, 0
+#
+#     for i in range(len(samples) - 1):
+#         if samples[i][0] <= a and samples[i+1][0] > a:
+#             out.append([a, samples[i][1]])
+#
+#         if a <= samples[i+1][0] < b:
+#             out.append(samples[i+1])
+#
+#         if samples[i][0] < b and samples[i+1][0] >= b:
+#             out.append([b, samples[i][1]])
+#             break
+#     return out, i
 
 
 def subtraction_operation(sample_left, sample_right):
