@@ -172,9 +172,9 @@ class STLSpecificationParser(LTLSpecificationParser, StlParserVisitor):
         if out.numerator % out.denominator > 0:
             raise STLParseException('The STL operator bound must be a multiple of the sampling period')
 
-        out = int(out / self.spec.sampling_period)
+        # out = int(out / self.spec.sampling_period)
 
-        return out
+        return int(out)
 
     def visitConstantTimeLiteral(self, ctx):
         const_name = ctx.Identifier().getText()
@@ -201,9 +201,9 @@ class STLSpecificationParser(LTLSpecificationParser, StlParserVisitor):
         if out.numerator % out.denominator > 0:
             raise STLParseException('The STL operator bound must be a multiple of the sampling period')
 
-        out = int(out / self.spec.sampling_period)
+        # out = int(out / self.spec.sampling_period)
 
-        return out
+        return int(out)
 
     def visitIntervalFloatTimeLiteral(self, ctx):
         text = ctx.literal().getText()
@@ -224,9 +224,9 @@ class STLSpecificationParser(LTLSpecificationParser, StlParserVisitor):
         if out.numerator % out.denominator > 0:
             raise STLParseException('The STL operator bound must be a multiple of the sampling period')
 
-        out = int(out / self.spec.sampling_period)
+        # out = int(out / self.spec.sampling_period)
 
-        return out
+        return int(out)
 
     def visitInterval(self, ctx):
         begin = self.visit(ctx.intervalTime(0))

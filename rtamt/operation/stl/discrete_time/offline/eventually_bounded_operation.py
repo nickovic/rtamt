@@ -6,11 +6,14 @@ class EventuallyBoundedOperation(AbstractOperation):
         self.end = end
 
     def update(self, samples):
+        l = len(samples)
+        if self.begin >= l:
+            return [-float("inf")] * l
+
         diff = self.end - self.begin
-        out  = [max(samples[j:j+diff+1]) for j in range(self.begin, self.end+1)]
-        tmp  = [max(samples[j:j+diff+1]) for j in range(self.end+1,len(samples))]
-        out += tmp
-        tmp  = [-float("inf") for j in range(len(samples)-len(out))]
+
+        out = [max(samples[j:min(l, j + diff + 1)]) for j in range(self.begin, l)]
+        tmp = [-float("inf") for j in range(l - len(out))]
         out += tmp
 
         return out
