@@ -6,20 +6,20 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
 
     def __init__(self, *args, **kwargs):
         super(TestStlDenseTimeOnlineSpecification, self).__init__(*args, **kwargs)
-        self.left1 = 100
-        self.right1 = 20
+        self.left1 = 100.0
+        self.right1 = 20.0
 
-        self.left2 = -1
-        self.right2 = -2
+        self.left2 = -1.0
+        self.right2 = -2.0
 
-        self.left3 = -2
-        self.right3 = 10
+        self.left3 = -2.0
+        self.right3 = 10.0
 
-        self.left4 = 5
-        self.right4 = 4
+        self.left4 = 5.0
+        self.right4 = 4.0
 
-        self.left5 = -1
-        self.right5 = -1
+        self.left5 = -1.0
+        self.right5 = -1.0
 
     def test_constant(self):
         spec = rtamt.STLDiscreteTimeSpecification()
@@ -124,11 +124,11 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
         out4 = spec.update(3, [('req', self.left4), ('gnt', self.right4)])
         out5 = spec.update(4, [('req', self.left5), ('gnt', self.right5)])
 
-        self.assertEqual(out1, 100 / 20, "input 1")
-        self.assertEqual(out2, -1 / -2, "input 2")
-        self.assertEqual(out3, -2 / 10, "input 3")
-        self.assertEqual(out4, 5 / 4, "input 4")
-        self.assertEqual(out5, -1 / -1, "input 5")
+        self.assertEqual(out1, 100.0 / 20.0, "input 1")
+        self.assertEqual(out2, -1.0 / -2.0, "input 2")
+        self.assertEqual(out3, -2.0 / 10.0, "input 3")
+        self.assertEqual(out4, 5.0 / 4.0, "input 4")
+        self.assertEqual(out5, -1.0 / -1.0, "input 5")
 
     def test_abs(self):
         spec = rtamt.STLDiscreteTimeSpecification()

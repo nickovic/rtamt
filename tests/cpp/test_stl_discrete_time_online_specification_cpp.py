@@ -6,20 +6,20 @@ class TestStlDenseTimeOnlineSpecificationCpp(unittest.TestCase):
 
     def __init__(self, *args, **kwargs):
         super(TestStlDenseTimeOnlineSpecificationCpp, self).__init__(*args, **kwargs)
-        self.left1 = 100
-        self.right1 = 20
+        self.left1 = 100.0
+        self.right1 = 20.0
 
-        self.left2 = -1
-        self.right2 = -2
+        self.left2 = -1.0
+        self.right2 = -2.0
 
-        self.left3 = -2
-        self.right3 = 10
+        self.left3 = -2.0
+        self.right3 = 10.0
 
-        self.left4 = 5
-        self.right4 = 4
+        self.left4 = 5.0
+        self.right4 = 4.0
 
-        self.left5 = -1
-        self.right5 = -1
+        self.left5 = -1.0
+        self.right5 = -1.0
 
     def test_constant(self):
         spec = rtamt.StlDiscreteTimeOnlineSpecificationCpp()
