@@ -570,10 +570,7 @@ class TestSTLReset(unittest.TestCase):
         spec.declare_var('out', 'float')
         spec.spec = 'out = req until[0:1] gnt'
         spec.parse()
-	
-	spec.pastify()
-
-        out = spec.update(0, [['req', 1.1], ['gnt', 2.2]])
+	out = spec.update(0, [['req', 1.1], ['gnt', 2.2]])
         self.assertEqual(2.2, out, 'Precedes [0:1] reset assertion')
 
         out = spec.update(1, [['req', 2], ['gnt', -1]])
