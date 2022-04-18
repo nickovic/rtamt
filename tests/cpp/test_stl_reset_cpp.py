@@ -564,22 +564,21 @@ class TestSTLReset(unittest.TestCase):
         self.assertEqual(1.6, out, 'Since [0:1] reset assertion')
 
     def test_precedes_0_1(self):
-        spec = rtamt.StlDiscreteTimeOnlineSpecificationCpp()
-        spec.declare_var('req', 'float')
-        spec.declare_var('gnt', 'float')
-        spec.declare_var('out', 'float')
-        spec.spec = 'out = req until[0:1] gnt'
+	spec = rtamt.StlDiscreteTimeOnlineSpecificationCpp()
+	spec.declare_var('req', 'float')
+	spec.declare_var('gnt', 'float')
+	spec.declare_var('out', 'float')
+	spec.spec = 'out = req until[0:1] gnt'
 	spec.parse()
+	spec.pastify()
+	
 	out = spec.update(0, [['req', 1.1], ['gnt', 2.2]])
 	self.assertEqual(2.2, out, 'Precedes [0:1] reset assertion')
-
-        out = spec.update(1, [['req', 2], ['gnt', -1]])
-        self.assertEqual(2.2, out, 'Precedes [0:1] reset assertion')
-
-        spec.reset()
-
-        out = spec.update(0, [['req', 3.3], ['gnt', 1.6]])
-        self.assertEqual(1.6, out, 'Precedes [0:1] reset assertion')
+	
+	spec.reset()
+	
+	out = spec.update(0, [['req', 3.3], ['gnt', 1.6]])
+	self.assertEqual(1.6, out, 'Precedes [0:1] reset assertion')
 
     if __name__ == '__main__':
         unittest.main()
