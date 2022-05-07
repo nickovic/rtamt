@@ -155,6 +155,7 @@ class STLOfflineDenseTimePythonMonitor(STLASTVisitor):
         self.node_monitor_dict[node.name] = monitor
 
         self.visit(node.children[0], args)
+        self.visit(node.children[1], args)
 
     def visitOnce(self, node, args):
         monitor = OnceOperation()
