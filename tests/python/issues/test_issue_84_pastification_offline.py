@@ -107,6 +107,7 @@ class OfflineMonitors():
         print('\tRESULT: {}'.format(rob[0][1]))
 
 
+
 if __name__ == '__main__':
     monitors = OfflineMonitors()
 
