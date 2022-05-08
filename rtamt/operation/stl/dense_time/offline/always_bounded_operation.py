@@ -29,11 +29,10 @@ class AlwaysBoundedOperation(AbstractOperation):
             domain_end = input_list[len(input_list)-1][0]
 
         while i >= 0:
-            # if i < len(input_list):
-            if i > 0:
-                b = (input_list[i - 1][0] - end, input_list[i][0] - begin, input_list[i - 1][1])
+            if i == len(input_list)-1:
+                b = (input_list[i][0] - end, float("inf"), input_list[i][1])
             else:
-                b = (input_list[i][0] - end, input_list[i][0] - begin, input_list[i][1])
+                b = (input_list[i][0] - end, input_list[i+1][0] - begin, input_list[i][1])
 
             if not out:
                 out.insert(0, b)
@@ -60,8 +59,5 @@ class AlwaysBoundedOperation(AbstractOperation):
                 ans.append([0, b[2]])
             elif b[0] > 0:
                 ans.append([b[0], b[2]])
-
-            if i == len(out) - 1:
-                ans.append([b[1], b[2]])
 
         return ans
