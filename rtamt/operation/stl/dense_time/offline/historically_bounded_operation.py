@@ -32,7 +32,7 @@ class HistoricallyBoundedOperation(AbstractOperation):
             if i < len(input_list):
                 b = (input_list[i - 1][0] + begin, input_list[i][0] + end, input_list[i - 1][1])
             else:
-                b = (input_list[i-1][0] + begin, input_list[i-1][0] + end, input_list[i-1][1])
+                b = (input_list[i-1][0] + begin, float('inf'), input_list[i-1][1])
 
             if not out:
                 out.append(b)
@@ -59,15 +59,6 @@ class HistoricallyBoundedOperation(AbstractOperation):
         for i, b in enumerate(out):
             if b[2] != prev or i == len(out) - 1:
                 ans.append([b[0], b[2]])
-
-            if b[0] <= domain_end < b[1]:
-                if b[0] < domain_end:
-                    ans.append([domain_end, b[2]])
-                break
-
-            if i == len(out) - 1 and b[1] > b[0]:
-                ans.append([b[1], b[2]])
-
             prev = b[2]
 
         return ans

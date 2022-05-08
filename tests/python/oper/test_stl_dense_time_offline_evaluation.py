@@ -1203,7 +1203,7 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
         op = [[0, 4], [5, 2], [10, 5], [15, 6]]
 
         out = oper.update(op)
-        expected = [[0, 4], [5, 2], [11, 5], [15, 5]]
+        expected = [[0, 4], [5, 2], [11, 5], [16, 6]]
 
         self.assertListEqual(expected, out, "historically[0,1] offline dense time 2")
 
@@ -1236,7 +1236,7 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
         op = [[0, 4], [5, 6], [5.5, 3], [15, 6]]
 
         out = oper.update(op)
-        expected = [[0, 4], [5.5, 3], [15, 3]]
+        expected = [[0, 4], [5.5, 3], [16, 6]]
 
         self.assertListEqual(expected, out, "historically[0,1] offline dense time 5")
 
@@ -1247,7 +1247,7 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
         op = [[0, 4], [5, 2], [10, 5], [15, 3]]
 
         out = oper.update(op)
-        expected = [[0, float('inf')], [1, 4], [6, 2], [12, 5], [15, 5]]
+        expected = [[0, float('inf')], [1, 4], [6, 2], [12, 5], [16, 3]]
 
         self.assertListEqual(expected, out, "historically[1,2] offline dense time 6")
 
@@ -1258,7 +1258,7 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
         op = [[0, 4], [5, 2], [10, 5], [15, 3]]
 
         out = oper.update(op)
-        expected = [[0, float('inf')], [2, 4], [7, 2], [12, 5], [15, 5]]
+        expected = [[0, float('inf')], [2, 4], [7, 2], [12, 5], [17, 3]]
 
         self.assertListEqual(expected, out, "historically[2,2] offline dense time 7")
 
@@ -1269,7 +1269,7 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
         op = [[0, 4], [5, 6], [5.1, 10], [5.2, 11], [5.3, 12], [5.5, 7], [15, 3]]
 
         out = oper.update(op)
-        expected = [[0, float('inf')], [1, 4], [7, 6], [7.1, 7], [15, 7]]
+        expected = [[0, float('inf')], [1, 4], [7, 6], [7.1, 7], [16, 3]]
 
         self.assertListEqual(expected, out, "historically[1,2] offline dense time 8")
 
@@ -1280,7 +1280,7 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
         op = [[0, 10], [5, 6], [7, 8], [7.5, 6], [15, 8]]
 
         out = oper.update(op)
-        expected = [[0, 10], [5, 6], [15, 6]]
+        expected = [[0, 10], [5, 6], [16, 8]]
 
         self.assertListEqual(expected, out, "historically[0,1] offline dense time 9")
 
