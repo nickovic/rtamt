@@ -1305,7 +1305,7 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
         op2 = [[0, 4], [10, 4]]
 
         out = oper.update(op1, op2)
-        expected = [[0, -float('inf')], [1, 2], [10, 2]]
+        expected = [[0, -float('inf')], [1, 2], [11, 2]]
 
         self.assertListEqual(out, expected, "since[0,1]")
 
@@ -1318,7 +1318,7 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
         op2 = [[0, 4], [10, 4]]
 
         out = oper.update(op1, op2)
-        expected = [[0, 2], [10, 2]]
+        expected = [[0, 2], [9, 2]]
 
         self.assertListEqual(out, expected, "until[0,1]")
 
@@ -1330,7 +1330,7 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
         op2 = [[0, 4], [10, 4]]
 
         out = oper.update(op1, op2)
-        expected = [[0, 2], [9, 2]]
+        expected = [[0, 2], [8, 2]]
 
         self.assertListEqual(out, expected, "until[0,1]")
 
