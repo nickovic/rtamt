@@ -86,6 +86,7 @@ class TestSTLBooleanAndTemporalOffline(unittest.TestCase):
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
+        spec.set_var_io_type('out', 'output')
         spec.spec = 'out = req implies gnt'
 
         spec.parse();
