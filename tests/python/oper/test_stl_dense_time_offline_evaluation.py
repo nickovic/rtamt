@@ -1092,7 +1092,7 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
         op = [[0, 4], [5, 2], [10, 5], [15, 3]]
 
         out = oper.update(op)
-        expected = [[0, 4], [6, 2], [10, 5], [15, 5]]
+        expected = [[0, 4], [6, 2], [10, 5], [16, 3]]
 
         self.assertListEqual(expected, out, "once[0,1] offline dense time 1")
 
@@ -1147,7 +1147,7 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
         op = [[0, 4], [5, 2], [10, 5], [15, 3]]
 
         out = oper.update(op)
-        expected = [[0, -float('inf')], [1, 4], [7, 2], [11, 5], [15, 5]]
+        expected = [[0, -float('inf')], [1, 4], [7, 2], [11, 5], [17, 3]]
 
         self.assertListEqual(expected, out, "once[0,1] offline dense time 6")
 
@@ -1158,7 +1158,7 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
         op = [[0, 4], [5, 2], [10, 5], [15, 3]]
 
         out = oper.update(op)
-        expected = [[0, -float('inf')], [2, 4], [7, 2], [12, 5], [15, 5]]
+        expected = [[0, -float('inf')], [2, 4], [7, 2], [12, 5], [17, 3]]
 
         self.assertListEqual(expected, out, "once[0,1] offline dense time 7")
 
@@ -1169,7 +1169,7 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
         op = [[0, 4], [5, 6], [5.1, 3], [5.2, 2], [5.3, 1], [5.5, 5], [15, 3]]
 
         out = oper.update(op)
-        expected = [[0, -float('inf')], [1, 4], [6, 6], [7.1, 5], [15, 5]]
+        expected = [[0, -float('inf')], [1, 4], [6, 6], [7.1, 5], [17, 3]]
 
         self.assertListEqual(expected, out, "once[0,1] offline dense time 8")
 
@@ -1180,7 +1180,7 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
         op = [[0, 4], [5, 6], [7, 3], [7.5, 6], [15, 3]]
 
         out = oper.update(op)
-        expected = [[0, 4], [5, 6], [15, 6]]
+        expected = [[0, 4], [5, 6], [16, 3]]
 
         self.assertListEqual(expected, out, "once[0,1] offline dense time 9")
 
