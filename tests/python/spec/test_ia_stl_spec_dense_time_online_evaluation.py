@@ -24,6 +24,8 @@ class TestIASTLSpecDenseTimeOnlineEvaluation(unittest.TestCase):
         out = spec.update(['req', left], ['gnt', right])
         expected = [[0, 20], [1, float("inf")]]
 
+        spec.get_value('out')
+
         self.assertEqual(out, expected, "output robustness")
 
     def test_input_vacuity(self):
