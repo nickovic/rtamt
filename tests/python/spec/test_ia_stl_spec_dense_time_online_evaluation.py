@@ -13,6 +13,7 @@ class TestIASTLSpecDenseTimeOnlineEvaluation(unittest.TestCase):
         spec.declare_var('out', 'float')
         spec.set_var_io_type('req', 'input')
         spec.set_var_io_type('gnt', 'output')
+        spec.set_var_io_type('out', 'output')
         spec.spec = 'out = (req >= 3) implies (gnt >= 0)'
 
         spec.parse();
