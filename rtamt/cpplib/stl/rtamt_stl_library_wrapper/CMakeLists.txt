@@ -50,6 +50,9 @@ add_library(stl_subtraction_node MODULE src/stl_subtraction_node_wrapper.cpp)
 add_library(stl_multiplication_node MODULE src/stl_multiplication_node_wrapper.cpp)
 add_library(stl_division_node MODULE src/stl_division_node_wrapper.cpp)
 add_library(stl_abs_node MODULE src/stl_abs_node_wrapper.cpp)
+add_library(stl_exp_node MODULE src/stl_exp_node_wrapper.cpp)
+add_library(stl_pow_node MODULE src/stl_pow_node_wrapper.cpp)
+add_library(stl_sqrt_node MODULE src/stl_sqrt_node_wrapper.cpp)
 add_library(stl_rise_node MODULE src/stl_rise_node_wrapper.cpp)
 add_library(stl_fall_node MODULE src/stl_fall_node_wrapper.cpp)
 add_library(stl_constant_node MODULE src/stl_constant_node_wrapper.cpp)
@@ -84,6 +87,9 @@ target_include_directories(stl_subtraction_node PUBLIC ${INCLUDE_DIRECTORIES_FOR
 target_include_directories(stl_multiplication_node PUBLIC ${INCLUDE_DIRECTORIES_FOR_STL_WRAPPER})
 target_include_directories(stl_division_node PUBLIC ${INCLUDE_DIRECTORIES_FOR_STL_WRAPPER})
 target_include_directories(stl_abs_node PUBLIC ${INCLUDE_DIRECTORIES_FOR_STL_WRAPPER})
+target_include_directories(stl_exp_node PUBLIC ${INCLUDE_DIRECTORIES_FOR_STL_WRAPPER})
+target_include_directories(stl_pow_node PUBLIC ${INCLUDE_DIRECTORIES_FOR_STL_WRAPPER})
+target_include_directories(stl_sqrt_node PUBLIC ${INCLUDE_DIRECTORIES_FOR_STL_WRAPPER})
 target_include_directories(stl_rise_node PUBLIC ${INCLUDE_DIRECTORIES_FOR_STL_WRAPPER})
 target_include_directories(stl_fall_node PUBLIC ${INCLUDE_DIRECTORIES_FOR_STL_WRAPPER})
 target_include_directories(stl_constant_node PUBLIC ${INCLUDE_DIRECTORIES_FOR_STL_WRAPPER})
@@ -115,6 +121,9 @@ target_link_libraries(stl_subtraction_node ${LINK_LIBS_FOR_STL_WRAPPER})
 target_link_libraries(stl_multiplication_node ${LINK_LIBS_FOR_STL_WRAPPER})
 target_link_libraries(stl_division_node ${LINK_LIBS_FOR_STL_WRAPPER})
 target_link_libraries(stl_abs_node ${LINK_LIBS_FOR_STL_WRAPPER})
+target_link_libraries(stl_exp_node ${LINK_LIBS_FOR_STL_WRAPPER})
+target_link_libraries(stl_pow_node ${LINK_LIBS_FOR_STL_WRAPPER})
+target_link_libraries(stl_sqrt_node ${LINK_LIBS_FOR_STL_WRAPPER})
 target_link_libraries(stl_rise_node ${LINK_LIBS_FOR_STL_WRAPPER})
 target_link_libraries(stl_fall_node ${LINK_LIBS_FOR_STL_WRAPPER})
 target_link_libraries(stl_constant_node ${LINK_LIBS_FOR_STL_WRAPPER})
@@ -196,6 +205,15 @@ set_target_properties(stl_division_node PROPERTIES
 	PREFIX ""
 	LIBRARY_OUTPUT_DIRECTORY ${LIB_OUT_DIR_FOR_STL_WRAPPER})
 set_target_properties(stl_abs_node PROPERTIES
+	PREFIX ""
+	LIBRARY_OUTPUT_DIRECTORY ${LIB_OUT_DIR_FOR_STL_WRAPPER})
+set_target_properties(stl_pow_node PROPERTIES
+	PREFIX ""
+	LIBRARY_OUTPUT_DIRECTORY ${LIB_OUT_DIR_FOR_STL_WRAPPER})
+set_target_properties(stl_exp_node PROPERTIES
+	PREFIX ""
+	LIBRARY_OUTPUT_DIRECTORY ${LIB_OUT_DIR_FOR_STL_WRAPPER})
+set_target_properties(stl_sqrt_node PROPERTIES
 	PREFIX ""
 	LIBRARY_OUTPUT_DIRECTORY ${LIB_OUT_DIR_FOR_STL_WRAPPER})
 set_target_properties(stl_rise_node PROPERTIES
