@@ -13,7 +13,6 @@ from rtamt.operation.iastl.discrete_time.offline.interpreter import IAStlOutputR
 from rtamt.enumerations.options import *
 from rtamt.pastifier.stl.pastifier import StlPastifier
 
-
 def STLDiscreteTimeSpecification(semantics=Semantics.STANDARD, language=Language.PYTHON):
     """
     A class used as a container for STL continuous time specifications
@@ -85,3 +84,4 @@ def StlDiscreteTimeOnlineSpecificationCpp():
     from rtamt.operation.stl.discrete_time.online.cpp.interpreter import StlDiscreteTimeOnlineInterpreterCpp
     spec = AbstractOnlineSpecification(StlAst(), StlDiscreteTimeOnlineInterpreterCpp(), pastifier=StlPastifier())
     return spec
+

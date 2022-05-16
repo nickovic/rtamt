@@ -86,6 +86,7 @@ class TestStlDenseTimeOfflineSpecification(unittest.TestCase):
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
+        spec.set_var_io_type('out', 'output')
         spec.spec = 'out = req implies gnt'
 
         spec.parse()
@@ -202,7 +203,7 @@ class TestStlDenseTimeOfflineSpecification(unittest.TestCase):
 
         op = [[0, 4], [5, 2], [10, 5], [15, 3]]
 
-        expected = [[0, 4], [6, 2], [10, 5], [15, 5]]
+        expected = [[0, 4], [6, 2], [10, 5], [16, 3]]
         computed = spec.evaluate(['req', op])
 
         self.assertListEqual(expected, computed, "once[0,1]")
@@ -232,7 +233,7 @@ class TestStlDenseTimeOfflineSpecification(unittest.TestCase):
 
         op = [[0, 4], [5, 2], [10, 5], [15, 3]]
 
-        expected = [[0, 4], [4, 2], [10, 5], [15, 5]]
+        expected = [[0, 4], [4, 2], [10, 5], [14, 3]]
         computed = spec.evaluate(['req', op])
 
         self.assertListEqual(expected, computed, "alw[0,1]")
@@ -247,7 +248,7 @@ class TestStlDenseTimeOfflineSpecification(unittest.TestCase):
 
         op = [[0, 4], [5, 2], [10, 5], [15, 3]]
 
-        expected = [[0, 4], [5, 2], [9, 5], [15, 5]]
+        expected = [[0, 4], [5, 2], [9, 5], [15, 3]]
         computed = spec.evaluate(['req', op])
 
         self.assertListEqual(expected, computed, "ev[0,1]")
@@ -324,7 +325,7 @@ class TestStlDenseTimeOfflineSpecification(unittest.TestCase):
         right = [[0, 4], [10, 4]]
 
         out = spec.evaluate(['req', left], ['gnt', right])
-        expected = [[0, 2], [10, 2]]
+        expected = [[0, 2], [9, 2]]
         self.assertListEqual(out, expected, "until[0:1]")
 
 

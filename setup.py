@@ -9,7 +9,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='rtamt',
-    version='0.2.8',
+    version='0.2.10',
     description='Library for specification-based online monitoring.',
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -19,8 +19,8 @@ setup(
     license='BSD',
     python_requires='>=2.7',
     install_requires=[
-        'antlr4-python2-runtime>=4.5, <4.6; python_version<"3"',
-        'antlr4-python3-runtime>=4.5, <4.6; python_version>="3"',
+        'antlr4-python2-runtime>=4.7, <4.8; python_version<"3"',
+        'antlr4-python3-runtime>=4.7, <4.8; python_version>="3"',
         'enum34; python_version<"3.4"'
     ],
     package_data={'': ['*.so']},

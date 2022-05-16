@@ -268,6 +268,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
+        spec.set_var_topic('req', 'rtamt/req')
         spec.spec = 'out = req iff gnt'
 
         spec.parse()

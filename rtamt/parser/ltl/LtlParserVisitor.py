@@ -1,4 +1,4 @@
-# Generated from LtlParser.g4 by ANTLR 4.5.1
+# Generated from LtlParser.g4 by ANTLR 4.7.2
 from antlr4 import *
 
 # This class defines a complete generic visitor for a parse tree produced by LtlParser.

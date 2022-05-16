@@ -1,13 +1,14 @@
-# Generated from StlLexer.g4 by ANTLR 4.5.1
+# Generated from StlLexer.g4 by ANTLR 4.7.2
 # encoding: utf-8
 from __future__ import print_function
 from antlr4 import *
 from io import StringIO
+import sys
 
 
 def serializedATN():
     with StringIO() as buf:
-        buf.write(u"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\2")
+        buf.write(u"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\2")
         buf.write(u"K\u02d4\b\1\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4")
         buf.write(u"\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f\t\f\4\r")
         buf.write(u"\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22")
@@ -77,29 +78,29 @@ def serializedATN():
         buf.write(u"\2\u00bf\2\u00c1H\u00c3I\u00c5J\u00c7K\3\2\r\3\2\63;")
         buf.write(u"\4\2ZZzz\5\2\62;CHch\4\2DDdd\3\2\62\63\4\2GGgg\4\2--")
         buf.write(u"//\4\2C\\c|\3\2\f\f\5\2\13\13\16\17\"\"\4\2\f\f\17\17")
-        buf.write(u"\u02ec\2\3\3\2\2\2\2\5\3\2\2\2\2\7\3\2\2\2\2\t\3\2\2")
-        buf.write(u"\2\2\13\3\2\2\2\2\r\3\2\2\2\2\17\3\2\2\2\2\21\3\2\2\2")
-        buf.write(u"\2\23\3\2\2\2\2\25\3\2\2\2\2\27\3\2\2\2\2\31\3\2\2\2")
-        buf.write(u"\2\33\3\2\2\2\2\35\3\2\2\2\2\37\3\2\2\2\2!\3\2\2\2\2")
-        buf.write(u"#\3\2\2\2\2%\3\2\2\2\2\'\3\2\2\2\2)\3\2\2\2\2+\3\2\2")
-        buf.write(u"\2\2-\3\2\2\2\2/\3\2\2\2\2\61\3\2\2\2\2\63\3\2\2\2\2")
-        buf.write(u"\65\3\2\2\2\2\67\3\2\2\2\29\3\2\2\2\2;\3\2\2\2\2=\3\2")
-        buf.write(u"\2\2\2?\3\2\2\2\2A\3\2\2\2\2C\3\2\2\2\2E\3\2\2\2\2G\3")
-        buf.write(u"\2\2\2\2I\3\2\2\2\2K\3\2\2\2\2M\3\2\2\2\2O\3\2\2\2\2")
-        buf.write(u"Q\3\2\2\2\2S\3\2\2\2\2U\3\2\2\2\2W\3\2\2\2\2Y\3\2\2\2")
-        buf.write(u"\2[\3\2\2\2\2]\3\2\2\2\2_\3\2\2\2\2a\3\2\2\2\2c\3\2\2")
-        buf.write(u"\2\2e\3\2\2\2\2g\3\2\2\2\2i\3\2\2\2\2k\3\2\2\2\2m\3\2")
-        buf.write(u"\2\2\2o\3\2\2\2\2q\3\2\2\2\2s\3\2\2\2\2u\3\2\2\2\2w\3")
-        buf.write(u"\2\2\2\2y\3\2\2\2\2{\3\2\2\2\2}\3\2\2\2\2\177\3\2\2\2")
-        buf.write(u"\2\u0081\3\2\2\2\2\u0083\3\2\2\2\2\u0085\3\2\2\2\2\u0087")
-        buf.write(u"\3\2\2\2\2\u00ab\3\2\2\2\2\u00b7\3\2\2\2\2\u00c1\3\2")
-        buf.write(u"\2\2\2\u00c3\3\2\2\2\2\u00c5\3\2\2\2\2\u00c7\3\2\2\2")
-        buf.write(u"\3\u00c9\3\2\2\2\5\u00cb\3\2\2\2\7\u00cd\3\2\2\2\t\u00cf")
-        buf.write(u"\3\2\2\2\13\u00d1\3\2\2\2\r\u00d3\3\2\2\2\17\u00d5\3")
-        buf.write(u"\2\2\2\21\u00d7\3\2\2\2\23\u00d9\3\2\2\2\25\u00db\3\2")
-        buf.write(u"\2\2\27\u00dd\3\2\2\2\31\u00df\3\2\2\2\33\u00e1\3\2\2")
-        buf.write(u"\2\35\u00e3\3\2\2\2\37\u00e5\3\2\2\2!\u00e7\3\2\2\2#")
-        buf.write(u"\u00eb\3\2\2\2%\u00f0\3\2\2\2\'\u00f4\3\2\2\2)\u00f8")
+        buf.write(u"\2\u02ec\2\3\3\2\2\2\2\5\3\2\2\2\2\7\3\2\2\2\2\t\3\2")
+        buf.write(u"\2\2\2\13\3\2\2\2\2\r\3\2\2\2\2\17\3\2\2\2\2\21\3\2\2")
+        buf.write(u"\2\2\23\3\2\2\2\2\25\3\2\2\2\2\27\3\2\2\2\2\31\3\2\2")
+        buf.write(u"\2\2\33\3\2\2\2\2\35\3\2\2\2\2\37\3\2\2\2\2!\3\2\2\2")
+        buf.write(u"\2#\3\2\2\2\2%\3\2\2\2\2\'\3\2\2\2\2)\3\2\2\2\2+\3\2")
+        buf.write(u"\2\2\2-\3\2\2\2\2/\3\2\2\2\2\61\3\2\2\2\2\63\3\2\2\2")
+        buf.write(u"\2\65\3\2\2\2\2\67\3\2\2\2\29\3\2\2\2\2;\3\2\2\2\2=\3")
+        buf.write(u"\2\2\2\2?\3\2\2\2\2A\3\2\2\2\2C\3\2\2\2\2E\3\2\2\2\2")
+        buf.write(u"G\3\2\2\2\2I\3\2\2\2\2K\3\2\2\2\2M\3\2\2\2\2O\3\2\2\2")
+        buf.write(u"\2Q\3\2\2\2\2S\3\2\2\2\2U\3\2\2\2\2W\3\2\2\2\2Y\3\2\2")
+        buf.write(u"\2\2[\3\2\2\2\2]\3\2\2\2\2_\3\2\2\2\2a\3\2\2\2\2c\3\2")
+        buf.write(u"\2\2\2e\3\2\2\2\2g\3\2\2\2\2i\3\2\2\2\2k\3\2\2\2\2m\3")
+        buf.write(u"\2\2\2\2o\3\2\2\2\2q\3\2\2\2\2s\3\2\2\2\2u\3\2\2\2\2")
+        buf.write(u"w\3\2\2\2\2y\3\2\2\2\2{\3\2\2\2\2}\3\2\2\2\2\177\3\2")
+        buf.write(u"\2\2\2\u0081\3\2\2\2\2\u0083\3\2\2\2\2\u0085\3\2\2\2")
+        buf.write(u"\2\u0087\3\2\2\2\2\u00ab\3\2\2\2\2\u00b7\3\2\2\2\2\u00c1")
+        buf.write(u"\3\2\2\2\2\u00c3\3\2\2\2\2\u00c5\3\2\2\2\2\u00c7\3\2")
+        buf.write(u"\2\2\3\u00c9\3\2\2\2\5\u00cb\3\2\2\2\7\u00cd\3\2\2\2")
+        buf.write(u"\t\u00cf\3\2\2\2\13\u00d1\3\2\2\2\r\u00d3\3\2\2\2\17")
+        buf.write(u"\u00d5\3\2\2\2\21\u00d7\3\2\2\2\23\u00d9\3\2\2\2\25\u00db")
+        buf.write(u"\3\2\2\2\27\u00dd\3\2\2\2\31\u00df\3\2\2\2\33\u00e1\3")
+        buf.write(u"\2\2\2\35\u00e3\3\2\2\2\37\u00e5\3\2\2\2!\u00e7\3\2\2")
+        buf.write(u"\2#\u00eb\3\2\2\2%\u00f0\3\2\2\2\'\u00f4\3\2\2\2)\u00f8")
         buf.write(u"\3\2\2\2+\u00fa\3\2\2\2-\u00fd\3\2\2\2/\u0100\3\2\2\2")
         buf.write(u"\61\u0103\3\2\2\2\63\u0106\3\2\2\2\65\u010c\3\2\2\2\67")
         buf.write(u"\u0113\3\2\2\29\u0119\3\2\2\2;\u0120\3\2\2\2=\u0129\3")
@@ -345,7 +346,6 @@ class StlLexer(Lexer):
 
     decisionsToDFA = [ DFA(ds, i) for i, ds in enumerate(atn.decisionToState) ]
 
-
     MINUS = 1
     PLUS = 2
     TIMES = 3
@@ -420,6 +420,8 @@ class StlLexer(Lexer):
     COMMENT = 72
     LINE_COMMENT = 73
 
+    channelNames = [ u"DEFAULT_TOKEN_CHANNEL", u"HIDDEN" ]
+
     modeNames = [ u"DEFAULT_MODE" ]
 
     literalNames = [ u"<INVALID>",
@@ -478,9 +480,9 @@ class StlLexer(Lexer):
 
     grammarFileName = u"StlLexer.g4"
 
-    def __init__(self, input=None):
-        super(StlLexer, self).__init__(input)
-        self.checkVersion("4.5.1")
+    def __init__(self, input=None, output=sys.stdout):
+        super(StlLexer, self).__init__(input, output=output)
+        self.checkVersion("4.7.2")
         self._interp = LexerATNSimulator(self, self.atn, self.decisionsToDFA, PredictionContextCache())
         self._actions = None
         self._predicates = None
