@@ -4,7 +4,6 @@ from rtamt.ast.parser.stl.specification_parser import StlAst
 from rtamt.operation.stl.dense_time.online.and_operation import AndOperation
 from rtamt.operation.stl.dense_time.online.interpreter import StlDenseTimeOnlineInterpreter
 from rtamt.operation.stl.dense_time.online.not_operation import NotOperation
-from rtamt.operation.stl.dense_time.online.or_operation import OrOperation
 from rtamt.operation.stl.dense_time.online.implies_operation import ImpliesOperation
 from rtamt.operation.stl.dense_time.online.iff_operation import IffOperation
 from rtamt.operation.stl.dense_time.online.xor_operation import XorOperation
