@@ -1,4 +1,4 @@
-from rtamt.ast.visitor.ltl.ast_visitor import LtlAstVisitor
+from rtamt.syntax.ast.visitor.ltl.ast_visitor import LtlAstVisitor
 
 from rtamt.node.ltl.predicate import Predicate
 from rtamt.node.ltl.variable import Variable

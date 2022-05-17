@@ -1,4 +1,4 @@
-from rtamt.ast.visitor.ltl.ast_visitor import LtlAstVisitor
+from rtamt.syntax.ast.visitor.ltl.ast_visitor import LtlAstVisitor
 
 from rtamt.exception.ltl.exception import LTLPastifyException
 

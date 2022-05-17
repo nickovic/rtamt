@@ -4,7 +4,7 @@ from collections import deque
 
 import rtamt.operation.stl.dense_time.offline.intersection as intersect
 
-from rtamt.ast.visitor.stl.ast_visitor import StlAstVisitor
+from rtamt.syntax.ast.visitor.stl.ast_visitor import StlAstVisitor
 from rtamt.enumerations.comp_oper import StlComparisonOperator
 
 from rtamt.exception.stl.exception import STLNotImplementedException

@@ -1,6 +1,6 @@
 import unittest
 
-from rtamt.ast.parser.stl.specification_parser import StlAst
+from rtamt.syntax.ast.parser.stl.specification_parser import StlAst
 from rtamt.operation.stl.dense_time.online.and_operation import AndOperation
 from rtamt.operation.stl.dense_time.online.interpreter import StlDenseTimeOnlineInterpreter
 from rtamt.operation.stl.dense_time.online.not_operation import NotOperation

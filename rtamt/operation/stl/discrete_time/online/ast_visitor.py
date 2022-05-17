@@ -1,4 +1,4 @@
-from rtamt.ast.visitor.stl.ast_visitor import StlAstVisitor
+from rtamt.syntax.ast.visitor.stl.ast_visitor import StlAstVisitor
 
 from rtamt.operation.arithmetic.discrete_time.online.addition_operation import AdditionOperation
 from rtamt.operation.arithmetic.discrete_time.online.multiplication_operation import MultiplicationOperation

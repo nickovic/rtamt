@@ -1,7 +1,7 @@
 from rtamt.exception.stl.exception import STLVisitorException
 from rtamt.node.stl.timed_precedes import TimedPrecedes
 
-from rtamt.ast.visitor.ltl.ast_visitor import LtlAstVisitor
+from rtamt.syntax.ast.visitor.ltl.ast_visitor import LtlAstVisitor
 
 #from rtamt.node.stl.timed_precedes import TimedPrecedes
 from rtamt.node.stl.timed_since import TimedSince

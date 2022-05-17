@@ -2,7 +2,7 @@ import logging
 import importlib
 
 from rtamt.spec.abstract_specification import AbstractSpecification
-from rtamt.ast.parser.ltl.specification_parser import LtlAstParserVisitor
+from rtamt.syntax.ast.parser.ltl.specification_parser import LtlAstParserVisitor
 
 from rtamt.exception.stl.exception import STLParseException
 

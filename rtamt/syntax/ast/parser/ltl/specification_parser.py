@@ -3,8 +3,8 @@
 from rtamt.parser.ltl.LtlLexer import LtlLexer
 from rtamt.parser.ltl.LtlParser import LtlParser
 from rtamt.parser.ltl.error.parser_error_listener import LTLParserErrorListener
-from rtamt.ast.parser.ltl.parser_visitor import LtlAstParserVisitor
-from rtamt.ast.parser.abstract_ast_parser import ast_factory
+from rtamt.syntax.ast.parser.ltl.parser_visitor import LtlAstParserVisitor
+from rtamt.syntax.ast.parser.abstract_ast_parser import ast_factory
 
 
 def LtlAst():

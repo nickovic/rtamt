@@ -4,7 +4,7 @@ import operator
 from rtamt.node.ltl.variable import Variable
 from rtamt.node.ltl.constant import Constant
 
-from rtamt.ast.visitor.abstract_ast_visitor import AbstractAstVisitor
+from rtamt.syntax.ast.visitor.abstract_ast_visitor import AbstractAstVisitor
 from rtamt.operation.abstract_online_interpreter import AbstractOnlineInterpreter, AbstractOnlineUpdateVisitor
 from rtamt.operation.dense_time_interpreter import DenseTimeInterpreter
 

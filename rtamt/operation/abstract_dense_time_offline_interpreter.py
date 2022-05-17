@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from rtamt.ast.visitor.abstract_ast_visitor import AbstractAstVisitor
+from rtamt.syntax.ast.visitor.abstract_ast_visitor import AbstractAstVisitor
 from rtamt.operation.abstract_offline_interpreter import AbstractOfflineInterpreter
 from rtamt.operation.dense_time_interpreter import DenseTimeInterpreter
 

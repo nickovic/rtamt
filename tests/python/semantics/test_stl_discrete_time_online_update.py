@@ -1,7 +1,7 @@
 import unittest
 import math
 
-from rtamt.ast.parser.stl.specification_parser import StlAst
+from rtamt.syntax.ast.parser.stl.specification_parser import StlAst
 from rtamt.operation.stl.discrete_time.online.constant_operation import ConstantOperation
 from rtamt.operation.stl.discrete_time.online.and_operation import AndOperation
 from rtamt.operation.stl.discrete_time.online.interpreter import StlDiscreteTimeOnlineInterpreter

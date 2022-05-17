@@ -1,7 +1,7 @@
 import operator
 from fractions import Fraction
 
-from rtamt.ast.visitor.abstract_ast_visitor import AbstractAstVisitor
+from rtamt.syntax.ast.visitor.abstract_ast_visitor import AbstractAstVisitor
 from rtamt.operation.abstract_online_interpreter import AbstractOnlineInterpreter, AbstractOnlineUpdateVisitor, AbstractOnlineResetVisitor
 from rtamt.operation.discrete_time_interpreter import DiscreteTimeInterpreter
 

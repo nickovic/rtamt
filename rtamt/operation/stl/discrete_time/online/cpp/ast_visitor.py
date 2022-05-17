@@ -1,4 +1,4 @@
-from rtamt.ast.visitor.stl.ast_visitor import StlAstVisitor
+from rtamt.syntax.ast.visitor.stl.ast_visitor import StlAstVisitor
 
 from rtamt.enumerations.comp_op import StlComparisonOperator as CompOp
 from rtamt.lib.rtamt_stl_library_wrapper.stl_combinatorial_binary_node import CombinatorialBinaryOperation

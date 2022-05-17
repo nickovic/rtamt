@@ -2,7 +2,7 @@ from decimal import Decimal
 from fractions import Fraction
 
 from rtamt.parser.stl.StlParserVisitor import StlParserVisitor
-from rtamt.ast.parser.ltl.parser_visitor import LtlAstParserVisitor
+from rtamt.syntax.ast.parser.ltl.parser_visitor import LtlAstParserVisitor
 from rtamt.interval.interval import Interval
 
 from rtamt.node.ltl.disjunction import Disjunction

@@ -7,7 +7,7 @@ from rtamt.operation.iastl.dense_time.online.interpreter import IAStlOutputRobus
 from rtamt.pastifier.stl.pastifier import StlPastifier
 from rtamt.spec.abstract_specification import AbstractOfflineSpecification, AbstractOnlineSpecification, AbstractOfflineOnlineSpecification
 
-from rtamt.ast.parser.stl.specification_parser import StlAst
+from rtamt.syntax.ast.parser.stl.specification_parser import StlAst
 
 from rtamt.operation.stl.dense_time.offline.interpreter import StlDenseTimeOfflineInterpreter
 from rtamt.operation.stl.dense_time.online.interpreter import StlDenseTimeOnlineInterpreter
