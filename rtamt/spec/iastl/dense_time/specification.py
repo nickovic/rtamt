@@ -3,8 +3,8 @@ from rtamt.spec.abstract_specification import AbstractOfflineSpecification, Abst
 
 from rtamt.syntax.ast.parser.stl.specification_parser import StlAst
 
-from rtamt.operation.stl.dense_time.offline.interpreter import StlDenseTimeOfflineInterpreter
-from rtamt.operation.stl.dense_time.online.interpreter import StlDenseTimeOnlineInterpreter
+from rtamt.semantics.stl.dense_time.offline.interpreter import StlDenseTimeOfflineInterpreter
+from rtamt.semantics.stl.dense_time.online.interpreter import StlDenseTimeOnlineInterpreter
 
 from rtamt.enumerations.options import *
 

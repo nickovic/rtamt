@@ -1,7 +1,7 @@
-from rtamt.operation.iastl.dense_time.offline.interpreter import IAStlOutputRobustnessDenseTimeOfflineInterpreter, \
+from rtamt.semantics.iastl.dense_time.offline.interpreter import IAStlOutputRobustnessDenseTimeOfflineInterpreter, \
     IAStlInputRobustnessDenseTimeOfflineInterpreter, IAStlInputVacuityDenseTimeOfflineInterpreter, \
     IAStlOutputVacuityDenseTimeOfflineInterpreter
-from rtamt.operation.iastl.dense_time.online.interpreter import IAStlOutputRobustnessDenseTimeOnlineInterpreter, \
+from rtamt.semantics.iastl.dense_time.online.interpreter import IAStlOutputRobustnessDenseTimeOnlineInterpreter, \
     IAStlInputRobustnessDenseTimeOnlineInterpreter, IAStlOutputVacuityDenseTimeOnlineInterpreter, \
     IAStlInputVacuityDenseTimeOnlineInterpreter
 from rtamt.pastifier.stl.pastifier import StlPastifier
@@ -9,8 +9,8 @@ from rtamt.spec.abstract_specification import AbstractOfflineSpecification, Abst
 
 from rtamt.syntax.ast.parser.stl.specification_parser import StlAst
 
-from rtamt.operation.stl.dense_time.offline.interpreter import StlDenseTimeOfflineInterpreter
-from rtamt.operation.stl.dense_time.online.interpreter import StlDenseTimeOnlineInterpreter
+from rtamt.semantics.stl.dense_time.offline.interpreter import StlDenseTimeOfflineInterpreter
+from rtamt.semantics.stl.dense_time.online.interpreter import StlDenseTimeOnlineInterpreter
 
 from rtamt.enumerations.options import *
 

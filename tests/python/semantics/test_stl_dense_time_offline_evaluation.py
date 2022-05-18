@@ -3,7 +3,7 @@ import math
 
 from rtamt.syntax.ast.parser.stl.specification_parser import StlAst
 from rtamt.enumerations.comp_op import StlComparisonOperator
-from rtamt.operation.stl.dense_time.offline.interpreter import StlDenseTimeOfflineInterpreter
+from rtamt.semantics.stl.dense_time.offline.interpreter import StlDenseTimeOfflineInterpreter
 
 
 class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):

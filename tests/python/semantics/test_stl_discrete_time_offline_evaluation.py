@@ -3,7 +3,7 @@ import math
 
 from rtamt.syntax.ast.parser.stl.specification_parser import StlAst
 from rtamt.enumerations.comp_op import StlComparisonOperator
-from rtamt.operation.stl.discrete_time.offline.interpreter import StlDiscreteTimeOfflineInterpreter
+from rtamt.semantics.stl.discrete_time.offline.interpreter import StlDiscreteTimeOfflineInterpreter
 
 
 class TestSTLEvaluation(unittest.TestCase):

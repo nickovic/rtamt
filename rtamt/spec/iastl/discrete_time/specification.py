@@ -1,10 +1,10 @@
-from rtamt.operation.stl.discrete_time.online.interpreter import StlDiscreteTimeOnlineInterpreter
+from rtamt.semantics.stl.discrete_time.online.interpreter import StlDiscreteTimeOnlineInterpreter
 from rtamt.spec.abstract_specification import AbstractOfflineSpecification, AbstractOnlineSpecification, AbstractOfflineOnlineSpecification
 
 from rtamt.syntax.ast.parser.stl.specification_parser import StlAst
 
-from rtamt.operation.stl.discrete_time.offline.interpreter import StlDiscreteTimeOfflineInterpreter
-from rtamt.operation.iastl.discrete_time.online.interpreter import IAStlDiscreteTimeOnlineInterpreter
+from rtamt.semantics.stl.discrete_time.offline.interpreter import StlDiscreteTimeOfflineInterpreter
+from rtamt.semantics.iastl.discrete_time.online.interpreter import IAStlDiscreteTimeOnlineInterpreter
 from rtamt.enumerations.options import *
 from rtamt.pastifier.stl.pastifier import StlPastifier
 
