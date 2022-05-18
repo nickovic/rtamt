@@ -1,7 +1,7 @@
 from decimal import Decimal
 from fractions import Fraction
 
-from rtamt.parser.stl.StlParserVisitor import StlParserVisitor
+from rtamt.antlr.parser.stl.StlParserVisitor import StlParserVisitor
 from rtamt.syntax.ast.parser.ltl.parser_visitor import LtlAstParserVisitor
 from rtamt.interval.interval import Interval
 

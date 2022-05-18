@@ -4,7 +4,7 @@ import operator
 
 from antlr4 import *
 
-from rtamt.parser.ltl.LtlParserVisitor import LtlParserVisitor
+from rtamt.antlr.parser.ltl.LtlParserVisitor import LtlParserVisitor
 
 from rtamt.syntax.node.ltl.variable import Variable
 from rtamt.syntax.node.ltl.predicate import Predicate
