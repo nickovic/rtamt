@@ -3,7 +3,7 @@ from fractions import Fraction
 
 from rtamt.antlr.parser.stl.StlParserVisitor import StlParserVisitor
 from rtamt.syntax.ast.parser.ltl.parser_visitor import LtlAstParserVisitor
-from rtamt.interval.interval import Interval
+from rtamt.semantics.interval.interval import Interval
 
 from rtamt.syntax.node.ltl.disjunction import Disjunction
 from rtamt.syntax.node.ltl.always import Always

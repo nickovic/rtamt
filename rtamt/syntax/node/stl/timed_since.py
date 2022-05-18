@@ -1,4 +1,4 @@
-from rtamt.interval.interval import Interval
+from rtamt.semantics.interval.interval import Interval
 from rtamt.syntax.node.binary_node import BinaryNode
 
 class TimedSince(BinaryNode, Interval):

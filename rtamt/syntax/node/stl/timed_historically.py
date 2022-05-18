@@ -1,4 +1,4 @@
-from rtamt.interval.interval import Interval
+from rtamt.semantics.interval.interval import Interval
 from rtamt.syntax.node.unary_node import UnaryNode
 
 

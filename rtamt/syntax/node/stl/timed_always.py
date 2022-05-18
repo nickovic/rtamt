@@ -4,7 +4,7 @@ Created on Sun Jul 21 22:24:09 2019
 
 @author: NickovicD
 """
-from rtamt.interval.interval import Interval
+from rtamt.semantics.interval.interval import Interval
 from rtamt.syntax.node.unary_node import UnaryNode
 
 

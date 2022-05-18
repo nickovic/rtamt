@@ -1,5 +1,5 @@
 from rtamt.syntax.ast.visitor.stl.ast_visitor import StlAstVisitor
-from rtamt.interval.interval import Interval
+from rtamt.semantics.interval.interval import Interval
 from rtamt.pastifier.ltl.pastifier import LtlPastifier
 
 from rtamt.syntax.node.ltl.variable import Variable
