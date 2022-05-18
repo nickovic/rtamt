@@ -1,8 +1,8 @@
 from abc import ABCMeta
 
-from rtamt.node.binary_node import BinaryNode
-from rtamt.node.unary_node import UnaryNode
-from rtamt.node.leaf_node import LeafNode
+from rtamt.syntax.node.binary_node import BinaryNode
+from rtamt.syntax.node.unary_node import UnaryNode
+from rtamt.syntax.node.leaf_node import LeafNode
 
 from rtamt.exception.exception import AstVisitorException
 

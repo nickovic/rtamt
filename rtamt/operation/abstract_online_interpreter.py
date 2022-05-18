@@ -1,7 +1,7 @@
 from abc import abstractmethod
 
-from rtamt.node.ltl.variable import Variable
-from rtamt.node.ltl.constant import Constant
+from rtamt.syntax.node.ltl.variable import Variable
+from rtamt.syntax.node.ltl.constant import Constant
 
 from rtamt.syntax.ast.visitor.abstract_ast_visitor import AbstractAstVisitor
 from rtamt.operation.abstract_interpreter import AbstractInterpreter

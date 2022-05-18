@@ -5,19 +5,19 @@ from rtamt.parser.stl.StlParserVisitor import StlParserVisitor
 from rtamt.syntax.ast.parser.ltl.parser_visitor import LtlAstParserVisitor
 from rtamt.interval.interval import Interval
 
-from rtamt.node.ltl.disjunction import Disjunction
-from rtamt.node.ltl.always import Always
-from rtamt.node.ltl.eventually import Eventually
-from rtamt.node.ltl.once import Once
-from rtamt.node.ltl.historically import Historically
-from rtamt.node.ltl.since import Since
-from rtamt.node.ltl.until import Until
-from rtamt.node.stl.timed_always import TimedAlways
-from rtamt.node.stl.timed_eventually import TimedEventually
-from rtamt.node.stl.timed_historically import TimedHistorically
-from rtamt.node.stl.timed_once import TimedOnce
-from rtamt.node.stl.timed_since import TimedSince
-from rtamt.node.stl.timed_until import TimedUntil
+from rtamt.syntax.node.ltl.disjunction import Disjunction
+from rtamt.syntax.node.ltl.always import Always
+from rtamt.syntax.node.ltl.eventually import Eventually
+from rtamt.syntax.node.ltl.once import Once
+from rtamt.syntax.node.ltl.historically import Historically
+from rtamt.syntax.node.ltl.since import Since
+from rtamt.syntax.node.ltl.until import Until
+from rtamt.syntax.node.stl.timed_always import TimedAlways
+from rtamt.syntax.node.stl.timed_eventually import TimedEventually
+from rtamt.syntax.node.stl.timed_historically import TimedHistorically
+from rtamt.syntax.node.stl.timed_once import TimedOnce
+from rtamt.syntax.node.stl.timed_since import TimedSince
+from rtamt.syntax.node.stl.timed_until import TimedUntil
 from rtamt.exception.stl.exception import STLParseException
 
 

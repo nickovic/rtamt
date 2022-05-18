@@ -1,15 +1,15 @@
 from rtamt.exception.stl.exception import STLVisitorException
-from rtamt.node.stl.timed_precedes import TimedPrecedes
+from rtamt.syntax.node.stl.timed_precedes import TimedPrecedes
 
 from rtamt.syntax.ast.visitor.ltl.ast_visitor import LtlAstVisitor
 
-#from rtamt.node.stl.timed_precedes import TimedPrecedes
-from rtamt.node.stl.timed_since import TimedSince
-from rtamt.node.stl.timed_once import TimedOnce
-from rtamt.node.stl.timed_historically import TimedHistorically
-from rtamt.node.stl.timed_eventually import TimedEventually
-from rtamt.node.stl.timed_always import TimedAlways
-from rtamt.node.stl.timed_until import TimedUntil
+#from rtamt.syntax.node.stl.timed_precedes import TimedPrecedes
+from rtamt.syntax.node.stl.timed_since import TimedSince
+from rtamt.syntax.node.stl.timed_once import TimedOnce
+from rtamt.syntax.node.stl.timed_historically import TimedHistorically
+from rtamt.syntax.node.stl.timed_eventually import TimedEventually
+from rtamt.syntax.node.stl.timed_always import TimedAlways
+from rtamt.syntax.node.stl.timed_until import TimedUntil
 
 
 class StlAstVisitor(LtlAstVisitor):

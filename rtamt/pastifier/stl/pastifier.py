@@ -2,11 +2,11 @@ from rtamt.syntax.ast.visitor.stl.ast_visitor import StlAstVisitor
 from rtamt.interval.interval import Interval
 from rtamt.pastifier.ltl.pastifier import LtlPastifier
 
-from rtamt.node.ltl.variable import Variable
-from rtamt.node.stl.timed_precedes import TimedPrecedes
-from rtamt.node.stl.timed_historically import TimedHistorically
-from rtamt.node.stl.timed_once import TimedOnce
-from rtamt.node.stl.timed_since import TimedSince
+from rtamt.syntax.node.ltl.variable import Variable
+from rtamt.syntax.node.stl.timed_precedes import TimedPrecedes
+from rtamt.syntax.node.stl.timed_historically import TimedHistorically
+from rtamt.syntax.node.stl.timed_once import TimedOnce
+from rtamt.syntax.node.stl.timed_since import TimedSince
 
 from rtamt.exception.stl.exception import STLException
 from rtamt.pastifier.stl.horizon import StlHorizon
