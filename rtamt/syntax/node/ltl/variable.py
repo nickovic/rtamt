@@ -1,5 +1,5 @@
 from rtamt.syntax.node.leaf_node import LeafNode
-from rtamt.enumerations.io_type import StlIOType
+from rtamt.semantics.enumerations.io_type import StlIOType
 class Variable(LeafNode):
     """A class for storing STL real-valued Variable nodes
             Inherits Node

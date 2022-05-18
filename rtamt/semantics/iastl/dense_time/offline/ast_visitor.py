@@ -1,5 +1,5 @@
 
-from rtamt.enumerations.options import Semantics
+from rtamt.semantics.enumerations.options import Semantics
 from rtamt.semantics.stl.dense_time.offline.ast_visitor import StlDenseTimeOfflineAstVisitor, subtraction_operation
 
 

@@ -10,7 +10,7 @@ from rtamt.semantics.iastl.discrete_time.online.interpreter import IAStlOutputRo
 from rtamt.semantics.iastl.discrete_time.offline.interpreter import IAStlOutputRobustnessDiscreteTimeOfflineInterpreter, \
     IAStlInputRobustnessDiscreteTimeOfflineInterpreter, IAStlInputVacuityDiscreteTimeOfflineInterpreter, \
     IAStlOutputVacuityDiscreteTimeOfflineInterpreter
-from rtamt.enumerations.options import *
+from rtamt.semantics.enumerations.options import *
 from rtamt.pastifier.stl.pastifier import StlPastifier
 
 def STLDiscreteTimeSpecification(semantics=Semantics.STANDARD, language=Language.PYTHON):

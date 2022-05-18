@@ -1,5 +1,5 @@
 from rtamt.semantics.abstract_online_operation import AbstractOnlineOperation
-from rtamt.enumerations.comp_oper import StlComparisonOperator
+from rtamt.semantics.enumerations.comp_oper import StlComparisonOperator
 from rtamt.exception.ltl.exception import LTLException
 
 

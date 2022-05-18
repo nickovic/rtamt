@@ -1,6 +1,6 @@
 from rtamt.semantics.stl.dense_time.online.ast_visitor import StlDenseTimeOnlineAstVisitor
 from rtamt.semantics.iastl.dense_time.online.predicate_operation import PredicateOperation
-from rtamt.enumerations.options import Semantics
+from rtamt.semantics.enumerations.options import Semantics
 
 class IAStlOutputRobustnessDenseTimeOnlineAstVisitor(StlDenseTimeOnlineAstVisitor):
 

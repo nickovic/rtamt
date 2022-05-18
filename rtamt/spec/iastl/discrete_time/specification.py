@@ -5,7 +5,7 @@ from rtamt.syntax.ast.parser.stl.specification_parser import StlAst
 
 from rtamt.semantics.stl.discrete_time.offline.interpreter import StlDiscreteTimeOfflineInterpreter
 from rtamt.semantics.iastl.discrete_time.online.interpreter import IAStlDiscreteTimeOnlineInterpreter
-from rtamt.enumerations.options import *
+from rtamt.semantics.enumerations.options import *
 from rtamt.pastifier.stl.pastifier import StlPastifier
 
 

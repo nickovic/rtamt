@@ -3,7 +3,7 @@ import operator
 import collections
 
 from rtamt.syntax.ast.visitor.stl.ast_visitor import StlAstVisitor
-from rtamt.enumerations.comp_oper import StlComparisonOperator
+from rtamt.semantics.enumerations.comp_oper import StlComparisonOperator
 from rtamt.exception.stl.exception import STLException
 
 

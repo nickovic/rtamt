@@ -6,7 +6,7 @@ from rtamt.syntax.ast.parser.stl.specification_parser import StlAst
 from rtamt.semantics.stl.dense_time.offline.interpreter import StlDenseTimeOfflineInterpreter
 from rtamt.semantics.stl.dense_time.online.interpreter import StlDenseTimeOnlineInterpreter
 
-from rtamt.enumerations.options import *
+from rtamt.semantics.enumerations.options import *
 
 
 def IASTLDenseTimeSpecification(semantics=Semantics.STANDARD, language=Language.PYTHON):

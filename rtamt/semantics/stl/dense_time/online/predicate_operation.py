@@ -1,5 +1,5 @@
 from rtamt.semantics.abstract_dense_time_online_operation import AbstractDenseTimeOnlineOperation
-from rtamt.enumerations.comp_oper import StlComparisonOperator
+from rtamt.semantics.enumerations.comp_oper import StlComparisonOperator
 from rtamt.semantics.arithmetic.dense_time.online.subtraction_operation import SubtractionOperation
 from rtamt.exception.ltl.exception import LTLException
 

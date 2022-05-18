@@ -1,5 +1,5 @@
 from rtamt.semantics.stl.discrete_time.offline.ast_visitor import StlDiscreteTimeOfflineAstVisitor
-from rtamt.enumerations.comp_op import StlComparisonOperator
+from rtamt.semantics.enumerations.comp_op import StlComparisonOperator
 
 
 class IAStlDiscreteTimeOfflineAstVisitor(StlDiscreteTimeOfflineAstVisitor):

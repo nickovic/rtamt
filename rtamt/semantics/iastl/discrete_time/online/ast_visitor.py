@@ -1,6 +1,6 @@
 from rtamt.semantics.stl.discrete_time.online.ast_visitor import StlDiscreteTimeOnlineAstVisitor
 from rtamt.semantics.iastl.discrete_time.online.predicate_operation import PredicateOperation
-from rtamt.enumerations.options import Semantics
+from rtamt.semantics.enumerations.options import Semantics
 
 class IAStlDiscreteTimeOnlineAstVisitor(StlDiscreteTimeOnlineAstVisitor):
 
