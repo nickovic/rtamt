@@ -18,7 +18,6 @@ class TestIssue156(unittest.TestCase):
         right = [[0, 2.5], [0.7, 4], [1.3, -1.2], [2.1, 1.7]]
 
         out = spec.evaluate(['req', left], ['gnt', right])
-        print("out", out)
 
 
 if __name__ == '__main__':

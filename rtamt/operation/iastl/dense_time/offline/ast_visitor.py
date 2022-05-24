@@ -1,18 +1,47 @@
-from rtamt.enumerations.options import Semantics
+from rtamt.enumerations.comp_oper import StlComparisonOperator
 from rtamt.operation.stl.dense_time.offline.ast_visitor import StlDenseTimeOfflineAstVisitor, subtraction_operation
 
 
 class IAStlDenseTimeOfflineAstVisitor(StlDenseTimeOfflineAstVisitor):
 
     def visitPredicate(self, node, *args, **kwargs):
-        in_sample_1 = self.visit(node.children[0], args)
-        in_sample_2 = self.visit(node.children[1], args)
+        sample_left = self.visit(node.children[0], *args, **kwargs)
+        sample_right = self.visit(node.children[1], *args, **kwargs)
 
-        monitor = self.node_monitor_dict[node.name]
-        out_sample = monitor.update(in_sample_1, in_sample_2)
-        sat_samples = monitor.sat(in_sample_1, in_sample_2)
-        return out_sample, sat_samples
+        out_samples = []
+        sat_samples = []
 
+        input_list = subtraction_operation(sample_left, sample_right)
+
+        prev = float("nan")
+        for i, in_sample in enumerate(input_list):
+            if node.operator.value == StlComparisonOperator.EQ.value:
+                sat_val = True if in_sample[1] == 0 else False
+                out_val = - abs(in_sample[1])
+            elif node.operator.value == StlComparisonOperator.NEQ.value:
+                sat_val = True if abs(in_sample[1]) > 0 else False
+                out_val = abs(in_sample[1])
+            elif node.operator.value == StlComparisonOperator.LEQ.value:
+                sat_val = True if in_sample[1] <= 0 else False
+                out_val = - in_sample[1]
+            elif node.operator.value == StlComparisonOperator.LESS.value:
+                sat_val = True if in_sample[1] < 0 else False
+                out_val = - in_sample[1]
+            elif node.operator.value == StlComparisonOperator.GEQ.value:
+                sat_val = True if in_sample[1] >= 0 else False
+                out_val = in_sample[1]
+            elif node.operator.value == StlComparisonOperator.GREATER.value:
+                sat_val = True if in_sample[1] > 0 else False
+                out_val = in_sample[1]
+            else:
+                out_val = float('nan')
+
+            if out_val != prev or i == len(input_list) - 1:
+                out_samples.append([in_sample[0], out_val])
+                sat_samples.append([in_sample[0], sat_val])
+            prev = out_val
+
+        return out_samples, sat_samples
 
 class IAStlOutputRobustnessDenseTimeOfflineAstVisitor(IAStlDenseTimeOfflineAstVisitor):
 
