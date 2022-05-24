@@ -2,14 +2,14 @@ import logging
 import importlib
 
 from rtamt.spec.abstract_specification import AbstractSpecification
-from rtamt.ast.parser.ltl.specification_parser import LtlAstParserVisitor
+from rtamt.syntax.ast.parser.ltl.specification_parser import LtlAstParserVisitor
 
 from rtamt.exception.stl.exception import STLParseException
 
 from rtamt.pastifier.ltl.pastifier import LtlPastifier
 from rtamt.interpreter.ltl.online_interpreter import LTLInterpreter
 from rtamt.reset.ltl.reset import LTLReset
-from rtamt.enumerations.options import *
+from rtamt.semantics.enumerations.options import *
 
 
 class LTLDiscreteTimeSpecification(AbstractSpecification):

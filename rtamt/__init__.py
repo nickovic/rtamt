@@ -10,8 +10,8 @@ from rtamt.exception.ltl.exception import LTLOfflineException
 from rtamt.exception.ltl.exception import LTLParseException
 from rtamt.exception.ltl.exception import LTLSpecificationException
 from rtamt.exception.exception import RTAMTException
-from rtamt.enumerations.io_type import StlIOType
-from rtamt.enumerations.options import Language, Semantics, TimeInterpretation
+from rtamt.semantics.enumerations.io_type import StlIOType
+from rtamt.semantics.enumerations.options import Language, Semantics, TimeInterpretation
 
 #TODO: reconfigure it after refactoring
 from rtamt.spec.stl.discrete_time.specification import STLDiscreteTimeSpecification

@@ -1,4 +1,4 @@
-from rtamt.ast.visitor.stl.ast_visitor import StlAstVisitor
+from rtamt.syntax.ast.visitor.stl.ast_visitor import StlAstVisitor
 from rtamt.pastifier.ltl.horizon import LtlHorizon
 
 from rtamt.exception.stl.exception import STLException

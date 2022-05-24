@@ -1,7 +1,7 @@
 import unittest
 
-from rtamt.ast.parser.ltl.specification_parser import LtlAst
-from rtamt.ast.parser.stl.specification_parser import StlAst
+from rtamt.syntax.ast.parser.ltl.specification_parser import LtlAst
+from rtamt.syntax.ast.parser.stl.specification_parser import StlAst
 from rtamt.pastifier.stl.pastifier import StlPastifier
 
 

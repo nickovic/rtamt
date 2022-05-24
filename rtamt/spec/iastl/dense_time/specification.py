@@ -2,9 +2,8 @@ from rtamt.pastifier.stl.pastifier import StlPastifier
 from rtamt.spec.abstract_specification import AbstractOfflineSpecification, AbstractOnlineSpecification, \
     AbstractOfflineOnlineSpecification
 
-from rtamt.ast.parser.stl.specification_parser import StlAst
-
-from rtamt.enumerations.options import *
+from rtamt.syntax.ast.parser.stl.specification_parser import StlAst
+from rtamt.semantics.enumerations.options import *
 
 
 def IASTLDenseTimeSpecification(semantics=Semantics.STANDARD, language=Language.PYTHON):
