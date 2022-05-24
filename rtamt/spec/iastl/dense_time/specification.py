@@ -1,10 +1,8 @@
 from rtamt.pastifier.stl.pastifier import StlPastifier
-from rtamt.spec.abstract_specification import AbstractOfflineSpecification, AbstractOnlineSpecification, AbstractOfflineOnlineSpecification
+from rtamt.spec.abstract_specification import AbstractOfflineSpecification, AbstractOnlineSpecification, \
+    AbstractOfflineOnlineSpecification
 
 from rtamt.ast.parser.stl.specification_parser import StlAst
-
-from rtamt.operation.stl.dense_time.offline.interpreter import StlDenseTimeOfflineInterpreter
-from rtamt.operation.stl.dense_time.online.interpreter import StlDenseTimeOnlineInterpreter
 
 from rtamt.enumerations.options import *
 
@@ -17,7 +15,7 @@ def IASTLDenseTimeSpecification(semantics=Semantics.STANDARD, language=Language.
     Attributes:
     """
     if semantics == Semantics.STANDARD and language == Language.PYTHON:
-        spec = AbstractOfflineOnlineSpecification(StlAst(), IAStlDenseTimeOfflineInterpreter(semantics), IAStlDenseTimeOnlineInterpreter(semantics), pastifier=StlPastifier())
+        spec = AbstractOfflineOnlineSpecification(StlAst(), IAStlDenseTimeOfflineInterpreter(), IAStlDenseTimeOnlineInterpreter(semantics), pastifier=StlPastifier())
     else:
         raise Exception()
 

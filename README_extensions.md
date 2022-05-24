@@ -52,5 +52,87 @@ four flavors of RTAMT monitors:
 - Dense-time offine
 
 
-The IA-STL extension is orthogonal to these four flavors. We show how 
-discrete-time online STL monitors are extended to IA-STL and le
+We show how 
+discrete-time online STL monitors are extended to IA-STL output robustness 
+monitors. The other combinations are similar.
+
+We first need to create an appropriate container for an IA-STL specification 
+and its associated monitor that is interpreted:
+- in an online fashion
+- in discrete time
+- with output robustness
+
+This is done in `spec/stl/discrete_time/specification.py`
+```
+from rtamt.operation.iastl.discrete_time.online.interpreter import \ 
+    IAStlOutputRobustnessDiscreteTimeOnlineInterpreter
+...
+def StlOutputRobustnessDiscreteTimeOnlineSpecification():
+    spec = AbstractOnlineSpecification(StlAst(), 
+                                       IAStlOutputRobustnessDiscreteTimeOnlineInterpreter(),
+                                       pastifier=StlPastifier())
+    return spec
+```
+
+`IAStlOutputRobustnessDiscreteTimeOnlineInterpreter` creates a monitor in the form 
+of a visitor defined by `IAStlOutputRobustnessDiscreteTimeOnlineAstVisitor`.
+
+```
+from rtamt.operation.iastl.discrete_time.online.ast_visitor import \
+    IAStlOutputRobustnessDiscreteTimeOnlineAstVisitor
+...
+def IAStlOutputRobustnessDiscreteTimeOnlineInterpreter():
+    iastlDiscreteTimeOnlineInterpreter = discrete_time_online_interpreter_factory(
+                                         IAStlOutputRobustnessDiscreteTimeOnlineAstVisitor)()
+    return iastlDiscreteTimeOnlineInterpreter
+```
+
+The IA-STL output robustness visitor `IAStlOutputRobustnessDiscreteTimeOnlineAstVisitor` inherits from the 
+standard STL visitor `StlDiscreteTimeOnlineAstVisitor` all the functionality, except the way how it 
+visits a predicate. In fact, it creates a special IA-STL `PredicateOperation` object, instead of 
+the default one used by STL monitors.
+
+```
+from rtamt.operation.stl.discrete_time.online.ast_visitor import \
+    StlDiscreteTimeOnlineAstVisitor
+from rtamt.operation.iastl.discrete_time.online.predicate_operation import \
+    PredicateOperation
+from rtamt.enumerations.options import Semantics
+
+
+class IAStlOutputRobustnessDiscreteTimeOnlineAstVisitor(StlDiscreteTimeOnlineAstVisitor):
+
+    def visitPredicate(self, node, *args, **kwargs):
+        self.visitChildren(node, *args, **kwargs)
+        self.online_operator_dict[node.name] = 
+                        PredicateOperation(node.operator, Semantics.OUTPUT_ROBUSTNESS,
+                                           node.in_vars, node.out_vars)
+```
+
+The `PredicateOperation` class is defined in `rtamt/operation/iastl/discrete_time/online/predicate_operation.py`.
+The monitoring evaluation at a given time step done using the `update` function first 
+uses the classical STL monitor to compute the robustness of the predicate. If no 
+output variable appears in the predicate, then the robustness value is translated 
+to `inf` if the predicate is satisfied and `-inf` if it is violated.
+
+```
+class PredicateOperation(StlPredicateOperation):
+    def __init__(self, comparison_op, semantics, in_vars, out_vars):
+        StlPredicateOperation.__init__(self, comparison_op)
+        self.semantics = semantics
+        self.in_vars = in_vars
+        self.out_vars = out_vars
+
+    def update(self, sample_left, sample_right):
+        out_sample = StlPredicateOperation.update(self, sample_left, sample_right)
+
+        sat_sample = self.sat(sample_left, sample_right)
+        if (self.semantics == Semantics.OUTPUT_ROBUSTNESS and not self.out_vars) or (
+                self.semantics == Semantics.INPUT_ROBUSTNESS and not self.in_vars):
+            out_sample = float('inf') if sat_sample == True else -float("inf")
+        elif (self.semantics == Semantics.INPUT_VACUITY and not self.in_vars) or (
+                self.semantics == Semantics.OUTPUT_VACUITY and not self.out_vars):
+            out_sample = 0
+
+        return out_sample
+``` 

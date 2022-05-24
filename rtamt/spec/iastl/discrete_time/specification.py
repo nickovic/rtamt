@@ -4,7 +4,7 @@ from rtamt.spec.abstract_specification import AbstractOfflineSpecification, Abst
 from rtamt.ast.parser.stl.specification_parser import StlAst
 
 from rtamt.operation.stl.discrete_time.offline.interpreter import StlDiscreteTimeOfflineInterpreter
-from rtamt.operation.iastl.discrete_time.online.interpreter import IAStlDiscreteTimeOnlineInterpreter
+from rtamt.operation.iastl.discrete_time.online.interpreter import IAStlOutputRobustnessDiscreteTimeOnlineInterpreter
 from rtamt.enumerations.options import *
 from rtamt.pastifier.stl.pastifier import StlPastifier
 
@@ -18,8 +18,8 @@ def IASTLDiscreteTimeSpecification(semantics=Semantics.STANDARD, language=Langua
     """
     if semantics == Semantics.STANDARD and language == Language.PYTHON:
         spec = AbstractOfflineOnlineSpecification(StlAst(), StlDiscreteTimeOfflineInterpreter(), StlDiscreteTimeOnlineInterpreter(), pastifier=StlPastifier())
-    else:
-        spec = AbstractOfflineOnlineSpecification(StlAst(), StlDiscreteTimeOfflineInterpreter(), IAStlDiscreteTimeOnlineInterpreter(semantics), pastifier=StlPastifier())
+    elif semantics == Semantics.OUTPUT_ROBUSTNESS and language == Language.PYTHON:
+        spec = AbstractOfflineOnlineSpecification(StlAst(), StlDiscreteTimeOfflineInterpreter(), IAStlOutputRobustnessDiscreteTimeOnlineInterpreter(semantics), pastifier=StlPastifier())
     return spec
 
 

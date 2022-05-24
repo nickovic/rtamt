@@ -1,12 +1,10 @@
 import operator
-from fractions import Fraction
 
 from rtamt.ast.visitor.abstract_ast_visitor import AbstractAstVisitor
 from rtamt.operation.abstract_online_interpreter import AbstractOnlineInterpreter, AbstractOnlineUpdateVisitor, AbstractOnlineResetVisitor
 from rtamt.operation.discrete_time_interpreter import DiscreteTimeInterpreter
 
 from rtamt.exception.exception import RTAMTException
-from rtamt.exception.stl.exception import STLException
 
 class AbstractDiscreteTimeOnlineInterpreter(AbstractOnlineInterpreter, DiscreteTimeInterpreter):
 
