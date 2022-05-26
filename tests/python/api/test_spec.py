@@ -23,7 +23,6 @@ class TestSemantics(unittest.TestCase):
             'a': [100, -1, -2, 5, -1]
         }
         rob = spec.evaluate(dataset)
-        print(rob)
 
     def test_stl_dense_time_offline(self):
         spec = StlDenseTimeOfflineSpecification()
@@ -33,7 +32,6 @@ class TestSemantics(unittest.TestCase):
 
         a = [[0, 1.3], [0.7, 3], [1.3, 0.1], [2.1, -2.2]]
         rob = spec.evaluate(['a', a])
-        print(rob)
 
     def test_stl_discrete_time_online(self):
         spec = StlDiscreteTimeOnlineSpecification()
@@ -47,8 +45,6 @@ class TestSemantics(unittest.TestCase):
         for i in range(len(a)):
             rob = spec.update(i, [('a', a[i])])
             robs.append(rob)
-
-        print(robs)
 
         spec.reset()
 
@@ -67,7 +63,6 @@ class TestSemantics(unittest.TestCase):
         for i in range(len(a)):
             rob = spec.update(['a', a[i]])
             robs.append(rob)
-        print(robs)
 
         # spec.reset()
 

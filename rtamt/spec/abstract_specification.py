@@ -1,4 +1,4 @@
-import os, sys
+import os
 from abc import ABCMeta
 
 from rtamt.semantics.abstract_discrete_time_online_interpreter import AbstractDiscreteTimeOnlineInterpreter

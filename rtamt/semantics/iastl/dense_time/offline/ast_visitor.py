@@ -1,5 +1,5 @@
-from rtamt.enumerations.comp_oper import StlComparisonOperator
-from rtamt.operation.stl.dense_time.offline.ast_visitor import StlDenseTimeOfflineAstVisitor, subtraction_operation
+from rtamt.semantics.enumerations.comp_oper import StlComparisonOperator
+from rtamt.semantics.stl.dense_time.offline.ast_visitor import StlDenseTimeOfflineAstVisitor, subtraction_operation
 
 
 class IAStlDenseTimeOfflineAstVisitor(StlDenseTimeOfflineAstVisitor):
