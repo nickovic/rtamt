@@ -62,9 +62,9 @@ and its associated monitor that is interpreted:
 - in discrete time
 - with output robustness
 
-This is done in `spec/stl/discrete_time/specification.py`
+This is done in `spec/iastl/discrete_time/specification.py`
 ```
-from rtamt.operation.iastl.discrete_time.online.interpreter import \ 
+from rtamt.semantics.iastl.discrete_time.online.interpreter import \ 
     IAStlOutputRobustnessDiscreteTimeOnlineInterpreter
 ...
 def StlOutputRobustnessDiscreteTimeOnlineSpecification():
@@ -78,7 +78,7 @@ def StlOutputRobustnessDiscreteTimeOnlineSpecification():
 of a visitor defined by `IAStlOutputRobustnessDiscreteTimeOnlineAstVisitor`.
 
 ```
-from rtamt.operation.iastl.discrete_time.online.ast_visitor import \
+from rtamt.semantics.iastl.discrete_time.online.ast_visitor import \
     IAStlOutputRobustnessDiscreteTimeOnlineAstVisitor
 ...
 def IAStlOutputRobustnessDiscreteTimeOnlineInterpreter():
@@ -93,9 +93,9 @@ visits a predicate. In fact, it creates a special IA-STL `PredicateOperation` ob
 the default one used by STL monitors.
 
 ```
-from rtamt.operation.stl.discrete_time.online.ast_visitor import \
+from rtamt.semantics.stl.discrete_time.online.ast_visitor import \
     StlDiscreteTimeOnlineAstVisitor
-from rtamt.operation.iastl.discrete_time.online.predicate_operation import \
+from rtamt.semantics.iastl.discrete_time.online.predicate_operation import \
     PredicateOperation
 from rtamt.enumerations.options import Semantics
 
@@ -109,7 +109,7 @@ class IAStlOutputRobustnessDiscreteTimeOnlineAstVisitor(StlDiscreteTimeOnlineAst
                                            node.in_vars, node.out_vars)
 ```
 
-The `PredicateOperation` class is defined in `rtamt/operation/iastl/discrete_time/online/predicate_operation.py`.
+The `PredicateOperation` class is defined in `rtamt/semantics/iastl/discrete_time/online/predicate_operation.py`.
 The monitoring evaluation at a given time step done using the `update` function first 
 uses the classical STL monitor to compute the robustness of the predicate. If no 
 output variable appears in the predicate, then the robustness value is translated 

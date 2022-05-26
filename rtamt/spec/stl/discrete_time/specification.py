@@ -50,45 +50,11 @@ def StlDiscreteTimeOfflineSpecification():
     spec = AbstractOfflineSpecification(StlAst(), StlDiscreteTimeOfflineInterpreter())
     return spec
 
-def StlOutputRobustnessDiscreteTimeOfflineSpecification():
-    spec = AbstractOfflineSpecification(StlAst(), IAStlOutputRobustnessDiscreteTimeOfflineInterpreter())
-    return spec
-
-def StlInputVacuityDiscreteTimeOfflineSpecification():
-    spec = AbstractOfflineSpecification(StlAst(), IAStlInputVacuityDiscreteTimeOfflineInterpreter())
-    return spec
-
-def StlInputRobustnessDiscreteTimeOfflineSpecification():
-    spec = AbstractOfflineSpecification(StlAst(), IAStlInputRobustnessDiscreteTimeOfflineInterpreter())
-    return spec
-
-def StlOutputVacuityDiscreteTimeOfflineSpecification():
-    spec = AbstractOfflineSpecification(StlAst(), IAStlOutputVacuityDiscreteTimeOfflineInterpreter())
-    return spec
-
 def StlDiscreteTimeOnlineSpecification():
     spec = AbstractOnlineSpecification(StlAst(), StlDiscreteTimeOnlineInterpreter(),
                                        pastifier=StlPastifier())
     return spec
 
-def StlOutputRobustnessDiscreteTimeOnlineSpecification():
-    spec = AbstractOnlineSpecification(StlAst(), IAStlOutputRobustnessDiscreteTimeOnlineInterpreter(),
-                                       pastifier=StlPastifier())
-    return spec
-
-def StlInputVacuityDiscreteTimeOnlineSpecification():
-    spec = AbstractOnlineSpecification(StlAst(), IAStlInputVacuityDiscreteTimeOnlineInterpreter(),
-                                       pastifier=StlPastifier())
-    return spec
-
-def StlInputRobustnessDiscreteTimeOnlineSpecification():
-    spec = AbstractOnlineSpecification(StlAst(), IAStlInputRobustnessDiscreteTimeOnlineInterpreter(),
-                                       pastifier=StlPastifier())
-    return spec
-
-def StlOutputVacuityDiscreteTimeOnlineSpecification():
-    spec = AbstractOnlineSpecification(StlAst(), IAStlOutputVacuityDiscreteTimeOnlineInterpreter(), pastifier=StlPastifier())
-    return spec
 
 def StlDiscreteTimeOnlineSpecificationCpp():
     from rtamt.semantics.stl.discrete_time.online.cpp.interpreter import StlDiscreteTimeOnlineInterpreterCpp
