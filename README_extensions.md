@@ -39,16 +39,17 @@ There are four interesting IA-STL interpretations:
 It follows that in order to extend STL to IA-STL, one needs in essence to extend the way how the predicate is evaluated.
 We recall that RTAMT implements four flavors of RTAMT monitors:
 
-- Discrete-time online
-- Discrete-time offline
-- Dense-time online
-- Dense-time offine
+- Discrete-time online (AbstractDiscreteTimeOnlineInterpreter)
+- Discrete-time offline (AbstractDiscreteTimeOfflineInterpreter)
+- Dense-time online (AbstractDenseTimeOnlineInterpreter)
+- Dense-time offine (AbstractDenseTimeOfflineInterpreter)
 
 We show how discrete-time online STL monitors are extended to IA-STL output robustness monitors.
 The other combinations are similar.
 
-We first need to create an appropriate container for an IA-STL specification
-and its associated monitor that is interpreted:
+![IA-STLclass](/figures/IA-STLclass.png)
+
+We first need to create an appropriate container for an IA-STL specification and its associated monitor that is interpreted:
 
 - in an online fashion
 - in discrete time
