@@ -3,6 +3,7 @@
 
 - [Introduction](#introduction)
 - [Semantic Extension](#semantic-extension)
+- [Syntactic Extension](#syntactic-extension)
 
 <!-- markdown-toc end -->
 
@@ -126,3 +127,11 @@ class PredicateOperation(StlPredicateOperation):
 
         return out_sample
 ```
+
+# Syntactic Extension
+
+- XStlLexer
+- XStlParser
+- Shift Node
+- Syntax/AST/Parser/XStl/parser_visitor - create a Shift node from ANTLR4 AST
+- Pastifier + Horizon
