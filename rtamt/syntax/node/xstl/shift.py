@@ -1,11 +1,7 @@
-from rtamt.semantics.interval.interval import Interval
 from rtamt.syntax.node.unary_node import UnaryNode
 
 
 class Shift(UnaryNode):
-    """A class for storing XSTL Shift nodes
-    """
-
     def __init__(self, child, val, val_unit):
         UnaryNode.__init__(self, child)
         self.val = val
