@@ -255,6 +255,62 @@ class XStlAstParserVisitor(StlAstParserVisitor, XStlParserVisitor):
 ```
 
 Now that we have our internal representation of XSTL, we need to implement 
-the monitoring algorithm to treat the shift operator. 
+the monitoring algorithm to treat the shift operator. We first implement 
+the `ShiftOperation` function that realizes the discrete-time online 
+monitor for the shift operator (`rtamt/semantics/xstl/discrete_time/online/shift_operation.py`)
+```
+from rtamt.semantics.abstract_online_operation import AbstractOnlineOperation
+import collections
 
-- Add `XSTLDiscreteTimeOnlineSpecification` to `rtamt/__init__.py`
+class ShiftOperation(AbstractOnlineOperation):
+    def __init__(self, val):
+        self.val = val
+        self.buffer = collections.deque(maxlen=(self.val + 1))
+
+        self.reset()
+
+    def reset(self):
+        for i in range(self.val + 1):
+            val = - float("inf")
+            self.buffer.append(val)
+
+    def update(self, sample):
+        self.buffer.append(sample)
+        return self.buffer[0]
+```
+
+We then create a custom visitor that associates `ShiftOperation` to the 
+`Shift` node and translates the shift value (with its associated time unit) 
+to an integer value that indicates how many logical steps the operand 
+must be shifted, depending on the sampling rate of the monitor. This is 
+done in `rtamt/semantics/xstl/discrete_time/online/ast_visitor.py`
+
+```
+from rtamt.semantics.stl.discrete_time.online.ast_visitor import StlDiscreteTimeOnlineAstVisitor
+from rtamt.semantics.xstl.discrete_time.online.shift_operation import ShiftOperation
+from rtamt.syntax.ast.visitor.xstl.ast_visitor import XStlAstVisitor
+
+
+class XStlDiscreteTimeOnlineAstVisitor(StlDiscreteTimeOnlineAstVisitor, XStlAstVisitor):
+
+    def visitShift(self, node, *args, **kwargs):
+        self.visitChildren(node, *args, **kwargs)
+        val = self.time_unit_transformer(node.val, node.val_unit)
+        self.online_operator_dict[node.name] = ShiftOperation(val)
+```
+
+Finally, we associate the visitor to the XSTL discrete-time online interpreter in `rtamt/semantics/xstl/discrete_time/online/interpreter.py`
+```
+from rtamt.semantics.abstract_discrete_time_online_interpreter import discrete_time_online_interpreter_factory
+from rtamt.semantics.xstl.discrete_time.online.ast_visitor import XStlDiscreteTimeOnlineAstVisitor
+
+
+def XStlDiscreteTimeOnlineInterpreter():
+    xstlDiscreteTimeOnlineInterpreter = discrete_time_online_interpreter_factory(XStlDiscreteTimeOnlineAstVisitor)()
+    return xstlDiscreteTimeOnlineInterpreter
+```
+
+
+As the last step, we add `XSTLDiscreteTimeOnlineSpecification` to `rtamt/__init__.py`, 
+so that the user can instantiate the monitor using 
+`rtamt.XSTLDiscreteTimeOnlineSpecification` syntax. 
