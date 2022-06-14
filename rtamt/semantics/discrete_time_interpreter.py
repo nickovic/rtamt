@@ -88,7 +88,7 @@ class DiscreteTimeInterpreter(TimeInterpreter):
         if duration < self.sampling_period - tolerance or duration > self.sampling_period + tolerance:
             self.sampling_violation_counter = self.sampling_violation_counter + 1
 
-    def time_unit_transformer(self, node):
+    def interval_unit_transformer(self, node):
         b = node.begin
         e = node.end
         b_unit = node.begin_unit
@@ -117,3 +117,19 @@ class DiscreteTimeInterpreter(TimeInterpreter):
         e = int(e)
 
         return b, e
+
+    def time_unit_transformer(self, v, v_unit):
+        if not v_unit:
+            v_unit = self.ast.unit
+
+        val = v * self.ast.U[v_unit]
+
+        sp = Fraction(self.sampling_period * self.ast.U[self.sampling_period_unit])
+        val = val / sp
+
+        if val.numerator % val.denominator > 0:
+            raise RTAMTException('The operator bound must be a multiple of the sampling period')
+
+        val = int(val)
+
+        return val

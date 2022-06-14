@@ -130,22 +130,22 @@ class StlDiscreteTimeOnlineAstVisitor(StlAstVisitor):
 
     def visitTimedPrecedes(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
-        begin, end = self.time_unit_transformer(node)
+        begin, end = self.interval_unit_transformer(node)
         self.online_operator_dict[node.name] = PrecedesTimedOperation(begin, end)
 
     def visitTimedOnce(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
-        begin, end = self.time_unit_transformer(node)
+        begin, end = self.interval_unit_transformer(node)
         self.online_operator_dict[node.name] = OnceTimedOperation(begin, end)
 
     def visitTimedHistorically(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
-        begin, end = self.time_unit_transformer(node)
+        begin, end = self.interval_unit_transformer(node)
         self.online_operator_dict[node.name] = HistoricallyTimedOperation(begin, end)
 
     def visitTimedSince(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
-        begin, end = self.time_unit_transformer(node)
+        begin, end = self.interval_unit_transformer(node)
         self.online_operator_dict[node.name] = SinceTimedOperation(begin, end)
 
     def visitTimedAlways(self, node, *args, **kwargs):

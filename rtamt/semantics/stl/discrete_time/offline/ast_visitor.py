@@ -296,7 +296,7 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
 
     def visitTimedOnce(self, node, *args, **kwargs):
         sample = self.visit(node.children[0], *args, **kwargs)
-        begin, end = self.time_unit_transformer(node)
+        begin, end = self.interval_unit_transformer(node)
 
         sample = [-float("inf") for j in range(end)] + sample
         sample_return = [max(sample[j - end:j - begin+ 1]) for j in range(end, len(sample))]
@@ -305,7 +305,7 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
 
     def visitTimedHistorically(self, node, *args, **kwargs):
         sample = self.visit(node.children[0], *args, **kwargs)
-        begin, end = self.time_unit_transformer(node)
+        begin, end = self.interval_unit_transformer(node)
 
         sample = [float("inf") for j in range(end)] + sample
         sample_return = [min(sample[j - end:j - begin + 1]) for j in range(end, len(sample))]
@@ -314,7 +314,7 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
     def visitTimedSince(self, node, *args, **kwargs):
         sample_left  = self.visit(node.children[0], *args, **kwargs)
         sample_right = self.visit(node.children[1], *args, **kwargs)
-        begin, end = self.time_unit_transformer(node)
+        begin, end = self.interval_unit_transformer(node)
 
         sample_return = []
         buffer_left = collections.deque(maxlen=(end + 1))
@@ -344,7 +344,7 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
 
     def visitTimedAlways(self, node, *args, **kwargs):
         sample = self.visit(node.children[0], *args, **kwargs)
-        begin, end = self.time_unit_transformer(node)
+        begin, end = self.interval_unit_transformer(node)
 
         diff = end - begin
         sample_return  = [min(sample[j:j+diff+1]) for j in range(begin, end+1)]
@@ -357,7 +357,7 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
 
     def visitTimedEventually(self, node, *args, **kwargs):
         sample = self.visit(node.children[0], *args, **kwargs)
-        begin, end = self.time_unit_transformer(node)
+        begin, end = self.interval_unit_transformer(node)
 
         diff = end - begin
         sample_return  = [max(sample[j:j+diff+1]) for j in range(begin, end+1)]
@@ -371,7 +371,7 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
     def visitTimedUntil(self, node, *args, **kwargs):
         sample_left  = self.visit(node.children[0], *args, **kwargs)
         sample_right = self.visit(node.children[1], *args, **kwargs)
-        begin, end = self.time_unit_transformer(node)
+        begin, end = self.interval_unit_transformer(node)
 
         sample_return = []
         buffer_left = collections.deque(maxlen=(end + 1))

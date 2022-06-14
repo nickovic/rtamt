@@ -11,6 +11,6 @@ class XStlAstParserVisitor(StlAstParserVisitor, XStlParserVisitor):
 
     def visitExprShift(self, ctx):
         child = self.visit(ctx.expression())
-        val = self.visit(ctx.literal())
-        node = Shift(child, val)
+        val, val_unit = self.visit(ctx.intervalTime())
+        node = Shift(child, val, val_unit)
         return node

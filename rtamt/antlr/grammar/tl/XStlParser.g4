@@ -20,7 +20,7 @@ expression
 
 	| AlwaysOperator ( interval )? expression                   #ExprAlways
     | EventuallyOperator ( interval )? expression               #ExprEv
-    | ShiftOperator LPAREN expression COMMA literal RPAREN      #ExprShift
+    | ShiftOperator LPAREN expression COMMA intervalTime RPAREN      #ExprShift
     | expression UntilOperator ( interval )? expression         #ExprUntil
     | expression UnlessOperator ( interval )? expression        #ExprUnless
     | HistoricallyOperator ( interval )? expression             #ExprHist

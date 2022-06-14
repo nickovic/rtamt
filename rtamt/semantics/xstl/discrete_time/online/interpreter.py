@@ -1,0 +1,7 @@
+from rtamt.semantics.abstract_discrete_time_online_interpreter import discrete_time_online_interpreter_factory
+from rtamt.semantics.xstl.discrete_time.online.ast_visitor import XStlDiscreteTimeOnlineAstVisitor
+
+
+def XStlDiscreteTimeOnlineInterpreter():
+    xstlDiscreteTimeOnlineInterpreter = discrete_time_online_interpreter_factory(XStlDiscreteTimeOnlineAstVisitor)()
+    return xstlDiscreteTimeOnlineInterpreter

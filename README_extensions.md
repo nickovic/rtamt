@@ -134,4 +134,6 @@ class PredicateOperation(StlPredicateOperation):
 - XStlParser
 - Shift Node
 - Syntax/AST/Parser/XStl/parser_visitor - create a Shift node from ANTLR4 AST
+- Syntax/AST/Parser/XStl/specification_parser - create a xstl internal AST data structure
 - Pastifier + Horizon
+- Add `XSTLDiscreteTimeOnlineSpecification` to `rtamt/__init__.py`

@@ -3,7 +3,6 @@ from rtamt.syntax.node.stl.timed_precedes import TimedPrecedes
 
 from rtamt.syntax.ast.visitor.ltl.ast_visitor import LtlAstVisitor
 
-#from rtamt.syntax.node.stl.timed_precedes import TimedPrecedes
 from rtamt.syntax.node.stl.timed_since import TimedSince
 from rtamt.syntax.node.stl.timed_once import TimedOnce
 from rtamt.syntax.node.stl.timed_historically import TimedHistorically

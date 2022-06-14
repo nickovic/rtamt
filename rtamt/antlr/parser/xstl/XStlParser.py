@@ -49,7 +49,7 @@ def serializedATN():
         buf.write("\3\2\2\2AB\3\2\2\2B^\5\2\2\bCD\7;\2\2D^\5\2\2\4EF\7:\2")
         buf.write("\2F^\5\2\2\3G^\5$\23\2HI\7\b\2\2IJ\5\2\2\2JK\7\t\2\2K")
         buf.write("^\3\2\2\2LM\7\3\2\2MN\7\b\2\2NO\5\2\2\2OP\7\20\2\2PQ\5")
-        buf.write("(\25\2QR\7\t\2\2R^\3\2\2\2ST\7\61\2\2TU\7\b\2\2UV\5\2")
+        buf.write("\6\4\2QR\7\t\2\2R^\3\2\2\2ST\7\61\2\2TU\7\b\2\2UV\5\2")
         buf.write("\2\2VW\7\t\2\2W^\3\2\2\2XY\7\62\2\2YZ\7\b\2\2Z[\5\2\2")
         buf.write("\2[\\\7\t\2\2\\^\3\2\2\2],\3\2\2\2]/\3\2\2\2]\64\3\2\2")
         buf.write("\2]9\3\2\2\2]>\3\2\2\2]C\3\2\2\2]E\3\2\2\2]G\3\2\2\2]")
@@ -502,8 +502,8 @@ class XStlParser ( Parser ):
 
         def COMMA(self):
             return self.getToken(XStlParser.COMMA, 0)
-        def literal(self):
-            return self.getTypedRuleContext(XStlParser.LiteralContext,0)
+        def intervalTime(self):
+            return self.getTypedRuleContext(XStlParser.IntervalTimeContext,0)
 
         def RPAREN(self):
             return self.getToken(XStlParser.RPAREN, 0)
@@ -910,7 +910,7 @@ class XStlParser ( Parser ):
                 self.state = 77
                 self.match(XStlParser.COMMA)
                 self.state = 78
-                self.literal()
+                self.intervalTime()
                 self.state = 79
                 self.match(XStlParser.RPAREN)
 

@@ -1,16 +1,7 @@
+from rtamt.pastifier.stl.pastifier import StlPastifier
 from rtamt.pastifier.xstl.horizon import XStlHorizon
-from rtamt.syntax.ast.visitor.stl.ast_visitor import StlAstVisitor
-from rtamt.semantics.interval.interval import Interval
-from rtamt.pastifier.ltl.pastifier import LtlPastifier
-
-from rtamt.syntax.node.ltl.variable import Variable
-from rtamt.syntax.node.stl.timed_precedes import TimedPrecedes
-from rtamt.syntax.node.stl.timed_historically import TimedHistorically
-from rtamt.syntax.node.stl.timed_once import TimedOnce
-from rtamt.syntax.node.stl.timed_since import TimedSince
-
+from rtamt.syntax.ast.visitor.xstl.ast_visitor import XStlAstVisitor
 from rtamt.exception.stl.exception import STLException
-from rtamt.pastifier.stl.horizon import StlHorizon
 
 
 class XStlPastifier(StlPastifier, XStlAstVisitor):
