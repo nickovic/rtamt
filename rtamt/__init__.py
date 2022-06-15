@@ -25,3 +25,5 @@ from rtamt.spec.stl.dense_time.specification import StlDenseTimeOfflineSpecifica
 from rtamt.spec.stl.dense_time.specification import StlDenseTimeOnlineSpecification
 
 from rtamt.spec.xstl.discrete_time.specification import XStlDiscreteTimeOnlineSpecification
+from rtamt.spec.xstl.discrete_time.specification import XStlDiscreteTimeOfflineSpecification
+

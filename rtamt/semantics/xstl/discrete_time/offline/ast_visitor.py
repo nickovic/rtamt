@@ -4,13 +4,13 @@ from rtamt.syntax.ast.visitor.xstl.ast_visitor import XStlAstVisitor
 
 class XStlDiscreteTimeOfflineAstVisitor(StlDiscreteTimeOfflineAstVisitor, XStlAstVisitor):
 
-    def visitTimedEventually(self, node, *args, **kwargs):
+    def visitShift(self, node, *args, **kwargs):
         sample = self.visit(node.children[0], *args, **kwargs)
-        val = self.interval_unit_transformer(node.val, node.val_unit)
+        val = self.time_unit_transformer(node.val, node.val_unit)
 
         head = [-float("inf") for i in range(val)]
-        tail  = sample[0:len(sample)-val]
-        result = head.append(tail)
+        tail  = [sample[i] for i in range(0, len(sample)-val)]
+        result = head + tail
         return result
 
 

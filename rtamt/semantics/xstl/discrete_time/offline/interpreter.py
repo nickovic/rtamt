@@ -1,0 +1,7 @@
+from rtamt.semantics.abstract_discrete_time_offline_interpreter import discrete_time_offline_interpreter_factory
+from rtamt.semantics.xstl.discrete_time.offline.ast_visitor import XStlDiscreteTimeOfflineAstVisitor
+
+
+def XStlDiscreteTimeOfflineInterpreter():
+    xstlDiscreteTimeOfflineInterpreter = discrete_time_offline_interpreter_factory(XStlDiscreteTimeOfflineAstVisitor)()
+    return xstlDiscreteTimeOfflineInterpreter
