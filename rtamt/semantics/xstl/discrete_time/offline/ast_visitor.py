@@ -9,7 +9,7 @@ class XStlDiscreteTimeOfflineAstVisitor(StlDiscreteTimeOfflineAstVisitor, XStlAs
         val = self.time_unit_transformer(node.val, node.val_unit)
 
         head = [-float("inf") for i in range(val)]
-        tail  = [sample[i] for i in range(0, len(sample)-val)]
+        tail = [sample[i] for i in range(0, len(sample)-val)]
         result = head + tail
         return result
 

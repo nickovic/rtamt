@@ -19,7 +19,7 @@ implementation of this special case.
 In the first step, we need to extend the `STL` grammar with the new syntax and 
 the new rules. We will use the name `XSTL` to denote the extended `STL` grammar. 
 
-In the first step, we need to extend the STL lexer and the parser. We consequently 
+We need to extend the STL lexer and the parser. We consequently 
 create the files `XStlLexer.g4` and `XStlParser.g4` files in `rtamt/antlr/grammar/tl`.
 The new lexer inherits the majority of the tokens from `StlLexer.g4`, and extends 
 it with the `shift` keyword.
@@ -137,62 +137,98 @@ class XStlAstParserVisitor(StlAstParserVisitor, XStlParserVisitor):
 ```
 
 Now that we have our internal representation of XSTL, we need to implement 
-the monitoring algorithm to treat the shift operator. We first implement 
-the `ShiftOperation` function that realizes the discrete-time online 
-monitor for the shift operator (`rtamt/semantics/xstl/discrete_time/online/shift_operation.py`)
-```
-from rtamt.semantics.abstract_online_operation import AbstractOnlineOperation
-import collections
+the monitoring algorithm to treat the shift operator. We show how to do it for 
+discrete-time offline monitoring algorithm. The other options 
+(dense-time, online) are done similarly.
 
-class ShiftOperation(AbstractOnlineOperation):
-    def __init__(self, val):
-        self.val = val
-        self.buffer = collections.deque(maxlen=(self.val + 1))
-
-        self.reset()
-
-    def reset(self):
-        for i in range(self.val + 1):
-            val = - float("inf")
-            self.buffer.append(val)
-
-    def update(self, sample):
-        self.buffer.append(sample)
-        return self.buffer[0]
-```
-
-We then create a custom visitor that associates `ShiftOperation` to the 
-`Shift` node and translates the shift value (with its associated time unit) 
-to an integer value that indicates how many logical steps the operand 
-must be shifted, depending on the sampling rate of the monitor. This is 
-done in `rtamt/semantics/xstl/discrete_time/online/ast_visitor.py`
+We create a custom visitor that implements the discrete-time 
+offline monitoring algorithm. This is 
+done in `rtamt/semantics/xstl/discrete_time/offline/ast_visitor.py`. 
+The new visitor inherits all monitoring functionality from
+`StlDiscreteTimeOfflineAstVisitor`, and only needs to implement 
+how to monitor the shift operation. Note that this is the place 
+(`time_unit_transforme`) where the real-time shift (given in the form of two strings 
+representing the value and the unit of the shift) is translated 
+to an integer, representing to how many (logical) steps the shift 
+corresponds, according to the sampling rate of the monitor.
 
 ```
-from rtamt.semantics.stl.discrete_time.online.ast_visitor import StlDiscreteTimeOnlineAstVisitor
-from rtamt.semantics.xstl.discrete_time.online.shift_operation import ShiftOperation
+from rtamt.semantics.stl.discrete_time.offline.ast_visitor import StlDiscreteTimeOfflineAstVisitor
 from rtamt.syntax.ast.visitor.xstl.ast_visitor import XStlAstVisitor
 
 
-class XStlDiscreteTimeOnlineAstVisitor(StlDiscreteTimeOnlineAstVisitor, XStlAstVisitor):
+class XStlDiscreteTimeOfflineAstVisitor(StlDiscreteTimeOfflineAstVisitor, XStlAstVisitor):
 
     def visitShift(self, node, *args, **kwargs):
-        self.visitChildren(node, *args, **kwargs)
+        sample = self.visit(node.children[0], *args, **kwargs)
         val = self.time_unit_transformer(node.val, node.val_unit)
-        self.online_operator_dict[node.name] = ShiftOperation(val)
+
+        head = [-float("inf") for i in range(val)]
+        tail = [sample[i] for i in range(0, len(sample)-val)]
+        result = head + tail
+        return result
 ```
 
-Finally, we associate the visitor to the XSTL discrete-time online interpreter in `rtamt/semantics/xstl/discrete_time/online/interpreter.py`
+Finally, we associate the visitor to the XSTL discrete-time offline interpreter in `rtamt/semantics/xstl/discrete_time/online/interpreter.py`
 ```
-from rtamt.semantics.abstract_discrete_time_online_interpreter import discrete_time_online_interpreter_factory
-from rtamt.semantics.xstl.discrete_time.online.ast_visitor import XStlDiscreteTimeOnlineAstVisitor
+from rtamt.semantics.abstract_discrete_time_offline_interpreter import discrete_time_offline_interpreter_factory
+from rtamt.semantics.xstl.discrete_time.offline.ast_visitor import XStlDiscreteTimeOfflineAstVisitor
 
 
-def XStlDiscreteTimeOnlineInterpreter():
-    xstlDiscreteTimeOnlineInterpreter = discrete_time_online_interpreter_factory(XStlDiscreteTimeOnlineAstVisitor)()
-    return xstlDiscreteTimeOnlineInterpreter
+def XStlDiscreteTimeOfflineInterpreter():
+    xstlDiscreteTimeOfflineInterpreter = discrete_time_offline_interpreter_factory(XStlDiscreteTimeOfflineAstVisitor)()
+    return xstlDiscreteTimeOfflineInterpreter
 ```
 
+Finally, we need to provide an API for the user to access the 
+extended monitoring functionality. This is done in 
+`rtamt/spec/xstl/specification.py`, where we define 
+`XStlDiscreteTimeOfflineSpecification`.
 
-As the last step, we add `XSTLDiscreteTimeOnlineSpecification` to `rtamt/__init__.py`, 
+```
+from rtamt.pastifier.xstl.pastifier import XStlPastifier
+from rtamt.semantics.xstl.discrete_time.offline.interpreter import XStlDiscreteTimeOfflineInterpreter
+from rtamt.spec.abstract_specification import AbstractOnlineSpecification, AbstractOfflineSpecification
+from rtamt.syntax.ast.parser.xstl.specification_parser import XStlAst
+
+
+def XStlDiscreteTimeOfflineSpecification():
+    spec = AbstractOfflineSpecification(XStlAst(), XStlDiscreteTimeOfflineInterpreter())
+    return spec
+```
+
+In the last step, we add `XSTLDiscreteTimeOfflineSpecification` to `rtamt/__init__.py`, 
 so that the user can instantiate the monitor using 
 `rtamt.XSTLDiscreteTimeOnlineSpecification` syntax. 
+
+A unit test showing how to instantiate the new monitor and checking
+the correctness of the implementation is available in 
+`tests/python/api/test_xstl.py`.
+
+```
+import unittest
+import rtamt
+
+
+class XStlTest(unittest.TestCase):
+
+    def __init__(self, *args, **kwargs):
+        super(XStlTest, self).__init__(*args, **kwargs)
+
+    def test_shift_offline(self):
+        spec = rtamt.XStlDiscreteTimeOfflineSpecification()
+        spec.declare_var('req', 'float')
+        spec.declare_var('out', 'float')
+        spec.spec = 'out = shift(req, 2)'
+
+        spec.parse()
+
+        dataset = {
+            'time': [0, 1, 2, 3, 4],
+            'req': [100, -1, -2, 5, -1]
+        }
+
+        out = spec.evaluate(dataset)
+        expected = [[0, -float("inf")], [1, -float("inf")], [2, 100], [3, -1], [4, -2]]
+        self.assertEqual(out, expected)
+```
