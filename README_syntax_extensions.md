@@ -5,10 +5,13 @@
 
 - [Syntax Extension](#syntax-extension)
   - [Overview](#overview)
-  - [Extend ANTLR grammar](#extend-antlr-grammar)
-  - [Extend RTAMT AST node](#extend-rtamt-ast-node)
-  - [Extend RTAMT AST visitor](#extend-rtamt-ast-visitor)
+  - [Extend Syntax](#extend-syntax)
+    - [ANTLR grammar](#antlr-grammar)
+    - [RTAMT AST node](#rtamt-ast-node)
+    - [RTAMT AST visitor](#rtamt-ast-visitor)
   - [Extend semantics](#extend-semantics)
+  - [Merge syntax and semantics in API](#merge-syntax-and-semantics-in-api)
+  - [Test](#test)
 
 <!-- markdown-toc end -->
 
@@ -16,7 +19,9 @@
 
 This document gives an example of how RTAMT library can be extended in a way that maximizes reuse of existing code.
 
-## Extend ANTLR grammar
+## Extend Syntax
+
+### ANTLR grammar
 
 In this part of the tutorial, we want to extend `RTAMT` with a `Shift` operator,
 where `shift(phi, v)` is equivalent to `once[v,v] phi`, providing a more efficient implementation of this special case.
@@ -71,7 +76,7 @@ expression
     ;
 ```
 
-## Extend RTAMT AST node
+### RTAMT AST node
 
 In the subsequent step, we need to create an internal representation for the shift node. We create a `Shift` node class in `rtamt/syntax/node/xstl/shift.py`.
 
@@ -111,7 +116,7 @@ def XStlAst():
     return xstlAst
 ```
 
-## Extend RTAMT AST visitor
+### RTAMT AST visitor
 
 The actual visitor for XSTL formulas (that extends the default visitor created by ANTLR4) inherits most visit rules from its STL counterpart. The only visit rule that needs to be implemented is for the shift rule. This is done in `rtamt/syntax/ast/parser/xstl/parser_visitor.py`
 
@@ -171,6 +176,8 @@ def XStlDiscreteTimeOfflineInterpreter():
     return xstlDiscreteTimeOfflineInterpreter
 ```
 
+## Merge syntax and semantics in API
+
 Finally, we need to provide an API for the user to access the extended monitoring functionality. This is done in `rtamt/spec/xstl/specification.py`, where we define `XStlDiscreteTimeOfflineSpecification`.
 
 ```python
@@ -186,6 +193,8 @@ def XStlDiscreteTimeOfflineSpecification():
 ```
 
 In the last step, we add `XSTLDiscreteTimeOfflineSpecification` to `rtamt/__init__.py`, so that the user can instantiate the monitor using `rtamt.XSTLDiscreteTimeOnlineSpecification` syntax.
+
+## Test
 
 A unit test showing how to instantiate the new monitor and checking
 the correctness of the implementation is available in `tests/python/api/test_xstl.py`.
