@@ -1,30 +1,32 @@
+# Syntax Extension
+
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->
 **Table of Contents**
 
-- [Introduction](#introduction)
-- [Syntactic Extension](#syntactic-extension)
+- [Syntax Extension](#syntax-extension)
+  - [Overview](#overview)
+  - [Extend ANTLR grammar](#extend-antlr-grammar)
+  - [Extend RTAMT AST node](#extend-rtamt-ast-node)
+  - [Extend RTAMT AST visitor](#extend-rtamt-ast-visitor)
+  - [Extend semantics](#extend-semantics)
 
 <!-- markdown-toc end -->
 
-# Introduction
+## Overview
 
-This document gives several examples of how RTAMT library can be extended in a way that maximizes reuse of existing code.
+This document gives an example of how RTAMT library can be extended in a way that maximizes reuse of existing code.
 
-# Syntactic Extension
+## Extend ANTLR grammar
 
-In this part of the tutorial, we want to extend `RTAMT` with a `Shift` operator, 
-where `shift(phi, v)` is equivalent to `once[v,v] phi`, providing a more efficient 
-implementation of this special case.
+In this part of the tutorial, we want to extend `RTAMT` with a `Shift` operator,
+where `shift(phi, v)` is equivalent to `once[v,v] phi`, providing a more efficient implementation of this special case.
 
-In the first step, we need to extend the `STL` grammar with the new syntax and 
-the new rules. We will use the name `XSTL` to denote the extended `STL` grammar. 
+In the first step, we need to extend the `STL` grammar with the new syntax and the new rules. We will use the name `XSTL` to denote the extended `STL` grammar.
 
-We need to extend the STL lexer and the parser. We consequently 
-create the files `XStlLexer.g4` and `XStlParser.g4` files in `rtamt/antlr/grammar/tl`.
-The new lexer inherits the majority of the tokens from `StlLexer.g4`, and extends 
-it with the `shift` keyword.
+We need to extend the STL lexer and the parser. We consequently create the files `XStlLexer.g4` and `XStlParser.g4` files in `rtamt/antlr/grammar/tl`.
+The new lexer inherits the majority of the tokens from `StlLexer.g4`, and extends it with the `shift` keyword.
 
-```
+```ANTLR
 lexer grammar XStlLexer ;
 
 import StlLexer;
@@ -33,9 +35,9 @@ ShiftOperator
 	: 'shift';
 ```
 
-Similarly, `XStlParser.g4` inherits the majority of rules from `StlParser.g4`. It 
-only needs to redefine the `expresssion` and add the `shift` rule to it.
-```
+Similarly, `XStlParser.g4` inherits the majority of rules from `StlParser.g4`. It only needs to redefine the `expresssion` and add the `shift` rule to it.
+
+```ANTLR
 parser grammar XStlParser ;
 import StlParser;
 
@@ -69,9 +71,11 @@ expression
     ;
 ```
 
-In the subsequent step, we need to create an internal representation for the 
-shift node. We create a `Shift` node class in `rtamt/syntax/node/xstl/shift.py`.
-```
+## Extend RTAMT AST node
+
+In the subsequent step, we need to create an internal representation for the shift node. We create a `Shift` node class in `rtamt/syntax/node/xstl/shift.py`.
+
+```python
 from rtamt.syntax.node.unary_node import UnaryNode
 
 
@@ -87,16 +91,11 @@ class Shift(UnaryNode):
         self.name = 'shift(' + child.name + ',' + str(val) + str(val_unit) + ')'
 ```
 
-Similarly to timed temporal operator nodes, `Shift` takes as input 
-the value by which the operand must be shifted in terms of two strings - 
-`val` representation of a decimal number and `val_unit` unit of the 
-value.
+Similarly to timed temporal operator nodes, `Shift` takes as input the value by which the operand must be shifted in terms of two strings - `val` representation of a decimal number and `val_unit` unit of the value.
 
-Now, we are ready to parse XSTL formulas and create an internal representation 
-of the AST. We first create an `XStlAst` object, similar to `StlAst` in 
-`rtamt/syntax/ast/parser/xstl/specification_parser.py`
+Now, we are ready to parse XSTL formulas and create an internal representation of the AST. We first create an `XStlAst` object, similar to `StlAst` in `rtamt/syntax/ast/parser/xstl/specification_parser.py`
 
-```
+```python
 from rtamt.syntax.ast.parser.abstract_ast_parser import ast_factory
 from rtamt.syntax.ast.parser.xstl.parser_visitor import XStlAstParserVisitor
 from rtamt.antlr.parser.xstl.XStlLexer import XStlLexer
@@ -112,12 +111,11 @@ def XStlAst():
     return xstlAst
 ```
 
-The actual visitor for XSTL formulas (that extends the default visitor created 
-by ANTLR4) inherits most visit rules from its STL counterpart. The only visit 
-rule that needs to be implemented is for the shift rule. This is done in 
-`rtamt/syntax/ast/parser/xstl/parser_visitor.py`
+## Extend RTAMT AST visitor
 
-```
+The actual visitor for XSTL formulas (that extends the default visitor created by ANTLR4) inherits most visit rules from its STL counterpart. The only visit rule that needs to be implemented is for the shift rule. This is done in `rtamt/syntax/ast/parser/xstl/parser_visitor.py`
+
+```python
 from rtamt.antlr.parser.xstl.XStlParserVisitor import XStlParserVisitor
 from rtamt.syntax.ast.parser.stl.parser_visitor import StlAstParserVisitor
 from rtamt.syntax.node.xstl.shift import Shift
@@ -136,23 +134,15 @@ class XStlAstParserVisitor(StlAstParserVisitor, XStlParserVisitor):
         return node
 ```
 
-Now that we have our internal representation of XSTL, we need to implement 
-the monitoring algorithm to treat the shift operator. We show how to do it for 
-discrete-time offline monitoring algorithm. The other options 
-(dense-time, online) are done similarly.
+## Extend semantics
 
-We create a custom visitor that implements the discrete-time 
-offline monitoring algorithm. This is 
-done in `rtamt/semantics/xstl/discrete_time/offline/ast_visitor.py`. 
+Now that we have our internal representation of XSTL, we need to implement the monitoring algorithm to treat the shift operator. We show how to do it for discrete-time offline monitoring algorithm. The other options (dense-time, online) are done similarly.
+
+We create a custom visitor that implements the discrete-time offline monitoring algorithm. This is done in `rtamt/semantics/xstl/discrete_time/offline/ast_visitor.py`.
 The new visitor inherits all monitoring functionality from
-`StlDiscreteTimeOfflineAstVisitor`, and only needs to implement 
-how to monitor the shift operation. Note that this is the place 
-(`time_unit_transforme`) where the real-time shift (given in the form of two strings 
-representing the value and the unit of the shift) is translated 
-to an integer, representing to how many (logical) steps the shift 
-corresponds, according to the sampling rate of the monitor.
+`StlDiscreteTimeOfflineAstVisitor`, and only needs to implement how to monitor the shift operation. Note that this is the place (`time_unit_transforme`) where the real-time shift (given in the form of two strings representing the value and the unit of the shift) is translated to an integer, representing to how many (logical) steps the shift corresponds, according to the sampling rate of the monitor.
 
-```
+```python
 from rtamt.semantics.stl.discrete_time.offline.ast_visitor import StlDiscreteTimeOfflineAstVisitor
 from rtamt.syntax.ast.visitor.xstl.ast_visitor import XStlAstVisitor
 
@@ -170,7 +160,8 @@ class XStlDiscreteTimeOfflineAstVisitor(StlDiscreteTimeOfflineAstVisitor, XStlAs
 ```
 
 Finally, we associate the visitor to the XSTL discrete-time offline interpreter in `rtamt/semantics/xstl/discrete_time/online/interpreter.py`
-```
+
+```python
 from rtamt.semantics.abstract_discrete_time_offline_interpreter import discrete_time_offline_interpreter_factory
 from rtamt.semantics.xstl.discrete_time.offline.ast_visitor import XStlDiscreteTimeOfflineAstVisitor
 
@@ -180,12 +171,9 @@ def XStlDiscreteTimeOfflineInterpreter():
     return xstlDiscreteTimeOfflineInterpreter
 ```
 
-Finally, we need to provide an API for the user to access the 
-extended monitoring functionality. This is done in 
-`rtamt/spec/xstl/specification.py`, where we define 
-`XStlDiscreteTimeOfflineSpecification`.
+Finally, we need to provide an API for the user to access the extended monitoring functionality. This is done in `rtamt/spec/xstl/specification.py`, where we define `XStlDiscreteTimeOfflineSpecification`.
 
-```
+```python
 from rtamt.pastifier.xstl.pastifier import XStlPastifier
 from rtamt.semantics.xstl.discrete_time.offline.interpreter import XStlDiscreteTimeOfflineInterpreter
 from rtamt.spec.abstract_specification import AbstractOnlineSpecification, AbstractOfflineSpecification
@@ -197,15 +185,12 @@ def XStlDiscreteTimeOfflineSpecification():
     return spec
 ```
 
-In the last step, we add `XSTLDiscreteTimeOfflineSpecification` to `rtamt/__init__.py`, 
-so that the user can instantiate the monitor using 
-`rtamt.XSTLDiscreteTimeOnlineSpecification` syntax. 
+In the last step, we add `XSTLDiscreteTimeOfflineSpecification` to `rtamt/__init__.py`, so that the user can instantiate the monitor using `rtamt.XSTLDiscreteTimeOnlineSpecification` syntax.
 
 A unit test showing how to instantiate the new monitor and checking
-the correctness of the implementation is available in 
-`tests/python/api/test_xstl.py`.
+the correctness of the implementation is available in `tests/python/api/test_xstl.py`.
 
-```
+```python
 import unittest
 import rtamt
 
