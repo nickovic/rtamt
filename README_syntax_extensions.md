@@ -10,7 +10,7 @@
     - [RTAMT AST node](#rtamt-ast-node)
     - [RTAMT AST visitor](#rtamt-ast-visitor)
   - [Extend semantics](#extend-semantics)
-  - [Merge syntax and semantics in API](#merge-syntax-and-semantics-in-api)
+  - [Merge syntax and semantics into spec](#merge-syntax-and-semantics-into-spec)
   - [Test](#test)
 
 <!-- markdown-toc end -->
@@ -18,6 +18,24 @@
 ## Overview
 
 This document gives an example of how RTAMT library can be extended in a way that maximizes reuse of existing code.
+
+This is code architecture of RTAMT.
+![architecture](figures/architecture.png "architecture")
+To extend temporal logic XSTL, we need to implement both Syntax and Semantics layer. Finally we may merge the syntax and semantics into a spec in specification layer.
+
+In syntax extension, we may need three steps.
+
+1. Define syntax
+   1. based on AMTLR.
+   We may extend `parser` (parser.g4) and `lexer` (lexer.g4). ANTLR can auto generate ParserVisitor.
+   1. Extend RTAMT AST node and parser.
+   Since RTAMT utilizing its AST, we need to extend `AbstractAst`. This time we extend `StlAst` since XSTL is very closed to STL.
+   1. Extend RTAMT AST visitor.
+   Regarding above, we may extend `AbstractAstVisitor` as well to enable any semantics layer visitors can visit. That is very crucial class in RTAMT. We extend `StlAstVisitor` since XSTL is very closed to STL.
+1. Extend semantics
+Based on the new visitor, we may extend `AbstractDiscreteTimeOfflineInterpreter` in offline fashion. We extend `AstDiscreteTimeOfflineInterpreter` since XSTL is very closed to STL.
+1. Merge syntax and semantics into spec.
+That connects the syntax and semantics into spec class with a few lines of codes based on `AbstractOfflineSpecification`.
 
 ## Extend Syntax
 
@@ -98,26 +116,6 @@ class Shift(UnaryNode):
 
 Similarly to timed temporal operator nodes, `Shift` takes as input the value by which the operand must be shifted in terms of two strings - `val` representation of a decimal number and `val_unit` unit of the value.
 
-Now, we are ready to parse XSTL formulas and create an internal representation of the AST. We first create an `XStlAst` object, similar to `StlAst` in `rtamt/syntax/ast/parser/xstl/specification_parser.py`
-
-```python
-from rtamt.syntax.ast.parser.abstract_ast_parser import ast_factory
-from rtamt.syntax.ast.parser.xstl.parser_visitor import XStlAstParserVisitor
-from rtamt.antlr.parser.xstl.XStlLexer import XStlLexer
-from rtamt.antlr.parser.xstl.XStlParser import XStlParser
-from rtamt.antlr.parser.xstl.error.parser_error_listener import XSTLParserErrorListener
-
-
-def XStlAst():
-    antrlLexerType = globals()['XStlLexer']
-    antrlParserType = globals()['XStlParser']
-    parserErrorListenerType = globals()['XSTLParserErrorListener']   #optional
-    xstlAst = ast_factory(XStlAstParserVisitor)(antrlLexerType, antrlParserType, parserErrorListenerType)
-    return xstlAst
-```
-
-### RTAMT AST visitor
-
 The actual visitor for XSTL formulas (that extends the default visitor created by ANTLR4) inherits most visit rules from its STL counterpart. The only visit rule that needs to be implemented is for the shift rule. This is done in `rtamt/syntax/ast/parser/xstl/parser_visitor.py`
 
 ```python
@@ -138,6 +136,53 @@ class XStlAstParserVisitor(StlAstParserVisitor, XStlParserVisitor):
         node = Shift(child, val, val_unit)
         return node
 ```
+
+Now, we are ready to parse XSTL formulas and create an internal representation of the AST. We may create an `XStlAst` object that merge `XStlLexer` and `XStlParser` from ANTLR, and `XStlAstParserVisitor` that enables to parse RTAMT AST in specific XSTL case similar to `StlAst` in `rtamt/syntax/ast/parser/xstl/specification_parser.py`
+
+```python
+from rtamt.syntax.ast.parser.abstract_ast_parser import ast_factory
+from rtamt.syntax.ast.parser.xstl.parser_visitor import XStlAstParserVisitor
+from rtamt.antlr.parser.xstl.XStlLexer import XStlLexer
+from rtamt.antlr.parser.xstl.XStlParser import XStlParser
+from rtamt.antlr.parser.xstl.error.parser_error_listener import XSTLParserErrorListener
+
+
+def XStlAst():
+    antrlLexerType = globals()['XStlLexer']
+    antrlParserType = globals()['XStlParser']
+    parserErrorListenerType = globals()['XSTLParserErrorListener']   #optional
+    xstlAst = ast_factory(XStlAstParserVisitor)(antrlLexerType, antrlParserType, parserErrorListenerType)
+    return xstlAst
+```
+
+### RTAMT AST visitor
+
+Above section enables to generate XSTL AST based on RTAMT AST. Now we may construct its visitor. We may extend `StlAstVisitor` since the XSTL is very closed to StlAstVisitor. However, we may also implement it from scratch based on `AbstractAstVisitor`.
+
+```python
+from rtamt.exception.stl.exception import STLVisitorException
+from rtamt.syntax.ast.visitor.stl.ast_visitor import StlAstVisitor
+from rtamt.syntax.node.xstl.shift import Shift
+
+
+class XStlAstVisitor(StlAstVisitor):
+
+    def visit(self, node, *args, **kwargs):
+        if isinstance(node, Shift):
+            result = self.visitShift(node, *args, **kwargs)
+        else:
+            result = super(XStlAstVisitor, self).visit(node, *args, **kwargs)
+
+        return result
+
+    def visitShift(self, node, *args, **kwargs):
+        return self.visitChildren(node, *args, **kwargs)
+
+    def raise_exception(self, text):
+        raise STLVisitorException(text)
+```
+
+This `XStlAstVisitor` becomes a crucial class for semantics layer below.
 
 ## Extend semantics
 
@@ -176,9 +221,9 @@ def XStlDiscreteTimeOfflineInterpreter():
     return xstlDiscreteTimeOfflineInterpreter
 ```
 
-## Merge syntax and semantics in API
+## Merge syntax and semantics into spec
 
-Finally, we need to provide an API for the user to access the extended monitoring functionality. This is done in `rtamt/spec/xstl/specification.py`, where we define `XStlDiscreteTimeOfflineSpecification`.
+Finally, we need to provide an spec for the user to access the extended monitoring functionality. Simply the class marge syntax `XStlAst` and semantics `XStlDiscreteTimeOfflineInterpreter`. This is done in `rtamt/spec/xstl/specification.py`, where we define `XStlDiscreteTimeOfflineSpecification`.
 
 ```python
 from rtamt.pastifier.xstl.pastifier import XStlPastifier
