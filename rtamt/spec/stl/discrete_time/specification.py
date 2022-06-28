@@ -13,7 +13,7 @@ from rtamt.semantics.iastl.discrete_time.offline.interpreter import IAStlOutputR
 from rtamt.semantics.enumerations.options import *
 from rtamt.pastifier.stl.pastifier import StlPastifier
 
-def STLDiscreteTimeSpecification(semantics=Semantics.STANDARD, language=Language.PYTHON):
+def StlDiscreteTimeSpecification(semantics=Semantics.STANDARD, language=Language.PYTHON):
     """
     A class used as a container for STL continuous time specifications
        Inherits STLSpecification
