@@ -13,9 +13,8 @@ from rtamt.exception.exception import RTAMTException
 from rtamt.semantics.enumerations.io_type import StlIOType
 from rtamt.semantics.enumerations.options import Language, Semantics, TimeInterpretation
 
-#TODO: reconfigure it after refactoring
-from rtamt.spec.stl.discrete_time.specification import STLDiscreteTimeSpecification
-from rtamt.spec.stl.discrete_time.specification import STLDiscreteTimeSpecification as STLSpecification
+from rtamt.spec.stl.discrete_time.specification import StlDiscreteTimeSpecification
+from rtamt.spec.stl.discrete_time.specification import StlDiscreteTimeSpecification as StlSpecification
 from rtamt.spec.stl.discrete_time.specification import StlDiscreteTimeOfflineSpecification
 from rtamt.spec.stl.discrete_time.specification import StlDiscreteTimeOnlineSpecification
 from rtamt.spec.stl.discrete_time.specification import StlDiscreteTimeOnlineSpecificationCpp
@@ -23,6 +22,3 @@ from rtamt.spec.stl.dense_time.specification import STLDenseTimeSpecification
 from rtamt.spec.stl.dense_time.specification import STLDenseTimeSpecification as STLCTSpecification
 from rtamt.spec.stl.dense_time.specification import StlDenseTimeOfflineSpecification
 from rtamt.spec.stl.dense_time.specification import StlDenseTimeOnlineSpecification
-
-#from rtamt.spec.ltl.discrete_time.specification import LTLDiscreteTimeSpecification
-#from rtamt.spec.ltl.discrete_time.specification import LTLDiscreteTimeSpecification as LTLSpecification

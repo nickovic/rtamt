@@ -94,6 +94,9 @@ class AbstractAst:
 
         self.specs = []
 
+        self.out_var = None
+        self.out_var_field = None
+
         #TODO Tom did not understand it well.
         # 1) Is it only stl? I don't think so
         # 2) Maybe we may consider where we may handle C++/python switch. Maybe semantics layer.
@@ -132,6 +135,21 @@ class AbstractAst:
         self.visit(ctx.specification())
         return
 
+    @property
+    def out_var(self):
+        return self.__out_var
+
+    @out_var.setter
+    def out_var(self, out_var):
+        self.__out_var = out_var
+
+    @property
+    def out_var_field(self):
+        return self.__out_var_field
+
+    @out_var_field.setter
+    def out_var_field(self, out_var_field):
+        self.__out_var_field = out_var_field
 
     @property
     def spec(self):
