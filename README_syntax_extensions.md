@@ -37,6 +37,9 @@ Based on the new visitor, we may extend `AbstractDiscreteTimeOfflineInterpreter`
 1. Merge syntax and semantics into spec.
 That connects the syntax and semantics into spec class with a few lines of codes based on `AbstractOfflineSpecification`.
 
+Here is class diagram in specific XSTL case.
+![XStlClass](figures/XSTLclass.png "XStlClass")
+
 ## Extend Syntax
 
 ### ANTLR grammar
