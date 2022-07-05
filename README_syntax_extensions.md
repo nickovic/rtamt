@@ -33,7 +33,7 @@ In syntax extension, we may need three steps.
    1. Extend RTAMT AST visitor.
    Regarding above, we may extend `AbstractAstVisitor` as well to enable any semantics layer visitors can visit. That is very crucial class in RTAMT. We extend `StlAstVisitor` since XSTL is very closed to STL.
 1. Extend semantics
-Based on the new visitor, we may extend `AbstractDiscreteTimeOfflineInterpreter` in offline fashion. We extend `AstDiscreteTimeOfflineInterpreter` since XSTL is very closed to STL.
+Based on the new visitor, we may extend `AbstractDiscreteTimeOfflineInterpreter` in offline fashion. We extend `StlDiscreteTimeOfflineInterpreter` since XSTL is very closed to STL.
 1. Merge syntax and semantics into spec.
 That connects the syntax and semantics into spec class with a few lines of codes based on `AbstractOfflineSpecification`.
 
