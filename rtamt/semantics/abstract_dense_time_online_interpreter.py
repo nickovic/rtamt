@@ -34,6 +34,10 @@ class AbstractDenseTimeOnlineInterpreter(AbstractOnlineInterpreter, DenseTimeInt
         # evaluate spec forest
         rob = self.updateVisitor.visitAst(self.ast, self.online_operator_dict, self.ast.var_object_dict)[0]
 
+        out = self.ast.var_object_dict[self.ast.out_var]
+        if self.ast.out_var_field:
+            setattr(out, self.ast.out_var_field, rob)
+
         self.ast.var_object_dict = self.ast.var_object_dict.fromkeys(self.ast.var_object_dict, [])  #TODO I did not understand it.
 
         return rob
@@ -55,11 +59,13 @@ class AbstractDenseTimeOnlineInterpreter(AbstractOnlineInterpreter, DenseTimeInt
 
 class DenseTimeOnlineUpdateVisitor(AbstractOnlineUpdateVisitor):
     def visitVariable(self, node, online_operator_dict, var_object_dict):
-        var = var_object_dict[node.var]
+        vals = var_object_dict[node.var]
         if node.field:  #TODO Tom did not understand this line.
-            sample_return = operator.attrgetter(node.field)(var)
+            sample_return = []
+            for val in vals:
+                sample_return.append([val[0], operator.attrgetter(node.field)(val[1])])
         else:
-            sample_return = var
+            sample_return = vals
         return sample_return
 
     def visitConstant(self, node, online_operator_dict, var_object_dict):

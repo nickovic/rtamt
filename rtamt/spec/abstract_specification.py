@@ -23,6 +23,7 @@ class AbstractSpecification(object):
         self.out_var_field = ''
         self.var_topic_dict = dict()
         self.free_vars = set()
+        self.var_object_dict = dict()
 
         #TODO we need to move it to RTAMT4ROS as wrapper
         self.modules = dict()
@@ -85,6 +86,15 @@ class AbstractSpecification(object):
     @var_topic_dict.setter
     def var_topic_dict(self, var_topic_dict):
         pass
+
+    @property
+    def var_object_dict(self):
+        return self.ast.var_object_dict
+
+    @var_object_dict.setter
+    def var_object_dict(self, var_object_dict):
+        self.__var_object_dict = var_object_dict
+        self.ast.var_object_dict = self.var_object_dict
 
     @property
     def free_vars(self):

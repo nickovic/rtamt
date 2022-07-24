@@ -9,6 +9,18 @@ class DiscreteTimeInterpreter(TimeInterpreter):
 
         self.DEFAULT_TOLERANCE = float(0.1)
 
+        self.S_UNIT = int(1000000000)
+        self.MS_UNIT = int(1000000)
+        self.US_UNIT = int(1000)
+        self.NS_UNIT = int(1)
+
+        self.U = {
+            's': self.S_UNIT,
+            'ms': self.MS_UNIT,
+            'us': self.US_UNIT,
+            'ns': self.NS_UNIT
+        }
+
         # Default sampling period - 1s
         self.sampling_period = int(1)
         self.sampling_period_unit = 's'
@@ -69,7 +81,7 @@ class DiscreteTimeInterpreter(TimeInterpreter):
         return self.sampling_period * self.U[self.sampling_period_unit]
 
     def get_sampling_frequency(self):
-        return 1e12 * 1/self.sampling_period
+        return 1e9 * 1/self.get_sampling_period()
 
 
     #input format
