@@ -1,5 +1,5 @@
-from rtamt import STLDiscreteTimeSpecification
-from rtamt import STLDenseTimeSpecification
+from rtamt import StlDiscreteTimeSpecification
+from rtamt import StlDenseTimeSpecification
 
 
 class OfflineMonitors():
@@ -41,7 +41,7 @@ class OfflineMonitors():
         """
 
         print('DISCRETE OFFLINE WITH PASTIFICATION')
-        phi = STLDiscreteTimeSpecification()
+        phi = StlDiscreteTimeSpecification()
 
         phi.unit = 's'
         phi.set_sampling_period(0.1, 's', 0.1)
@@ -60,7 +60,7 @@ class OfflineMonitors():
         """
 
         print('DISCRETE OFFLINE WITHOUT PASTIFICATION')
-        phi = STLDiscreteTimeSpecification()
+        phi = StlDiscreteTimeSpecification()
 
         phi.unit = 's'
         phi.set_sampling_period(0.1, 's', 0.1)
@@ -78,7 +78,7 @@ class OfflineMonitors():
         """
 
         print('DENSE OFFLINE WITH PASTIFICATION')
-        phi = STLDenseTimeSpecification()
+        phi = StlDenseTimeSpecification()
 
         phi.set_sampling_period(0.1, 's', 0.1)
         phi.declare_var('x', 'float')
@@ -96,7 +96,7 @@ class OfflineMonitors():
         """
 
         print('DENSE OFFLINE WITHOUT PASTIFICATION')
-        phi = STLDenseTimeSpecification()
+        phi = StlDenseTimeSpecification()
 
         phi.declare_var('x', 'float')
         phi.spec = self.spec

@@ -22,7 +22,7 @@ def monitor():
     # Example - offline robustness
     #
     # # #
-    spec = rtamt.STLDenseTimeSpecification()
+    spec = rtamt.StlDenseTimeSpecification()
     spec.name = 'Example 1'
     spec.declare_var('req', 'float')
     spec.declare_var('gnt', 'float')
@@ -46,7 +46,7 @@ def monitor():
     # Example - online robustness
     #
     # # #
-    spec = rtamt.STLDenseTimeSpecification()
+    spec = rtamt.StlDenseTimeSpecification()
     spec.name = 'Example 1'
     spec.declare_var('req', 'float')
     spec.declare_var('gnt', 'float')

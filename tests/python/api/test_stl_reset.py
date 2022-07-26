@@ -1,14 +1,14 @@
 import unittest
 import math
 
-from rtamt.spec.stl.discrete_time.specification import STLDiscreteTimeSpecification
+from rtamt.spec.stl.discrete_time.specification import StlDiscreteTimeSpecification
 
 class TestStlReset(unittest.TestCase):
     def __init__(self, *args, **kwargs):
         super(TestStlReset, self).__init__(*args, **kwargs)
 
     def test_constant(self):
-        spec = STLDiscreteTimeSpecification()
+        spec = StlDiscreteTimeSpecification()
         spec.declare_var('out', 'float')
         spec.spec = 'out = 5'
         spec.parse()
@@ -25,7 +25,7 @@ class TestStlReset(unittest.TestCase):
         self.assertEqual(5, out, 'Constant reset assertion')
 
     def test_variable(self):
-        spec = STLDiscreteTimeSpecification()
+        spec = StlDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = req'
@@ -43,7 +43,7 @@ class TestStlReset(unittest.TestCase):
         self.assertEqual(3.3, out, 'Variable reset assertion')
 
     def test_abs(self):
-        spec = STLDiscreteTimeSpecification()
+        spec = StlDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = abs(req)'
@@ -62,7 +62,7 @@ class TestStlReset(unittest.TestCase):
 
 
     def test_sqrt(self):
-        spec = STLDiscreteTimeSpecification()
+        spec = StlDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = sqrt(abs(req))'
@@ -80,7 +80,7 @@ class TestStlReset(unittest.TestCase):
         self.assertEqual(math.sqrt(3.3), out, 'Abs reset assertion')
 
     def test_exp(self):
-        spec = STLDiscreteTimeSpecification()
+        spec = StlDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = exp(req)'
@@ -98,7 +98,7 @@ class TestStlReset(unittest.TestCase):
         self.assertEqual(math.exp(-3.3), out, 'Abs reset assertion')
 
     def test_pow(self):
-        spec = STLDiscreteTimeSpecification()
+        spec = StlDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = pow(2,req)'
@@ -116,7 +116,7 @@ class TestStlReset(unittest.TestCase):
         self.assertEqual(math.pow(2,-3.3), out, 'Abs reset assertion')
 
     def test_addition(self):
-        spec = STLDiscreteTimeSpecification()
+        spec = StlDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
@@ -135,7 +135,7 @@ class TestStlReset(unittest.TestCase):
         self.assertEqual(3.3 + 4.3, out, 'Addition reset assertion')
 
     def test_subtraction(self):
-        spec = STLDiscreteTimeSpecification()
+        spec = StlDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
@@ -154,7 +154,7 @@ class TestStlReset(unittest.TestCase):
         self.assertEqual(3.3 - 4.3, out, 'Subtraction reset assertion')
 
     def test_multiplication(self):
-        spec = STLDiscreteTimeSpecification()
+        spec = StlDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
@@ -173,7 +173,7 @@ class TestStlReset(unittest.TestCase):
         self.assertEqual(3.3 * 4.3, out, 'Multiplication reset assertion')
 
     def test_division(self):
-        spec = STLDiscreteTimeSpecification()
+        spec = StlDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
@@ -192,7 +192,7 @@ class TestStlReset(unittest.TestCase):
         self.assertEqual(3.3 / 4.3, out, 'Division reset assertion')
 
     def test_predicate_leq(self):
-        spec = STLDiscreteTimeSpecification()
+        spec = StlDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
@@ -211,7 +211,7 @@ class TestStlReset(unittest.TestCase):
         self.assertEqual(4.3 - 3.3, out, 'Predicate <= reset assertion')
 
     def test_predicate_less(self):
-        spec = STLDiscreteTimeSpecification()
+        spec = StlDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
@@ -230,7 +230,7 @@ class TestStlReset(unittest.TestCase):
         self.assertEqual(4.3 - 3.3, out, 'Predicate < reset assertion')
 
     def test_predicate_geq(self):
-        spec = STLDiscreteTimeSpecification()
+        spec = StlDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
@@ -249,7 +249,7 @@ class TestStlReset(unittest.TestCase):
         self.assertEqual(-4.3 + 3.3, out, 'Predicate >= reset assertion')
 
     def test_predicate_greater(self):
-        spec = STLDiscreteTimeSpecification()
+        spec = StlDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
@@ -268,7 +268,7 @@ class TestStlReset(unittest.TestCase):
         self.assertEqual(-4.3 + 3.3, out, 'Predicate > reset assertion')
 
     def test_predicate_eq(self):
-        spec = STLDiscreteTimeSpecification()
+        spec = StlDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
@@ -287,7 +287,7 @@ class TestStlReset(unittest.TestCase):
         self.assertEqual(-4.3 + 3.3, out, 'Predicate == reset assertion')
 
     def test_predicate_neq(self):
-        spec = STLDiscreteTimeSpecification()
+        spec = StlDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
@@ -306,7 +306,7 @@ class TestStlReset(unittest.TestCase):
         self.assertEqual(4.3 - 3.3, out, 'Predicate == reset assertion')
 
     def test_not(self):
-        spec = STLDiscreteTimeSpecification()
+        spec = StlDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = not(req)'
@@ -324,7 +324,7 @@ class TestStlReset(unittest.TestCase):
         self.assertEqual(3.3, out, 'Negation reset assertion')
 
     def test_conjunction(self):
-        spec = STLDiscreteTimeSpecification()
+        spec = StlDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
@@ -343,7 +343,7 @@ class TestStlReset(unittest.TestCase):
         self.assertEqual(3.3, out, 'And reset assertion')
 
     def test_disjunction(self):
-        spec = STLDiscreteTimeSpecification()
+        spec = StlDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
@@ -362,7 +362,7 @@ class TestStlReset(unittest.TestCase):
         self.assertEqual(4.3, out, 'Or reset assertion')
 
     def test_implication(self):
-        spec = STLDiscreteTimeSpecification()
+        spec = StlDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
@@ -381,7 +381,7 @@ class TestStlReset(unittest.TestCase):
         self.assertEqual(4.3, out, 'Implies reset assertion')
 
     def test_iff(self):
-        spec = STLDiscreteTimeSpecification()
+        spec = StlDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
@@ -400,7 +400,7 @@ class TestStlReset(unittest.TestCase):
         self.assertEqual(3.3 - 4.3, out, 'Iff reset assertion')
 
     def test_xor(self):
-        spec = STLDiscreteTimeSpecification()
+        spec = StlDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
@@ -419,7 +419,7 @@ class TestStlReset(unittest.TestCase):
         self.assertEqual(4.3 - 3.3, out, 'Xor reset assertion')
 
     def test_rise(self):
-        spec = STLDiscreteTimeSpecification()
+        spec = StlDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = rise(req)'
@@ -437,7 +437,7 @@ class TestStlReset(unittest.TestCase):
         self.assertEqual(4.3, out, 'Rise reset assertion')
 
     def test_fall(self):
-        spec = STLDiscreteTimeSpecification()
+        spec = StlDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = fall(req)'
@@ -455,7 +455,7 @@ class TestStlReset(unittest.TestCase):
         self.assertEqual(3, out, 'Rise reset assertion')
 
     def test_prev(self):
-        spec = STLDiscreteTimeSpecification()
+        spec = StlDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = prev(req)'
@@ -473,7 +473,7 @@ class TestStlReset(unittest.TestCase):
         self.assertEqual(float("inf"), out, 'Rise reset assertion')
 
     def test_once(self):
-        spec = STLDiscreteTimeSpecification()
+        spec = StlDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = once(req)'
@@ -491,7 +491,7 @@ class TestStlReset(unittest.TestCase):
         self.assertEqual(4.3, out, 'Once reset assertion')
 
     def test_historically(self):
-        spec = STLDiscreteTimeSpecification()
+        spec = StlDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = historically(req)'
@@ -509,7 +509,7 @@ class TestStlReset(unittest.TestCase):
         self.assertEqual(4.3, out, 'Historically reset assertion')
 
     # def test_eventually(self):
-    #     spec = STLDiscreteTimeSpecification()
+    #     spec = StlDiscreteTimeSpecification()
     #     spec.declare_var('req', 'float')
     #     spec.declare_var('out', 'float')
     #     spec.spec = 'out = eventually(req)'
@@ -527,7 +527,7 @@ class TestStlReset(unittest.TestCase):
     #     self.assertEqual(4.3, out, 'Eventually reset assertion')
 
     # def test_always(self):
-    #     spec = STLDiscreteTimeSpecification()
+    #     spec = StlDiscreteTimeSpecification()
     #     spec.declare_var('req', 'float')
     #     spec.declare_var('out', 'float')
     #     spec.spec = 'out = always(req)'
@@ -545,7 +545,7 @@ class TestStlReset(unittest.TestCase):
     #     self.assertEqual(4.3, out, 'Always reset assertion')
 
     def test_since(self):
-        spec = STLDiscreteTimeSpecification()
+        spec = StlDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
@@ -565,7 +565,7 @@ class TestStlReset(unittest.TestCase):
 
 
     def test_once_0_1(self):
-        spec = STLDiscreteTimeSpecification()
+        spec = StlDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = once[0:1](req)'
@@ -584,7 +584,7 @@ class TestStlReset(unittest.TestCase):
 
 
     def test_historically_0_1(self):
-        spec = STLDiscreteTimeSpecification()
+        spec = StlDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = historically[0:1](req)'
@@ -602,7 +602,7 @@ class TestStlReset(unittest.TestCase):
         self.assertEqual(4.3, out, 'Historically [0,1] reset assertion')
 
     def test_since_0_1(self):
-        spec = STLDiscreteTimeSpecification()
+        spec = StlDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
@@ -621,7 +621,7 @@ class TestStlReset(unittest.TestCase):
         self.assertEqual(1.6, out, 'Since [0:1] reset assertion')
 
     def test_precedes_0_1(self):
-        spec = STLDiscreteTimeSpecification()
+        spec = StlDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')

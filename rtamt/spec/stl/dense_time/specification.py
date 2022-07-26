@@ -15,7 +15,7 @@ from rtamt.semantics.stl.dense_time.online.interpreter import StlDenseTimeOnline
 from rtamt.semantics.enumerations.options import *
 
 
-def STLDenseTimeSpecification(semantics=Semantics.STANDARD, language=Language.PYTHON):
+def StlDenseTimeSpecification(semantics=Semantics.STANDARD, language=Language.PYTHON):
     """
     A class used as a container for STL continuous time specifications
        Inherits STLSpecification

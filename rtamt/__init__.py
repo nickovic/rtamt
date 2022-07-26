@@ -18,7 +18,7 @@ from rtamt.spec.stl.discrete_time.specification import StlDiscreteTimeSpecificat
 from rtamt.spec.stl.discrete_time.specification import StlDiscreteTimeOfflineSpecification
 from rtamt.spec.stl.discrete_time.specification import StlDiscreteTimeOnlineSpecification
 from rtamt.spec.stl.discrete_time.specification import StlDiscreteTimeOnlineSpecificationCpp
-from rtamt.spec.stl.dense_time.specification import STLDenseTimeSpecification
-from rtamt.spec.stl.dense_time.specification import STLDenseTimeSpecification as STLCTSpecification
+from rtamt.spec.stl.dense_time.specification import StlDenseTimeSpecification
+from rtamt.spec.stl.dense_time.specification import StlDenseTimeSpecification as STLCTSpecification
 from rtamt.spec.stl.dense_time.specification import StlDenseTimeOfflineSpecification
 from rtamt.spec.stl.dense_time.specification import StlDenseTimeOnlineSpecification

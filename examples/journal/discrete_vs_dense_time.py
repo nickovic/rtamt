@@ -43,7 +43,7 @@ n6 = [[i, random.random()] for i in range(1000000)]
 s1_times = []
 s2_times = []
 
-spec1 = rtamt.STLDiscreteTimeSpecification(semantics=rtamt.Semantics.STANDARD)
+spec1 = rtamt.StlDiscreteTimeSpecification(semantics=rtamt.Semantics.STANDARD)
 spec1.name = 'Example 1'
 spec1.declare_var('req', 'float')
 spec1.declare_var('gnt', 'float')
@@ -57,7 +57,7 @@ except rtamt.STLParseException as err:
     print('STL Parse Exception: {}'.format(err))
     sys.exit()
 
-spec2 = rtamt.STLDenseTimeSpecification(semantics=rtamt.Semantics.STANDARD)
+spec2 = rtamt.StlDenseTimeSpecification(semantics=rtamt.Semantics.STANDARD)
 spec2.name = 'Example 1'
 spec2.declare_var('req', 'float')
 spec2.declare_var('gnt', 'float')

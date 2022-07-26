@@ -8,7 +8,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
         super(TestStlDenseTimeOnlineSpecification, self).__init__(*args, **kwargs)
 
     def test_and_1(self):
-        spec = rtamt.STLDenseTimeSpecification()
+        spec = rtamt.StlDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
@@ -37,7 +37,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
                                   out_expected_2, out_computed_2))
 
     def test_and_2(self):
-        spec = rtamt.STLDenseTimeSpecification()
+        spec = rtamt.StlDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
@@ -76,7 +76,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
                                   out_expected_3, out_computed_3))
 
     def test_and_3(self):
-        spec = rtamt.STLDenseTimeSpecification()
+        spec = rtamt.StlDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
@@ -113,7 +113,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
                                   out_expected_3, out_computed_3))
 
     def test_or(self):
-        spec = rtamt.STLDenseTimeSpecification()
+        spec = rtamt.StlDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
@@ -150,7 +150,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
 
 
     def test_iff(self):
-        spec = rtamt.STLDenseTimeSpecification()
+        spec = rtamt.StlDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
@@ -168,7 +168,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
                                  out_expected, out_computed))
 
     def test_xor(self):
-        spec = rtamt.STLDenseTimeSpecification()
+        spec = rtamt.StlDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
@@ -187,7 +187,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
 
 
     def test_implies(self):
-        spec = rtamt.STLDenseTimeSpecification()
+        spec = rtamt.StlDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
@@ -205,7 +205,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
                                  out_expected, out_computed))
 
     def test_always_without_pastify(self):
-        spec = rtamt.STLDenseTimeSpecification()
+        spec = rtamt.StlDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = always(req)'
@@ -215,7 +215,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
         self.assertRaises(rtamt.LTLNotImplementedException, spec.update, [])
 
     def test_always_with_pastify(self):
-        spec = rtamt.STLDenseTimeSpecification()
+        spec = rtamt.StlDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = always(req)'
@@ -226,7 +226,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
 
 
     def test_historically(self):
-        spec = rtamt.STLDenseTimeSpecification()
+        spec = rtamt.StlDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = historically req'
@@ -249,7 +249,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
                                  out_expected, out_computed))
 
     def test_once(self):
-        spec = rtamt.STLDenseTimeSpecification()
+        spec = rtamt.StlDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = once req'
@@ -281,7 +281,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
                                  out_expected, out_computed))
 
     def test_once_0_1(self):
-        spec = rtamt.STLDenseTimeSpecification()
+        spec = rtamt.StlDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = once[0,1] req'
@@ -313,7 +313,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
                                  out_expected_3, out_computed_3))
 
     def test_once_1_3(self):
-        spec = rtamt.STLDenseTimeSpecification()
+        spec = rtamt.StlDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = once[1,3] req'
@@ -346,7 +346,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
 
 
     def test_since_1(self):
-        spec = rtamt.STLDenseTimeSpecification()
+        spec = rtamt.StlDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
@@ -363,7 +363,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
                                  out_expected, out_computed))
 
     def test_since_2(self):
-        spec = rtamt.STLDenseTimeSpecification()
+        spec = rtamt.StlDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
@@ -400,7 +400,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
 
 
     def test_historically_1_2_1(self):
-        spec = rtamt.STLDenseTimeSpecification()
+        spec = rtamt.StlDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = historically[1,2] req'
@@ -416,7 +416,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
                              out_expected, out_computed))
 
     def test_historically_1_2_2(self):
-        spec = rtamt.STLDenseTimeSpecification()
+        spec = rtamt.StlDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = historically[1,2] req'
@@ -448,7 +448,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
                                  out_expected_3, out_computed_3))
 
     def test_addition(self):
-        spec = rtamt.STLDenseTimeSpecification()
+        spec = rtamt.StlDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
@@ -465,7 +465,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
                                  out_expected, out_computed))
 
     def test_addition_2(self):
-        spec = rtamt.STLDenseTimeSpecification()
+        spec = rtamt.StlDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
@@ -481,7 +481,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
                                  out_expected, out_computed))
 
     def test_subtraction(self):
-        spec = rtamt.STLDenseTimeSpecification()
+        spec = rtamt.StlDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
@@ -499,7 +499,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
                                  out_expected, out_computed))
 
     def test_multiplication(self):
-        spec = rtamt.STLDenseTimeSpecification()
+        spec = rtamt.StlDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
@@ -518,7 +518,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
 
 
     def test_division(self):
-        spec = rtamt.STLDenseTimeSpecification()
+        spec = rtamt.StlDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
@@ -536,7 +536,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
                                  out_expected, out_computed))
 
     def test_abs(self):
-        spec = rtamt.STLDenseTimeSpecification()
+        spec = rtamt.StlDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = abs(req)'
@@ -552,7 +552,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
                                  out_expected, out_computed))
 
     def test_sqrt(self):
-        spec = rtamt.STLDenseTimeSpecification()
+        spec = rtamt.StlDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = sqrt(abs(req))'
@@ -568,7 +568,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
                                  out_expected, out_computed))
 
     def test_exp(self):
-        spec = rtamt.STLDenseTimeSpecification()
+        spec = rtamt.StlDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = exp(req)'
@@ -584,7 +584,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
                                  out_expected, out_computed))
 
     def test_pow(self):
-        spec = rtamt.STLDenseTimeSpecification()
+        spec = rtamt.StlDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = pow(3,req)'
@@ -602,7 +602,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
 
 
     def test_not(self):
-        spec = rtamt.STLDenseTimeSpecification()
+        spec = rtamt.StlDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = not req'
@@ -635,7 +635,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
                                   out_expected_3, out_computed_3))
 
     def test_until_without_pastify(self):
-        spec = rtamt.STLDenseTimeSpecification()
+        spec = rtamt.StlDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
@@ -646,7 +646,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
         self.assertRaises(rtamt.LTLNotImplementedException, spec.update, [])
 
     def test_until_with_pastify(self):
-        spec = rtamt.STLDenseTimeSpecification()
+        spec = rtamt.StlDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
@@ -657,7 +657,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
         self.assertRaises(rtamt.LTLPastifyException, spec.pastify)
 
     def test_until_0_1_without_pastify(self):
-        spec = rtamt.STLDenseTimeSpecification()
+        spec = rtamt.StlDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
@@ -668,7 +668,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
         self.assertRaises(rtamt.LTLNotImplementedException, spec.update, [])
 
     def test_until_0_1_with_pastify(self):
-        spec = rtamt.STLDenseTimeSpecification()
+        spec = rtamt.StlDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
@@ -679,7 +679,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
         self.assertRaises(rtamt.LTLPastifyException, spec.pastify)
 
     def test_next(self):
-        spec = rtamt.STLDenseTimeSpecification()
+        spec = rtamt.StlDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = next req'
@@ -689,7 +689,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
         self.assertRaises(rtamt.LTLNotImplementedException, spec.update, ['req', [0.0, 3.0]])
 
     def test_prev(self):
-        spec = rtamt.STLDenseTimeSpecification()
+        spec = rtamt.StlDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = prev req'
@@ -699,7 +699,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
         self.assertRaises(rtamt.LTLNotImplementedException, spec.update, ['req', [0.0, 3.0]])
 
     def test_rise(self):
-        spec = rtamt.STLDenseTimeSpecification()
+        spec = rtamt.StlDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = rise(req)'
@@ -709,7 +709,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
         self.assertRaises(rtamt.LTLNotImplementedException, spec.update, ['req', [0.0, 3.0]])
 
     def test_fall(self):
-        spec = rtamt.STLDenseTimeSpecification()
+        spec = rtamt.StlDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = fall(req)'
@@ -719,7 +719,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
         self.assertRaises(rtamt.LTLNotImplementedException, spec.update, ['req', [0.0, 3.0]])
 
     def test_always_0_1_without_pastify(self):
-        spec = rtamt.STLDenseTimeSpecification()
+        spec = rtamt.StlDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = always[0,1] req'
@@ -729,7 +729,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
         self.assertRaises(rtamt.STLNotImplementedException, spec.update, ['req', [0.0, 3.0]])
 
     def test_eventually_0_1_without_pastify(self):
-        spec = rtamt.STLDenseTimeSpecification()
+        spec = rtamt.StlDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = eventually[0,1] req'
@@ -739,7 +739,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
         self.assertRaises(rtamt.STLNotImplementedException, spec.update, ['req', [0.0, 3.0]])
 
     def test_eventually_0_1_with_pastify(self):
-        spec = rtamt.STLDenseTimeSpecification()
+        spec = rtamt.StlDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = eventually[0,1] req'
@@ -772,7 +772,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
                                  out_expected_3, out_computed_3))
 
     def test_always_0_1_with_pastify(self):
-        spec = rtamt.STLDenseTimeSpecification()
+        spec = rtamt.StlDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = always[0,1] req'
@@ -790,7 +790,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
 
 
     def test_predicate_leq(self):
-        spec = rtamt.STLDenseTimeSpecification()
+        spec = rtamt.StlDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = req <= 2'
@@ -823,7 +823,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
                                   out_expected_3, out_computed_3))
 
     def test_predicate_less(self):
-        spec = rtamt.STLDenseTimeSpecification()
+        spec = rtamt.StlDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = req < 2'
@@ -856,7 +856,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
                                   out_expected_3, out_computed_3))
 
     def test_predicate_geq(self):
-        spec = rtamt.STLDenseTimeSpecification()
+        spec = rtamt.StlDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = req >= 2'
@@ -889,7 +889,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
                                   out_expected_3, out_computed_3))
 
     def test_predicate_greater(self):
-        spec = rtamt.STLDenseTimeSpecification()
+        spec = rtamt.StlDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = req > 2'
@@ -922,7 +922,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
                                   out_expected_3, out_computed_3))
 
     def test_predicate_eq(self):
-        spec = rtamt.STLDenseTimeSpecification()
+        spec = rtamt.StlDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = req == 2'
@@ -955,7 +955,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
                                   out_expected_3, out_computed_3))
 
     def test_predicate_neq(self):
-        spec = rtamt.STLDenseTimeSpecification()
+        spec = rtamt.StlDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = req !== 2'

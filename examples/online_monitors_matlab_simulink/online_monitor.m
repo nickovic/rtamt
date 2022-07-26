@@ -117,8 +117,8 @@ function InitializeConditions(block)
 function Start(block)
     spec_filename = block.DialogPrm(1).Data;
     
-    import py.rtamt.STLDiscreteTimeSpecification;
-    spec = STLDiscreteTimeSpecification();
+    import py.rtamt.StlDiscreteTimeSpecification;
+    spec = StlDiscreteTimeSpecification();
     spec.spec = get_spec_from_file(spec, spec_filename);
     
     parse(spec);

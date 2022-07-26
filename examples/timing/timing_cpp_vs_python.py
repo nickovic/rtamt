@@ -14,14 +14,14 @@ def monitor():
         bound = 10**i
         bound_str = str(bound)
 
-        spec_python = rtamt.STLDiscreteTimeSpecification(language=rtamt.Language.PYTHON)
+        spec_python = rtamt.StlDiscreteTimeSpecification(language=rtamt.Language.PYTHON)
         spec_python.name = 'PythonMonitor'
         spec_python.declare_var('a', 'float')
         spec_python.declare_var('b', 'float')
         spec_python.declare_var('c', 'float')
         spec_python.spec = 'c = always[0:' + bound_str + '](a + b >= - 2)'
 
-        spec_cpp = rtamt.STLDiscreteTimeSpecification(language=rtamt.Language.CPP)
+        spec_cpp = rtamt.StlDiscreteTimeSpecification(language=rtamt.Language.CPP)
         spec_cpp.name = 'CPPMonitor'
         spec_cpp.declare_var('a', 'float')
         spec_cpp.declare_var('b', 'float')

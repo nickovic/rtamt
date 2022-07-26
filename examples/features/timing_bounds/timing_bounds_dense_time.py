@@ -8,7 +8,7 @@ def monitor():
     data1 = read_csv('example.csv')
 
 
-    spec = rtamt.STLDenseTimeSpecification(semantics=rtamt.Semantics.STANDARD)
+    spec = rtamt.StlDenseTimeSpecification(semantics=rtamt.Semantics.STANDARD)
     spec.name = 'Example 1'
     spec.declare_var('req', 'float')
     spec.declare_var('gnt', 'float')
@@ -28,7 +28,7 @@ def monitor():
 
     print('Example (a) - standard robustness: {}'.format(rob))
 
-    spec = rtamt.STLDenseTimeSpecification(semantics=rtamt.Semantics.STANDARD)
+    spec = rtamt.StlDenseTimeSpecification(semantics=rtamt.Semantics.STANDARD)
     spec.name = 'Example 1'
     spec.declare_var('req', 'float')
     spec.declare_var('gnt', 'float')
