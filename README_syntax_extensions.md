@@ -21,31 +21,32 @@ This document gives an example of how RTAMT library can be extended in a way tha
 
 This is code architecture of RTAMT.
 ![architecture](figures/architecture.png "architecture")
-To extend temporal logic XSTL, we need to implement both Syntax and Semantics layer. Finally we may merge the syntax and semantics into a spec in specification layer.
-
-In syntax extension, we may need three steps.
+To extend temporal logic XSTL, we need to implement both Syntax and Semantics layer. Finally we may merge the syntax and semantics into a spec in specification layer. In syntax extension, we may need three steps.
 
 1. Define syntax
-   1. based on AMTLR.
+   1. based on ANTLR.
+   In `rtamt/rtamt/antlr/`,
    We may extend `parser` (parser.g4) and `lexer` (lexer.g4). ANTLR can auto generate ParserVisitor.
    1. Extend RTAMT AST node and parser.
+   In `rtamt/rtamt/syntax/node`,
    Since RTAMT utilizing its AST, we need to extend `AbstractAst`. This time we extend `StlAst` since XSTL is very closed to STL.
    1. Extend RTAMT AST visitor.
+   In `rtamt/rtamt/syntax/`,
    Regarding above, we may extend `AbstractAstVisitor` as well to enable any semantics layer visitors can visit. That is very crucial class in RTAMT. We extend `StlAstVisitor` since XSTL is very closed to STL.
 1. Extend semantics
+In `rtamt/rtamt/semantics/`,
 Based on the new visitor, we may extend `AbstractDiscreteTimeOfflineInterpreter` in offline fashion. We extend `StlDiscreteTimeOfflineInterpreter` since XSTL is very closed to STL.
 1. Merge syntax and semantics into spec.
 That connects the syntax and semantics into spec class with a few lines of codes based on `AbstractOfflineSpecification`.
 
-Here is class diagram in specific XSTL case.
+In this part of the tutorial, we want to extend `RTAMT` with a `Shift` operator as XSTL, where `shift(phi, v)` is equivalent to `once[v,v] phi`, providing a more efficient implementation of this special case.
+
+Here is class diagram in specific XSTL case. Highlighted classes are what designer needs to implement.
 ![XStlClass](figures/XSTLclass.png "XStlClass")
 
 ## Extend Syntax
 
 ### ANTLR grammar
-
-In this part of the tutorial, we want to extend `RTAMT` with a `Shift` operator,
-where `shift(phi, v)` is equivalent to `once[v,v] phi`, providing a more efficient implementation of this special case.
 
 In the first step, we need to extend the `STL` grammar with the new syntax and the new rules. We will use the name `XSTL` to denote the extended `STL` grammar.
 
@@ -140,7 +141,8 @@ class XStlAstParserVisitor(StlAstParserVisitor, XStlParserVisitor):
         return node
 ```
 
-Now, we are ready to parse XSTL formulas and create an internal representation of the AST. We may create an `XStlAst` object that merge `XStlLexer` and `XStlParser` from ANTLR, and `XStlAstParserVisitor` that enables to parse RTAMT AST in specific XSTL case similar to `StlAst` in `rtamt/syntax/ast/parser/xstl/specification_parser.py`
+Now, we are ready to parse XSTL formulas and create an internal representation of the AST. We may create an `XStlAst` object that merge `XStlLexer` and `XStlParser` from ANTLR, and `XStlAstParserVisitor` that enables to parse RTAMT AST in specific XSTL case as well as `StlAst`.
+This is done in `rtamt/syntax/ast/parser/xstl/specification_parser.py`
 
 ```python
 from rtamt.syntax.ast.parser.abstract_ast_parser import ast_factory
@@ -161,6 +163,7 @@ def XStlAst():
 ### RTAMT AST visitor
 
 Above section enables to generate XSTL AST based on RTAMT AST. Now we may construct its visitor. We may extend `StlAstVisitor` since the XSTL is very closed to StlAstVisitor. However, we may also implement it from scratch based on `AbstractAstVisitor`.
+This is done in `rtamt/syntax/ast/visitor/xstl/ast_visitor.py`
 
 ```python
 from rtamt.exception.stl.exception import STLVisitorException
@@ -240,7 +243,13 @@ def XStlDiscreteTimeOfflineSpecification():
     return spec
 ```
 
-In the last step, we add `XSTLDiscreteTimeOfflineSpecification` to `rtamt/__init__.py`, so that the user can instantiate the monitor using `rtamt.XSTLDiscreteTimeOnlineSpecification` syntax.
+In the last step, we add `XSTLDiscreteTimeOfflineSpecification` to `rtamt/__init__.py`,
+
+```python
+from rtamt.spec.xstl.discrete_time.specification import XStlDiscreteTimeOfflineSpecification
+```
+
+so that the user can instantiate the monitor using `rtamt.XSTLDiscreteTimeOnlineSpecification` syntax.
 
 ## Test
 
