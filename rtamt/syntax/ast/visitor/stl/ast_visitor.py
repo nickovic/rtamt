@@ -1,4 +1,4 @@
-from rtamt.exception.stl.exception import STLVisitorException
+from rtamt.exception.exception import RTAMTException
 from rtamt.syntax.node.stl.timed_precedes import TimedPrecedes
 
 from rtamt.syntax.ast.visitor.ltl.ast_visitor import LtlAstVisitor
@@ -59,4 +59,4 @@ class StlAstVisitor(LtlAstVisitor):
         return self.visitChildren(node, *args, **kwargs)
 
     def raise_exception(self, text):
-        raise STLVisitorException(text)
+        raise RTAMTException(text)

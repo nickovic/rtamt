@@ -212,7 +212,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
 
         spec.parse()
 
-        self.assertRaises(rtamt.LTLNotImplementedException, spec.update, [])
+        self.assertRaises(rtamt.RTAMTException, spec.update, [])
 
     def test_always_with_pastify(self):
         spec = rtamt.StlDenseTimeSpecification()
@@ -222,7 +222,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
 
         spec.parse()
 
-        self.assertRaises(rtamt.LTLPastifyException, spec.pastify)
+        self.assertRaises(rtamt.RTAMTException, spec.pastify)
 
 
     def test_historically(self):
@@ -643,7 +643,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
 
         spec.parse()
 
-        self.assertRaises(rtamt.LTLNotImplementedException, spec.update, [])
+        self.assertRaises(rtamt.RTAMTException, spec.update, [])
 
     def test_until_with_pastify(self):
         spec = rtamt.StlDenseTimeSpecification()
@@ -654,7 +654,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
 
         spec.parse()
 
-        self.assertRaises(rtamt.LTLPastifyException, spec.pastify)
+        self.assertRaises(rtamt.RTAMTException, spec.pastify)
 
     def test_until_0_1_without_pastify(self):
         spec = rtamt.StlDenseTimeSpecification()
@@ -665,7 +665,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
 
         spec.parse()
 
-        self.assertRaises(rtamt.LTLNotImplementedException, spec.update, [])
+        self.assertRaises(rtamt.RTAMTException, spec.update, [])
 
     def test_until_0_1_with_pastify(self):
         spec = rtamt.StlDenseTimeSpecification()
@@ -676,7 +676,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
 
         spec.parse()
 
-        self.assertRaises(rtamt.LTLPastifyException, spec.pastify)
+        self.assertRaises(rtamt.RTAMTException, spec.pastify)
 
     def test_next(self):
         spec = rtamt.StlDenseTimeSpecification()
@@ -686,7 +686,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
 
         spec.parse()
 
-        self.assertRaises(rtamt.LTLNotImplementedException, spec.update, ['req', [0.0, 3.0]])
+        self.assertRaises(rtamt.RTAMTException, spec.update, ['req', [0.0, 3.0]])
 
     def test_prev(self):
         spec = rtamt.StlDenseTimeSpecification()
@@ -696,7 +696,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
 
         spec.parse()
 
-        self.assertRaises(rtamt.LTLNotImplementedException, spec.update, ['req', [0.0, 3.0]])
+        self.assertRaises(rtamt.RTAMTException, spec.update, ['req', [0.0, 3.0]])
 
     def test_rise(self):
         spec = rtamt.StlDenseTimeSpecification()
@@ -706,7 +706,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
 
         spec.parse()
 
-        self.assertRaises(rtamt.LTLNotImplementedException, spec.update, ['req', [0.0, 3.0]])
+        self.assertRaises(rtamt.RTAMTException, spec.update, ['req', [0.0, 3.0]])
 
     def test_fall(self):
         spec = rtamt.StlDenseTimeSpecification()
@@ -716,7 +716,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
 
         spec.parse()
 
-        self.assertRaises(rtamt.LTLNotImplementedException, spec.update, ['req', [0.0, 3.0]])
+        self.assertRaises(rtamt.RTAMTException, spec.update, ['req', [0.0, 3.0]])
 
     def test_always_0_1_without_pastify(self):
         spec = rtamt.StlDenseTimeSpecification()
@@ -726,7 +726,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
 
         spec.parse()
 
-        self.assertRaises(rtamt.STLNotImplementedException, spec.update, ['req', [0.0, 3.0]])
+        self.assertRaises(rtamt.RTAMTException, spec.update, ['req', [0.0, 3.0]])
 
     def test_eventually_0_1_without_pastify(self):
         spec = rtamt.StlDenseTimeSpecification()
@@ -736,7 +736,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
 
         spec.parse()
 
-        self.assertRaises(rtamt.STLNotImplementedException, spec.update, ['req', [0.0, 3.0]])
+        self.assertRaises(rtamt.RTAMTException, spec.update, ['req', [0.0, 3.0]])
 
     def test_eventually_0_1_with_pastify(self):
         spec = rtamt.StlDenseTimeSpecification()

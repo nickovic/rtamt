@@ -28,7 +28,7 @@ class TestSTLSamplingTimeUnits(unittest.TestCase):
             computed = spec.update(1.2, [['req', 4.2], ['gnt', -3.7]])
             self.assertEqual(4.2, computed, 'First computation')
             self.assertEqual(1, spec.sampling_violation_counter, 'Violation counter')
-        except rtamt.STLParseException as err:
+        except rtamt.RTAMTException as err:
             print('STL Parse Exception: {}'.format(err))
 
 if __name__ == '__main__':

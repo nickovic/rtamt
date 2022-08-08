@@ -28,7 +28,7 @@ from rtamt.syntax.node.ltl.constant import Constant
 from rtamt.syntax.node.ltl.next import Next
 from rtamt.syntax.node.ltl.previous import Previous
 
-from rtamt.exception.ltl.exception import LTLVisitorException
+from rtamt.exception.exception import RTAMTException
 
 
 class LtlAstVisitor(AbstractAstVisitor):
@@ -93,7 +93,7 @@ class LtlAstVisitor(AbstractAstVisitor):
         return result
 
     def raise_exception(self, text):
-        raise LTLVisitorException(text)
+        raise RTAMTException(text)
 
     def visitPredicate(self, node, *args, **kwargs):
         return self.visitChildren(node, *args, **kwargs)

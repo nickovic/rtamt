@@ -32,7 +32,7 @@ from rtamt.lib.rtamt_stl_library_wrapper.stl_historically_bounded_node import Hi
 from rtamt.lib.rtamt_stl_library_wrapper.stl_since_bounded_node import SinceBoundedOperation
 from rtamt.lib.rtamt_stl_library_wrapper.stl_precedes_bounded_node import PrecedesBoundedOperation
 
-from rtamt.exception.stl.exception import STLNotImplementedException, STLParseException
+from rtamt.exception.exception import RTAMTException
 
 
 class StlDiscreteTimeOnlineAstVisitorCpp(StlAstVisitor):
@@ -100,15 +100,15 @@ class StlDiscreteTimeOnlineAstVisitorCpp(StlAstVisitor):
     def visitEventually(self, node, *args, **kwargs):
         #self.visitChildren(node, *args, **kwargs)
         #self.online_operator_dict[node.name] = EventuallyOperation()
-        raise STLNotImplementedException('Eventually operator is not implemented in the STL online monitor.')
+        raise RTAMTException('Eventually operator is not implemented in the STL online monitor.')
 
     def visitAlways(self, node, *args, **kwargs):
         #self.visitChildren(node, *args, **kwargs)
         #self.online_operator_dict[node.name] = AlwaysOperation()
-        raise STLNotImplementedException('Always operator is not implemented in the STL online monitor.')
+        raise RTAMTException('Always operator is not implemented in the STL online monitor.')
 
     def visitUntil(self, node, *args, **kwargs):
-        raise STLNotImplementedException('Until operator is not implemented in the STL online monitor.')
+        raise RTAMTException('Until operator is not implemented in the STL online monitor.')
 
     def visitOnce(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
@@ -135,7 +135,7 @@ class StlDiscreteTimeOnlineAstVisitorCpp(StlAstVisitor):
         self.online_operator_dict[node.name] = PreviousOperation()
 
     def visitNext(self, node, *args, **kwargs):
-        raise STLNotImplementedException('Next operator not implemented in STL online monitor.')
+        raise RTAMTException('Next operator not implemented in STL online monitor.')
 
     def visitTimedPrecedes(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
@@ -158,13 +158,13 @@ class StlDiscreteTimeOnlineAstVisitorCpp(StlAstVisitor):
         self.online_operator_dict[node.name] = SinceBoundedOperation(begin, end)
 
     def visitTimedAlways(self, node, *args, **kwargs):
-        raise STLNotImplementedException('Bounded always operator not implemented in STL online monitor.')
+        raise RTAMTException('Bounded always operator not implemented in STL online monitor.')
 
     def visitTimedEventually(self, node, *args, **kwargs):
-        raise STLNotImplementedException('Bounded eventually operator not implemented in STL online monitor.')
+        raise RTAMTException('Bounded eventually operator not implemented in STL online monitor.')
 
     def visitTimedUntil(self, node, *args, **kwargs):
-        raise STLNotImplementedException('Bounded until operator not implemented in STL online monitor.')
+        raise RTAMTException('Bounded until operator not implemented in STL online monitor.')
 
     def op_cpp(self, op):
         if op == CompOp.GEQ:
@@ -180,4 +180,4 @@ class StlDiscreteTimeOnlineAstVisitorCpp(StlAstVisitor):
         elif op == CompOp.EQUAL:
             return StlComparisonOperator.EQUAL
         else:
-            raise STLParseException('Could not find operator {}!'.format(op))
+            raise RTAMTException('Could not find operator {}!'.format(op))

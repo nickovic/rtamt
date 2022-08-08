@@ -4,7 +4,7 @@ from rtamt.syntax.node.binary_node import BinaryNode
 from rtamt.syntax.node.unary_node import UnaryNode
 from rtamt.syntax.node.leaf_node import LeafNode
 
-from rtamt.exception.exception import AstVisitorException
+from rtamt.exception.exception import RTAMTException
 
 
 class AbstractAstVisitor(object):
@@ -24,7 +24,7 @@ class AbstractAstVisitor(object):
         elif isinstance(node, LeafNode):
             result = self.visitLeaf(node, *args, **kwargs)
         else:
-            raise AstVisitorException('{} is not RTAMT AST node'.format(node.__class__.__name__))
+            raise RTAMTException('{} is not RTAMT AST node'.format(node.__class__.__name__))
         return result
 
     def visitAst(self, ast, *args, **kwargs):

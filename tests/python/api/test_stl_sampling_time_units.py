@@ -29,7 +29,7 @@ class TestStlSamplingTimeUnits(unittest.TestCase):
             computed = spec.update(1.2, [['req', 4.2], ['gnt', -3.7]])
             self.assertEqual(-6.7, computed, 'First computation')
             self.assertEqual(1, spec.sampling_violation_counter, 'Violation counter')
-        except rtamt.STLParseException as err:
+        except rtamt.RTAMTException as err:
             print('STL Parse Exception: {}'.format(err))
 
     def test_wrong_tolerance(self):
@@ -60,7 +60,7 @@ class TestStlSamplingTimeUnits(unittest.TestCase):
             spec.update(4.39, [['req', 2.2], ['gnt', 1]])
 
             self.assertEqual(0, spec.sampling_violation_counter, 'Violation counter')
-        except rtamt.STLParseException as err:
+        except rtamt.RTAMTException as err:
             print('STL Parse Exception: {}'.format(err))
 
 

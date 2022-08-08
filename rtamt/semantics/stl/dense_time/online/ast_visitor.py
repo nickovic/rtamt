@@ -24,8 +24,7 @@ from rtamt.semantics.stl.dense_time.online.once_timed_operation import OnceTimed
 from rtamt.semantics.stl.dense_time.online.historically_timed_operation import HistoricallyTimedOperation
 from rtamt.semantics.stl.dense_time.online.since_timed_operation import SinceTimedOperation
 
-from rtamt.exception.stl.exception import STLNotImplementedException
-from rtamt.exception.ltl.exception import LTLNotImplementedException
+from rtamt.exception.exception import RTAMTException
 
 class StlDenseTimeOnlineAstVisitor(StlAstVisitor):
     def visitPredicate(self, node, *args, **kwargs):
@@ -89,13 +88,13 @@ class StlDenseTimeOnlineAstVisitor(StlAstVisitor):
         self.online_operator_dict[node.name] = XorOperation()
 
     def visitEventually(self, node, *args, **kwargs):
-        raise LTLNotImplementedException('Eventually operator is not implemented in the STL online monitor.')
+        raise RTAMTException('Eventually operator is not implemented in the STL online monitor.')
 
     def visitAlways(self, node, *args, **kwargs):
-        raise LTLNotImplementedException('Always operator is not implemented in the STL online monitor.')
+        raise RTAMTException('Always operator is not implemented in the STL online monitor.')
 
     def visitUntil(self, node, *args, **kwargs):
-        raise LTLNotImplementedException('Until operator is not implemented in the STL online monitor.')
+        raise RTAMTException('Until operator is not implemented in the STL online monitor.')
 
     def visitOnce(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
@@ -110,19 +109,19 @@ class StlDenseTimeOnlineAstVisitor(StlAstVisitor):
         self.online_operator_dict[node.name] = SinceOperation()
 
     def visitRise(self, node, *args, **kwargs):
-        raise LTLNotImplementedException('Rise operator not implemented in STL dense monitor.')
+        raise RTAMTException('Rise operator not implemented in STL dense monitor.')
 
     def visitFall(self, node, *args, **kwargs):
-        raise LTLNotImplementedException('Fall operator not implemented in STL dense monitor.')
+        raise RTAMTException('Fall operator not implemented in STL dense monitor.')
 
     def visitPrevious(self, node, *args, **kwargs):
-        raise LTLNotImplementedException('Previous operator not implemented in STL dense-time monitor.')
+        raise RTAMTException('Previous operator not implemented in STL dense-time monitor.')
 
     def visitNext(self, node, *args, **kwargs):
-        raise LTLNotImplementedException('Next operator not implemented in STL dense-time monitor.')
+        raise RTAMTException('Next operator not implemented in STL dense-time monitor.')
 
     def visitTimedPrecedes(self, node, *args, **kwargs):
-        raise STLNotImplementedException('Precedes operator not implemented in STL dense-time monitor.')
+        raise RTAMTException('Precedes operator not implemented in STL dense-time monitor.')
 
     def visitTimedOnce(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
@@ -140,10 +139,10 @@ class StlDenseTimeOnlineAstVisitor(StlAstVisitor):
         self.online_operator_dict[node.name] = SinceTimedOperation(begin, end)
 
     def visitTimedAlways(self, node, *args, **kwargs):
-        raise STLNotImplementedException('Bounded always operator not implemented in STL dense-time monitor.')
+        raise RTAMTException('Bounded always operator not implemented in STL dense-time monitor.')
 
     def visitTimedEventually(self, node, *args, **kwargs):
-        raise STLNotImplementedException('Bounded eventually operator not implemented in STL dense-time monitor.')
+        raise RTAMTException('Bounded eventually operator not implemented in STL dense-time monitor.')
 
     def visitTimedUntil(self, node, *args, **kwargs):
-        raise STLNotImplementedException('Bounded until operator not implemented in STL dense-time monitor.')
+        raise RTAMTException('Bounded until operator not implemented in STL dense-time monitor.')

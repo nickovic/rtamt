@@ -7,7 +7,7 @@ import rtamt.semantics.stl.dense_time.offline.intersection as intersect
 from rtamt.syntax.ast.visitor.stl.ast_visitor import StlAstVisitor
 from rtamt.semantics.enumerations.comp_oper import StlComparisonOperator
 
-from rtamt.exception.stl.exception import STLNotImplementedException
+from rtamt.exception.exception import RTAMTException
 
 def subtraction_operation(sample_left, sample_right):
     sample_return = []
@@ -558,10 +558,10 @@ class StlDenseTimeOfflineAstVisitor(StlAstVisitor):
 
 
     def visitRise(self, node, *args, **kwargs):
-        raise STLNotImplementedException('Rise operator not implemented in STL dense monitor.')
+        raise RTAMTException('Rise operator not implemented in STL dense monitor.')
 
     def visitFall(self, node, *args, **kwargs):
-        raise STLNotImplementedException('Fall operator not implemented in STL dense monitor.')
+        raise RTAMTException('Fall operator not implemented in STL dense monitor.')
 
     #TODO: this code may not work.
     def visitConstant(self, node, *args, **kwargs):
@@ -569,15 +569,15 @@ class StlDenseTimeOfflineAstVisitor(StlAstVisitor):
         return sample_return
 
     def visitPrevious(self, node, *args, **kwargs):
-        raise STLNotImplementedException('Previous operator not implemented in STL dense-time monitor.')
+        raise RTAMTException('Previous operator not implemented in STL dense-time monitor.')
 
 
     def visitNext(self, node, *args, **kwargs):
-        raise STLNotImplementedException('Next operator not implemented in STL dense-time monitor.')
+        raise RTAMTException('Next operator not implemented in STL dense-time monitor.')
 
 
     def visitTimedPrecedes(self, node, *args, **kwargs):
-        raise STLNotImplementedException('Precedes operator not implemented in STL dense-time monitor.')
+        raise RTAMTException('Precedes operator not implemented in STL dense-time monitor.')
 
 
     def visitTimedOnce(self, node, *args, **kwargs):

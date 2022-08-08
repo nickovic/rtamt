@@ -1,7 +1,8 @@
 from rtamt.syntax.ast.visitor.stl.ast_visitor import StlAstVisitor
 from rtamt.pastifier.ltl.horizon import LtlHorizon
 
-from rtamt.exception.stl.exception import STLException
+from rtamt.exception.exception import RTAMTException
+
 
 class StlHorizon(LtlHorizon, StlAstVisitor):
 
@@ -50,4 +51,4 @@ class StlHorizon(LtlHorizon, StlAstVisitor):
         return max(op1_horizon, op2_horizon)
 
     def visitDefault(self, node):
-        raise STLException('STL Pastifier: encountered unexpected type of node.')
+        raise RTAMTException('STL Pastifier: encountered unexpected type of node.')

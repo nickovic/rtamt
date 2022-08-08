@@ -1,13 +1,11 @@
 from abc import ABCMeta
 import logging
 import importlib
-from fractions import Fraction
 from antlr4 import *
 from antlr4.InputStream import InputStream
 from antlr4.error.ErrorListener import ErrorListener
 
-from rtamt.exception.exception import AstParseException
-from rtamt.exception.stl.exception import STLException
+from rtamt.exception.exception import RTAMTException
 
 class AbstractAst:
     """An abstract class for AST parser
@@ -115,22 +113,22 @@ class AbstractAst:
 
     def parse(self):
         if self.spec is None:
-            raise AstParseException('STL specification if empty')
+            raise RTAMTException('STL specification if empty')
 
         #TODO How to handle sub-formulas?
         entire_spec = self.modular_spec + self.spec
         input_stream = InputStream(entire_spec)
         lexer = self.antrlLexerType(input_stream)
         if not isinstance(lexer, Lexer):
-            raise AstParseException('{} is not ANTRL4 Lexer'.format(lexer.__class__.__name__))
+            raise RTAMTException('{} is not ANTRL4 Lexer'.format(lexer.__class__.__name__))
         stream = CommonTokenStream(lexer)
         parser = self.antrlParserType(stream)
         if not isinstance(parser, Parser):
-            raise AstParseException('{} is not ANTRL4 Parser'.format(parser.__class__.__name__))
+            raise RTAMTException('{} is not ANTRL4 Parser'.format(parser.__class__.__name__))
         if self.parserErrorListenerType != None:
             parser._listeners = [self.parserErrorListenerType()]
             if not isinstance(parser._listeners[0], ErrorListener):
-                raise AstParseException('{} is not ANTRL4 ErrorListener'.format(parser._listeners[0].__class__.__name__))
+                raise RTAMTException('{} is not ANTRL4 ErrorListener'.format(parser._listeners[0].__class__.__name__))
         ctx = parser.specification_file()
         self.visit(ctx.specification())
         return
@@ -223,7 +221,7 @@ class AbstractAst:
                 class_ = getattr(var_module, var_type)
                 var = class_()
             except KeyError:
-                raise AstParseException('The type {} does not seem to be imported.'.format(var_type))
+                raise RTAMTException('The type {} does not seem to be imported.'.format(var_type))
         return var
 
     def declare_var(self, var_name, var_type):
@@ -248,7 +246,7 @@ class AbstractAst:
 
     def declare_const(self, const_name, const_type, const_val):
         if const_name in self.vars:
-            raise AstParseException('Constant {} already declared'.format(const_name))
+            raise RTAMTException('Constant {} already declared'.format(const_name))
 
         self.const_type_dict[const_name] = const_type
         self.const_val_dict[const_name] = const_val
@@ -259,7 +257,7 @@ class AbstractAst:
             module = importlib.import_module(from_name)
             self.modules[module_name] = module
         except ImportError:
-            raise AstParseException('The module {} cannot be loaded'.format(from_name))
+            raise RTAMTException('The module {} cannot be loaded'.format(from_name))
 
     def set_var_topic(self, var_name, var_topic):
         if not var_name in self.vars:
