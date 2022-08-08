@@ -13,7 +13,7 @@ def monitor():
     b3 = [(15, 0)]
 
     # # stl
-    spec = rtamt.STLDenseTimeSpecification()
+    spec = rtamt.StlDenseTimeSpecification()
     spec.name = 'STL dense-time specification'
     spec.declare_var('a', 'float')
     spec.declare_var('c', 'float')

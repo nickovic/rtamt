@@ -46,7 +46,7 @@ s3_times = []
 s4_times = []
 
 
-spec1 = rtamt.STLDenseTimeSpecification(semantics=rtamt.Semantics.STANDARD)
+spec1 = rtamt.StlDenseTimeSpecification(semantics=rtamt.Semantics.STANDARD)
 spec1.name = 'Example 1'
 spec1.declare_var('req', 'float')
 spec1.declare_var('gnt', 'float')
@@ -60,7 +60,7 @@ except rtamt.STLParseException as err:
     print('STL Parse Exception: {}'.format(err))
     sys.exit()
 
-spec2 = rtamt.STLDenseTimeSpecification(semantics=rtamt.Semantics.STANDARD)
+spec2 = rtamt.StlDenseTimeSpecification(semantics=rtamt.Semantics.STANDARD)
 spec2.name = 'Example 1'
 spec2.declare_var('req', 'float')
 spec2.declare_var('gnt', 'float')
@@ -74,7 +74,7 @@ except rtamt.STLParseException as err:
     print('STL Parse Exception: {}'.format(err))
     sys.exit()
 
-spec3 = rtamt.STLDenseTimeSpecification(semantics=rtamt.Semantics.STANDARD)
+spec3 = rtamt.StlDenseTimeSpecification(semantics=rtamt.Semantics.STANDARD)
 spec3.name = 'Example 1'
 spec3.declare_var('req', 'float')
 spec3.declare_var('gnt', 'float')
@@ -88,7 +88,7 @@ except rtamt.STLParseException as err:
     print('STL Parse Exception: {}'.format(err))
     sys.exit()
 
-spec4 = rtamt.STLDenseTimeSpecification(semantics=rtamt.Semantics.STANDARD)
+spec4 = rtamt.StlDenseTimeSpecification(semantics=rtamt.Semantics.STANDARD)
 spec4.name = 'Example 1'
 spec4.declare_var('req', 'float')
 spec4.declare_var('gnt', 'float')

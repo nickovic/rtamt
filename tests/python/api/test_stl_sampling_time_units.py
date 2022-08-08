@@ -7,7 +7,7 @@ class TestStlSamplingTimeUnits(unittest.TestCase):
         super(TestStlSamplingTimeUnits, self).__init__(*args, **kwargs)
 
     def test_example(self):
-        spec = rtamt.STLDiscreteTimeSpecification()
+        spec = rtamt.StlDiscreteTimeSpecification()
         spec.name = 'STL Example specification'
 
         self.assertEqual(spec.name, 'STL Example specification', 'Spec name assertion')
@@ -33,12 +33,12 @@ class TestStlSamplingTimeUnits(unittest.TestCase):
             print('STL Parse Exception: {}'.format(err))
 
     def test_wrong_tolerance(self):
-        spec = rtamt.STLDiscreteTimeSpecification()
+        spec = rtamt.StlDiscreteTimeSpecification()
         with self.assertRaises(Exception):
             spec.set_sampling_period(1, 's', 1.5)
 
     def test_default_unit_default_sampling_unit_greater_tolerance_ok_samples(self):
-        spec = rtamt.STLDiscreteTimeSpecification()
+        spec = rtamt.StlDiscreteTimeSpecification()
         spec.name = 'STL Example specification'
 
         self.assertEqual(spec.name, 'STL Example specification', 'Spec name assertion')

@@ -7,7 +7,7 @@ class TestIastlDenseTimeOnlineSpecification(unittest.TestCase):
         super(TestIastlDenseTimeOnlineSpecification, self).__init__(*args, **kwargs)
 
     def test_output_robustness(self):
-        spec = rtamt.STLDenseTimeSpecification(semantics=rtamt.Semantics.OUTPUT_ROBUSTNESS)
+        spec = rtamt.StlDenseTimeSpecification(semantics=rtamt.Semantics.OUTPUT_ROBUSTNESS)
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
@@ -26,7 +26,7 @@ class TestIastlDenseTimeOnlineSpecification(unittest.TestCase):
         self.assertEqual(out, expected, "output robustness")
 
     def test_input_vacuity(self):
-        spec = rtamt.STLDenseTimeSpecification(semantics=rtamt.Semantics.INPUT_VACUITY)
+        spec = rtamt.StlDenseTimeSpecification(semantics=rtamt.Semantics.INPUT_VACUITY)
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
@@ -45,7 +45,7 @@ class TestIastlDenseTimeOnlineSpecification(unittest.TestCase):
         self.assertEqual(out, expected, "input vacuity")
 
     def test_input_robustness(self):
-        spec = rtamt.STLDenseTimeSpecification(semantics=rtamt.Semantics.INPUT_ROBUSTNESS)
+        spec = rtamt.StlDenseTimeSpecification(semantics=rtamt.Semantics.INPUT_ROBUSTNESS)
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
@@ -64,7 +64,7 @@ class TestIastlDenseTimeOnlineSpecification(unittest.TestCase):
         self.assertEqual(out, expected, "input robustness")
 
     def test_output_vacuity(self):
-        spec = rtamt.STLDenseTimeSpecification(semantics=rtamt.Semantics.OUTPUT_VACUITY)
+        spec = rtamt.StlDenseTimeSpecification(semantics=rtamt.Semantics.OUTPUT_VACUITY)
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')

@@ -32,7 +32,9 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
     def visitVariable(self, node, *args, **kwargs):
         var = self.ast.var_object_dict[node.var]
         if node.field:  #TODO Tom did not understand this line.
-            sample_return = operator.attrgetter(node.field)(var)
+            sample_return = []
+            for v in var:
+                sample_return.append(operator.attrgetter(node.field)(v))
         else:
             sample_return = var
         return sample_return

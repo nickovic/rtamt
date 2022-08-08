@@ -6,7 +6,7 @@ def monitor():
     req = [[0.0, 0.0], [3.0, 6.0], [5.0, 0.0], [11.0, 0.0]]
     gnt = [[0.0, 0.0], [7.0, 6.0], [9.0, 0.0], [11.0, 0.0]]
 
-    spec = rtamt.STLDenseTimeSpecification()
+    spec = rtamt.StlDenseTimeSpecification()
     spec.name = 'STL Dense-time Offline Monitor'
     spec.declare_var('req', 'float')
     spec.declare_var('gnt', 'float')

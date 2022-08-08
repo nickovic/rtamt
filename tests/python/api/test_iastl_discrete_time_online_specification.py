@@ -21,7 +21,7 @@ class TestIastlDiscreteTimeOnlineSpecification(unittest.TestCase):
         self.right5 = -1
 
     def test_output_robustness(self):
-        spec = rtamt.STLDiscreteTimeSpecification(semantics=rtamt.Semantics.OUTPUT_ROBUSTNESS)
+        spec = rtamt.StlDiscreteTimeSpecification(semantics=rtamt.Semantics.OUTPUT_ROBUSTNESS)
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
@@ -44,7 +44,7 @@ class TestIastlDiscreteTimeOnlineSpecification(unittest.TestCase):
         self.assertEqual(out5, float("inf"), "input 5")
 
     def test_input_vacuity(self):
-        spec = rtamt.STLDiscreteTimeSpecification(semantics=rtamt.Semantics.INPUT_VACUITY)
+        spec = rtamt.StlDiscreteTimeSpecification(semantics=rtamt.Semantics.INPUT_VACUITY)
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
@@ -67,7 +67,7 @@ class TestIastlDiscreteTimeOnlineSpecification(unittest.TestCase):
         self.assertEqual(out5, 4, "input 5")
 
     def test_input_robustness(self):
-        spec = rtamt.STLDiscreteTimeSpecification(semantics=rtamt.Semantics.INPUT_ROBUSTNESS)
+        spec = rtamt.StlDiscreteTimeSpecification(semantics=rtamt.Semantics.INPUT_ROBUSTNESS)
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
@@ -90,7 +90,7 @@ class TestIastlDiscreteTimeOnlineSpecification(unittest.TestCase):
         self.assertEqual(out5, float("inf"), "input 5")
 
     def test_output_vacuity(self):
-        spec = rtamt.STLDiscreteTimeSpecification(semantics=rtamt.Semantics.OUTPUT_VACUITY)
+        spec = rtamt.StlDiscreteTimeSpecification(semantics=rtamt.Semantics.OUTPUT_VACUITY)
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')

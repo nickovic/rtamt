@@ -7,7 +7,7 @@ class TestIssue156(unittest.TestCase):
         super(TestIssue156, self).__init__(*args, **kwargs)
 
     def test_issue_156(self):
-        spec = rtamt.STLDenseTimeSpecification();
+        spec = rtamt.StlDenseTimeSpecification();
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')

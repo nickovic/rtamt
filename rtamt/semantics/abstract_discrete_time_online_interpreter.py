@@ -29,6 +29,11 @@ class AbstractDiscreteTimeOnlineInterpreter(AbstractOnlineInterpreter, DiscreteT
         # evaluate spec forest
         rob = self.updateVisitor.visitAst(self.ast, self.online_operator_dict, self.ast.var_object_dict)[0]
 
+        out = self.ast.var_object_dict[self.ast.out_var]
+        if self.ast.out_var_field:
+            setattr(out, self.ast.out_var_field, rob)
+
+
         # Check if the difference between two consecutive timestamps is between
         # the accepted tolerance - if not, increase the violation counter
         if self.update_counter > 0:

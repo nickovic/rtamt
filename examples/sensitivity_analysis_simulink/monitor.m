@@ -4,8 +4,8 @@ function [rob] = monitor( in )
 % Created:  20-01-2020
 % Author:   Dejan Nickovic
 
-import py.rtamt.STLDiscreteTimeSpecification;
-spec = STLDiscreteTimeSpecification();
+import py.rtamt.StlDiscreteTimeSpecification;
+spec = StlDiscreteTimeSpecification();
 declare_var(spec, 'pc', 'float');
 declare_var(spec, 'lep', 'float');
 declare_var(spec, 'out', 'float');

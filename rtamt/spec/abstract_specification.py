@@ -19,6 +19,11 @@ class AbstractSpecification(object):
         self.ast = ast
         self.interpreter = None
         self.set_ast_flag = False # It is for interpreter is set ast or not.
+        self.out_var = ''
+        self.out_var_field = ''
+        self.var_topic_dict = dict()
+        self.free_vars = set()
+        self.var_object_dict = dict()
 
         #TODO we need to move it to RTAMT4ROS as wrapper
         self.modules = dict()
@@ -58,14 +63,49 @@ class AbstractSpecification(object):
     def declare_const(self, const_name, const_type, const_val):
         self.ast.declare_const(const_name, const_type, const_val)
 
-    def free_vars(self, free_vars): # we do not need
-        self.ast.free_vars(free_vars)
+    @property
+    def out_var(self):
+        return self.ast.out_var
 
-    def vars(self, vars): # we do not need
-        self.ast.vars(vars)
+    @out_var.setter
+    def out_var(self, out_var):
+        pass
+
+    @property
+    def out_var_field(self):
+        return self.ast.out_var_field
+
+    @out_var_field.setter
+    def out_var_field(self, out_var_field):
+        pass
+
+    @property
+    def var_topic_dict(self):
+        return self.ast.var_topic_dict
+
+    @var_topic_dict.setter
+    def var_topic_dict(self, var_topic_dict):
+        pass
+
+    @property
+    def var_object_dict(self):
+        return self.ast.var_object_dict
+
+    @var_object_dict.setter
+    def var_object_dict(self, var_object_dict):
+        self.__var_object_dict = var_object_dict
+        self.ast.var_object_dict = self.var_object_dict
+
+    @property
+    def free_vars(self):
+        return self.ast.free_vars
+
+    @free_vars.setter
+    def free_vars(self, free_vars):
+        pass
 
     def modules(self, modules): #TODO: send syntax layer (ast)?
-        self.ast.modules(modules)
+        return self.ast.modules(modules)
 
     def import_module(self, from_name, module_name): #TODO: send syntax layer (ast)?
         self.ast.import_module(from_name, module_name)
@@ -78,38 +118,38 @@ class AbstractSpecification(object):
 
     # forwarding to interpreter
     def set_sampling_period(self, sampling_period=int(1), unit='s', tolerance=float(0.1)):
-        if self.online_interpreter:
+        if hasattr(self, 'online_interpreter'):
             if isinstance(self.online_interpreter, DiscreteTimeInterpreter):
                 self.online_interpreter.set_sampling_period(sampling_period, unit, tolerance)
             else:
                 RTAMTException('time_unit_transformer() allowed only discrete time')
 
-        if self.offline_interpreter:
+        if hasattr(self, 'offline_interpreter'):
             if isinstance(self.offline_interpreter, DiscreteTimeInterpreter):
                 self.offline_interpreter.set_sampling_period(sampling_period, unit, tolerance)
             else:
                 RTAMTException('time_unit_transformer() allowed only discrete time')
 
     def get_sampling_frequency(self):
-        if self.online_interpreter:
+        if hasattr(self, 'online_interpreter'):
             if isinstance(self.online_interpreter, DiscreteTimeInterpreter):
-                self.online_interpreter.get_sampling_frequency()
+                return self.online_interpreter.get_sampling_frequency()
             else:
                 RTAMTException('time_unit_transformer() allowed only discrete time')
-        if self.offline_interpreter:
+        if hasattr(self, 'offline_interpreter'):
             if isinstance(self.offline_interpreter, DiscreteTimeInterpreter):
-                self.offline_interpreter.get_sampling_frequency()
+                return self.offline_interpreter.get_sampling_frequency()
             else:
                 RTAMTException('time_unit_transformer() allowed only discrete time')
 
     @property
     def sampling_violation_counter(self):
-        if self.online_interpreter:
+        if hasattr(self, 'online_interpreter'):
             if isinstance(self.online_interpreter, DiscreteTimeInterpreter):
                 return self.online_interpreter.sampling_violation_counter
             else:
                 RTAMTException('only discrete time has sampling_violation_counter')
-        if self.offline_interpreter:
+        if hasattr(self, 'offline_interpreter'):
             if isinstance(self.offline_interpreter, DiscreteTimeInterpreter):
                 return self.offline_interpreter.sampling_violation_counter
             else:
@@ -117,12 +157,12 @@ class AbstractSpecification(object):
 
     @property
     def sampling_tolerance(self):
-        if self.online_interpreter:
+        if hasattr(self, 'online_interpreter'):
             if isinstance(self.online_interpreter, DiscreteTimeInterpreter):
                 return self.online_interpreter.sampling_tolerance
             else:
                 RTAMTException('only discrete time has sampling_tolerance')
-        if self.offline_interpreter:
+        if hasattr(self, 'offline_interpreter'):
             if isinstance(self.offline_interpreter, DiscreteTimeInterpreter):
                 return self.offline_interpreter.sampling_tolerance
             else:

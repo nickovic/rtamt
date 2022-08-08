@@ -15,7 +15,7 @@ def monitor():
     # Example (a) - standard robustness
     #
     # # #
-    spec = rtamt.STLDenseTimeSpecification(semantics=rtamt.Semantics.STANDARD)
+    spec = rtamt.StlDenseTimeSpecification(semantics=rtamt.Semantics.STANDARD)
     spec.name = 'Example 1'
     spec.declare_var('req', 'float')
     spec.declare_var('gnt', 'float')
@@ -40,7 +40,7 @@ def monitor():
     # Example (a) - output robustness
     #
     # # #
-    spec = rtamt.STLDenseTimeSpecification(semantics=rtamt.Semantics.OUTPUT_ROBUSTNESS)
+    spec = rtamt.StlDenseTimeSpecification(semantics=rtamt.Semantics.OUTPUT_ROBUSTNESS)
     spec.name = 'Example 1'
     spec.declare_var('req', 'float')
     spec.declare_var('gnt', 'float')
@@ -63,7 +63,7 @@ def monitor():
     # Example (a) - input vacuity
     #
     # # # #
-    spec = rtamt.STLDenseTimeSpecification(semantics=rtamt.Semantics.INPUT_VACUITY)
+    spec = rtamt.StlDenseTimeSpecification(semantics=rtamt.Semantics.INPUT_VACUITY)
     spec.name = 'Example 1'
     spec.declare_var('req', 'float')
     spec.declare_var('gnt', 'float')
@@ -86,7 +86,7 @@ def monitor():
     # Example (b) - standard robustness
     #
     # # #
-    spec = rtamt.STLDenseTimeSpecification(semantics=rtamt.Semantics.STANDARD)
+    spec = rtamt.StlDenseTimeSpecification(semantics=rtamt.Semantics.STANDARD)
     spec.name = 'Example 1'
     spec.declare_var('req', 'float')
     spec.declare_var('gnt', 'float')
@@ -110,7 +110,7 @@ def monitor():
     # Example (b) - output robustness
     #
     # # #
-    spec = rtamt.STLDenseTimeSpecification(semantics=rtamt.Semantics.OUTPUT_ROBUSTNESS)
+    spec = rtamt.StlDenseTimeSpecification(semantics=rtamt.Semantics.OUTPUT_ROBUSTNESS)
     spec.name = 'Example 1'
     spec.declare_var('req', 'float')
     spec.declare_var('gnt', 'float')
@@ -133,7 +133,7 @@ def monitor():
     # Example (b) - input vacuity
     #
     # # #
-    spec = rtamt.STLDenseTimeSpecification(semantics=rtamt.Semantics.INPUT_VACUITY)
+    spec = rtamt.StlDenseTimeSpecification(semantics=rtamt.Semantics.INPUT_VACUITY)
     spec.name = 'Example 1'
     spec.declare_var('req', 'float')
     spec.declare_var('gnt', 'float')
@@ -156,7 +156,7 @@ def monitor():
     # Example (c) - standard robustness
     #
     # # #
-    spec = rtamt.STLDenseTimeSpecification(semantics=rtamt.Semantics.STANDARD)
+    spec = rtamt.StlDenseTimeSpecification(semantics=rtamt.Semantics.STANDARD)
     spec.name = 'Example 1'
     spec.declare_var('req', 'float')
     spec.declare_var('gnt', 'float')
@@ -182,7 +182,7 @@ def monitor():
     # Example (c) - output robustness
     #
     # # #
-    spec = rtamt.STLDenseTimeSpecification(semantics=rtamt.Semantics.OUTPUT_ROBUSTNESS)
+    spec = rtamt.StlDenseTimeSpecification(semantics=rtamt.Semantics.OUTPUT_ROBUSTNESS)
     spec.name = 'Example 1'
     spec.declare_var('req', 'float')
     spec.declare_var('gnt', 'float')
@@ -205,7 +205,7 @@ def monitor():
     # Example (c) - input vacuity
     #
     # # #
-    spec = rtamt.STLDenseTimeSpecification(semantics=rtamt.Semantics.INPUT_VACUITY)
+    spec = rtamt.StlDenseTimeSpecification(semantics=rtamt.Semantics.INPUT_VACUITY)
     spec.name = 'Example 1'
     spec.declare_var('req', 'float')
     spec.declare_var('gnt', 'float')
@@ -228,7 +228,7 @@ def monitor():
     # # Example (d) - standard robustness
     # #
     # # # #
-    spec = rtamt.STLDenseTimeSpecification(semantics=rtamt.Semantics.STANDARD)
+    spec = rtamt.StlDenseTimeSpecification(semantics=rtamt.Semantics.STANDARD)
 
     spec.name = 'Example d'
     spec.declare_var('req', 'float')
@@ -251,7 +251,7 @@ def monitor():
     # # Example (d) - output robustness
     # #
     # # # #
-    spec = rtamt.STLDenseTimeSpecification(semantics=rtamt.Semantics.OUTPUT_ROBUSTNESS)
+    spec = rtamt.StlDenseTimeSpecification(semantics=rtamt.Semantics.OUTPUT_ROBUSTNESS)
     spec.name = 'Example d'
     spec.declare_var('req', 'float')
     spec.declare_var('gnt', 'float')
@@ -275,7 +275,7 @@ def monitor():
     # # Example (d) - input vacuity
     # #
     # # # #
-    spec = rtamt.STLDenseTimeSpecification(semantics=rtamt.Semantics.INPUT_VACUITY)
+    spec = rtamt.StlDenseTimeSpecification(semantics=rtamt.Semantics.INPUT_VACUITY)
     spec.name = 'Example 1'
     spec.declare_var('req', 'float')
     spec.declare_var('gnt', 'float')

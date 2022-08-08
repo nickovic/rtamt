@@ -7,7 +7,7 @@ def monitor():
     # Load traces
     data = read_csv('example1.csv')
 
-    spec = rtamt.STLDiscreteTimeSpecification()
+    spec = rtamt.StlDiscreteTimeSpecification()
     spec.name = 'Example 1'
     spec.declare_const('threshold', 'float', '3')
     spec.declare_const('T', 'float', '5')

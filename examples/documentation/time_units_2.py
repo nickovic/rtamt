@@ -2,7 +2,7 @@ import sys
 import rtamt
 
 def monitor():
-    spec = rtamt.STLDiscreteTimeSpecification()
+    spec = rtamt.StlDiscreteTimeSpecification()
     spec.name = 'Bounded-response Request-Grant'
 
     spec.declare_var('req', 'float')

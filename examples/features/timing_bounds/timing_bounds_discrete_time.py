@@ -14,7 +14,7 @@ def monitor():
     # We require that the bound is divisible by the sampling period
 
     # # stl
-    spec = rtamt.STLDiscreteTimeSpecification()
+    spec = rtamt.StlDiscreteTimeSpecification()
     spec.name = 'HandMadeMonitor'
     spec.declare_var('a', 'float')
     spec.declare_var('c', 'float')
@@ -32,7 +32,7 @@ def monitor():
         print('STL Parse Exception: {}'.format(err))
 
     # # stl
-    spec = rtamt.STLDiscreteTimeSpecification()
+    spec = rtamt.StlDiscreteTimeSpecification()
     spec.name = 'HandMadeMonitor'
     spec.declare_var('a', 'float')
     spec.declare_var('c', 'float')
@@ -50,7 +50,7 @@ def monitor():
         print('STL Parse Exception: {}'.format(err))
 
     # # stl
-    spec = rtamt.STLDiscreteTimeSpecification()
+    spec = rtamt.StlDiscreteTimeSpecification()
     spec.name = 'HandMadeMonitor'
     spec.declare_var('a', 'float')
     spec.declare_var('c', 'float')
@@ -69,7 +69,7 @@ def monitor():
         print('STL Parse Exception: {}'.format(err))
 
     # # stl
-    spec = rtamt.STLDiscreteTimeSpecification()
+    spec = rtamt.StlDiscreteTimeSpecification()
     spec.name = 'HandMadeMonitor'
     spec.declare_var('a', 'float')
     spec.declare_var('c', 'float')

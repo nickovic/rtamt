@@ -257,8 +257,8 @@ The library monitors bounded-future STL formulas with a fixed _delay_. In order 
 
 The API provides two monitoring classes:
 
-- `STLDiscreteTimeSpecification` for discrete-time monitors
-- `STLDenseTimeSpecification` for dense-time monitors
+- `StlDiscreteTimeSpecification` for discrete-time monitors
+- `StlDenseTimeSpecification` for dense-time monitors
 
 Both classes implement online and offline monitors:
 
@@ -317,7 +317,7 @@ def monitor():
     b3 = [(15, 0)]
 
     # # stl
-    spec = rtamt.STLDenseTimeSpecification()
+    spec = rtamt.StlDenseTimeSpecification()
     spec.name = 'STL dense-time specification'
     spec.declare_var('a', 'float')
     spec.spec = 'a>=2'
@@ -351,7 +351,7 @@ def monitor():
     req = [[0.0, 0.0], [3.0, 6.0], [5.0, 0.0], [11.0, 0.0]]
     gnt = [[0.0, 0.0], [7.0, 6.0], [9.0, 0.0], [11.0, 0.0]]
     
-    spec = rtamt.STLDenseTimeSpecification()
+    spec = rtamt.StlDenseTimeSpecification()
     spec.name = 'STL Dense-time Offline Monitor'
     spec.declare_var('req', 'float')
     spec.declare_var('gnt', 'float')
@@ -393,7 +393,7 @@ import sys
 import rtamt
 
 def monitor():
-    spec = rtamt.STLDiscreteTimeSpecification()
+    spec = rtamt.StlDiscreteTimeSpecification()
     spec.name = 'Bounded-response Request-Grant'
 
     spec.declare_var('req', 'float')

@@ -7,7 +7,7 @@ class TestIssue85(unittest.TestCase):
         super(TestIssue85, self).__init__(*args, **kwargs)
 
     def test_issue_85(self):
-        specification = rtamt.STLDiscreteTimeSpecification()
+        specification = rtamt.StlDiscreteTimeSpecification()
 
         specification.declare_var('zzz', 'float')
         specification.spec = '!( (eventually[2,3]( zzz) ) )'
