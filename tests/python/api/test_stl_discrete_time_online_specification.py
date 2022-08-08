@@ -198,7 +198,7 @@ class TestStlDiscreteTimeOnlineSpecification(unittest.TestCase):
 
         spec.parse()
 
-        self.assertRaises(rtamt.LTLNotImplementedException, spec.update, 0, [('req', self.left1)])
+        self.assertRaises(rtamt.RTAMTException, spec.update, 0, [('req', self.left1)])
 
     def test_next_with_pastify(self):
         spec = rtamt.StlDiscreteTimeSpecification()
@@ -335,7 +335,7 @@ class TestStlDiscreteTimeOnlineSpecification(unittest.TestCase):
 
         spec.parse()
 
-        self.assertRaises(rtamt.LTLNotImplementedException, spec.update, 0, [('req', self.left1)])
+        self.assertRaises(rtamt.RTAMTException, spec.update, 0, [('req', self.left1)])
 
     def test_always_with_pastify(self):
         spec = rtamt.StlDiscreteTimeSpecification()
@@ -345,7 +345,7 @@ class TestStlDiscreteTimeOnlineSpecification(unittest.TestCase):
 
         spec.parse()
 
-        self.assertRaises(rtamt.LTLPastifyException, spec.pastify)
+        self.assertRaises(rtamt.RTAMTException, spec.pastify)
 
     def test_eventually_without_pastify(self):
         spec = rtamt.StlDiscreteTimeSpecification()
@@ -355,7 +355,7 @@ class TestStlDiscreteTimeOnlineSpecification(unittest.TestCase):
 
         spec.parse()
 
-        self.assertRaises(rtamt.LTLNotImplementedException, spec.update, 0, [('req', self.left1)])
+        self.assertRaises(rtamt.RTAMTException, spec.update, 0, [('req', self.left1)])
 
     def test_eventually_with_pastify(self):
         spec = rtamt.StlDiscreteTimeSpecification()
@@ -365,7 +365,7 @@ class TestStlDiscreteTimeOnlineSpecification(unittest.TestCase):
 
         spec.parse()
 
-        self.assertRaises(rtamt.LTLPastifyException, spec.pastify)
+        self.assertRaises(rtamt.RTAMTException, spec.pastify)
 
     def test_historically(self):
         spec = rtamt.StlDiscreteTimeSpecification()
@@ -437,7 +437,7 @@ class TestStlDiscreteTimeOnlineSpecification(unittest.TestCase):
 
         spec.parse()
 
-        self.assertRaises(rtamt.LTLNotImplementedException, spec.update, 0, [('req', self.left1), ('gnt', self.right1)])
+        self.assertRaises(rtamt.RTAMTException, spec.update, 0, [('req', self.left1), ('gnt', self.right1)])
 
     def test_always_with_pastify(self):
         spec = rtamt.StlDiscreteTimeSpecification()
@@ -448,7 +448,7 @@ class TestStlDiscreteTimeOnlineSpecification(unittest.TestCase):
 
         spec.parse()
 
-        self.assertRaises(rtamt.LTLPastifyException, spec.pastify)
+        self.assertRaises(rtamt.RTAMTException, spec.pastify)
 
     def test_eventually_0_1_without_pastify(self):
         spec = rtamt.StlDiscreteTimeSpecification()
@@ -458,7 +458,7 @@ class TestStlDiscreteTimeOnlineSpecification(unittest.TestCase):
 
         spec.parse()
 
-        self.assertRaises(rtamt.STLNotImplementedException, spec.update, 0, [('req', self.left1)])
+        self.assertRaises(rtamt.RTAMTException, spec.update, 0, [('req', self.left1)])
 
     def test_eventually_0_1_with_pastify(self):
         spec = rtamt.StlDiscreteTimeSpecification()
@@ -529,7 +529,7 @@ class TestStlDiscreteTimeOnlineSpecification(unittest.TestCase):
 
         spec.parse()
 
-        self.assertRaises(rtamt.STLNotImplementedException, spec.update, 0, [('req', self.left1)])
+        self.assertRaises(rtamt.RTAMTException, spec.update, 0, [('req', self.left1)])
 
     def test_always_0_1_with_pastify(self):
         spec = rtamt.StlDiscreteTimeSpecification()
@@ -601,7 +601,7 @@ class TestStlDiscreteTimeOnlineSpecification(unittest.TestCase):
 
         spec.parse()
 
-        self.assertRaises(rtamt.STLNotImplementedException, spec.update, 0, [('req', self.left1), ('gnt', self.right1)])
+        self.assertRaises(rtamt.RTAMTException, spec.update, 0, [('req', self.left1), ('gnt', self.right1)])
 
     def test_until_1_2_with_pastify(self):
         spec = rtamt.StlDiscreteTimeSpecification()

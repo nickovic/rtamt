@@ -43,7 +43,7 @@ class TestStlIntervalStyle(unittest.TestCase):
             computed_column = spec_column.update(3, [['req', 4.3], ['gnt', 4.4]])
             self.assertEqual(computed_comma, computed_column, 'Second computation')
 
-        except rtamt.STLParseException as err:
+        except rtamt.RTAMTException as err:
             print('STL Parse Exception: {}'.format(err))
 
 if __name__ == '__main__':

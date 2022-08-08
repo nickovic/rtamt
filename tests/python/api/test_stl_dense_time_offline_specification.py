@@ -473,7 +473,7 @@ class TestStlDenseTimeOfflineSpecification(unittest.TestCase):
 
         spec.parse()
 
-        self.assertRaises(rtamt.LTLNotImplementedException, spec.update, ['req', [0.0, 3.0]])
+        self.assertRaises(rtamt.RTAMTException, spec.update, ['req', [0.0, 3.0]])
 
     def test_prev(self):
         spec = rtamt.StlDenseTimeSpecification()
@@ -483,7 +483,7 @@ class TestStlDenseTimeOfflineSpecification(unittest.TestCase):
 
         spec.parse()
 
-        self.assertRaises(rtamt.LTLNotImplementedException, spec.update, ['req', [0.0, 3.0]])
+        self.assertRaises(rtamt.RTAMTException, spec.update, ['req', [0.0, 3.0]])
 
     def test_rise(self):
         spec = rtamt.StlDenseTimeSpecification()
@@ -493,7 +493,7 @@ class TestStlDenseTimeOfflineSpecification(unittest.TestCase):
 
         spec.parse()
 
-        self.assertRaises(rtamt.LTLNotImplementedException, spec.update, ['req', [0.0, 3.0]])
+        self.assertRaises(rtamt.RTAMTException, spec.update, ['req', [0.0, 3.0]])
 
     def test_fall(self):
         spec = rtamt.StlDenseTimeSpecification()
@@ -503,7 +503,7 @@ class TestStlDenseTimeOfflineSpecification(unittest.TestCase):
 
         spec.parse()
 
-        self.assertRaises(rtamt.LTLNotImplementedException, spec.update, ['req', [0.0, 3.0]])
+        self.assertRaises(rtamt.RTAMTException, spec.update, ['req', [0.0, 3.0]])
 
 
 
