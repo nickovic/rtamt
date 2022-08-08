@@ -1,6 +1,6 @@
 from rtamt.semantics.abstract_online_operation import AbstractOnlineOperation
 from rtamt.semantics.enumerations.comp_oper import StlComparisonOperator
-from rtamt.exception.ltl.exception import LTLException
+from rtamt.exception.exception import RTAMTException
 
 
 class PredicateOperation(AbstractOnlineOperation):
@@ -20,7 +20,7 @@ class PredicateOperation(AbstractOnlineOperation):
         elif self.comparison_op.value == StlComparisonOperator.GEQ.value or self.comparison_op.value == StlComparisonOperator.GREATER.value:
             sample_return = sample_left - sample_right
         else:
-            raise LTLException('Unknown predicate operation')
+            raise RTAMTException('Unknown predicate operation')
 
         return sample_return
 
@@ -38,6 +38,6 @@ class PredicateOperation(AbstractOnlineOperation):
         elif self.comparison_op.value == StlComparisonOperator.LESS.value:
             sample_return = sample_left < sample_right
         else:
-            raise LTLException('Unknown predicate operation')
+            raise RTAMTException('Unknown predicate operation')
 
         return sample_return

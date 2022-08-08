@@ -8,7 +8,7 @@ from rtamt.syntax.node.stl.timed_historically import TimedHistorically
 from rtamt.syntax.node.stl.timed_once import TimedOnce
 from rtamt.syntax.node.stl.timed_since import TimedSince
 
-from rtamt.exception.stl.exception import STLException
+from rtamt.exception.exception import RTAMTException
 from rtamt.pastifier.stl.horizon import StlHorizon
 
 
@@ -93,4 +93,4 @@ class StlPastifier(LtlPastifier, StlAstVisitor):
         return node
 
     def visitDefault(self, node):
-        raise STLException('STL Pastifier: encountered unexpected type of node.')
+        raise RTAMTException('STL Pastifier: encountered unexpected type of node.')

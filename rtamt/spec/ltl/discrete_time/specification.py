@@ -4,7 +4,7 @@ import importlib
 from rtamt.spec.abstract_specification import AbstractSpecification
 from rtamt.syntax.ast.parser.ltl.specification_parser import LtlAstParserVisitor
 
-from rtamt.exception.stl.exception import STLParseException
+from rtamt.exception.exception import RTAMTException
 
 from rtamt.pastifier.ltl.pastifier import LtlPastifier
 from rtamt.interpreter.ltl.online_interpreter import LTLInterpreter
@@ -83,11 +83,11 @@ class LTLDiscreteTimeSpecification(AbstractSpecification):
             module = importlib.import_module(from_name)
             self.modules[module_name] = module
         except ImportError:
-            raise STLParseException('The module {} cannot be loaded'.format(from_name))
+            raise RTAMTException('The module {} cannot be loaded'.format(from_name))
 
     def declare_const(self, const_name, const_type, const_val):
         if const_name in self.vars:
-            raise STLParseException('Constant {} already declared'.format(const_name))
+            raise RTAMTException('Constant {} already declared'.format(const_name))
 
         self.const_type_dict[const_name] = const_type
         self.const_val_dict[const_name] = const_val
@@ -136,7 +136,7 @@ class LTLDiscreteTimeSpecification(AbstractSpecification):
                 class_ = getattr(var_module, var_type)
                 var = class_()
             except KeyError:
-                raise STLParseException('The type {} does not seem to be imported.'.format(var_type))
+                raise RTAMTException('The type {} does not seem to be imported.'.format(var_type))
         return var
 
     @property

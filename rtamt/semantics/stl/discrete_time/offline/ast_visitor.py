@@ -4,7 +4,7 @@ import collections
 
 from rtamt.syntax.ast.visitor.stl.ast_visitor import StlAstVisitor
 from rtamt.semantics.enumerations.comp_oper import StlComparisonOperator
-from rtamt.exception.stl.exception import STLException
+from rtamt.exception.exception import RTAMTException
 
 
 class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
@@ -24,7 +24,7 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
             elif node.operator.value == StlComparisonOperator.GEQ.value or node.operator.value == StlComparisonOperator.GREATER.value:
                 val = sample_left[i] - sample_right[i]
             else:
-                raise STLException('Unknown predicate operation')
+                raise RTAMTException('Unknown predicate operation')
             sample_return.append(val)
         return sample_return
 
@@ -292,8 +292,7 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
 
 
     def visitTimedPrecedes(self, node, *args, **kwargs):
-        #TODO consider correct exception
-        raise STLException('Offline does not need visitTimedPrecedes')
+        raise RTAMTException('Offline does not need visitTimedPrecedes')
 
 
     def visitTimedOnce(self, node, *args, **kwargs):

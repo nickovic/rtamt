@@ -1,7 +1,7 @@
 from rtamt.semantics.abstract_dense_time_online_operation import AbstractDenseTimeOnlineOperation
 from rtamt.semantics.enumerations.comp_oper import StlComparisonOperator
 from rtamt.semantics.arithmetic.dense_time.online.subtraction_operation import SubtractionOperation
-from rtamt.exception.ltl.exception import LTLException
+from rtamt.exception.exception import RTAMTException
 
 
 class PredicateOperation(AbstractDenseTimeOnlineOperation):
@@ -83,7 +83,7 @@ class PredicateOperation(AbstractDenseTimeOnlineOperation):
                 out_val = True if in_sample[1] > 0 else False
                 rval = in_sample[1]
             else:
-                raise LTLException('Unknown predicate operation')
+                raise RTAMTException('Unknown predicate operation')
 
             if rval != prev or i == len(input_list) - 1:
                 sample_result.append([in_sample[0], out_val])
@@ -116,7 +116,7 @@ class PredicateOperation(AbstractDenseTimeOnlineOperation):
                 out_val = True if in_sample[1] > 0 else False
                 rval = in_sample[1]
             else:
-                raise LTLException('Unknown predicate operation')
+                raise RTAMTException('Unknown predicate operation')
 
             if rval != prev or i == len(input_list) - 1:
                 sample_result.append([in_sample[0], out_val])

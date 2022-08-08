@@ -1,6 +1,6 @@
 from rtamt.syntax.ast.visitor.ltl.ast_visitor import LtlAstVisitor
 
-from rtamt.exception.ltl.exception import LTLPastifyException
+from rtamt.exception.exception import RTAMTException
 
 
 class LtlHorizon(LtlAstVisitor):
@@ -111,13 +111,13 @@ class LtlHorizon(LtlAstVisitor):
         return max(op1_horizon, op2_horizon)
 
     def visitEventually(self, node, *args, **kwargs):
-        raise LTLPastifyException('Cannot pastify an unbounded eventually.')
+        raise RTAMTException('Cannot pastify an unbounded eventually.')
 
     def visitAlways(self, node, *args, **kwargs):
-        raise LTLPastifyException('Cannot pastify an unbounded always.')
+        raise RTAMTException('Cannot pastify an unbounded always.')
 
     def visitUntil(self, node, *args, **kwargs):
-        raise LTLPastifyException('Cannot pastify an unbounded until.')
+        raise RTAMTException('Cannot pastify an unbounded until.')
 
     def visitOnce(self, node, *args, **kwargs):
         op_horizon = self.visit(node.children[0], *args, **kwargs)
@@ -146,4 +146,4 @@ class LtlHorizon(LtlAstVisitor):
         return max(op1_horizon, op2_horizon)
 
     def visitDefault(self, node):
-        raise LTLPastifyException('LTL Pastifier: encountered unexpected type of object.')
+        raise RTAMTException('LTL Pastifier: encountered unexpected type of object.')

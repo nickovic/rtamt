@@ -18,7 +18,7 @@ from rtamt.syntax.node.stl.timed_historically import TimedHistorically
 from rtamt.syntax.node.stl.timed_once import TimedOnce
 from rtamt.syntax.node.stl.timed_since import TimedSince
 from rtamt.syntax.node.stl.timed_until import TimedUntil
-from rtamt.exception.stl.exception import STLParseException
+from rtamt.exception.exception import RTAMTException
 
 
 class StlAstParserVisitor(LtlAstParserVisitor, StlParserVisitor):
@@ -104,7 +104,7 @@ class StlAstParserVisitor(LtlAstParserVisitor, StlParserVisitor):
         const_name = ctx.Identifier().getText()
 
         if const_name not in self.const_val_dict:
-            raise STLParseException('Bound {} not declared'.format(const_name))
+            raise RTAMTException('Bound {} not declared'.format(const_name))
 
         val = self.const_val_dict[const_name]
 
