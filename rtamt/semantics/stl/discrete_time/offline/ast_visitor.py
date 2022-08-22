@@ -346,6 +346,9 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
     def visitTimedAlways(self, node, *args, **kwargs):
         sample = self.visit(node.children[0], *args, **kwargs)
         begin, end = self.time_unit_transformer(node)
+        sample_len = len(sample)
+        if sample_len <= end:
+            sample += [float('inf')] * (end - sample_len + 1)
 
         diff = end - begin
         sample_return  = [min(sample[j:j+diff+1]) for j in range(begin, end+1)]
@@ -353,20 +356,23 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
         sample_return += tmp
         tmp  = [float("inf") for j in range(len(sample)-len(sample_return))]
         sample_return += tmp
-        return sample_return
-
+        return sample_return[0:sample_len]
 
     def visitTimedEventually(self, node, *args, **kwargs):
         sample = self.visit(node.children[0], *args, **kwargs)
         begin, end = self.time_unit_transformer(node)
+        sample_len = len(sample)
+
+        if sample_len <= end:
+            sample += [-float('inf')] * (end - sample_len + 1)
 
         diff = end - begin
         sample_return  = [max(sample[j:j+diff+1]) for j in range(begin, end+1)]
-        tmp  = [max(sample[j:j+diff+1]) for j in range(end+1,len(sample))]
+        tmp = [max(sample[j:j+diff+1]) for j in range(end+1,len(sample))]
         sample_return += tmp
-        tmp  = [-float("inf") for j in range(len(sample)-len(sample_return))]
+        tmp = [-float("inf") for j in range(len(sample)-len(sample_return))]
         sample_return += tmp
-        return sample_return
+        return sample_return[0:sample_len]
 
 
     def visitTimedUntil(self, node, *args, **kwargs):
