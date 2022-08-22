@@ -117,24 +117,6 @@ class StlAstParserVisitor(LtlAstParserVisitor, StlParserVisitor):
 
         return out, unit
 
-        #if ctx.unit() == None:
-            # default time unit is seconds - conversion of the bound to ps
-        #    unit = self.unit
-        #else:
-        #    unit = ctx.unit().getText()
-
-        #out = out * self.U[unit]
-
-        #sp = Fraction(self.get_sampling_period())
-
-        #out = out / sp
-
-        #if out.numerator % out.denominator > 0:
-        #    raise STLParseException('The STL operator bound must be a multiple of the sampling period')
-
-        #out = int(out / self.sampling_period)
-
-        #return out
 
     def visitIntervalTimeLiteral(self, ctx):
         time_bound = Fraction(Decimal(ctx.literal().getText()))
@@ -145,46 +127,6 @@ class StlAstParserVisitor(LtlAstParserVisitor, StlParserVisitor):
 
         return time_bound, unit
 
-        #text = ctx.literal().getText()
-        #out = Fraction(Decimal(text))
-
-        #if ctx.unit() == None:
-            # default time unit is seconds - conversion of the bound to ns
-        #    unit = self.unit
-        #else:
-        #    unit = ctx.unit().getText()
-
-        #out = out * self.U[unit]
-
-        #sp = Fraction(self.get_sampling_period())
-
-        #out = out / sp
-
-        #if out.numerator % out.denominator > 0:
-        #    raise STLParseException('The STL operator bound must be a multiple of the sampling period')
-
-        #out = int(out / self.sampling_period)
-
-        #return out
-
-    #def visitIntervalTimeLiteral(self, ctx):
-        #text = ctx.literal().getText()
-        #out = float(text)
-
-        #if ctx.unit() != None:
-        #    unit = ctx.unit().getText()
-        #    if (unit == 'ps'):
-        #        out = out * 1e-12
-        #    elif (unit == 'ms'):
-        #        out = out * 1e-3
-        #    elif (unit == 'us'):
-        #        out = out * 1e-6
-        #    elif (unit == 'ns'):
-        #        out = out * 1e-9
-        #    else:
-        #        pass
-
-        #return out
 
     def visitInterval(self, ctx):
         begin, begin_unit = self.visit(ctx.intervalTime(0))

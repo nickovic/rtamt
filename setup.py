@@ -9,7 +9,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='rtamt',
-    version='0.3.2',
+    version='0.3.3',
     description='Library for specification-based online monitoring.',
     long_description=long_description,
     long_description_content_type="text/markdown",
