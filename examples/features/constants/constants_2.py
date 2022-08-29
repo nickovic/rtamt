@@ -10,7 +10,7 @@ def monitor():
     }
 
     # # stl
-    spec = rtamt.StlDiscreteTimeSpecification(language=rtamt.Language.PYTHON)
+    spec = rtamt.StlDiscreteTimeSpecification()
     spec.name = 'HandMadeMonitor'
     spec.declare_var('a', 'float')
     spec.declare_var('b', 'float')
@@ -20,8 +20,8 @@ def monitor():
 
     try:
         spec.parse()
-    except rtamt.STLParseException as err:
-        print('STL Parse Exception: {}'.format(err))
+    except rtamt.RTAMTException as err:
+        print('RTAMT Exception: {}'.format(err))
         sys.exit()
 
     # # eval

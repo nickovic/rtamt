@@ -10,7 +10,7 @@ def monitor():
     }
 
     # # stl
-    spec = rtamt.STLSpecification(language=rtamt.Language.PYTHON)
+    spec = rtamt.StlDiscreteTimeSpecification()
     spec.name = 'STL discrete-time online Python monitor'
     spec.declare_var('a', 'float')
     spec.declare_var('b', 'float')
@@ -18,7 +18,7 @@ def monitor():
 
     try:
         spec.parse()
-    except rtamt.STLParseException as err:
+    except rtamt.RTAMTException as err:
         print('STL Parse Exception: {}'.format(err))
         sys.exit()
 

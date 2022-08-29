@@ -56,8 +56,8 @@ spec1.set_var_io_type('gnt', 'output')
 spec1.spec = 'out = (req>=3)'
 try:
     spec1.parse()
-except rtamt.STLParseException as err:
-    print('STL Parse Exception: {}'.format(err))
+except rtamt.RTAMTException as err:
+    print('RTAMT Exception: {}'.format(err))
     sys.exit()
 
 spec2 = rtamt.StlDiscreteTimeSpecification(semantics=rtamt.Semantics.STANDARD)
@@ -70,8 +70,8 @@ spec2.set_var_io_type('gnt', 'output')
 spec2.spec = 'out = ((req>=3) implies (gnt>=3))'
 try:
     spec2.parse()
-except rtamt.STLParseException as err:
-    print('STL Parse Exception: {}'.format(err))
+except rtamt.RTAMTException as err:
+    print('RTAMT Exception: {}'.format(err))
     sys.exit()
 
 spec3 = rtamt.StlDiscreteTimeSpecification(semantics=rtamt.Semantics.STANDARD)
@@ -84,8 +84,8 @@ spec3.set_var_io_type('gnt', 'output')
 spec3.spec = 'out = ((req>=3) implies (eventually[0:5](gnt>=3)))'
 try:
     spec3.parse()
-except rtamt.STLParseException as err:
-    print('STL Parse Exception: {}'.format(err))
+except rtamt.RTAMTException as err:
+    print('RTAMT Exception: {}'.format(err))
     sys.exit()
 
 spec4 = rtamt.StlDiscreteTimeSpecification(semantics=rtamt.Semantics.STANDARD)
@@ -98,8 +98,8 @@ spec4.set_var_io_type('gnt', 'output')
 spec4.spec = 'out = ((H(req>=3)) implies ((not (req>=3))until[0:5](gnt>=3)))'
 try:
     spec4.parse()
-except rtamt.STLParseException as err:
-    print('STL Parse Exception: {}'.format(err))
+except rtamt.RTAMTException as err:
+    print('RTAMT Exception: {}'.format(err))
     sys.exit()
 
 dataset = {'time': t1, 'req': v1, 'gnt': w1}

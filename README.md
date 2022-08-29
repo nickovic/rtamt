@@ -275,7 +275,7 @@ import rtamt
 
 def monitor():
     # # stl
-    spec = rtamt.STLSpecification()
+    spec = rtamt.StlDiscreteTimeSpecification()
     spec.declare_var('a', 'float')
     spec.declare_var('b', 'float')
     spec.spec = 'eventually[0,1] (a >= b)'
@@ -323,8 +323,8 @@ def monitor():
     spec.spec = 'a>=2'
     try:
         spec.parse()
-    except rtamt.STLParseException as err:
-        print('STL Parse Exception: {}'.format(err))
+    except rtamt.RTAMTException as err:
+        print('RTAMT Exception: {}'.format(err))
         sys.exit()
 
     rob = spec.update(['a', a1], ['b', b1])
@@ -361,9 +361,8 @@ def monitor():
     spec.spec = 'out = always((req>=3) implies (eventually[0:5](gnt>=3)))'
     try:
         spec.parse()
-        spec.pastify()
-    except rtamt.STLParseException as err:
-        print('STL Parse Exception: {}'.format(err))
+    except rtamt.RTAMTException as err:
+        print('RTAMT Exception: {}'.format(err))
         sys.exit()
 
     rob = spec.evaluate(['req', req], ['gnt', gnt])
@@ -400,7 +399,7 @@ def monitor():
     spec.declare_var('gnt', 'float')
     spec.declare_var('out', 'float')
 
-    spec.spec = 'out = always((req>=3) implies (eventually[0:5](gnt>=3)))'
+    spec.spec = 'out = (req>=3) implies (eventually[0:5](gnt>=3))'
 
     try:
         spec.parse()
@@ -408,8 +407,8 @@ def monitor():
         spec.update(1, [('req', 0.45), ('gnt', 0.12)])
         spec.update(2, [('req', 0.78), ('gnt', 0.18)])
         nb_violations = spec.sampling_violation_counter // nb_violations = 0
-    except rtamt.STLParseException as err:
-        print('STL Parse Exception: {}'.format(err))
+    except rtamt.RTAMTException as err:
+        print('RTAMT Exception: {}'.format(err))
         sys.exit()
 
 if __name__ == '__main__':
@@ -463,7 +462,7 @@ The user can also explicitely set the default unit, as well as the expected peri
     spec.unit = 's'
     spec.set_sampling_period(500, 'ms', 0.1)
     ...
-    spec.spec = 'out = always((req>=3) implies (eventually[0.5:1.5](gnt>=3)))'
+    spec.spec = 'out = (req>=3) implies (eventually[0.5:1.5](gnt>=3))'
     ...
     spec.update(0, [('req', 0.1), ('gnt', 0.3)])
     spec.update(0.5, [('req', 0.45), ('gnt', 0.12)])
@@ -480,7 +479,7 @@ The following defines the same program, but now with `ms` as the default unit.
     spec.unit = 'ms'
     spec.set_sampling_period(500, 'ms', 0.1)
     ...
-    spec.spec = 'out = always((req>=3) implies (eventually[500:1500](gnt>=3)))'
+    spec.spec = 'out = (req>=3) implies (eventually[500:1500](gnt>=3))'
     ...
     spec.update(0, [('req', 0.1), ('gnt', 0.3)])
     spec.update(500, [('req', 0.45), ('gnt', 0.12)])

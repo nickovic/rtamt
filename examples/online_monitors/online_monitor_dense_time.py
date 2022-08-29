@@ -33,8 +33,8 @@ def monitor():
     try:
         spec.parse()
         spec.pastify()
-    except rtamt.STLParseException as err:
-        print('STL Parse Exception: {}'.format(err))
+    except rtamt.RTAMTException as err:
+        print('RTAMT Exception: {}'.format(err))
         sys.exit()
 
 
@@ -57,8 +57,8 @@ def monitor():
     try:
         spec.parse()
         spec.pastify()
-    except rtamt.STLParseException as err:
-        print('STL Parse Exception: {}'.format(err))
+    except rtamt.RTAMTException as err:
+        print('RTAMT Exception: {}'.format(err))
         sys.exit()
 
     rob = spec.update(['req', req_1], ['gnt', gnt_1])
@@ -69,9 +69,6 @@ def monitor():
 
     rob = spec.update(['req', req_3], ['gnt', gnt_3])
     print('Robustness online - step 3: {}'.format(rob))
-
-    #rob = spec.update_final(['req', []], ['gnt', []])
-    #print('Robustness online - step final: {}'.format(rob))
 
 
 def read_csv(filename):

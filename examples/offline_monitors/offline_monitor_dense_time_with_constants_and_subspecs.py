@@ -21,8 +21,8 @@ def monitor():
     spec.spec = 'out = ((req >= threshold) implies response)'
     try:
         spec.parse()
-    except rtamt.STLParseException as err:
-        print('STL Parse Exception: {}'.format(err))
+    except rtamt.RTAMTException as err:
+        print('RTAMT Exception: {}'.format(err))
         sys.exit()
 
     rob = spec.evaluate(['req', data[' req']], ['gnt', data[' gnt']])

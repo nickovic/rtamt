@@ -16,8 +16,8 @@ def monitor():
     spec.spec = 'out = (req>=3) implies (eventually[0:5](gnt>=3))'
     try:
         spec.parse()
-    except rtamt.STLParseException as err:
-        print('STL Parse Exception: {}'.format(err))
+    except rtamt.RTAMTException as err:
+        print('RTAMT Exception: {}'.format(err))
         sys.exit()
 
     rob = spec.evaluate(['req', req], ['gnt', gnt])
