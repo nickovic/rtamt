@@ -19,8 +19,8 @@ def monitor():
     try:
         spec.parse()
         spec.pastify()
-    except rtamt.STLParseException as err:
-        print('STL Parse Exception: {}'.format(err))
+    except rtamt.RTAMTException as err:
+        print('RTAMT Exception: {}'.format(err))
         sys.exit()
 
 
@@ -39,8 +39,8 @@ def monitor():
     try:
         spec.parse()
         spec.pastify()
-    except rtamt.STLParseException as err:
-        print('STL Parse Exception: {}'.format(err))
+    except rtamt.RTAMTException as err:
+        print('RTAMT Exception: {}'.format(err))
         sys.exit()
 
 
@@ -65,10 +65,6 @@ def read_csv(filename):
             column[h].append([float(row[0]), float(v)])
 
     return column
-
-
-
-
 
 if __name__ == '__main__':
     # Process arguments

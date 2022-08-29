@@ -25,8 +25,8 @@ def monitor():
     spec.spec = 'out = ((req>=3) implies (eventually[0:5](gnt>=3)))'
     try:
         spec.parse()
-    except rtamt.STLParseException as err:
-        print('STL Parse Exception: {}'.format(err))
+    except rtamt.RTAMTException as err:
+        print('RTAMT Exception: {}'.format(err))
         sys.exit()
 
 
@@ -50,8 +50,8 @@ def monitor():
     spec.spec = 'out = ((req>=3) implies (eventually[0:5](gnt>=3)))'
     try:
         spec.parse()
-    except rtamt.STLParseException as err:
-        print('STL Parse Exception: {}'.format(err))
+    except rtamt.RTAMTException as err:
+        print('RTAMT Exception: {}'.format(err))
         sys.exit()
 
     rob = spec.evaluate(['req', data1[' req']], ['gnt', data1[' gnt']])
@@ -73,8 +73,8 @@ def monitor():
     spec.spec = 'out = ((req >= 3) implies eventually[0:5] (gnt >= 3))'
     try:
         spec.parse()
-    except rtamt.STLParseException as err:
-        print('STL Parse Exception: {}'.format(err))
+    except rtamt.RTAMTException as err:
+        print('RTAMT Exception: {}'.format(err))
         sys.exit()
 
     rob = spec.evaluate(['req', data1[' req']], ['gnt', data1[' gnt']])
@@ -97,8 +97,8 @@ def monitor():
     try:
         spec.parse()
         spec.pastify()
-    except rtamt.STLParseException as err:
-        print('STL Parse Exception: {}'.format(err))
+    except rtamt.RTAMTException as err:
+        print('RTAMT Exception: {}'.format(err))
         sys.exit()
 
     rob = spec.evaluate(['req', data2[' req']], ['gnt', data2[' gnt']])
@@ -120,8 +120,8 @@ def monitor():
     spec.spec = 'out = ((req >= 3) implies eventually[0:5] (gnt >= 3))'
     try:
         spec.parse()
-    except rtamt.STLParseException as err:
-        print('STL Parse Exception: {}'.format(err))
+    except rtamt.RTAMTException as err:
+        print('RTAMT Exception: {}'.format(err))
         sys.exit()
 
     rob = spec.evaluate(['req', data2[' req']], ['gnt', data2[' gnt']])
@@ -143,8 +143,8 @@ def monitor():
     spec.spec = 'out = ((req >= 3) implies eventually[0:5] (gnt >= 3))'
     try:
         spec.parse()
-    except rtamt.STLParseException as err:
-        print('STL Parse Exception: {}'.format(err))
+    except rtamt.RTAMTException as err:
+        print('RTAMT Exception: {}'.format(err))
         sys.exit()
 
     rob = spec.evaluate(['req', data2[' req']], ['gnt', data2[' gnt']])
@@ -166,8 +166,8 @@ def monitor():
     spec.spec = 'out = ((req >= 3) implies eventually[0:5] (gnt >= 3))'
     try:
         spec.parse()
-    except rtamt.STLParseException as err:
-        print('STL Parse Exception: {}'.format(err))
+    except rtamt.RTAMTException as err:
+        print('RTAMT Exception: {}'.format(err))
         sys.exit()
 
     rob = spec.evaluate(['req', data3[' req']], ['gnt', data3[' gnt']])
@@ -192,8 +192,8 @@ def monitor():
     spec.spec = 'out = ((req >= 3) implies eventually[0:5] (gnt >= 3))'
     try:
         spec.parse()
-    except rtamt.STLParseException as err:
-        print('STL Parse Exception: {}'.format(err))
+    except rtamt.RTAMTException as err:
+        print('RTAMT Exception: {}'.format(err))
         sys.exit()
 
     rob = spec.evaluate(['req', data3[' req']], ['gnt', data3[' gnt']])
@@ -215,8 +215,8 @@ def monitor():
     spec.spec = 'out = ((req >= 3) implies eventually[0:5] (gnt >= 3))'
     try:
         spec.parse()
-    except rtamt.STLParseException as err:
-        print('STL Parse Exception: {}'.format(err))
+    except rtamt.RTAMTException as err:
+        print('RTAMT Exception: {}'.format(err))
         sys.exit()
 
     rob = spec.evaluate(['req', data3[' req']], ['gnt', data3[' gnt']])
@@ -239,8 +239,8 @@ def monitor():
     spec.spec = 'out = ((req >= 3) implies eventually[0:5] (gnt >= 3))'
     try:
         spec.parse()
-    except rtamt.STLParseException as err:
-        print('STL Parse Exception: {}'.format(err))
+    except rtamt.RTAMTException as err:
+        print('RTAMT Exception: {}'.format(err))
         sys.exit()
 
     rob = spec.evaluate(['req', data4[' req']], ['gnt', data4[' gnt']])
@@ -261,8 +261,8 @@ def monitor():
     spec.spec = 'out = ((req >= 3) implies eventually[0:5] (gnt >= 3))'
     try:
         spec.parse()
-    except rtamt.STLParseException as err:
-        print('STL Parse Exception: {}'.format(err))
+    except rtamt.RTAMTException as err:
+        print('RTAMT Exception: {}'.format(err))
         sys.exit()
 
     rob = spec.evaluate(['req', data4[' req']], ['gnt', data4[' gnt']])
@@ -285,8 +285,8 @@ def monitor():
     spec.spec = 'out = ((req >= 3) implies eventually[0:5] (gnt >= 3))'
     try:
         spec.parse()
-    except rtamt.STLParseException as err:
-        print('STL Parse Exception: {}'.format(err))
+    except rtamt.RTAMTException as err:
+        print('RTAMT Exception: {}'.format(err))
         sys.exit()
 
     rob = spec.evaluate(['req', data4[' req']], ['gnt', data4[' gnt']])

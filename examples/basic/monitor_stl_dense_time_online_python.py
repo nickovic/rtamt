@@ -20,8 +20,8 @@ def monitor():
     spec.spec = 'c=a>=2'
     try:
         spec.parse()
-    except rtamt.STLParseException as err:
-        print('STL Parse Exception: {}'.format(err))
+    except rtamt.RTAMTException as err:
+        print('RTAMT Exception: {}'.format(err))
         sys.exit()
 
     rob = spec.update(['a', a1], ['b', b1])

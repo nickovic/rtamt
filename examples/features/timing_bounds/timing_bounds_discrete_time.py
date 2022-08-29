@@ -28,8 +28,8 @@ def monitor():
     try:
         spec.parse()
         print('Succesfully parsed.')
-    except rtamt.STLParseException as err:
-        print('STL Parse Exception: {}'.format(err))
+    except rtamt.RTAMTException as err:
+        print('RTAMT Exception: {}'.format(err))
 
     # # stl
     spec = rtamt.StlDiscreteTimeSpecification()
@@ -46,8 +46,8 @@ def monitor():
     try:
         spec.parse()
         print('Succesfully parsed.')
-    except rtamt.STLParseException as err:
-        print('STL Parse Exception: {}'.format(err))
+    except rtamt.RTAMTException as err:
+        print('RTAMT Exception: {}'.format(err))
 
     # # stl
     spec = rtamt.StlDiscreteTimeSpecification()
@@ -65,8 +65,8 @@ def monitor():
     try:
         spec.parse()
         print('Succesfully parsed.')
-    except rtamt.STLParseException as err:
-        print('STL Parse Exception: {}'.format(err))
+    except rtamt.RTAMTException as err:
+        print('RTAMT Exception: {}'.format(err))
 
     # # stl
     spec = rtamt.StlDiscreteTimeSpecification()
@@ -84,8 +84,8 @@ def monitor():
     try:
         spec.parse()
         print('Succesfully parsed.')
-    except rtamt.STLParseException as err:
-        print('STL Parse Exception: {}'.format(err))
+    except rtamt.RTAMTException as err:
+        print('RTAMT Exception: {}'.format(err))
 
 if __name__ == '__main__':
     # Process arguments

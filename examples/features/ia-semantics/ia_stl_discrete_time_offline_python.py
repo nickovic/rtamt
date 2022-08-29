@@ -11,7 +11,8 @@ def monitor():
     }
 
     # # STANDARD ROBUSTNESS
-    spec = rtamt.STLSpecification(language=rtamt.Language.PYTHON, semantics=rtamt.Semantics.STANDARD)
+
+    spec = rtamt.StlDiscreteTimeSpecification(semantics=rtamt.Semantics.STANDARD)
     spec.name = 'IA-STL discrete-time online Python monitor with STANDARD semantics'
     spec.declare_var('x', 'float')
     spec.declare_var('y', 'float')
@@ -21,15 +22,15 @@ def monitor():
 
     try:
         spec.parse()
-    except rtamt.STLParseException as err:
-        print('STL Parse Exception: {}'.format(err))
+    except rtamt.RTAMTException as err:
+        print('RTAMT Exception: {}'.format(err))
         sys.exit()
 
     rob = spec.evaluate(dataSet)
     print('Standard robustness: ' + str(rob))
 
     # # OUTPUT ROBUSTNESS
-    spec = rtamt.STLSpecification(language=rtamt.Language.PYTHON, semantics=rtamt.Semantics.OUTPUT_ROBUSTNESS)
+    spec = rtamt.StlDiscreteTimeSpecification(semantics=rtamt.Semantics.OUTPUT_ROBUSTNESS)
     spec.name = 'IA-STL discrete-time online Python monitor with OUTPUT ROBUSTNESS semantics'
     spec.declare_var('x', 'float')
     spec.declare_var('y', 'float')
@@ -39,15 +40,15 @@ def monitor():
 
     try:
         spec.parse()
-    except rtamt.STLParseException as err:
-        print('STL Parse Exception: {}'.format(err))
+    except rtamt.RTAMTException as err:
+        print('RTAMT Exception: {}'.format(err))
         sys.exit()
 
     rob = spec.evaluate(dataSet)
     print('Output robustness: ' + str(rob))
 
     # # INPUT VACUITY
-    spec = rtamt.STLSpecification(language=rtamt.Language.PYTHON, semantics=rtamt.Semantics.INPUT_VACUITY)
+    spec = rtamt.StlDiscreteTimeSpecification(semantics=rtamt.Semantics.INPUT_VACUITY)
     spec.name = 'IA-STL discrete-time online Python monitor with INPUT VACUITY semantics'
     spec.declare_var('x', 'float')
     spec.declare_var('y', 'float')
@@ -57,8 +58,8 @@ def monitor():
 
     try:
         spec.parse()
-    except rtamt.STLParseException as err:
-        print('STL Parse Exception: {}'.format(err))
+    except rtamt.RTAMTException as err:
+        print('RTAMT Exception: {}'.format(err))
         sys.exit()
 
     rob = spec.evaluate(dataSet)

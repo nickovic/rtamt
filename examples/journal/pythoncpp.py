@@ -26,8 +26,8 @@ spec1.set_var_io_type('gnt', 'output')
 spec1.spec = 'out = ((req>=3) implies (once[0:10](gnt>=3)))'
 try:
     spec1.parse()
-except rtamt.STLParseException as err:
-    print('STL Parse Exception: {}'.format(err))
+except rtamt.RTAMTException as err:
+    print('RTAMT Exception: {}'.format(err))
     sys.exit()
 
 spec2 = rtamt.StlDiscreteTimeOnlineSpecification()
@@ -40,8 +40,8 @@ spec2.set_var_io_type('gnt', 'output')
 spec2.spec = 'out = ((req>=3) implies (once[0:100](gnt>=3)))'
 try:
     spec2.parse()
-except rtamt.STLParseException as err:
-    print('STL Parse Exception: {}'.format(err))
+except rtamt.RTAMTException as err:
+    print('RTAMT Exception: {}'.format(err))
     sys.exit()
 
 spec3 = rtamt.StlDiscreteTimeOnlineSpecification()
@@ -54,8 +54,8 @@ spec3.set_var_io_type('gnt', 'output')
 spec3.spec = 'out = ((req>=3) implies (once[0:1000](gnt>=3)))'
 try:
     spec3.parse()
-except rtamt.STLParseException as err:
-    print('STL Parse Exception: {}'.format(err))
+except rtamt.RTAMTException as err:
+    print('RTAMT Exception: {}'.format(err))
     sys.exit()
 
 spec4 = rtamt.StlDiscreteTimeOnlineSpecification()
@@ -68,8 +68,8 @@ spec4.set_var_io_type('gnt', 'output')
 spec4.spec = 'out = ((req>=3) implies (once[0:10000](gnt>=3)))'
 try:
     spec4.parse()
-except rtamt.STLParseException as err:
-    print('STL Parse Exception: {}'.format(err))
+except rtamt.RTAMTException as err:
+    print('RTAMT Exception: {}'.format(err))
     sys.exit()
 
 s_t = time.time()
@@ -102,8 +102,8 @@ spec1.set_var_io_type('gnt', 'output')
 spec1.spec = 'out = ((req>=3) implies (once[0:10](gnt>=3)))'
 try:
     spec1.parse()
-except rtamt.STLParseException as err:
-    print('STL Parse Exception: {}'.format(err))
+except rtamt.RTAMTException as err:
+    print('RTAMT Exception: {}'.format(err))
     sys.exit()
 
 spec2 = rtamt.StlDiscreteTimeOnlineSpecificationCpp()
@@ -116,8 +116,8 @@ spec2.set_var_io_type('gnt', 'output')
 spec2.spec = 'out = ((req>=3) implies (once[0:100](gnt>=3)))'
 try:
     spec2.parse()
-except rtamt.STLParseException as err:
-    print('STL Parse Exception: {}'.format(err))
+except rtamt.RTAMTException as err:
+    print('RTAMT Exception: {}'.format(err))
     sys.exit()
 
 spec3 = rtamt.StlDiscreteTimeOnlineSpecificationCpp()
@@ -130,8 +130,8 @@ spec3.set_var_io_type('gnt', 'output')
 spec3.spec = 'out = ((req>=3) implies (once[0:1000](gnt>=3)))'
 try:
     spec3.parse()
-except rtamt.STLParseException as err:
-    print('STL Parse Exception: {}'.format(err))
+except rtamt.RTAMTException as err:
+    print('RTAMT Exception: {}'.format(err))
     sys.exit()
 
 spec4 = rtamt.StlDiscreteTimeOnlineSpecificationCpp()
@@ -144,8 +144,8 @@ spec4.set_var_io_type('gnt', 'output')
 spec4.spec = 'out = ((req>=3) implies (once[0:10000](gnt>=3)))'
 try:
     spec4.parse()
-except rtamt.STLParseException as err:
-    print('STL Parse Exception: {}'.format(err))
+except rtamt.RTAMTException as err:
+    print('RTAMT Exception: {}'.format(err))
     sys.exit()
 
 s_t = time.time()

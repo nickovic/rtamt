@@ -53,8 +53,8 @@ spec1.set_var_io_type('gnt', 'output')
 spec1.spec = 'out = ((req>=3) implies (eventually[0:5](gnt>=3)))'
 try:
     spec1.parse()
-except rtamt.STLParseException as err:
-    print('STL Parse Exception: {}'.format(err))
+except rtamt.RTAMTException as err:
+    print('RTAMT Exception: {}'.format(err))
     sys.exit()
 
 spec2 = rtamt.StlDenseTimeSpecification(semantics=rtamt.Semantics.STANDARD)
@@ -67,8 +67,8 @@ spec2.set_var_io_type('gnt', 'output')
 spec2.spec = 'out = ((req>=3) implies (eventually[0:5](gnt>=3)))'
 try:
     spec2.parse()
-except rtamt.STLParseException as err:
-    print('STL Parse Exception: {}'.format(err))
+except rtamt.RTAMTException as err:
+    print('RTAMT Exception: {}'.format(err))
     sys.exit()
 
 req = zip(t1, v1)

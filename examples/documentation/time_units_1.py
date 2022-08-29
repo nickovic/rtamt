@@ -19,8 +19,8 @@ def monitor():
         spec.update(2, [('req', 0.78), ('gnt', 0.18)])
         nb_violations = spec.sampling_violation_counter
         print(nb_violations)
-    except rtamt.STLParseException as err:
-        print('STL Parse Exception: {}'.format(err))
+    except rtamt.RTAMTException as err:
+        print('RTAMT Parse Exception: {}'.format(err))
         sys.exit()
 
 if __name__ == '__main__':
