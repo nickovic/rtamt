@@ -43,6 +43,8 @@ class TestIssue164(unittest.TestCase):
         spec2.spec = premise_response_formula
         spec2.parse()
 
+        spec2.evaluate(data)
+
         # evaluate robustness
         robustnesses = []
         for spec in [spec1, spec2]:

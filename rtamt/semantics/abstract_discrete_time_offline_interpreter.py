@@ -29,7 +29,8 @@ class AbstractDiscreteTimeOfflineInterpreter(AbstractOfflineInterpreter, Discret
 
         # evaluate spec forest
         length = len(dataset['time'])
-        rob = self.visitAst(self.ast, length)[0]
+        rob = self.visitAst(self.ast, length)
+        rob = rob[len(rob)-1]
 
         # Check if the difference between two consecutive timestamps is between
         # the accepted tolerance - if not, increase the violation counter

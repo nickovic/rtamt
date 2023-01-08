@@ -32,7 +32,8 @@ class AbstractDenseTimeOnlineInterpreter(AbstractOnlineInterpreter, DenseTimeInt
         self.set_variable_to_ast_from_dataset(dataset)
 
         # evaluate spec forest
-        rob = self.updateVisitor.visitAst(self.ast, self.online_operator_dict, self.ast.var_object_dict)[0]
+        rob = self.updateVisitor.visitAst(self.ast, self.online_operator_dict, self.ast.var_object_dict)
+        rob = rob[len(rob) - 1]
 
         out = self.ast.var_object_dict[self.ast.out_var]
         if self.ast.out_var_field:
