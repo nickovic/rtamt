@@ -40,4 +40,6 @@ expression
     | FallOperator LPAREN expression RPAREN                     #ExprFall
     | PreviousOperator expression                               #ExprPrevious
     | NextOperator expression                                   #ExprNext
+    | StrongPreviousOperator expression                         #ExprStrongPrevious
+    | StrongNextOperator expression                             #ExprStrongNext
 	;

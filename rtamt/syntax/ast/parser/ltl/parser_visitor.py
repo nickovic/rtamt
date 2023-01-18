@@ -16,6 +16,8 @@ from rtamt.syntax.node.ltl.conjunction import Conjunction
 from rtamt.syntax.node.ltl.disjunction import Disjunction
 from rtamt.syntax.node.ltl.implies import Implies
 from rtamt.syntax.node.ltl.iff import Iff
+from rtamt.syntax.node.ltl.strong_next import StrongNext
+from rtamt.syntax.node.ltl.strong_previous import StrongPrevious
 from rtamt.syntax.node.ltl.xor import Xor
 from rtamt.syntax.node.ltl.always import Always
 from rtamt.syntax.node.ltl.eventually import Eventually
@@ -242,9 +244,19 @@ class LtlAstParserVisitor(LtlParserVisitor):
         node = Previous(child)
         return node
 
+    def visitExprStrongPrevious(self, ctx):
+        child = self.visit(ctx.expression())
+        node = StrongPrevious(child)
+        return node
+
     def visitExprNext(self, ctx):
         child = self.visit(ctx.expression())
         node = Next(child)
+        return node
+
+    def visitExprStrongNext(self, ctx):
+        child = self.visit(ctx.expression())
+        node = StrongNext(child)
         return node
 
     def visitExpreOnce(self, ctx):

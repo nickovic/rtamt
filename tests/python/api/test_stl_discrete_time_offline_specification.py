@@ -147,6 +147,18 @@ class TestStlDiscreteTimeOfflineSpecification(unittest.TestCase):
 
         self.assertListEqual(out, expected, "previous")
 
+    def test_strong_previous(self):
+        spec = rtamt.StlDiscreteTimeSpecification()
+        spec.declare_var('req', 'float')
+        spec.declare_var('out', 'float')
+        spec.spec = 'out = s_prev req'
+
+        spec.parse()
+        out = spec.evaluate(self.dataset)
+        expected = [[0, -float("inf")], [1, 100], [2, -1], [3, -2], [4, 5]]
+
+        self.assertListEqual(out, expected, "strong previous")
+
     def test_next(self):
         spec = rtamt.StlDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
@@ -158,6 +170,18 @@ class TestStlDiscreteTimeOfflineSpecification(unittest.TestCase):
         expected = [[0, -1], [1, -2], [2, 5], [3, -1], [4, float("inf")]]
 
         self.assertListEqual(out, expected, "next")
+
+    def test_strong_next(self):
+        spec = rtamt.StlDiscreteTimeSpecification()
+        spec.declare_var('req', 'float')
+        spec.declare_var('out', 'float')
+        spec.spec = 'out = s_next req'
+
+        spec.parse()
+        out = spec.evaluate(self.dataset)
+        expected = [[0, -1], [1, -2], [2, 5], [3, -1], [4, -float("inf")]]
+
+        self.assertListEqual(out, expected, "s_next")
 
     def test_and(self):
         spec = rtamt.StlDiscreteTimeSpecification()

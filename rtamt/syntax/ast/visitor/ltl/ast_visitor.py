@@ -1,6 +1,8 @@
 from rtamt.syntax.ast.visitor.abstract_ast_visitor import AbstractAstVisitor
 
 from rtamt.syntax.node.ltl.predicate import Predicate
+from rtamt.syntax.node.ltl.strong_next import StrongNext
+from rtamt.syntax.node.ltl.strong_previous import StrongPrevious
 from rtamt.syntax.node.ltl.variable import Variable
 from rtamt.syntax.node.ltl.neg import Neg
 from rtamt.syntax.node.ltl.disjunction import Disjunction
@@ -88,6 +90,10 @@ class LtlAstVisitor(AbstractAstVisitor):
             result = self.visitPrevious(node, *args, **kwargs)
         elif isinstance(node, Next):
             result = self.visitNext(node, *args, **kwargs)
+        elif isinstance(node, StrongPrevious):
+            result = self.visitStrongPrevious(node, *args, **kwargs)
+        elif isinstance(node, StrongNext):
+            result = self.visitStrongNext(node, *args, **kwargs)
         else:
             self.raise_exception('{} is not a TL operator'.format(node.__class__.__name__))
         return result
@@ -174,6 +180,12 @@ class LtlAstVisitor(AbstractAstVisitor):
         return self.visitChildren(node, *args, **kwargs)
 
     def visitNext(self, node, *args, **kwargs):
+        return self.visitChildren(node, *args, **kwargs)
+
+    def visitStrongPrevious(self, node, *args, **kwargs):
+        return self.visitChildren(node, *args, **kwargs)
+
+    def visitStrongNext(self, node, *args, **kwargs):
         return self.visitChildren(node, *args, **kwargs)
 
     def visitDefault(self, node, *args, **kwargs):

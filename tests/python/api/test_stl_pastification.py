@@ -51,6 +51,17 @@ class TestStlPastification(unittest.TestCase):
 
         self.assertEqual('previous(req)', ast.specs[0].name, 'Prev pastification assertion')
 
+    def test_strong_previous(self):
+        ast = StlAst()
+        ast.declare_var('req', 'float')
+        ast.spec = 's_prev req'
+        ast.parse()
+
+        pastifier = StlPastifier()
+        ast = pastifier.pastify(ast)
+
+        self.assertEqual('s_previous(req)', ast.specs[0].name, 'Strong Prev pastification assertion')
+
 
     def test_next_1(self):
         ast = StlAst()
@@ -62,6 +73,17 @@ class TestStlPastification(unittest.TestCase):
         ast = pastifier.pastify(ast)
 
         self.assertEqual('req', ast.specs[0].name, 'Next pastification assertion')
+
+    def test_strong_next_1(self):
+        ast = StlAst()
+        ast.declare_var('req', 'float')
+        ast.spec = 'sX req'
+        ast.parse()
+
+        pastifier = StlPastifier()
+        ast = pastifier.pastify(ast)
+
+        self.assertEqual('req', ast.specs[0].name, 'Weak Next pastification assertion')
 
     def test_abs_1(self):
         ast = StlAst()

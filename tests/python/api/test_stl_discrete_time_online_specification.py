@@ -190,6 +190,26 @@ class TestStlDiscreteTimeOnlineSpecification(unittest.TestCase):
         self.assertEqual(out4, -2, "input 4")
         self.assertEqual(out5, 5, "input 5")
 
+    def test_strong_weak_previous(self):
+        spec = rtamt.StlDiscreteTimeSpecification()
+        spec.declare_var('req', 'float')
+        spec.declare_var('out', 'float')
+        spec.spec = 'out = s_prev(req)'
+
+        spec.parse()
+
+        out1 = spec.update(0, [('req', self.left1)])
+        out2 = spec.update(1, [('req', self.left2)])
+        out3 = spec.update(2, [('req', self.left3)])
+        out4 = spec.update(3, [('req', self.left4)])
+        out5 = spec.update(4, [('req', self.left5)])
+
+        self.assertEqual(out1, -float("inf"), "input 1")
+        self.assertEqual(out2, 100, "input 2")
+        self.assertEqual(out3, -1, "input 3")
+        self.assertEqual(out4, -2, "input 4")
+        self.assertEqual(out5, 5, "input 5")
+
     def test_next_without_pastify(self):
         spec = rtamt.StlDiscreteTimeSpecification()
         spec.declare_var('req', 'float')
@@ -205,6 +225,27 @@ class TestStlDiscreteTimeOnlineSpecification(unittest.TestCase):
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
         spec.spec = 'out = next(req)'
+
+        spec.parse()
+        spec.pastify()
+
+        out1 = spec.update(0, [('req', self.left1)])
+        out2 = spec.update(1, [('req', self.left2)])
+        out3 = spec.update(2, [('req', self.left3)])
+        out4 = spec.update(3, [('req', self.left4)])
+        out5 = spec.update(4, [('req', self.left5)])
+
+        self.assertEqual(out1, 100, "input 1")
+        self.assertEqual(out2, -1, "input 2")
+        self.assertEqual(out3, -2, "input 3")
+        self.assertEqual(out4, 5, "input 4")
+        self.assertEqual(out5, -1, "input 5")
+
+    def test_strong_next_with_pastify(self):
+        spec = rtamt.StlDiscreteTimeSpecification()
+        spec.declare_var('req', 'float')
+        spec.declare_var('out', 'float')
+        spec.spec = 'out = s_next(req)'
 
         spec.parse()
         spec.pastify()
