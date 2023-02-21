@@ -236,7 +236,7 @@ class AbstractOfflineSpecification(AbstractSpecification):
         self.explainer.explain(self.ast)
 
     def plot(self):
-        self.plotter.plot(self.ast, self.explainer.expanations)
+        self.plotter.plot(self.ast, self.explainer.explanations)
 
     # forwarding to interpreter
     def evaluate(self, *args, **kwargs):

@@ -14,9 +14,8 @@ class STLExplainer(LTLExplainer, StlAstVisitor):
         return StlAstVisitor.visit(self, element, args)
 
 
-    def explain(self, spec, explanations):
+    def explain(self, spec):
         self.spec = spec
-        self.explanations = explanations
         for spec in self.spec.specs:
             top_signal = self.spec.offline_results[spec]
             if top_signal[0] < 0:

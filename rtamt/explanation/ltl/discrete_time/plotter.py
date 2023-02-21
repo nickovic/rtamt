@@ -11,7 +11,8 @@ class LTLPlotter(LtlAstVisitor):
         self.explanations = explanations
         nb_plots = len(self.spec.offline_results)
         fig, ax = plt.subplots(nb_plots)
-        self.visit(self.spec.top, [fig, ax])
+        for spec in self.spec.specs:
+            self.visit(spec, [fig, ax])
         manager = plt.get_current_fig_manager()
         manager.full_screen_toggle()
         plt.tight_layout()
@@ -19,7 +20,7 @@ class LTLPlotter(LtlAstVisitor):
 
     def visitConstant(self, element, args):
         fig, ax = args
-        t = self.spec.time
+        t = self.spec.offline_results['time']
         x = self.spec.offline_results[element]
         i = list(self.spec.offline_results.keys()).index(element)
         ax[i].step(t, x, where='post', linewidth=2)
@@ -44,7 +45,7 @@ class LTLPlotter(LtlAstVisitor):
 
     def visitPredicate(self, element, args):
         fig, ax = args
-        t = self.spec.time
+        t = self.spec.offline_results['time']
         x = self.spec.offline_results[element]
         i = list(self.spec.offline_results.keys()).index(element)
         ax[i].step(t, x, where='post', linewidth=2)
@@ -71,7 +72,7 @@ class LTLPlotter(LtlAstVisitor):
 
     def visitVariable(self, element, args):
         fig, ax = args
-        t = self.spec.time
+        t = self.spec.offline_results['time']
         x = self.spec.offline_results[element]
         i = list(self.spec.offline_results.keys()).index(element)
         ax[i].step(t, x, where='post', linewidth=2)
@@ -96,7 +97,7 @@ class LTLPlotter(LtlAstVisitor):
 
     def visitAddition(self, element, args):
         fig, ax = args
-        t = self.spec.time
+        t = self.spec.offline_results['time']
         x = self.spec.offline_results[element]
         i = list(self.spec.offline_results.keys()).index(element)
         ax[i].step(t, x, where='post', linewidth=2)
@@ -123,7 +124,7 @@ class LTLPlotter(LtlAstVisitor):
 
     def visitMultiplication(self, element, args):
         fig, ax = args
-        t = self.spec.time
+        t = self.spec.offline_results['time']
         x = self.spec.offline_results[element]
         i = list(self.spec.offline_results.keys()).index(element)
         ax[i].step(t, x, where='post', linewidth=2)
@@ -150,7 +151,7 @@ class LTLPlotter(LtlAstVisitor):
 
     def visitSubtraction(self, element, args):
         fig, ax = args
-        t = self.spec.time
+        t = self.spec.offline_results['time']
         x = self.spec.offline_results[element]
         i = list(self.spec.offline_results.keys()).index(element)
         ax[i].step(t, x, where='post', linewidth=2)
@@ -177,7 +178,7 @@ class LTLPlotter(LtlAstVisitor):
 
     def visitDivision(self, element, args):
         fig, ax = args
-        t = self.spec.time
+        t = self.spec.offline_results['time']
         x = self.spec.offline_results[element]
         i = list(self.spec.offline_results.keys()).index(element)
         ax[i].step(t, x, where='post', linewidth=2)
@@ -204,7 +205,7 @@ class LTLPlotter(LtlAstVisitor):
 
     def visitAbs(self, element, args):
         fig, ax = args
-        t = self.spec.time
+        t = self.spec.offline_results['time']
         x = self.spec.offline_results[element]
         i = list(self.spec.offline_results.keys()).index(element)
         ax[i].step(t, x, where='post', linewidth=2)
@@ -230,7 +231,7 @@ class LTLPlotter(LtlAstVisitor):
 
     def visitSqrt(self, element, args):
         fig, ax = args
-        t = self.spec.time
+        t = self.spec.offline_results['time']
         x = self.spec.offline_results[element]
         i = list(self.spec.offline_results.keys()).index(element)
         ax[i].step(t, x, where='post', linewidth=2)
@@ -256,7 +257,7 @@ class LTLPlotter(LtlAstVisitor):
 
     def visitExp(self, element, args):
         fig, ax = args
-        t = self.spec.time
+        t = self.spec.offline_results['time']
         x = self.spec.offline_results[element]
         i = list(self.spec.offline_results.keys()).index(element)
         ax[i].step(t, x, where='post', linewidth=2)
@@ -282,7 +283,7 @@ class LTLPlotter(LtlAstVisitor):
 
     def visitPow(self, element, args):
         fig, ax = args
-        t = self.spec.time
+        t = self.spec.offline_results['time']
         x = self.spec.offline_results[element]
         i = list(self.spec.offline_results.keys()).index(element)
         ax[i].step(t, x, where='post', linewidth=2)
@@ -309,7 +310,7 @@ class LTLPlotter(LtlAstVisitor):
 
     def visitRise(self, element, args):
         fig, ax = args
-        t = self.spec.time
+        t = self.spec.offline_results['time']
         x = self.spec.offline_results[element]
         i = list(self.spec.offline_results.keys()).index(element)
         ax[i].step(t, x, where='post', linewidth=2)
@@ -335,7 +336,7 @@ class LTLPlotter(LtlAstVisitor):
 
     def visitFall(self, element, args):
         fig, ax = args
-        t = self.spec.time
+        t = self.spec.offline_results['time']
         x = self.spec.offline_results[element]
         i = list(self.spec.offline_results.keys()).index(element)
         ax[i].step(t, x, where='post', linewidth=2)
@@ -361,7 +362,7 @@ class LTLPlotter(LtlAstVisitor):
 
     def visitNot(self, element, args):
         fig, ax = args
-        t = self.spec.time
+        t = self.spec.offline_results['time']
         x = self.spec.offline_results[element]
         i = list(self.spec.offline_results.keys()).index(element)
         ax[i].step(t, x, where='post', linewidth=2)
@@ -387,7 +388,7 @@ class LTLPlotter(LtlAstVisitor):
 
     def visitAnd(self, element, args):
         fig, ax = args
-        t = self.spec.time
+        t = self.spec.offline_results['time']
         x = self.spec.offline_results[element]
         i = list(self.spec.offline_results.keys()).index(element)
         ax[i].step(t, x, where='post', linewidth=2)
@@ -414,7 +415,7 @@ class LTLPlotter(LtlAstVisitor):
 
     def visitOr(self, element, args):
         fig, ax = args
-        t = self.spec.time
+        t = self.spec.offline_results['time']
         x = self.spec.offline_results[element]
         i = list(self.spec.offline_results.keys()).index(element)
         ax[i].step(t, x, where='post', linewidth=2)
@@ -441,7 +442,7 @@ class LTLPlotter(LtlAstVisitor):
 
     def visitImplies(self, element, args):
         fig, ax = args
-        t = self.spec.time
+        t = self.spec.offline_results['time']
         x = self.spec.offline_results[element]
         i = list(self.spec.offline_results.keys()).index(element)
         ax[i].step(t, x, where='post', linewidth=2)
@@ -468,7 +469,7 @@ class LTLPlotter(LtlAstVisitor):
 
     def visitIff(self, element, args):
         fig, ax = args
-        t = self.spec.time
+        t = self.spec.offline_results['time']
         x = self.spec.offline_results[element]
         i = list(self.spec.offline_results.keys()).index(element)
         ax[i].step(t, x, where='post', linewidth=2)
@@ -495,7 +496,7 @@ class LTLPlotter(LtlAstVisitor):
 
     def visitXor(self, element, args):
         fig, ax = args
-        t = self.spec.time
+        t = self.spec.offline_results['time']
         x = self.spec.offline_results[element]
         i = list(self.spec.offline_results.keys()).index(element)
         ax[i].step(t, x, where='post', linewidth=2)
@@ -522,7 +523,7 @@ class LTLPlotter(LtlAstVisitor):
 
     def visitEventually(self, element, args):
         fig, ax = args
-        t = self.spec.time
+        t = self.spec.offline_results['time']
         x = self.spec.offline_results[element]
         i = list(self.spec.offline_results.keys()).index(element)
         ax[i].step(t, x, where='post', linewidth=2)
@@ -548,7 +549,7 @@ class LTLPlotter(LtlAstVisitor):
 
     def visitAlways(self, element, args):
         fig, ax = args
-        t = self.spec.time
+        t = self.spec.offline_results['time']
         x = self.spec.offline_results[element]
         i = list(self.spec.offline_results.keys()).index(element)
         ax[i].step(t, x, where='post', linewidth=2)
@@ -574,7 +575,7 @@ class LTLPlotter(LtlAstVisitor):
 
     def visitUntil(self, element, args):
         fig, ax = args
-        t = self.spec.time
+        t = self.spec.offline_results['time']
         x = self.spec.offline_results[element]
         i = list(self.spec.offline_results.keys()).index(element)
         ax[i].step(t, x, where='post', linewidth=2)
@@ -601,7 +602,7 @@ class LTLPlotter(LtlAstVisitor):
 
     def visitOnce(self, element, args):
         fig, ax = args
-        t = self.spec.time
+        t = self.spec.offline_results['time']
         x = self.spec.offline_results[element]
         i = list(self.spec.offline_results.keys()).index(element)
         ax[i].step(t, x, where='post', linewidth=2)
@@ -627,7 +628,7 @@ class LTLPlotter(LtlAstVisitor):
 
     def visitPrevious(self, element, args):
         fig, ax = args
-        t = self.spec.time
+        t = self.spec.offline_results['time']
         x = self.spec.offline_results[element]
         i = list(self.spec.offline_results.keys()).index(element)
         ax[i].step(t, x, where='post', linewidth=2)
@@ -653,7 +654,7 @@ class LTLPlotter(LtlAstVisitor):
 
     def visitNext(self, element, args):
         fig, ax = args
-        t = self.spec.time
+        t = self.spec.offline_results['time']
         x = self.spec.offline_results[element]
         i = list(self.spec.offline_results.keys()).index(element)
         ax[i].step(t, x, where='post', linewidth=2)
@@ -679,7 +680,7 @@ class LTLPlotter(LtlAstVisitor):
 
     def visitHistorically(self, element, args):
         fig, ax = args
-        t = self.spec.time
+        t = self.spec.offline_results['time']
         x = self.spec.offline_results[element]
         i = list(self.spec.offline_results.keys()).index(element)
         ax[i].step(t, x, where='post', linewidth=2)
@@ -705,7 +706,7 @@ class LTLPlotter(LtlAstVisitor):
 
     def visitSince(self, element, args):
         fig, ax = args
-        t = self.spec.time
+        t = self.spec.offline_results['time']
         x = self.spec.offline_results[element]
         i = list(self.spec.offline_results.keys()).index(element)
         ax[i].step(t, x, where='post', linewidth=2)

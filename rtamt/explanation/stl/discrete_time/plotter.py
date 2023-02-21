@@ -15,7 +15,7 @@ class STLPlotter(LTLPlotter, StlAstVisitor):
 
     def visitTimedEventually(self, element, args):
         fig, ax = args
-        t = self.spec.time
+        t = self.spec.offline_results['time']
         x = self.spec.offline_results[element]
         i = list(self.spec.offline_results.keys()).index(element)
         ax[i].step(t, x, where='post', linewidth=2)
@@ -41,7 +41,7 @@ class STLPlotter(LTLPlotter, StlAstVisitor):
 
     def visitTimedAlways(self, element, args):
         fig, ax = args
-        t = self.spec.time
+        t = self.spec.offline_results['time']
         x = self.spec.offline_results[element]
         i = list(self.spec.offline_results.keys()).index(element)
         ax[i].step(t, x, where='post', linewidth=2)
@@ -67,7 +67,7 @@ class STLPlotter(LTLPlotter, StlAstVisitor):
 
     def visitTimedUntil(self, element, args):
         fig, ax = args
-        t = self.spec.time
+        t = self.spec.offline_results['time']
         x = self.spec.offline_results[element]
         i = list(self.spec.offline_results.keys()).index(element)
         ax[i].step(t, x, where='post', linewidth=2)
@@ -94,7 +94,7 @@ class STLPlotter(LTLPlotter, StlAstVisitor):
 
     def visitTimedOnce(self, element, args):
         fig, ax = args
-        t = self.spec.time
+        t = self.spec.offline_results['time']
         x = self.spec.offline_results[element]
         i = list(self.spec.offline_results.keys()).index(element)
         ax[i].step(t, x, where='post', linewidth=2)
@@ -120,7 +120,7 @@ class STLPlotter(LTLPlotter, StlAstVisitor):
 
     def visitTimedHistorically(self, element, args):
         fig, ax = args
-        t = self.spec.time
+        t = self.spec.offline_results['time']
         x = self.spec.offline_results[element]
         i = list(self.spec.offline_results.keys()).index(element)
         ax[i].step(t, x, where='post', linewidth=2)
@@ -146,7 +146,7 @@ class STLPlotter(LTLPlotter, StlAstVisitor):
 
     def visitTimedSince(self, element, args):
         fig, ax = args
-        t = self.spec.time
+        t = self.spec.offline_results['time']
         x = self.spec.offline_results[element]
         i = list(self.spec.offline_results.keys()).index(element)
         ax[i].step(t, x, where='post', linewidth=2)
@@ -173,7 +173,7 @@ class STLPlotter(LTLPlotter, StlAstVisitor):
 
     def visitTimedPrecedes(self, element, args):
         fig, ax = args
-        t = self.spec.time
+        t = self.spec.offline_results['time']
         x = self.spec.offline_results[element]
         i = list(self.spec.offline_results.keys()).index(element)
         ax[i].step(t, x, where='post', linewidth=2)
