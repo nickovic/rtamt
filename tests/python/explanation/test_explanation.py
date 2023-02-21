@@ -8,7 +8,7 @@ class TestSemantics(unittest.TestCase):
         super(TestSemantics, self).__init__(*args, **kwargs)
         self.dataset = {
             'time': [0, 1, 2, 3, 4],
-            'req': [100, -1, -2, 5, -1],
+            'req': [-1, -1, -2, 5, -1],
             'gnt': [20, -2, 10, 4, -1]
         }
 
@@ -20,9 +20,11 @@ class TestSemantics(unittest.TestCase):
 
         spec.parse()
         out = spec.evaluate(self.dataset)
-        expected = [[0, 100], [1, -1], [2, 5], [3, 5], [4, -1]]
+        expected = [[0, -1], [1, -1], [2, 5], [3, 5], [4, -1]]
 
         spec.explain()
+        explanation = spec.explainer.explanations
+        print(explanation)
 
         self.assertListEqual(out, expected, "eventually[0,1]")
 

@@ -190,6 +190,7 @@ class LTLDiscreteTimeSpecification(AbstractSpecification):
         explainer = LTLExplainer(self)
         explainer.explain()
 
+
     def update(self, timestamp, list_inputs):
         # timestamp - float
         # inputs - list of [var name, var value] pairs
