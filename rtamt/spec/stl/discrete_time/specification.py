@@ -1,3 +1,4 @@
+from rtamt.explanation.stl.discrete_time.explainer import STLExplainer
 from rtamt.spec.abstract_specification import AbstractOfflineSpecification, AbstractOnlineSpecification, AbstractOfflineOnlineSpecification
 
 from rtamt.syntax.ast.parser.stl.specification_parser import StlAst
@@ -47,7 +48,7 @@ def StlDiscreteTimeSpecification(semantics=Semantics.STANDARD, language=Language
 
 
 def StlDiscreteTimeOfflineSpecification():
-    spec = AbstractOfflineSpecification(StlAst(), StlDiscreteTimeOfflineInterpreter())
+    spec = AbstractOfflineSpecification(StlAst(), StlDiscreteTimeOfflineInterpreter(), explainer=STLExplainer())
     return spec
 
 def StlDiscreteTimeOnlineSpecification():

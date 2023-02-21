@@ -9,6 +9,11 @@ from rtamt.exception.exception import RTAMTException
 
 class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
 
+    def visit(self, node, *args, **kwargs):
+        result = super(StlDiscreteTimeOfflineAstVisitor, self).visit(node, *args, **kwargs)
+        self.ast.offline_results[node] = result
+        return result
+
     def visitPredicate(self, node, *args, **kwargs):
         sample_left  = self.visit(node.children[0], *args, **kwargs)
         sample_right = self.visit(node.children[1], *args, **kwargs)

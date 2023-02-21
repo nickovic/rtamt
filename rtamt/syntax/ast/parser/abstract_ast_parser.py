@@ -65,6 +65,7 @@ class AbstractAst:
         self.var_io_dict = dict()
         self.const_type_dict = dict()
         self.const_val_dict = dict()
+        self.offline_results = dict()
 
         self.modules = dict()
 
