@@ -29,7 +29,7 @@ class STLExplainer(LTLExplainer, StlAstVisitor):
             op_intervals = explain_sat_timed_eventually(op_signal, intervals, element.begin, element.end)
         else:
             op_intervals = explain_unsat_timed_eventually(op_signal, intervals, element.begin, element.end)
-        self.explanations[element] = intervals
+        self.explanations[element.name] = intervals
         self.visit(element.children[0], [op_intervals, flag])
 
     def visitTimedAlways(self, element, args):
@@ -40,7 +40,7 @@ class STLExplainer(LTLExplainer, StlAstVisitor):
             op_intervals = explain_sat_timed_always(op_signal, intervals, element.begin, element.end)
         else:
             op_intervals = explain_unsat_timed_always(op_signal, intervals, element.begin, element.end)
-        self.explanations[element] = intervals
+        self.explanations[element.name] = intervals
         self.visit(element.children[0], [op_intervals, flag])
 
     def visitTimedUntil(self, element, args):
@@ -54,7 +54,7 @@ class STLExplainer(LTLExplainer, StlAstVisitor):
             op_intervals = explain_sat_timed_once(op_signal, intervals, element.begin, element.end)
         else:
             op_intervals = explain_unsat_timed_once(op_signal, intervals, element.begin, element.end)
-        self.explanations[element] = intervals
+        self.explanations[element.name] = intervals
         self.visit(element.children[0], [op_intervals, flag])
 
     def visitTimedHistorically(self, element, args):
@@ -65,7 +65,7 @@ class STLExplainer(LTLExplainer, StlAstVisitor):
             op_intervals = explain_sat_timed_historically(op_signal, intervals, element.begin, element.end)
         else:
             op_intervals = explain_unsat_timed_historically(op_signal, intervals, element.begin, element.end)
-        self.explanations[element] = intervals
+        self.explanations[element.name] = intervals
         self.visit(element.children[0], [op_intervals, flag])
 
     def visitTimedSince(self, element, args):

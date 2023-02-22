@@ -1,5 +1,7 @@
 def explain_sat_timed_always(op_signal, intervals, a, b):
     op_intervals = []
+    a = int(a)
+    b = int(b)
     if intervals:
         begin, end = intervals[0]
         exp_begin = min(begin + a, len(op_signal) - 1)
@@ -11,6 +13,8 @@ def explain_sat_timed_always(op_signal, intervals, a, b):
 
 def explain_sat_timed_historically(op_signal, intervals, a, b):
     op_intervals = []
+    a = int(a)
+    b = int(b)
     if intervals:
         begin, end = intervals[0]
         exp_begin = max(begin - b, 0)
@@ -22,6 +26,8 @@ def explain_sat_timed_historically(op_signal, intervals, a, b):
 
 def explain_sat_timed_eventually(op_signal, intervals, a, b):
     op_intervals = []
+    a = int(a)
+    b = int(b)
     for begin, end in intervals:
         begin = min(begin + a, len(op_signal) - 1)
         end = min(end + b, len(op_signal) - 1)
@@ -41,6 +47,8 @@ def explain_sat_timed_eventually(op_signal, intervals, a, b):
 
 def explain_sat_timed_once(op_signal, intervals, a, b):
     op_intervals = []
+    a = int(a)
+    b = int(b)
     for begin, end in intervals:
         begin = max(begin - b, 0)
         end = max(end - a, 0)
@@ -60,6 +68,8 @@ def explain_sat_timed_once(op_signal, intervals, a, b):
 
 def explain_unsat_timed_once(op_signal, intervals, a, b):
     op_intervals = []
+    a = int(a)
+    b = int(b)
     if intervals:
         begin, end = intervals[0]
         exp_begin = min(begin + a, len(op_signal) - 1)
@@ -71,6 +81,8 @@ def explain_unsat_timed_once(op_signal, intervals, a, b):
 
 def explain_unsat_timed_always(op_signal, intervals, a, b):
     op_intervals = []
+    a = int(a)
+    b = int(b)
     for begin, end in intervals:
         begin = min(begin + a, len(op_signal) - 1)
         end = min(end + b, len(op_signal) - 1)
@@ -90,6 +102,8 @@ def explain_unsat_timed_always(op_signal, intervals, a, b):
 
 def explain_unsat_timed_historically(op_signal, intervals, a, b):
     op_intervals = []
+    a = int(a)
+    b = int(b)
     for begin, end in intervals:
         begin = max(begin - b, 0)
         end = max(end - a, 0)
@@ -109,6 +123,8 @@ def explain_unsat_timed_historically(op_signal, intervals, a, b):
 
 def explain_unsat_timed_eventually(op_signal, intervals, a, b):
     op_intervals = []
+    a = int(a)
+    b = int(b)
     if intervals:
         begin, end = intervals[0]
         exp_begin = min(begin + a, len(op_signal) - 1)
