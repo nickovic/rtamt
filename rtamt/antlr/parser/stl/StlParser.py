@@ -1,144 +1,119 @@
-# Generated from StlParser.g4 by ANTLR 4.7.2
+# Generated from StlParser.g4 by ANTLR 4.11.1
 # encoding: utf-8
-from __future__ import print_function
 from antlr4 import *
 from io import StringIO
 import sys
+if sys.version_info[1] > 5:
+	from typing import TextIO
+else:
+	from typing.io import TextIO
 
 def serializedATN():
-    with StringIO() as buf:
-        buf.write(u"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3")
-        buf.write(u"K\u011d\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t")
-        buf.write(u"\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f\t\f\4\r\t\r")
-        buf.write(u"\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22\4")
-        buf.write(u"\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\3\2\3\2\3\2\3")
-        buf.write(u"\2\3\2\3\2\3\3\3\3\5\3\65\n\3\3\3\3\3\5\39\n\3\5\3;\n")
-        buf.write(u"\3\3\4\3\4\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\5")
-        buf.write(u"\5I\n\5\3\5\3\5\3\5\5\5N\n\5\3\5\3\5\3\5\5\5S\n\5\3\5")
-        buf.write(u"\3\5\3\5\5\5X\n\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5")
-        buf.write(u"\3\5\3\5\3\5\3\5\3\5\3\5\5\5i\n\5\3\5\3\5\3\5\3\5\3\5")
-        buf.write(u"\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5")
-        buf.write(u"\3\5\3\5\3\5\3\5\5\5\u0081\n\5\3\5\3\5\3\5\3\5\5\5\u0087")
-        buf.write(u"\n\5\3\5\3\5\3\5\3\5\5\5\u008d\n\5\3\5\7\5\u0090\n\5")
-        buf.write(u"\f\5\16\5\u0093\13\5\3\6\3\6\3\6\3\7\5\7\u0099\n\7\3")
-        buf.write(u"\7\7\7\u009c\n\7\f\7\16\7\u009f\13\7\3\7\3\7\7\7\u00a3")
-        buf.write(u"\n\7\f\7\16\7\u00a6\13\7\3\7\6\7\u00a9\n\7\r\7\16\7\u00aa")
-        buf.write(u"\3\b\3\b\3\b\3\t\3\t\3\t\3\t\3\t\3\n\3\n\5\n\u00b7\n")
-        buf.write(u"\n\3\n\3\n\3\13\3\13\5\13\u00bd\n\13\3\f\3\f\3\f\3\r")
-        buf.write(u"\3\r\3\r\3\r\3\r\3\r\3\r\3\16\5\16\u00ca\n\16\3\16\3")
-        buf.write(u"\16\3\16\5\16\u00cf\n\16\3\17\3\17\3\17\3\17\3\17\3\17")
-        buf.write(u"\3\20\3\20\3\20\3\20\5\20\u00db\n\20\3\21\3\21\3\22\3")
-        buf.write(u"\22\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23")
-        buf.write(u"\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3")
-        buf.write(u"\23\3\23\3\23\3\23\3\23\5\23\u00fa\n\23\3\23\3\23\3\23")
-        buf.write(u"\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23\3\23\7\23\u0108")
-        buf.write(u"\n\23\f\23\16\23\u010b\13\23\3\24\3\24\3\24\3\24\3\24")
-        buf.write(u"\3\24\5\24\u0113\n\24\3\25\3\25\3\25\3\25\5\25\u0119")
-        buf.write(u"\n\25\3\26\3\26\3\26\2\4\b$\27\2\4\6\b\n\f\16\20\22\24")
-        buf.write(u"\26\30\32\34\36 \"$&(*\2\6\3\2\16\17\3\2\26\31\4\2\"")
-        buf.write(u"%GG\3\2\35\36\2\u013e\2,\3\2\2\2\4:\3\2\2\2\6<\3\2\2")
-        buf.write(u"\2\bh\3\2\2\2\n\u0094\3\2\2\2\f\u0098\3\2\2\2\16\u00ac")
-        buf.write(u"\3\2\2\2\20\u00af\3\2\2\2\22\u00b6\3\2\2\2\24\u00bc\3")
-        buf.write(u"\2\2\2\26\u00be\3\2\2\2\30\u00c1\3\2\2\2\32\u00c9\3\2")
-        buf.write(u"\2\2\34\u00d0\3\2\2\2\36\u00da\3\2\2\2 \u00dc\3\2\2\2")
-        buf.write(u"\"\u00de\3\2\2\2$\u00f9\3\2\2\2&\u0112\3\2\2\2(\u0118")
-        buf.write(u"\3\2\2\2*\u011a\3\2\2\2,-\7\13\2\2-.\5\4\3\2./\t\2\2")
-        buf.write(u"\2/\60\5\4\3\2\60\61\7\f\2\2\61\3\3\2\2\2\62\64\5(\25")
-        buf.write(u"\2\63\65\5\6\4\2\64\63\3\2\2\2\64\65\3\2\2\2\65;\3\2")
-        buf.write(u"\2\2\668\7G\2\2\679\5\6\4\28\67\3\2\2\289\3\2\2\29;\3")
-        buf.write(u"\2\2\2:\62\3\2\2\2:\66\3\2\2\2;\5\3\2\2\2<=\t\3\2\2=")
-        buf.write(u"\7\3\2\2\2>?\b\5\1\2?i\5$\23\2@A\7\7\2\2AB\5\b\5\2BC")
-        buf.write(u"\7\b\2\2Ci\3\2\2\2DE\7*\2\2Ei\5\b\5\23FH\7\62\2\2GI\5")
-        buf.write(u"\2\2\2HG\3\2\2\2HI\3\2\2\2IJ\3\2\2\2Ji\5\b\5\rKM\7\63")
-        buf.write(u"\2\2LN\5\2\2\2ML\3\2\2\2MN\3\2\2\2NO\3\2\2\2Oi\5\b\5")
-        buf.write(u"\fPR\7\66\2\2QS\5\2\2\2RQ\3\2\2\2RS\3\2\2\2ST\3\2\2\2")
-        buf.write(u"Ti\5\b\5\tUW\7\67\2\2VX\5\2\2\2WV\3\2\2\2WX\3\2\2\2X")
-        buf.write(u"Y\3\2\2\2Yi\5\b\5\bZ[\7\60\2\2[\\\7\7\2\2\\]\5\b\5\2")
-        buf.write(u"]^\7\b\2\2^i\3\2\2\2_`\7\61\2\2`a\7\7\2\2ab\5\b\5\2b")
-        buf.write(u"c\7\b\2\2ci\3\2\2\2de\7:\2\2ei\5\b\5\4fg\79\2\2gi\5\b")
-        buf.write(u"\5\3h>\3\2\2\2h@\3\2\2\2hD\3\2\2\2hF\3\2\2\2hK\3\2\2")
-        buf.write(u"\2hP\3\2\2\2hU\3\2\2\2hZ\3\2\2\2h_\3\2\2\2hd\3\2\2\2")
-        buf.write(u"hf\3\2\2\2i\u0091\3\2\2\2jk\f\25\2\2kl\5&\24\2lm\5\b")
-        buf.write(u"\5\26m\u0090\3\2\2\2no\f\22\2\2op\7+\2\2p\u0090\5\b\5")
-        buf.write(u"\23qr\f\21\2\2rs\7,\2\2s\u0090\5\b\5\22tu\f\20\2\2uv")
-        buf.write(u"\7.\2\2v\u0090\5\b\5\21wx\f\17\2\2xy\7-\2\2y\u0090\5")
-        buf.write(u"\b\5\20z{\f\16\2\2{|\7/\2\2|\u0090\5\b\5\17}~\f\13\2")
-        buf.write(u"\2~\u0080\7\64\2\2\177\u0081\5\2\2\2\u0080\177\3\2\2")
-        buf.write(u"\2\u0080\u0081\3\2\2\2\u0081\u0082\3\2\2\2\u0082\u0090")
-        buf.write(u"\5\b\5\f\u0083\u0084\f\n\2\2\u0084\u0086\7\65\2\2\u0085")
-        buf.write(u"\u0087\5\2\2\2\u0086\u0085\3\2\2\2\u0086\u0087\3\2\2")
-        buf.write(u"\2\u0087\u0088\3\2\2\2\u0088\u0090\5\b\5\13\u0089\u008a")
-        buf.write(u"\f\7\2\2\u008a\u008c\78\2\2\u008b\u008d\5\2\2\2\u008c")
-        buf.write(u"\u008b\3\2\2\2\u008c\u008d\3\2\2\2\u008d\u008e\3\2\2")
-        buf.write(u"\2\u008e\u0090\5\b\5\b\u008fj\3\2\2\2\u008fn\3\2\2\2")
-        buf.write(u"\u008fq\3\2\2\2\u008ft\3\2\2\2\u008fw\3\2\2\2\u008fz")
-        buf.write(u"\3\2\2\2\u008f}\3\2\2\2\u008f\u0083\3\2\2\2\u008f\u0089")
-        buf.write(u"\3\2\2\2\u0090\u0093\3\2\2\2\u0091\u008f\3\2\2\2\u0091")
-        buf.write(u"\u0092\3\2\2\2\u0092\t\3\2\2\2\u0093\u0091\3\2\2\2\u0094")
-        buf.write(u"\u0095\5\f\7\2\u0095\u0096\7\2\2\3\u0096\13\3\2\2\2\u0097")
-        buf.write(u"\u0099\5\16\b\2\u0098\u0097\3\2\2\2\u0098\u0099\3\2\2")
-        buf.write(u"\2\u0099\u009d\3\2\2\2\u009a\u009c\5\20\t\2\u009b\u009a")
-        buf.write(u"\3\2\2\2\u009c\u009f\3\2\2\2\u009d\u009b\3\2\2\2\u009d")
-        buf.write(u"\u009e\3\2\2\2\u009e\u00a4\3\2\2\2\u009f\u009d\3\2\2")
-        buf.write(u"\2\u00a0\u00a3\5\24\13\2\u00a1\u00a3\5\26\f\2\u00a2\u00a0")
-        buf.write(u"\3\2\2\2\u00a2\u00a1\3\2\2\2\u00a3\u00a6\3\2\2\2\u00a4")
-        buf.write(u"\u00a2\3\2\2\2\u00a4\u00a5\3\2\2\2\u00a5\u00a8\3\2\2")
-        buf.write(u"\2\u00a6\u00a4\3\2\2\2\u00a7\u00a9\5\22\n\2\u00a8\u00a7")
-        buf.write(u"\3\2\2\2\u00a9\u00aa\3\2\2\2\u00aa\u00a8\3\2\2\2\u00aa")
-        buf.write(u"\u00ab\3\2\2\2\u00ab\r\3\2\2\2\u00ac\u00ad\7(\2\2\u00ad")
-        buf.write(u"\u00ae\7G\2\2\u00ae\17\3\2\2\2\u00af\u00b0\7)\2\2\u00b0")
-        buf.write(u"\u00b1\7G\2\2\u00b1\u00b2\7\34\2\2\u00b2\u00b3\7G\2\2")
-        buf.write(u"\u00b3\21\3\2\2\2\u00b4\u00b5\7G\2\2\u00b5\u00b7\7A\2")
-        buf.write(u"\2\u00b6\u00b4\3\2\2\2\u00b6\u00b7\3\2\2\2\u00b7\u00b8")
-        buf.write(u"\3\2\2\2\u00b8\u00b9\5\b\5\2\u00b9\23\3\2\2\2\u00ba\u00bd")
-        buf.write(u"\5\32\16\2\u00bb\u00bd\5\34\17\2\u00bc\u00ba\3\2\2\2")
-        buf.write(u"\u00bc\u00bb\3\2\2\2\u00bd\25\3\2\2\2\u00be\u00bf\7\21")
-        buf.write(u"\2\2\u00bf\u00c0\5\30\r\2\u00c0\27\3\2\2\2\u00c1\u00c2")
-        buf.write(u"\7\33\2\2\u00c2\u00c3\7\7\2\2\u00c3\u00c4\7G\2\2\u00c4")
-        buf.write(u"\u00c5\7\17\2\2\u00c5\u00c6\7G\2\2\u00c6\u00c7\7\b\2")
-        buf.write(u"\2\u00c7\31\3\2\2\2\u00c8\u00ca\5\"\22\2\u00c9\u00c8")
-        buf.write(u"\3\2\2\2\u00c9\u00ca\3\2\2\2\u00ca\u00cb\3\2\2\2\u00cb")
-        buf.write(u"\u00cc\5 \21\2\u00cc\u00ce\7G\2\2\u00cd\u00cf\5\36\20")
-        buf.write(u"\2\u00ce\u00cd\3\2\2\2\u00ce\u00cf\3\2\2\2\u00cf\33\3")
-        buf.write(u"\2\2\2\u00d0\u00d1\7 \2\2\u00d1\u00d2\5 \21\2\u00d2\u00d3")
-        buf.write(u"\7G\2\2\u00d3\u00d4\7A\2\2\u00d4\u00d5\5(\25\2\u00d5")
-        buf.write(u"\35\3\2\2\2\u00d6\u00d7\7A\2\2\u00d7\u00db\5(\25\2\u00d8")
-        buf.write(u"\u00d9\7A\2\2\u00d9\u00db\5\b\5\2\u00da\u00d6\3\2\2\2")
-        buf.write(u"\u00da\u00d8\3\2\2\2\u00db\37\3\2\2\2\u00dc\u00dd\t\4")
-        buf.write(u"\2\2\u00dd!\3\2\2\2\u00de\u00df\t\5\2\2\u00df#\3\2\2")
-        buf.write(u"\2\u00e0\u00e1\b\23\1\2\u00e1\u00fa\7G\2\2\u00e2\u00fa")
-        buf.write(u"\5(\25\2\u00e3\u00e4\7\22\2\2\u00e4\u00e5\7\7\2\2\u00e5")
-        buf.write(u"\u00e6\5$\23\2\u00e6\u00e7\7\b\2\2\u00e7\u00fa\3\2\2")
-        buf.write(u"\2\u00e8\u00e9\7\23\2\2\u00e9\u00ea\7\7\2\2\u00ea\u00eb")
-        buf.write(u"\5$\23\2\u00eb\u00ec\7\b\2\2\u00ec\u00fa\3\2\2\2\u00ed")
-        buf.write(u"\u00ee\7\24\2\2\u00ee\u00ef\7\7\2\2\u00ef\u00f0\5$\23")
-        buf.write(u"\2\u00f0\u00f1\7\b\2\2\u00f1\u00fa\3\2\2\2\u00f2\u00f3")
-        buf.write(u"\7\25\2\2\u00f3\u00f4\7\7\2\2\u00f4\u00f5\5$\23\2\u00f5")
-        buf.write(u"\u00f6\7\17\2\2\u00f6\u00f7\5$\23\2\u00f7\u00f8\7\b\2")
-        buf.write(u"\2\u00f8\u00fa\3\2\2\2\u00f9\u00e0\3\2\2\2\u00f9\u00e2")
-        buf.write(u"\3\2\2\2\u00f9\u00e3\3\2\2\2\u00f9\u00e8\3\2\2\2\u00f9")
-        buf.write(u"\u00ed\3\2\2\2\u00f9\u00f2\3\2\2\2\u00fa\u0109\3\2\2")
-        buf.write(u"\2\u00fb\u00fc\f\n\2\2\u00fc\u00fd\7\4\2\2\u00fd\u0108")
-        buf.write(u"\5$\23\13\u00fe\u00ff\f\t\2\2\u00ff\u0100\7\3\2\2\u0100")
-        buf.write(u"\u0108\5$\23\n\u0101\u0102\f\b\2\2\u0102\u0103\7\5\2")
-        buf.write(u"\2\u0103\u0108\5$\23\t\u0104\u0105\f\7\2\2\u0105\u0106")
-        buf.write(u"\7\6\2\2\u0106\u0108\5$\23\b\u0107\u00fb\3\2\2\2\u0107")
-        buf.write(u"\u00fe\3\2\2\2\u0107\u0101\3\2\2\2\u0107\u0104\3\2\2")
-        buf.write(u"\2\u0108\u010b\3\2\2\2\u0109\u0107\3\2\2\2\u0109\u010a")
-        buf.write(u"\3\2\2\2\u010a%\3\2\2\2\u010b\u0109\3\2\2\2\u010c\u0113")
-        buf.write(u"\7>\2\2\u010d\u0113\7=\2\2\u010e\u0113\7@\2\2\u010f\u0113")
-        buf.write(u"\7?\2\2\u0110\u0113\7;\2\2\u0111\u0113\7<\2\2\u0112\u010c")
-        buf.write(u"\3\2\2\2\u0112\u010d\3\2\2\2\u0112\u010e\3\2\2\2\u0112")
-        buf.write(u"\u010f\3\2\2\2\u0112\u0110\3\2\2\2\u0112\u0111\3\2\2")
-        buf.write(u"\2\u0113\'\3\2\2\2\u0114\u0119\7E\2\2\u0115\u0119\7F")
-        buf.write(u"\2\2\u0116\u0117\7\3\2\2\u0117\u0119\5(\25\2\u0118\u0114")
-        buf.write(u"\3\2\2\2\u0118\u0115\3\2\2\2\u0118\u0116\3\2\2\2\u0119")
-        buf.write(u")\3\2\2\2\u011a\u011b\7G\2\2\u011b+\3\2\2\2\36\648:H")
-        buf.write(u"MRWh\u0080\u0086\u008c\u008f\u0091\u0098\u009d\u00a2")
-        buf.write(u"\u00a4\u00aa\u00b6\u00bc\u00c9\u00ce\u00da\u00f9\u0107")
-        buf.write(u"\u0109\u0112\u0118")
-        return buf.getvalue()
-
+    return [
+        4,1,73,283,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
+        6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,2,13,7,13,
+        2,14,7,14,2,15,7,15,2,16,7,16,2,17,7,17,2,18,7,18,2,19,7,19,2,20,
+        7,20,1,0,1,0,1,0,1,0,1,0,1,0,1,1,1,1,3,1,51,8,1,1,1,1,1,3,1,55,8,
+        1,3,1,57,8,1,1,2,1,2,1,3,1,3,1,3,1,3,1,3,1,3,1,3,1,3,1,3,1,3,3,3,
+        71,8,3,1,3,1,3,1,3,3,3,76,8,3,1,3,1,3,1,3,3,3,81,8,3,1,3,1,3,1,3,
+        3,3,86,8,3,1,3,1,3,1,3,1,3,1,3,1,3,1,3,1,3,1,3,1,3,1,3,1,3,1,3,1,
+        3,1,3,3,3,103,8,3,1,3,1,3,1,3,1,3,1,3,1,3,1,3,1,3,1,3,1,3,1,3,1,
+        3,1,3,1,3,1,3,1,3,1,3,1,3,1,3,1,3,1,3,1,3,3,3,127,8,3,1,3,1,3,1,
+        3,1,3,3,3,133,8,3,1,3,1,3,1,3,1,3,3,3,139,8,3,1,3,5,3,142,8,3,10,
+        3,12,3,145,9,3,1,4,1,4,1,4,1,5,3,5,151,8,5,1,5,5,5,154,8,5,10,5,
+        12,5,157,9,5,1,5,1,5,5,5,161,8,5,10,5,12,5,164,9,5,1,5,4,5,167,8,
+        5,11,5,12,5,168,1,6,1,6,1,6,1,7,1,7,1,7,1,7,1,7,1,8,1,8,3,8,181,
+        8,8,1,8,1,8,1,9,1,9,3,9,187,8,9,1,10,1,10,1,10,1,11,1,11,1,11,1,
+        11,1,11,1,11,1,11,1,12,3,12,200,8,12,1,12,1,12,1,12,3,12,205,8,12,
+        1,13,1,13,1,13,1,13,1,13,1,13,1,14,1,14,1,14,1,14,3,14,217,8,14,
+        1,15,1,15,1,16,1,16,1,17,1,17,1,17,1,17,1,17,1,17,1,17,1,17,1,17,
+        1,17,1,17,1,17,1,17,1,17,1,17,1,17,1,17,1,17,1,17,1,17,1,17,1,17,
+        1,17,1,17,1,17,3,17,248,8,17,1,17,1,17,1,17,1,17,1,17,1,17,1,17,
+        1,17,1,17,1,17,1,17,1,17,5,17,262,8,17,10,17,12,17,265,9,17,1,18,
+        1,18,1,18,1,18,1,18,1,18,3,18,273,8,18,1,19,1,19,1,19,1,19,3,19,
+        279,8,19,1,20,1,20,1,20,0,2,6,34,21,0,2,4,6,8,10,12,14,16,18,20,
+        22,24,26,28,30,32,34,36,38,40,0,4,1,0,12,13,1,0,20,23,2,0,32,35,
+        69,69,1,0,27,28,316,0,42,1,0,0,0,2,56,1,0,0,0,4,58,1,0,0,0,6,102,
+        1,0,0,0,8,146,1,0,0,0,10,150,1,0,0,0,12,170,1,0,0,0,14,173,1,0,0,
+        0,16,180,1,0,0,0,18,186,1,0,0,0,20,188,1,0,0,0,22,191,1,0,0,0,24,
+        199,1,0,0,0,26,206,1,0,0,0,28,216,1,0,0,0,30,218,1,0,0,0,32,220,
+        1,0,0,0,34,247,1,0,0,0,36,272,1,0,0,0,38,278,1,0,0,0,40,280,1,0,
+        0,0,42,43,5,9,0,0,43,44,3,2,1,0,44,45,7,0,0,0,45,46,3,2,1,0,46,47,
+        5,10,0,0,47,1,1,0,0,0,48,50,3,38,19,0,49,51,3,4,2,0,50,49,1,0,0,
+        0,50,51,1,0,0,0,51,57,1,0,0,0,52,54,5,69,0,0,53,55,3,4,2,0,54,53,
+        1,0,0,0,54,55,1,0,0,0,55,57,1,0,0,0,56,48,1,0,0,0,56,52,1,0,0,0,
+        57,3,1,0,0,0,58,59,7,1,0,0,59,5,1,0,0,0,60,61,6,3,-1,0,61,103,3,
+        34,17,0,62,63,5,5,0,0,63,64,3,6,3,0,64,65,5,6,0,0,65,103,1,0,0,0,
+        66,67,5,40,0,0,67,103,3,6,3,17,68,70,5,48,0,0,69,71,3,0,0,0,70,69,
+        1,0,0,0,70,71,1,0,0,0,71,72,1,0,0,0,72,103,3,6,3,11,73,75,5,49,0,
+        0,74,76,3,0,0,0,75,74,1,0,0,0,75,76,1,0,0,0,76,77,1,0,0,0,77,103,
+        3,6,3,10,78,80,5,52,0,0,79,81,3,0,0,0,80,79,1,0,0,0,80,81,1,0,0,
+        0,81,82,1,0,0,0,82,103,3,6,3,7,83,85,5,53,0,0,84,86,3,0,0,0,85,84,
+        1,0,0,0,85,86,1,0,0,0,86,87,1,0,0,0,87,103,3,6,3,6,88,89,5,46,0,
+        0,89,90,5,5,0,0,90,91,3,6,3,0,91,92,5,6,0,0,92,103,1,0,0,0,93,94,
+        5,47,0,0,94,95,5,5,0,0,95,96,3,6,3,0,96,97,5,6,0,0,97,103,1,0,0,
+        0,98,99,5,56,0,0,99,103,3,6,3,2,100,101,5,55,0,0,101,103,3,6,3,1,
+        102,60,1,0,0,0,102,62,1,0,0,0,102,66,1,0,0,0,102,68,1,0,0,0,102,
+        73,1,0,0,0,102,78,1,0,0,0,102,83,1,0,0,0,102,88,1,0,0,0,102,93,1,
+        0,0,0,102,98,1,0,0,0,102,100,1,0,0,0,103,143,1,0,0,0,104,105,10,
+        19,0,0,105,106,3,36,18,0,106,107,3,6,3,20,107,142,1,0,0,0,108,109,
+        10,16,0,0,109,110,5,41,0,0,110,142,3,6,3,17,111,112,10,15,0,0,112,
+        113,5,42,0,0,113,142,3,6,3,16,114,115,10,14,0,0,115,116,5,44,0,0,
+        116,142,3,6,3,15,117,118,10,13,0,0,118,119,5,43,0,0,119,142,3,6,
+        3,14,120,121,10,12,0,0,121,122,5,45,0,0,122,142,3,6,3,13,123,124,
+        10,9,0,0,124,126,5,50,0,0,125,127,3,0,0,0,126,125,1,0,0,0,126,127,
+        1,0,0,0,127,128,1,0,0,0,128,142,3,6,3,10,129,130,10,8,0,0,130,132,
+        5,51,0,0,131,133,3,0,0,0,132,131,1,0,0,0,132,133,1,0,0,0,133,134,
+        1,0,0,0,134,142,3,6,3,9,135,136,10,5,0,0,136,138,5,54,0,0,137,139,
+        3,0,0,0,138,137,1,0,0,0,138,139,1,0,0,0,139,140,1,0,0,0,140,142,
+        3,6,3,6,141,104,1,0,0,0,141,108,1,0,0,0,141,111,1,0,0,0,141,114,
+        1,0,0,0,141,117,1,0,0,0,141,120,1,0,0,0,141,123,1,0,0,0,141,129,
+        1,0,0,0,141,135,1,0,0,0,142,145,1,0,0,0,143,141,1,0,0,0,143,144,
+        1,0,0,0,144,7,1,0,0,0,145,143,1,0,0,0,146,147,3,10,5,0,147,148,5,
+        0,0,1,148,9,1,0,0,0,149,151,3,12,6,0,150,149,1,0,0,0,150,151,1,0,
+        0,0,151,155,1,0,0,0,152,154,3,14,7,0,153,152,1,0,0,0,154,157,1,0,
+        0,0,155,153,1,0,0,0,155,156,1,0,0,0,156,162,1,0,0,0,157,155,1,0,
+        0,0,158,161,3,18,9,0,159,161,3,20,10,0,160,158,1,0,0,0,160,159,1,
+        0,0,0,161,164,1,0,0,0,162,160,1,0,0,0,162,163,1,0,0,0,163,166,1,
+        0,0,0,164,162,1,0,0,0,165,167,3,16,8,0,166,165,1,0,0,0,167,168,1,
+        0,0,0,168,166,1,0,0,0,168,169,1,0,0,0,169,11,1,0,0,0,170,171,5,38,
+        0,0,171,172,5,69,0,0,172,13,1,0,0,0,173,174,5,39,0,0,174,175,5,69,
+        0,0,175,176,5,26,0,0,176,177,5,69,0,0,177,15,1,0,0,0,178,179,5,69,
+        0,0,179,181,5,63,0,0,180,178,1,0,0,0,180,181,1,0,0,0,181,182,1,0,
+        0,0,182,183,3,6,3,0,183,17,1,0,0,0,184,187,3,24,12,0,185,187,3,26,
+        13,0,186,184,1,0,0,0,186,185,1,0,0,0,187,19,1,0,0,0,188,189,5,15,
+        0,0,189,190,3,22,11,0,190,21,1,0,0,0,191,192,5,25,0,0,192,193,5,
+        5,0,0,193,194,5,69,0,0,194,195,5,13,0,0,195,196,5,69,0,0,196,197,
+        5,6,0,0,197,23,1,0,0,0,198,200,3,32,16,0,199,198,1,0,0,0,199,200,
+        1,0,0,0,200,201,1,0,0,0,201,202,3,30,15,0,202,204,5,69,0,0,203,205,
+        3,28,14,0,204,203,1,0,0,0,204,205,1,0,0,0,205,25,1,0,0,0,206,207,
+        5,30,0,0,207,208,3,30,15,0,208,209,5,69,0,0,209,210,5,63,0,0,210,
+        211,3,38,19,0,211,27,1,0,0,0,212,213,5,63,0,0,213,217,3,38,19,0,
+        214,215,5,63,0,0,215,217,3,6,3,0,216,212,1,0,0,0,216,214,1,0,0,0,
+        217,29,1,0,0,0,218,219,7,2,0,0,219,31,1,0,0,0,220,221,7,3,0,0,221,
+        33,1,0,0,0,222,223,6,17,-1,0,223,248,5,69,0,0,224,248,3,38,19,0,
+        225,226,5,16,0,0,226,227,5,5,0,0,227,228,3,34,17,0,228,229,5,6,0,
+        0,229,248,1,0,0,0,230,231,5,17,0,0,231,232,5,5,0,0,232,233,3,34,
+        17,0,233,234,5,6,0,0,234,248,1,0,0,0,235,236,5,18,0,0,236,237,5,
+        5,0,0,237,238,3,34,17,0,238,239,5,6,0,0,239,248,1,0,0,0,240,241,
+        5,19,0,0,241,242,5,5,0,0,242,243,3,34,17,0,243,244,5,13,0,0,244,
+        245,3,34,17,0,245,246,5,6,0,0,246,248,1,0,0,0,247,222,1,0,0,0,247,
+        224,1,0,0,0,247,225,1,0,0,0,247,230,1,0,0,0,247,235,1,0,0,0,247,
+        240,1,0,0,0,248,263,1,0,0,0,249,250,10,8,0,0,250,251,5,2,0,0,251,
+        262,3,34,17,9,252,253,10,7,0,0,253,254,5,1,0,0,254,262,3,34,17,8,
+        255,256,10,6,0,0,256,257,5,3,0,0,257,262,3,34,17,7,258,259,10,5,
+        0,0,259,260,5,4,0,0,260,262,3,34,17,6,261,249,1,0,0,0,261,252,1,
+        0,0,0,261,255,1,0,0,0,261,258,1,0,0,0,262,265,1,0,0,0,263,261,1,
+        0,0,0,263,264,1,0,0,0,264,35,1,0,0,0,265,263,1,0,0,0,266,273,5,60,
+        0,0,267,273,5,59,0,0,268,273,5,62,0,0,269,273,5,61,0,0,270,273,5,
+        57,0,0,271,273,5,58,0,0,272,266,1,0,0,0,272,267,1,0,0,0,272,268,
+        1,0,0,0,272,269,1,0,0,0,272,270,1,0,0,0,272,271,1,0,0,0,273,37,1,
+        0,0,0,274,279,5,67,0,0,275,279,5,68,0,0,276,277,5,1,0,0,277,279,
+        3,38,19,0,278,274,1,0,0,0,278,275,1,0,0,0,278,276,1,0,0,0,279,39,
+        1,0,0,0,280,281,5,69,0,0,281,41,1,0,0,0,28,50,54,56,70,75,80,85,
+        102,126,132,138,141,143,150,155,160,162,168,180,186,199,204,216,
+        247,261,263,272,278
+    ]
 
 class StlParser ( Parser ):
 
@@ -150,39 +125,37 @@ class StlParser ( Parser ):
 
     sharedContextCache = PredictionContextCache()
 
-    literalNames = [ u"<INVALID>", u"'-'", u"'+'", u"'*'", u"'/'", u"'('", 
-                     u"')'", u"'{'", u"'}'", u"'['", u"']'", u"';'", u"':'", 
-                     u"','", u"'.'", u"'@'", u"'abs'", u"'sqrt'", u"'exp'", 
-                     u"'pow'", u"'s'", u"'ms'", u"'us'", u"'ns'", u"'ps'", 
-                     u"'topic'", u"'import'", u"'input'", u"'output'", u"'internal'", 
-                     u"'const'", u"'real'", u"'float'", u"'long'", u"'complex'", 
-                     u"'int'", u"'bool'", u"'assertion'", u"'specification'", 
-                     u"'from'", u"<INVALID>", u"<INVALID>", u"<INVALID>", 
-                     u"<INVALID>", u"<INVALID>", u"'xor'", u"'rise'", u"'fall'", 
-                     u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>", 
-                     u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>", 
-                     u"<INVALID>", u"'=='", u"'!=='", u"'>='", u"'<='", 
-                     u"'>'", u"'<'", u"'='" ]
+    literalNames = [ "<INVALID>", "'-'", "'+'", "'*'", "'/'", "'('", "')'", 
+                     "'{'", "'}'", "'['", "']'", "';'", "':'", "','", "'.'", 
+                     "'@'", "'abs'", "'sqrt'", "'exp'", "'pow'", "'s'", 
+                     "'ms'", "'us'", "'ns'", "'ps'", "'topic'", "'import'", 
+                     "'input'", "'output'", "'internal'", "'const'", "'real'", 
+                     "'float'", "'long'", "'complex'", "'int'", "'bool'", 
+                     "'assertion'", "'specification'", "'from'", "<INVALID>", 
+                     "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
+                     "'xor'", "'rise'", "'fall'", "<INVALID>", "<INVALID>", 
+                     "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
+                     "<INVALID>", "<INVALID>", "<INVALID>", "'=='", "'!=='", 
+                     "'>='", "'<='", "'>'", "'<'", "'='" ]
 
-    symbolicNames = [ u"<INVALID>", u"MINUS", u"PLUS", u"TIMES", u"DIVIDE", 
-                      u"LPAREN", u"RPAREN", u"LBRACE", u"RBRACE", u"LBRACK", 
-                      u"RBRACK", u"SEMICOLON", u"COLON", u"COMMA", u"DOT", 
-                      u"AT", u"ABS", u"SQRT", u"EXP", u"POW", u"SEC", u"MSEC", 
-                      u"USEC", u"NSEC", u"PSEC", u"ROS_Topic", u"Import", 
-                      u"Input", u"Output", u"Internal", u"Constant", u"DomainTypeReal", 
-                      u"DomainTypeFloat", u"DomainTypeLong", u"DomainTypeComplex", 
-                      u"DomainTypeInt", u"DomainTypeBool", u"Assertion", 
-                      u"Specification", u"From", u"NotOperator", u"OrOperator", 
-                      u"AndOperator", u"IffOperator", u"ImpliesOperator", 
-                      u"XorOperator", u"RiseOperator", u"FallOperator", 
-                      u"AlwaysOperator", u"EventuallyOperator", u"UntilOperator", 
-                      u"UnlessOperator", u"HistoricallyOperator", u"OnceOperator", 
-                      u"SinceOperator", u"NextOperator", u"PreviousOperator", 
-                      u"EqualOperator", u"NotEqualOperator", u"GreaterOrEqualOperator", 
-                      u"LesserOrEqualOperator", u"GreaterOperator", u"LesserOperator", 
-                      u"EQUAL", u"BooleanLiteral", u"TRUE", u"FALSE", u"IntegerLiteral", 
-                      u"RealLiteral", u"Identifier", u"LINE_TERMINATOR", 
-                      u"WHITESPACE", u"COMMENT", u"LINE_COMMENT" ]
+    symbolicNames = [ "<INVALID>", "MINUS", "PLUS", "TIMES", "DIVIDE", "LPAREN", 
+                      "RPAREN", "LBRACE", "RBRACE", "LBRACK", "RBRACK", 
+                      "SEMICOLON", "COLON", "COMMA", "DOT", "AT", "ABS", 
+                      "SQRT", "EXP", "POW", "SEC", "MSEC", "USEC", "NSEC", 
+                      "PSEC", "ROS_Topic", "Import", "Input", "Output", 
+                      "Internal", "Constant", "DomainTypeReal", "DomainTypeFloat", 
+                      "DomainTypeLong", "DomainTypeComplex", "DomainTypeInt", 
+                      "DomainTypeBool", "Assertion", "Specification", "From", 
+                      "NotOperator", "OrOperator", "AndOperator", "IffOperator", 
+                      "ImpliesOperator", "XorOperator", "RiseOperator", 
+                      "FallOperator", "AlwaysOperator", "EventuallyOperator", 
+                      "UntilOperator", "UnlessOperator", "HistoricallyOperator", 
+                      "OnceOperator", "SinceOperator", "NextOperator", "PreviousOperator", 
+                      "EqualOperator", "NotEqualOperator", "GreaterOrEqualOperator", 
+                      "LesserOrEqualOperator", "GreaterOperator", "LesserOperator", 
+                      "EQUAL", "BooleanLiteral", "TRUE", "FALSE", "IntegerLiteral", 
+                      "RealLiteral", "Identifier", "LINE_TERMINATOR", "WHITESPACE", 
+                      "COMMENT", "LINE_COMMENT" ]
 
     RULE_interval = 0
     RULE_intervalTime = 1
@@ -206,12 +179,11 @@ class StlParser ( Parser ):
     RULE_literal = 19
     RULE_identifier = 20
 
-    ruleNames =  [ u"interval", u"intervalTime", u"unit", u"expression", 
-                   u"specification_file", u"specification", u"spec", u"modimport", 
-                   u"assertion", u"declaration", u"annotation", u"annotation_type", 
-                   u"variableDeclaration", u"constantDeclaration", u"assignment", 
-                   u"domainType", u"ioType", u"real_expression", u"comparisonOp", 
-                   u"literal", u"identifier" ]
+    ruleNames =  [ "interval", "intervalTime", "unit", "expression", "specification_file", 
+                   "specification", "spec", "modimport", "assertion", "declaration", 
+                   "annotation", "annotation_type", "variableDeclaration", 
+                   "constantDeclaration", "assignment", "domainType", "ioType", 
+                   "real_expression", "comparisonOp", "literal", "identifier" ]
 
     EOF = Token.EOF
     MINUS=1
@@ -288,24 +260,26 @@ class StlParser ( Parser ):
     COMMENT=72
     LINE_COMMENT=73
 
-    def __init__(self, input, output=sys.stdout):
-        super(StlParser, self).__init__(input, output=output)
-        self.checkVersion("4.7.2")
+    def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
+        super().__init__(input, output)
+        self.checkVersion("4.11.1")
         self._interp = ParserATNSimulator(self, self.atn, self.decisionsToDFA, self.sharedContextCache)
         self._predicates = None
 
 
 
-    class IntervalContext(ParserRuleContext):
 
-        def __init__(self, parser, parent=None, invokingState=-1):
-            super(StlParser.IntervalContext, self).__init__(parent, invokingState)
+    class IntervalContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
             self.parser = parser
 
         def LBRACK(self):
             return self.getToken(StlParser.LBRACK, 0)
 
-        def intervalTime(self, i=None):
+        def intervalTime(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(StlParser.IntervalTimeContext)
             else:
@@ -324,8 +298,8 @@ class StlParser ( Parser ):
         def getRuleIndex(self):
             return StlParser.RULE_interval
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitInterval"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitInterval" ):
                 return visitor.visitInterval(self)
             else:
                 return visitor.visitChildren(self)
@@ -346,7 +320,7 @@ class StlParser ( Parser ):
             self.intervalTime()
             self.state = 44
             _la = self._input.LA(1)
-            if not(_la==StlParser.COLON or _la==StlParser.COMMA):
+            if not(_la==12 or _la==13):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
@@ -363,10 +337,12 @@ class StlParser ( Parser ):
             self.exitRule()
         return localctx
 
-    class IntervalTimeContext(ParserRuleContext):
 
-        def __init__(self, parser, parent=None, invokingState=-1):
-            super(StlParser.IntervalTimeContext, self).__init__(parent, invokingState)
+    class IntervalTimeContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
             self.parser = parser
 
 
@@ -374,15 +350,15 @@ class StlParser ( Parser ):
             return StlParser.RULE_intervalTime
 
      
-        def copyFrom(self, ctx):
-            super(StlParser.IntervalTimeContext, self).copyFrom(ctx)
+        def copyFrom(self, ctx:ParserRuleContext):
+            super().copyFrom(ctx)
 
 
 
     class IntervalTimeLiteralContext(IntervalTimeContext):
 
-        def __init__(self, parser, ctx): # actually a StlParser.IntervalTimeContext)
-            super(StlParser.IntervalTimeLiteralContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a StlParser.IntervalTimeContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
         def literal(self):
@@ -392,8 +368,8 @@ class StlParser ( Parser ):
             return self.getTypedRuleContext(StlParser.UnitContext,0)
 
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitIntervalTimeLiteral"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitIntervalTimeLiteral" ):
                 return visitor.visitIntervalTimeLiteral(self)
             else:
                 return visitor.visitChildren(self)
@@ -401,8 +377,8 @@ class StlParser ( Parser ):
 
     class ConstantTimeLiteralContext(IntervalTimeContext):
 
-        def __init__(self, parser, ctx): # actually a StlParser.IntervalTimeContext)
-            super(StlParser.ConstantTimeLiteralContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a StlParser.IntervalTimeContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
         def Identifier(self):
@@ -411,8 +387,8 @@ class StlParser ( Parser ):
             return self.getTypedRuleContext(StlParser.UnitContext,0)
 
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitConstantTimeLiteral"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitConstantTimeLiteral" ):
                 return visitor.visitConstantTimeLiteral(self)
             else:
                 return visitor.visitChildren(self)
@@ -428,7 +404,7 @@ class StlParser ( Parser ):
             self.state = 56
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [StlParser.MINUS, StlParser.IntegerLiteral, StlParser.RealLiteral]:
+            if token in [1, 67, 68]:
                 localctx = StlParser.IntervalTimeLiteralContext(self, localctx)
                 self.enterOuterAlt(localctx, 1)
                 self.state = 48
@@ -436,13 +412,13 @@ class StlParser ( Parser ):
                 self.state = 50
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << StlParser.SEC) | (1 << StlParser.MSEC) | (1 << StlParser.USEC) | (1 << StlParser.NSEC))) != 0):
+                if ((_la) & ~0x3f) == 0 and ((1 << _la) & 15728640) != 0:
                     self.state = 49
                     self.unit()
 
 
                 pass
-            elif token in [StlParser.Identifier]:
+            elif token in [69]:
                 localctx = StlParser.ConstantTimeLiteralContext(self, localctx)
                 self.enterOuterAlt(localctx, 2)
                 self.state = 52
@@ -450,7 +426,7 @@ class StlParser ( Parser ):
                 self.state = 54
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << StlParser.SEC) | (1 << StlParser.MSEC) | (1 << StlParser.USEC) | (1 << StlParser.NSEC))) != 0):
+                if ((_la) & ~0x3f) == 0 and ((1 << _la) & 15728640) != 0:
                     self.state = 53
                     self.unit()
 
@@ -467,10 +443,12 @@ class StlParser ( Parser ):
             self.exitRule()
         return localctx
 
-    class UnitContext(ParserRuleContext):
 
-        def __init__(self, parser, parent=None, invokingState=-1):
-            super(StlParser.UnitContext, self).__init__(parent, invokingState)
+    class UnitContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
             self.parser = parser
 
         def SEC(self):
@@ -488,8 +466,8 @@ class StlParser ( Parser ):
         def getRuleIndex(self):
             return StlParser.RULE_unit
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitUnit"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitUnit" ):
                 return visitor.visitUnit(self)
             else:
                 return visitor.visitChildren(self)
@@ -506,7 +484,7 @@ class StlParser ( Parser ):
             self.enterOuterAlt(localctx, 1)
             self.state = 58
             _la = self._input.LA(1)
-            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << StlParser.SEC) | (1 << StlParser.MSEC) | (1 << StlParser.USEC) | (1 << StlParser.NSEC))) != 0)):
+            if not(((_la) & ~0x3f) == 0 and ((1 << _la) & 15728640) != 0):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
@@ -519,10 +497,12 @@ class StlParser ( Parser ):
             self.exitRule()
         return localctx
 
-    class ExpressionContext(ParserRuleContext):
 
-        def __init__(self, parser, parent=None, invokingState=-1):
-            super(StlParser.ExpressionContext, self).__init__(parent, invokingState)
+    class ExpressionContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
             self.parser = parser
 
 
@@ -530,17 +510,17 @@ class StlParser ( Parser ):
             return StlParser.RULE_expression
 
      
-        def copyFrom(self, ctx):
-            super(StlParser.ExpressionContext, self).copyFrom(ctx)
+        def copyFrom(self, ctx:ParserRuleContext):
+            super().copyFrom(ctx)
 
 
     class ExprSinceContext(ExpressionContext):
 
-        def __init__(self, parser, ctx): # actually a StlParser.ExpressionContext)
-            super(StlParser.ExprSinceContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a StlParser.ExpressionContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
-        def expression(self, i=None):
+        def expression(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(StlParser.ExpressionContext)
             else:
@@ -552,8 +532,8 @@ class StlParser ( Parser ):
             return self.getTypedRuleContext(StlParser.IntervalContext,0)
 
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitExprSince"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitExprSince" ):
                 return visitor.visitExprSince(self)
             else:
                 return visitor.visitChildren(self)
@@ -561,8 +541,8 @@ class StlParser ( Parser ):
 
     class ExprParenContext(ExpressionContext):
 
-        def __init__(self, parser, ctx): # actually a StlParser.ExpressionContext)
-            super(StlParser.ExprParenContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a StlParser.ExpressionContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
         def LPAREN(self):
@@ -573,8 +553,8 @@ class StlParser ( Parser ):
         def RPAREN(self):
             return self.getToken(StlParser.RPAREN, 0)
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitExprParen"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitExprParen" ):
                 return visitor.visitExprParen(self)
             else:
                 return visitor.visitChildren(self)
@@ -582,11 +562,11 @@ class StlParser ( Parser ):
 
     class ExprIffContext(ExpressionContext):
 
-        def __init__(self, parser, ctx): # actually a StlParser.ExpressionContext)
-            super(StlParser.ExprIffContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a StlParser.ExpressionContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
-        def expression(self, i=None):
+        def expression(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(StlParser.ExpressionContext)
             else:
@@ -595,8 +575,8 @@ class StlParser ( Parser ):
         def IffOperator(self):
             return self.getToken(StlParser.IffOperator, 0)
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitExprIff"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitExprIff" ):
                 return visitor.visitExprIff(self)
             else:
                 return visitor.visitChildren(self)
@@ -604,8 +584,8 @@ class StlParser ( Parser ):
 
     class ExpreOnceContext(ExpressionContext):
 
-        def __init__(self, parser, ctx): # actually a StlParser.ExpressionContext)
-            super(StlParser.ExpreOnceContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a StlParser.ExpressionContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
         def OnceOperator(self):
@@ -617,8 +597,8 @@ class StlParser ( Parser ):
             return self.getTypedRuleContext(StlParser.IntervalContext,0)
 
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitExpreOnce"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitExpreOnce" ):
                 return visitor.visitExpreOnce(self)
             else:
                 return visitor.visitChildren(self)
@@ -626,8 +606,8 @@ class StlParser ( Parser ):
 
     class ExprEvContext(ExpressionContext):
 
-        def __init__(self, parser, ctx): # actually a StlParser.ExpressionContext)
-            super(StlParser.ExprEvContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a StlParser.ExpressionContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
         def EventuallyOperator(self):
@@ -639,8 +619,8 @@ class StlParser ( Parser ):
             return self.getTypedRuleContext(StlParser.IntervalContext,0)
 
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitExprEv"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitExprEv" ):
                 return visitor.visitExprEv(self)
             else:
                 return visitor.visitChildren(self)
@@ -648,11 +628,11 @@ class StlParser ( Parser ):
 
     class ExprImpliesContext(ExpressionContext):
 
-        def __init__(self, parser, ctx): # actually a StlParser.ExpressionContext)
-            super(StlParser.ExprImpliesContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a StlParser.ExpressionContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
-        def expression(self, i=None):
+        def expression(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(StlParser.ExpressionContext)
             else:
@@ -661,8 +641,8 @@ class StlParser ( Parser ):
         def ImpliesOperator(self):
             return self.getToken(StlParser.ImpliesOperator, 0)
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitExprImplies"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitExprImplies" ):
                 return visitor.visitExprImplies(self)
             else:
                 return visitor.visitChildren(self)
@@ -670,11 +650,11 @@ class StlParser ( Parser ):
 
     class ExprUntilContext(ExpressionContext):
 
-        def __init__(self, parser, ctx): # actually a StlParser.ExpressionContext)
-            super(StlParser.ExprUntilContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a StlParser.ExpressionContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
-        def expression(self, i=None):
+        def expression(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(StlParser.ExpressionContext)
             else:
@@ -686,8 +666,8 @@ class StlParser ( Parser ):
             return self.getTypedRuleContext(StlParser.IntervalContext,0)
 
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitExprUntil"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitExprUntil" ):
                 return visitor.visitExprUntil(self)
             else:
                 return visitor.visitChildren(self)
@@ -695,8 +675,8 @@ class StlParser ( Parser ):
 
     class ExprNotContext(ExpressionContext):
 
-        def __init__(self, parser, ctx): # actually a StlParser.ExpressionContext)
-            super(StlParser.ExprNotContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a StlParser.ExpressionContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
         def NotOperator(self):
@@ -705,8 +685,8 @@ class StlParser ( Parser ):
             return self.getTypedRuleContext(StlParser.ExpressionContext,0)
 
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitExprNot"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitExprNot" ):
                 return visitor.visitExprNot(self)
             else:
                 return visitor.visitChildren(self)
@@ -714,8 +694,8 @@ class StlParser ( Parser ):
 
     class ExprNextContext(ExpressionContext):
 
-        def __init__(self, parser, ctx): # actually a StlParser.ExpressionContext)
-            super(StlParser.ExprNextContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a StlParser.ExpressionContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
         def NextOperator(self):
@@ -724,8 +704,8 @@ class StlParser ( Parser ):
             return self.getTypedRuleContext(StlParser.ExpressionContext,0)
 
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitExprNext"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitExprNext" ):
                 return visitor.visitExprNext(self)
             else:
                 return visitor.visitChildren(self)
@@ -733,11 +713,11 @@ class StlParser ( Parser ):
 
     class ExprAndContext(ExpressionContext):
 
-        def __init__(self, parser, ctx): # actually a StlParser.ExpressionContext)
-            super(StlParser.ExprAndContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a StlParser.ExpressionContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
-        def expression(self, i=None):
+        def expression(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(StlParser.ExpressionContext)
             else:
@@ -746,8 +726,8 @@ class StlParser ( Parser ):
         def AndOperator(self):
             return self.getToken(StlParser.AndOperator, 0)
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitExprAnd"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitExprAnd" ):
                 return visitor.visitExprAnd(self)
             else:
                 return visitor.visitChildren(self)
@@ -755,11 +735,11 @@ class StlParser ( Parser ):
 
     class ExprUnlessContext(ExpressionContext):
 
-        def __init__(self, parser, ctx): # actually a StlParser.ExpressionContext)
-            super(StlParser.ExprUnlessContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a StlParser.ExpressionContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
-        def expression(self, i=None):
+        def expression(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(StlParser.ExpressionContext)
             else:
@@ -771,8 +751,8 @@ class StlParser ( Parser ):
             return self.getTypedRuleContext(StlParser.IntervalContext,0)
 
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitExprUnless"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitExprUnless" ):
                 return visitor.visitExprUnless(self)
             else:
                 return visitor.visitChildren(self)
@@ -780,8 +760,8 @@ class StlParser ( Parser ):
 
     class ExprPreviousContext(ExpressionContext):
 
-        def __init__(self, parser, ctx): # actually a StlParser.ExpressionContext)
-            super(StlParser.ExprPreviousContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a StlParser.ExpressionContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
         def PreviousOperator(self):
@@ -790,8 +770,8 @@ class StlParser ( Parser ):
             return self.getTypedRuleContext(StlParser.ExpressionContext,0)
 
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitExprPrevious"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitExprPrevious" ):
                 return visitor.visitExprPrevious(self)
             else:
                 return visitor.visitChildren(self)
@@ -799,8 +779,8 @@ class StlParser ( Parser ):
 
     class ExprHistContext(ExpressionContext):
 
-        def __init__(self, parser, ctx): # actually a StlParser.ExpressionContext)
-            super(StlParser.ExprHistContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a StlParser.ExpressionContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
         def HistoricallyOperator(self):
@@ -812,8 +792,8 @@ class StlParser ( Parser ):
             return self.getTypedRuleContext(StlParser.IntervalContext,0)
 
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitExprHist"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitExprHist" ):
                 return visitor.visitExprHist(self)
             else:
                 return visitor.visitChildren(self)
@@ -821,8 +801,8 @@ class StlParser ( Parser ):
 
     class ExprFallContext(ExpressionContext):
 
-        def __init__(self, parser, ctx): # actually a StlParser.ExpressionContext)
-            super(StlParser.ExprFallContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a StlParser.ExpressionContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
         def FallOperator(self):
@@ -835,8 +815,8 @@ class StlParser ( Parser ):
         def RPAREN(self):
             return self.getToken(StlParser.RPAREN, 0)
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitExprFall"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitExprFall" ):
                 return visitor.visitExprFall(self)
             else:
                 return visitor.visitChildren(self)
@@ -844,11 +824,11 @@ class StlParser ( Parser ):
 
     class ExprPredicateContext(ExpressionContext):
 
-        def __init__(self, parser, ctx): # actually a StlParser.ExpressionContext)
-            super(StlParser.ExprPredicateContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a StlParser.ExpressionContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
-        def expression(self, i=None):
+        def expression(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(StlParser.ExpressionContext)
             else:
@@ -858,8 +838,8 @@ class StlParser ( Parser ):
             return self.getTypedRuleContext(StlParser.ComparisonOpContext,0)
 
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitExprPredicate"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitExprPredicate" ):
                 return visitor.visitExprPredicate(self)
             else:
                 return visitor.visitChildren(self)
@@ -867,11 +847,11 @@ class StlParser ( Parser ):
 
     class ExprXorContext(ExpressionContext):
 
-        def __init__(self, parser, ctx): # actually a StlParser.ExpressionContext)
-            super(StlParser.ExprXorContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a StlParser.ExpressionContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
-        def expression(self, i=None):
+        def expression(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(StlParser.ExpressionContext)
             else:
@@ -880,8 +860,8 @@ class StlParser ( Parser ):
         def XorOperator(self):
             return self.getToken(StlParser.XorOperator, 0)
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitExprXor"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitExprXor" ):
                 return visitor.visitExprXor(self)
             else:
                 return visitor.visitChildren(self)
@@ -889,8 +869,8 @@ class StlParser ( Parser ):
 
     class ExprRiseContext(ExpressionContext):
 
-        def __init__(self, parser, ctx): # actually a StlParser.ExpressionContext)
-            super(StlParser.ExprRiseContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a StlParser.ExpressionContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
         def RiseOperator(self):
@@ -903,8 +883,8 @@ class StlParser ( Parser ):
         def RPAREN(self):
             return self.getToken(StlParser.RPAREN, 0)
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitExprRise"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitExprRise" ):
                 return visitor.visitExprRise(self)
             else:
                 return visitor.visitChildren(self)
@@ -912,11 +892,11 @@ class StlParser ( Parser ):
 
     class ExprOrContext(ExpressionContext):
 
-        def __init__(self, parser, ctx): # actually a StlParser.ExpressionContext)
-            super(StlParser.ExprOrContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a StlParser.ExpressionContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
-        def expression(self, i=None):
+        def expression(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(StlParser.ExpressionContext)
             else:
@@ -925,8 +905,8 @@ class StlParser ( Parser ):
         def OrOperator(self):
             return self.getToken(StlParser.OrOperator, 0)
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitExprOr"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitExprOr" ):
                 return visitor.visitExprOr(self)
             else:
                 return visitor.visitChildren(self)
@@ -934,8 +914,8 @@ class StlParser ( Parser ):
 
     class ExprAlwaysContext(ExpressionContext):
 
-        def __init__(self, parser, ctx): # actually a StlParser.ExpressionContext)
-            super(StlParser.ExprAlwaysContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a StlParser.ExpressionContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
         def AlwaysOperator(self):
@@ -947,8 +927,8 @@ class StlParser ( Parser ):
             return self.getTypedRuleContext(StlParser.IntervalContext,0)
 
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitExprAlways"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitExprAlways" ):
                 return visitor.visitExprAlways(self)
             else:
                 return visitor.visitChildren(self)
@@ -956,23 +936,23 @@ class StlParser ( Parser ):
 
     class ExprRealContext(ExpressionContext):
 
-        def __init__(self, parser, ctx): # actually a StlParser.ExpressionContext)
-            super(StlParser.ExprRealContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a StlParser.ExpressionContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
         def real_expression(self):
             return self.getTypedRuleContext(StlParser.Real_expressionContext,0)
 
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitExprReal"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitExprReal" ):
                 return visitor.visitExprReal(self)
             else:
                 return visitor.visitChildren(self)
 
 
 
-    def expression(self, _p=0):
+    def expression(self, _p:int=0):
         _parentctx = self._ctx
         _parentState = self.state
         localctx = StlParser.ExpressionContext(self, self._ctx, _parentState)
@@ -985,7 +965,7 @@ class StlParser ( Parser ):
             self.state = 102
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [StlParser.MINUS, StlParser.ABS, StlParser.SQRT, StlParser.EXP, StlParser.POW, StlParser.IntegerLiteral, StlParser.RealLiteral, StlParser.Identifier]:
+            if token in [1, 16, 17, 18, 19, 67, 68, 69]:
                 localctx = StlParser.ExprRealContext(self, localctx)
                 self._ctx = localctx
                 _prevctx = localctx
@@ -993,7 +973,7 @@ class StlParser ( Parser ):
                 self.state = 61
                 self.real_expression(0)
                 pass
-            elif token in [StlParser.LPAREN]:
+            elif token in [5]:
                 localctx = StlParser.ExprParenContext(self, localctx)
                 self._ctx = localctx
                 _prevctx = localctx
@@ -1004,7 +984,7 @@ class StlParser ( Parser ):
                 self.state = 64
                 self.match(StlParser.RPAREN)
                 pass
-            elif token in [StlParser.NotOperator]:
+            elif token in [40]:
                 localctx = StlParser.ExprNotContext(self, localctx)
                 self._ctx = localctx
                 _prevctx = localctx
@@ -1013,7 +993,7 @@ class StlParser ( Parser ):
                 self.state = 67
                 self.expression(17)
                 pass
-            elif token in [StlParser.AlwaysOperator]:
+            elif token in [48]:
                 localctx = StlParser.ExprAlwaysContext(self, localctx)
                 self._ctx = localctx
                 _prevctx = localctx
@@ -1022,7 +1002,7 @@ class StlParser ( Parser ):
                 self.state = 70
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if _la==StlParser.LBRACK:
+                if _la==9:
                     self.state = 69
                     self.interval()
 
@@ -1030,7 +1010,7 @@ class StlParser ( Parser ):
                 self.state = 72
                 self.expression(11)
                 pass
-            elif token in [StlParser.EventuallyOperator]:
+            elif token in [49]:
                 localctx = StlParser.ExprEvContext(self, localctx)
                 self._ctx = localctx
                 _prevctx = localctx
@@ -1039,7 +1019,7 @@ class StlParser ( Parser ):
                 self.state = 75
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if _la==StlParser.LBRACK:
+                if _la==9:
                     self.state = 74
                     self.interval()
 
@@ -1047,7 +1027,7 @@ class StlParser ( Parser ):
                 self.state = 77
                 self.expression(10)
                 pass
-            elif token in [StlParser.HistoricallyOperator]:
+            elif token in [52]:
                 localctx = StlParser.ExprHistContext(self, localctx)
                 self._ctx = localctx
                 _prevctx = localctx
@@ -1056,7 +1036,7 @@ class StlParser ( Parser ):
                 self.state = 80
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if _la==StlParser.LBRACK:
+                if _la==9:
                     self.state = 79
                     self.interval()
 
@@ -1064,7 +1044,7 @@ class StlParser ( Parser ):
                 self.state = 82
                 self.expression(7)
                 pass
-            elif token in [StlParser.OnceOperator]:
+            elif token in [53]:
                 localctx = StlParser.ExpreOnceContext(self, localctx)
                 self._ctx = localctx
                 _prevctx = localctx
@@ -1073,7 +1053,7 @@ class StlParser ( Parser ):
                 self.state = 85
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if _la==StlParser.LBRACK:
+                if _la==9:
                     self.state = 84
                     self.interval()
 
@@ -1081,7 +1061,7 @@ class StlParser ( Parser ):
                 self.state = 87
                 self.expression(6)
                 pass
-            elif token in [StlParser.RiseOperator]:
+            elif token in [46]:
                 localctx = StlParser.ExprRiseContext(self, localctx)
                 self._ctx = localctx
                 _prevctx = localctx
@@ -1094,7 +1074,7 @@ class StlParser ( Parser ):
                 self.state = 91
                 self.match(StlParser.RPAREN)
                 pass
-            elif token in [StlParser.FallOperator]:
+            elif token in [47]:
                 localctx = StlParser.ExprFallContext(self, localctx)
                 self._ctx = localctx
                 _prevctx = localctx
@@ -1107,7 +1087,7 @@ class StlParser ( Parser ):
                 self.state = 96
                 self.match(StlParser.RPAREN)
                 pass
-            elif token in [StlParser.PreviousOperator]:
+            elif token in [56]:
                 localctx = StlParser.ExprPreviousContext(self, localctx)
                 self._ctx = localctx
                 _prevctx = localctx
@@ -1116,7 +1096,7 @@ class StlParser ( Parser ):
                 self.state = 99
                 self.expression(2)
                 pass
-            elif token in [StlParser.NextOperator]:
+            elif token in [55]:
                 localctx = StlParser.ExprNextContext(self, localctx)
                 self._ctx = localctx
                 _prevctx = localctx
@@ -1230,7 +1210,7 @@ class StlParser ( Parser ):
                         self.state = 126
                         self._errHandler.sync(self)
                         _la = self._input.LA(1)
-                        if _la==StlParser.LBRACK:
+                        if _la==9:
                             self.state = 125
                             self.interval()
 
@@ -1251,7 +1231,7 @@ class StlParser ( Parser ):
                         self.state = 132
                         self._errHandler.sync(self)
                         _la = self._input.LA(1)
-                        if _la==StlParser.LBRACK:
+                        if _la==9:
                             self.state = 131
                             self.interval()
 
@@ -1272,7 +1252,7 @@ class StlParser ( Parser ):
                         self.state = 138
                         self._errHandler.sync(self)
                         _la = self._input.LA(1)
-                        if _la==StlParser.LBRACK:
+                        if _la==9:
                             self.state = 137
                             self.interval()
 
@@ -1294,10 +1274,12 @@ class StlParser ( Parser ):
             self.unrollRecursionContexts(_parentctx)
         return localctx
 
-    class Specification_fileContext(ParserRuleContext):
 
-        def __init__(self, parser, parent=None, invokingState=-1):
-            super(StlParser.Specification_fileContext, self).__init__(parent, invokingState)
+    class Specification_fileContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
             self.parser = parser
 
         def specification(self):
@@ -1310,8 +1292,8 @@ class StlParser ( Parser ):
         def getRuleIndex(self):
             return StlParser.RULE_specification_file
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitSpecification_file"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitSpecification_file" ):
                 return visitor.visitSpecification_file(self)
             else:
                 return visitor.visitChildren(self)
@@ -1337,38 +1319,40 @@ class StlParser ( Parser ):
             self.exitRule()
         return localctx
 
-    class SpecificationContext(ParserRuleContext):
 
-        def __init__(self, parser, parent=None, invokingState=-1):
-            super(StlParser.SpecificationContext, self).__init__(parent, invokingState)
+    class SpecificationContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
             self.parser = parser
 
         def spec(self):
             return self.getTypedRuleContext(StlParser.SpecContext,0)
 
 
-        def modimport(self, i=None):
+        def modimport(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(StlParser.ModimportContext)
             else:
                 return self.getTypedRuleContext(StlParser.ModimportContext,i)
 
 
-        def declaration(self, i=None):
+        def declaration(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(StlParser.DeclarationContext)
             else:
                 return self.getTypedRuleContext(StlParser.DeclarationContext,i)
 
 
-        def annotation(self, i=None):
+        def annotation(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(StlParser.AnnotationContext)
             else:
                 return self.getTypedRuleContext(StlParser.AnnotationContext,i)
 
 
-        def assertion(self, i=None):
+        def assertion(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(StlParser.AssertionContext)
             else:
@@ -1378,8 +1362,8 @@ class StlParser ( Parser ):
         def getRuleIndex(self):
             return StlParser.RULE_specification
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitSpecification"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitSpecification" ):
                 return visitor.visitSpecification(self)
             else:
                 return visitor.visitChildren(self)
@@ -1397,7 +1381,7 @@ class StlParser ( Parser ):
             self.state = 150
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==StlParser.Specification:
+            if _la==38:
                 self.state = 149
                 self.spec()
 
@@ -1405,7 +1389,7 @@ class StlParser ( Parser ):
             self.state = 155
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while _la==StlParser.From:
+            while _la==39:
                 self.state = 152
                 self.modimport()
                 self.state = 157
@@ -1420,11 +1404,11 @@ class StlParser ( Parser ):
                     self.state = 160
                     self._errHandler.sync(self)
                     token = self._input.LA(1)
-                    if token in [StlParser.Input, StlParser.Output, StlParser.Constant, StlParser.DomainTypeFloat, StlParser.DomainTypeLong, StlParser.DomainTypeComplex, StlParser.DomainTypeInt, StlParser.Identifier]:
+                    if token in [27, 28, 30, 32, 33, 34, 35, 69]:
                         self.state = 158
                         self.declaration()
                         pass
-                    elif token in [StlParser.AT]:
+                    elif token in [15]:
                         self.state = 159
                         self.annotation()
                         pass
@@ -1444,7 +1428,7 @@ class StlParser ( Parser ):
                 self.state = 168 
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << StlParser.MINUS) | (1 << StlParser.LPAREN) | (1 << StlParser.ABS) | (1 << StlParser.SQRT) | (1 << StlParser.EXP) | (1 << StlParser.POW) | (1 << StlParser.NotOperator) | (1 << StlParser.RiseOperator) | (1 << StlParser.FallOperator) | (1 << StlParser.AlwaysOperator) | (1 << StlParser.EventuallyOperator) | (1 << StlParser.HistoricallyOperator) | (1 << StlParser.OnceOperator) | (1 << StlParser.NextOperator) | (1 << StlParser.PreviousOperator))) != 0) or ((((_la - 67)) & ~0x3f) == 0 and ((1 << (_la - 67)) & ((1 << (StlParser.IntegerLiteral - 67)) | (1 << (StlParser.RealLiteral - 67)) | (1 << (StlParser.Identifier - 67)))) != 0)):
+                if not (((_la) & ~0x3f) == 0 and ((1 << _la) & 122653820614279202) != 0 or (((_la - 67)) & ~0x3f) == 0 and ((1 << (_la - 67)) & 7) != 0):
                     break
 
         except RecognitionException as re:
@@ -1455,10 +1439,12 @@ class StlParser ( Parser ):
             self.exitRule()
         return localctx
 
-    class SpecContext(ParserRuleContext):
 
-        def __init__(self, parser, parent=None, invokingState=-1):
-            super(StlParser.SpecContext, self).__init__(parent, invokingState)
+    class SpecContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
             self.parser = parser
 
 
@@ -1466,15 +1452,15 @@ class StlParser ( Parser ):
             return StlParser.RULE_spec
 
      
-        def copyFrom(self, ctx):
-            super(StlParser.SpecContext, self).copyFrom(ctx)
+        def copyFrom(self, ctx:ParserRuleContext):
+            super().copyFrom(ctx)
 
 
 
     class SpecificationIdContext(SpecContext):
 
-        def __init__(self, parser, ctx): # actually a StlParser.SpecContext)
-            super(StlParser.SpecificationIdContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a StlParser.SpecContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
         def Specification(self):
@@ -1482,8 +1468,8 @@ class StlParser ( Parser ):
         def Identifier(self):
             return self.getToken(StlParser.Identifier, 0)
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitSpecificationId"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitSpecificationId" ):
                 return visitor.visitSpecificationId(self)
             else:
                 return visitor.visitChildren(self)
@@ -1509,10 +1495,12 @@ class StlParser ( Parser ):
             self.exitRule()
         return localctx
 
-    class ModimportContext(ParserRuleContext):
 
-        def __init__(self, parser, parent=None, invokingState=-1):
-            super(StlParser.ModimportContext, self).__init__(parent, invokingState)
+    class ModimportContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
             self.parser = parser
 
 
@@ -1520,20 +1508,20 @@ class StlParser ( Parser ):
             return StlParser.RULE_modimport
 
      
-        def copyFrom(self, ctx):
-            super(StlParser.ModimportContext, self).copyFrom(ctx)
+        def copyFrom(self, ctx:ParserRuleContext):
+            super().copyFrom(ctx)
 
 
 
     class ModImportContext(ModimportContext):
 
-        def __init__(self, parser, ctx): # actually a StlParser.ModimportContext)
-            super(StlParser.ModImportContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a StlParser.ModimportContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
         def From(self):
             return self.getToken(StlParser.From, 0)
-        def Identifier(self, i=None):
+        def Identifier(self, i:int=None):
             if i is None:
                 return self.getTokens(StlParser.Identifier)
             else:
@@ -1541,8 +1529,8 @@ class StlParser ( Parser ):
         def Import(self):
             return self.getToken(StlParser.Import, 0)
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitModImport"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitModImport" ):
                 return visitor.visitModImport(self)
             else:
                 return visitor.visitChildren(self)
@@ -1572,10 +1560,12 @@ class StlParser ( Parser ):
             self.exitRule()
         return localctx
 
-    class AssertionContext(ParserRuleContext):
 
-        def __init__(self, parser, parent=None, invokingState=-1):
-            super(StlParser.AssertionContext, self).__init__(parent, invokingState)
+    class AssertionContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
             self.parser = parser
 
         def expression(self):
@@ -1591,8 +1581,8 @@ class StlParser ( Parser ):
         def getRuleIndex(self):
             return StlParser.RULE_assertion
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitAssertion"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitAssertion" ):
                 return visitor.visitAssertion(self)
             else:
                 return visitor.visitChildren(self)
@@ -1626,10 +1616,12 @@ class StlParser ( Parser ):
             self.exitRule()
         return localctx
 
-    class DeclarationContext(ParserRuleContext):
 
-        def __init__(self, parser, parent=None, invokingState=-1):
-            super(StlParser.DeclarationContext, self).__init__(parent, invokingState)
+    class DeclarationContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
             self.parser = parser
 
 
@@ -1637,23 +1629,23 @@ class StlParser ( Parser ):
             return StlParser.RULE_declaration
 
      
-        def copyFrom(self, ctx):
-            super(StlParser.DeclarationContext, self).copyFrom(ctx)
+        def copyFrom(self, ctx:ParserRuleContext):
+            super().copyFrom(ctx)
 
 
 
     class DeclVariableContext(DeclarationContext):
 
-        def __init__(self, parser, ctx): # actually a StlParser.DeclarationContext)
-            super(StlParser.DeclVariableContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a StlParser.DeclarationContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
         def variableDeclaration(self):
             return self.getTypedRuleContext(StlParser.VariableDeclarationContext,0)
 
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitDeclVariable"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitDeclVariable" ):
                 return visitor.visitDeclVariable(self)
             else:
                 return visitor.visitChildren(self)
@@ -1661,16 +1653,16 @@ class StlParser ( Parser ):
 
     class DeclConstantContext(DeclarationContext):
 
-        def __init__(self, parser, ctx): # actually a StlParser.DeclarationContext)
-            super(StlParser.DeclConstantContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a StlParser.DeclarationContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
         def constantDeclaration(self):
             return self.getTypedRuleContext(StlParser.ConstantDeclarationContext,0)
 
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitDeclConstant"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitDeclConstant" ):
                 return visitor.visitDeclConstant(self)
             else:
                 return visitor.visitChildren(self)
@@ -1685,13 +1677,13 @@ class StlParser ( Parser ):
             self.state = 186
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [StlParser.Input, StlParser.Output, StlParser.DomainTypeFloat, StlParser.DomainTypeLong, StlParser.DomainTypeComplex, StlParser.DomainTypeInt, StlParser.Identifier]:
+            if token in [27, 28, 32, 33, 34, 35, 69]:
                 localctx = StlParser.DeclVariableContext(self, localctx)
                 self.enterOuterAlt(localctx, 1)
                 self.state = 184
                 self.variableDeclaration()
                 pass
-            elif token in [StlParser.Constant]:
+            elif token in [30]:
                 localctx = StlParser.DeclConstantContext(self, localctx)
                 self.enterOuterAlt(localctx, 2)
                 self.state = 185
@@ -1708,10 +1700,12 @@ class StlParser ( Parser ):
             self.exitRule()
         return localctx
 
-    class AnnotationContext(ParserRuleContext):
 
-        def __init__(self, parser, parent=None, invokingState=-1):
-            super(StlParser.AnnotationContext, self).__init__(parent, invokingState)
+    class AnnotationContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
             self.parser = parser
 
         def AT(self):
@@ -1724,8 +1718,8 @@ class StlParser ( Parser ):
         def getRuleIndex(self):
             return StlParser.RULE_annotation
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitAnnotation"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitAnnotation" ):
                 return visitor.visitAnnotation(self)
             else:
                 return visitor.visitChildren(self)
@@ -1751,10 +1745,12 @@ class StlParser ( Parser ):
             self.exitRule()
         return localctx
 
-    class Annotation_typeContext(ParserRuleContext):
 
-        def __init__(self, parser, parent=None, invokingState=-1):
-            super(StlParser.Annotation_typeContext, self).__init__(parent, invokingState)
+    class Annotation_typeContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
             self.parser = parser
 
 
@@ -1762,22 +1758,22 @@ class StlParser ( Parser ):
             return StlParser.RULE_annotation_type
 
      
-        def copyFrom(self, ctx):
-            super(StlParser.Annotation_typeContext, self).copyFrom(ctx)
+        def copyFrom(self, ctx:ParserRuleContext):
+            super().copyFrom(ctx)
 
 
 
     class RosTopicContext(Annotation_typeContext):
 
-        def __init__(self, parser, ctx): # actually a StlParser.Annotation_typeContext)
-            super(StlParser.RosTopicContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a StlParser.Annotation_typeContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
         def ROS_Topic(self):
             return self.getToken(StlParser.ROS_Topic, 0)
         def LPAREN(self):
             return self.getToken(StlParser.LPAREN, 0)
-        def Identifier(self, i=None):
+        def Identifier(self, i:int=None):
             if i is None:
                 return self.getTokens(StlParser.Identifier)
             else:
@@ -1787,8 +1783,8 @@ class StlParser ( Parser ):
         def RPAREN(self):
             return self.getToken(StlParser.RPAREN, 0)
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitRosTopic"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitRosTopic" ):
                 return visitor.visitRosTopic(self)
             else:
                 return visitor.visitChildren(self)
@@ -1822,10 +1818,12 @@ class StlParser ( Parser ):
             self.exitRule()
         return localctx
 
-    class VariableDeclarationContext(ParserRuleContext):
 
-        def __init__(self, parser, parent=None, invokingState=-1):
-            super(StlParser.VariableDeclarationContext, self).__init__(parent, invokingState)
+    class VariableDeclarationContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
             self.parser = parser
 
         def domainType(self):
@@ -1846,8 +1844,8 @@ class StlParser ( Parser ):
         def getRuleIndex(self):
             return StlParser.RULE_variableDeclaration
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitVariableDeclaration"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitVariableDeclaration" ):
                 return visitor.visitVariableDeclaration(self)
             else:
                 return visitor.visitChildren(self)
@@ -1865,7 +1863,7 @@ class StlParser ( Parser ):
             self.state = 199
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==StlParser.Input or _la==StlParser.Output:
+            if _la==27 or _la==28:
                 self.state = 198
                 self.ioType()
 
@@ -1877,7 +1875,7 @@ class StlParser ( Parser ):
             self.state = 204
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==StlParser.EQUAL:
+            if _la==63:
                 self.state = 203
                 self.assignment()
 
@@ -1890,10 +1888,12 @@ class StlParser ( Parser ):
             self.exitRule()
         return localctx
 
-    class ConstantDeclarationContext(ParserRuleContext):
 
-        def __init__(self, parser, parent=None, invokingState=-1):
-            super(StlParser.ConstantDeclarationContext, self).__init__(parent, invokingState)
+    class ConstantDeclarationContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
             self.parser = parser
 
         def Constant(self):
@@ -1916,8 +1916,8 @@ class StlParser ( Parser ):
         def getRuleIndex(self):
             return StlParser.RULE_constantDeclaration
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitConstantDeclaration"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitConstantDeclaration" ):
                 return visitor.visitConstantDeclaration(self)
             else:
                 return visitor.visitChildren(self)
@@ -1949,10 +1949,12 @@ class StlParser ( Parser ):
             self.exitRule()
         return localctx
 
-    class AssignmentContext(ParserRuleContext):
 
-        def __init__(self, parser, parent=None, invokingState=-1):
-            super(StlParser.AssignmentContext, self).__init__(parent, invokingState)
+    class AssignmentContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
             self.parser = parser
 
 
@@ -1960,15 +1962,15 @@ class StlParser ( Parser ):
             return StlParser.RULE_assignment
 
      
-        def copyFrom(self, ctx):
-            super(StlParser.AssignmentContext, self).copyFrom(ctx)
+        def copyFrom(self, ctx:ParserRuleContext):
+            super().copyFrom(ctx)
 
 
 
     class AsgnExprContext(AssignmentContext):
 
-        def __init__(self, parser, ctx): # actually a StlParser.AssignmentContext)
-            super(StlParser.AsgnExprContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a StlParser.AssignmentContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
         def EQUAL(self):
@@ -1977,8 +1979,8 @@ class StlParser ( Parser ):
             return self.getTypedRuleContext(StlParser.ExpressionContext,0)
 
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitAsgnExpr"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitAsgnExpr" ):
                 return visitor.visitAsgnExpr(self)
             else:
                 return visitor.visitChildren(self)
@@ -1986,8 +1988,8 @@ class StlParser ( Parser ):
 
     class AsgnLiteralContext(AssignmentContext):
 
-        def __init__(self, parser, ctx): # actually a StlParser.AssignmentContext)
-            super(StlParser.AsgnLiteralContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a StlParser.AssignmentContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
         def EQUAL(self):
@@ -1996,8 +1998,8 @@ class StlParser ( Parser ):
             return self.getTypedRuleContext(StlParser.LiteralContext,0)
 
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitAsgnLiteral"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitAsgnLiteral" ):
                 return visitor.visitAsgnLiteral(self)
             else:
                 return visitor.visitChildren(self)
@@ -2039,10 +2041,12 @@ class StlParser ( Parser ):
             self.exitRule()
         return localctx
 
-    class DomainTypeContext(ParserRuleContext):
 
-        def __init__(self, parser, parent=None, invokingState=-1):
-            super(StlParser.DomainTypeContext, self).__init__(parent, invokingState)
+    class DomainTypeContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
             self.parser = parser
 
         def DomainTypeFloat(self):
@@ -2063,8 +2067,8 @@ class StlParser ( Parser ):
         def getRuleIndex(self):
             return StlParser.RULE_domainType
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitDomainType"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitDomainType" ):
                 return visitor.visitDomainType(self)
             else:
                 return visitor.visitChildren(self)
@@ -2081,7 +2085,7 @@ class StlParser ( Parser ):
             self.enterOuterAlt(localctx, 1)
             self.state = 218
             _la = self._input.LA(1)
-            if not(((((_la - 32)) & ~0x3f) == 0 and ((1 << (_la - 32)) & ((1 << (StlParser.DomainTypeFloat - 32)) | (1 << (StlParser.DomainTypeLong - 32)) | (1 << (StlParser.DomainTypeComplex - 32)) | (1 << (StlParser.DomainTypeInt - 32)) | (1 << (StlParser.Identifier - 32)))) != 0)):
+            if not((((_la - 32)) & ~0x3f) == 0 and ((1 << (_la - 32)) & 137438953487) != 0):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
@@ -2094,10 +2098,12 @@ class StlParser ( Parser ):
             self.exitRule()
         return localctx
 
-    class IoTypeContext(ParserRuleContext):
 
-        def __init__(self, parser, parent=None, invokingState=-1):
-            super(StlParser.IoTypeContext, self).__init__(parent, invokingState)
+    class IoTypeContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
             self.parser = parser
 
         def Input(self):
@@ -2109,8 +2115,8 @@ class StlParser ( Parser ):
         def getRuleIndex(self):
             return StlParser.RULE_ioType
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitIoType"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitIoType" ):
                 return visitor.visitIoType(self)
             else:
                 return visitor.visitChildren(self)
@@ -2127,7 +2133,7 @@ class StlParser ( Parser ):
             self.enterOuterAlt(localctx, 1)
             self.state = 220
             _la = self._input.LA(1)
-            if not(_la==StlParser.Input or _la==StlParser.Output):
+            if not(_la==27 or _la==28):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
@@ -2140,10 +2146,12 @@ class StlParser ( Parser ):
             self.exitRule()
         return localctx
 
-    class Real_expressionContext(ParserRuleContext):
 
-        def __init__(self, parser, parent=None, invokingState=-1):
-            super(StlParser.Real_expressionContext, self).__init__(parent, invokingState)
+    class Real_expressionContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
             self.parser = parser
 
 
@@ -2151,17 +2159,17 @@ class StlParser ( Parser ):
             return StlParser.RULE_real_expression
 
      
-        def copyFrom(self, ctx):
-            super(StlParser.Real_expressionContext, self).copyFrom(ctx)
+        def copyFrom(self, ctx:ParserRuleContext):
+            super().copyFrom(ctx)
 
 
     class ExprSubtractionContext(Real_expressionContext):
 
-        def __init__(self, parser, ctx): # actually a StlParser.Real_expressionContext)
-            super(StlParser.ExprSubtractionContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a StlParser.Real_expressionContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
-        def real_expression(self, i=None):
+        def real_expression(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(StlParser.Real_expressionContext)
             else:
@@ -2170,8 +2178,8 @@ class StlParser ( Parser ):
         def MINUS(self):
             return self.getToken(StlParser.MINUS, 0)
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitExprSubtraction"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitExprSubtraction" ):
                 return visitor.visitExprSubtraction(self)
             else:
                 return visitor.visitChildren(self)
@@ -2179,15 +2187,15 @@ class StlParser ( Parser ):
 
     class ExprPowContext(Real_expressionContext):
 
-        def __init__(self, parser, ctx): # actually a StlParser.Real_expressionContext)
-            super(StlParser.ExprPowContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a StlParser.Real_expressionContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
         def POW(self):
             return self.getToken(StlParser.POW, 0)
         def LPAREN(self):
             return self.getToken(StlParser.LPAREN, 0)
-        def real_expression(self, i=None):
+        def real_expression(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(StlParser.Real_expressionContext)
             else:
@@ -2198,8 +2206,8 @@ class StlParser ( Parser ):
         def RPAREN(self):
             return self.getToken(StlParser.RPAREN, 0)
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitExprPow"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitExprPow" ):
                 return visitor.visitExprPow(self)
             else:
                 return visitor.visitChildren(self)
@@ -2207,11 +2215,11 @@ class StlParser ( Parser ):
 
     class ExprDivisionContext(Real_expressionContext):
 
-        def __init__(self, parser, ctx): # actually a StlParser.Real_expressionContext)
-            super(StlParser.ExprDivisionContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a StlParser.Real_expressionContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
-        def real_expression(self, i=None):
+        def real_expression(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(StlParser.Real_expressionContext)
             else:
@@ -2220,8 +2228,8 @@ class StlParser ( Parser ):
         def DIVIDE(self):
             return self.getToken(StlParser.DIVIDE, 0)
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitExprDivision"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitExprDivision" ):
                 return visitor.visitExprDivision(self)
             else:
                 return visitor.visitChildren(self)
@@ -2229,11 +2237,11 @@ class StlParser ( Parser ):
 
     class ExprMultiplicationContext(Real_expressionContext):
 
-        def __init__(self, parser, ctx): # actually a StlParser.Real_expressionContext)
-            super(StlParser.ExprMultiplicationContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a StlParser.Real_expressionContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
-        def real_expression(self, i=None):
+        def real_expression(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(StlParser.Real_expressionContext)
             else:
@@ -2242,8 +2250,8 @@ class StlParser ( Parser ):
         def TIMES(self):
             return self.getToken(StlParser.TIMES, 0)
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitExprMultiplication"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitExprMultiplication" ):
                 return visitor.visitExprMultiplication(self)
             else:
                 return visitor.visitChildren(self)
@@ -2251,16 +2259,16 @@ class StlParser ( Parser ):
 
     class ExprLiteralContext(Real_expressionContext):
 
-        def __init__(self, parser, ctx): # actually a StlParser.Real_expressionContext)
-            super(StlParser.ExprLiteralContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a StlParser.Real_expressionContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
         def literal(self):
             return self.getTypedRuleContext(StlParser.LiteralContext,0)
 
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitExprLiteral"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitExprLiteral" ):
                 return visitor.visitExprLiteral(self)
             else:
                 return visitor.visitChildren(self)
@@ -2268,8 +2276,8 @@ class StlParser ( Parser ):
 
     class ExprExpContext(Real_expressionContext):
 
-        def __init__(self, parser, ctx): # actually a StlParser.Real_expressionContext)
-            super(StlParser.ExprExpContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a StlParser.Real_expressionContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
         def EXP(self):
@@ -2282,8 +2290,8 @@ class StlParser ( Parser ):
         def RPAREN(self):
             return self.getToken(StlParser.RPAREN, 0)
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitExprExp"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitExprExp" ):
                 return visitor.visitExprExp(self)
             else:
                 return visitor.visitChildren(self)
@@ -2291,8 +2299,8 @@ class StlParser ( Parser ):
 
     class ExprSqrtContext(Real_expressionContext):
 
-        def __init__(self, parser, ctx): # actually a StlParser.Real_expressionContext)
-            super(StlParser.ExprSqrtContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a StlParser.Real_expressionContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
         def SQRT(self):
@@ -2305,8 +2313,8 @@ class StlParser ( Parser ):
         def RPAREN(self):
             return self.getToken(StlParser.RPAREN, 0)
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitExprSqrt"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitExprSqrt" ):
                 return visitor.visitExprSqrt(self)
             else:
                 return visitor.visitChildren(self)
@@ -2314,15 +2322,15 @@ class StlParser ( Parser ):
 
     class ExprIdContext(Real_expressionContext):
 
-        def __init__(self, parser, ctx): # actually a StlParser.Real_expressionContext)
-            super(StlParser.ExprIdContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a StlParser.Real_expressionContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
         def Identifier(self):
             return self.getToken(StlParser.Identifier, 0)
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitExprId"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitExprId" ):
                 return visitor.visitExprId(self)
             else:
                 return visitor.visitChildren(self)
@@ -2330,8 +2338,8 @@ class StlParser ( Parser ):
 
     class ExprAbsContext(Real_expressionContext):
 
-        def __init__(self, parser, ctx): # actually a StlParser.Real_expressionContext)
-            super(StlParser.ExprAbsContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a StlParser.Real_expressionContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
         def ABS(self):
@@ -2344,8 +2352,8 @@ class StlParser ( Parser ):
         def RPAREN(self):
             return self.getToken(StlParser.RPAREN, 0)
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitExprAbs"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitExprAbs" ):
                 return visitor.visitExprAbs(self)
             else:
                 return visitor.visitChildren(self)
@@ -2353,11 +2361,11 @@ class StlParser ( Parser ):
 
     class ExprAdditionContext(Real_expressionContext):
 
-        def __init__(self, parser, ctx): # actually a StlParser.Real_expressionContext)
-            super(StlParser.ExprAdditionContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a StlParser.Real_expressionContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
-        def real_expression(self, i=None):
+        def real_expression(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(StlParser.Real_expressionContext)
             else:
@@ -2366,15 +2374,15 @@ class StlParser ( Parser ):
         def PLUS(self):
             return self.getToken(StlParser.PLUS, 0)
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitExprAddition"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitExprAddition" ):
                 return visitor.visitExprAddition(self)
             else:
                 return visitor.visitChildren(self)
 
 
 
-    def real_expression(self, _p=0):
+    def real_expression(self, _p:int=0):
         _parentctx = self._ctx
         _parentState = self.state
         localctx = StlParser.Real_expressionContext(self, self._ctx, _parentState)
@@ -2386,7 +2394,7 @@ class StlParser ( Parser ):
             self.state = 247
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [StlParser.Identifier]:
+            if token in [69]:
                 localctx = StlParser.ExprIdContext(self, localctx)
                 self._ctx = localctx
                 _prevctx = localctx
@@ -2394,14 +2402,14 @@ class StlParser ( Parser ):
                 self.state = 223
                 self.match(StlParser.Identifier)
                 pass
-            elif token in [StlParser.MINUS, StlParser.IntegerLiteral, StlParser.RealLiteral]:
+            elif token in [1, 67, 68]:
                 localctx = StlParser.ExprLiteralContext(self, localctx)
                 self._ctx = localctx
                 _prevctx = localctx
                 self.state = 224
                 self.literal()
                 pass
-            elif token in [StlParser.ABS]:
+            elif token in [16]:
                 localctx = StlParser.ExprAbsContext(self, localctx)
                 self._ctx = localctx
                 _prevctx = localctx
@@ -2414,7 +2422,7 @@ class StlParser ( Parser ):
                 self.state = 228
                 self.match(StlParser.RPAREN)
                 pass
-            elif token in [StlParser.SQRT]:
+            elif token in [17]:
                 localctx = StlParser.ExprSqrtContext(self, localctx)
                 self._ctx = localctx
                 _prevctx = localctx
@@ -2427,7 +2435,7 @@ class StlParser ( Parser ):
                 self.state = 233
                 self.match(StlParser.RPAREN)
                 pass
-            elif token in [StlParser.EXP]:
+            elif token in [18]:
                 localctx = StlParser.ExprExpContext(self, localctx)
                 self._ctx = localctx
                 _prevctx = localctx
@@ -2440,7 +2448,7 @@ class StlParser ( Parser ):
                 self.state = 238
                 self.match(StlParser.RPAREN)
                 pass
-            elif token in [StlParser.POW]:
+            elif token in [19]:
                 localctx = StlParser.ExprPowContext(self, localctx)
                 self._ctx = localctx
                 _prevctx = localctx
@@ -2537,10 +2545,12 @@ class StlParser ( Parser ):
             self.unrollRecursionContexts(_parentctx)
         return localctx
 
-    class ComparisonOpContext(ParserRuleContext):
 
-        def __init__(self, parser, parent=None, invokingState=-1):
-            super(StlParser.ComparisonOpContext, self).__init__(parent, invokingState)
+    class ComparisonOpContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
             self.parser = parser
 
 
@@ -2548,22 +2558,22 @@ class StlParser ( Parser ):
             return StlParser.RULE_comparisonOp
 
      
-        def copyFrom(self, ctx):
-            super(StlParser.ComparisonOpContext, self).copyFrom(ctx)
+        def copyFrom(self, ctx:ParserRuleContext):
+            super().copyFrom(ctx)
 
 
 
     class GeqContext(ComparisonOpContext):
 
-        def __init__(self, parser, ctx): # actually a StlParser.ComparisonOpContext)
-            super(StlParser.GeqContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a StlParser.ComparisonOpContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
         def GreaterOrEqualOperator(self):
             return self.getToken(StlParser.GreaterOrEqualOperator, 0)
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitGeq"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitGeq" ):
                 return visitor.visitGeq(self)
             else:
                 return visitor.visitChildren(self)
@@ -2571,15 +2581,15 @@ class StlParser ( Parser ):
 
     class LeqContext(ComparisonOpContext):
 
-        def __init__(self, parser, ctx): # actually a StlParser.ComparisonOpContext)
-            super(StlParser.LeqContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a StlParser.ComparisonOpContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
         def LesserOrEqualOperator(self):
             return self.getToken(StlParser.LesserOrEqualOperator, 0)
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitLeq"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitLeq" ):
                 return visitor.visitLeq(self)
             else:
                 return visitor.visitChildren(self)
@@ -2587,15 +2597,15 @@ class StlParser ( Parser ):
 
     class GreaterContext(ComparisonOpContext):
 
-        def __init__(self, parser, ctx): # actually a StlParser.ComparisonOpContext)
-            super(StlParser.GreaterContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a StlParser.ComparisonOpContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
         def GreaterOperator(self):
             return self.getToken(StlParser.GreaterOperator, 0)
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitGreater"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitGreater" ):
                 return visitor.visitGreater(self)
             else:
                 return visitor.visitChildren(self)
@@ -2603,15 +2613,15 @@ class StlParser ( Parser ):
 
     class NeqContext(ComparisonOpContext):
 
-        def __init__(self, parser, ctx): # actually a StlParser.ComparisonOpContext)
-            super(StlParser.NeqContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a StlParser.ComparisonOpContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
         def NotEqualOperator(self):
             return self.getToken(StlParser.NotEqualOperator, 0)
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitNeq"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitNeq" ):
                 return visitor.visitNeq(self)
             else:
                 return visitor.visitChildren(self)
@@ -2619,15 +2629,15 @@ class StlParser ( Parser ):
 
     class EqContext(ComparisonOpContext):
 
-        def __init__(self, parser, ctx): # actually a StlParser.ComparisonOpContext)
-            super(StlParser.EqContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a StlParser.ComparisonOpContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
         def EqualOperator(self):
             return self.getToken(StlParser.EqualOperator, 0)
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitEq"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitEq" ):
                 return visitor.visitEq(self)
             else:
                 return visitor.visitChildren(self)
@@ -2635,15 +2645,15 @@ class StlParser ( Parser ):
 
     class LessContext(ComparisonOpContext):
 
-        def __init__(self, parser, ctx): # actually a StlParser.ComparisonOpContext)
-            super(StlParser.LessContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a StlParser.ComparisonOpContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
         def LesserOperator(self):
             return self.getToken(StlParser.LesserOperator, 0)
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitLess"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitLess" ):
                 return visitor.visitLess(self)
             else:
                 return visitor.visitChildren(self)
@@ -2658,37 +2668,37 @@ class StlParser ( Parser ):
             self.state = 272
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [StlParser.LesserOrEqualOperator]:
+            if token in [60]:
                 localctx = StlParser.LeqContext(self, localctx)
                 self.enterOuterAlt(localctx, 1)
                 self.state = 266
                 self.match(StlParser.LesserOrEqualOperator)
                 pass
-            elif token in [StlParser.GreaterOrEqualOperator]:
+            elif token in [59]:
                 localctx = StlParser.GeqContext(self, localctx)
                 self.enterOuterAlt(localctx, 2)
                 self.state = 267
                 self.match(StlParser.GreaterOrEqualOperator)
                 pass
-            elif token in [StlParser.LesserOperator]:
+            elif token in [62]:
                 localctx = StlParser.LessContext(self, localctx)
                 self.enterOuterAlt(localctx, 3)
                 self.state = 268
                 self.match(StlParser.LesserOperator)
                 pass
-            elif token in [StlParser.GreaterOperator]:
+            elif token in [61]:
                 localctx = StlParser.GreaterContext(self, localctx)
                 self.enterOuterAlt(localctx, 4)
                 self.state = 269
                 self.match(StlParser.GreaterOperator)
                 pass
-            elif token in [StlParser.EqualOperator]:
+            elif token in [57]:
                 localctx = StlParser.EqContext(self, localctx)
                 self.enterOuterAlt(localctx, 5)
                 self.state = 270
                 self.match(StlParser.EqualOperator)
                 pass
-            elif token in [StlParser.NotEqualOperator]:
+            elif token in [58]:
                 localctx = StlParser.NeqContext(self, localctx)
                 self.enterOuterAlt(localctx, 6)
                 self.state = 271
@@ -2705,10 +2715,12 @@ class StlParser ( Parser ):
             self.exitRule()
         return localctx
 
-    class LiteralContext(ParserRuleContext):
 
-        def __init__(self, parser, parent=None, invokingState=-1):
-            super(StlParser.LiteralContext, self).__init__(parent, invokingState)
+    class LiteralContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
             self.parser = parser
 
         def IntegerLiteral(self):
@@ -2727,8 +2739,8 @@ class StlParser ( Parser ):
         def getRuleIndex(self):
             return StlParser.RULE_literal
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitLiteral"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitLiteral" ):
                 return visitor.visitLiteral(self)
             else:
                 return visitor.visitChildren(self)
@@ -2744,17 +2756,17 @@ class StlParser ( Parser ):
             self.state = 278
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [StlParser.IntegerLiteral]:
+            if token in [67]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 274
                 self.match(StlParser.IntegerLiteral)
                 pass
-            elif token in [StlParser.RealLiteral]:
+            elif token in [68]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 275
                 self.match(StlParser.RealLiteral)
                 pass
-            elif token in [StlParser.MINUS]:
+            elif token in [1]:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 276
                 self.match(StlParser.MINUS)
@@ -2772,10 +2784,12 @@ class StlParser ( Parser ):
             self.exitRule()
         return localctx
 
-    class IdentifierContext(ParserRuleContext):
 
-        def __init__(self, parser, parent=None, invokingState=-1):
-            super(StlParser.IdentifierContext, self).__init__(parent, invokingState)
+    class IdentifierContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
             self.parser = parser
 
 
@@ -2783,22 +2797,22 @@ class StlParser ( Parser ):
             return StlParser.RULE_identifier
 
      
-        def copyFrom(self, ctx):
-            super(StlParser.IdentifierContext, self).copyFrom(ctx)
+        def copyFrom(self, ctx:ParserRuleContext):
+            super().copyFrom(ctx)
 
 
 
     class IdContext(IdentifierContext):
 
-        def __init__(self, parser, ctx): # actually a StlParser.IdentifierContext)
-            super(StlParser.IdContext, self).__init__(parser)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a StlParser.IdentifierContext
+            super().__init__(parser)
             self.copyFrom(ctx)
 
         def Identifier(self):
             return self.getToken(StlParser.Identifier, 0)
 
-        def accept(self, visitor):
-            if hasattr(visitor, "visitId"):
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitId" ):
                 return visitor.visitId(self)
             else:
                 return visitor.visitChildren(self)
@@ -2824,7 +2838,7 @@ class StlParser ( Parser ):
 
 
 
-    def sempred(self, localctx, ruleIndex, predIndex):
+    def sempred(self, localctx:RuleContext, ruleIndex:int, predIndex:int):
         if self._predicates == None:
             self._predicates = dict()
         self._predicates[3] = self.expression_sempred
@@ -2835,7 +2849,7 @@ class StlParser ( Parser ):
         else:
             return pred(localctx, predIndex)
 
-    def expression_sempred(self, localctx, predIndex):
+    def expression_sempred(self, localctx:ExpressionContext, predIndex:int):
             if predIndex == 0:
                 return self.precpred(self._ctx, 19)
          
@@ -2872,7 +2886,7 @@ class StlParser ( Parser ):
                 return self.precpred(self._ctx, 5)
          
 
-    def real_expression_sempred(self, localctx, predIndex):
+    def real_expression_sempred(self, localctx:Real_expressionContext, predIndex:int):
             if predIndex == 9:
                 return self.precpred(self._ctx, 8)
          
