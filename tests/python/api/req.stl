@@ -1,0 +1,4 @@
+specification Test_Spec_From_File
+  float a
+  const float b = 5
+  a <= b

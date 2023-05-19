@@ -108,13 +108,13 @@ class LtlAstParserVisitor(LtlParserVisitor):
                 var_iotype = 'input'
             elif (not ctx.ioType().Output() is None):
                 var_iotype = 'output'
-        self.set_var_io_type(var_name, var_iotype)
+            self.set_var_io_type(var_name, var_iotype)
 
         self.visitChildren(ctx)
 
     def visitConstantDeclaration(self, ctx):
         # fetch the variable name, type and io signature
-        const_name = ctx.identifier().getText()
+        const_name = ctx.Identifier().getText()
         const_type = ctx.domainType().getText()
         const_value = ctx.literal().getText()
 
