@@ -14,7 +14,7 @@ class TestSpecFromFile(unittest.TestCase):
 
     def test_spec_from_file(self):
         spec = StlDiscreteTimeOfflineSpecification()
-        spec.spec = spec.get_spec_from_file('req.stl')
+        spec.spec = spec.get_spec_from_file('./req.stl')
         spec.parse()
 
         dataset = {
