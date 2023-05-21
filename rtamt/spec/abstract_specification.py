@@ -30,11 +30,11 @@ class AbstractSpecification(object):
 
     @property
     def name(self):
-        return self.__name
+        return self.ast.name
 
     @name.setter
     def name(self, name):
-        self.__name = name
+        self.ast.name = name
 
     @property
     def spec(self):

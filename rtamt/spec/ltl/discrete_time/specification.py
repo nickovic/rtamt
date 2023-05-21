@@ -173,7 +173,7 @@ class LTLDiscreteTimeSpecification(AbstractSpecification):
 
     def pastify(self):
         # Translate bounded future STL to past STL
-        pastifier = LTLPastifier()
+        pastifier = LtlPastifier()
         self.top.accept(pastifier)
 
         # evaluate modular sub-specs
@@ -224,34 +224,3 @@ class LTLDiscreteTimeSpecification(AbstractSpecification):
             self.update_counter = int(0);
             self.previous_time = float(0.0);
             self.sampling_violation_counter = int(0);
-
-    # def offline(self, dataset):
-    #     counter = 0
-    #     prev_signal_length = 0
-    #     signal_length = 0
-    #     out = 0
-    #
-    #     for var_name in dataset:
-    #         signal_length = len(dataset[var_name])
-    #         if counter > 0 and not (signal_length == prev_signal_length):
-    #             raise STLOfflineException('Input signals have different length')
-    #         prev_signal_length = signal_length
-    #         counter = counter + 1
-    #
-    #     for i in range(signal_length):
-    #         signal_snapshot = []
-    #         counter = 0
-    #         prev_time = 0
-    #         for var_name in dataset:
-    #             signal = dataset[var_name]
-    #             sample = signal[i]
-    #             time = sample[0]
-    #             value = sample[1]
-    #             if counter > 0 and not (time == prev_time):
-    #                 raise STLOfflineException('The time indices do not agree')
-    #             signal_snapshot.append((var_name, value))
-    #             counter = counter + 1
-    #             prev_time = time
-    #         out = self.update(time, signal_snapshot)
-    #
-    #     return out
