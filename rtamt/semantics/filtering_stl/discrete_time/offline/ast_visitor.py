@@ -194,7 +194,7 @@ class FilteringStlDiscreteTimeOfflineAstVisitor(StlDiscreteTimeOfflineAstVisitor
         sample_left  = self.visit(node.children[0], *args, **kwargs)
         sample_right = self.visit(node.children[1], *args, **kwargs)
 
-        sample_return = [max(1-l,r) for l,r in zip(sample_left, sample_right)]
+        sample_return = [max(1-l, r) for l,r in zip(sample_left, sample_right)]
         return sample_return
 
     def visitIff(self, node, *args, **kwargs):
@@ -204,4 +204,89 @@ class FilteringStlDiscreteTimeOfflineAstVisitor(StlDiscreteTimeOfflineAstVisitor
         sample_return = [abs(1-l-r) for l,r in zip(sample_left, sample_right)]
         return sample_return
 
+    def visitUntil(self, node, *args, **kwargs):
+        sample_left  = self.visit(node.children[0], *args, **kwargs)
+        sample_right = self.visit(node.children[1], *args, **kwargs)
 
+        l = len(sample_left)
+
+        out = []
+        for i in range(l):
+            prev_flag = sample_left[i]
+            cnt = sample_right[i]
+            for j in range(i+1, l):
+                flag = min(sample_left[j], prev_flag)
+                cnt = cnt + prev_flag*sample_right[j]
+                prev_flag = flag
+
+            out.append(cnt/(l-i))
+        return out
+
+    def visitSince(self, node, *args, **kwargs):
+        sample_left  = self.visit(node.children[0], *args, **kwargs)
+        sample_right = self.visit(node.children[1], *args, **kwargs)
+
+        sample_left.reverse()
+        sample_right.reverse()
+
+        l = len(sample_left)
+
+        out = []
+        for i in range(l):
+            prev_flag = sample_left[i]
+            cnt = sample_right[i]
+            for j in range(i+1, l):
+                flag = min(sample_left[j], prev_flag)
+                cnt = cnt + prev_flag*sample_right[j]
+                prev_flag = flag
+
+            out.append(cnt/(l-i))
+
+        out.reverse()
+        return out
+
+    def visitTimedUntil(self, node, *args, **kwargs):
+        sample_left = self.visit(node.children[0], *args, **kwargs)
+        sample_right = self.visit(node.children[1], *args, **kwargs)
+        begin, end = self.time_unit_transformer(node)
+
+        l = len(sample_left)
+
+        out = []
+        for i in range(l):
+            prev_flag = sample_left[i]
+            cnt = sample_right[i]
+            for j in range(i+1, i + end + 1):
+                if j < l:
+                    flag = min(sample_left[j], prev_flag)
+                    if j >= i + begin:
+                        cnt = cnt + prev_flag * sample_right[j]
+                        prev_flag = flag
+
+            out.append(cnt / (end - begin + 1))
+        return out
+
+    def visitTimedSince(self, node, *args, **kwargs):
+        sample_left = self.visit(node.children[0], *args, **kwargs)
+        sample_right = self.visit(node.children[1], *args, **kwargs)
+        begin, end = self.time_unit_transformer(node)
+
+        sample_left.reverse()
+        sample_right.reverse()
+
+        l = len(sample_left)
+
+        out = []
+        for i in range(l):
+            prev_flag = sample_left[i]
+            cnt = sample_right[i]
+            for j in range(i+1, i + end + 1):
+                if j < l:
+                    flag = min(sample_left[j], prev_flag)
+                    if j >= i + begin:
+                        cnt = cnt + prev_flag * sample_right[j]
+                        prev_flag = flag
+
+            out.append(cnt / (end - begin + 1))
+        out.reverse()
+        return out

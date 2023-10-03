@@ -294,7 +294,7 @@ class TestFilteringStlDiscreteTimeOfflineSpecification(unittest.TestCase):
 
         spec.parse()
         out = spec.evaluate(self.dataset)
-        expected = [[0, 20], [1, -1], [2, 10], [3, 5], [4, -1]]
+        expected = [[0, 0], [1, 1/2], [2, 1/3], [3, 1/4], [4, 2/5]]
 
         self.assertListEqual(out, expected, "since")
 
@@ -307,7 +307,7 @@ class TestFilteringStlDiscreteTimeOfflineSpecification(unittest.TestCase):
 
         spec.parse()
         out = spec.evaluate(self.dataset)
-        expected = [[0, 20], [1, -1], [2, 10], [3, 4], [4, -1]]
+        expected = [[0, 0], [1, 2/4], [2, 1/3], [3, 1/2], [4, 1]]
 
         self.assertListEqual(out, expected, "until")
 
@@ -320,7 +320,7 @@ class TestFilteringStlDiscreteTimeOfflineSpecification(unittest.TestCase):
 
         spec.parse()
         out = spec.evaluate(self.dataset)
-        expected = [[0, 20], [1, -1], [2, 10], [3, 4], [4, -1]]
+        expected = [[0, 0], [1, 1/2], [2, 0], [3, 1/2], [4, 1/2]]
 
         self.assertListEqual(out, expected, "until")
 
@@ -368,7 +368,7 @@ class TestFilteringStlDiscreteTimeOfflineSpecification(unittest.TestCase):
 
         spec.parse()
         out = spec.evaluate(self.dataset)
-        expected = [[0, 0], [1, 0], [2, 0], [3, 1], [4, 1]]
+        expected = [[0, 1], [1, 0], [2, 0], [3, 1], [4, 1]]
 
         self.assertListEqual(out, expected, "historically[1,2]")
 
@@ -381,7 +381,7 @@ class TestFilteringStlDiscreteTimeOfflineSpecification(unittest.TestCase):
 
         spec.parse()
         out = spec.evaluate(self.dataset)
-        expected = [[0, 20], [1, -1], [2, 10], [3, 5], [4, -1]]
+        expected = [[0, 0], [1, 1/2], [2, 1/2], [3, 0], [4, 1/2]]
 
         self.assertListEqual(out, expected, "since[0,1]")
 
