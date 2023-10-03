@@ -1,0 +1,6 @@
+from rtamt.semantics.abstract_discrete_time_offline_interpreter import discrete_time_offline_interpreter_factory
+from rtamt.semantics.filtering_stl.discrete_time.offline.ast_visitor import FilteringStlDiscreteTimeOfflineAstVisitor
+
+def FilteringStlDiscreteTimeOfflineInterpreter():
+    filteringStlDiscreteTimeOfflineInterpreter = discrete_time_offline_interpreter_factory(FilteringStlDiscreteTimeOfflineAstVisitor)()
+    return filteringStlDiscreteTimeOfflineInterpreter

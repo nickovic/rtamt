@@ -11,3 +11,5 @@ from rtamt.spec.stl.dense_time.specification import StlDenseTimeSpecification
 from rtamt.spec.stl.dense_time.specification import StlDenseTimeSpecification as STLCTSpecification # for old API
 from rtamt.spec.stl.dense_time.specification import StlDenseTimeOfflineSpecification
 from rtamt.spec.stl.dense_time.specification import StlDenseTimeOnlineSpecification
+
+from rtamt.spec.filtering_stl.discrete_time.specification import FilteringStlDiscreteTimeOfflineSpecification
