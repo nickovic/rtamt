@@ -269,7 +269,31 @@ class LTLExplainer(LtlAstVisitor):
 
         self.visit(element.children[0], [op_intervals, flag])
 
+    def visitStrongPrevious(self, element, args):
+        intervals = args[0]
+        flag = args[1]
+        op_signal = self.spec.offline_results[element.children[0]]
+        if flag:
+            op_intervals = explain_sat_prev(op_signal, intervals)
+        else:
+            op_intervals = explain_unsat_prev(op_signal, intervals)
+        self.explanations[element.name] = intervals
+
+        self.visit(element.children[0], [op_intervals, flag])
+
     def visitNext(self, element, args):
+        intervals = args[0]
+        flag = args[1]
+        op_signal = self.spec.offline_results[element.children[0]]
+        if flag:
+            op_intervals = explain_sat_next(op_signal, intervals)
+        else:
+            op_intervals = explain_unsat_next(op_signal, intervals)
+        self.explanations[element.name] = intervals
+
+        self.visit(element.children[0], [op_intervals, flag])
+
+    def visitStrongNext(self, element, args):
         intervals = args[0]
         flag = args[1]
         op_signal = self.spec.offline_results[element.children[0]]
