@@ -1,3 +1,4 @@
+from rtamt.semantics.stl.discrete_time.online.strong_previous_operation import StrongPreviousOperation
 from rtamt.syntax.ast.visitor.stl.ast_visitor import StlAstVisitor
 
 from rtamt.semantics.arithmetic.discrete_time.online.addition_operation import AdditionOperation
@@ -124,8 +125,15 @@ class StlDiscreteTimeOnlineAstVisitor(StlAstVisitor):
         self.visitChildren(node, *args, **kwargs)
         self.online_operator_dict[node.name] = PreviousOperation()
 
+    def visitStrongPrevious(self, node, *args, **kwargs):
+        self.visitChildren(node, *args, **kwargs)
+        self.online_operator_dict[node.name] = StrongPreviousOperation()
+
     def visitNext(self, node, *args, **kwargs):
         raise RTAMTException('Next operator not implemented in STL online monitor.')
+
+    def visitStrongNext(self, node, *args, **kwargs):
+        raise RTAMTException('Strong Next operator not implemented in STL online monitor.')
 
     def visitTimedPrecedes(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)

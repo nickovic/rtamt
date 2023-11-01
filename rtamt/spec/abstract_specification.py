@@ -225,9 +225,13 @@ class DiscreteTimeOfflineInterpreter(object):
 
 
 class AbstractOfflineSpecification(AbstractSpecification):
-    def __init__(self, ast, offlineInterpreter):
+    def __init__(self, ast, offlineInterpreter, explainer=None):
         AbstractSpecification.__init__(self, ast)
         self.offline_interpreter = offlineInterpreter
+        self.explainer = explainer
+
+    def explain(self):
+        self.explainer.explain(self.ast)
 
     # forwarding to interpreter
     def evaluate(self, *args, **kwargs):

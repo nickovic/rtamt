@@ -1,13 +1,13 @@
 import logging
 import importlib
 
+from rtamt.explanation.ltl.discrete_time.explainer import LTLExplainer
 from rtamt.spec.abstract_specification import AbstractSpecification
 from rtamt.syntax.ast.parser.ltl.specification_parser import LtlAstParserVisitor
 
 from rtamt.exception.exception import RTAMTException
 
-from rtamt.pastifier.ltl.pastifier import LtlPastifier
-from rtamt.interpreter.ltl.online_interpreter import LTLInterpreter
+from rtamt.interpreter.ltl.online_interpreter import LtlInterpreter
 from rtamt.reset.ltl.reset import LTLReset
 from rtamt.semantics.enumerations.options import *
 
@@ -185,6 +185,11 @@ class LTLDiscreteTimeSpecification(AbstractSpecification):
 
         past = pastifier.pastify(self.top)
         self.top = past
+
+    def explain(self):
+        explainer = LTLExplainer(self)
+        explainer.explain()
+
 
     def update(self, timestamp, list_inputs):
         # timestamp - float

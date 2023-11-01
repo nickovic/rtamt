@@ -7,6 +7,7 @@ from rtamt.syntax.node.ltl.conjunction import Conjunction
 from rtamt.syntax.node.ltl.disjunction import Disjunction
 from rtamt.syntax.node.ltl.implies import Implies
 from rtamt.syntax.node.ltl.iff import Iff
+from rtamt.syntax.node.ltl.strong_previous import StrongPrevious
 from rtamt.syntax.node.ltl.xor import Xor
 from rtamt.syntax.node.ltl.once import Once
 from rtamt.syntax.node.ltl.historically import Historically
@@ -172,7 +173,17 @@ class LtlPastifier(LtlAstVisitor):
         node = Previous(child_node)
         return node
 
+    def visitStrongPrevious(self, node, *args, **kwargs):
+        child_node = self.visit(node.children[0], *args, **kwargs)
+        node = StrongPrevious(child_node)
+        return node
+
     def visitNext(self, node, *args, **kwargs):
+        horizon = args[0] - 1
+        child_node = self.visit(node.children[0], horizon)
+        return child_node
+
+    def visitStrongNext(self, node, *args, **kwargs):
         horizon = args[0] - 1
         child_node = self.visit(node.children[0], horizon)
         return child_node

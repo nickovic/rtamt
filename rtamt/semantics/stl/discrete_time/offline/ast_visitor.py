@@ -9,6 +9,11 @@ from rtamt.exception.exception import RTAMTException
 
 class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
 
+    def visit(self, node, *args, **kwargs):
+        result = super(StlDiscreteTimeOfflineAstVisitor, self).visit(node, *args, **kwargs)
+        self.ast.offline_results[node] = result
+        return result
+
     def visitPredicate(self, node, *args, **kwargs):
         sample_left  = self.visit(node.children[0], *args, **kwargs)
         sample_right = self.visit(node.children[1], *args, **kwargs)
@@ -282,12 +287,30 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
             sample_return.append(out_sample)
         return sample_return
 
+    def visitStrongPrevious(self, node, *args, **kwargs):
+        sample = self.visit(node.children[0], *args, **kwargs)
+
+        sample_return = []
+        prev = -float("inf")
+        for i in sample:
+            out_sample = prev
+            prev = i
+            sample_return.append(out_sample)
+        return sample_return
+
 
     def visitNext(self, node, *args, **kwargs):
         sample = self.visit(node.children[0], *args, **kwargs)
 
         sample_return = sample[1:]
         sample_return.append(float("inf"))
+        return sample_return
+
+    def visitStrongNext(self, node, *args, **kwargs):
+        sample = self.visit(node.children[0], *args, **kwargs)
+
+        sample_return = sample[1:]
+        sample_return.append(-float("inf"))
         return sample_return
 
 

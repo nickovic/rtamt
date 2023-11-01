@@ -1,6 +1,6 @@
-# Generated from LtlParser.g4 by ANTLR 4.11.1
+# Generated from rtamt/antlr/grammar/tl/LtlParser.g4 by ANTLR 4.13.1
 from antlr4 import *
-if __name__ is not None and "." in __name__:
+if "." in __name__:
     from .LtlParser import LtlParser
 else:
     from LtlParser import LtlParser
@@ -109,6 +109,11 @@ class LtlParserVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by LtlParser#ExprStrongPrevious.
+    def visitExprStrongPrevious(self, ctx:LtlParser.ExprStrongPreviousContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by LtlParser#ExprImplies.
     def visitExprImplies(self, ctx:LtlParser.ExprImpliesContext):
         return self.visitChildren(ctx)
@@ -121,6 +126,11 @@ class LtlParserVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by LtlParser#ExprNot.
     def visitExprNot(self, ctx:LtlParser.ExprNotContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by LtlParser#ExprStrongNext.
+    def visitExprStrongNext(self, ctx:LtlParser.ExprStrongNextContext):
         return self.visitChildren(ctx)
 
 
