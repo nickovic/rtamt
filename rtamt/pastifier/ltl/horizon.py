@@ -129,7 +129,17 @@ class LtlHorizon(LtlAstVisitor):
 
         return op_horizon
 
+    def visitStrongPrevious(self, node, *args, **kwargs):
+        op_horizon = self.visit(node.children[0], *args, **kwargs)
+
+        return op_horizon
+
     def visitNext(self, node, *args, **kwargs):
+        op_horizon = self.visit(node.children[0], *args, **kwargs)
+
+        return op_horizon
+
+    def visitStrongNext(self, node, *args, **kwargs):
         op_horizon = self.visit(node.children[0], *args, **kwargs)
 
         return op_horizon

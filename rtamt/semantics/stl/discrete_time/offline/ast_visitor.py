@@ -287,12 +287,30 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
             sample_return.append(out_sample)
         return sample_return
 
+    def visitStrongPrevious(self, node, *args, **kwargs):
+        sample = self.visit(node.children[0], *args, **kwargs)
+
+        sample_return = []
+        prev = -float("inf")
+        for i in sample:
+            out_sample = prev
+            prev = i
+            sample_return.append(out_sample)
+        return sample_return
+
 
     def visitNext(self, node, *args, **kwargs):
         sample = self.visit(node.children[0], *args, **kwargs)
 
         sample_return = sample[1:]
         sample_return.append(float("inf"))
+        return sample_return
+
+    def visitStrongNext(self, node, *args, **kwargs):
+        sample = self.visit(node.children[0], *args, **kwargs)
+
+        sample_return = sample[1:]
+        sample_return.append(-float("inf"))
         return sample_return
 
 

@@ -177,6 +177,12 @@ NextOperator
 PreviousOperator
 	: 'prev' | 'Y' ;
 
+StrongNextOperator
+	: 's_next' | 'sX' ;
+
+StrongPreviousOperator
+	: 's_prev' | 'sY' ;
+
 EqualOperator
 	: '==' ;
 

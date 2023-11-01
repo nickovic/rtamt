@@ -1,4 +1,4 @@
-# Generated from LtlParser.g4 by ANTLR 4.7.2
+# Generated from LtlParser.g4 by ANTLR 4.5.1
 from antlr4 import *
 
 # This class defines a complete generic visitor for a parse tree produced by LtlParser.
@@ -105,6 +105,11 @@ class LtlParserVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by LtlParser#ExprStrongPrevious.
+    def visitExprStrongPrevious(self, ctx):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by LtlParser#ExprImplies.
     def visitExprImplies(self, ctx):
         return self.visitChildren(ctx)
@@ -117,6 +122,11 @@ class LtlParserVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by LtlParser#ExprNot.
     def visitExprNot(self, ctx):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by LtlParser#ExprStrongNext.
+    def visitExprStrongNext(self, ctx):
         return self.visitChildren(ctx)
 
 
