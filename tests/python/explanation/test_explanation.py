@@ -23,7 +23,6 @@ class TestSemantics(unittest.TestCase):
         expected = [[0, -1], [1, -1], [2, 5], [3, 5], [4, -1]]
 
         spec.explain()
-        spec.plot()
         explanation = spec.explainer.explanations
         print(explanation)
 
