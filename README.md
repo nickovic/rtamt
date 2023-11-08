@@ -156,10 +156,10 @@ RTAMT is a Python library for offline and online monitoring of (bounded-future)
 Signal Temporal Logic (STL). The library is inspired by several theoretical and practical  
 works:
 
-- The bounded-future fragment of STL is inspired by [2]
-- The interface-aware interpretation of STL quantitative semantics is inspired by [3]
-- The periodic-sampling interpretation of specifications (even in presence of timestamps that are not perfectly periodic) is inspired by [4]
-- The translation of bounded-future STL to "equirobust" past STL prior to the online monitoring phase is inspired by [2]
+- The bounded-future fragment of STL is inspired by [3]
+- The interface-aware interpretation of STL quantitative semantics is inspired by [4]
+- The periodic-sampling interpretation of specifications (even in presence of timestamps that are not perfectly periodic) is inspired by [5]
+- The translation of bounded-future STL to "equirobust" past STL prior to the online monitoring phase is inspired by [3]
 
 ## Specification Language
 
@@ -251,7 +251,7 @@ There are several important points to note about the above syntax and semantics:
 - The `unless` operator is added as syntactic sugar - `phi unless[a,b] psi = always[0,b] phi or phi until[a,b] psi
 
 We can see from the semantics of bounded-future STL that the direct evaluation of a formula `phi` at time `t` may depend on inputs at `t'>t` that have not arrived yet.
-The library monitors bounded-future STL formulas with a fixed _delay_. In order to compute `rho(phi,w,t)`, the monitor waits for all inputs required to evaluate `phi` to become available before computing the robustness degree. This delay is fixed and depends on the specification. For instance, the specification `always((req >= 3) -> eventually[0:2]always[0:3](gnt >= 3)`is evaluated with delay `5` - the time needed to capture all inputs required for evaluating bounded `eventually` and `always` operators. We refer the reader to [2] for algorithmic details regarding monitoring with delay.
+The library monitors bounded-future STL formulas with a fixed _delay_. In order to compute `rho(phi,w,t)`, the monitor waits for all inputs required to evaluate `phi` to become available before computing the robustness degree. This delay is fixed and depends on the specification. For instance, the specification `always((req >= 3) -> eventually[0:2]always[0:3](gnt >= 3)`is evaluated with delay `5` - the time needed to capture all inputs required for evaluating bounded `eventually` and `always` operators. We refer the reader to [3] for algorithmic details regarding monitoring with delay.
 
 # Usage
 
@@ -520,7 +520,8 @@ Finally, the following program is correct, because the temporal bound is explici
 
 # References
 
-- [1] Dejan Nickovic, Tomoya Yamaguchi: RTAMT: Online Robustness Monitors from STL. CoRR abs/2005.11827 (2020)
-- [2] Stefan Jaksic, Ezio Bartocci, Radu Grosu, Reinhard Kloibhofer, Thang Nguyen, Dejan Nickovic: From signal temporal logic to FPGA monitors. MEMOCODE 2015: 218-227
-- [3] Thomas Ferrère, Dejan Nickovic, Alexandre Donzé, Hisahiro Ito, James Kapinski: Interface-aware signal temporal logic. HSCC 2019: 57-66
-- [4] Thomas A. Henzinger, Zohar Manna, Amir Pnueli: What Good Are Digital Clocks? ICALP 1992: 545-558
+- [1] Tomoya Yamaguchi1, Bardh Hoxha1, Dejan Nickovic: RTAMT: RTAMT–Runtime Robustness Monitors with Application to CPS and Robotics. International Journal on Software Tools for Technology Transfer, 1-21 (2023)
+- [2] Dejan Nickovic, Tomoya Yamaguchi: RTAMT: Online Robustness Monitors from STL. CoRR abs/2005.11827 (2020)
+- [3] Stefan Jaksic, Ezio Bartocci, Radu Grosu, Reinhard Kloibhofer, Thang Nguyen, Dejan Nickovic: From signal temporal logic to FPGA monitors. MEMOCODE 2015: 218-227
+- [4] Thomas Ferrère, Dejan Nickovic, Alexandre Donzé, Hisahiro Ito, James Kapinski: Interface-aware signal temporal logic. HSCC 2019: 57-66
+- [5] Thomas A. Henzinger, Zohar Manna, Amir Pnueli: What Good Are Digital Clocks? ICALP 1992: 545-558
