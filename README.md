@@ -53,7 +53,7 @@ You will also need CMake version 3.12 or higher if you need to build the CPP bac
 sudo apt install cmake
 ```
 
-In our experience, Ubuntu 16.04, 18.04 don't support the versions in default. You can check [our manual intallation of cmake](README_cmake.md).
+In our experience, Ubuntu 16.04, 18.04 don't support the versions in default. You can check [our manual installation of cmake](README_cmake.md).
 
 ## Option 1: Install Python package version
 
@@ -158,7 +158,7 @@ works:
 
 - The bounded-future fragment of STL is inspired by [2]
 - The interface-aware interpretation of STL quantitative semantics is inspired by [3]
-- The periodic-sampling interpretation of specifications (even in presence of timestamps that are not prefectly periodic) is inpired by [4]
+- The periodic-sampling interpretation of specifications (even in presence of timestamps that are not perfectly periodic) is inspired by [4]
 - The translation of bounded-future STL to "equirobust" past STL prior to the online monitoring phase is inspired by [2]
 
 ## Specification Language
@@ -379,7 +379,7 @@ if __name__ == '__main__':
 ### Working with time units and timing assumptions
 
 The default unit in RTAMT is seconds, and the default expected period between two consecutive input samples is `1s` with `10%` tolerance.  
-The following program uses these default values to implicitely set up the monitor.  
+The following program uses these default values to implicitly set up the monitor.  
 The specification intuitively states that whenever the `req` is above `3`, eventually within `5s` `gnt` also goes above `3`.  
 The user feeds the monitor with values timestamped _exactly_ `1s` apart from each other. It follows that the periodic sampling assumption holds.
 
@@ -417,7 +417,7 @@ if __name__ == '__main__':
 }
 ```
 
-The same program, but with slightly different timestamps still reports `0` number of periodic sampling assumption violations. This is because the difference between all consecutive sampling timestamps remains within the (implicitely) specified `10%` tolerance.
+The same program, but with slightly different timestamps still reports `0` number of periodic sampling assumption violations. This is because the difference between all consecutive sampling timestamps remains within the (implicitly) specified `10%` tolerance.
 
 ```python
 # examples/documentation/time_units_2.py
@@ -441,7 +441,7 @@ This is because the third input is `1.12s` away from the second sample, which is
     nb_violations = spec.sampling_violation_counter // nb_violations = 1
 ```
 
-This same sequence of inputs results in `0` reported violation of periodic sampling assumption if we explicitely set the sampling period tolerance value to `20%`.  
+This same sequence of inputs results in `0` reported violation of periodic sampling assumption if we explicitly set the sampling period tolerance value to `20%`.  
 
 ```python
 # examples/documentation/time_units_4.py
@@ -454,7 +454,7 @@ This same sequence of inputs results in `0` reported violation of periodic sampl
     nb_violations = spec.sampling_violation_counter // nb_violations = 0
 ```
 
-The user can also explicitely set the default unit, as well as the expected period and tolerance. In that case, the user must ensure that the timing bounds declared in the specification are divisible by the sampling period. The following specification is correct, since the sampling period is set to `500ms`, the default unit is set to seconds, and the specification implicitely defines the bound from `0.5s = 500ms` and `1.5s = 1500ms`, i.e. between `1` amd `3` sampling periods.
+The user can also explicitly set the default unit, as well as the expected period and tolerance. In that case, the user must ensure that the timing bounds declared in the specification are divisible by the sampling period. The following specification is correct, since the sampling period is set to `500ms`, the default unit is set to seconds, and the specification implicitly defines the bound from `0.5s = 500ms` and `1.5s = 1500ms`, i.e. between `1` amd `3` sampling periods.
 
 ```python
 # examples/documentation/time_units_5.py
@@ -504,7 +504,7 @@ The following program throws an exception - the temporal bound is defined betwee
 }
 ```
 
-Finally, the following program is correct, because the temporal bound is explicitely defined between `500s` and `1500s`, while the sampling period equals to `1s`.
+Finally, the following program is correct, because the temporal bound is explicitly defined between `500s` and `1500s`, while the sampling period equals to `1s`.
 
 ```python
 # examples/documentation/time_units_8.py
