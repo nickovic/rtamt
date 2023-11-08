@@ -520,7 +520,7 @@ Finally, the following program is correct, because the temporal bound is explici
 
 # References
 
-- [1] Tomoya Yamaguchi1, Bardh Hoxha1, Dejan Nickovic: RTAMT: RTAMT–Runtime Robustness Monitors with Application to CPS and Robotics. International Journal on Software Tools for Technology Transfer, 1-21 (2023)
+- [1] Tomoya Yamaguchi, Bardh Hoxha, Dejan Nickovic: RTAMT - Runtime Robustness Monitors with Application to CPS and Robotics. International Journal on Software Tools for Technology Transfer, 1-21 (2023)
 - [2] Dejan Nickovic, Tomoya Yamaguchi: RTAMT: Online Robustness Monitors from STL. CoRR abs/2005.11827 (2020)
 - [3] Stefan Jaksic, Ezio Bartocci, Radu Grosu, Reinhard Kloibhofer, Thang Nguyen, Dejan Nickovic: From signal temporal logic to FPGA monitors. MEMOCODE 2015: 218-227
 - [4] Thomas Ferrère, Dejan Nickovic, Alexandre Donzé, Hisahiro Ito, James Kapinski: Interface-aware signal temporal logic. HSCC 2019: 57-66
