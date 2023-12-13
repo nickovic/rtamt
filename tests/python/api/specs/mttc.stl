@@ -1,0 +1,42 @@
+/**
+  MTTC - Modified Time To Collision
+  Ratio between relative distance between two vehicle and their relative velocity
+  Assumptions:
+  (1) npc in front of ego
+  (2) npc and ego in the same lane
+  (3) velocity of npc lower then velocity of ego
+  If assumptions are violated, TTC = +inf (no collision can occur)
+  Extended TTC takes into account the effect of possible accelerations/decelerations between the two vehicles
+
+  Ozbay, K., Yang, H., Bartin, B., & Mudigonda, S. (2008). Derivation and Validation of New
+  Simulation-Based Surrogate Safety Measure. Transportation Research Record, 2083(1), 105-113.
+
+**/
+
+specification MTTC
+  float back_ego_npc
+  float dist_lon_ego_npc
+  float velocity_ego
+  float velocity_npc
+  float acceleration_ego
+  float acceleration_npc
+  const float safe_ttc = 3.5
+
+  delta_v = abs(velocity_ego - velocity_npc)
+  delta_a = abs(acceleration_ego - acceleration_npc)
+
+  t1 = - (delta_v) - sqrt(pow(delta_v, 2) + 2*delta_a*dist_lon_ego_npc)
+  t2 = - delta_v + sqrt(pow(delta_v, 2) + 2*delta_a*dist_lon_ego_npc)
+
+  cond = back_ego_npc and velocity_ego > velocity_npc
+
+  c1 = (cond and delta_a == 0) -> ((dist_lon_ego_npc / (velocity_ego - velocity_npc)) >= safe_ttc)
+  c2 = (cond and delta_a > 0 and t1 > 0 and t2 > 0 and t1 >= t2) -> (t1 >= safe_ttc)
+  c3 = (cond and delta_a > 0 and t1 > 0 and t2 > 0 and t1 < t2) -> (t2 >= safe_ttc)
+  c4 = (cond and delta_a > 0 and t1 > 0 and t2 <= 0) -> (t1 >= safe_ttc)
+  c5 = (cond and delta_a > 0 and t1 <= 0 and t2 > 0) -> (t2 >= safe_ttc)
+
+  c1 and c2 and c3 and c4 and c5
+
+
+

@@ -465,6 +465,21 @@ class TestStlDenseTimeOfflineSpecification(unittest.TestCase):
 
         self.assertListEqual(expected, computed, "not")
 
+    def test_minus(self):
+        spec = rtamt.StlDenseTimeSpecification()
+        spec.declare_var('req', 'float')
+        spec.declare_var('out', 'float')
+        spec.spec = 'out = -(req)'
+
+        spec.parse()
+
+        op = [[1.3, 4], [3.7, -2.2], [9.4, -33]]
+
+        expected = [[1.3, -4], [3.7, 2.2], [9.4, 33]]
+        computed = spec.evaluate(['req', op])
+
+        self.assertListEqual(expected, computed, "minus")
+
     def test_next(self):
         spec = rtamt.StlDenseTimeSpecification()
         spec.declare_var('req', 'float')

@@ -5,6 +5,7 @@ import operator
 from antlr4 import *
 
 from rtamt.antlr.parser.ltl.LtlParserVisitor import LtlParserVisitor
+from rtamt.syntax.node.arithmetic.minus import Minus
 
 from rtamt.syntax.node.ltl.variable import Variable
 from rtamt.syntax.node.ltl.predicate import Predicate
@@ -42,8 +43,8 @@ from rtamt.exception.exception import RTAMTException
 class LtlAstParserVisitor(LtlParserVisitor):
 
     def visitExprPredicate(self, ctx):
-        child1 = self.visit(ctx.expression(0))
-        child2 = self.visit(ctx.expression(1))
+        child1 = self.visit(ctx.real_expression(0))
+        child2 = self.visit(ctx.real_expression(1))
         op_type = self.str_to_op_type(ctx.comparisonOp().getText())
         node = Predicate(child1, child2, op_type)
 
@@ -189,6 +190,12 @@ class LtlAstParserVisitor(LtlParserVisitor):
         node = Rise(child)
         return node
 
+    def visitExprUnaryMinus(self, ctx):
+        expr = ctx.real_expression()
+        child = self.visit(ctx.real_expression())
+        node = Minus(child)
+        return node
+
     def visitExprLiteral(self, ctx):
         val = float(ctx.literal().getText())
         node = Constant(val)
@@ -297,6 +304,9 @@ class LtlAstParserVisitor(LtlParserVisitor):
     def visitExprParen(self, ctx):
         return self.visit(ctx.expression())
 
+    def visitExprParenRealExpr(self, ctx):
+        return self.visit(ctx.real_expression())
+
     def visitExpr(self, ctx):
         return self.visit(ctx.expression())
 
@@ -308,7 +318,7 @@ class LtlAstParserVisitor(LtlParserVisitor):
             id = 'out'
             implicit = True
         else:
-            id = ctx.Identifier().getText();
+            id = ctx.Identifier().getText()
 
         self.var_subspec_dict[id] = out
         id_tokens = id.split('.')

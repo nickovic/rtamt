@@ -1,4 +1,6 @@
 from rtamt.syntax.ast.visitor.abstract_ast_visitor import AbstractAstVisitor
+from rtamt.syntax.node.arithmetic.minus import Minus
+from rtamt.syntax.node.ltl.bool import Booleanize
 
 from rtamt.syntax.node.ltl.predicate import Predicate
 from rtamt.syntax.node.ltl.strong_next import StrongNext
@@ -94,6 +96,10 @@ class LtlAstVisitor(AbstractAstVisitor):
             result = self.visitStrongPrevious(node, *args, **kwargs)
         elif isinstance(node, StrongNext):
             result = self.visitStrongNext(node, *args, **kwargs)
+        elif isinstance(node, Minus):
+            result = self.visitMinus(node, *args, **kwargs)
+        elif isinstance(node, Booleanize):
+            result = self.visitBooleanize(node, *args, **kwargs)
         else:
             self.raise_exception('{} is not a TL operator'.format(node.__class__.__name__))
         return result
@@ -117,6 +123,9 @@ class LtlAstVisitor(AbstractAstVisitor):
         return self.visitChildren(node, *args, **kwargs)
 
     def visitExp(self, node, *args, **kwargs):
+        return self.visitChildren(node, *args, **kwargs)
+
+    def visitMinus(self, node, *args, **kwargs):
         return self.visitChildren(node, *args, **kwargs)
 
     def visitAddition(self, node, *args, **kwargs):
@@ -186,6 +195,9 @@ class LtlAstVisitor(AbstractAstVisitor):
         return self.visitChildren(node, *args, **kwargs)
 
     def visitStrongNext(self, node, *args, **kwargs):
+        return self.visitChildren(node, *args, **kwargs)
+
+    def visitBooleanize(self, node, *args, **kwargs):
         return self.visitChildren(node, *args, **kwargs)
 
     def visitDefault(self, node, *args, **kwargs):

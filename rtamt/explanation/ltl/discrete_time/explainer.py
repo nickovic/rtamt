@@ -88,6 +88,15 @@ class LTLExplainer(LtlAstVisitor):
 
         self.visit(element.children[0], [op_intervals, flag])
 
+    def visitMinus(self, element, args):
+        intervals = args[0]
+        flag = args[1]
+        op_signal = self.spec.offline_results[element.children[0]]
+        op_intervals = explain_minus(op_signal, intervals)
+        self.explanations[element.name] = intervals
+
+        self.visit(element.children[0], [op_intervals, flag])
+
     def visitSqrt(self, element, args):
         intervals = args[0]
         flag = args[1]

@@ -19,7 +19,7 @@ unit
 expression
 	:
     real_expression                                             #ExprReal
-    | expression comparisonOp expression                        #ExprPredicate
+    | real_expression comparisonOp real_expression              #ExprPredicate
 	| LPAREN expression RPAREN                                  #ExprParen
 	| NotOperator expression                                    #ExprNot
 

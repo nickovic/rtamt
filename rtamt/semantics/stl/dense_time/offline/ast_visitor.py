@@ -341,6 +341,16 @@ class StlDenseTimeOfflineAstVisitor(StlAstVisitor):
             sample_return.append([out_time, out_value])
         return sample_return
 
+    def visitMinus(self, node, *args, **kwargs):
+        sample = self.visit(node.children[0], *args, **kwargs)
+
+        sample_return = []
+        for i in sample:
+            out_time = i[0]
+            out_value = -i[1]
+            sample_return.append([out_time, out_value])
+        return sample_return
+
 
     def visitSqrt(self, node, *args, **kwargs):
         sample = self.visit(node.children[0], *args, **kwargs)

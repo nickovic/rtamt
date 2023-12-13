@@ -1,4 +1,5 @@
 from rtamt.syntax.ast.visitor.ltl.ast_visitor import LtlAstVisitor
+from rtamt.syntax.node.arithmetic.minus import Minus
 
 from rtamt.syntax.node.ltl.predicate import Predicate
 from rtamt.syntax.node.ltl.variable import Variable
@@ -91,6 +92,11 @@ class LtlPastifier(LtlAstVisitor):
     def visitAbs(self, node, *args, **kwargs):
         child_node = self.visit(node.children[0], *args, **kwargs)
         node = Abs(child_node)
+        return node
+
+    def visitMinus(self, node, *args, **kwargs):
+        child_node = self.visit(node.children[0], *args, **kwargs)
+        node = Minus(child_node)
         return node
 
     def visitSqrt(self, node, *args, **kwargs):

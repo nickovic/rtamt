@@ -55,6 +55,7 @@ domainType
 	| DomainTypeInt
     | DomainTypeLong
     | DomainTypeComplex
+    | DomainTypeBool
     | Identifier
     ;
 
@@ -67,7 +68,7 @@ ioType
 expression
 	:
     real_expression                                             #ExprReal
-    | expression comparisonOp expression                        #ExprPredicate
+    | real_expression comparisonOp real_expression              #ExprPredicate
 	| LPAREN expression RPAREN                                  #ExprParen
 	| NotOperator expression                                    #ExprNot
 
@@ -95,6 +96,8 @@ expression
 real_expression:
     Identifier                                                  #ExprId
     | literal                                                   #ExprLiteral
+    | LPAREN real_expression RPAREN                             #ExprParenRealExpr
+    | MINUS real_expression                                     #ExprUnaryMinus
     | real_expression PLUS real_expression                      #ExprAddition
 	| real_expression MINUS real_expression                     #ExprSubtraction
 	| real_expression TIMES real_expression                     #ExprMultiplication
@@ -119,8 +122,15 @@ comparisonOp
 literal
 	: IntegerLiteral		
 	| RealLiteral
+	| boolLiteral
 	| MINUS literal
 	;
+
+boolLiteral
+    :
+    TRUE
+    | FALSE
+    ;
 
 identifier
 	: Identifier											 #Id

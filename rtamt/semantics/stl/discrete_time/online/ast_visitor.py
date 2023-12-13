@@ -9,6 +9,7 @@ from rtamt.semantics.arithmetic.discrete_time.online.abs_operation import AbsOpe
 from rtamt.semantics.arithmetic.discrete_time.online.sqrt_operation import SqrtOperation
 from rtamt.semantics.arithmetic.discrete_time.online.exp_operation import ExpOperation
 from rtamt.semantics.arithmetic.discrete_time.online.pow_operation import PowOperation
+from rtamt.semantics.arithmetic.discrete_time.online.minus_operation import MinusOperation
 
 from rtamt.semantics.stl.discrete_time.online.predicate_operation import PredicateOperation
 from rtamt.semantics.stl.discrete_time.online.and_operation import AndOperation
@@ -39,6 +40,10 @@ class StlDiscreteTimeOnlineAstVisitor(StlAstVisitor):
     def visitAbs(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
         self.online_operator_dict[node.name] = AbsOperation()
+
+    def visitMinus(self, node, *args, **kwargs):
+        self.visitChildren(node, *args, **kwargs)
+        self.online_operator_dict[node.name] = MinusOperation()
 
     def visitSqrt(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)

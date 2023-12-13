@@ -49,6 +49,11 @@ class LtlHorizon(LtlAstVisitor):
 
         return op_horizon
 
+    def visitMinus(self, node, *args, **kwargs):
+        op_horizon = self.visit(node.children[0], *args, **kwargs)
+
+        return op_horizon
+
     def visitSqrt(self, node, *args, **kwargs):
         op_horizon = self.visit(node.children[0], *args, **kwargs)
 

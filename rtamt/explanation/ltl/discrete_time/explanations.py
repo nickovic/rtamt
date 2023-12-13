@@ -32,6 +32,9 @@ def explain_predicate(op1_signal, op2_signal, intervals):
 def explain_abs(op_signal, intervals):
     return explain_unary(op_signal, intervals)
 
+def explain_minus(op_signal, intervals):
+    return explain_unary(op_signal, intervals)
+
 
 def explain_sqrt(op_signal, intervals):
     return explain_unary(op_signal, intervals)

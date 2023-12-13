@@ -433,6 +433,18 @@ class TestStlDiscreteTimeOfflineSpecification(unittest.TestCase):
 
         self.assertListEqual(out, expected, "not")
 
+    def test_minus(self):
+        spec = rtamt.StlDiscreteTimeSpecification()
+        spec.declare_var('req', 'float')
+        spec.declare_var('out', 'float')
+        spec.spec = 'out = not req'
+
+        spec.parse()
+        out = spec.evaluate(self.dataset)
+        expected = [[0, -100], [1, 1], [2, 2], [3, -5], [4, 1]]
+
+        self.assertListEqual(out, expected, "minus")
+
     def test_rise(self):
         spec = rtamt.StlDiscreteTimeSpecification()
         spec.declare_var('req', 'float')

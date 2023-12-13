@@ -1,0 +1,8 @@
+specification Test_Spec_From_File
+  output float a
+  output float b
+  input bool c
+
+  c = a < b
+
+  c -> a >= b

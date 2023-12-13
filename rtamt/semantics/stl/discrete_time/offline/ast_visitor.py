@@ -54,6 +54,15 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
             sample_return.append(out_sample)
         return sample_return
 
+    def visitMinus(self, node, *args, **kwargs):
+        sample = self.visit(node.children[0], *args, **kwargs)
+
+        sample_return = []
+        for i in sample:
+            out_sample = -i
+            sample_return.append(out_sample)
+        return sample_return
+
     def visitSqrt(self, node, *args, **kwargs):
         sample = self.visit(node.children[0], *args, **kwargs)
 
