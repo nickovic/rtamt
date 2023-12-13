@@ -11,6 +11,7 @@ from rtamt.semantics.arithmetic.discrete_time.online.exp_operation import ExpOpe
 from rtamt.semantics.arithmetic.discrete_time.online.pow_operation import PowOperation
 from rtamt.semantics.arithmetic.discrete_time.online.minus_operation import MinusOperation
 
+from rtamt.semantics.stl.discrete_time.online.booleanize_operation import BooleanizeOperation
 from rtamt.semantics.stl.discrete_time.online.predicate_operation import PredicateOperation
 from rtamt.semantics.stl.discrete_time.online.and_operation import AndOperation
 from rtamt.semantics.stl.discrete_time.online.or_operation import OrOperation
@@ -72,6 +73,10 @@ class StlDiscreteTimeOnlineAstVisitor(StlAstVisitor):
     def visitDivision(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
         self.online_operator_dict[node.name] = DivisionOperation()
+
+    def visitBooleanize(self, node, *args, **kwargs):
+        self.visitChildren(node, *args, **kwargs)
+        self.online_operator_dict[node.name] = BooleanizeOperation()
 
     def visitNot(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)

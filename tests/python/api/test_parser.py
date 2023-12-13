@@ -59,6 +59,17 @@ class TestSemantics(unittest.TestCase):
         except Exception:
             self.fail("parse() raised Exception unexpectedly!")
 
+    def test_stl_rss_spec_from_file(self):
+        my_path = os.path.abspath(os.path.dirname(__file__))
+        path = os.path.join(my_path, "specs/rss.stl")
+        spec = StlDiscreteTimeOfflineSpecification()
+        spec.spec = spec.get_spec_from_file(path)
+
+        try:
+            spec.parse()
+        except Exception:
+            self.fail("parse() raised Exception unexpectedly!")
+
     def test_stl_ioreq_spec_from_file(self):
         my_path = os.path.abspath(os.path.dirname(__file__))
         path = os.path.join(my_path, "specs/ioreq.stl")

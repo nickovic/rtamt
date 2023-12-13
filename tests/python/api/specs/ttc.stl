@@ -13,11 +13,11 @@
 **/
 
 specification TTC
-  float back_ego_npc
   float dist_lon_ego_npc
   float velocity_ego
   float velocity_npc
-  float cond
+  bool cond
+  bool back_ego_npc
   const float safe_ttc = 3.5
 
   cond = back_ego_npc and velocity_ego > velocity_npc

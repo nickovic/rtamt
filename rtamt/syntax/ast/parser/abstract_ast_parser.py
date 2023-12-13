@@ -216,6 +216,8 @@ class AbstractAst:
             var = int()
         elif var_type.encode('utf-8') == 'complex'.encode('utf-8'):
             var = complex()
+        elif var_type.encode('utf-8') == 'bool'.encode('utf-8'):
+            var = bool()
         else:
             try:
                 var_module = self.modules[var_type]

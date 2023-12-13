@@ -1,6 +1,6 @@
-# Generated from rtamt\antlr\grammar\tl\LtlParser.g4 by ANTLR 4.5.1
+# Generated from rtamt/antlr/grammar/tl/LtlParser.g4 by ANTLR 4.13.1
 from antlr4 import *
-if __name__ is not None and "." in __name__:
+if "." in __name__:
     from .LtlParser import LtlParser
 else:
     from LtlParser import LtlParser
@@ -154,13 +154,13 @@ class LtlParserVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by LtlParser#ExprHist.
-    def visitExprHist(self, ctx:LtlParser.ExprHistContext):
+    # Visit a parse tree produced by LtlParser#ExprPredicate.
+    def visitExprPredicate(self, ctx:LtlParser.ExprPredicateContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by LtlParser#ExprPredicate.
-    def visitExprPredicate(self, ctx:LtlParser.ExprPredicateContext):
+    # Visit a parse tree produced by LtlParser#ExprHist.
+    def visitExprHist(self, ctx:LtlParser.ExprHistContext):
         return self.visitChildren(ctx)
 
 

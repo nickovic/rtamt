@@ -44,6 +44,11 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
             sample_return = var
         return sample_return
 
+    def visitBooleanize(self, node, *args, **kwargs):
+        sample = self.visit(node.children[0], *args, **kwargs)
+
+        return sample*float('inf')
+
 
     def visitAbs(self, node, *args, **kwargs):
         sample = self.visit(node.children[0], *args, **kwargs)

@@ -6,6 +6,7 @@ from antlr4 import *
 
 from rtamt.antlr.parser.ltl.LtlParserVisitor import LtlParserVisitor
 from rtamt.syntax.node.arithmetic.minus import Minus
+from rtamt.syntax.node.ltl.bool import Booleanize
 
 from rtamt.syntax.node.ltl.variable import Variable
 from rtamt.syntax.node.ltl.predicate import Predicate
@@ -320,6 +321,10 @@ class LtlAstParserVisitor(LtlParserVisitor):
         else:
             id = ctx.Identifier().getText()
 
+        if id in self.var_type_dict.keys():
+            if self.var_type_dict[id] == 'bool':
+                out = Booleanize(out)
+
         self.var_subspec_dict[id] = out
         id_tokens = id.split('.')
         id_head = id_tokens[0]
@@ -327,15 +332,15 @@ class LtlAstParserVisitor(LtlParserVisitor):
         id_tail = '.'.join(id_tokens)
 
         try:
-            var = self.var_object_dict[id_head]
             var = self.create_var_from_name(id_head)
             if (not id_tail):
-                if (not isinstance(var, (int, float))):
+                if (not isinstance(var, (bool, int, float))):
                     raise RTAMTException('Variable {} is not of type int or float'.format(id))
+
             else:
                 try:
                     value = operator.attrgetter(id_tail)(var)
-                    if (not isinstance(value, (int, float))):
+                    if (not isinstance(value, (bool, int, float))):
                         raise RTAMTException(
                             'The field {0} of the variable {1} is not of type int or float'.format(id, id_head))
                 except AttributeError as err:
@@ -354,7 +359,9 @@ class LtlAstParserVisitor(LtlParserVisitor):
         self.out_var = id_head
         self.out_var_field = id_tail
         self.free_vars.discard(id_head)
+
         self.specs.append(out)
+
         return
 
     def visitSpecification_file(self, ctx):

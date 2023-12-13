@@ -437,6 +437,16 @@ class StlDenseTimeOfflineAstVisitor(StlAstVisitor):
             sample_return.append([out_time, out_value])
         return sample_return
 
+    def visitBooleanize(self, node, *args, **kwargs):
+        sample =  self.visit(node.children[0], *args, **kwargs)
+
+        sample_return = []
+        for i in sample:
+            out_time = i[0]
+            out_value = i[1]*float('inf')
+            sample_return.append([out_time, out_value])
+        return sample_return
+
 
     def visitAnd(self, node, *args, **kwargs):
         sample_left  = self.visit(node.children[0], *args, **kwargs)

@@ -11,7 +11,7 @@ from rtamt.semantics.arithmetic.dense_time.online.pow_operation import PowOperat
 from rtamt.semantics.arithmetic.dense_time.online.exp_operation import ExpOperation
 from rtamt.semantics.arithmetic.dense_time.online.minus_operation import MinusOperation
 
-
+from rtamt.semantics.stl.dense_time.online.booleanize_operation import BooleanizeOperation
 from rtamt.semantics.stl.dense_time.online.predicate_operation import PredicateOperation
 from rtamt.semantics.stl.dense_time.online.and_operation import AndOperation
 from rtamt.semantics.stl.dense_time.online.or_operation import OrOperation
@@ -68,6 +68,10 @@ class StlDenseTimeOnlineAstVisitor(StlAstVisitor):
     def visitDivision(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
         self.online_operator_dict[node.name] = DivisionOperation()
+
+    def visitBooleanize(self, node, *args, **kwargs):
+        self.visitChildren(node, *args, **kwargs)
+        self.online_operator_dict[node.name] = BooleanizeOperation()
 
     def visitNot(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
