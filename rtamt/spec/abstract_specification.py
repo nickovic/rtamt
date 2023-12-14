@@ -15,8 +15,8 @@ class AbstractSpecification(object):
     __metaclass__ = ABCMeta
 
     def __init__(self, ast):
-        self.name = 'Abstract Specification'
         self.ast = ast
+        self.name = 'Abstract Specification'
         self.interpreter = None
         self.set_ast_flag = False # It is for interpreter is set ast or not.
         self.out_var = ''
@@ -30,11 +30,11 @@ class AbstractSpecification(object):
 
     @property
     def name(self):
-        return self.__name
+        return self.ast.name
 
     @name.setter
     def name(self, name):
-        self.__name = name
+        self.ast.name = name
 
     @property
     def spec(self):
@@ -227,7 +227,6 @@ class DiscreteTimeOfflineInterpreter(object):
 class AbstractOfflineSpecification(AbstractSpecification):
     def __init__(self, ast, offlineInterpreter, explainer=None):
         AbstractSpecification.__init__(self, ast)
-        self.name = 'Abstract Offline Specification'
         self.offline_interpreter = offlineInterpreter
         self.explainer = explainer
 
@@ -261,7 +260,6 @@ class AbstractOfflineSpecification(AbstractSpecification):
 class AbstractOnlineSpecification(AbstractSpecification):
     def __init__(self, ast, onlineInterpreter, pastifier=None):
         AbstractSpecification.__init__(self, ast)
-        self.name = 'Abstract Online Specification'
         self.online_interpreter = onlineInterpreter
         self.pastifier = pastifier
 
