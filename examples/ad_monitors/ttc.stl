@@ -1,0 +1,25 @@
+/**
+  TTC - Time To Collision
+  Ratio between relative distance between two vehicle and their relative velocity
+  Assumptions:
+  (1) npc in front of ego
+  (2) npc and ego in the same lane
+  (3) velocity of npc lower then velocity of ego
+  If assumptions are violated, TTC = +inf (no collision can occur)
+  Vanilla TTC ignore the effect of possible accelerations/decelerations between the two vehicles
+
+  Michiel M. Minderhoud, Piet H.L. Bovy, Extended time-to-collision measures for road traffic safety assessment,
+  Accident Analysis & Prevention, Volume 33, Issue 1, 2001,
+**/
+
+specification TTC
+  float relative_distance_0_1
+  float vel_0
+  float vel_1
+  bool cond
+  bool same_lane_0_1
+  const float safe_ttc = 3.5
+
+  cond = same_lane_0_1 and vel_0 > vel_1
+
+  cond -> ((relative_distance_0_1 / (vel_0 - vel_1)) >= safe_ttc)
