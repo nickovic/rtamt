@@ -10,12 +10,18 @@
 **/
 
 specification RSS
+  // TODO Update names to match CSV file
   float dist_lon_ego_npc
+  
+  //
   float velocity_ego
   float velocity_npc
   bool cond
+
+  // Is behind?: Same lane and sign
   bool back_ego_npc
   float safe_dist
+
   const float tau = 0.1
   const float acc_max = 5
   const float break_min = 4

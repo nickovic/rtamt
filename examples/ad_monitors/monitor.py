@@ -8,7 +8,7 @@ def monitor():
 
     # # stl
     spec = rtamt.StlDiscreteTimeSpecification()
-    spec.spec = spec.get_spec_from_file('ttc.stl')
+    spec.spec = spec.get_spec_from_file('specs/ttc.stl')
 
     try:
         spec.parse()

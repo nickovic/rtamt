@@ -1,4 +1,4 @@
-time,vel_0,acc_0,rot_0,relative_distance_0_1,same_lane_0_1,relative_distance_0_2,same_lane_0_2,relative_distance_0_3,same_lane_0_3,vel_1,acc_1,rot_1,relative_distance_1_2,same_lane_1_2,relative_distance_1_3,same_lane_1_3,vel_2,acc_2,rot_2,relative_distance_2_3,same_lane_2_3,vel_3,acc_3,rot_3
+time,velocity_ego,acc_ego,rot_ego,relative_distance_ego_npc,same_lane_ego_npc,relative_distance_npc_2,same_lane_npc_2,relative_distance_npc_3,same_lane_npc_3,velocity_npc,acc_npc,rot_npc,relative_distance_1_2,same_lane_1_2,relative_distance_1_3,same_lane_1_3,vel_2,acc_2,rot_2,relative_distance_2_3,same_lane_2_3,vel_3,acc_3,rot_3
 0.0,12.0,0.0,0.0,66.4227170936,True,21.4227170936,True,inf,False,0.0,0.0,0.0,45.0,True,inf,False,12.0,0.0,0.0,inf,False,19.4,0.0,0.0
 0.1,11.999602538695665,-0.007892037409822488,0.0,65.22273038996738,True,21.422730389967377,True,inf,False,0.0,0.0,0.0,43.8,True,inf,False,11.9996,-0.0077,0.0006,inf,False,19.3996,-0.0078,0.0
 0.2,11.998449099520837,-0.015123130084100767,-6.621617167281256e-21,64.02282178214598,True,21.422721782145985,True,inf,False,0.0,0.0,0.0,42.6001,True,inf,False,11.9984,-0.0143,0.0026,inf,False,19.3984,-0.0151,0.0

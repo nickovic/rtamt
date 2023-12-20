@@ -14,6 +14,7 @@
 **/
 
 specification MTTC
+  // TODO: Port the name of the variable to CSV or the otherway around
   bool back_ego_npc
   float dist_lon_ego_npc
   float velocity_ego
