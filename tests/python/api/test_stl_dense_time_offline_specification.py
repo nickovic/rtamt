@@ -21,7 +21,6 @@ class TestStlDenseTimeOfflineSpecification(unittest.TestCase):
 
         expected = [[0, 1.3], [0.7, 3], [1.3, -1.2], [2.1, -2.2]]
 
-
         computed = spec.evaluate(['req', left], ['gnt', right])
 
         self.assertListEqual(expected, computed, "and")
@@ -100,7 +99,6 @@ class TestStlDenseTimeOfflineSpecification(unittest.TestCase):
 
         self.assertListEqual(expected, computed, "implies")
 
-
     def test_always(self):
         spec = rtamt.StlDenseTimeSpecification()
         spec.declare_var('req', 'float')
@@ -131,7 +129,6 @@ class TestStlDenseTimeOfflineSpecification(unittest.TestCase):
 
         self.assertListEqual(expected, computed, "ev")
 
-
     def test_historically(self):
         spec = rtamt.StlDenseTimeSpecification()
         spec.declare_var('req', 'float')
@@ -161,7 +158,6 @@ class TestStlDenseTimeOfflineSpecification(unittest.TestCase):
         computed = spec.evaluate(['req', op])
 
         self.assertListEqual(expected, computed, "hist")
-
 
     def test_since(self):
         spec = rtamt.StlDenseTimeSpecification()
@@ -438,13 +434,13 @@ class TestStlDenseTimeOfflineSpecification(unittest.TestCase):
         spec = rtamt.StlDenseTimeSpecification()
         spec.declare_var('req', 'float')
         spec.declare_var('out', 'float')
-        spec.spec = 'out = pow(2,req)'
+        spec.spec = 'out = pow(2, req)'
 
         spec.parse()
 
-        op = [[1.3, 4], [3.7, -2.2], [9.4, -33]]
+        op = [[1.3, 4], [3.7, -2.2], [9.4, -33.0]]
 
-        expected = [[1.3, math.pow(2,4)], [3.7, math.pow(2,-2.2)], [9.4, math.pow(2,-33)]]
+        expected = [[1.3, math.pow(2, 4)], [3.7, math.pow(2, -2.2)], [9.4, math.pow(2, -33.0)]]
         computed = spec.evaluate(['req', op])
 
         self.assertListEqual(expected, computed, "pow")

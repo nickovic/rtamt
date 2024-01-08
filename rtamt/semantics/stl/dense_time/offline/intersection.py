@@ -62,8 +62,6 @@ def intersection(in_samples_1, in_samples_2, method):
         if in_samples_1[0][0] == in_samples_2[0][0]:
             out_value = method(in_samples_1[0][1], in_samples_2[0][1])
             out_samples.append([in_samples_1[0][0], out_value])
-            in_samples_1.pop(0)
-            in_samples_2.pop(0)
             ans = out_samples[-1]
         return out_samples, ans, in_samples_1, in_samples_2
     # If the first list has exactly one sample, and the second list has exactly two samples
@@ -73,15 +71,12 @@ def intersection(in_samples_1, in_samples_2, method):
         if in_samples_2[0][0] <= in_samples_1[0][0] < in_samples_2[1][0]:
             out_value = method(in_samples_1[0][1], in_samples_2[0][1])
             out_samples.append([in_samples_1[0][0], out_value])
-            ans = out_samples[-1]
-            in_samples_1.pop(0)
             in_samples_2.pop(0)
+            ans = out_samples[-1]
         elif in_samples_2[0][0] < in_samples_1[0][0] == in_samples_2[1][0]:
             out_value = method(in_samples_1[0][1], in_samples_2[1][1])
             out_samples.append([in_samples_1[0][0], out_value])
             ans = out_samples[-1]
-            in_samples_1.pop(0)
-            in_samples_2.pop(0)
             in_samples_2.pop(0)
         return out_samples, ans, in_samples_1, in_samples_2
     # symmetric to the previous case
@@ -89,16 +84,13 @@ def intersection(in_samples_1, in_samples_2, method):
         if in_samples_1[0][0] <= in_samples_2[0][0] < in_samples_1[1][0]:
             out_value = method(in_samples_2[0][1], in_samples_1[0][1])
             out_samples.append([in_samples_2[0][0], out_value])
-            ans = out_samples[-1]
             in_samples_1.pop(0)
-            in_samples_2.pop(0)
+            ans = out_samples[-1]
         elif in_samples_1[0][0] < in_samples_2[0][0] == in_samples_1[1][0]:
             out_value = method(in_samples_2[0][1], in_samples_1[1][1])
             out_samples.append([in_samples_2[0][0], out_value])
             ans = out_samples[-1]
             in_samples_1.pop(0)
-            in_samples_1.pop(0)
-            in_samples_2.pop(0)
         return out_samples, ans, in_samples_1, in_samples_2
 
     # In all other cases, the two lists have both at least 2 samples each
@@ -127,7 +119,7 @@ def intersection(in_samples_1, in_samples_2, method):
         # [ interval 1      ]
         #              [ interval 2 ]
         elif prev_in_sample_1[0] < prev_in_sample_2[0] < current_in_sample_1[0] < current_in_sample_2[0]:
-            out_value = method(current_in_sample_1[1], prev_in_sample_2[1])
+            out_value = method(prev_in_sample_1[1], prev_in_sample_2[1])
             out_samples.append([prev_in_sample_2[0], out_value])
             in_samples_1.pop(0)
             prev_in_sample_1 = current_in_sample_1
@@ -208,29 +200,44 @@ def intersection(in_samples_1, in_samples_2, method):
             in_samples_2.pop(0)
             prev_in_sample_2 = current_in_sample_2
 
-    if prev_in_sample_1 == current_in_sample_1:
-        if prev_in_sample_2[0] < prev_in_sample_1[0] < current_in_sample_2[0]:
-            out_value = method(prev_in_sample_2[1], prev_in_sample_1[1])
-            out_samples.append([prev_in_sample_1[0], out_value])
-            in_samples_2.pop(0)
-        elif prev_in_sample_2[0] < prev_in_sample_1[0] == current_in_sample_2[0]:
-            out_value = method(current_in_sample_2[1], prev_in_sample_1[1])
-            out_samples.append([prev_in_sample_1[0], out_value])
-            in_samples_1.pop(0)
-            in_samples_2.pop(0)
-    elif prev_in_sample_2 == current_in_sample_2:
-        if prev_in_sample_1[0] < prev_in_sample_2[0] < current_in_sample_1[0]:
+    remainder_in_samples_1 = in_samples_1.copy()
+    remainder_in_samples_2 = in_samples_2.copy()
+
+    while in_samples_1[1:]:
+        current_in_sample_1 = in_samples_1[1]
+        if prev_in_sample_1[0] <= prev_in_sample_2[0] < current_in_sample_1[0]:
             out_value = method(prev_in_sample_1[1], prev_in_sample_2[1])
             out_samples.append([prev_in_sample_2[0], out_value])
             in_samples_1.pop(0)
         elif prev_in_sample_1[0] < prev_in_sample_2[0] == current_in_sample_1[0]:
             out_value = method(current_in_sample_1[1], prev_in_sample_2[1])
-            out_samples.append([prev_in_sample_2[0], out_value])
+            out_samples.append([current_in_sample_1[0], out_value])
             in_samples_1.pop(0)
             in_samples_2.pop(0)
+        elif current_in_sample_1[0] > prev_in_sample_2[0]:
+            break
+        prev_in_sample_1 = current_in_sample_1
+        in_samples_1.pop(0)
 
-    last = out_samples[-1] if out_samples else list()
-    return out_samples, last, in_samples_1, in_samples_2
+    while in_samples_2[1:]:
+        current_in_sample_2 = in_samples_2[1]
+        if prev_in_sample_2[0] <= prev_in_sample_1[0] < current_in_sample_2[0]:
+            out_value = method(prev_in_sample_1[1], prev_in_sample_2[1])
+            out_samples.append([prev_in_sample_1[0], out_value])
+            in_samples_2.pop(0)
+        elif prev_in_sample_2[0] < prev_in_sample_1[0] == current_in_sample_2[0]:
+            out_value = method(prev_in_sample_1[1], current_in_sample_2[1])
+            out_samples.append([current_in_sample_2[0], out_value])
+            in_samples_1.pop(0)
+            in_samples_2.pop(0)
+        elif current_in_sample_2[0] > prev_in_sample_1[0]:
+            break
+
+        prev_in_sample_2 = current_in_sample_2
+        in_samples_2.pop(0)
+
+    last = list()
+    return out_samples, last, remainder_in_samples_1, remainder_in_samples_2
 
 def intersection_old(a, b, method):
     ans = []

@@ -29,8 +29,8 @@ class PredicateOperation(AbstractDenseTimeOnlineOperation):
             else:
                 out_val = float('nan')
 
-            if out_val != prev:
-                sample_result.append([i[0], out_val])
+
+            sample_result.append([i[0], out_val])
             prev = out_val
 
         return sample_result

@@ -22,7 +22,7 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
          oper = AndOperation()
          in_data_1_1 = [[2, 2], [3.3, 3], [5.7, 4]]
          in_data_2_1 = [[2.5, 5], [4.7, 6]]
-         out_expected_1 = [[2.5, 2], [3.3, 3]]
+         out_expected_1 = [[2.5, 2], [3.3, 3], [4.7, 3]]
          out_computed_1 = oper.update(in_data_1_1, in_data_2_1)
 
          self.assertListEqual(out_expected_1, out_computed_1,
@@ -30,24 +30,19 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
                                   out_expected_1, out_computed_1))
          in_data_1_2 = []
          in_data_2_2 = [[5.7, 1]]
-         out_expected_2 = [[4.7, 3]]
+         out_expected_2 = [[5.7, 1]]
          out_computed_2 = oper.update(in_data_1_2, in_data_2_2)
 
          self.assertListEqual(out_expected_2, out_computed_2,
                               "Problem with 1st example:\nExpected output: %s\nComputed output: %s" % (
                                   out_expected_2, out_computed_2))
 
-         out_expected_final = [[5.7, 1]]
-         out_computed_final = oper.update_final([], [])
-         self.assertListEqual(out_expected_final, out_computed_final,
-                              "Problem with 1st example:\nExpected output: %s\nComputed output: %s" % (
-                                  out_expected_final, out_computed_final))
 
          oper = AndOperation()
          in_data_1_1 = [[2, 2]]
          in_data_2_1 = [[2, 1]]
 
-         out_expected_1 = []
+         out_expected_1 = [[2, 1]]
          out_computed_1 = oper.update(in_data_1_1, in_data_2_1)
 
          self.assertListEqual(out_expected_1, out_computed_1,
@@ -57,7 +52,7 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
          in_data_1_2 = [[3.3, 3]]
          in_data_2_2 = [[3.3, 5]]
 
-         out_expected_2 = [[2, 1]]
+         out_expected_2 = [[3.3, 3]]
          out_computed_2 = oper.update(in_data_1_2, in_data_2_2)
 
          self.assertListEqual(out_expected_2, out_computed_2,
@@ -67,26 +62,20 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
          in_data_1_3 = [[4.7, 5]]
          in_data_2_3 = [[4.7, 2]]
 
-         out_expected_3 = [[3.3, 3]]
+         out_expected_3 = [[4.7, 2]]
          out_computed_3 = oper.update(in_data_1_3, in_data_2_3)
 
          self.assertListEqual(out_expected_3, out_computed_3,
                               "Problem with 2nd example:\nExpected output: %s\nComputed output: %s" % (
                                   out_expected_3, out_computed_3))
 
-         out_expected_final = [[4.7, 2]]
-         out_computed_final = oper.update_final([], [])
-
-         self.assertListEqual(out_expected_final, out_computed_final,
-                              "Problem with 2nd example:\nExpected output: %s\nComputed output: %s" % (
-                                  out_expected_final, out_computed_final))
 
          ################################################################################################
 
          oper = AndOperation()
          in_data_1_1 = [[1, 2], [4.1, 1], [5, 2], [6.1, 1]]
          in_data_2_1 = [[1.2, 1]]
-         out_expected_1 = []
+         out_expected_1 = [[1.2, 1]]
          out_computed_1 = oper.update(in_data_1_1, in_data_2_1)
 
          self.assertListEqual(out_expected_1, out_computed_1,
@@ -94,8 +83,8 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
                                   out_expected_1, out_computed_1))
 
          in_data_1_2 = []
-         in_data_2_2 = [[1.2, 1], [3.7, 3], [7.5, 2]]
-         out_expected_2 = [[1.2, 1], [3.7, 2], [4.1, 1], [5, 2]]
+         in_data_2_2 = [[3.7, 3], [7.5, 2]]
+         out_expected_2 = [[3.7, 2], [4.1, 1], [5, 2], [6.1, 1]]
          out_computed_2 = oper.update(in_data_1_2, in_data_2_2)
 
          self.assertListEqual(out_expected_2, out_computed_2,
@@ -104,27 +93,18 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
 
          in_data_1_3 = [[6.7, 4], [9.9, 5]]
          in_data_2_3 = [[8.1, 6]]
-         out_expected_3 = [[6.1, 1], [6.7, 3], [7.5, 2]]
+         out_expected_3 = [[6.7, 3], [7.5, 2], [8.1, 4]]
          out_computed_3 = oper.update(in_data_1_3, in_data_2_3)
 
          self.assertListEqual(out_expected_3, out_computed_3,
                               "Problem with 6th example:\nExpected output: %s\nComputed output: %s" % (
                                   out_expected_3, out_computed_3))
 
-
-         out_expected_final = [[8.1, 4]]
-         out_computed_final = oper.update_final([], [])
-
-         self.assertListEqual(out_expected_final, out_computed_final,
-                              "Problem with 6th example:\nExpected output: %s\nComputed output: %s" % (
-                                  out_expected_final, out_computed_final))
-
-
     def test_or(self):
         oper = OrOperation()
         in_data_1_1 = [[1, 2], [4.1, 1], [5, 2], [6.1, 1]]
         in_data_2_1 = [[1.2, 1]]
-        out_expected_1 = []
+        out_expected_1 = [[1.2, 2]]
         out_computed_1 = oper.update(in_data_1_1, in_data_2_1)
 
         self.assertListEqual(out_expected_1, out_computed_1,
@@ -133,7 +113,7 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
 
         in_data_1_2 = []
         in_data_2_2 = [[3.7, 3], [7.5, 2]]
-        out_expected_2 = [[1.2, 2], [3.7, 3]]
+        out_expected_2 = [[3.7, 3], [4.1, 3], [5, 3], [6.1, 3]]
         out_computed_2 = oper.update(in_data_1_2, in_data_2_2)
 
         self.assertListEqual(out_expected_2, out_computed_2,
@@ -142,51 +122,31 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
 
         in_data_1_3 = [[6.7, 4], [9.9, 5]]
         in_data_2_3 = [[8.1, 6]]
-        out_expected_3 = [[6.1, 3], [6.7, 4]]
+        out_expected_3 = [[6.7, 4], [7.5, 4], [8.1, 6]]
         out_computed_3 = oper.update(in_data_1_3, in_data_2_3)
 
         self.assertListEqual(out_expected_3, out_computed_3,
                              "Problem with 6th example:\nExpected output: %s\nComputed output: %s" % (
                                  out_expected_3, out_computed_3))
 
-        out_expected_final = [[8.1, 6]]
-        out_computed_final = oper.update_final([], [])
-
-        self.assertListEqual(out_expected_final, out_computed_final,
-                             "Problem with 6th example:\nExpected output: %s\nComputed output: %s" % (
-                                 out_expected_final, out_computed_final))
-
 
     def test_iff(self):
         oper = IffOperation()
         in_data_1 = [[1, 2], [4.1, 1], [5, 2], [6.1, 1], [6.7, 4], [9.9, 5]]
         in_data_2 = [[1.2, 1], [3.7, 3], [7.5, 2], [8.1, 6]]
-        out_expected = [[1.2, -1], [4.1, -2], [5, -1], [6.1, -2], [6.7, -1], [7.5, -2]]
+        out_expected = [[1.2, -1], [3.7, -1], [4.1, -2], [5, -1], [6.1, -2], [6.7, -1], [7.5, -2], [8.1, -2]]
         out_computed = oper.update(in_data_1, in_data_2)
 
         self.assertListEqual(out_expected, out_computed,
                              "Problem with 1st example:\nExpected output: %s\nComputed output: %s" % (
                                  out_expected, out_computed))
 
-        out_expected = [[8.1, -2]]
-        out_computed = oper.update_final([], [])
-
-        self.assertListEqual(out_expected, out_computed,
-                             "Problem with 1st example:\nExpected output: %s\nComputed output: %s" % (
-                                 out_expected, out_computed))
     def test_xor(self):
         oper = XorOperation()
         in_data_1 = [[1, 2], [4.1, 1], [5, 2], [6.1, 1], [6.7, 4], [9.9, 5]]
         in_data_2 = [[1.2, 1], [3.7, 3], [7.5, 2], [8.1, 6]]
-        out_expected = [[1.2, 1], [4.1, 2], [5, 1], [6.1, 2], [6.7, 1], [7.5, 2]]
+        out_expected = [[1.2, 1], [3.7, 1], [4.1, 2], [5, 1], [6.1, 2], [6.7, 1], [7.5, 2], [8.1, 2]]
         out_computed = oper.update(in_data_1, in_data_2)
-
-        self.assertListEqual(out_expected, out_computed,
-                             "Problem with 1st example:\nExpected output: %s\nComputed output: %s" % (
-                                 out_expected, out_computed))
-
-        out_expected = [[8.1, 2]]
-        out_computed = oper.update_final([], [])
 
         self.assertListEqual(out_expected, out_computed,
                              "Problem with 1st example:\nExpected output: %s\nComputed output: %s" % (
@@ -196,15 +156,8 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
         oper = ImpliesOperation()
         in_data_1 = [[1, 2], [4.1, 1], [5, 2], [6.1, 1], [6.7, 4], [9.9, 5]]
         in_data_2 = [[1.2, 1], [3.7, 3], [7.5, 2], [8.1, 6]]
-        out_expected = [[1.2, 1], [3.7, 3], [7.5, 2]]
+        out_expected = [[1.2, 1], [3.7, 3], [4.1, 3], [5, 3], [6.1, 3], [6.7, 3], [7.5, 2], [8.1, 6]]
         out_computed = oper.update(in_data_1, in_data_2)
-
-        self.assertListEqual(out_expected, out_computed,
-                             "Problem with 1st example:\nExpected output: %s\nComputed output: %s" % (
-                                 out_expected, out_computed))
-
-        out_expected = [[8.1, 6]]
-        out_computed = oper.update_final([], [])
 
         self.assertListEqual(out_expected, out_computed,
                              "Problem with 1st example:\nExpected output: %s\nComputed output: %s" % (
