@@ -10,24 +10,17 @@ from rtamt.semantics.enumerations.comp_oper import StlComparisonOperator
 from rtamt.exception.exception import RTAMTException
 
 def subtraction_operation(sample_left, sample_right):
-    sample_return = []
     sample_return, last, left, right = intersect.intersection(sample_left, sample_right, intersect.subtraction)
-    if last:
-        sample_return.append(last)
     return sample_return
 
 
 def and_operation(sample_left, sample_right):
     sample_return, last, a, b = intersect.intersection(sample_left, sample_right, intersect.conjunction)
-    if last:
-        sample_return.append(last)
     return sample_return
 
 
 def since_operation(sample_left, sample_right):
     iout, last, a, b = intersect.intersection(sample_left, sample_right, intersect.split)
-    if last:
-        iout.append(last)
     sample_return = []
     prev = -float("inf")
     for i, sample in enumerate(iout):
@@ -261,8 +254,6 @@ def eventually_timed_operation(sample, begin, end):
 
 def until_operation(sample_left, sample_right):
     iout, last, a, b = intersect.intersection(sample_left, sample_right, intersect.split)
-    if last:
-        iout.append(last)
     sample_return = []
     next = -float("inf")
     for i, sample in reversed(list(enumerate(iout))):
@@ -371,8 +362,6 @@ class StlDenseTimeOfflineAstVisitor(StlAstVisitor):
         sample_right = self.visit(node.children[1], *args, **kwargs)
 
         sample_return, last, left, right = intersect.intersection(sample_left, sample_right, intersect.power)
-        if last:
-            sample_return.append(last)
         return sample_return
 
 
@@ -382,8 +371,6 @@ class StlDenseTimeOfflineAstVisitor(StlAstVisitor):
 
         sample_return = []
         sample_return, last, left, right = intersect.intersection(sample_left, sample_right, intersect.addition)
-        if last:
-            sample_return.append(last)
         return sample_return
 
 
@@ -391,7 +378,7 @@ class StlDenseTimeOfflineAstVisitor(StlAstVisitor):
         sample_left  = self.visit(node.children[0], *args, **kwargs)
         sample_right = self.visit(node.children[1], *args, **kwargs)
 
-        sample_return= subtraction_operation(sample_left, sample_right)
+        sample_return = subtraction_operation(sample_left, sample_right)
         return sample_return
 
 
@@ -399,10 +386,7 @@ class StlDenseTimeOfflineAstVisitor(StlAstVisitor):
         sample_left  = self.visit(node.children[0], *args, **kwargs)
         sample_right = self.visit(node.children[1], *args, **kwargs)
 
-        sample_return = []
         sample_return, last, left, right = intersect.intersection(sample_left, sample_right, intersect.multiplication)
-        if last:
-            sample_return.append(last)
         return sample_return
 
 
@@ -410,10 +394,7 @@ class StlDenseTimeOfflineAstVisitor(StlAstVisitor):
         sample_left  = self.visit(node.children[0], *args, **kwargs)
         sample_right = self.visit(node.children[1], *args, **kwargs)
 
-        sample_return = []
         sample_return, last, left, right = intersect.intersection(sample_left, sample_right, intersect.division)
-        if last:
-            sample_return.append(last)
         return sample_return
 
 
@@ -441,8 +422,6 @@ class StlDenseTimeOfflineAstVisitor(StlAstVisitor):
         sample_right = self.visit(node.children[1], *args, **kwargs)
 
         sample_return, last, left, right = intersect.intersection(sample_left, sample_right, intersect.disjunction)
-        if last:
-            sample_return.append(last)
         return sample_return
 
 
@@ -451,8 +430,6 @@ class StlDenseTimeOfflineAstVisitor(StlAstVisitor):
         sample_right = self.visit(node.children[1], *args, **kwargs)
 
         sample_return, last, left, right = intersect.intersection(sample_left, sample_right, intersect.implication)
-        if last:
-            sample_return.append(last)
         return sample_return
 
 
@@ -461,8 +438,6 @@ class StlDenseTimeOfflineAstVisitor(StlAstVisitor):
         sample_right = self.visit(node.children[1], *args, **kwargs)
 
         sample_return, last, left, right = intersect.intersection(sample_left, sample_right, intersect.iff)
-        if last:
-            sample_return.append(last)
         return sample_return
 
 
@@ -471,8 +446,6 @@ class StlDenseTimeOfflineAstVisitor(StlAstVisitor):
         sample_right = self.visit(node.children[1], *args, **kwargs)
 
         sample_return, last, left, right = intersect.intersection(sample_left, sample_right, intersect.xor)
-        if last:
-            sample_return.append(last)
         return sample_return
 
 

@@ -55,7 +55,7 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
         b = ['b', [[0, 2.5], [0.7, 4], [1.3, 3], [2.1, 4]]]
         dataset = [a, b]
         out = interpreter.evaluate(dataset)
-        expected = [[0, 1.3 + 2.5], [0.7, 3 + 4], [2.1, 3 + 4]]
+        expected = [[0, 1.3 + 2.5], [0.7, 3 + 4], [1.3, 4+3], [2.1, 3 + 4]]
 
         self.assertListEqual(expected, out, "addition dense time offline 1")
         #################################################################################
