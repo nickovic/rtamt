@@ -46,8 +46,18 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
 
     def visitBooleanize(self, node, *args, **kwargs):
         sample = self.visit(node.children[0], *args, **kwargs)
+        out = []
+        for input in sample:
+            if isinstance(input, bool):
+                result = float('inf') if input else -float('inf')
+            elif isinstance(input, float) or isinstance(input, int):
+                result = input * float('inf')
+            else:
+                raise RTAMTException('The input is not a boolean, an integer or a float')
+            out.append(result)
 
-        return [s * float('inf') for s in sample]
+
+        return out
 
 
     def visitAbs(self, node, *args, **kwargs):
