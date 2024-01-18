@@ -40,10 +40,10 @@ specification MTTC
   delta_v = abs(velocity_ego - velocity_npc)
   delta_a = abs(acceleration_ego - acceleration_npc)
 
-  t1 = - (delta_v) - sqrt(pow(delta_v, 2) + 2*delta_a*dist_lon_ego_npc)
-  t2 = - delta_v + sqrt(pow(delta_v, 2) + 2*delta_a*dist_lon_ego_npc)
+  t1 = - (delta_v) - sqrt(pow(delta_v, 2) + (2*delta_a*dist_lon_ego_npc))
+  t2 = - delta_v + sqrt(pow(delta_v, 2) + (2*delta_a*dist_lon_ego_npc))
 
-  cond = back_ego_npc and velocity_ego > velocity_npc
+  cond = back_ego_npc and (velocity_ego > velocity_npc)
   cond_1 = delta_a > 0
   cond_2 = t1 > 0
   cond_3 = t2 > 0
