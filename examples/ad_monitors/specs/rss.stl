@@ -29,6 +29,8 @@ specification RSS
 
   cond = back_ego_npc
 
-  safe_dist = ((velocity_ego * tau) + (0.5 * acc_max * pow(tau, 2)) + pow(velocity_ego + (tau*acc_max), 2)) / ((2 * break_min) - (pow(velocity_npc, 2) / (2 * break_max)))
+  safe_dist =   (velocity_ego * tau) + (0.5 * acc_max * pow(tau, 2)) +
+                (pow(velocity_ego + (tau*acc_max), 2) / (2 * break_min))
+                - (pow(velocity_npc, 2) / (2 * break_max))
 
   cond -> (dist_lon_ego_npc >= safe_dist)
