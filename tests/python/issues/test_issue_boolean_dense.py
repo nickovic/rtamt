@@ -26,7 +26,7 @@ class TestIssueBooleanDense(unittest.TestCase):
             sys.exit()
 
         rob = spec.evaluate(['req', req], ['gnt', gnt])
-        self.assertListEqual([[0, 3.0], [5.0, -3.0]], rob, "dt")
+        self.assertListEqual([[0, 3.0], [5.0, -3.0], [7, 1], [8.5, -3]], rob, "dt")
 
 if __name__ == '__main__':
     unittest.main()
