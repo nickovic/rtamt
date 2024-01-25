@@ -8,6 +8,7 @@ class PredicateOperation(AbstractDenseTimeOnlineOperation):
     def __init__(self, comparison_op):
         self.sub = SubtractionOperation()
         self.comparison_op = comparison_op
+        self.subtraction_output = list()
 
     def reset(self):
         pass
@@ -15,6 +16,7 @@ class PredicateOperation(AbstractDenseTimeOnlineOperation):
     def update(self, sample_left, sample_right, *args, **kargs):
         sample_result = []
         input_list = self.sub.update(sample_left, sample_right, *args, **kargs)
+        self.subtraction_output = input_list
 
         prev = float('nan')
         for i in input_list:
@@ -60,7 +62,8 @@ class PredicateOperation(AbstractDenseTimeOnlineOperation):
 
     def sat(self, sample_left, sample_right, *args, **kargs):
         sample_result = []
-        input_list = self.sub.update(sample_left, sample_right)
+        #input_list = self.sub.update(sample_left, sample_right)
+        input_list = self.subtraction_output
 
         prev = float('nan')
         for i, in_sample in enumerate(input_list):

@@ -239,6 +239,24 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
                              "Problem with 1st example:\nExpected output: %s\nComputed output: %s" % (
                                  out_expected, out_computed))
 
+    def test_once_0_1_d(self):
+        oper = OnceTimedOperation(0, 1)
+        in_data_1 = [[2, 5], [3, 3], [6, 1], [7, 8], [8, 3]]
+        out_expected_1 = [[2, 5], [4, 3], [7, 8]]
+        out_computed_1 = oper.update(in_data_1)
+
+        self.assertListEqual(out_expected_1, out_computed_1,
+                                  "Problem with 1st example:\nExpected output: %s\nComputed output: %s" % (
+                                  out_expected_1, out_computed_1))
+
+        in_data_2 = [[10, 3]]
+        out_expected_2 = [[8, 8], [9, 3]]
+        out_computed_2 = oper.update(in_data_2)
+
+        self.assertListEqual(out_expected_2, out_computed_2,
+                             "Problem with 1st example:\nExpected output: %s\nComputed output: %s" % (
+                                 out_expected_1, out_computed_1))
+
     def test_once_0_1(self):
         oper = OnceTimedOperation(0, 1)
         in_data_1 = [[5, 3], [5.3, 2], [5.75, 1]]

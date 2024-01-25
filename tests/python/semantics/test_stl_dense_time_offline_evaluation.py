@@ -1565,6 +1565,51 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
         expected = [[4, 2], [5, 3]]
         self.assertListEqual(out, expected, "until")
 
+    def test_once_bounded_2(self):
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.spec = 'once[0,1](a)'
+        ast.parse()
+        interpreter = StlDenseTimeOfflineInterpreter()
+        interpreter.set_ast(ast)
+
+        a = ['a', [[2, 5], [3, 3], [6, 1], [7, 8], [8, 3]]]
+        dataset = [a]
+        out = interpreter.evaluate(dataset)
+        expected = [[2, 5], [4, 3], [7, 8], [9, 3]]
+
+        self.assertListEqual(expected, out, "once[0,1] offline dense time 1")
+
+    def test_once_bounded_3(self):
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.spec = 'once[1,2](a)'
+        ast.parse()
+        interpreter = StlDenseTimeOfflineInterpreter()
+        interpreter.set_ast(ast)
+
+        a = ['a', [[2, 5], [3, 3], [6, 1], [7, 8], [8, 3]]]
+        dataset = [a]
+        out = interpreter.evaluate(dataset)
+        expected = [[0, -float('inf')], [3, 5], [5, 3], [8, 8], [10, 3]]
+
+        self.assertListEqual(expected, out, "once[0,1] offline dense time 1")
+
+    def test_once_bounded_4(self):
+        ast = StlAst()
+        ast.declare_var('a', 'float')
+        ast.spec = 'once[1,2](a)'
+        ast.parse()
+        interpreter = StlDenseTimeOfflineInterpreter()
+        interpreter.set_ast(ast)
+
+        a = ['a', [[0, 3], [1, 2], [1.4, 4], [2, 1], [3.4, 6], [3.8, 7], [4.2, 1], [4.4, 2], [5.2, 5], [6, 3]]]
+        dataset = [a]
+        out = interpreter.evaluate(dataset)
+        expected = [[0, -float('inf')], [1, 3], [2.4, 4], [4, 1], [4.4, 6], [4.8, 7], [6.2, 5], [8, 3]]
+
+        self.assertListEqual(expected, out, "once[1,2] offline dense time 1")
+
     def test_once_bounded(self):
         ast = StlAst()
         ast.declare_var('a', 'float')

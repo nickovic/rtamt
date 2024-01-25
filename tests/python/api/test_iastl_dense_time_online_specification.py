@@ -21,7 +21,7 @@ class TestIastlDenseTimeOnlineSpecification(unittest.TestCase):
         right = [[0, 20], [1, -2], [2, 10], [3, 4], [4, -1]]
 
         out = spec.update(['req', left], ['gnt', right])
-        expected = [[0, 20], [1, float("inf")]]
+        expected = [[0, 20], [1, float("inf")], [2, float('inf')], [3, 4], [4, float('inf')]]
 
         self.assertEqual(out, expected, "output robustness")
 
@@ -40,7 +40,7 @@ class TestIastlDenseTimeOnlineSpecification(unittest.TestCase):
         right = [[0, 20], [1, -2], [2, 10], [3, 4], [4, -1]]
 
         out = spec.update(['req', left], ['gnt', right])
-        expected = [[0, 0], [1, 4], [2, 5]]
+        expected = [[0, 0], [1, 4], [2, 5], [3, 0], [4, 4]]
 
         self.assertEqual(out, expected, "input vacuity")
 
@@ -59,7 +59,7 @@ class TestIastlDenseTimeOnlineSpecification(unittest.TestCase):
         right = [[0, 20], [1, -2], [2, 10], [3, 4], [4, -1]]
 
         out = spec.update(['req', left], ['gnt', right])
-        expected = [[0, 20], [1, float("inf")]]
+        expected = [[0, 20], [1, float("inf")], [2, float('inf')], [3, 4.0], [4, float('inf')]]
 
         self.assertEqual(out, expected, "input robustness")
 
@@ -78,7 +78,7 @@ class TestIastlDenseTimeOnlineSpecification(unittest.TestCase):
         right = [[0, 20], [1, -2], [2, 10], [3, 4], [4, -1]]
 
         out = spec.update(['req', left], ['gnt', right])
-        expected = [[0, 0], [1, 4], [2, 5]]
+        expected = [[0, 0], [1, 4], [2, 5], [3, 0], [4, 4]]
 
         self.assertEqual(out, expected, "output vacuity")
 
