@@ -66,45 +66,49 @@ ioType
 
 expression
 	:
-    real_expression                                             #ExprReal
-    | expression comparisonOp expression                        #ExprPredicate
-	| LPAREN expression RPAREN                                  #ExprParen
-	| NotOperator expression                                    #ExprNot
+	LPAREN expression RPAREN                                    #ExprParen
 
-    | expression OrOperator expression                          #ExprOr
-    | expression AndOperator expression                         #ExprAnd
-    | expression ImpliesOperator expression                     #ExprImplies
-    | expression IffOperator expression                         #ExprIff
-    | expression XorOperator expression                         #ExprXor
+	| ABS LPAREN expression RPAREN                              #ExprAbs
+	| SQRT LPAREN expression RPAREN                             #ExprSqrt
+	| EXP LPAREN expression RPAREN                              #ExprExp
+	| POW LPAREN expression COMMA expression RPAREN             #ExprPow
+
+    | expression TIMES expression                               #ExprMultiplication
+	| expression DIVIDE expression                              #ExprDivision
+	| expression PLUS expression                                #ExprAddition
+	| expression MINUS expression                               #ExprSubtraction
+
+	| expression comparisonOp expression                        #ExprPredicate
+
+	| NotOperator expression                                    #ExprNot
 
 	| AlwaysOperator expression                                 #ExprAlways
     | EventuallyOperator expression                             #ExprEv
-    | expression UntilOperator expression                       #ExprUntil
-    | expression UnlessOperator expression                      #ExprUnless
     | HistoricallyOperator expression                           #ExprHist
     | OnceOperator expression                                   #ExpreOnce
-    | expression SinceOperator expression                       #ExprSince
-    | RiseOperator LPAREN expression RPAREN                     #ExprRise
-    | FallOperator LPAREN expression RPAREN                     #ExprFall
+
     | PreviousOperator expression                               #ExprPrevious
     | NextOperator expression                                   #ExprNext
     | StrongPreviousOperator expression                         #ExprStrongPrevious
     | StrongNextOperator expression                             #ExprStrongNext
+
+    | expression UntilOperator expression                       #ExprUntil
+    | expression UnlessOperator expression                      #ExprUnless
+    | expression SinceOperator expression                       #ExprSince
+
+    | expression AndOperator expression                         #ExprAnd
+    | expression OrOperator expression                          #ExprOr
+    | expression ImpliesOperator expression                     #ExprImplies
+    | expression IffOperator expression                         #ExprIff
+    | expression XorOperator expression                         #ExprXor
+
+    | RiseOperator LPAREN expression RPAREN                     #ExprRise
+    | FallOperator LPAREN expression RPAREN                     #ExprFall
+
+    | Identifier                                                 #ExprId
+    | literal                                                    #ExprLiteral
 	;
 
-real_expression:
-    Identifier                                                  #ExprId
-    | literal                                                   #ExprLiteral
-    | real_expression PLUS real_expression                      #ExprAddition
-	| real_expression MINUS real_expression                     #ExprSubtraction
-	| real_expression TIMES real_expression                     #ExprMultiplication
-	| real_expression DIVIDE real_expression                    #ExprDivision
-
-	| ABS LPAREN real_expression RPAREN                         #ExprAbs
-	| SQRT LPAREN real_expression RPAREN                        #ExprSqrt
-	| EXP LPAREN real_expression RPAREN                         #ExprExp
-	| POW LPAREN real_expression COMMA real_expression RPAREN   #ExprPow
-	;
 
 
 comparisonOp
@@ -121,8 +125,3 @@ literal
 	| RealLiteral
 	| MINUS literal
 	;
-
-identifier
-	: Identifier											 #Id
-	;
-

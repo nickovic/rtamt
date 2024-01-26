@@ -215,9 +215,11 @@ def intersection(in_samples_1, in_samples_2, method):
             in_samples_1.pop(0)
             in_samples_2.pop(0)
         elif current_in_sample_1[0] > prev_in_sample_2[0]:
-            break
+            out_value = method(prev_in_sample_1[1], prev_in_sample_2[1])
+            out_samples.append([prev_in_sample_2[0], out_value])
+            in_samples_1.pop(0)
         prev_in_sample_1 = current_in_sample_1
-        in_samples_1.pop(0)
+        # in_samples_1.pop(0)
 
     while in_samples_2[1:]:
         current_in_sample_2 = in_samples_2[1]
@@ -231,105 +233,15 @@ def intersection(in_samples_1, in_samples_2, method):
             in_samples_1.pop(0)
             in_samples_2.pop(0)
         elif current_in_sample_2[0] > prev_in_sample_1[0]:
-            break
+            out_value = method(prev_in_sample_2[1], prev_in_sample_1[1])
+            out_samples.append([prev_in_sample_2[0], out_value])
+            in_samples_2.pop(0)
 
         prev_in_sample_2 = current_in_sample_2
-        in_samples_2.pop(0)
+        # in_samples_2.pop(0)
 
     last = list()
     return out_samples, last, remainder_in_samples_1, remainder_in_samples_2
-
-def intersection_old(a, b, method):
-    ans = []
-    a = list(a)
-    b = list(b)
-    i = j = 1
-
-    hi = None
-
-    prev = float("nan")
-    last = []
-
-    if len(a)==0 or len(b)==0:
-        return ans, last, a, b
-
-    if len(a)==1 and len(b)==1:
-        if a[0][0] == b[0][0]:
-            val = method(a[0][1], b[0][1])
-            ans.append([a[0][0], val])
-        return ans, last, a, b
-
-    if len(a) == 1:
-        i = 0
-        while i < len(b):
-            if i == len(b)-1:
-                if a[0][0] == b[i][0]:
-                    val = method(a[0][1], b[i][1])
-                    ans.append([a[0][0], val])
-            else:
-                t = a[0][0]
-                t1 = b[i][0]
-                t2 = b[i+1][0]
-                if t1 <= t < t2:
-                    val = method(a[0][1], b[i][1])
-                    ans.append([a[0][0], val])
-            i += 1
-        return ans, last, a, b
-
-    if len(b) == 1:
-        i = 0
-        while i < len(a):
-            if i == len(a)-1:
-                if b[0][0] == a[i][0]:
-                    val = method(a[i][1], b[0][1])
-                    ans.append([b[0][0], val])
-            else:
-                t = b[0][0]
-                t1 = a[i][0]
-                t2 = a[i+1][0]
-                if t1 <= t < t2:
-                    val = method(a[i][1], b[0][1])
-                    ans.append([b[0][0], val])
-            i += 1
-        return ans, last, a, b
-
-    while len(a) > 1 and len(b) > 1:
-        a_start = a[i - 1][0]
-        a_end = a[i][0]
-        b_start = b[j - 1][0]
-        b_end = b[j][0]
-
-        a_val = a[i - 1][1]
-        b_val = b[j - 1][1]
-
-        a_val_next = a[i][1]
-        b_val_next = b[j][1]
-
-        if a_end < b_end:
-            last_val = method(a_val_next, b_val)
-            del (a[i - 1])
-        elif a_end > b_end:
-            last_val = method(a_val, b_val_next)
-            del (b[j - 1])
-        else:
-            last_val = method(a_val_next, b_val_next)
-            del (a[i - 1])
-            del (b[j - 1])
-
-        lo = max(a_start, b_start)
-        hi = min(a_end, b_end)
-
-        val = float("nan")
-
-        if lo < hi:
-            val = method(a_val, b_val)
-            if val != prev:
-                ans.append([lo, val])
-            prev = val
-            last = [hi, last_val]
-
-    return ans, last, a, b
-
 
 def disjunction(a, b):
     return max(a, b)
