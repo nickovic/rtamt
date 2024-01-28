@@ -55,7 +55,7 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
         b = ['b', [[0, 2.5], [0.7, 4], [1.3, 3], [2.1, 4]]]
         dataset = [a, b]
         out = interpreter.evaluate(dataset)
-        expected = [[0, 1.3 + 2.5], [0.7, 3 + 4], [1.3, 4+3], [2.1, 3 + 4]]
+        expected = [[0, 1.3 + 2.5], [0.7, 7]]
 
         self.assertListEqual(expected, out, "addition dense time offline 1")
         #################################################################################
@@ -72,7 +72,7 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
         b = ['b', [[0, 2], [7, 3]]]
         dataset = [a, b]
         out = interpreter.evaluate(dataset)
-        expected = [[1, 1 + 2], [3.5, 7+2], [4.7, 3+2], [5.3, 5+2], [6.2, 1+2]]
+        expected = [[1, 1 + 2], [3.5, 7+2], [4.7, 3+2], [5.3, 5+2], [6.2, 1+2], [7, 1+3]]
 
         self.assertListEqual(expected, out, "addition dense time offline 1")
         #################################################################################
@@ -89,7 +89,7 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
         b = ['b', [[4, 2], [6, 3]]]
         dataset = [a, b]
         out = interpreter.evaluate(dataset)
-        expected = [[4, 7+2], [4.7, 3+2], [5.3, 5+2], [6, 5+3]]
+        expected = [[4, 7+2], [4.7, 3+2], [5.3, 5+2], [6, 5+3], [6.2, 1+3]]
 
         self.assertListEqual(expected, out, "addition dense time offline 1")
 
@@ -107,7 +107,7 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
         b = ['b', [[1.5, 1], [1.7, 2], [2.7, 3], [3, 5], [4, 1]]]
         dataset = [a, b]
         out = interpreter.evaluate(dataset)
-        expected = [[1.5, 1+1], [1.7, 2+1], [2, 8+2], [2.7, 8+3], [3, 4+5], [4, 4+1]]
+        expected = [[1.5, 1+1], [1.7, 2+1], [2, 8+2], [2.7, 8+3], [3, 4+5], [4, 4+1], [4.5, 7+1]]
 
         self.assertListEqual(expected, out, "addition dense time offline 1")
 
@@ -125,7 +125,7 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
         b = ['b', [[5, 1], [6, 2], [7, 3], [8, 5], [9, 1]]]
         dataset = [a, b]
         out = interpreter.evaluate(dataset)
-        expected = []
+        expected = [[5, 1+7], [6, 7+2], [7, 3+7], [8, 5+7], [9, 1+7]]
 
         self.assertListEqual(expected, out, "addition dense time offline 1")
 
@@ -216,7 +216,7 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
         b = ['b', [[0.2,3]]]
         dataset = [a, b]
         out = interpreter.evaluate(dataset)
-        expected = []
+        expected = [[0.2, 2+3]]
 
         self.assertListEqual(expected, out, "addition dense time offline 1")
 
@@ -235,7 +235,7 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
         b = ['b', [[5.2, 3]]]
         dataset = [a, b]
         out = interpreter.evaluate(dataset)
-        expected = [[5.2, 3+2.6]]
+        expected = [[5.2, 3+2.6], [6.6, 7+3]]
 
         self.assertListEqual(expected, out, "addition dense time offline 1")
 
@@ -243,7 +243,7 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
         ast = StlAst()
         ast.declare_var('a', 'float')
         ast.declare_var('b', 'float')
-        ast.spec = 'a-b'
+        ast.spec = '(a-b)'
         ast.parse()
         interpreter = StlDenseTimeOfflineInterpreter()
         interpreter.set_ast(ast)
@@ -1343,7 +1343,7 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
         b = ['b', [[0, 4], [5, 4]]]
         dataset = [a, b]
         out = interpreter.evaluate(dataset)
-        expected = [[0, 2], [5, 2]]
+        expected = [[0, 2]]
 
         self.assertListEqual(expected, out, "since dense time offline 1")
 
@@ -1379,7 +1379,7 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
         b = ['b', [[0, 4], [2, 6], [5, 4]]]
         dataset = [a, b]
         out = interpreter.evaluate(dataset)
-        expected = [[2.3, 2]]
+        expected = [[2.3, 2], [5, 2]]
 
         self.assertListEqual(expected, out, "since dense time offline 3")
 
@@ -1417,7 +1417,7 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
         dataset = [a, b]
         out = interpreter.evaluate(dataset)
 
-        expected = [[1, 1], [3.5, 2], [6.2, 1]]
+        expected = [[1, 1], [3.5, 2], [6.2, 1], [7, 1]]
 
         self.assertListEqual(expected, out, "since dense time offline 4")
 
@@ -1435,7 +1435,7 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
         b = ['b', [[4, 2], [6, 3]]]
         dataset = [a, b]
         out = interpreter.evaluate(dataset)
-        expected = [[4, 2], [6, 3]]
+        expected = [[4, 2], [6, 3], [6.2, 1]]
 
         self.assertListEqual(expected, out, "since dense time offline 4")
 
@@ -1452,7 +1452,7 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
         b = ['b', [[0, 4], [5, 4]]]
         dataset = [a, b]
         out = interpreter.evaluate(dataset)
-        expected = [[0, 2], [5, 2]]
+        expected = [[0, 2]]
 
         self.assertListEqual(expected, out, "until dense time offline 1")
 
@@ -1489,7 +1489,7 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
         dataset = [a, b]
         out = interpreter.evaluate(dataset)
 
-        expected = [[2.3, 2]]
+        expected = [[2.3, 2], [5, 2]]
 
         self.assertListEqual(expected, out, "until dense time offline 3")
 
@@ -1525,7 +1525,7 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
         b = ['b', [[0, 2], [7, 3]]]
         dataset = [a, b]
         out = interpreter.evaluate(dataset)
-        expected = [[1, 1], [3.5, 2], [6.2, 1]]
+        expected = [[1, 1], [3.5, 2], [6.2, 1], [7, 1]]
 
         self.assertListEqual(expected, out, "until dense time offline 5")
 
@@ -1543,7 +1543,7 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
         b = ['b', [[4, 2], [6, 3]]]
         dataset = [a, b]
         out = interpreter.evaluate(dataset)
-        expected = [[4, 3], [6, 3]]
+        expected = [[4, 3], [6.2, 1]]
 
         self.assertListEqual(expected, out, "until dense time offline 6")
 
@@ -1562,7 +1562,7 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
         out = interpreter.evaluate(dataset)
 
 
-        expected = [[4, 2], [5, 3]]
+        expected = [[4, 2], [5, 3], [6.2, 1]]
         self.assertListEqual(out, expected, "until")
 
     def test_once_bounded_2(self):
@@ -1896,7 +1896,7 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
         b = ['b', [[0, 4], [10, 4]]]
         dataset = [a, b]
         out = interpreter.evaluate(dataset)
-        expected = [[0, 2], [10, 2]]
+        expected = [[0, 2]]
 
         self.assertListEqual(out, expected, "since[0,1]")
 
@@ -1914,7 +1914,7 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
         b = ['b', [[0, 4], [10, 4]]]
         dataset = [a, b]
         out = interpreter.evaluate(dataset)
-        expected = [[0, -float('inf')], [1, 2], [11, 2]]
+        expected = [[0, -float('inf')], [1, 2]]
 
         self.assertListEqual(out, expected, "since[0,1]")
 
@@ -1933,7 +1933,7 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
         b = ['b', [[0, 4], [10, 4]]]
         dataset = [a, b]
         out = interpreter.evaluate(dataset)
-        expected = [[0, 2], [8, 2]]
+        expected = [[0, 2]]
 
         self.assertListEqual(out, expected, "until[0,1]")
 
@@ -2016,7 +2016,7 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
         dataset = [a, b]
         out = interpreter.evaluate(dataset)
 
-        expected = [[0, 2.5-1.3], [0.7, 4-3], [2.1, 4-3]]
+        expected = [[0, 2.5-1.3], [0.7, 4-3]]
 
         self.assertListEqual(expected, out, "leq dense time offline 2")
 
@@ -2034,7 +2034,7 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
         b = ['b', [[0, 2], [7, 3]]]
         dataset = [a, b]
         out = interpreter.evaluate(dataset)
-        expected = [[1, 2-1], [3.5, 2-7], [4.7, 2-3], [5.3, 2-5], [6.2, 2-1]]
+        expected = [[1, 2-1], [3.5, 2-7], [4.7, 2-3], [5.3, 2-5], [6.2, 2-1], [7, 3-1]]
 
         self.assertListEqual(expected, out, "leq dense time offline 3")
 
@@ -2052,7 +2052,7 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
         b = ['b', [[4, 2], [6, 3]]]
         dataset = [a, b]
         out = interpreter.evaluate(dataset)
-        expected = [[4, 2-7], [4.7, 2-3], [5.3, 2-5], [6, 3-5]]
+        expected = [[4, 2-7], [4.7, 2-3], [5.3, 2-5], [6, 3-5], [6.2, 3-1]]
 
         self.assertListEqual(expected, out, "leq dense time offline 4")
 
@@ -2070,7 +2070,7 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
         b = ['b', [[1.5, 1], [1.7, 2], [2.7, 3], [3, 5], [4, 1]]]
         dataset = [a, b]
         out = interpreter.evaluate(dataset)
-        expected = [[1.5, 1-1], [1.7, 2-1], [2, 2-8], [2.7, 3-8], [3, 5-4], [4, 1-4]]
+        expected = [[1.5, 1-1], [1.7, 2-1], [2, 2-8], [2.7, 3-8], [3, 5-4], [4, 1-4], [4.5, 1-7]]
 
         self.assertListEqual(expected, out, "leq dense time offline 5")
 
@@ -2088,7 +2088,7 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
         b = ['b', [[5, 1], [6, 2], [7, 3], [8, 5], [9, 1]]]
         dataset = [a, b]
         out = interpreter.evaluate(dataset)
-        expected = []
+        expected = [[5, 1-7], [6, 2-7], [7, 3-7], [8, 5-7], [9, 1-7]]
 
         self.assertListEqual(expected, out, "leq dense time offline 6")
 

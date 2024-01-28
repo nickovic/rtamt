@@ -135,47 +135,47 @@ class LtlAstParserVisitor(LtlParserVisitor):
         self.import_module(module_name, var_type)
 
     def visitExprAddition(self, ctx):
-        child1 = self.visit(ctx.real_expression(0))
-        child2 = self.visit(ctx.real_expression(1))
+        child1 = self.visit(ctx.expression(0))
+        child2 = self.visit(ctx.expression(1))
         node = Addition(child1, child2)
         return node
 
     def visitExprSubtraction(self, ctx):
-        child1 = self.visit(ctx.real_expression(0))
-        child2 = self.visit(ctx.real_expression(1))
+        child1 = self.visit(ctx.expression(0))
+        child2 = self.visit(ctx.expression(1))
         node = Subtraction(child1, child2)
         return node
 
     def visitExprMultiplication(self, ctx):
-        child1 = self.visit(ctx.real_expression(0))
-        child2 = self.visit(ctx.real_expression(1))
+        child1 = self.visit(ctx.expression(0))
+        child2 = self.visit(ctx.expression(1))
         node = Multiplication(child1, child2)
         return node
 
     def visitExprDivision(self, ctx):
-        child1 = self.visit(ctx.real_expression(0))
-        child2 = self.visit(ctx.real_expression(1))
+        child1 = self.visit(ctx.expression(0))
+        child2 = self.visit(ctx.expression(1))
         node = Division(child1, child2)
         return node
 
     def visitExprAbs(self, ctx):
-        child = self.visit(ctx.real_expression())
+        child = self.visit(ctx.expression())
         node = Abs(child)
         return node
 
     def visitExprSqrt(self, ctx):
-        child = self.visit(ctx.real_expression())
+        child = self.visit(ctx.expression())
         node = Sqrt(child)
         return node
 
     def visitExprExp(self, ctx):
-        child = self.visit(ctx.real_expression())
+        child = self.visit(ctx.expression())
         node = Exp(child)
         return node
 
     def visitExprPow(self, ctx):
-        child1 = self.visit(ctx.real_expression(0))
-        child2 = self.visit(ctx.real_expression(1))
+        child1 = self.visit(ctx.expression(0))
+        child2 = self.visit(ctx.expression(1))
         node = Pow(child1, child2)
         return node
 

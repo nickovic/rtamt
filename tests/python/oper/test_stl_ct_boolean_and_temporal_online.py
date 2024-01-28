@@ -145,7 +145,7 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
         oper = XorOperation()
         in_data_1 = [[1, 2], [4.1, 1], [5, 2], [6.1, 1], [6.7, 4], [9.9, 5]]
         in_data_2 = [[1.2, 1], [3.7, 3], [7.5, 2], [8.1, 6]]
-        out_expected = [[1.2, 1], [3.7, 1], [4.1, 2], [5, 1], [6.1, 2], [6.7, 1], [7.5, 2], [8.1, 2]]
+        out_expected = [[1.2, 1], [3.7, 1], [4.1, 2], [5, 1], [6.1, 2], [6.7, 1], [7.5, 2], [8.1, 2], [9.9, 1]]
         out_computed = oper.update(in_data_1, in_data_2)
 
         self.assertListEqual(out_expected, out_computed,

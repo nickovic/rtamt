@@ -450,7 +450,7 @@ class StlDenseTimeOfflineAstVisitor(StlAstVisitor):
 
 
     def visitEventually(self, node, *args, **kwargs):
-        sample =  self.visit(node.children[0], *args, **kwargs)
+        sample = self.visit(node.children[0], *args, **kwargs)
 
         sample_return = []
         self.next = -float("inf")   #TODO don't use self.next
