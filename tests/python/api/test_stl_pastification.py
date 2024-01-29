@@ -1,5 +1,6 @@
 import unittest
 
+from rtamt.pastifier.ltl.pastifier import LtlPastifier
 from rtamt.syntax.ast.parser.ltl.specification_parser import LtlAst
 from rtamt.syntax.ast.parser.stl.specification_parser import StlAst
 from rtamt.pastifier.stl.pastifier import StlPastifier
@@ -41,46 +42,46 @@ class TestStlPastification(unittest.TestCase):
         # self.assertEqual('myvar.req.val', ast.specs[0].name, 'Var pastification assertion')
 
     def test_previous_1(self):
-        ast = StlAst()
+        ast = LtlAst()
         ast.declare_var('req', 'float')
         ast.spec = 'prev req'
         ast.parse()
 
-        pastifier = StlPastifier()
+        pastifier = LtlPastifier()
         ast = pastifier.pastify(ast)
 
         self.assertEqual('previous(req)', ast.specs[0].name, 'Prev pastification assertion')
 
     def test_strong_previous(self):
-        ast = StlAst()
+        ast = LtlAst()
         ast.declare_var('req', 'float')
         ast.spec = 's_prev req'
         ast.parse()
 
-        pastifier = StlPastifier()
+        pastifier = LtlPastifier()
         ast = pastifier.pastify(ast)
 
         self.assertEqual('s_previous(req)', ast.specs[0].name, 'Strong Prev pastification assertion')
 
 
     def test_next_1(self):
-        ast = StlAst()
+        ast = LtlAst()
         ast.declare_var('req', 'float')
         ast.spec = 'X req'
         ast.parse()
 
-        pastifier = StlPastifier()
+        pastifier = LtlPastifier()
         ast = pastifier.pastify(ast)
 
         self.assertEqual('req', ast.specs[0].name, 'Next pastification assertion')
 
     def test_strong_next_1(self):
-        ast = StlAst()
+        ast = LtlAst()
         ast.declare_var('req', 'float')
         ast.spec = 'sX req'
         ast.parse()
 
-        pastifier = StlPastifier()
+        pastifier = LtlPastifier()
         ast = pastifier.pastify(ast)
 
         self.assertEqual('req', ast.specs[0].name, 'Weak Next pastification assertion')
@@ -484,7 +485,7 @@ class TestStlPastification(unittest.TestCase):
         pastifier = StlPastifier()
         ast = pastifier.pastify(ast)
 
-        self.assertEqual('(once[0,1](req))->(once[1,2](once[3,3](gnt)))', ast.specs[0].name, 'Complex pastification assertion')
+        self.assertEqual('(once[0,1](req))->(once[4,5](gnt))', ast.specs[0].name, 'Complex pastification assertion')
 
     if __name__ == '__main__':
         unittest.main()

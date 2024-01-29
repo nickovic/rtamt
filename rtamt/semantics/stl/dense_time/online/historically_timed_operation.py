@@ -54,8 +54,6 @@ class HistoricallyTimedOperation(AbstractDenseTimeOnlineOperation):
                         out.append((a[1], b[1], b[2]))
                     else:
                         del (out[len(out) - 1])
-                        #out.append((a[0], b[0], a[2]))
-                        #out.append((b[0], b[1], b[2]))
                         if b[0] > a[0]:
                             out.append((a[0], b[0], a[2]))
                         out.append((b[0], b[1], b[2]))
