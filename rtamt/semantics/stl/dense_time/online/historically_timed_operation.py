@@ -25,7 +25,8 @@ class HistoricallyTimedOperation(AbstractDenseTimeOnlineOperation):
 
         if sample:
             # update when the residuals start in this iteration
-            self.residual_start = sample[len(sample) - 1][0] + begin
+            #self.residual_start = sample[len(sample) - 1][0] + begin
+            self.residual_start = sample[-1][0]
             if out:
                 # update the last previous sample with current knowledge
                 last_prev = out[len(out) - 1]
@@ -61,18 +62,29 @@ class HistoricallyTimedOperation(AbstractDenseTimeOnlineOperation):
 
         prev = float("nan")
 
+        last = []
         for i, b in enumerate(out):
-            if b[1] <= self.residual_start:
+            if self.residual_start >= b[1]:
+                last = [b[0], b[2]]
                 if b[2] != prev or i == len(out) - 1:
-                    sample_result.append([b[0], b[2]])
-            elif b[0] < self.residual_start < b[1]:
+                    sample_result.append(last)
+            elif b[0] <= self.residual_start < b[1]:
+                last = [b[0], b[2]]
                 if b[2] != prev or i == len(out) - 1:
-                    sample_result.append([b[0], b[2]])
-                self.prev.append((self.residual_start, b[1], b[2]))
+                    sample_result.append(last)
+                if self.residual_start > b[0]:
+                    last = [self.residual_start, b[2]]
+                    self.prev.append((self.residual_start, b[1], b[2]))
             else:
                 self.prev.append(b)
-
             prev = b[2]
+
+        if last:
+            if not sample_result:
+                sample_result.append(last)
+            else:
+                if last[0] > sample_result[-1][0]:
+                    sample_result.append(last)
 
         return sample_result
 
