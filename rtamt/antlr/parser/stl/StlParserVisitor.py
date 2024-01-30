@@ -1,6 +1,6 @@
-# Generated from rtamt/antlr/grammar/tl/StlParser.g4 by ANTLR 4.13.1
+# Generated from rtamt\antlr\grammar\tl\StlParser.g4 by ANTLR 4.7.2
 from antlr4 import *
-if "." in __name__:
+if __name__ is not None and "." in __name__:
     from .StlParser import StlParser
 else:
     from StlParser import StlParser
@@ -156,11 +156,6 @@ class StlParserVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by StlParser#ExprHist.
     def visitExprHist(self, ctx:StlParser.ExprHistContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by StlParser#ExprMinus.
-    def visitExprMinus(self, ctx:StlParser.ExprMinusContext):
         return self.visitChildren(ctx)
 
 

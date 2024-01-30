@@ -24,8 +24,6 @@ expression
 	| EXP LPAREN expression RPAREN                              #ExprExp
 	| POW LPAREN expression COMMA expression RPAREN             #ExprPow
 
-    | MINUS expression                                          #ExprMinus
-
     | expression TIMES expression                               #ExprMultiplication
 	| expression DIVIDE expression                              #ExprDivision
 	| expression PLUS expression                                #ExprAddition

@@ -34,6 +34,8 @@ class OnceTimedOperation(AbstractDenseTimeOnlineOperation):
 
         i = 1
         while len(sample) >= i:
+            if i == 1 and sample[0][0] == 0 and begin > 0:
+                out.append((0, sample[0][0] + begin, -float('inf')))
             if i == len(sample):
                 b = (sample[i - 1][0] + begin, sample[i-1][0] + end, sample[i - 1][1])
             else:

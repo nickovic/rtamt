@@ -201,7 +201,7 @@ def intersection(in_samples_1, in_samples_2, method):
             in_samples_2.pop(0)
             prev_in_sample_2 = current_in_sample_2
         else:
-            raise RTAMTException('Dense time offline evaluation: Unexpected case in the intersection.')
+            raise RTAMTException('Dense time online evaluation: Unexpected case in the intersection.')
 
     remainder_samples_1 = in_samples_1.copy()
     remainder_samples_2 = in_samples_2.copy()

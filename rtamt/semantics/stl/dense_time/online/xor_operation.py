@@ -11,8 +11,15 @@ class XorOperation(AbstractDenseTimeOnlineOperation):
         pass
 
     def update(self, sample_left, sample_right, *args, **kargs):
-        self.sample_left_buf = self.sample_left_buf + sample_left
-        self.sample_right_buf = self.sample_right_buf + sample_right
+        if self.sample_left_buf and sample_left and self.sample_left_buf[-1][0] == sample_left[0][0]:
+            self.sample_left_buf = self.sample_left_buf + sample_left[1:]
+        else:
+            self.sample_left_buf = self.sample_left_buf + sample_left
+
+        if self.sample_right_buf and sample_right and self.sample_right_buf[-1][0] == sample_right[0][0]:
+            self.sample_right_buf = self.sample_right_buf + sample_right[1:]
+        else:
+            self.sample_right_buf = self.sample_right_buf + sample_right
 
         result, last, left, right = intersect.intersection(self.sample_left_buf, self.sample_right_buf, intersect.xor)
 

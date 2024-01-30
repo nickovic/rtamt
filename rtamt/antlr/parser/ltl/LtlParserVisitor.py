@@ -1,6 +1,6 @@
-# Generated from rtamt/antlr/grammar/tl/LtlParser.g4 by ANTLR 4.13.1
+# Generated from rtamt\antlr\grammar\tl\LtlParser.g4 by ANTLR 4.7.2
 from antlr4 import *
-if "." in __name__:
+if __name__ is not None and "." in __name__:
     from .LtlParser import LtlParser
 else:
     from LtlParser import LtlParser
