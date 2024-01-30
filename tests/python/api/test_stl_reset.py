@@ -139,7 +139,7 @@ class TestStlReset(unittest.TestCase):
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
-        spec.spec = 'out = req - gnt'
+        spec.spec = 'out = (req - gnt)'
         spec.parse()
 
         out = spec.update(0, [['req', 1.1], ['gnt', 2.2]])

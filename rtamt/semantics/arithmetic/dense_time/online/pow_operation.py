@@ -1,6 +1,6 @@
 import math
 from rtamt.semantics.abstract_dense_time_online_operation import AbstractDenseTimeOnlineOperation
-import rtamt.semantics.stl.dense_time.offline.intersection as intersect
+import rtamt.semantics.stl.dense_time.online.intersection as intersect
 
 class PowOperation(AbstractDenseTimeOnlineOperation):
     def __init__(self):
@@ -17,12 +17,18 @@ class PowOperation(AbstractDenseTimeOnlineOperation):
 
         result, last, left, right = intersect.intersection(self.sample_left_buf, self.sample_right_buf, intersect.power)
 
+        if last:
+            if not result:
+                result.append(last)
+            else:
+                if last[0] > result[-1][0]:
+                    result.append(last)
+
         self.sample_left_buf = left
         self.sample_right_buf = right
-        if self.last_output:
-            if result:
-                if self.last_output[0] == result[0][0] and self.last_output[1] == result[0][1]:
-                    result.pop(0)
+        if self.last_output and result:
+            if self.last_output[0] == result[0][0] and self.last_output[1] == result[0][1]:
+                result.pop(0)
 
         if result:
             self.last_output = result[-1]

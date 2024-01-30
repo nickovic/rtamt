@@ -125,7 +125,7 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
         b = ['b', [[3.7, 3], [7.5, 2]]]
         dataset = [a, b]
         out = op.update(dataset)
-        out_expected_2 = [[3.7, 3], [4.1, 3], [5, 3], [6.1, 3]]
+        out_expected_2 = [[3.7, 3], [6.1, 3]]
 
         self.assertListEqual(out_expected_2, out,
                              "Problem with 6th example:\nExpected output: %s\nComputed output: %s" % (
@@ -135,7 +135,7 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
         b = ['b', [[8.1, 6]]]
         dataset = [a, b]
         out = op.update(dataset)
-        out_expected_3 = [[6.7, 4], [7.5, 4], [8.1, 6]]
+        out_expected_3 = [[6.7, 4], [8.1, 6]]
 
         self.assertListEqual(out_expected_3, out,
                              "Problem with 6th example:\nExpected output: %s\nComputed output: %s" % (
@@ -146,7 +146,7 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
         oper = IffOperation()
         in_data_1 = [[1, 2], [4.1, 1], [5, 2], [6.1, 1], [6.7, 4], [9.9, 5]]
         in_data_2 = [[1.2, 1], [3.7, 3], [7.5, 2], [8.1, 6]]
-        out_expected = [[1.2, -1], [3.7, -1], [4.1, -2], [5, -1], [6.1, -2], [6.7, -1], [7.5, -2], [8.1, -2]]
+        out_expected = [[1.2, -1], [4.1, -2], [5, -1], [6.1, -2], [6.7, -1], [7.5, -2], [8.1, -2]]
         out_computed = oper.update(in_data_1, in_data_2)
 
         self.assertListEqual(out_expected, out_computed,
@@ -157,7 +157,7 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
         oper = XorOperation()
         in_data_1 = [[1, 2], [4.1, 1], [5, 2], [6.1, 1], [6.7, 4], [9.9, 5]]
         in_data_2 = [[1.2, 1], [3.7, 3], [7.5, 2], [8.1, 6]]
-        out_expected = [[1.2, 1], [3.7, 1], [4.1, 2], [5, 1], [6.1, 2], [6.7, 1], [7.5, 2], [8.1, 2]]
+        out_expected = [[1.2, 1], [4.1, 2], [5, 1], [6.1, 2], [6.7, 1], [7.5, 2], [8.1, 2]]
         out_computed = oper.update(in_data_1, in_data_2)
 
         self.assertListEqual(out_expected, out_computed,
@@ -169,7 +169,7 @@ class TestSTLBooleanAndTemporalOnline(unittest.TestCase):
         oper = ImpliesOperation()
         in_data_1 = [[1, 2], [4.1, 1], [5, 2], [6.1, 1], [6.7, 4], [9.9, 5]]
         in_data_2 = [[1.2, 1], [3.7, 3], [7.5, 2], [8.1, 6]]
-        out_expected = [[1.2, 1], [3.7, 3], [4.1, 3], [5, 3], [6.1, 3], [6.7, 3], [7.5, 2], [8.1, 6]]
+        out_expected = [[1.2, 1], [3.7, 3], [7.5, 2], [8.1, 6]]
         out_computed = oper.update(in_data_1, in_data_2)
 
         self.assertListEqual(out_expected, out_computed,

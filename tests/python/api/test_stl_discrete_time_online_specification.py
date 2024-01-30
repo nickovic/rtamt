@@ -72,7 +72,7 @@ class TestStlDiscreteTimeOnlineSpecification(unittest.TestCase):
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
-        spec.spec = 'out = req - gnt'
+        spec.spec = 'out = (req - gnt)'
 
         spec.parse()
 

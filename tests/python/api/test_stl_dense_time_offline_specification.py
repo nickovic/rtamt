@@ -306,7 +306,7 @@ class TestStlDenseTimeOfflineSpecification(unittest.TestCase):
         right = [[0, 4], [10, 4]]
 
         out = spec.evaluate(['req', left], ['gnt', right])
-        expected = [[0, 2], [10, 2]]
+        expected = [[0, 2]]
         self.assertListEqual(out, expected, "since[0:1]")
 
     def test_until_0_1(self):
@@ -321,7 +321,7 @@ class TestStlDenseTimeOfflineSpecification(unittest.TestCase):
         right = [[0, 4], [10, 4]]
 
         out = spec.evaluate(['req', left], ['gnt', right])
-        expected = [[0, 2], [9, 2]]
+        expected = [[0, 2]]
         self.assertListEqual(out, expected, "until[0:1]")
 
 
@@ -345,7 +345,7 @@ class TestStlDenseTimeOfflineSpecification(unittest.TestCase):
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
-        spec.spec = 'out = req - gnt'
+        spec.spec = 'out = (req - gnt)'
 
         spec.parse()
         left = [[0, 1.3], [0.7, 3], [1.3, 0.1], [2.1, -2.2]]

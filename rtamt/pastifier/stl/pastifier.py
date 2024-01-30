@@ -353,16 +353,34 @@ class StlPastifier(LtlPastifier, StlAstVisitor):
         return node
 
     def visitPrevious(self, node, *args, **kwargs):
-        raise RTAMTException('Cannot pastify a previous operator in dense time.')
+        node_horizon = self.subformula_horizons[node]
+        remaining_horizon = args[0]
+        horizon = remaining_horizon - node_horizon
+        child_node = self.visit(node.children[0], node_horizon)
+        node = Previous(child_node)
+        if horizon > 0:
+            node = TimedOnce(node, Interval(horizon, horizon))
+        return node
 
     def visitStrongPrevious(self, node, *args, **kwargs):
-        raise RTAMTException('Cannot pastify a previous operator in dense time.')
+        node_horizon = self.subformula_horizons[node]
+        remaining_horizon = args[0]
+        horizon = remaining_horizon - node_horizon
+        child_node = self.visit(node.children[0], node_horizon)
+        node = StrongPrevious(child_node)
+        if horizon > 0:
+            node = TimedOnce(node, Interval(horizon, horizon))
+        return node
 
     def visitNext(self, node, *args, **kwargs):
-        raise RTAMTException('Cannot pastify a previous operator in dense time.')
+        horizon = args[0] - 1
+        child_node = self.visit(node.children[0], horizon)
+        return child_node
 
     def visitStrongNext(self, node, *args, **kwargs):
-        raise RTAMTException('Cannot pastify a previous operator in dense time.')
+        horizon = args[0] - 1
+        child_node = self.visit(node.children[0], horizon)
+        return child_node
 
     def visitHistorically(self, node, *args, **kwargs):
         node_horizon = self.subformula_horizons[node]

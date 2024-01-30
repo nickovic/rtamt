@@ -1,20 +1,20 @@
 from rtamt.semantics.abstract_dense_time_online_operation import AbstractDenseTimeOnlineOperation
-import rtamt.semantics.stl.dense_time.offline.intersection as intersect
+import rtamt.semantics.stl.dense_time.online.intersection as intersect
 
 class SubtractionOperation(AbstractDenseTimeOnlineOperation):
     def __init__(self):
-        self.sample_left = []
-        self.sample_right = []
+        self.sample_left_buf = []
+        self.sample_right_buf = []
         self.last_output = []
 
     def reset(self):
         pass
 
     def update(self, sample_left, sample_right, *args, **kargs):
-        self.sample_left = self.sample_left + sample_left
-        self.sample_right = self.sample_right + sample_right
+        self.sample_left_buf = self.sample_left_buf + sample_left
+        self.sample_right_buf = self.sample_right_buf + sample_right
 
-        result, last, left, right = intersect.intersection(self.sample_left, self.sample_right, intersect.subtraction)
+        result, last, left, right = intersect.intersection(self.sample_left_buf, self.sample_right_buf, intersect.subtraction)
 
         if last:
             if not result:

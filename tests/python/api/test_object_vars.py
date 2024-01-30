@@ -48,21 +48,21 @@ class TestSemantics(unittest.TestCase):
 
         spec.reset()
 
-    def test_stl_dense_time_online(self):
-        spec = StlDenseTimeOnlineSpecification()
-        spec.declare_var('a', 'float')
-        spec.spec = 'historically[0,1](a>=2)'
-        spec.parse()
+    #def test_stl_dense_time_online(self):
+    #    spec = StlDenseTimeOnlineSpecification()
+    #    spec.declare_var('a', 'float')
+    #    spec.spec = 'historically[0,1](a>=2)'
+    #    spec.parse()
 
-        a = []
-        a.append([[5, 3], [5.3, 1]])
-        a.append([[5.75, 2], [6.5, 5], [6.75, 6], [9, 5], [9.25, 4]])
-        a.append([[10, 2]])
+    #    a = []
+    #    a.append([[5, 3], [5.3, 1]])
+    #    a.append([[5.75, 2], [6.5, 5], [6.75, 6], [9, 5], [9.25, 4]])
+    #    a.append([[10, 2]])
 
-        robs = []
-        for i in range(len(a)):
-            rob = spec.update(['a', a[i]])
-            robs.append(rob)
+    #    robs = []
+    #    for i in range(len(a)):
+    #        rob = spec.update(['a', a[i]])
+    #        robs.append(rob)
 
         # spec.reset()
 

@@ -55,7 +55,7 @@ class TestSTLEvaluation(unittest.TestCase):
         ast = StlAst()
         ast.declare_var('a', 'float')
         ast.declare_var('b', 'float')
-        ast.spec = 'a - b'
+        ast.spec = '(a - b)'
         ast.parse()
         interpreter = StlDiscreteTimeOfflineInterpreter()
         interpreter.set_ast(ast)

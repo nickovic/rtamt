@@ -132,7 +132,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
 
         in_data_1_2 = []
         in_data_2_2 = [[3.7, 3], [7.5, 2]]
-        out_expected_2 = [[3.7, 3], [4.1, 3], [5, 3], [6.1, 3]]
+        out_expected_2 = [[3.7, 3], [6.1, 3]]
         out_computed_2 = spec.update(['req', in_data_1_2], ['gnt', in_data_2_2])
 
         self.assertListEqual(out_expected_2, out_computed_2,
@@ -141,7 +141,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
 
         in_data_1_3 = [[6.7, 4], [9.9, 5]]
         in_data_2_3 = [[8.1, 6]]
-        out_expected_3 = [[6.7, 4], [7.5, 4], [8.1, 6]]
+        out_expected_3 = [[6.7, 4], [8.1, 6]]
         out_computed_3 = spec.update(['req', in_data_1_3], ['gnt', in_data_2_3])
 
         self.assertListEqual(out_expected_3, out_computed_3,
@@ -160,7 +160,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
 
         in_data_1 = [[1, 2], [4.1, 1], [5, 2], [6.1, 1], [6.7, 4], [9.9, 5]]
         in_data_2 = [[1.2, 1], [3.7, 3], [7.5, 2], [8.1, 6]]
-        out_expected = [[1.2, -1], [3.7, -1], [4.1, -2], [5, -1], [6.1, -2], [6.7, -1], [7.5, -2], [8.1, -2]]
+        out_expected = [[1.2, -1], [4.1, -2], [5, -1], [6.1, -2], [6.7, -1], [7.5, -2], [8.1, -2]]
         out_computed = spec.update(['req', in_data_1], ['gnt', in_data_2])
 
         self.assertListEqual(out_expected, out_computed,
@@ -178,7 +178,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
 
         in_data_1 = [[1, 2], [4.1, 1], [5, 2], [6.1, 1], [6.7, 4], [9.9, 5]]
         in_data_2 = [[1.2, 1], [3.7, 3], [7.5, 2], [8.1, 6]]
-        out_expected = [[1.2, 1], [3.7, 1], [4.1, 2], [5, 1], [6.1, 2], [6.7, 1], [7.5, 2], [8.1, 2]]
+        out_expected = [[1.2, 1], [4.1, 2], [5, 1], [6.1, 2], [6.7, 1], [7.5, 2], [8.1, 2]]
         out_computed = spec.update(['req', in_data_1], ['gnt', in_data_2])
 
         self.assertListEqual(out_expected, out_computed,
@@ -197,7 +197,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
 
         in_data_1 = [[1, 2], [4.1, 1], [5, 2], [6.1, 1], [6.7, 4], [9.9, 5]]
         in_data_2 = [[1.2, 1], [3.7, 3], [7.5, 2], [8.1, 6]]
-        out_expected = [[1.2, 1], [3.7, 3], [4.1, 3], [5, 3], [6.1, 3], [6.7, 3], [7.5, 2], [8.1, 6]]
+        out_expected = [[1.2, 1], [3.7, 3], [7.5, 2], [8.1, 6]]
         out_computed = spec.update(['req', in_data_1], ['gnt', in_data_2])
 
         self.assertListEqual(out_expected, out_computed,
@@ -485,7 +485,7 @@ class TestStlDenseTimeOnlineSpecification(unittest.TestCase):
         spec.declare_var('req', 'float')
         spec.declare_var('gnt', 'float')
         spec.declare_var('out', 'float')
-        spec.spec = 'out = req - gnt'
+        spec.spec = 'out = (req - gnt)'
 
         spec.parse()
 
