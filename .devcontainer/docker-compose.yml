@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  rtamt:
+    # platform: linux/arm64
+    build:
+      context: ../
+      dockerfile: .devcontainer/Dockerfile
+    volumes:
+      - ../:/home/rtamt
+    stdin_open: true
+    tty: true
