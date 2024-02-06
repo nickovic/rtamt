@@ -436,7 +436,7 @@ class TestStlDenseTimeOnlineSpecificationCpp(unittest.TestCase):
 
         spec.parse()
 
-        self.assertRaises(rtamt.STLNotImplementedException, spec.update, 0, [('req', self.left1), ('gnt', self.right1)])
+        self.assertRaises(rtamt.RTAMTException, spec.update, 0, [('req', self.left1), ('gnt', self.right1)])
 
     def test_until_with_pastify(self):
         spec = rtamt.StlDiscreteTimeOnlineSpecificationCpp()
