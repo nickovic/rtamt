@@ -110,7 +110,7 @@ jobs:
     - name: Upload artifact signatures to GitHub Release
       env:
         GITHUB_TOKEN: ${{ github.token }}
-      # Uploead to GitHub Release using the 'gh' CLI
+      # Uploead to GitHub Release using the 'gh' CLI 
       # 'dist/' contains the built packages, and the 
       # sigstore-produced signatures and certificates.
       run: >-
