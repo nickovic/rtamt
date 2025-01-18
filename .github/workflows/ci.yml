@@ -122,11 +122,11 @@ jobs:
     name: Publish Python distribution to TestPyPI
     needs:
     - build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     environment:
       name: testpypi
-      url: https://test.pypi.org/p/rtamt
+      url: https://test.pypi.org/project/rtamt
 
     permissions:
       id-token: write
