@@ -11,7 +11,7 @@ setup(
     name='rtamt',
     version='0.4.6',
     description='Library for specification-based online monitoring.',
-    long_description=long_description,
+    long_description='Library for specification-based online monitoring.',
     long_description_content_type="text/markdown",
     url='https://github.com/nickovic/rtamt',
     author='Nickovic Dejan, Tomoya Yamaguchi',
