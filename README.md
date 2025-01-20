@@ -26,7 +26,7 @@
 
 # About
 
-RTAMT is a Python (2- and 3-compatible) library for monitoring of Signal Temporal Logic (STL).
+RTAMT is a Python (2- and 3-compatible) library for monitoring of Signal Temporal Logic (STL). 
 The library implements algorithms offline and online monitoring of discrete-time and dense-time STL.
 The online monitors support the bounded future fragment of STL.
 The online discrete-time part of the library has an optimized C++ back-end.
