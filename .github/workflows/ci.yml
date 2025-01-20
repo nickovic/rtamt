@@ -126,7 +126,7 @@ jobs:
 
     environment:
       name: testpypi
-      url: https://test.pypi.org/project/rtamt
+      url: https://test.pypi.org/p/rtamt
 
     permissions:
       id-token: write
