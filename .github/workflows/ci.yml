@@ -141,7 +141,5 @@ jobs:
       uses: pypa/gh-action-pypi-publish@15c56dba361d8335944d31a2ecd17d700fc7bcbc # v1.12.2
       with:
         repository-url: https://test.pypi.org/legacy
-        attestations: true
         verbose: true
-
 
