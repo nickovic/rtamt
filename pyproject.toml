@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "rtamt" 
-version = "0.4.6"
+version = "0.4.7"
 description = "Signal Temporal Logic (STL) monitoring library"
 readme = "README.md"
 requires-python = ">=2.7"
@@ -36,3 +36,4 @@ package-data = { "sample" = ["*.so"] }
 
 [tool.setuptools.packages]
 find = {}
+
