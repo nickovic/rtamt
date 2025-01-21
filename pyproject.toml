@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+
+[project]
+name = "rtamt" 
+version = "0.4.6"
+description = "Signal Temporal Logic (STL) monitoring library"
+readme = "README.md"
+requires-python = ">=2.7"
+license = { file = "LICENSE" }
+keywords = ["STL", "monitoring", "runtime verification"]
+authors = [{ name = "Dejan Nickovic", email = "dejan.nickovic@gmail.com" }]
+maintainers = [
+  { name = "Dejan Nickovic", email = "dejan.nickovic@gmail.com" },
+]
+
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "License :: OSI Approved :: BSD License",
+  "Programming Language :: Python :: 2.7",
+  "Programming Language :: Python :: 3",
+]
+
+dependencies = ["antlr4-python3-runtime==4.7"]
+
+[project.urls]
+"Homepage" = "https://github.com/nickovic/rtamt"
+"Bug Reports" = "https://github.com/nickovic/rtamt/issues"
+"Source" = "https://github.com/nickovic/rtamt"
+
+
+[tool.setuptools]
+package-data = { "sample" = ["*.so"] }
+
+[tool.setuptools.packages]
+find = {}
