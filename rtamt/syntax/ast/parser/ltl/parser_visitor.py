@@ -46,6 +46,7 @@ class LtlAstParserVisitor(LtlParserVisitor):
         child2 = self.visit(ctx.expression(1))
         op_type = self.str_to_op_type(ctx.comparisonOp().getText())
         node = Predicate(child1, child2, op_type)
+        self.phi_name_to_node_dict[node.name] = node
 
         return node
 
@@ -56,9 +57,11 @@ class LtlAstParserVisitor(LtlParserVisitor):
         if id in self.const_val_dict:
             val = self.const_val_dict[id]
             node = Constant(float(val))
+            self.phi_name_to_node_dict[node.name] = node
         # Identifier is either an input variable or a sub-formula
         elif id in self.var_subspec_dict:
                 node = self.var_subspec_dict[id]
+                self.phi_name_to_node_dict[node.name] = node
                 return node
         else:
             id_tokens = id.split('.')
@@ -91,6 +94,7 @@ class LtlAstParserVisitor(LtlParserVisitor):
 
             var_io = self.var_io_dict[id_head]
             node = Variable(id_head, id_tail, var_io)
+            self.phi_name_to_node_dict[node.name] = node
 
         return node
 
@@ -138,141 +142,167 @@ class LtlAstParserVisitor(LtlParserVisitor):
         child1 = self.visit(ctx.expression(0))
         child2 = self.visit(ctx.expression(1))
         node = Addition(child1, child2)
+        self.phi_name_to_node_dict[node.name] = node
         return node
 
     def visitExprSubtraction(self, ctx):
         child1 = self.visit(ctx.expression(0))
         child2 = self.visit(ctx.expression(1))
         node = Subtraction(child1, child2)
+        self.phi_name_to_node_dict[node.name] = node
         return node
 
     def visitExprMultiplication(self, ctx):
         child1 = self.visit(ctx.expression(0))
         child2 = self.visit(ctx.expression(1))
         node = Multiplication(child1, child2)
+        self.phi_name_to_node_dict[node.name] = node
         return node
 
     def visitExprDivision(self, ctx):
         child1 = self.visit(ctx.expression(0))
         child2 = self.visit(ctx.expression(1))
         node = Division(child1, child2)
+        self.phi_name_to_node_dict[node.name] = node
         return node
 
     def visitExprAbs(self, ctx):
         child = self.visit(ctx.expression())
         node = Abs(child)
+        self.phi_name_to_node_dict[node.name] = node
         return node
 
     def visitExprSqrt(self, ctx):
         child = self.visit(ctx.expression())
         node = Sqrt(child)
+        self.phi_name_to_node_dict[node.name] = node
         return node
 
     def visitExprExp(self, ctx):
         child = self.visit(ctx.expression())
         node = Exp(child)
+        self.phi_name_to_node_dict[node.name] = node
         return node
 
     def visitExprPow(self, ctx):
         child1 = self.visit(ctx.expression(0))
         child2 = self.visit(ctx.expression(1))
         node = Pow(child1, child2)
+        self.phi_name_to_node_dict[node.name] = node
         return node
 
     def visitExprNot(self, ctx):
         child = self.visit(ctx.expression())
         node = Neg(child)
+        self.phi_name_to_node_dict[node.name] = node
         return node
 
     def visitExprRise(self, ctx):
         child = self.visit(ctx.expression())
         node = Rise(child)
+        self.phi_name_to_node_dict[node.name] = node
         return node
 
     def visitExprLiteral(self, ctx):
         val = float(ctx.literal().getText())
         node = Constant(val)
+        self.phi_name_to_node_dict[node.name] = node
         return node
 
     def visitExprFall(self, ctx):
         child = self.visit(ctx.expression())
         node = Fall(child)
+        self.phi_name_to_node_dict[node.name] = node
         return node
 
     def visitExprAnd(self, ctx):
         child1 = self.visit(ctx.expression(0))
         child2 = self.visit(ctx.expression(1))
         node = Conjunction(child1, child2)
+        self.phi_name_to_node_dict[node.name] = node
         return node
 
     def visitExprOr(self, ctx):
         child1 = self.visit(ctx.expression(0))
         child2 = self.visit(ctx.expression(1))
         node = Disjunction(child1, child2)
+        self.phi_name_to_node_dict[node.name] = node
         return node
 
     def visitExprImplies(self, ctx):
         child1 = self.visit(ctx.expression(0))
         child2 = self.visit(ctx.expression(1))
         node = Implies(child1, child2)
+        self.phi_name_to_node_dict[node.name] = node
         return node
 
     def visitExprIff(self, ctx):
         child1 = self.visit(ctx.expression(0))
         child2 = self.visit(ctx.expression(1))
         node = Iff(child1, child2)
+        self.phi_name_to_node_dict[node.name] = node
         return node
 
     def visitExprXor(self, ctx):
         child1 = self.visit(ctx.expression(0))
         child2 = self.visit(ctx.expression(1))
         node = Xor(child1, child2)
+        self.phi_name_to_node_dict[node.name] = node
         return node
 
     def visitExprAlways(self, ctx):
         child = self.visit(ctx.expression())
         node = Always(child)
+        self.phi_name_to_node_dict[node.name] = node
         return node
 
     def visitExprEv(self, ctx):
         child = self.visit(ctx.expression())
         node = Eventually(child)
+        self.phi_name_to_node_dict[node.name] = node
         return node
 
     def visitExprPrevious(self, ctx):
         child = self.visit(ctx.expression())
         node = Previous(child)
+        self.phi_name_to_node_dict[node.name] = node
         return node
 
     def visitExprStrongPrevious(self, ctx):
         child = self.visit(ctx.expression())
         node = StrongPrevious(child)
+        self.phi_name_to_node_dict[node.name] = node
         return node
 
     def visitExprNext(self, ctx):
         child = self.visit(ctx.expression())
         node = Next(child)
+        self.phi_name_to_node_dict[node.name] = node
         return node
 
     def visitExprStrongNext(self, ctx):
         child = self.visit(ctx.expression())
         node = StrongNext(child)
+        self.phi_name_to_node_dict[node.name] = node
         return node
 
     def visitExpreOnce(self, ctx):
         child = self.visit(ctx.expression())
         node = Once(child)
+        self.phi_name_to_node_dict[node.name] = node
         return node
 
     def visitExprHist(self, ctx):
         child = self.visit(ctx.expression())
         node = Historically(child)
+        self.phi_name_to_node_dict[node.name] = node
         return node
 
     def visitExprSince(self, ctx):
         child1 = self.visit(ctx.expression(0))
         child2 = self.visit(ctx.expression(1))
         node = Since(child1, child2)
+        self.phi_name_to_node_dict[node.name] = node
         return node
 
     def visitExprUntil(self, ctx):
@@ -281,6 +311,7 @@ class LtlAstParserVisitor(LtlParserVisitor):
         child2 = self.visit(ctx.expression(1))
 
         node = Until(child1, child2)
+        self.phi_name_to_node_dict[node.name] = node
         return node
 
     def visitExprUnless(self, ctx):
@@ -291,6 +322,7 @@ class LtlAstParserVisitor(LtlParserVisitor):
         left = Always(child1, 0, interval.end)
         right = Until(child1, child2)
         node = Disjunction(left, right)
+        self.phi_name_to_node_dict[node.name] = node
 
         return node
 
@@ -308,7 +340,8 @@ class LtlAstParserVisitor(LtlParserVisitor):
             id = 'out'
             implicit = True
         else:
-            id = ctx.Identifier().getText();
+            id = ctx.Identifier().getText()
+        self.phi_name_to_node_dict[id] = out
 
         self.var_subspec_dict[id] = out
         id_tokens = id.split('.')

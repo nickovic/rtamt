@@ -14,7 +14,7 @@ class AbstractAstVisitor(object):
         result = None
         for nodeChild in node.children:
             result = self.visit(nodeChild, *args, **kwargs)
-        return result   # visitChildren reterns only last result
+        return result   # visitChildren returns only last result
 
     def visit(self, node, *args, **kwargs):
         if isinstance(node, BinaryNode):

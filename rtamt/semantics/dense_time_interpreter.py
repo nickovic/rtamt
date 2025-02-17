@@ -20,6 +20,7 @@ class DenseTimeInterpreter(TimeInterpreter):
             var_name = data[0]
             var_object = data[1]
             self.ast.var_object_dict[var_name] = var_object
+            self.online_operator_dict[var_name].sample = var_object
 
     def time_unit_transformer(self, node):
         b = node.begin

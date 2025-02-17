@@ -24,6 +24,7 @@ class AbstractSpecification(object):
         self.var_topic_dict = dict()
         self.free_vars = set()
         self.var_object_dict = dict()
+        self.phi_name_to_node_dict = dict()
 
         #TODO we need to move it to RTAMT4ROS as wrapper
         self.modules = dict()
@@ -48,8 +49,8 @@ class AbstractSpecification(object):
     def add_var(self, var):
         self.ast.vars.add(var)
 
-    def get_value(self, var_name):
-        return self.ast.get_value(var_name)
+    def get_value(self, phi_name):
+        return self.ast.get_value(phi_name)
 
     def add_sub_spec(self, sub_spec):
         self.ast.add_sub_spec(sub_spec)
@@ -95,6 +96,15 @@ class AbstractSpecification(object):
     def var_object_dict(self, var_object_dict):
         self.__var_object_dict = var_object_dict
         self.ast.var_object_dict = self.var_object_dict
+
+    @property
+    def phi_name_to_node_dict(self):
+        return self.ast.phi_name_to_node_dict
+
+    @phi_name_to_node_dict.setter
+    def phi_name_to_node_dict(self, phi_name_to_node_dict):
+        self.__phi_name_to_node_dict = phi_name_to_node_dict
+        self.ast.phi_name_to_node_dict = self.phi_name_to_node_dict
 
     @property
     def free_vars(self):

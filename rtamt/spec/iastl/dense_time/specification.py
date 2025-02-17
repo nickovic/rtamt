@@ -16,33 +16,41 @@ def IAStlOutputRobustnessDenseTimeOfflineSpecification():
     spec = AbstractOfflineSpecification(StlAst(), IAStlOutputRobustnessDenseTimeOfflineInterpreter())
     return spec
 
+
 def IAStlInputVacuityDenseTimeOfflineSpecification():
     spec = AbstractOfflineSpecification(StlAst(), IAStlInputVacuityDenseTimeOfflineInterpreter())
     return spec
+
 
 def IAStlInputRobustnessDenseTimeOfflineSpecification():
     spec = AbstractOfflineSpecification(StlAst(), IAStlInputRobustnessDenseTimeOfflineInterpreter())
     return spec
 
+
 def IAStlOutputVacuityDenseTimeOfflineSpecification():
     spec = AbstractOfflineSpecification(StlAst(), IAStlOutputVacuityDenseTimeOfflineInterpreter())
     return spec
+
 
 def IAStlOutputRobustnessDenseTimeOnlineSpecification():
     spec = AbstractOnlineSpecification(StlAst(), IAStlOutputRobustnessDenseTimeOnlineInterpreter(),
                                        pastifier=StlPastifier())
     return spec
 
+
 def IAStlInputVacuityDenseTimeOnlineSpecification():
     spec = AbstractOnlineSpecification(StlAst(), IAStlInputVacuityDenseTimeOnlineInterpreter(),
                                        pastifier=StlPastifier())
     return spec
+
 
 def IAStlInputRobustnessDenseTimeOnlineSpecification():
     spec = AbstractOnlineSpecification(StlAst(), IAStlInputRobustnessDenseTimeOnlineInterpreter(),
                                        pastifier=StlPastifier())
     return spec
 
+
 def IAStlOutputVacuityDenseTimeOnlineSpecification():
-    spec = AbstractOnlineSpecification(StlAst(), IAStlOutputVacuityDenseTimeOnlineInterpreter(), pastifier=StlPastifier())
+    spec = AbstractOnlineSpecification(StlAst(), IAStlOutputVacuityDenseTimeOnlineInterpreter(),
+                                       pastifier=StlPastifier())
     return spec
