@@ -1,4 +1,5 @@
 from rtamt.semantics.stl.discrete_time.online.strong_previous_operation import StrongPreviousOperation
+from rtamt.semantics.stl.discrete_time.online.variable_operation import VariableOperation
 from rtamt.syntax.ast.visitor.stl.ast_visitor import StlAstVisitor
 
 from rtamt.semantics.arithmetic.discrete_time.online.addition_operation import AdditionOperation
@@ -31,6 +32,10 @@ from rtamt.semantics.stl.discrete_time.online.precedes_timed_operation import Pr
 from rtamt.exception.exception import RTAMTException
 
 class StlDiscreteTimeOnlineAstVisitor(StlAstVisitor):
+
+    def visitVariable(self, node, *args, **kwargs):
+        self.visitChildren(node, *args, **kwargs)
+        self.online_operator_dict[node.name] = VariableOperation()
 
     def visitPredicate(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)

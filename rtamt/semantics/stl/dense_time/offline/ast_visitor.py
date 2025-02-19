@@ -283,6 +283,11 @@ def until_timed_operation(sample_left, sample_right, begin, end):
 
 class StlDenseTimeOfflineAstVisitor(StlAstVisitor):
 
+    def visit(self, node, *args, **kwargs):
+        result = super(StlDenseTimeOfflineAstVisitor, self).visit(node, *args, **kwargs)
+        self.ast.results[node] = result
+        return result
+
     def visitPredicate(self, node, *args, **kwargs):
         sample_left  = self.visit(node.children[0], *args, **kwargs)
         sample_right = self.visit(node.children[1], *args, **kwargs)

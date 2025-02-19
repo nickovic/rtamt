@@ -35,6 +35,7 @@ class StlAstParserVisitor(LtlAstParserVisitor, StlParserVisitor):
         else:
             interval = self.visit(ctx.interval())
             node = TimedAlways(child, interval)
+        self.phi_name_to_node_dict[node.name] = node
         return node
 
 
@@ -42,9 +43,11 @@ class StlAstParserVisitor(LtlAstParserVisitor, StlParserVisitor):
         child = self.visit(ctx.expression())
         if ctx.interval() == None:
             node = Eventually(child)
+            self.phi_name_to_node_dict[node.name] = node
         else:
             interval = self.visit(ctx.interval())
             node = TimedEventually(child, interval)
+        self.phi_name_to_node_dict[node.name] = node
         return node
 
     def visitExpreOnce(self, ctx):
@@ -54,6 +57,7 @@ class StlAstParserVisitor(LtlAstParserVisitor, StlParserVisitor):
         else:
             interval = self.visit(ctx.interval())
             node = TimedOnce(child, interval)
+        self.phi_name_to_node_dict[node.name] = node
         return node
 
     def visitExprHist(self, ctx):
@@ -63,6 +67,7 @@ class StlAstParserVisitor(LtlAstParserVisitor, StlParserVisitor):
         else:
             interval = self.visit(ctx.interval())
             node = TimedHistorically(child, interval)
+        self.phi_name_to_node_dict[node.name] = node
         return node
 
     def visitExprSince(self, ctx):
@@ -73,6 +78,7 @@ class StlAstParserVisitor(LtlAstParserVisitor, StlParserVisitor):
         else:
             interval = self.visit(ctx.interval())
             node = TimedSince(child1, child2, interval)
+        self.phi_name_to_node_dict[node.name] = node
         return node
 
     def visitExprUntil(self, ctx):
@@ -83,6 +89,7 @@ class StlAstParserVisitor(LtlAstParserVisitor, StlParserVisitor):
         else:
             interval = self.visit(ctx.interval())
             node = TimedUntil(child1, child2, interval)
+        self.phi_name_to_node_dict[node.name] = node
         return node
 
     def visitExprUnless(self, ctx):
@@ -98,6 +105,7 @@ class StlAstParserVisitor(LtlAstParserVisitor, StlParserVisitor):
             left = TimedAlways(child1, interval_left)
             right = TimedUntil(child1, child2, interval)
             node = Disjunction(left, right)
+        self.phi_name_to_node_dict[node.name] = node
         return node
 
     def visitConstantTimeLiteral(self, ctx):

@@ -18,7 +18,7 @@ class AbstractDiscreteTimeOnlineInterpreter(AbstractOnlineInterpreter, DiscreteT
     # inputs - list of [var name, var value] pairs
     # Example:
     # update(1, [['a', 2.2], ['b', 3.3]])
-    #TODO merge dense and discrete into update AbstractOnlineInterpreter
+    # TODO merge dense and discrete into update AbstractOnlineInterpreter
     def update(self, timestamp, dataset):
         # check ast exists
         self.exist_ast()
@@ -29,6 +29,8 @@ class AbstractDiscreteTimeOnlineInterpreter(AbstractOnlineInterpreter, DiscreteT
         # evaluate spec forest
         rob = self.updateVisitor.visitAst(self.ast, self.online_operator_dict, self.ast.var_object_dict)
         rob = rob[len(rob) - 1]
+        self.ast.results = self.updateVisitor.results
+
 
         out = self.ast.var_object_dict[self.ast.out_var]
         if self.ast.out_var_field:
@@ -59,7 +61,9 @@ class AbstractDiscreteTimeOnlineInterpreter(AbstractOnlineInterpreter, DiscreteT
         for data in dataset:
             var_name = data[0]
             var_value = data[1]
-            self.ast.var_object_dict[var_name] = var_value
+            if data[0] in self.ast.free_vars:
+                self.ast.var_object_dict[var_name] = var_value
+                self.online_operator_dict[var_name].sample = var_value
 
     @property
     def update_counter(self):

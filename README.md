@@ -20,6 +20,8 @@
   - [Dense-time Offline Monitor](#dense-time-offline-monitor)
   - [Discrete-time Specifics](#discrete-time-specifics)
     - [Working with time units and timing assumptions](#working-with-time-units-and-timing-assumptions)
+- [Features]
+  - [Accessing evaluation of sub-formulas]
 - [References](#references)
 
 <!-- markdown-toc end -->
@@ -516,6 +518,52 @@ Finally, the following program is correct, because the temporal bound is explici
     ...
     spec.parse()
     ...
+```
+# Features
+
+## Accessing evaluation of sub-formulas
+
+The following example shows how to use the `get_value` method from the 
+specification object to access the evaluated values of sub-formulas. This works for both 
+discrete- and dense-time specifications, as well as for online and offline 
+monitors.
+
+```python
+def monitor():
+    # data
+    dataset = {
+         'time': [0, 1, 2],
+         'a': [100.0, -1.0, -2.0],
+         'b': [20.0, 2.0, 10.0]
+    }
+
+    # # stl
+    spec = rtamt.StlDiscreteTimeSpecification()
+    spec.name = 'HandMadeMonitor'
+    spec.declare_var('a', 'float')
+    spec.declare_var('b', 'float')
+    spec.declare_var('c', 'float')
+    spec.declare_var('d', 'float')
+    spec.add_sub_spec('c = a + b')
+    spec.spec = 'd = c >= - 2'
+
+    try:
+        spec.parse()
+    except rtamt.RTAMTException as err:
+        print('RTAMT Exception: {}'.format(err))
+        sys.exit()
+
+    spec.evaluate(dataset)
+    a = spec.get_value('a')
+    b = spec.get_value('b')
+    c = spec.get_value('c')
+    d = spec.get_value('d')
+
+    print('a: ' + str(a))
+    print('b: ' + str(b))
+    print('c: ' + str(c))
+    print('d: ' + str(d))
+
 ```
 
 # References

@@ -1,4 +1,4 @@
-
+from rtamt.semantics.stl.dense_time.online.variable_operation import VariableOperation
 from rtamt.syntax.ast.visitor.stl.ast_visitor import StlAstVisitor
 
 from rtamt.semantics.arithmetic.dense_time.online.addition_operation import AdditionOperation
@@ -27,6 +27,16 @@ from rtamt.semantics.stl.dense_time.online.since_timed_operation import SinceTim
 from rtamt.exception.exception import RTAMTException
 
 class StlDenseTimeOnlineAstVisitor(StlAstVisitor):
+
+    def visit(self, node, *args, **kwargs):
+        result = super(StlDenseTimeOnlineAstVisitor, self).visit(node, *args, **kwargs)
+        self.ast.results[node] = result
+        return result
+
+    def visitVariable(self, node, *args, **kwargs):
+        self.visitChildren(node, *args, **kwargs)
+        self.online_operator_dict[node.name] = VariableOperation()
+
     def visitPredicate(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
         self.online_operator_dict[node.name] = PredicateOperation(node.operator)
