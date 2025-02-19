@@ -5,6 +5,7 @@ from antlr4 import *
 from antlr4.InputStream import InputStream
 from antlr4.error.ErrorListener import ErrorListener
 
+from rtamt.syntax.ast.parser.stl.parser_visitor import StlAstParserVisitor
 from rtamt.exception.exception import RTAMTException
 
 class AbstractAst:
