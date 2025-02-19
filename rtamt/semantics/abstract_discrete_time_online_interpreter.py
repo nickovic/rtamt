@@ -61,8 +61,9 @@ class AbstractDiscreteTimeOnlineInterpreter(AbstractOnlineInterpreter, DiscreteT
         for data in dataset:
             var_name = data[0]
             var_value = data[1]
-            self.ast.var_object_dict[var_name] = var_value
-            self.online_operator_dict[var_name].sample = var_value
+            if data[0] in self.ast.free_vars:
+                self.ast.var_object_dict[var_name] = var_value
+                self.online_operator_dict[var_name].sample = var_value
 
     @property
     def update_counter(self):

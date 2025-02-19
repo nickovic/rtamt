@@ -10,6 +10,10 @@ from rtamt.semantics.discrete_time_interpreter import DiscreteTimeInterpreter
 
 from rtamt.exception.exception import RTAMTException
 
+from antlr4 import *
+from antlr4.InputStream import InputStream
+from antlr4.error.ErrorListener import ErrorListener
+
 
 class AbstractSpecification(object):
     __metaclass__ = ABCMeta
@@ -300,8 +304,6 @@ class AbstractOnlineSpecification(AbstractSpecification):
             i = args[0]
             dataset = args[1]
             return self.online_interpreter.update(i, dataset)
-        else:
-            pass
 
     def final_update(self, *args, **kwargs):
         if self.set_ast_flag != True:
