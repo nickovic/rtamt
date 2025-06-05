@@ -18,7 +18,7 @@ class TestBrowsing(unittest.TestCase):
         spec.declare_var('b', 'float')
         spec.declare_var('c', 'float')
         spec.declare_var('d', 'float')
-        spec.spec = 'c = always(a>=2 and b<=3) d = always(b<=5)'
+        spec.spec = 'c = always(a>=2 and b<=3); d = always(b<=5)'
         spec.parse()
 
         dataset = {
@@ -47,7 +47,7 @@ class TestBrowsing(unittest.TestCase):
         spec.declare_var('b', 'float')
         spec.declare_var('c', 'float')
         spec.declare_var('d', 'float')
-        spec.spec = 'c = (a>=2 and b<=3) d = (b<=5)'
+        spec.spec = 'c = (a>=2 and b<=3); d = (b<=5)'
         spec.parse()
 
         spec.update(0, [('a', 100), ('b', 50)])
@@ -78,6 +78,7 @@ class TestBrowsing(unittest.TestCase):
         right = [[0, 2.5], [0.7, 4], [1.3, -1.2], [2.1, 1.7]]
 
         expected = [[0, 1.3], [0.7, 3], [1.3, -1.2], [2.1, -2.2]]
+
 
         spec.evaluate(['a', left], ['b', right])
         a = spec.get_value('a')

@@ -1,20 +1,20 @@
 from rtamt.syntax.node.unary_node import UnaryNode
 
-class Sqrt(UnaryNode):
-    """A class for storing STL Sqrt nodes
+class Negate(UnaryNode):
+    """A class for storing STL Negate nodes
         Inherits Node
     """
     def __init__(self, child):
-        """Constructor for Sqrt node
+        """Constructor for Neg node
 
             Parameters:
                 child : stl.Node
         """
-        super(Sqrt, self).__init__(child)
+        super(Negate, self).__init__(child)
 
         self.in_vars = child.in_vars
         self.out_vars = child.out_vars
 
-        self.name = 'sqrt(' + child.name + ')'
+        self.name = '-(' + child.name + ')'
 
 
