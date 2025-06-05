@@ -60,9 +60,11 @@ class LtlAstParserVisitor(LtlParserVisitor):
         if id in self.const_val_dict:
             val = self.const_val_dict[id]
             node = Constant(float(val))
+            self.phi_name_to_node_dict[node.name] = node
         # Identifier is either an input variable or a sub-formula
         elif id in self.var_subspec_dict:
                 node = self.var_subspec_dict[id]
+                self.phi_name_to_node_dict[node.name] = node
                 return node
         else:
             id_tokens = id.split('.')
@@ -95,8 +97,8 @@ class LtlAstParserVisitor(LtlParserVisitor):
 
             var_io = self.var_io_dict[id_head]
             node = Variable(id_head, id_tail, var_io)
+            self.phi_name_to_node_dict[node.name] = node
 
-        self.phi_name_to_node_dict[node.name] = node
         return node
 
 
@@ -354,7 +356,7 @@ class LtlAstParserVisitor(LtlParserVisitor):
             id = 'out'
             implicit = True
         else:
-            id = ctx.Identifier().getText();
+            id = ctx.Identifier().getText()
         self.phi_name_to_node_dict[id] = out
 
         self.var_subspec_dict[id] = out
