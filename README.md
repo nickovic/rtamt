@@ -20,8 +20,9 @@
   - [Dense-time Offline Monitor](#dense-time-offline-monitor)
   - [Discrete-time Specifics](#discrete-time-specifics)
     - [Working with time units and timing assumptions](#working-with-time-units-and-timing-assumptions)
-- [Features]
-  - [Accessing evaluation of sub-formulas]
+- [Features](#features)
+  - [Accessing evaluation of sub-formulas](#accessing-evaluation-of-sub-formulas)
+  - [Printing formulas](#printing-formulas)
 - [References](#references)
 
 <!-- markdown-toc end -->
@@ -136,7 +137,9 @@ for Python 3
 sudo pip3 uninstall rtamt
 ```
 
-## test RTAMT
+## Testing RTAMT
+
+For running all tests (Python and C++) tests.
 
 for Python 2
 
@@ -150,6 +153,22 @@ for Python 3
 ```bash
 cd rtamt/
 python3 -m unittest discover tests/
+```
+
+For running only Python tests.
+
+for Python 2
+
+```bash
+cd rtamt/
+python2 -m unittest discover tests/python
+```
+
+for Python 3
+
+```bash
+cd rtamt/
+python3 -m unittest discover tests/python
 ```
 
 # Theory
@@ -564,6 +583,44 @@ def monitor():
     print('c: ' + str(c))
     print('d: ' + str(d))
 
+```
+The output is:
+```bash
+a: [100.0, -1.0, -2.0]
+b: [20.0, 2.0, 10.0]
+c: [120.0, 1.0, 8.0]
+d: [122.0, 3.0, 10.0]
+```
+
+## Printing formulas
+
+Online monitoring requires automatically translating bounded-future STL formulas into their equisatisfiable past STL counterparts. The user may want to see the translated formula, to understand better the semantics and debug the monitor. For this, we provide the `spec_print()` method. An example of using it is shown below:
+
+```python
+import sys
+import rtamt
+
+spec = rtamt.StlDiscreteTimeSpecification()
+spec.declare_var('a', 'float')
+spec.declare_var('b', 'float')
+spec.spec = 'eventually[0,1] (a >= b)'
+
+try:
+    spec.parse()
+    print("Before pastification: " + spec.spec_print())
+
+    spec.pastify()
+    print("After pastification: " + spec.spec_print())
+except rtamt.RTAMTException as err:
+    print('RTAMT Exception: {}'.format(err))
+    sys.exit()
+```
+
+The output of the method is shown here.
+
+```bash
+Before pastification: eventually[0,1]((a)>=(b))
+After pastification: once[0,1]((a)>=(b))
 ```
 
 # References

@@ -127,6 +127,12 @@ class AbstractSpecification(object):
     def set_var_topic(self, var_name, var_topic):
         self.ast.set_var_topic(var_name, var_topic)
 
+    def spec_print(self):
+        name = str()
+        for spec in self.ast.specs:
+            name = name + spec.name + '\n'
+        return name
+
     def parse(self):
         self.ast.parse()
 
