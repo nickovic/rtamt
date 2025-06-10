@@ -10,22 +10,13 @@ def monitor():
 
     try:
         spec.parse()
+        print("Before pastification: " + spec.spec_print())
+
         spec.pastify()
+        print("After pastification: " + spec.spec_print())
     except rtamt.RTAMTException as err:
         print('RTAMT Exception: {}'.format(err))
         sys.exit()
-
-    t = 0
-    rob = spec.update(t, [('a', 100.0), ('b', 20.0)])
-    print('time=' + str(t) + ' rob=' + str(rob))
-
-    t = 1
-    rob = spec.update(t, [('a', -1.0), ('b', 2.0)])
-    print('time=' + str(t) + ' rob=' + str(rob))
-
-    t = 2
-    rob = spec.update(t, [('a', -2.0), ('b', -10.0)])
-    print('time=' + str(t) + ' rob=' + str(rob))
 
 if __name__ == '__main__':
     monitor()
