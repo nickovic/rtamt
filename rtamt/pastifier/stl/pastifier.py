@@ -149,8 +149,8 @@ class StlPastifier(LtlPastifier, StlAstVisitor):
         node_horizon = self.subformula_horizons[node]
         remaining_horizon = args[0]
         horizon = remaining_horizon - node_horizon
-        child1_node = self.visit(node.children[0], *args, **kwargs)
-        child2_node = self.visit(node.children[1], *args, **kwargs)
+        child1_node = self.visit(node.children[0], node_horizon)
+        child2_node = self.visit(node.children[1], node_horizon)
         node = Predicate(child1_node, child2_node, node.operator)
         if horizon > 0:
             node = TimedOnce(node, Interval(horizon, horizon))
