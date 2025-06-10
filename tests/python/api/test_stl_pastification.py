@@ -487,5 +487,29 @@ class TestStlPastification(unittest.TestCase):
 
         self.assertEqual('(once[0,1](req))->(once[4,5](gnt))', ast.specs[0].name, 'Complex pastification assertion')
 
+    def test_implication_1(self):
+        ast = StlAst()
+        ast.declare_var('req', 'float')
+        ast.declare_var('gnt', 'float')
+        ast.spec = 'req==1 -> (eventually[0,3] gnt==2)'
+        ast.parse()
+
+        pastifier = StlPastifier()
+        ast = pastifier.pastify(ast)
+
+        self.assertEqual('(once[3,3]((req)==(1.0)))->(once[0,3]((gnt)==(2.0)))', ast.specs[0].name, 'Complex pastification assertion')
+
+    def test_implication_2(self):
+        ast = StlAst()
+        ast.declare_var('req', 'float')
+        ast.declare_var('gnt', 'float')
+        ast.spec = 'always[0,6](req==1 -> (eventually[0,3] gnt==2))'
+        ast.parse()
+
+        pastifier = StlPastifier()
+        ast = pastifier.pastify(ast)
+
+        self.assertEqual('historically[0,6]((once[3,3]((req)==(1.0)))->(once[0,3]((gnt)==(2.0))))', ast.specs[0].name, 'Complex pastification assertion')
+
     if __name__ == '__main__':
         unittest.main()
