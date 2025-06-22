@@ -33,8 +33,10 @@ class LtlPastifier(LtlAstVisitor):
 
     def __init__(self):
         self.subformula_horizons = dict()
+        self.ast = None
 
     def pastify(self, ast):
+        self.ast = ast
         h = LtlHorizon()
         horizons = dict()
         for spec in ast.specs:
@@ -46,8 +48,16 @@ class LtlPastifier(LtlAstVisitor):
             horizon = horizons[spec]
             pastified_spec = self.visit(spec, horizon)
             pastified_specs.append(pastified_spec)
+        ast.phi_name_to_node_dict = self.ast.phi_name_to_node_dict
         ast.specs = pastified_specs
         return ast
+
+    def visit(self, node, *args, **kwargs):
+        out = LtlAstVisitor.visit(self, node, *args, **kwargs)
+        d = self.ast.phi_name_to_node_dict
+        keys = [k for k, v in d.items() if v == node]
+        self.ast.phi_name_to_node_dict.update({key: out for key in keys})
+        return out
 
     def visitConstant(self, node, *args, **kwargs):
         node = Constant(node.val)
