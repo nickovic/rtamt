@@ -42,6 +42,7 @@ class StlPastifier(LtlPastifier, StlAstVisitor):
         self.node_horizons = dict()
 
     def pastify(self, ast):
+        self.ast = ast
         h = StlHorizon()
         horizons = dict()
         for spec in ast.specs:
@@ -54,10 +55,15 @@ class StlPastifier(LtlPastifier, StlAstVisitor):
             pastified_spec = self.visit(spec, horizon)
             pastified_specs.append(pastified_spec)
         ast.specs = pastified_specs
+        ast.phi_name_to_node_dict = self.ast.phi_name_to_node_dict
         return ast
 
     def visit(self, node, *args, **kwargs):
-        return StlAstVisitor.visit(self, node, *args, **kwargs)
+        out = StlAstVisitor.visit(self, node, *args, **kwargs)
+        d = self.ast.phi_name_to_node_dict
+        keys = [k for k, v in d.items() if v == node]
+        self.ast.phi_name_to_node_dict.update({key: out for key in keys})
+        return out
 
     def visitVariable(self, node, *args, **kwargs):
         horizon = args[0]
