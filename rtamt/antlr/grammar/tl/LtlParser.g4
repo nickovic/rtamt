@@ -1,8 +1,8 @@
 parser grammar LtlParser ;
 
 options {
-	tokenVocab = LtlLexer
-	;
+	tokenVocab = LtlLexer ;
+	language = Python3	;
 }
 
 specification_file
@@ -21,11 +21,11 @@ modimport :
         From Identifier Import Identifier #modImport
         ;
 
-assertion 
-	: (Identifier EQUAL)? expression
+assertion
+	: (Identifier EQUAL)? expression SEMICOLON
 	;
 
-declaration 
+declaration
 	: variableDeclaration                                         #declVariable
 	| constantDeclaration                                         #declConstant
 	;
@@ -67,20 +67,22 @@ ioType
 expression
 	:
 	LPAREN expression RPAREN                                    #ExprParen
+	| MINUS expression                                          #ExprNegate
 
 	| ABS LPAREN expression RPAREN                              #ExprAbs
 	| SQRT LPAREN expression RPAREN                             #ExprSqrt
 	| EXP LPAREN expression RPAREN                              #ExprExp
 	| POW LPAREN expression COMMA expression RPAREN             #ExprPow
+	| LOG LPAREN expression COMMA expression RPAREN             #ExprLog
+	| LN LPAREN expression RPAREN                               #ExprLn
 
-    | expression TIMES expression                               #ExprMultiplication
-	| expression DIVIDE expression                              #ExprDivision
-	| expression PLUS expression                                #ExprAddition
-	| expression MINUS expression                               #ExprSubtraction
+    | expression multdivOp expression                           #ExprMultDiv
+	| expression addsubOp expression                            #ExprAddSub
 
 	| expression comparisonOp expression                        #ExprPredicate
 
 	| NotOperator expression                                    #ExprNot
+
 
 	| AlwaysOperator expression                                 #ExprAlways
     | EventuallyOperator expression                             #ExprEv
@@ -109,7 +111,15 @@ expression
     | literal                                                    #ExprLiteral
 	;
 
+multdivOp
+    : TIMES                                                     #Mult
+    | DIVIDE                                                    #Div
+    ;
 
+addsubOp
+    : PLUS                                                      #Plus
+    | MINUS                                                     #Minus
+    ;
 
 comparisonOp
 	: LesserOrEqualOperator                                     #Leq
@@ -119,9 +129,8 @@ comparisonOp
     | EqualOperator                                             #Eq
     | NotEqualOperator                                          #Neq
 	;
-	
+
 literal
-	: IntegerLiteral		
+	: IntegerLiteral
 	| RealLiteral
-	| MINUS literal
 	;

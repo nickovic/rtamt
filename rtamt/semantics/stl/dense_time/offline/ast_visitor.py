@@ -369,6 +369,25 @@ class StlDenseTimeOfflineAstVisitor(StlAstVisitor):
         sample_return, last, left, right = intersect.intersection(sample_left, sample_right, intersect.power)
         return sample_return
 
+    def visitLog(self, node, *args, **kwargs):
+        sample_left  = self.visit(node.children[0], *args, **kwargs)
+        sample_right = self.visit(node.children[1], *args, **kwargs)
+
+        sample_return, last, left, right = intersect.intersection(sample_left, sample_right, intersect.log)
+        return sample_return
+
+    def visitLn(self, node, *args, **kwargs):
+        sample = self.visit(node.children[0], *args, **kwargs)
+
+        sample_return = []
+        for i in sample:
+            if i[1] < 0:
+                raise Exception('ln: the input is smaller than 0.')
+            out_time = i[0]
+            out_value = math.log(i[1])
+            sample_return.append([out_time, out_value])
+        return sample_return
+
 
     def visitAddition(self, node, *args, **kwargs):
         sample_left  = self.visit(node.children[0], *args, **kwargs)
@@ -404,7 +423,18 @@ class StlDenseTimeOfflineAstVisitor(StlAstVisitor):
 
 
     def visitNot(self, node, *args, **kwargs):
-        sample =  self.visit(node.children[0], *args, **kwargs)
+        sample = self.visit(node.children[0], *args, **kwargs)
+
+        sample_return = []
+        for i in sample:
+            out_time = i[0]
+            out_value = - i[1]
+            sample_return.append([out_time, out_value])
+        return sample_return
+
+
+    def visitNegate(self, node, *args, **kwargs):
+        sample = self.visit(node.children[0], *args, **kwargs)
 
         sample_return = []
         for i in sample:

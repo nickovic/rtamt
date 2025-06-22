@@ -9,6 +9,9 @@ from rtamt.semantics.arithmetic.dense_time.online.abs_operation import AbsOperat
 from rtamt.semantics.arithmetic.dense_time.online.sqrt_operation import SqrtOperation
 from rtamt.semantics.arithmetic.dense_time.online.pow_operation import PowOperation
 from rtamt.semantics.arithmetic.dense_time.online.exp_operation import ExpOperation
+from rtamt.semantics.arithmetic.discrete_time.online.negate_operation import NegateOperation
+from rtamt.semantics.arithmetic.discrete_time.online.log_operation import LogOperation
+from rtamt.semantics.arithmetic.discrete_time.online.ln_operation import LnOperation
 
 from rtamt.semantics.stl.dense_time.online.predicate_operation import PredicateOperation
 from rtamt.semantics.stl.dense_time.online.and_operation import AndOperation
@@ -65,6 +68,10 @@ class StlDenseTimeOnlineAstVisitor(StlAstVisitor):
         self.visitChildren(node, *args, **kwargs)
         self.online_operator_dict[node.name] = SubtractionOperation()
 
+    def visitNegate(self, node, *args, **kwargs):
+        self.visitChildren(node, *args, **kwargs)
+        self.online_operator_dict[node.name] = NegateOperation()
+
     def visitMultiplication(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
         self.online_operator_dict[node.name] = MultiplicationOperation()
@@ -72,6 +79,18 @@ class StlDenseTimeOnlineAstVisitor(StlAstVisitor):
     def visitDivision(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)
         self.online_operator_dict[node.name] = DivisionOperation()
+        
+    def visitLog(self, node, *args, **kwargs):
+        self.visitChildren(node, *args, **kwargs)
+        self.online_operator_dict[node.name] = LogOperation()
+
+    def visitLn(self, node, *args, **kwargs):
+        self.visitChildren(node, *args, **kwargs)
+        self.online_operator_dict[node.name] = LnOperation()
+
+    def visitNegate(self, node, *args, **kwargs):
+        self.visitChildren(node, *args, **kwargs)
+        self.online_operator_dict[node.name] = NegateOperation()
 
     def visitNot(self, node, *args, **kwargs):
         self.visitChildren(node, *args, **kwargs)

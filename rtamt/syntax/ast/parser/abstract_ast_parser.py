@@ -120,6 +120,10 @@ class AbstractAst:
 
         #TODO How to handle sub-formulas?
         entire_spec = self.modular_spec + self.spec
+        
+        if entire_spec[-1] != ';':
+            entire_spec += ';'
+        
         input_stream = InputStream(entire_spec)
         lexer = self.antrlLexerType(input_stream)
         if not isinstance(lexer, Lexer):

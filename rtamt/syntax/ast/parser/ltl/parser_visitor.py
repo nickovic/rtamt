@@ -28,8 +28,11 @@ from rtamt.syntax.node.arithmetic.abs import Abs
 from rtamt.syntax.node.arithmetic.sqrt import Sqrt
 from rtamt.syntax.node.arithmetic.exp import Exp
 from rtamt.syntax.node.arithmetic.pow import Pow
+from rtamt.syntax.node.arithmetic.log import Log
+from rtamt.syntax.node.arithmetic.ln import Ln
 from rtamt.syntax.node.arithmetic.addition import Addition
 from rtamt.syntax.node.arithmetic.subtraction import Subtraction
+from rtamt.syntax.node.arithmetic.negate import Negate
 from rtamt.syntax.node.arithmetic.multiplication import Multiplication
 from rtamt.syntax.node.arithmetic.division import Division
 from rtamt.syntax.node.ltl.fall import Fall
@@ -138,31 +141,31 @@ class LtlAstParserVisitor(LtlParserVisitor):
         var_type = ctx.Identifier(1).getText()
         self.import_module(module_name, var_type)
 
-    def visitExprAddition(self, ctx):
+    def visitExprAddSub(self, ctx):
         child1 = self.visit(ctx.expression(0))
         child2 = self.visit(ctx.expression(1))
-        node = Addition(child1, child2)
+        opText = ctx.addsubOp().getText()
+        if opText == '+' or opText == '--':
+            node = Addition(child1, child2)
+        else:  # opText == '-' or opText == '+-'
+            node = Subtraction(child1, child2)
         self.phi_name_to_node_dict[node.name] = node
         return node
 
-    def visitExprSubtraction(self, ctx):
-        child1 = self.visit(ctx.expression(0))
-        child2 = self.visit(ctx.expression(1))
-        node = Subtraction(child1, child2)
+    def visitExprNegate(self, ctx):
+        child = self.visit(ctx.expression())
+        node = Negate(child)
         self.phi_name_to_node_dict[node.name] = node
         return node
 
-    def visitExprMultiplication(self, ctx):
+    def visitExprMultDiv(self, ctx):
         child1 = self.visit(ctx.expression(0))
         child2 = self.visit(ctx.expression(1))
-        node = Multiplication(child1, child2)
-        self.phi_name_to_node_dict[node.name] = node
-        return node
-
-    def visitExprDivision(self, ctx):
-        child1 = self.visit(ctx.expression(0))
-        child2 = self.visit(ctx.expression(1))
-        node = Division(child1, child2)
+        opText = ctx.multdivOp().getText()
+        if opText == '*':
+            node = Multiplication(child1, child2)
+        else:   # opText == '/'
+            node = Division(child1, child2)
         self.phi_name_to_node_dict[node.name] = node
         return node
 
@@ -188,6 +191,19 @@ class LtlAstParserVisitor(LtlParserVisitor):
         child1 = self.visit(ctx.expression(0))
         child2 = self.visit(ctx.expression(1))
         node = Pow(child1, child2)
+        self.phi_name_to_node_dict[node.name] = node
+        return node
+
+    def visitExprLog(self, ctx):
+        child1 = self.visit(ctx.expression(0))
+        child2 = self.visit(ctx.expression(1))
+        node = Log(child1, child2)
+        self.phi_name_to_node_dict[node.name] = node
+        return node
+
+    def visitExprLn(self, ctx):
+        child = self.visit(ctx.expression())
+        node = Ln(child)
         self.phi_name_to_node_dict[node.name] = node
         return node
 
@@ -322,8 +338,8 @@ class LtlAstParserVisitor(LtlParserVisitor):
         left = Always(child1, 0, interval.end)
         right = Until(child1, child2)
         node = Disjunction(left, right)
-        self.phi_name_to_node_dict[node.name] = node
 
+        self.phi_name_to_node_dict[node.name] = node
         return node
 
     def visitExprParen(self, ctx):
@@ -378,6 +394,7 @@ class LtlAstParserVisitor(LtlParserVisitor):
         self.out_var_field = id_tail
         self.free_vars.discard(id_head)
         self.specs.append(out)
+
         return
 
     def visitSpecification_file(self, ctx):
