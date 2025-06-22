@@ -17,8 +17,8 @@ def monitor():
     spec.declare_var('b', 'float')
     spec.declare_var('c', 'float')
     spec.declare_var('d', 'float')
-    spec.add_sub_spec('c = a + b')
-    spec.spec = 'd = c >= - 2'
+    spec.add_sub_spec('c = a + b;')
+    spec.spec = 'd = c >= - 2;'
 
     try:
         spec.parse()

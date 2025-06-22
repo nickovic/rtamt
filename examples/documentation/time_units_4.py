@@ -11,7 +11,7 @@ def monitor():
 
     spec.set_sampling_period(1, 's', 0.2)
 
-    spec.spec = 'out = (req>=3) implies (eventually[0:5](gnt>=3))'
+    spec.spec = 'out = (req>=3) implies (eventually[0:5](gnt>=3));'
 
     try:
         spec.parse()

@@ -29,7 +29,7 @@ def monitor():
     spec.declare_var('out', 'float')
     spec.set_var_io_type('req', 'input')
     spec.set_var_io_type('gnt', 'output')
-    spec.spec = 'out = ((req>=3) implies (eventually[1:2](gnt>=3)))'
+    spec.spec = 'out = ((req>=3) implies (eventually[1:2](gnt>=3)));'
     try:
         spec.parse()
         spec.pastify()
@@ -53,7 +53,7 @@ def monitor():
     spec.declare_var('out', 'float')
     spec.set_var_io_type('req', 'input')
     spec.set_var_io_type('gnt', 'output')
-    spec.spec = 'out = ((req>=3) implies (eventually[1:2](gnt>=3)))'
+    spec.spec = 'out = ((req>=3) implies (eventually[1:2](gnt>=3)));'
     try:
         spec.parse()
         spec.pastify()

@@ -18,7 +18,7 @@ def monitor():
     spec.declare_var('y', 'float')
     spec.set_var_io_type('x', 'input')
     spec.set_var_io_type('y', 'output')
-    spec.spec = '(x>=0.25) and (y>=1.25)'
+    spec.spec = '(x>=0.25) and (y>=1.25);'
 
     try:
         spec.parse()

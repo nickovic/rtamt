@@ -17,8 +17,8 @@ def monitor():
     spec.declare_var('out', 'float')
     spec.set_var_io_type('req', 'input')
     spec.set_var_io_type('gnt', 'output')
-    spec.add_sub_spec('response = eventually[0:T s](gnt >= threshold)')
-    spec.spec = 'out = ((req >= threshold) implies response)'
+    spec.add_sub_spec('response = eventually[0:T s](gnt >= threshold);')
+    spec.spec = 'out = ((req >= threshold) implies response);'
     try:
         spec.parse()
         spec.pastify()

@@ -2,5 +2,5 @@ specification SpeedLimit
     float velocity
     float velocity_km_h
     const float speed_limit_km_h = 50.0
-    velocity_km_h = velocity * 3.6
-    velocity_km_h <= speed_limit_km_h
+    velocity_km_h = velocity * 3.6;
+    velocity_km_h <= speed_limit_km_h;

@@ -9,7 +9,7 @@ def monitor():
     spec.declare_var('gnt', 'float')
     spec.declare_var('out', 'float')
 
-    spec.spec = 'out = (req>=3) implies (eventually[0:5](gnt>=3))'
+    spec.spec = 'out = (req>=3) implies (eventually[0:5](gnt>=3));'
 
     try:
         spec.parse()

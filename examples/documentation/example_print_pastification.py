@@ -6,7 +6,7 @@ def monitor():
     spec = rtamt.StlDiscreteTimeSpecification()
     spec.declare_var('a', 'float')
     spec.declare_var('b', 'float')
-    spec.spec = 'eventually[0,1] (a >= b)'
+    spec.spec = 'eventually[0,1] (a >= b);'
 
     try:
         spec.parse()

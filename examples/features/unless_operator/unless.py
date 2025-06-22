@@ -15,7 +15,7 @@ def monitor():
     spec.declare_var('a', 'float')
     spec.declare_var('b', 'float')
     spec.declare_var('c', 'float')
-    spec.spec = 'c = (a>=2) unless[1,2] (b>=-2)'
+    spec.spec = 'c = (a>=2) unless[1,2] (b>=-2);'
 
     try:
         spec.parse()

@@ -299,7 +299,7 @@ def monitor():
     spec = rtamt.StlDiscreteTimeSpecification()
     spec.declare_var('a', 'float')
     spec.declare_var('b', 'float')
-    spec.spec = 'eventually[0,1] (a >= b)'
+    spec.spec = 'eventually[0,1] (a >= b);'
 
     try:
         spec.parse()
@@ -379,7 +379,7 @@ def monitor():
     spec.declare_var('out', 'float')
     spec.set_var_io_type('req', 'input')
     spec.set_var_io_type('gnt', 'output')
-    spec.spec = 'out = always((req>=3) implies (eventually[0:5](gnt>=3)))'
+    spec.spec = 'out = always((req>=3) implies (eventually[0:5](gnt>=3)));'
     try:
         spec.parse()
     except rtamt.RTAMTException as err:
@@ -420,7 +420,7 @@ def monitor():
     spec.declare_var('gnt', 'float')
     spec.declare_var('out', 'float')
 
-    spec.spec = 'out = (req>=3) implies (eventually[0:5](gnt>=3))'
+    spec.spec = 'out = (req>=3) implies (eventually[0:5](gnt>=3));'
 
     try:
         spec.parse()
@@ -483,7 +483,7 @@ The user can also explicitly set the default unit, as well as the expected perio
     spec.unit = 's'
     spec.set_sampling_period(500, 'ms', 0.1)
     ...
-    spec.spec = 'out = (req>=3) implies (eventually[0.5:1.5](gnt>=3))'
+    spec.spec = 'out = (req>=3) implies (eventually[0.5:1.5](gnt>=3));'
     ...
     spec.update(0, [('req', 0.1), ('gnt', 0.3)])
     spec.update(0.5, [('req', 0.45), ('gnt', 0.12)])
@@ -500,7 +500,7 @@ The following defines the same program, but now with `ms` as the default unit.
     spec.unit = 'ms'
     spec.set_sampling_period(500, 'ms', 0.1)
     ...
-    spec.spec = 'out = (req>=3) implies (eventually[500:1500](gnt>=3))'
+    spec.spec = 'out = (req>=3) implies (eventually[500:1500](gnt>=3));'
     ...
     spec.update(0, [('req', 0.1), ('gnt', 0.3)])
     spec.update(500, [('req', 0.45), ('gnt', 0.12)])
@@ -517,7 +517,7 @@ The following program throws an exception - the temporal bound is defined betwee
     spec.unit = 'ms'
     spec.set_sampling_period(1, 's', 0.1)
     ...
-    spec.spec = 'out = always((req>=3) implies (eventually[500:1500](gnt>=3)))'
+    spec.spec = 'out = always((req>=3) implies (eventually[500:1500](gnt>=3)));'
     ...
     spec.parse()
     ...
@@ -533,7 +533,7 @@ Finally, the following program is correct, because the temporal bound is explici
     spec.unit = 'ms'
     spec.set_sampling_period(1, 's', 0.1)
     ...
-    spec.spec = 'out = always((req>=3) implies (eventually[500s:1500s](gnt>=3)))'
+    spec.spec = 'out = always((req>=3) implies (eventually[500s:1500s](gnt>=3)));'
     ...
     spec.parse()
     ...
@@ -563,8 +563,8 @@ def monitor():
     spec.declare_var('b', 'float')
     spec.declare_var('c', 'float')
     spec.declare_var('d', 'float')
-    spec.add_sub_spec('c = a + b')
-    spec.spec = 'd = c >= - 2'
+    spec.add_sub_spec('c = a + b;')
+    spec.spec = 'd = c >= - 2;'
 
     try:
         spec.parse()

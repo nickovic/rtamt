@@ -12,7 +12,7 @@ def monitor():
     spec.unit = 'ms'
     spec.set_sampling_period(1, 's', 0.1)
 
-    spec.spec = 'out = (req>=3) implies (eventually[500s:1500s](gnt>=3))'
+    spec.spec = 'out = (req>=3) implies (eventually[500s:1500s](gnt>=3));'
 
     try:
         spec.parse()

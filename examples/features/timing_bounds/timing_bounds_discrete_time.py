@@ -21,7 +21,7 @@ def monitor():
     # bound = [0s:1s]
     # sampling period = s
     # ok
-    spec.spec = 'c = always[0:1](a>=0)'
+    spec.spec = 'c = always[0:1](a>=0);'
     print('Example 1: ' + spec.spec)
     print('Default unit: s')
     print('Sampling period: 1s')
@@ -39,7 +39,7 @@ def monitor():
     # bound = [0s:100ms]
     # sampling period = 1s
     # not divisible - the parser fails
-    spec.spec = 'c = always[0:100ms](a>=0)'
+    spec.spec = 'c = always[0:100ms](a>=0);'
     print('-------------------------------------------')
     print('Example 2: ' + spec.spec)
     print('Sampling period: 1s')
@@ -57,7 +57,7 @@ def monitor():
     # bound = [0s:100ms]
     # sampling period = 10ms
     # ok
-    spec.spec = 'c = always[0:100ms](a>=0)'
+    spec.spec = 'c = always[0:100ms](a>=0);'
     print('-------------------------------------------')
     print('Example 3: ' + spec.spec)
     print('Sampling period: 10ms')
@@ -76,7 +76,7 @@ def monitor():
     # bound = [0s:0.02s]
     # sampling period = 10ms
     # ok
-    spec.spec = 'c = always[0:0.02s](a>=0)'
+    spec.spec = 'c = always[0:0.02s](a>=0);'
     spec.set_sampling_period(10, 'ms')
     print('-------------------------------------------')
     print('Example 4: ' + spec.spec)
