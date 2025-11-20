@@ -1,7 +1,7 @@
 from antlr4.error.ErrorListener import ErrorListener
 from rtamt.exception.exception import RTAMTException
 
-class LTLParserErrorListener( ErrorListener ):
+class STLParserErrorListener( ErrorListener ):
     def syntaxError(self, recognizer, offendingSymbol, line, column, msg, e):
         raise RTAMTException (str(line) + ":" + str(column) + ": Syntax ERROR, " + str(msg))
 
