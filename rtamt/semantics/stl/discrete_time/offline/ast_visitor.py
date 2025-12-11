@@ -1,6 +1,7 @@
 import math
 import operator
 import collections
+import copy
 
 from rtamt.syntax.ast.visitor.stl.ast_visitor import StlAstVisitor
 from rtamt.semantics.enumerations.comp_oper import StlComparisonOperator
@@ -11,7 +12,7 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
 
     def visit(self, node, *args, **kwargs):
         result = super(StlDiscreteTimeOfflineAstVisitor, self).visit(node, *args, **kwargs)
-        self.ast.results[node] = result
+        self.ast.results[node] = copy.deepcopy(result)
         return result
 
     def visitPredicate(self, node, *args, **kwargs):
