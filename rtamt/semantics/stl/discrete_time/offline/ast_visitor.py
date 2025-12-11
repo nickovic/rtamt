@@ -377,7 +377,7 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
         begin, end = self.time_unit_transformer(node)
         sample_len = len(sample)
         if sample_len <= end:
-            sample += [float('inf')] * (end - sample_len + 1)
+            sample = sample + [float('inf')] * (end - sample_len + 1)
 
         diff = end - begin
         sample_return  = [min(sample[j:j+diff+1]) for j in range(begin, end+1)]
@@ -393,7 +393,7 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
         sample_len = len(sample)
 
         if sample_len <= end:
-            sample += [-float('inf')] * (end - sample_len + 1)
+            sample = sample + [-float('inf')] * (end - sample_len + 1)
 
         diff = end - begin
         sample_return  = [max(sample[j:j+diff+1]) for j in range(begin, end+1)]
