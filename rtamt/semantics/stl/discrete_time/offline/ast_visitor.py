@@ -42,7 +42,7 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
             for v in var:
                 sample_return.append(operator.attrgetter(node.field)(v))
         else:
-            sample_return = var
+            sample_return = list(var)
         return sample_return
 
 
