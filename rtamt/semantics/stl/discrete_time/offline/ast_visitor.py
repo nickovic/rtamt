@@ -421,12 +421,15 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
             right = list(buffer_right)
             out_sample = - float("inf")
 
-            for j in range(end-begin+1):
-                c_left = float("inf")
-                c_right = buffer_right[j]
-                for k in range(j+1, end+1):
-                    c_left = min(c_left, buffer_left[k])
-                out_sample = max(out_sample, min(c_left, c_right))
+            # build the suffix minimum of the sample_left buffer
+            suf_min_left = [float("inf")]*(L+1)
+            for k in range(L-1,-1,-1):
+                lt = left[k]
+                st = suf_min_left[k+1]
+                suf_min_left[k] = lt if lt<st else st
+
+            for j in range(L-begin):
+                out_sample = max(out_sample, min(suf_min_left[j+1], right[j]))
             sample_return.append(out_sample)
         sample_return.reverse()
         return sample_return
