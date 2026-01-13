@@ -417,6 +417,8 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
         for i in range(len(sample_left)-1, -1, -1):
             buffer_left.append(sample_left[i])
             buffer_right.append(sample_right[i])
+            left = list(buffer_left)
+            right = list(buffer_right)
             out_sample = - float("inf")
 
             for j in range(end-begin+1):
