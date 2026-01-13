@@ -409,14 +409,11 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
         begin, end = self.time_unit_transformer(node)
 
         sample_return = []
-        buffer_left = collections.deque(maxlen=(end + 1))
-        buffer_right = collections.deque(maxlen=(end + 1))
+        L = end+1
 
-        for i in range(end + 1):
-            s_left = float("inf")
-            s_right = - float("inf")
-            buffer_left.append(s_left)
-            buffer_right.append(s_right)
+        buffer_left  = collections.deque([ float("inf")] * L, maxlen=L)
+        buffer_right = collections.deque([-float("inf")] * L, maxlen=L)
+
         for i in range(len(sample_left)-1, -1, -1):
             buffer_left.append(sample_left[i])
             buffer_right.append(sample_right[i])
