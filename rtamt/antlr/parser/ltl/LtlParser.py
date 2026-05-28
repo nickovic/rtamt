@@ -2,9 +2,13 @@
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO
-from typing.io import TextIO
 import sys
 
+# Directly import from typing module if available
+if sys.version_info >= (3, 6):
+    from typing import TextIO
+else:
+    from typing.io import TextIO
 
 def serializedATN():
     with StringIO() as buf:
