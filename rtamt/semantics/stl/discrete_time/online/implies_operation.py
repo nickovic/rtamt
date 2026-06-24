@@ -9,6 +9,6 @@ class ImpliesOperation(AbstractOnlineOperation):
         pass
 
     def update(self, sample_left, sample_right):
-        if sample_left == 0: sample_left = float_info.min
+        if sample_left == 0: sample_left = float_info.max
         sample_return = max(-sample_left, sample_right)
         return sample_return
