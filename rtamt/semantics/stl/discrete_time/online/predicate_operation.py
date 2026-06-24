@@ -1,7 +1,7 @@
 from rtamt.semantics.abstract_online_operation import AbstractOnlineOperation
 from rtamt.semantics.enumerations.comp_oper import StlComparisonOperator
 from rtamt.exception.exception import RTAMTException
-
+from sys import float_info
 
 class PredicateOperation(AbstractOnlineOperation):
     def __init__(self, comparison_op):
@@ -15,9 +15,15 @@ class PredicateOperation(AbstractOnlineOperation):
             sample_return = - abs(sample_left - sample_right)
         elif self.comparison_op.value == StlComparisonOperator.NEQ.value:
             sample_return = abs(sample_left - sample_right)
-        elif self.comparison_op.value == StlComparisonOperator.LEQ.value or self.comparison_op.value == StlComparisonOperator.LESS.value:
+        elif self.comparison_op.value == StlComparisonOperator.LESS.value:
             sample_return = sample_right - sample_left
-        elif self.comparison_op.value == StlComparisonOperator.GEQ.value or self.comparison_op.value == StlComparisonOperator.GREATER.value:
+            if sample_return == 0: sample_return = -float_info.min
+        elif self.comparison_op.value == StlComparisonOperator.LEQ.value:
+            sample_return = sample_right - sample_left
+        elif self.comparison_op.value == StlComparisonOperator.GREATER.value:
+            sample_return = sample_left - sample_right
+            if sample_return == 0: sample_return = -float_info.min
+        elif self.comparison_op.value == StlComparisonOperator.GEQ.value:
             sample_return = sample_left - sample_right
         else:
             raise RTAMTException('Unknown predicate operation')
