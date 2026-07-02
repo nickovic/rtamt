@@ -2,6 +2,8 @@ import unittest
 import math
 import rtamt
 
+from sys import float_info
+
 class TestLtlDiscreteTimeOnlineSpecification(unittest.TestCase):
 
     def __init__(self, *args, **kwargs):
@@ -550,7 +552,7 @@ class TestLtlDiscreteTimeOnlineSpecification(unittest.TestCase):
         self.assertEqual(out2, -1, "input 2")
         self.assertEqual(out3, 12, "input 3")
         self.assertEqual(out4, -1, "input 4")
-        self.assertEqual(out5, 0, "input 5")
+        self.assertEqual(out5, -float_info.min, "input 5")
 
     def test_predicate_geq(self):
         spec = rtamt.StlDiscreteTimeSpecification()
@@ -592,7 +594,7 @@ class TestLtlDiscreteTimeOnlineSpecification(unittest.TestCase):
         self.assertEqual(out2, 1, "input 2")
         self.assertEqual(out3, -12, "input 3")
         self.assertEqual(out4, 1, "input 4")
-        self.assertEqual(out5, 0, "input 5")
+        self.assertEqual(out5, -float_info.min, "input 5")
 
     def test_predicate_eq(self):
         spec = rtamt.StlDiscreteTimeSpecification()

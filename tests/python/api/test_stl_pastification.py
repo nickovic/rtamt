@@ -216,6 +216,26 @@ class TestStlPastification(unittest.TestCase):
 
         self.assertEqual('(req)>=(gnt)', ast.specs[0].name, 'GEQ pastification assertion')
 
+    def test_predicate_geq_negative_decimal(self):
+        ast = LtlAst()
+        ast.declare_var('req', 'float')
+        ast.spec = 'req >= -5.2'
+        ast.parse()
+
+        pastifier = StlPastifier()
+        ast = pastifier.pastify(ast)
+        self.assertEqual('(req)>=(-5.2)', ast.specs[0].name, 'GEQ pastification assertion')
+
+    def test_predicate_geq_negative_integer(self):
+        ast = LtlAst()
+        ast.declare_var('req', 'int')
+        ast.spec = 'req >= -5'
+        ast.parse()
+
+        pastifier = StlPastifier()
+        ast = pastifier.pastify(ast)
+        self.assertEqual('(req)>=(-5.0)', ast.specs[0].name, 'GEQ pastification assertion')
+
     def test_predicate_greater(self):
         ast = LtlAst()
         ast.declare_var('req', 'float')

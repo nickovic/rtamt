@@ -223,7 +223,7 @@ FALSE
 	: ('false' | 'FALSE');
 
 IntegerLiteral
-	: DecimalNumeral
+	: SignedInteger
 	| HexNumeral
 	| BinaryNumeral ;
 
@@ -288,9 +288,9 @@ RealLiteral
 	: DecimalRealLiteral ;
 
 fragment DecimalRealLiteral
-	: Digits '.' Digits? ExponentPart?
-	| '.' Digits ExponentPart?
-	| Digits ExponentPart
+	: Sign? Digits '.' Digits? ExponentPart?
+	| Sign? '.' Digits ExponentPart?
+	| Sign? Digits ExponentPart
 	;
 
 fragment ExponentPart

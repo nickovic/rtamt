@@ -1,6 +1,8 @@
 import unittest
 import math
 
+from sys import float_info
+
 from rtamt.syntax.ast.parser.stl.specification_parser import StlAst
 from rtamt.semantics.stl.discrete_time.online.constant_operation import ConstantOperation
 from rtamt.semantics.stl.discrete_time.online.and_operation import AndOperation
@@ -51,6 +53,9 @@ class TestSTLEvaluation(unittest.TestCase):
 
         self.left5 = -1
         self.right5 = -1
+
+        self.left6 = 0
+        self.right6 = -1
 
     def test_constant(self):
         oper = ConstantOperation(5)
@@ -294,12 +299,14 @@ class TestSTLEvaluation(unittest.TestCase):
         out3 = oper.update(self.left3, self.right3)
         out4 = oper.update(self.left4, self.right4)
         out5 = oper.update(self.left5, self.right5)
+        out6 = oper.update(self.left6, self.right6)
 
         self.assertEqual(out1, 20, "input 1")
         self.assertEqual(out2, 1, "input 2")
         self.assertEqual(out3, 10, "input 3")
         self.assertEqual(out4, 4, "input 4")
         self.assertEqual(out5, 1, "input 5")
+        self.assertEqual(out6, -1, "input 6")
 
     def test_always(self):
         oper = AlwaysOperation()
@@ -540,7 +547,7 @@ class TestSTLEvaluation(unittest.TestCase):
         self.assertEqual(out2, -1, "input 2")
         self.assertEqual(out3, 12, "input 3")
         self.assertEqual(out4, -1, "input 4")
-        self.assertEqual(out5, 0, "input 5")
+        self.assertEqual(out5, -float_info.min, "input 5")
 
     def test_predicate_geq(self):
         oper = PredicateOperation(StlComparisonOperator.GEQ)
@@ -570,7 +577,7 @@ class TestSTLEvaluation(unittest.TestCase):
         self.assertEqual(out2, 1, "input 2")
         self.assertEqual(out3, -12, "input 3")
         self.assertEqual(out4, 1, "input 4")
-        self.assertEqual(out5, 0, "input 5")
+        self.assertEqual(out5, -float_info.min, "input 5")
 
     def test_predicate_eq(self):
         oper = PredicateOperation(StlComparisonOperator.EQUAL)

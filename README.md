@@ -209,9 +209,11 @@ rho(phi / psi,w,t) = rho(phi,w,t) / rho(psi,w,t)
 
 % Numeric predicates
 rho(phi <= psi,w,t) = rho(psi,w,t) - rho(phi,w,t) 
-rho(phi < psi,w,t) = rho(psi,w,t) - rho(phi,w,t)
+rho(phi < psi,w,t) = rho(psi,w,t) - rho(phi,w,t) if rho(psi,w,t) - rho(phi,w,t) != 0
+                     -sys.float_info.min         otherwise
 rho(phi >= psi,w,t) = rho(phi,w,t) - rho(psi,w,t)
-rho(phi > psi,w,t) = rho(phi,w,t) - rho(psi,w,t)
+rho(phi > psi,w,t) = rho(phi,w,t) - rho(psi,w,t) if rho(psi,w,t) - rho(phi,w,t) != 0
+                     -sys.float_info.min         otherwise
 rho(phi == psi,w,t) = -|rho(phi,w,t) - rho(psi,w,t)|
 rho(phi !== psi,w,t) = |rho(phi,w,t) - rho(psi,w,t)|
 
@@ -220,6 +222,8 @@ rho(not(phi),w,t) = -rho(phi,w,t)
 rho(phi or psi,w,t) = max(rho(phi,w,t),rho(psi,w,t))
 rho(phi and psi,w,t) = min(rho(phi,w,t),rho(psi,w,t))
 rho(phi -> psi,w,t) = max(-rho(phi,w,t),rho(psi,w,t))
+rho(phi -> psi,w,t) = rho(psi,w,t)                    if rho(phi,w,t) == 0 
+                    = max(-rho(phi,w,t),rho(psi,w,t)) otherwise
 rho(phi <-> psi,w,t) = -|rho(phi,w,t) - rho(psi,w,t)|
 rho(phi xor psi,w,t) = |rho(phi,w,t) - rho(psi,w,t)|
 
