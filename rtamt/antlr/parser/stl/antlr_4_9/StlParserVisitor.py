@@ -149,6 +149,11 @@ class StlParserVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by StlParser#ExprRelease.
+    def visitExprRelease(self, ctx:StlParser.ExprReleaseContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by StlParser#ExprNegate.
     def visitExprNegate(self, ctx:StlParser.ExprNegateContext):
         return self.visitChildren(ctx)

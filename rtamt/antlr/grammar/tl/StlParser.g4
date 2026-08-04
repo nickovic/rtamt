@@ -47,6 +47,7 @@ expression
 
     | expression UntilOperator ( interval )? expression         #ExprUntil
     | expression UnlessOperator ( interval )? expression        #ExprUnless
+    | expression ReleaseOperator ( interval )? expression       #ExprRelease
     | expression SinceOperator ( interval )? expression         #ExprSince
 
     | expression AndOperator expression                         #ExprAnd

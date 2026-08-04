@@ -96,6 +96,7 @@ expression
 
     | expression UntilOperator expression                       #ExprUntil
     | expression UnlessOperator expression                      #ExprUnless
+	| expression ReleaseOperator expression                     #ExprRelease
     | expression SinceOperator expression                       #ExprSince
 
     | expression AndOperator expression                         #ExprAnd

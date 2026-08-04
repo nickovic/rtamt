@@ -170,6 +170,9 @@ UntilOperator
 UnlessOperator
 	: 'unless' | 'W' ;
 
+ReleaseOperator
+	: 'release' | 'R' ;
+
 HistoricallyOperator
 	: 'historically' | 'H' ;
 

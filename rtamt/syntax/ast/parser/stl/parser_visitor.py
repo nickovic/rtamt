@@ -108,6 +108,23 @@ class StlAstParserVisitor(LtlAstParserVisitor, StlParserVisitor):
         self.phi_name_to_node_dict[node.name] = node
         return node
 
+    def visitExprRelease(self, ctx):
+            child1 = self.visit(ctx.expression(0))
+            child2 = self.visit(ctx.expression(1))
+            interval = self.visit(ctx.interval())
+            if ctx.interval() == None:
+                op1 = Negation(child1)
+                op2 = Negation(child2)
+                op3 = Until(op1, op2)
+                node = Negation(op3)
+            else:
+                op1 = Negation(child1)
+                op2 = Negation(child2)
+                op3 = TimedUntil(op1, op2, interval)
+                node = Negation(op3)
+            self.phi_name_to_node_dict[node.name] = node
+            return node
+
     def visitConstantTimeLiteral(self, ctx):
         const_name = ctx.Identifier().getText()
 

@@ -342,6 +342,20 @@ class LtlAstParserVisitor(LtlParserVisitor):
         self.phi_name_to_node_dict[node.name] = node
         return node
 
+    def visitExprRelease(self, ctx):
+            child1 = self.visit(ctx.expression(0))
+            child2 = self.visit(ctx.expression(1))
+            interval = self.visit(ctx.interval())
+
+            op1 = Negation(child1)
+            op2 = Negation(child2)
+            op3 = Until(op1, op2)
+            node = Negation(op3)
+    
+            
+            self.phi_name_to_node_dict[node.name] = node
+            return node
+
     def visitExprParen(self, ctx):
         return self.visit(ctx.expression())
 
