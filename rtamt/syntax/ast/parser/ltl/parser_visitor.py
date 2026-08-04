@@ -347,10 +347,10 @@ class LtlAstParserVisitor(LtlParserVisitor):
             child2 = self.visit(ctx.expression(1))
             interval = self.visit(ctx.interval())
 
-            op1 = Negation(child1)
-            op2 = Negation(child2)
+            op1 = Neg(child1)
+            op2 = Neg(child2)
             op3 = Until(op1, op2)
-            node = Negation(op3)
+            node = Neg(op3)
     
             
             self.phi_name_to_node_dict[node.name] = node

@@ -466,6 +466,25 @@ class TestSTLEvaluation(unittest.TestCase):
         expected = [[0, 20], [1, -1], [2, 10], [3, 4], [4, -1]]
         self.assertListEqual(out, expected, "until")
 
+    def test_release(self):
+            ast = StlAst()
+            ast.declare_var('a', 'float')
+            ast.declare_var('b', 'float')
+            ast.spec = 'a release b'
+            ast.parse()
+            interpreter = StlDiscreteTimeOfflineInterpreter()
+            interpreter.set_ast(ast)
+    
+            a = [100, -1, -2, 5, -1]
+            b = [20, -2, 10, 4, -1]
+            t = [0, 1, 2, 3, 4]
+
+            dataset = {'time': t, 'a': a, 'b': b}
+    
+            out = interpreter.evaluate(dataset)
+            expected = [[0, 20], [1, -2], [2, 4], [3, 4], [4, -1]]
+            self.assertListEqual(out, expected, "until")
+
     def test_until_0_1(self):
         ast = StlAst()
         ast.declare_var('a', 'float')

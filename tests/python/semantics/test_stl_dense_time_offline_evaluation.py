@@ -1565,6 +1565,23 @@ class TestSTLDenseTimeOfflineEvaluation(unittest.TestCase):
         expected = [[4, 2], [5, 3], [6.2, 1]]
         self.assertListEqual(out, expected, "until")
 
+    def test_release_0_1(self):
+            ast = StlAst()
+            ast.declare_var('a', 'float')
+            ast.declare_var('b', 'float')
+            ast.spec = 'a release[0,1] b'
+            ast.parse()
+            interpreter = StlDenseTimeOfflineInterpreter()
+            interpreter.set_ast(ast)
+    
+            a = ['a', [[1, 1], [3.5, 7], [4.7, 3], [5.3, 5], [6.2, 1]]]
+            b = ['b', [[4, 2], [6, 3]]]
+            dataset = [a, b]
+            out = interpreter.evaluate(dataset)
+    
+            expected = [[4, 7], [4.7, 3], [5.3, 5], [6.2, 3]]
+            self.assertListEqual(out, expected, "release")
+
     def test_once_bounded_2(self):
         ast = StlAst()
         ast.declare_var('a', 'float')
