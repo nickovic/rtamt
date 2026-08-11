@@ -65,7 +65,8 @@ class AbstractDenseTimeOnlineInterpreter(AbstractOnlineInterpreter, DenseTimeInt
             var_object = data[1]
             if data[0] in self.ast.free_vars:
                 self.ast.var_object_dict[var_name] = var_object
-                self.online_operator_dict[var_name].sample = var_object
+                if var_name in self.online_operator_dict:
+                    self.online_operator_dict[var_name].sample = var_object
 
 class DenseTimeOnlineUpdateVisitor(AbstractOnlineUpdateVisitor):
     def visitVariable(self, node, online_operator_dict, var_object_dict):
