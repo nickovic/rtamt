@@ -1,0 +1,9 @@
+include LICENSE README.md RELEASE.md pyproject.toml
+recursive-include rtamt *.py
+recursive-include rtamt/cpplib *.cpp *.h *.hpp CMakeLists.txt
+include rtamt/CMakeLists.txt
+prune rtamt/lib
+prune rtamt/build
+prune tests
+prune examples
+global-exclude *.py[cod] *.so *.pyd *.dll
