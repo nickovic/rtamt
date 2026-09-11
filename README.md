@@ -3,14 +3,10 @@
 
 - [About](#about)
 - [Installation](#installation)
-  - [Install prerequisites for RTAMT installation](#install-prerequisites-for-rtamt-installation)
-  - [Option 1: Install Python package version](#option-1-install-python-package-version)
-  - [Option 2: Build the tool](#option-2-build-the-tool)
-    - [Clone the repository](#clone-the-repository)
-    - [Build CPP libraries](#build-cpp-libraries)
-    - [Install RTAMT](#install-rtamt)
-    - [uninstall RTAMT](#uninstall-rtamt)
-  - [test RTAMT](#test-rtamt)
+  - [Install from source](#install-from-source)
+  - [Optional C++ backend](#optional-c-backend)
+  - [Run tests](#run-tests)
+  - [Releases](#releases)
 - [Theory](#theory)
   - [Specification Language](#specification-language)
 - [Usage](#usage)
@@ -26,129 +22,68 @@
 
 # About
 
-RTAMT is a Python (2- and 3-compatible) library for monitoring of Signal Temporal Logic (STL). 
+RTAMT is a Python 3 library for monitoring of Signal Temporal Logic (STL).
 The library implements algorithms offline and online monitoring of discrete-time and dense-time STL.
 The online monitors support the bounded future fragment of STL.
 The online discrete-time part of the library has an optimized C++ back-end.
 
 # Installation
 
-## Install prerequisites for RTAMT installation
+RTAMT supports Python 3.8 through 3.12. Its ANTLR 4.7 runtime does not
+support Python 3.13 or newer. Use a virtual environment with a supported Python:
 
-```bash
-sudo apt install libboost-all-dev
-sudo apt install python-dev
-sudo apt install python-pip
+```sh
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install rtamt
 ```
 
-If your want to extend the specification language, you may need the ANTLR4 parser generator.
+On Windows, activate with `.venv\Scripts\Activate.ps1` in PowerShell.
+Published wheels contain the pure Python monitors.
 
-```bash
-sudo apt install antlr4
-```
+## Install from source
 
-You will also need CMake version 3.12 or higher if you need to build the CPP backend.
-
-```bash
-sudo apt install cmake
-```
-
-In our experience, Ubuntu 16.04, 18.04 don't support the versions in default. You can check [our manual installation of cmake](README_cmake.md).
-
-## Option 1: Install Python package version
-
-We provide Python package version of RTAMT.
-
-for Python 2
-
-```bash
-sudo pip2 install rtamt
-```
-
-for Python 3
-
-```bash
-sudo pip3 install rtamt
-```
-
-## Option 2: Build the tool
-
-### Clone the repository
-
-```bash
+```sh
 git clone https://github.com/nickovic/rtamt
+cd rtamt
+python -m pip install -e .
 ```
 
-### Build CPP libraries
+## Optional C++ backend
 
-This step is needed only if you want to use the CPP backend and
-can be skipped if you want to use pure Python monitors.
+On Ubuntu 22.04, install the compiler, CMake and Boost.Python prerequisites.
+Use the system Python so it matches the packaged Boost.Python library:
 
-for Python 2
-
-```bash
-cd rtamt/rtamt
-mkdir build
-cd build
-cmake -DPythonVersion=2 ../
-make
+```sh
+sudo apt-get install build-essential cmake libboost-python-dev libboost-system-dev python3-dev python3-venv
+/usr/bin/python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -e .
+cmake -S rtamt -B build/cpp -DPythonVersion=3 -DPython3_EXECUTABLE=/usr/bin/python3
+cmake --build build/cpp --parallel 2
 ```
 
-for Python 3
+Run these commands from the repository root. Keep the editable installation:
+it makes the locally compiled modules available without packaging them into
+an incorrectly tagged pure Python wheel. C++ sources are also included in
+the source distribution. CMake 3.12 or newer is required.
 
-```bash
-cd rtamt/rtamt
-mkdir build
-cd build
-cmake -DPythonVersion=3 ../
-make
+## Run tests
+
+```sh
+python -m pip install pytest
+python -m pytest tests/python
+# After building the optional C++ backend:
+python -m pytest tests/cpp
 ```
 
-### Install RTAMT
+To uninstall, run `python -m pip uninstall rtamt`.
+For changes to the specification language, you also need the ANTLR4 generator.
 
-for Python 2
+## Releases
 
-```bash
-cd rtamt/
-sudo pip2 install .
-```
-
-for Python 3
-
-```bash
-cd rtamt/
-sudo pip3 install .
-```
-
-### uninstall RTAMT
-
-for Python 2
-
-```bash
-sudo pip2 uninstall rtamt
-```
-
-for Python 3
-
-```bash
-sudo pip3 uninstall rtamt
-```
-
-## test RTAMT
-
-for Python 2
-
-```bash
-cd rtamt/
-python2 -m unittest discover tests/
-```
-
-for Python 3
-
-```bash
-cd rtamt/
-python3 -m unittest discover tests/
-```
+See [RELEASE.md](RELEASE.md) for publisher setup, validation, tagging,
+publication, and recovery from a partially completed release.
 
 # Theory
 

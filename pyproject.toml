@@ -1,14 +1,15 @@
 [build-system]
-requires = ["setuptools"]
+requires = ["setuptools>=61"]
 build-backend = "setuptools.build_meta"
 
 
 [project]
 name = "rtamt" 
-version = "0.4.7"
+version = "0.4.8"
 description = "Signal Temporal Logic (STL) monitoring library"
 readme = "README.md"
-requires-python = ">=2.7"
+# ANTLR 4.7 imports typing.io, removed in Python 3.13.
+requires-python = ">=3.8,<3.13"
 license = { file = "LICENSE" }
 keywords = ["STL", "monitoring", "runtime verification"]
 authors = [{ name = "Dejan Nickovic", email = "dejan.nickovic@gmail.com" }]
@@ -19,7 +20,6 @@ maintainers = [
 classifiers = [
   "Development Status :: 4 - Beta",
   "License :: OSI Approved :: BSD License",
-  "Programming Language :: Python :: 2.7",
   "Programming Language :: Python :: 3",
 ]
 
@@ -32,8 +32,10 @@ dependencies = ["antlr4-python3-runtime==4.7"]
 
 
 [tool.setuptools]
-package-data = { "sample" = ["*.so"] }
+include-package-data = false
 
-[tool.setuptools.packages]
-find = {}
+[tool.setuptools.packages.find]
+include = ["rtamt", "rtamt.*"]
+exclude = ["rtamt.lib", "rtamt.lib.*", "rtamt.cpplib", "rtamt.cpplib.*"]
+namespaces = false
 

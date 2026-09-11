@@ -1,145 +1,153 @@
 name: Python package
 
-on: [push]
+on:
+  push:
+    branches: ['**']
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   build:
-    name: Build distribution
-    runs-on: ubuntu-20.04
-    strategy:
-      matrix:
-        python-version: [3.8]
-
+    name: Build and check distributions
+    runs-on: ubuntu-22.04
     steps:
-    - uses: actions/checkout@v4
-      with:
-        persist-credentials: false
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install flake8 pytest pytest-coverage codecov
-        python -m pip install . --upgrade
-    - name: Lint with flake8
-      run: |
-        # stop the build if there are Python syntax errors or undefined names
-        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-    - name: Test with pytest
-      run: |
-        pytest --ignore=tests/cpp
-    - name: Build coverage file
-      run: |
-        pytest --ignore=tests/cpp --cache-clear --cov-report=xml --cov=rtamt tests/
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v1
-      with:
-        token: ${{ secrets.CODECOV_TOKEN }}
-        file: ./coverage.xml
-        flags: unittests
-    - name: Install pypa/build
-      run: >-
-        python3 -m
-        pip install
-        build
-        --user
-    - name: Build a binary wheel and a source tarball
-      run: python -m build
-    - name: Store the distribution packages
-      uses: actions/upload-artifact@v4
-      with:
-        name: python-package-distributions
-        path: dist/
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --upgrade build twine flake8 packaging
+      - name: Check release tag
+        run: python tools/check_release.py
+      - name: Lint
+        run: flake8 rtamt tests tools --count --select=E9,F63,F7,F82 --show-source --statistics
+      - run: python -m build
+      - run: python -m twine check --strict dist/*
+      - name: Check distribution contents
+        run: python tools/check_release.py --dist dist
+      - uses: actions/upload-artifact@v4
+        with:
+          name: python-package-distributions
+          path: dist/
+          if-no-files-found: error
+
+  test:
+    name: Test ${{ matrix.distribution }} on Python ${{ matrix.python }}
+    needs: build
+    runs-on: ubuntu-22.04
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ['3.8', '3.9', '3.10', '3.11', '3.12']
+        distribution: [wheel, sdist]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: python-package-distributions
+          path: dist/
+      - run: python -m pip install --upgrade pip pytest pytest-cov
+      - name: Test installed distribution outside checkout
+        run: python tools/test_distribution.py ${{ matrix.distribution }}
+      - name: Upload coverage
+        if: matrix.python == '3.12' && matrix.distribution == 'wheel'
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: coverage.xml
+          fail_ci_if_error: false
+
+  test-cpp:
+    name: Test optional C++ backend
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      # Use the system Python matching Ubuntu's Boost.Python package.
+      - run: sudo apt-get update && sudo apt-get install -y cmake libboost-python-dev libboost-system-dev python3-dev python3-venv
+      - run: /usr/bin/python3 -m venv .venv
+      - run: .venv/bin/python -m pip install --upgrade pip pytest
+      - run: .venv/bin/python -m pip install -e .
+      - run: cmake -S rtamt -B build/cpp -DPythonVersion=3 -DPython3_EXECUTABLE=/usr/bin/python3
+      - run: cmake --build build/cpp --parallel 2
+      - run: .venv/bin/python -m pytest tests/cpp
+
+  publish-to-testpypi:
+    name: Publish to TestPyPI
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+    needs: [build, test, test-cpp]
+    runs-on: ubuntu-22.04
+    environment:
+      name: testpypi
+      url: https://test.pypi.org/p/rtamt
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: python-package-distributions
+          path: dist/
+      - uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: https://test.pypi.org/legacy/
+          # For retries only; changed code needs a new version (see RELEASE.md).
+          skip-existing: true
 
   publish-to-pypi:
-    name: >-
-      Publish Python distribution to PyPI
-    if: startsWith(github.ref, 'refs/tags/') # only publish to PyPI on tag pushes
-    needs:
-    - build
-    runs-on: ubuntu-latest
+    name: Publish to PyPI
+    needs: publish-to-testpypi
+    runs-on: ubuntu-22.04
     environment:
       name: pypi
       url: https://pypi.org/p/rtamt
     permissions:
       id-token: write
     steps:
-    - name: Download all the dists
-      uses: actions/download-artifact@v4
-      with:
-        name: python-package-distributions
-        path: dist/
-    - name: Publish distribution to PyPI
-      uses: pypa/gh-action-pypi-publish@release/v1
+      - uses: actions/download-artifact@v4
+        with:
+          name: python-package-distributions
+          path: dist/
+      - uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          skip-existing: true
 
   github-release:
-    name: >-
-      Sign the Python distribution with Sigstore and upload to GitHub Release
-    needs:
-    - publish-to-pypi
-    runs-on: ubuntu-latest
-
+    name: Sign distributions and create GitHub Release
+    needs: publish-to-pypi
+    runs-on: ubuntu-22.04
     permissions:
       contents: write
       id-token: write
-
     steps:
-    - name: Download all the dists
-      uses: actions/download-artifact@4
-      with:
-        name: python-package-distributions
-        path: dist/
-    - name: Sign the dists with Sigstore
-      uses: sigstore/gh-action-sigstore-python@v3.0.0
-      with:
-        inputs: >-
-          ./dist/*.tar.gz
-          ./dist/*.whl
-    - name: Create GitHub release
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
-      run: >-
-        gh release create
-        "$GITHUB_REF_NAME"
-        -- repo "$GITHUB_REPOSITORY"
-        --notes ""
-    - name: Upload artifact signatures to GitHub Release
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
-      # Uploead to GitHub Release using the 'gh' CLI 
-      # 'dist/' contains the built packages, and the 
-      # sigstore-produced signatures and certificates.
-      run: >-
-        gh release upload
-        "$GITHUB_REF_NAME" dist/**
-        --repo "$GITHUB_REPOSITORY"
-
-  publish-to-testpypi:
-    name: Publish Python distribution to TestPyPI
-    needs:
-    - build
-    runs-on: ubuntu-latest
-
-    environment:
-      name: testpypi
-      url: https://test.pypi.org/p/rtamt
-
-    permissions:
-      id-token: write
-
-    steps:
-    - name: Download all the dists
-      uses: actions/download-artifact@v4
-      with:
-        name: python-package-distributions
-        path: dist/
-    - name: Publish distirbution to TestPyPI
-      uses: pypa/gh-action-pypi-publish@release/v1
-      with:
-        repository-url: https://test.pypi.org/legacy
-        verbose: true
-
+      - uses: actions/download-artifact@v4
+        with:
+          name: python-package-distributions
+          path: dist/
+      - uses: sigstore/gh-action-sigstore-python@v3.0.0
+        with:
+          inputs: >-
+            ./dist/*.tar.gz
+            ./dist/*.whl
+      - name: Create release if needed and upload files
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if ! gh release view "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release create "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" --verify-tag --generate-notes
+          fi
+          gh release upload "$GITHUB_REF_NAME" dist/* --repo "$GITHUB_REPOSITORY" --clobber
