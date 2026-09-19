@@ -12,10 +12,8 @@ class NegateOperation(AbstractDenseTimeOnlineOperation):
         sample_result = []
 
         for i in sample:
-            if i[1] < 0:
-                raise Exception('sqrt: input is smaller than 0.')
             out_time = i[0]
-            out_value = - (i[1])
+            out_value = -(i[1])
             sample_result.append([out_time, out_value])
 
         return sample_result

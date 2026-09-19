@@ -4,7 +4,7 @@ class XorOperation(AbstractOnlineOperation):
         pass
 
     def reset(self):
-        pass
+        self.__init__()
 
     def update(self, sample_left, sample_right):
         sample_return = abs(sample_left - sample_right)

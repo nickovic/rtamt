@@ -7,7 +7,7 @@ class AlwaysOperation(AbstractDenseTimeOnlineOperation):
         self.prev = float("inf")
 
     def reset(self):
-        pass
+        self.__init__()
 
     def update(self, sample, *args, **kargs):
         sample_result = []

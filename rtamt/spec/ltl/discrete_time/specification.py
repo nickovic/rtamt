@@ -7,8 +7,6 @@ from rtamt.syntax.ast.parser.ltl.specification_parser import LtlAstParserVisitor
 
 from rtamt.exception.exception import RTAMTException
 
-from rtamt.interpreter.ltl.online_interpreter import LtlInterpreter
-from rtamt.reset.ltl.reset import LTLReset
 from rtamt.semantics.enumerations.options import *
 
 
