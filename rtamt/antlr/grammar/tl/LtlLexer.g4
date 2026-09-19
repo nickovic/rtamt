@@ -1,6 +1,8 @@
 lexer grammar LtlLexer ;
 
-
+options {
+	language = Python3;
+}
 // Rules prefixed with fragment can be called only from other lexer rules;
 // they are not tokens in their own right.
 
@@ -62,6 +64,12 @@ EXP
 
 POW
     : 'pow' ;
+
+LOG
+    : 'log' ;
+
+LN
+    : 'ln' ;
 
 SEC
     : 's' ;

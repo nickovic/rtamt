@@ -1,4 +1,4 @@
-# Generated from rtamt\antlr\grammar\tl\StlParser.g4 by ANTLR 4.7.2
+# Generated from StlParser.g4 by ANTLR 4.7.2
 from antlr4 import *
 if __name__ is not None and "." in __name__:
     from .StlParser import StlParser
@@ -39,6 +39,11 @@ class StlParserVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by StlParser#ExprAddSub.
+    def visitExprAddSub(self, ctx:StlParser.ExprAddSubContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by StlParser#ExprUnless.
     def visitExprUnless(self, ctx:StlParser.ExprUnlessContext):
         return self.visitChildren(ctx)
@@ -64,13 +69,13 @@ class StlParserVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by StlParser#ExprId.
-    def visitExprId(self, ctx:StlParser.ExprIdContext):
+    # Visit a parse tree produced by StlParser#ExprLog.
+    def visitExprLog(self, ctx:StlParser.ExprLogContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by StlParser#ExprAddition.
-    def visitExprAddition(self, ctx:StlParser.ExprAdditionContext):
+    # Visit a parse tree produced by StlParser#ExprId.
+    def visitExprId(self, ctx:StlParser.ExprIdContext):
         return self.visitChildren(ctx)
 
 
@@ -84,11 +89,6 @@ class StlParserVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by StlParser#ExprDivision.
-    def visitExprDivision(self, ctx:StlParser.ExprDivisionContext):
-        return self.visitChildren(ctx)
-
-
     # Visit a parse tree produced by StlParser#ExprIff.
     def visitExprIff(self, ctx:StlParser.ExprIffContext):
         return self.visitChildren(ctx)
@@ -96,11 +96,6 @@ class StlParserVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by StlParser#ExpreOnce.
     def visitExpreOnce(self, ctx:StlParser.ExpreOnceContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by StlParser#ExprMultiplication.
-    def visitExprMultiplication(self, ctx:StlParser.ExprMultiplicationContext):
         return self.visitChildren(ctx)
 
 
@@ -134,11 +129,6 @@ class StlParserVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by StlParser#ExprSubtraction.
-    def visitExprSubtraction(self, ctx:StlParser.ExprSubtractionContext):
-        return self.visitChildren(ctx)
-
-
     # Visit a parse tree produced by StlParser#ExprAnd.
     def visitExprAnd(self, ctx:StlParser.ExprAndContext):
         return self.visitChildren(ctx)
@@ -159,8 +149,18 @@ class StlParserVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by StlParser#ExprNegate.
+    def visitExprNegate(self, ctx:StlParser.ExprNegateContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by StlParser#ExprXor.
     def visitExprXor(self, ctx:StlParser.ExprXorContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by StlParser#ExprLn.
+    def visitExprLn(self, ctx:StlParser.ExprLnContext):
         return self.visitChildren(ctx)
 
 
@@ -176,6 +176,11 @@ class StlParserVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by StlParser#ExprLiteral.
     def visitExprLiteral(self, ctx:StlParser.ExprLiteralContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by StlParser#ExprMultDiv.
+    def visitExprMultDiv(self, ctx:StlParser.ExprMultDivContext):
         return self.visitChildren(ctx)
 
 
@@ -256,6 +261,26 @@ class StlParserVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by StlParser#ioType.
     def visitIoType(self, ctx:StlParser.IoTypeContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by StlParser#Mult.
+    def visitMult(self, ctx:StlParser.MultContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by StlParser#Div.
+    def visitDiv(self, ctx:StlParser.DivContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by StlParser#Plus.
+    def visitPlus(self, ctx:StlParser.PlusContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by StlParser#Minus.
+    def visitMinus(self, ctx:StlParser.MinusContext):
         return self.visitChildren(ctx)
 
 

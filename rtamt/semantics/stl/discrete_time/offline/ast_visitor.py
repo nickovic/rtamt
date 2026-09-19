@@ -11,7 +11,7 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
 
     def visit(self, node, *args, **kwargs):
         result = super(StlDiscreteTimeOfflineAstVisitor, self).visit(node, *args, **kwargs)
-        self.ast.offline_results[node] = result
+        self.ast.results[node] = result
         return result
 
     def visitPredicate(self, node, *args, **kwargs):
@@ -133,6 +133,11 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
         sample_return = [ -i for i in sample]
         return sample_return
 
+    def visitNegate(self, node, *args, **kwargs):
+        sample = self.visit(node.children[0], *args, **kwargs)
+
+        sample_return = [ -i for i in sample]
+        return sample_return
 
     def visitAnd(self, node, *args, **kwargs):
         sample_left  = self.visit(node.children[0], *args, **kwargs)

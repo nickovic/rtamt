@@ -11,7 +11,7 @@ class LTLExplainer(LtlAstVisitor):
     def explain(self, spec):
         self.spec = spec
         for spec in self.spec.specs:
-            top_signal = self.spec.offline_results[spec]
+            top_signal = self.spec.results[spec]
             if top_signal[0] < 0:
                 self.visit(spec, [[[0, 0]], False])
 
@@ -23,8 +23,8 @@ class LTLExplainer(LtlAstVisitor):
     def visitPredicate(self, element, args):
         intervals = args[0]
         flag = args[1]
-        op1_signal = self.spec.offline_results[element.children[0]]
-        op2_signal = self.spec.offline_results[element.children[1]]
+        op1_signal = self.spec.results[element.children[0]]
+        op2_signal = self.spec.results[element.children[1]]
         op1_intervals, op2_intervals = explain_predicate(op1_signal, op2_signal, intervals)
         self.explanations[element.name] = intervals
 
@@ -38,8 +38,8 @@ class LTLExplainer(LtlAstVisitor):
     def visitAddition(self, element, args):
         intervals = args[0]
         flag = args[1]
-        op1_signal = self.spec.offline_results[element.children[0]]
-        op2_signal = self.spec.offline_results[element.children[1]]
+        op1_signal = self.spec.results[element.children[0]]
+        op2_signal = self.spec.results[element.children[1]]
         op1_intervals, op2_intervals = explain_addition(op1_signal, op2_signal, intervals)
         self.explanations[element.name] = intervals
 
@@ -49,8 +49,8 @@ class LTLExplainer(LtlAstVisitor):
     def visitMultiplication(self, element, args):
         intervals = args[0]
         flag = args[1]
-        op1_signal = self.spec.offline_results[element.children[0]]
-        op2_signal = self.spec.offline_results[element.children[1]]
+        op1_signal = self.spec.results[element.children[0]]
+        op2_signal = self.spec.results[element.children[1]]
         op1_intervals, op2_intervals = explain_multiplication(op1_signal, op2_signal, intervals)
         self.explanations[element.name] = intervals
 
@@ -60,8 +60,8 @@ class LTLExplainer(LtlAstVisitor):
     def visitSubtraction(self, element, args):
         intervals = args[0]
         flag = args[1]
-        op1_signal = self.spec.offline_results[element.children[0]]
-        op2_signal = self.spec.offline_results[element.children[1]]
+        op1_signal = self.spec.results[element.children[0]]
+        op2_signal = self.spec.results[element.children[1]]
         op1_intervals, op2_intervals = explain_subtraction(op1_signal, op2_signal, intervals)
         self.explanations[element.name] = intervals
 
@@ -71,8 +71,8 @@ class LTLExplainer(LtlAstVisitor):
     def visitDivision(self, element, args):
         intervals = args[0]
         flag = args[1]
-        op1_signal = self.spec.offline_results[element.children[0]]
-        op2_signal = self.spec.offline_results[element.children[1]]
+        op1_signal = self.spec.results[element.children[0]]
+        op2_signal = self.spec.results[element.children[1]]
         op1_intervals, op2_intervals = explain_division(op1_signal, op2_signal, intervals)
         self.explanations[element.name] = intervals
 
@@ -82,7 +82,7 @@ class LTLExplainer(LtlAstVisitor):
     def visitAbs(self, element, args):
         intervals = args[0]
         flag = args[1]
-        op_signal = self.spec.offline_results[element.children[0]]
+        op_signal = self.spec.results[element.children[0]]
         op_intervals = explain_abs(op_signal, intervals)
         self.explanations[element.name] = intervals
 
@@ -91,7 +91,7 @@ class LTLExplainer(LtlAstVisitor):
     def visitSqrt(self, element, args):
         intervals = args[0]
         flag = args[1]
-        op_signal = self.spec.offline_results[element.children[0]]
+        op_signal = self.spec.results[element.children[0]]
         op_intervals = explain_sqrt(op_signal, intervals)
         self.explanations[element.name] = intervals
 
@@ -100,7 +100,7 @@ class LTLExplainer(LtlAstVisitor):
     def visitExp(self, element, args):
         intervals = args[0]
         flag = args[1]
-        op_signal = self.spec.offline_results[element.children[0]]
+        op_signal = self.spec.results[element.children[0]]
         op_intervals = explain_exp(op_signal, intervals)
         self.explanations[element.name] = intervals
 
@@ -109,8 +109,8 @@ class LTLExplainer(LtlAstVisitor):
     def visitPow(self, element, args):
         intervals = args[0]
         flag = args[1]
-        op1_signal = self.spec.offline_results[element.children[0]]
-        op2_signal = self.spec.offline_results[element.children[1]]
+        op1_signal = self.spec.results[element.children[0]]
+        op2_signal = self.spec.results[element.children[1]]
         op1_intervals, op2_intervals = explain_pow(op1_signal, op2_signal, intervals)
         self.explanations[element.name] = intervals
 
@@ -120,7 +120,7 @@ class LTLExplainer(LtlAstVisitor):
     def visitRise(self, element, args):
         intervals = args[0]
         flag = args[1]
-        op_signal = self.spec.offline_results[element.children[0]]
+        op_signal = self.spec.results[element.children[0]]
         op_intervals = explain_rise(op_signal, intervals)
         self.explanations[element.name] = intervals
 
@@ -129,7 +129,7 @@ class LTLExplainer(LtlAstVisitor):
     def visitFall(self, element, args):
         intervals = args[0]
         flag = args[1]
-        op_signal = self.spec.offline_results[element.children[0]]
+        op_signal = self.spec.results[element.children[0]]
         op_intervals = explain_fall(op_signal, intervals)
         self.explanations[element.name] = intervals
 
@@ -138,7 +138,7 @@ class LTLExplainer(LtlAstVisitor):
     def visitNot(self, element, args):
         intervals = args[0]
         flag = args[1]
-        op_signal = self.spec.offline_results[element.children[0]]
+        op_signal = self.spec.results[element.children[0]]
         if flag:
             op_intervals = explain_sat_not(op_signal, intervals)
         else:
@@ -150,8 +150,8 @@ class LTLExplainer(LtlAstVisitor):
     def visitAnd(self, element, args):
         intervals = args[0]
         flag = args[1]
-        op1_signal = self.spec.offline_results[element.children[0]]
-        op2_signal = self.spec.offline_results[element.children[1]]
+        op1_signal = self.spec.results[element.children[0]]
+        op2_signal = self.spec.results[element.children[1]]
         if flag:
             op1_intervals, op2_intervals = explain_sat_and(op1_signal, op2_signal, intervals)
         else:
@@ -164,8 +164,8 @@ class LTLExplainer(LtlAstVisitor):
     def visitOr(self, element, args):
         intervals = args[0]
         flag = args[1]
-        op1_signal = self.spec.offline_results[element.children[0]]
-        op2_signal = self.spec.offline_results[element.children[1]]
+        op1_signal = self.spec.results[element.children[0]]
+        op2_signal = self.spec.results[element.children[1]]
         if flag:
             op1_intervals, op2_intervals = explain_sat_or(op1_signal, op2_signal, intervals)
         else:
@@ -178,8 +178,8 @@ class LTLExplainer(LtlAstVisitor):
     def visitImplies(self, element, args):
         intervals = args[0]
         flag = args[1]
-        op1_signal = self.spec.offline_results[element.children[0]]
-        op2_signal = self.spec.offline_results[element.children[1]]
+        op1_signal = self.spec.results[element.children[0]]
+        op2_signal = self.spec.results[element.children[1]]
         if flag:
             op1_intervals, op2_intervals = explain_sat_implies(op1_signal, op2_signal, intervals)
         else:
@@ -192,8 +192,8 @@ class LTLExplainer(LtlAstVisitor):
     def visitIff(self, element, args):
         intervals = args[0]
         flag = args[1]
-        op1_signal = self.spec.offline_results[element.children[0]]
-        op2_signal = self.spec.offline_results[element.children[1]]
+        op1_signal = self.spec.results[element.children[0]]
+        op2_signal = self.spec.results[element.children[1]]
         if flag:
             op1_intervals, op2_intervals = explain_sat_iff(op1_signal, op2_signal, intervals)
         else:
@@ -206,8 +206,8 @@ class LTLExplainer(LtlAstVisitor):
     def visitXor(self, element, args):
         intervals = args[0]
         flag = args[1]
-        op1_signal = self.spec.offline_results[element.children[0]]
-        op2_signal = self.spec.offline_results[element.children[1]]
+        op1_signal = self.spec.results[element.children[0]]
+        op2_signal = self.spec.results[element.children[1]]
         if flag:
             op1_intervals, op2_intervals = explain_sat_xor(op1_signal, op2_signal, intervals)
         else:
@@ -220,7 +220,7 @@ class LTLExplainer(LtlAstVisitor):
     def visitEventually(self, element, args):
         intervals = args[0]
         flag = args[1]
-        op_signal = self.spec.offline_results[element.children[0]]
+        op_signal = self.spec.results[element.children[0]]
         if flag:
             op_intervals = explain_sat_eventually(op_signal, intervals)
         else:
@@ -232,7 +232,7 @@ class LTLExplainer(LtlAstVisitor):
     def visitAlways(self, element, args):
         intervals = args[0]
         flag = args[1]
-        op_signal = self.spec.offline_results[element.children[0]]
+        op_signal = self.spec.results[element.children[0]]
         if flag:
             op_intervals = explain_sat_always(op_signal, intervals)
         else:
@@ -248,7 +248,7 @@ class LTLExplainer(LtlAstVisitor):
     def visitOnce(self, element, args):
         intervals = args[0]
         flag = args[1]
-        op_signal = self.spec.offline_results[element.children[0]]
+        op_signal = self.spec.results[element.children[0]]
         if flag:
             op_intervals = explain_sat_once(op_signal, intervals)
         else:
@@ -260,7 +260,7 @@ class LTLExplainer(LtlAstVisitor):
     def visitPrevious(self, element, args):
         intervals = args[0]
         flag = args[1]
-        op_signal = self.spec.offline_results[element.children[0]]
+        op_signal = self.spec.results[element.children[0]]
         if flag:
             op_intervals = explain_sat_prev(op_signal, intervals)
         else:
@@ -272,7 +272,7 @@ class LTLExplainer(LtlAstVisitor):
     def visitStrongPrevious(self, element, args):
         intervals = args[0]
         flag = args[1]
-        op_signal = self.spec.offline_results[element.children[0]]
+        op_signal = self.spec.results[element.children[0]]
         if flag:
             op_intervals = explain_sat_prev(op_signal, intervals)
         else:
@@ -284,7 +284,7 @@ class LTLExplainer(LtlAstVisitor):
     def visitNext(self, element, args):
         intervals = args[0]
         flag = args[1]
-        op_signal = self.spec.offline_results[element.children[0]]
+        op_signal = self.spec.results[element.children[0]]
         if flag:
             op_intervals = explain_sat_next(op_signal, intervals)
         else:
@@ -296,7 +296,7 @@ class LTLExplainer(LtlAstVisitor):
     def visitStrongNext(self, element, args):
         intervals = args[0]
         flag = args[1]
-        op_signal = self.spec.offline_results[element.children[0]]
+        op_signal = self.spec.results[element.children[0]]
         if flag:
             op_intervals = explain_sat_next(op_signal, intervals)
         else:
@@ -308,7 +308,7 @@ class LTLExplainer(LtlAstVisitor):
     def visitHistorically(self, element, args):
         intervals = args[0]
         flag = args[1]
-        op_signal = self.spec.offline_results[element.children[0]]
+        op_signal = self.spec.results[element.children[0]]
         if flag:
             op_intervals = explain_sat_historically(op_signal, intervals)
         else:

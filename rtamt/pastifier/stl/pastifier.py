@@ -42,6 +42,7 @@ class StlPastifier(LtlPastifier, StlAstVisitor):
         self.node_horizons = dict()
 
     def pastify(self, ast):
+        self.ast = ast
         h = StlHorizon()
         horizons = dict()
         for spec in ast.specs:
@@ -54,10 +55,15 @@ class StlPastifier(LtlPastifier, StlAstVisitor):
             pastified_spec = self.visit(spec, horizon)
             pastified_specs.append(pastified_spec)
         ast.specs = pastified_specs
+        ast.phi_name_to_node_dict = self.ast.phi_name_to_node_dict
         return ast
 
     def visit(self, node, *args, **kwargs):
-        return StlAstVisitor.visit(self, node, *args, **kwargs)
+        out = StlAstVisitor.visit(self, node, *args, **kwargs)
+        d = self.ast.phi_name_to_node_dict
+        keys = [k for k, v in d.items() if v == node]
+        self.ast.phi_name_to_node_dict.update({key: out for key in keys})
+        return out
 
     def visitVariable(self, node, *args, **kwargs):
         horizon = args[0]
@@ -149,8 +155,8 @@ class StlPastifier(LtlPastifier, StlAstVisitor):
         node_horizon = self.subformula_horizons[node]
         remaining_horizon = args[0]
         horizon = remaining_horizon - node_horizon
-        child1_node = self.visit(node.children[0], *args, **kwargs)
-        child2_node = self.visit(node.children[1], *args, **kwargs)
+        child1_node = self.visit(node.children[0], node_horizon)
+        child2_node = self.visit(node.children[1], node_horizon)
         node = Predicate(child1_node, child2_node, node.operator)
         if horizon > 0:
             node = TimedOnce(node, Interval(horizon, horizon))

@@ -19,9 +19,12 @@ from rtamt.syntax.node.ltl.since import Since
 from rtamt.syntax.node.arithmetic.abs import Abs
 from rtamt.syntax.node.arithmetic.exp import Exp
 from rtamt.syntax.node.arithmetic.pow import Pow
+from rtamt.syntax.node.arithmetic.log import Log
+from rtamt.syntax.node.arithmetic.ln import Ln
 from rtamt.syntax.node.arithmetic.sqrt import Sqrt
 from rtamt.syntax.node.arithmetic.addition import Addition
 from rtamt.syntax.node.arithmetic.subtraction import Subtraction
+from rtamt.syntax.node.arithmetic.negate import Negate
 from rtamt.syntax.node.arithmetic.multiplication import Multiplication
 from rtamt.syntax.node.arithmetic.division import Division
 from rtamt.syntax.node.ltl.rise import Rise
@@ -72,10 +75,16 @@ class LtlAstVisitor(AbstractAstVisitor):
             result = self.visitExp(node, *args, **kwargs)
         elif isinstance(node, Pow):
             result = self.visitPow(node, *args, **kwargs)
+        elif isinstance(node, Log):
+            result = self.visitLog(node, *args, **kwargs)
+        elif isinstance(node, Ln):
+            result = self.visitLn(node, *args, **kwargs)
         elif isinstance(node, Addition):
             result = self.visitAddition(node, *args, **kwargs)
         elif isinstance(node, Subtraction):
             result = self.visitSubtraction(node, *args, **kwargs)
+        elif isinstance(node, Negate):
+            result = self.visitNegate(node, *args, **kwargs)
         elif isinstance(node, Multiplication):
             result = self.visitMultiplication(node, *args, **kwargs)
         elif isinstance(node, Division):
@@ -116,6 +125,12 @@ class LtlAstVisitor(AbstractAstVisitor):
     def visitPow(self, node, *args, **kwargs):
         return self.visitChildren(node, *args, **kwargs)
 
+    def visitLog(self, node, *args, **kwargs):
+        return self.visitChildren(node, *args, **kwargs)
+
+    def visitLn(self, node, *args, **kwargs):
+        return self.visitChildren(node, *args, **kwargs)
+
     def visitExp(self, node, *args, **kwargs):
         return self.visitChildren(node, *args, **kwargs)
 
@@ -125,10 +140,10 @@ class LtlAstVisitor(AbstractAstVisitor):
     def visitSubtraction(self, node, *args, **kwargs):
         return self.visitChildren(node, *args, **kwargs)
 
-    def visitMultiplication(self, node, *args, **kwargs):
+    def visitNegate(self, node, *args, **kwargs):
         return self.visitChildren(node, *args, **kwargs)
 
-    def visitDivision(self, node, *args, **kwargs):
+    def visitMultDiv(self, node, *args, **kwargs):
         return self.visitChildren(node, *args, **kwargs)
 
     def visitNot(self, node, *args, **kwargs):

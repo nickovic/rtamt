@@ -53,11 +53,11 @@ class TestStlSamplingTimeUnits(unittest.TestCase):
 
         try:
             spec.parse()
-            spec.update(0, [['req', 2.2], ['gnt', 1]])
-            spec.update(1.11, [['req', 2.2], ['gnt', 1]])
-            spec.update(1.99, [['req', 2.2], ['gnt', 1]])
-            spec.update(3.38, [['req', 2.2], ['gnt', 1]])
-            spec.update(4.39, [['req', 2.2], ['gnt', 1]])
+            spec.update(0, [['req', 2.2]])
+            spec.update(1.11, [['req', 2.2]])
+            spec.update(1.99, [['req', 2.2]])
+            spec.update(3.38, [['req', 2.2]])
+            spec.update(4.39, [['req', 2.2]])
 
             self.assertEqual(0, spec.sampling_violation_counter, 'Violation counter')
         except rtamt.RTAMTException as err:

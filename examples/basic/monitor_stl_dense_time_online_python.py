@@ -17,7 +17,7 @@ def monitor():
     spec.name = 'STL dense-time specification'
     spec.declare_var('a', 'float')
     spec.declare_var('c', 'float')
-    spec.spec = 'c=a>=2'
+    spec.spec = 'c=a>=2;'
     try:
         spec.parse()
     except rtamt.RTAMTException as err:

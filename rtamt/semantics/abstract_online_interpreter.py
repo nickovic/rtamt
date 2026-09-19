@@ -60,9 +60,13 @@ class AbstractOnlineResetVisitor(AbstractAstVisitor):
 
 
 class AbstractOnlineUpdateVisitor(AbstractAstVisitor):
+    def __init__(self):
+        self.results = dict()
+
     def visitSpec(self, node, online_operator_dict, var_object_dict):
         sample_return = self.visit(node, online_operator_dict, var_object_dict)
         var_object_dict[node] = sample_return  #TODO subspec name is necessary as a key for var_object_dict.
+        self.results[node] = sample_return
         return sample_return
 
     def visitBinary(self, node, online_operator_dict, var_object_dict):
@@ -70,12 +74,14 @@ class AbstractOnlineUpdateVisitor(AbstractAstVisitor):
         sample_right = self.visit(node.children[1], online_operator_dict, var_object_dict)
         operator = online_operator_dict[node.name]
         sample_return = operator.update(sample_left, sample_right)
+        self.results[node] = sample_return
         return sample_return
 
     def visitUnary(self, node, online_operator_dict, var_object_dict):
         sample = self.visit(node.children[0], online_operator_dict, var_object_dict)
         op = online_operator_dict[node.name]
         sample_return = op.update(sample)
+        self.results[node] = sample_return
         return sample_return
 
     def visitLeaf(self, node, online_operator_dict, var_object_dict):
@@ -83,4 +89,5 @@ class AbstractOnlineUpdateVisitor(AbstractAstVisitor):
             sample_return = self.visitConstant(node, online_operator_dict, var_object_dict)
         elif isinstance(node, Variable):
             sample_return = self.visitVariable(node, online_operator_dict, var_object_dict)
+        self.results[node] = sample_return
         return sample_return

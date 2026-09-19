@@ -19,7 +19,15 @@ class DenseTimeInterpreter(TimeInterpreter):
         for data in dataset:
             var_name = data[0]
             var_object = data[1]
-            self.ast.var_object_dict[var_name] = var_object
+            if data[0] in self.ast.free_vars:
+                self.ast.var_object_dict[var_name] = var_object
+
+    def is_dataset_valid(self, dataset):
+        dataset_vars = set()
+        for data in dataset:
+            dataset_vars.add(data[0])
+        valid = dataset_vars == self.ast.free_vars
+        return valid
 
     def time_unit_transformer(self, node):
         b = node.begin

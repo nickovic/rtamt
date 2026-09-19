@@ -6,7 +6,7 @@ class TestIssue164(unittest.TestCase):
     def __init__(self, *args, **kwargs):
         super(TestIssue164, self).__init__(*args, **kwargs)
 
-    def test_issue_157_1(self):
+    def test_issue_164_1(self):
         # define data and variables types
         data = {
             "time": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
@@ -22,7 +22,7 @@ class TestIssue164(unittest.TestCase):
         }
 
         # example 1: unique stl formula
-        unique_formula = 'always((req>=3) implies (eventually[0:5]((gnt>=3) and (gnt<=10))))'
+        unique_formula = 'always((req>=3) implies (eventually[0:5]((gnt>=3) and (gnt<=10))));'
 
         spec1 = rtamt.StlDiscreteTimeSpecification()
         for var, type in var_types.items():
@@ -31,9 +31,9 @@ class TestIssue164(unittest.TestCase):
         spec1.parse()
 
         # example 2: equivalent stl formula with 2 subformulas
-        premise_formula = 'premise = (req >= 3)'
-        response_formula = 'response = (eventually[0:5]((gnt>=3) and (gnt<=10)))'
-        premise_response_formula = 'always(premise implies response)'
+        premise_formula = 'premise = (req >= 3);'
+        response_formula = 'response = (eventually[0:5]((gnt>=3) and (gnt<=10)));'
+        premise_response_formula = 'always(premise implies response);'
 
         spec2 = rtamt.StlDiscreteTimeSpecification()
         for var, type in var_types.items():

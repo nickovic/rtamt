@@ -9,7 +9,9 @@ class LTLParserErrorListener( ErrorListener ):
         raise RTAMTException("Ambiguity ERROR, " + str(configs))
 
     def reportAttemptingFullContext(self, recognizer, dfa, startIndex, stopIndex, conflictingAlts, configs):
-        raise RTAMTException("Attempting full context ERROR, " + str(configs))
+        pass
+        #raise RTAMTException("Attempting full context ERROR, " + str(configs))
 
     def reportContextSensitivity(self, recognizer, dfa, startIndex, stopIndex, prediction, configs):
-        raise RTAMTException("Context ERROR, " + str(configs))
+        pass
+        #raise RTAMTException("Context ERROR, " + str(configs))

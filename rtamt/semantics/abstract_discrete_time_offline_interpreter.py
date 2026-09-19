@@ -29,7 +29,7 @@ class AbstractDiscreteTimeOfflineInterpreter(AbstractOfflineInterpreter, Discret
 
         # evaluate spec forest
         length = len(dataset['time'])
-        self.ast.offline_results['time'] = dataset['time']
+        self.ast.results['time'] = dataset['time']
 
         rob = self.visitAst(self.ast, length)
         rob = rob[len(rob)-1]

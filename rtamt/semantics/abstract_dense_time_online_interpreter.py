@@ -35,6 +35,8 @@ class AbstractDenseTimeOnlineInterpreter(AbstractOnlineInterpreter, DenseTimeInt
         rob = self.updateVisitor.visitAst(self.ast, self.online_operator_dict, self.ast.var_object_dict)
         rob = rob[len(rob) - 1]
 
+        self.ast.results = self.updateVisitor.results
+
         out = self.ast.var_object_dict[self.ast.out_var]
         if self.ast.out_var_field:
             setattr(out, self.ast.out_var_field, rob)
@@ -57,6 +59,13 @@ class AbstractDenseTimeOnlineInterpreter(AbstractOnlineInterpreter, DenseTimeInt
 
         return rob
 
+    def set_variable_to_ast_from_dataset(self, dataset):
+        for data in dataset:
+            var_name = data[0]
+            var_object = data[1]
+            if data[0] in self.ast.free_vars:
+                self.ast.var_object_dict[var_name] = var_object
+                self.online_operator_dict[var_name].sample = var_object
 
 class DenseTimeOnlineUpdateVisitor(AbstractOnlineUpdateVisitor):
     def visitVariable(self, node, online_operator_dict, var_object_dict):

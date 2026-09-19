@@ -16,7 +16,7 @@ def monitor():
     spec.declare_var('b', 'float')
     spec.declare_const('c', 'float', '5.2')
     spec.declare_const('d', 'float', '2')
-    spec.spec = 'a + b >= once[0, d s] c'
+    spec.spec = 'a + b >= once[0, d s] c;'
 
     try:
         spec.parse()

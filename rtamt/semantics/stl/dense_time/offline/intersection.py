@@ -188,6 +188,7 @@ def intersection(in_samples_1, in_samples_2, method):
     last = list()
     return out_samples, last, in_samples_1, in_samples_2
 
+
 def disjunction(a, b):
     return max(a, b)
 
@@ -223,26 +224,38 @@ def multiplication(a, b):
 def division(a, b):
     return float(a) / float(b)
 
+
 def eq(a, b):
     return a == b
+
 
 def neq(a, b):
     return not a == b
 
+
 def geq(a, b):
     return a >= b
+
 
 def greater(a, b):
     return a > b
 
+
 def leq(a, b):
     return a <= b
+
 
 def less(a, b):
     return a < b
 
+
 def power(a, b):
     return math.pow(a, b)
+
+
+def log(a, b):
+    return math.log(a, b)
+
 
 def split(a, b):
     return [a,b]

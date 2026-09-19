@@ -5,7 +5,7 @@ class Sqrt(UnaryNode):
         Inherits Node
     """
     def __init__(self, child):
-        """Constructor for Neg node
+        """Constructor for Sqrt node
 
             Parameters:
                 child : stl.Node

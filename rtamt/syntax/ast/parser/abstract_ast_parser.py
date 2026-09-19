@@ -5,6 +5,7 @@ from antlr4 import *
 from antlr4.InputStream import InputStream
 from antlr4.error.ErrorListener import ErrorListener
 
+from rtamt.syntax.ast.parser.stl.parser_visitor import StlAstParserVisitor
 from rtamt.exception.exception import RTAMTException
 
 class AbstractAst:
@@ -65,7 +66,8 @@ class AbstractAst:
         self.var_io_dict = dict()
         self.const_type_dict = dict()
         self.const_val_dict = dict()
-        self.offline_results = dict()
+        self.results = dict()
+        self.phi_name_to_node_dict = dict()
 
         self.modules = dict()
 
@@ -118,6 +120,10 @@ class AbstractAst:
 
         #TODO How to handle sub-formulas?
         entire_spec = self.modular_spec + self.spec
+        
+        if entire_spec[-1] != ';':
+            entire_spec += ';'
+        
         input_stream = InputStream(entire_spec)
         lexer = self.antrlLexerType(input_stream)
         if not isinstance(lexer, Lexer):
@@ -201,8 +207,9 @@ class AbstractAst:
     def add_var(self, var):
         self.vars.add(var)
 
-    def get_value(self, var_name):
-        return self.var_object_dict[var_name]
+    def get_value(self, phi_name):
+        node = self.phi_name_to_node_dict[phi_name]
+        return self.results[node]
 
     def add_sub_spec(self, sub_spec):
         self.modular_spec = self.modular_spec + sub_spec + '\n'

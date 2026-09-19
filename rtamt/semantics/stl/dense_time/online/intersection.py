@@ -291,12 +291,22 @@ def subtraction(a, b):
 def multiplication(a, b):
     return a * b
 
+
 def power(a, b):
     return math.pow(a, b)
 
 
+def log(a, b):
+    return math.log(a, b)
+
+
+def ln(a):
+    return math.log(a)
+
+
 def division(a, b):
     return float(a) / float(b)
+
 
 def split(a, b):
     return [a,b]

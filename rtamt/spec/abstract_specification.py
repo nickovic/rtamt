@@ -10,6 +10,10 @@ from rtamt.semantics.discrete_time_interpreter import DiscreteTimeInterpreter
 
 from rtamt.exception.exception import RTAMTException
 
+from antlr4 import *
+from antlr4.InputStream import InputStream
+from antlr4.error.ErrorListener import ErrorListener
+
 
 class AbstractSpecification(object):
     __metaclass__ = ABCMeta
@@ -24,6 +28,7 @@ class AbstractSpecification(object):
         self.var_topic_dict = dict()
         self.free_vars = set()
         self.var_object_dict = dict()
+        self.phi_name_to_node_dict = dict()
 
         #TODO we need to move it to RTAMT4ROS as wrapper
         self.modules = dict()
@@ -48,8 +53,8 @@ class AbstractSpecification(object):
     def add_var(self, var):
         self.ast.vars.add(var)
 
-    def get_value(self, var_name):
-        return self.ast.get_value(var_name)
+    def get_value(self, phi_name):
+        return self.ast.get_value(phi_name)
 
     def add_sub_spec(self, sub_spec):
         self.ast.add_sub_spec(sub_spec)
@@ -97,6 +102,15 @@ class AbstractSpecification(object):
         self.ast.var_object_dict = self.var_object_dict
 
     @property
+    def phi_name_to_node_dict(self):
+        return self.ast.phi_name_to_node_dict
+
+    @phi_name_to_node_dict.setter
+    def phi_name_to_node_dict(self, phi_name_to_node_dict):
+        self.__phi_name_to_node_dict = phi_name_to_node_dict
+        self.ast.phi_name_to_node_dict = self.phi_name_to_node_dict
+
+    @property
     def free_vars(self):
         return self.ast.free_vars
 
@@ -112,6 +126,12 @@ class AbstractSpecification(object):
 
     def set_var_topic(self, var_name, var_topic):
         self.ast.set_var_topic(var_name, var_topic)
+
+    def spec_print(self):
+        name = str()
+        for spec in self.ast.specs:
+            name = name + spec.name + '\n'
+        return name
 
     def parse(self):
         self.ast.parse()
@@ -290,8 +310,6 @@ class AbstractOnlineSpecification(AbstractSpecification):
             i = args[0]
             dataset = args[1]
             return self.online_interpreter.update(i, dataset)
-        else:
-            pass
 
     def final_update(self, *args, **kwargs):
         if self.set_ast_flag != True:
