@@ -11,7 +11,9 @@ class OnceTimedOperation(AbstractDenseTimeOnlineOperation):
         self.end = end
 
     def reset(self):
-        pass
+        self.prev = []
+        self.residual_start = -float("inf")
+        self.max = - float("inf")
 
     def update(self, sample, *args, **kargs):
         # get inputs

@@ -11,7 +11,8 @@ class PredicateOperation(AbstractDenseTimeOnlineOperation):
         self.subtraction_output = list()
 
     def reset(self):
-        pass
+        self.subtraction_output = list()
+        self.sub = SubtractionOperation()
 
     def update(self, sample_left, sample_right, *args, **kargs):
         sample_result = []

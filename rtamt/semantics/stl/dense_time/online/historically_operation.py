@@ -6,7 +6,7 @@ class HistoricallyOperation(AbstractDenseTimeOnlineOperation):
         self.prev = float("inf")
 
     def reset(self):
-        pass
+        self.prev = float("inf")
 
     def update(self, sample, *args, **kargs):
         result_sample = []

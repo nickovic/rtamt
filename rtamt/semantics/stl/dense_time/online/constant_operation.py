@@ -6,6 +6,9 @@ class ConstantOperation(AbstractDenseTimeOnlineOperation):
         self.val = val
         self.is_first_sample = True
 
+    def reset(self):
+        self.is_first_sample = True
+
     def update(self, *args, **kargs):
         if self.is_first_sample:
             out = [[0, self.val], [float("inf"), self.val]]

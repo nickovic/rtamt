@@ -8,7 +8,9 @@ class XorOperation(AbstractDenseTimeOnlineOperation):
         self.last_output = []
 
     def reset(self):
-        pass
+        self.sample_left_buf = []
+        self.sample_right_buf = []
+        self.last_output = []
 
     def update(self, sample_left, sample_right, *args, **kargs):
         if self.sample_left_buf and sample_left and self.sample_left_buf[-1][0] == sample_left[0][0]:

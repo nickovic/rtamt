@@ -5,6 +5,9 @@ class VariableOperation(AbstractDenseTimeOnlineOperation):
     def __init__(self):
         self.val = None
 
+    def reset(self):
+        self.val = None
+
     def update(self, *args, **kargs):
         return self.val
 

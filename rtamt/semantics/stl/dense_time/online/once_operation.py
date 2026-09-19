@@ -6,7 +6,7 @@ class OnceOperation(AbstractDenseTimeOnlineOperation):
         self.prev = - float("inf")
 
     def reset(self):
-        pass
+        self.prev = - float("inf")
 
     def update(self, sample, *args, **kargs):
         sample_result = []

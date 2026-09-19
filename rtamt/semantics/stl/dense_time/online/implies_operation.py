@@ -9,7 +9,9 @@ class ImpliesOperation(AbstractDenseTimeOnlineOperation):
         self.last_output = []
 
     def reset(self):
-        pass
+        self.sample_left_buf = []
+        self.sample_right_buf = []
+        self.last_output = []
 
 
     def update(self, sample_left, sample_right, *args, **kargs):
