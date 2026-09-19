@@ -42,4 +42,4 @@ class AdditionOperation(AbstractDenseTimeOnlineOperation):
         return result
 
     def update_final(self, sample_left, sample_right, *args, **kargs):
-        return self.update(sample_left, sample_right, *args, **kargs) + [self.last]
+        return self.update(sample_left, sample_right, *args, **kargs)

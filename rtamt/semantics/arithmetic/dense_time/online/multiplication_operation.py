@@ -5,9 +5,12 @@ class MultiplicationOperation(AbstractDenseTimeOnlineOperation):
     def __init__(self):
         self.sample_left_buf = []
         self.sample_right_buf = []
+        self.last_output = []
 
     def reset(self):
-        pass
+        self.sample_left_buf = []
+        self.sample_right_buf = []
+        self.last_output = []
 
     def update(self, sample_left, sample_right, *args, **kargs):
         if self.sample_left_buf and sample_left and self.sample_left_buf[-1][0] == sample_left[0][0]:
@@ -19,7 +22,6 @@ class MultiplicationOperation(AbstractDenseTimeOnlineOperation):
             self.sample_right_buf = self.sample_right_buf + sample_right[1:]
         else:
             self.sample_right_buf = self.sample_right_buf + sample_right
-        self.last_output = []
 
         result, last, left, right = intersect.intersection(self.sample_left_buf, self.sample_right_buf, intersect.multiplication)
 
@@ -42,4 +44,4 @@ class MultiplicationOperation(AbstractDenseTimeOnlineOperation):
         return result
 
     def update_final(self, sample_left, sample_right, *args, **kargs):
-        return self.update(sample_left, sample_right, *args, **kargs) + [self.last]
+        return self.update(sample_left, sample_right, *args, **kargs)
