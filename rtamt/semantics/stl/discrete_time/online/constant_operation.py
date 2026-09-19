@@ -5,7 +5,7 @@ class ConstantOperation(AbstractOnlineOperation):
         self.val = val
 
     def reset(self):
-        pass
+        self.__init__()
 
     def update(self):
         return self.val

@@ -5,7 +5,7 @@ class VariableOperation(AbstractOnlineOperation):
         self.sample = None
 
     def reset(self):
-        pass
+        self.__init__()
 
     def update(self):
         return self.sample

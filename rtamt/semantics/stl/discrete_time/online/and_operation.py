@@ -5,7 +5,7 @@ class AndOperation(AbstractOnlineOperation):
         pass
 
     def reset(self):
-        pass
+        self.__init__()
 
     def update(self, sample_left, sample_right):
         sample_return = min(sample_left, sample_right)

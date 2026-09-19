@@ -5,7 +5,7 @@ class NotOperation(AbstractOnlineOperation):
         pass
 
     def reset(self):
-        pass
+        self.__init__()
 
     def update(self, sample):
         sample_return = - sample
