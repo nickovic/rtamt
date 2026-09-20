@@ -1,6 +1,7 @@
 import math
 import operator
 import collections
+import copy
 
 from rtamt.syntax.ast.visitor.stl.ast_visitor import StlAstVisitor
 from rtamt.semantics.enumerations.comp_oper import StlComparisonOperator
@@ -11,7 +12,7 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
 
     def visit(self, node, *args, **kwargs):
         result = super(StlDiscreteTimeOfflineAstVisitor, self).visit(node, *args, **kwargs)
-        self.ast.results[node] = result
+        self.ast.results[node] = copy.deepcopy(result)
         return result
 
     def visitPredicate(self, node, *args, **kwargs):
@@ -41,7 +42,7 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
             for v in var:
                 sample_return.append(operator.attrgetter(node.field)(v))
         else:
-            sample_return = var
+            sample_return = list(var)
         return sample_return
 
 
@@ -376,7 +377,7 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
         begin, end = self.time_unit_transformer(node)
         sample_len = len(sample)
         if sample_len <= end:
-            sample += [float('inf')] * (end - sample_len + 1)
+            sample = sample + [float('inf')] * (end - sample_len + 1)
 
         diff = end - begin
         sample_return  = [min(sample[j:j+diff+1]) for j in range(begin, end+1)]
@@ -392,7 +393,7 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
         sample_len = len(sample)
 
         if sample_len <= end:
-            sample += [-float('inf')] * (end - sample_len + 1)
+            sample = sample + [-float('inf')] * (end - sample_len + 1)
 
         diff = end - begin
         sample_return  = [max(sample[j:j+diff+1]) for j in range(begin, end+1)]
