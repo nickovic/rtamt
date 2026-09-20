@@ -409,25 +409,27 @@ class StlDiscreteTimeOfflineAstVisitor(StlAstVisitor):
         begin, end = self.time_unit_transformer(node)
 
         sample_return = []
-        buffer_left = collections.deque(maxlen=(end + 1))
-        buffer_right = collections.deque(maxlen=(end + 1))
+        L = end+1
 
-        for i in range(end + 1):
-            s_left = float("inf")
-            s_right = - float("inf")
-            buffer_left.append(s_left)
-            buffer_right.append(s_right)
+        buffer_left  = collections.deque([ float("inf")] * L, maxlen=L)
+        buffer_right = collections.deque([-float("inf")] * L, maxlen=L)
+
         for i in range(len(sample_left)-1, -1, -1):
             buffer_left.append(sample_left[i])
             buffer_right.append(sample_right[i])
+            left = list(buffer_left)
+            right = list(buffer_right)
             out_sample = - float("inf")
 
-            for j in range(end-begin+1):
-                c_left = float("inf")
-                c_right = buffer_right[j]
-                for k in range(j+1, end+1):
-                    c_left = min(c_left, buffer_left[k])
-                out_sample = max(out_sample, min(c_left, c_right))
+            # build the suffix minimum of the sample_left buffer
+            suf_min_left = [float("inf")]*(L+1)
+            for k in range(L-1,-1,-1):
+                lt = left[k]
+                st = suf_min_left[k+1]
+                suf_min_left[k] = lt if lt<st else st
+
+            for j in range(L-begin):
+                out_sample = max(out_sample, min(suf_min_left[j+1], right[j]))
             sample_return.append(out_sample)
         sample_return.reverse()
         return sample_return
