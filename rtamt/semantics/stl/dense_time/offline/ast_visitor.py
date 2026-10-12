@@ -27,7 +27,7 @@ def since_operation(sample_left, sample_right):
         t = sample[0]
         o1_val = sample[1][0]
         o2_val = sample[1][1]
-        result = max(min(o1_val, o2_val), min(o1_val, prev))
+        result = max(min(o1_val, o2_val), min(o1_val, prev), o2_val)
         if result != prev or i == len(iout) - 1:
             sample_return.append([t, result])
         prev = result
@@ -260,7 +260,7 @@ def until_operation(sample_left, sample_right):
         t = sample[0]
         o1_val = sample[1][0]
         o2_val = sample[1][1]
-        result = max(min(o1_val, o2_val), min(o1_val, next))
+        result = max(min(o1_val, o2_val), min(o1_val, next), o2_val)
         if result == next and i < len(iout) - 2:
             sample_return.pop(0)
         sample_return.insert(0, [t, result])
